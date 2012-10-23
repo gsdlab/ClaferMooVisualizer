@@ -221,10 +221,10 @@ XMLProcessor.prototype.getFeatureValue = function(instanceIndex, featureName, fo
 {
 	try
 	{
-        if (featureName == "c160_total_energy")
-            featureName = "c215_total_energy";
+//        if (featureName == "c160_total_energy")
+//            featureName = "c215_total_energy";
 
-            var clafers = queryXML(this.iXML, 'instances/instance[' + instanceIndex + ']' + '//clafer[@id="' + featureName + '"]');
+        var clafers = queryXML(this.iXML, 'instances/instance[' + instanceIndex + ']' + '//clafer[@id="' + featureName + '"]');
 		if (clafers.length == 1)
 		{	
 			var result;
