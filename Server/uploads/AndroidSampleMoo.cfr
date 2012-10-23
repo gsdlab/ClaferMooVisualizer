@@ -1,0 +1,60 @@
+abstract Component
+    performance : integer	
+
+abstract ComponentWithEnergy : Component
+    energy : integer
+	
+abstract androidPhone
+    hardware : Component
+        [ this.performance = 0 ]
+        screen : Component
+                [ this.performance = 0 ]
+            xor material : Component
+                    [ this.performance = 0 ]
+                oled : ComponentWithEnergy
+                    [this.energy = 3]
+ 	            [ this.performance = -3]
+                amoled : ComponentWithEnergy
+                    [this.energy = 2]
+                    [ this.performance = -5] 
+                lcd : ComponentWithEnergy
+                    [this.energy = 4]
+                    [ this.performance = -2]
+        keyboard : ComponentWithEnergy ?
+            [this.energy = 1]
+            [ this.performance = 0]
+        keyboardLight : ComponentWithEnergy ?
+            [ this.energy = 2]
+            [ this.performance = -1]
+            [ keyboard]
+        cpu : ComponentWithEnergy
+            [ this.energy = 1]
+            [ this.performance = 10 ]
+	extra_cpu : ComponentWithEnergy ?
+	    [this.energy = 2 ]
+	    [ this.performance = 15 ]
+        or location ?
+            gps : ComponentWithEnergy
+                [this.energy = 5]
+                [ this.performance = -1 ]
+           wifitriangulation : ComponentWithEnergy
+                [ this.energy = 2]
+                [ this.performance = - 3 ]
+    software : Component
+        [ this.performance = 0 ]
+    	browser : Component ?
+                [ this.performance = 0 ]
+                [ extra_cpu ]
+        mediaplayer : Component ?
+                [ this.performance = -2 ]
+
+    total_performance : integer 
+      [ total_performance = sum Component.performance ]
+    total_energy : integer
+       [ total_energy = sum ComponentWithEnergy.energy ]  
+
+aPhone : androidPhone
+       [ mediaplayer ]
+
+<< min aPhone.total_energy >>
+<< max aPhone.total_performance >>

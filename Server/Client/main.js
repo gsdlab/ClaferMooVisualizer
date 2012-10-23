@@ -97,7 +97,7 @@ $(document).ready(function() {
             height: 30,
             posx: 0,
             posy: 0,
-            content: '<form id="myForm" action="' + serverAction + '" method="post" enctype="multipart/form-data">' + '<input type="file" name="upload-file">'+ '<input type="submit" value="Upload">'+'</form>',
+            content: '<div id="load_area"><form id="myform" action="' + serverAction + '" method="post" enctype="multipart/form-data">' + '<input type="file" name="upload-file">'+ '<input type="submit" value="Upload">'+'</form></div>',
             onDragBegin : null,
             onDragEnd : null,
             onResizeBegin : null,
@@ -130,8 +130,8 @@ $(':file').change(function(){
 
     var options = { 
 //        target:        '#output',   // target element(s) to be updated with server response 
-        beforeSubmit:  showRequest,  // pre-submit callback 
-        success:       showResponse  // post-submit callback 
+        beforeSubmit:  beginQuery,  // pre-submit callback 
+        success:       showResponse // post-submit callback 
 //        dataType: "json"
 		// other available options: 
 //        url:       "upload.php",         // override for form's 'action' attribute 
@@ -145,9 +145,47 @@ $(':file').change(function(){
     }; 
  
     // bind form using 'ajaxForm' 
-    $('#myForm').ajaxForm(options); 
-	$('#myForm').submit();
+    $('#myform').ajaxForm(options); 
+	$('#myform').submit();
 });
+
+function beginQuery(formData, jqForm, options) { 
+	$("#load_area #myform").hide();
+	$("#load_area").append('<div id="preloader"><img id="preloader_img" src="/Client/images/preloader.gif" alt="Loading..."/><span>Loading and processing...</span></div>');	
+    return true; 
+} 
+ 
+// post-submit callback 
+function endQuery()  { 
+	$("#preloader").remove();
+	$("#load_area #myform").show();
+	
+	var fadeColor = "#ccc";
+	var normalColor = "#000"
+
+	var fadeOpacity = "0.3";
+	var normalOpacity = "1.0"
+	
+	$("#comparison table tr").not(':first').hover(
+	  function () {
+		$('#comparison table tr:gt(0)').css("color", fadeColor);
+		$('#comparison table tr:gt(0) img').css("opacity", fadeOpacity);
+		
+		$(this).css("color", normalColor);
+		$(this).find("img").css("opacity", normalOpacity);
+
+		$(this).css("background", "#ffffcc");
+	  }, 
+	  function () {
+		$('#comparison table tr:gt(0)').css("color", normalColor);
+		$('#comparison table tr:gt(0) img').css("opacity", normalOpacity);
+		$(this).css("background", "");
+	  }
+	);
+
+	
+	return true;
+} 
 
 function graphResize(e)
 {
@@ -257,7 +295,7 @@ function showRequest(formData, jqForm, options) {
 function showResponse(responseText, statusText, xhr, $form)  { 
 //	alert(xhr.responseType);
 	processToolResult(responseText);
-
+	endQuery();
     // for normal html responses, the first argument to the success callback 
     // is the XMLHttpRequest object's responseText property 
  
@@ -460,12 +498,12 @@ function onDataPreProcessed()
 	
 	showGoals(goals);
 	
-	if (goals.length > 2)
+	if (goals.length >= 2)
 	{
 		$("#chart").show();
 		assignToAxis("dropPointX", goals[0].arg, goals[0].label);
 		assignToAxis("dropPointY", goals[1].arg, goals[1].label);
-		redrawParetoFront();
+        redrawParetoFront();
 	}
 	else
 		$("#chart").hide();
@@ -496,6 +534,38 @@ function traverse(clafer, level)
 	}
 }
 
+function IsNumeric(input)
+{
+    return (input - 0) == input && input.length > 0;
+}
+
+function mapValue(sVal)
+{
+	var result = new Object();
+	result.tdStyle = "";
+	result.html = sVal;
+	
+	if (sVal == "yes")
+	{
+		result.html = '<img class="tick" src="/Client/images/tick.png"/>';
+		result.tdStyle = 'tick';
+	}
+	
+	if (sVal == "-")
+	{
+		result.html = '-';
+		result.tdStyle = 'no';
+	}
+
+	if (IsNumeric(sVal))
+	{
+		result.tdStyle = 'numeric';
+		result.html = '<span class="number">' + sVal + '</span>'
+	}
+		
+	return result;
+}
+
 function getComparisonHtml()
 {
 	var instanceCount = processor.getInstanceCount();
@@ -516,7 +586,7 @@ function getComparisonHtml()
 	traverse(current, 0);
 	output = abstractClaferOutput;
 	
-	var table = $('<table width="100%"></table>').addClass('foo');
+	var table = $('<table width="100%" cellspacing="0" cellspadding="0"></table>').addClass('foo');
 	
 	for (var i = 0; i < output.length; i++)
 	{
@@ -540,7 +610,12 @@ function getComparisonHtml()
 			if (i == 0)
 				td.html("Prod#" + j);
 			else
-				td.html(processor.getFeatureValue(j, output[i].claferId, false));
+			{
+				sVal = processor.getFeatureValue(j, output[i].claferId, false);
+				mappedValue = mapValue(sVal);
+				td.html(mappedValue.html);
+				td.addClass(mappedValue.tdStyle);
+			}
 				
 			row.append(td);
 		}

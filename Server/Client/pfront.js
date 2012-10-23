@@ -21,9 +21,25 @@ function ParetoFrontVisualizer (element)
           legend: 'none'
         };
 
-        var chart = new google.visualization.ScatterChart(document.getElementById(element));
+        this.chart = new google.visualization.ScatterChart(document.getElementById(element));
+
  //       chart.draw(data, options);
 	}
+}
+
+ParetoFrontVisualizer.prototype.selectHandler = function(e) {
+//  alert('A table row was selected');
+	//alert(this.chart.getSelection);
+	try{
+	var sel = this.chart.getSelection();
+	alert(sel);
+	}
+	catch(e)
+	{
+	
+	}
+	
+  return true;
 }
 
 ParetoFrontVisualizer.prototype.draw = function(processor, args, labels) 
@@ -35,9 +51,14 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 	}
 	
 	var instanceCount = processor.getInstanceCount();
-	var data = new Array();
-	data.push(labels);
 	
+    var data = new google.visualization.DataTable();
+    data.addColumn({type:'number', label: labels[0], role:'domain'}); 
+    data.addColumn({type:'number', label: labels[1], role:'data'});  
+    data.addColumn({type:'string', label: 'tooltip', role:'tooltip'});
+	
+    var rows = new Array();
+    
 	for (var i = 1; i <= instanceCount; i++)
 	{
 		var first = processor.getFeatureValue(i, args[0], true); // get only numeric
@@ -46,11 +67,15 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 		point = new Array();
 		point.push(first);
 		point.push(second);
+		point.push("Prod#" + i);
 		
-		data.push(point);
+		rows.push(point);
 	}
+    
+    data.addRows(rows);          
 
 	var options = {
+/*	  theme: 'maximized', */
 	  title: 'Pareto Front',
 	  hAxis: {title: labels[0], minValue: 0, maxValue: 15},
 	  vAxis: {title: labels[1], minValue: 0, maxValue: 15},
@@ -59,7 +84,9 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 	};
 
 //	alert(data);
-	var chart = new google.visualization.ScatterChart(document.getElementById(this.element));
-	chart.draw(google.visualization.arrayToDataTable(data), options);
+	this.chart = new google.visualization.ScatterChart(document.getElementById(this.element));
+	this.chart.draw(data, options);
+		
+//	google.visualization.events.addListener(this.chart, 'select', this.selectHandler);
 	
 }

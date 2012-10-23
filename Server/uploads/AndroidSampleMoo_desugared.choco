@@ -1,0 +1,83 @@
+ConstraintMandatoryFeatures:c1:Choco.eq(c5_androidPhone, 1)
+ConstraintMandatoryFeatures:c2:Choco.eq(c6_hardware, 1)
+ConstraintMandatoryFeatures:c3:Choco.eq(c132_software, 1)
+ConstraintMandatoryFeatures:c4:Choco.eq(c12_screen, 1)
+ConstraintMandatoryFeatures:c5:Choco.eq(c18_material, 1)
+ConstraintMandatoryFeatures:c6:Choco.eq(c24_oled, 1)
+ConstraintMandatoryFeatures:c7:Choco.eq(c36_amoled, 1)
+ConstraintMandatoryFeatures:c8:Choco.eq(c48_lcd, 1)
+ConstraintMandatoryFeatures:c9:Choco.eq(c85_cpu, 1)
+ConstraintMandatoryFeatures:c10:Choco.eq(c120_wifitriangulation, 1)
+ConstraintChildrenImpliesParent:c11:Choco.implies(Choco.eq(c138_browser, 1), Choco.eq(c132_software, 1))
+ConstraintChildrenImpliesParent:c12:Choco.implies(Choco.eq(c146_mediaplayer, 1), Choco.eq(c132_software, 1))
+ConstraintChildrenImpliesParent:c13:Choco.implies(Choco.eq(c6_hardware, 1), Choco.eq(c5_androidPhone, 1))
+ConstraintMandatoryChildEqualParent:c14:Choco.eq(c6_hardware, c5_androidPhone)
+ConstraintChildrenImpliesParent:c15:Choco.implies(Choco.eq(c132_software, 1), Choco.eq(c5_androidPhone, 1))
+ConstraintMandatoryChildEqualParent:c16:Choco.eq(c132_software, c5_androidPhone)
+ConstraintChildrenImpliesParent:c17:Choco.implies(Choco.eq(c108_gps, 1), Choco.eq(c107_location, 1))
+ConstraintChildrenImpliesParent:c18:Choco.implies(Choco.eq(c12_screen, 1), Choco.eq(c6_hardware, 1))
+ConstraintMandatoryChildEqualParent:c19:Choco.eq(c12_screen, c6_hardware)
+ConstraintChildrenImpliesParent:c20:Choco.implies(Choco.eq(c18_material, 1), Choco.eq(c6_hardware, 1))
+ConstraintMandatoryChildEqualParent:c21:Choco.eq(c18_material, c6_hardware)
+ConstraintChildrenImpliesParent:c22:Choco.implies(Choco.eq(c24_oled, 1), Choco.eq(c6_hardware, 1))
+ConstraintMandatoryChildEqualParent:c23:Choco.eq(c24_oled, c6_hardware)
+ConstraintChildrenImpliesParent:c24:Choco.implies(Choco.eq(c36_amoled, 1), Choco.eq(c6_hardware, 1))
+ConstraintMandatoryChildEqualParent:c25:Choco.eq(c36_amoled, c6_hardware)
+ConstraintChildrenImpliesParent:c26:Choco.implies(Choco.eq(c48_lcd, 1), Choco.eq(c6_hardware, 1))
+ConstraintMandatoryChildEqualParent:c27:Choco.eq(c48_lcd, c6_hardware)
+ConstraintChildrenImpliesParent:c28:Choco.implies(Choco.eq(c60_keyboard, 1), Choco.eq(c6_hardware, 1))
+ConstraintChildrenImpliesParent:c29:Choco.implies(Choco.eq(c71_keyboardLight, 1), Choco.eq(c6_hardware, 1))
+ConstraintChildrenImpliesParent:c30:Choco.implies(Choco.eq(c85_cpu, 1), Choco.eq(c6_hardware, 1))
+ConstraintMandatoryChildEqualParent:c31:Choco.eq(c85_cpu, c6_hardware)
+ConstraintChildrenImpliesParent:c32:Choco.implies(Choco.eq(c96_extra_cpu, 1), Choco.eq(c6_hardware, 1))
+ConstraintChildrenImpliesParent:c33:Choco.implies(Choco.eq(c107_location, 1), Choco.eq(c6_hardware, 1))
+ConstraintChildrenImpliesParent:c34:Choco.implies(Choco.eq(c120_wifitriangulation, 1), Choco.eq(c6_hardware, 1))
+ConstraintMandatoryChildEqualParent:c35:Choco.eq(c120_wifitriangulation, c6_hardware)
+ConstraintOr:c36:Choco.ifOnlyIf(Choco.or(GROUPVARS(c108_gps)), Choco.eq(c107_location, 1))
+ConstraintCrossTree:c37:Choco.implies(Choco.eq(c71_keyboardLight, 1), Choco.eq(c60_keyboard, 1))
+ConstraintCrossTree:c38:Choco.implies(Choco.eq(c138_browser, 1), Choco.eq(c96_extra_cpu, 1))
+BinaryVariable:c6_hardware
+BinaryVariable:c12_screen
+BinaryVariable:c18_material
+BinaryVariable:c24_oled
+BinaryVariable:c36_amoled
+BinaryVariable:c48_lcd
+BinaryVariable:c60_keyboard
+BinaryVariable:c71_keyboardLight
+BinaryVariable:c85_cpu
+BinaryVariable:c96_extra_cpu
+BinaryVariable:c107_location
+BinaryVariable:c108_gps
+BinaryVariable:c120_wifitriangulation
+BinaryVariable:c132_software
+BinaryVariable:c138_browser
+BinaryVariable:c146_mediaplayer
+BinaryVariable:c5_androidPhone
+ProductLevelNfpAttribute:c2_performance
+ProductLevelNfpAttribute:c4_energy
+ProductLevelNfpFeatureContribution:c4_energy,c6_hardware,0
+ProductLevelNfpFeatureContribution:c4_energy,c12_screen,0
+ProductLevelNfpFeatureContribution:c4_energy,c18_material,0
+ProductLevelNfpFeatureContribution:c4_energy,c24_oled,-3
+ProductLevelNfpFeatureContribution:c4_energy,c36_amoled,-5
+ProductLevelNfpFeatureContribution:c4_energy,c48_lcd,-2
+ProductLevelNfpFeatureContribution:c4_energy,c60_keyboard,0
+ProductLevelNfpFeatureContribution:c4_energy,c71_keyboardLight,-1
+ProductLevelNfpFeatureContribution:c4_energy,c85_cpu,10
+ProductLevelNfpFeatureContribution:c4_energy,c96_extra_cpu,15
+ProductLevelNfpFeatureContribution:c4_energy,c108_gps,-1
+ProductLevelNfpFeatureContribution:c4_energy,c120_wifitriangulation,-3
+ProductLevelNfpFeatureContribution:c4_energy,c132_software,0
+ProductLevelNfpFeatureContribution:c4_energy,c138_browser,0
+ProductLevelNfpFeatureContribution:c4_energy,c146_mediaplayer,-2
+ProductLevelNfpFeatureContribution:c4_energy,c24_oled,3
+ProductLevelNfpFeatureContribution:c4_energy,c36_amoled,2
+ProductLevelNfpFeatureContribution:c4_energy,c48_lcd,4
+ProductLevelNfpFeatureContribution:c4_energy,c60_keyboard,1
+ProductLevelNfpFeatureContribution:c4_energy,c71_keyboardLight,2
+ProductLevelNfpFeatureContribution:c4_energy,c85_cpu,1
+ProductLevelNfpFeatureContribution:c4_energy,c96_extra_cpu,2
+ProductLevelNfpFeatureContribution:c4_energy,c108_gps,5
+ProductLevelNfpFeatureContribution:c4_energy,c120_wifitriangulation,2
+ObjectiveSense:False
+ObjectiveSense:True

@@ -260,7 +260,8 @@ function show_404(req, res) {
 var extToMimes = {
 	'js': 'text/javascript',
 	'css': 'text/css',
-	'gif': 'image/gif'
+	'gif': 'image/gif',
+	'png': 'image/png'
 }
 
 function getMimeByExt(filename) 
