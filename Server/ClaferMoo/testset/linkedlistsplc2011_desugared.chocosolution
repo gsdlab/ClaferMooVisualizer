@@ -1,0 +1,67 @@
+<solution>
+	<instance>
+		<variable id='c4_AbstractElement'>
+			<value>1</value>
+		</variable>
+		<variable id='c83_Measurement'>
+			<value>0</value>
+		</variable>
+		<variable id='c59_MergeSort'>
+			<value>0</value>
+		</variable>
+		<variable id='c23_ElementC'>
+			<value>0</value>
+		</variable>
+		<variable id='c17_ElementB'>
+			<value>1</value>
+		</variable>
+		<variable id='c103_Performance'>
+			<value>0</value>
+		</variable>
+		<variable id='c65_InsertionSort'>
+			<value>0</value>
+		</variable>
+		<variable id='c115_Base'>
+			<value>1</value>
+		</variable>
+		<variable id='c97_SyntheticPerformanceOrMemorySize'>
+			<value>0</value>
+		</variable>
+		<variable id='c53_BubbleSort'>
+			<value>0</value>
+		</variable>
+		<variable id='c47_AbstractSort'>
+			<value>0</value>
+		</variable>
+		<variable id='c35_ForwardIterator'>
+			<value>1</value>
+		</variable>
+		<variable id='c91_TCP_IP'>
+			<value>0</value>
+		</variable>
+		<variable id='c71_QuickSort'>
+			<value>0</value>
+		</variable>
+		<variable id='c11_ElementA'>
+			<value>0</value>
+		</variable>
+		<variable id='c29_AbstractIterator'>
+			<value>1</value>
+		</variable>
+		<variable id='c41_BackwardIterator'>
+			<value>0</value>
+		</variable>
+		<variable id='c77_print'>
+			<value>0</value>
+		</variable>
+		<variable id='c3_LinkedList'>
+			<value>1</value>
+		</variable>
+		<variable id='c109_MemorySize'>
+			<value>0</value>
+		</variable>
+		<variable id='c2_footprint'>
+			<value>443</value>
+		</variable>
+	</instance>
+</solution>

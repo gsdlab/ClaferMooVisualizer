@@ -1,0 +1,47 @@
+abstract IMeasurable
+ cost : integer
+ performance : integer
+
+abstract BikeModel
+ xor Frame : IMeasurable
+    [ this.cost = 0 ]
+    [ this.performance = 0 ] 
+    Aluminum : IMeasurable
+      [ this.cost = 7 ]
+      [ this.performance = 5 ]      
+    Steel : IMeasurable
+      [ this.cost = 2 ]
+      [ this.performance = 3 ]
+ xor Forks : IMeasurable
+    [ this.cost = 0 ]
+    [ this.performance = 0 ]  
+    regular : IMeasurable
+      [ this.cost = 1 ]
+      [ this.performance = 2 ]
+    shocks : IMeasurable
+      [ this.cost = 5 ]
+      [ this.performance = 6 ]
+ xor HandleBars : IMeasurable
+    [ this.cost = 0 ]
+    [ this.performance = 0 ]
+    Standard : IMeasurable
+     	[ this.cost = 1 ]
+     	[ this.performance = 3 ]
+    Racing : IMeasurable
+     	[ this.cost = 6 ]
+     	[ this.performance = 7 ]
+     	
+ total_performance : integer
+ 	[ total_performance = Standard.performance + Racing.performance + regular.performance + shocks.performance + Steel.performance + Aluminum.performance ]
+//sum IMeasurable.performance ]
+ total_cost : integer
+ 	[ total_cost = Standard.cost + Racing.cost + regular.cost + shocks.cost + Steel.cost + Aluminum.cost ]
+ 
+// 	[ total_cost =  
+// sum IMeasurable.cost ]
+
+simpleBike : BikeModel
+
+
+<< min simpleBike.total_cost >>
+<< max simpleBike.total_performance >>

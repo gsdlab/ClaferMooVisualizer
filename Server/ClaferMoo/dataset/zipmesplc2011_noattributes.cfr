@@ -1,0 +1,16 @@
+// Adapated from Scalable Prediction of Non-functional Properties in Software Product Lines.
+// scaled down by 100 
+
+abstract IMeasurable
+
+abstract ZipMeSPL
+		base : IMeasurable
+			zipMe : IMeasurable
+			zipMecompress : IMeasurable
+		zipMeCRC : IMeasurable ?
+		zipMearchiveCheck : IMeasurable ?
+		zipMeGZIP : IMeasurable ?
+		zipMeadaptation : IMeasurable ?
+		zipMeadler32Chcksum : IMeasurable ?
+		zipMeextract : IMeasurable ?
+

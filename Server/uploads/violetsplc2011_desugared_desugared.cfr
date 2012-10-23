@@ -1,0 +1,60 @@
+// Adapated from Scalable Prediction of Non-functional Properties in Software Product Lines.
+// Scaled down by dividing numbers by 1 and rounding.
+//To execute in alloy: run  show for ...
+
+
+abstract IFeature
+	footprint : integer
+	usability : integer
+
+abstract PortabilityFeature
+	portability : integer
+
+abstract Violet
+	VioletDef : IFeature 
+		[ this.footprint = 18]
+		[ this.usability = 0]		
+		base : IFeature 
+			[ this.footprint = 3]
+			[ this.usability = 0]			
+		MenuResources : IFeature  ?
+			[ this.footprint = 3]
+			[ this.usability = 0]			
+		GraphUtility : IFeature  ?
+			[ this.footprint = 3]
+			[ this.usability = 0]			
+		ExtensionFilter : IFeature  ?
+			[ this.footprint = 3]
+			[ this.usability = 0]			
+		FileUtility : IFeature  ?
+			[ this.footprint = 3]
+			[ this.usability = 0]			
+		InternalFrame : IFeature  ?
+			[ this.footprint = 3]
+			[ this.usability = 0]
+		Read : PortabilityFeature  ?
+			[ this.portability = 4]
+		FileMenu : IFeature  ?
+			[ this.footprint = 3]
+			[ this.usability = 0]			
+		NewFile : IFeature  ?
+			[ ExtensionFilter && InternalFrame && Read && GraphUtility && MenuResources && FileMenu && FileUtility ]
+			[ this.footprint = 0]
+			[ this.usability = 1]
+		UseCaseD : IFeature  ?
+			[ this.footprint = 0]
+			[ this.usability = 3]			
+	total_footprint : integer
+	[ total_footprint = sum IFeature.footprint ]
+	total_usability : integer
+	[ total_usability = sum IFeature.usability ]
+	total_portability : integer
+	[ total_portability = sum PortabilityFeature.portability]
+
+simpleConfig : Violet 
+
+
+//Mandatory Features all configurations will have: VioletDef base 
+<< max simpleConfig.total_usability >>
+<< min simpleConfig.total_footprint >>
+<< max simpleConfig.total_portability >>

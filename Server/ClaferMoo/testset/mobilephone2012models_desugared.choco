@@ -1,0 +1,31 @@
+ConstraintMandatoryFeatures:c1:Choco.eq(c6_MobilePhone, 1)
+ConstraintMandatoryFeatures:c2:Choco.eq(c7_Connectivity, 1)
+ConstraintChildrenImpliesParent:c3:Choco.implies(Choco.eq(c7_Connectivity, 1), Choco.eq(c6_MobilePhone, 1))
+ConstraintMandatoryChildEqualParent:c4:Choco.eq(c7_Connectivity, c6_MobilePhone)
+ConstraintChildrenImpliesParent:c5:Choco.implies(Choco.eq(c51_PasswordProtection, 1), Choco.eq(c6_MobilePhone, 1))
+ConstraintChildrenImpliesParent:c6:Choco.implies(Choco.eq(c18_Bluetooth, 1), Choco.eq(c7_Connectivity, 1))
+ConstraintChildrenImpliesParent:c7:Choco.implies(Choco.eq(c29_USB, 1), Choco.eq(c7_Connectivity, 1))
+ConstraintChildrenImpliesParent:c8:Choco.implies(Choco.eq(c40_Wifi, 1), Choco.eq(c7_Connectivity, 1))
+ConstraintExclusiveOr:c9:Choco.ifOnlyIf(Choco.eq(c18_Bluetooth, 1), Choco.and(Choco.not(Choco.eq(c29_USB, 1)),Choco.not(Choco.eq(c40_Wifi, 1)),Choco.eq(c7_Connectivity, 1)))
+ConstraintExclusiveOr:c10:Choco.ifOnlyIf(Choco.eq(c29_USB, 1), Choco.and(Choco.not(Choco.eq(c18_Bluetooth, 1)),Choco.not(Choco.eq(c40_Wifi, 1)),Choco.eq(c7_Connectivity, 1)))
+ConstraintExclusiveOr:c11:Choco.ifOnlyIf(Choco.eq(c40_Wifi, 1), Choco.and(Choco.not(Choco.eq(c18_Bluetooth, 1)),Choco.not(Choco.eq(c29_USB, 1)),Choco.eq(c7_Connectivity, 1)))
+BinaryVariable:c7_Connectivity
+BinaryVariable:c18_Bluetooth
+BinaryVariable:c29_USB
+BinaryVariable:c40_Wifi
+BinaryVariable:c51_PasswordProtection
+BinaryVariable:c6_MobilePhone
+ProductLevelNfpAttribute:c2_performance
+ProductLevelNfpAttribute:c5_security
+ProductLevelNfpAttribute:c3_cost
+ProductLevelNfpFeatureContribution:c3_cost,c7_Connectivity,0
+ProductLevelNfpFeatureContribution:c3_cost,c18_Bluetooth,300
+ProductLevelNfpFeatureContribution:c3_cost,c29_USB,500
+ProductLevelNfpFeatureContribution:c3_cost,c40_Wifi,725
+ProductLevelNfpFeatureContribution:c3_cost,c51_PasswordProtection,20
+ProductLevelNfpFeatureContribution:c3_cost,c7_Connectivity,0
+ProductLevelNfpFeatureContribution:c3_cost,c18_Bluetooth,150
+ProductLevelNfpFeatureContribution:c3_cost,c29_USB,35
+ProductLevelNfpFeatureContribution:c3_cost,c40_Wifi,85
+ProductLevelNfpFeatureContribution:c3_cost,c51_PasswordProtection,10
+ProductLevelNfpFeatureContribution:c3_cost,c51_PasswordProtection,1

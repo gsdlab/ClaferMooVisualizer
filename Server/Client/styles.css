@@ -1,0 +1,20 @@
+th{
+	text-align: left;
+}
+
+.axis_drop{
+	background: #cccccc;
+}
+
+#dropPointX{
+}
+
+#dropPointY{
+}
+
+textarea.child {
+      height:100%;
+}
+  
+div.parent {height:60px;}
+textarea.child {height:100%;}

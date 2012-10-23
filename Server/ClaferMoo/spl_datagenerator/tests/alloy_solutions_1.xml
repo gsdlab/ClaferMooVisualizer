@@ -1,0 +1,218 @@
+<alloy builddate="unknown">
+
+<instance bitwidth="4" maxseq="1" command="Run show for 1 but exactly  partial 1 bag_extra_ints, exactly  partial 72 extra_ints,  partial 1 c4_Base,  partial 1 c10_HostnameLookups,  partial 1 c17_KeepAlive,  partial 1 c23_EnableSendfile,  partial 1 c29_FollowSymLinks,  partial 1 c35_AccessLog,  partial 1 c42_ExtendedStatus,  partial 1 c49_InMemory,  partial 1 c57_Handle,  partial 9 c2_performance,  partial 9 r_c2_performance,  partial 9 c2_performance_ref optimize o_global" filename="">
+
+<sig label="seq/Int" ID="0" parentID="1" builtin="yes">
+</sig>
+
+<sig label="Int" ID="1" parentID="2" builtin="yes">
+<int value="-52"/><int value="-48"/><int value="-41"/><int value="-37"/><int value="-33"/><int value="-26"/><int value="-22"/><int value="-18"/><int value="-15"/><int value="-11"/><int value="8"/><int value="11"/><int value="15"/><int value="19"/><int value="26"/><int value="30"/><int value="34"/><int value="41"/><int value="45"/><int value="53"/><int value="57"/><int value="64"/><int value="68"/><int value="72"/><int value="79"/><int value="83"/><int value="87"/><int value="90"/><int value="94"/><int value="98"/><int value="102"/><int value="105"/><int value="109"/><int value="113"/><int value="116"/><int value="117"/><int value="120"/><int value="124"/><int value="128"/><int value="131"/><int value="132"/><int value="135"/><int value="139"/><int value="143"/><int value="146"/><int value="150"/><int value="154"/><int value="158"/><int value="161"/><int value="165"/><int value="169"/><int value="176"/><int value="180"/><int value="184"/><int value="191"/><int value="195"/><int value="203"/><int value="207"/><int value="214"/><int value="218"/><int value="222"/><int value="229"/><int value="233"/><int value="237"/><int value="240"/><int value="244"/><int value="248"/><int value="255"/><int value="259"/><int value="263"/><int value="266"/><int value="270"/><int value="274"/><int value="281"/><int value="285"/><int value="289"/><int value="296"/><int value="300"/>
+</sig>
+
+<sig label="String" ID="3" parentID="2" builtin="yes">
+</sig>
+
+<sig label="this/c4_Base" ID="4" parentID="5">
+   <atom label="partial_c4_Base%"/>
+</sig>
+
+<sig label="this/c10_HostnameLookups" ID="6" parentID="5">
+</sig>
+
+<sig label="this/c17_KeepAlive" ID="7" parentID="5">
+   <atom label="partial_c17_KeepAlive%"/>
+</sig>
+
+<sig label="this/c23_EnableSendfile" ID="8" parentID="5">
+   <atom label="partial_c23_EnableSendfile%"/>
+</sig>
+
+<sig label="this/c29_FollowSymLinks" ID="9" parentID="5">
+</sig>
+
+<sig label="this/c35_AccessLog" ID="10" parentID="5">
+</sig>
+
+<sig label="this/c42_ExtendedStatus" ID="11" parentID="5">
+</sig>
+
+<sig label="this/c49_InMemory" ID="12" parentID="5">
+   <atom label="partial_c49_InMemory%"/>
+</sig>
+
+<sig label="this/c57_Handle" ID="13" parentID="5">
+</sig>
+
+<sig label="this/c1_IMeasurable" ID="5" parentID="2" abstract="yes">
+</sig>
+
+<field label="r_c2_performance" ID="14" parentID="5">
+   <tuple> <atom label="partial_c4_Base%"/> <atom label="performance_for_c4_Base_of_150%"/> </tuple>
+   <tuple> <atom label="partial_c17_KeepAlive%"/> <atom label="performance_for_c17_KeepAlive_of_105%"/> </tuple>
+   <tuple> <atom label="partial_c23_EnableSendfile%"/> <atom label="performance_for_c23_EnableSendfile_of_15%"/> </tuple>
+   <tuple> <atom label="partial_c49_InMemory%"/> <atom label="performance_for_c49_InMemory_of_26%"/> </tuple>
+   <types> <type ID="5"/> <type ID="15"/> </types>
+</field>
+
+<sig label="this/c2_performance" ID="15" parentID="2">
+   <atom label="performance_for_c4_Base_of_150%"/>
+   <atom label="performance_for_c17_KeepAlive_of_105%"/>
+   <atom label="performance_for_c23_EnableSendfile_of_15%"/>
+   <atom label="performance_for_c49_InMemory_of_26%"/>
+</sig>
+
+<field label="c2_performance_ref" ID="16" parentID="15">
+   <tuple> <atom label="performance_for_c4_Base_of_150%"/> <atom label="150"/> </tuple>
+   <tuple> <atom label="performance_for_c17_KeepAlive_of_105%"/> <atom label="105"/> </tuple>
+   <tuple> <atom label="performance_for_c23_EnableSendfile_of_15%"/> <atom label="15"/> </tuple>
+   <tuple> <atom label="performance_for_c49_InMemory_of_26%"/> <atom label="26"/> </tuple>
+   <types> <type ID="15"/> <type ID="1"/> </types>
+</field>
+
+<sig label="this/c101_simpleConfig" ID="17" parentID="18" one="yes">
+   <atom label="c101_simpleConfig$0"/>
+</sig>
+
+<sig label="this/c3_Apache" ID="18" parentID="2" abstract="yes">
+</sig>
+
+<field label="r_c4_Base" ID="19" parentID="18">
+   <tuple> <atom label="c101_simpleConfig$0"/> <atom label="partial_c4_Base%"/> </tuple>
+   <types> <type ID="18"/> <type ID="4"/> </types>
+</field>
+
+<field label="r_c10_HostnameLookups" ID="20" parentID="18">
+   <types> <type ID="18"/> <type ID="6"/> </types>
+</field>
+
+<field label="r_c17_KeepAlive" ID="21" parentID="18">
+   <tuple> <atom label="c101_simpleConfig$0"/> <atom label="partial_c17_KeepAlive%"/> </tuple>
+   <types> <type ID="18"/> <type ID="7"/> </types>
+</field>
+
+<field label="r_c23_EnableSendfile" ID="22" parentID="18">
+   <tuple> <atom label="c101_simpleConfig$0"/> <atom label="partial_c23_EnableSendfile%"/> </tuple>
+   <types> <type ID="18"/> <type ID="8"/> </types>
+</field>
+
+<field label="r_c29_FollowSymLinks" ID="23" parentID="18">
+   <types> <type ID="18"/> <type ID="9"/> </types>
+</field>
+
+<field label="r_c35_AccessLog" ID="24" parentID="18">
+   <types> <type ID="18"/> <type ID="10"/> </types>
+</field>
+
+<field label="r_c42_ExtendedStatus" ID="25" parentID="18">
+   <types> <type ID="18"/> <type ID="11"/> </types>
+</field>
+
+<field label="r_c49_InMemory" ID="26" parentID="18">
+   <tuple> <atom label="c101_simpleConfig$0"/> <atom label="partial_c49_InMemory%"/> </tuple>
+   <types> <type ID="18"/> <type ID="12"/> </types>
+</field>
+
+<field label="r_c57_Handle" ID="27" parentID="18">
+   <types> <type ID="18"/> <type ID="13"/> </types>
+</field>
+
+<field label="r_c63_total_performance" ID="28" parentID="18">
+   <tuple> <atom label="c101_simpleConfig$0"/> <atom label="c63_total_performance$0"/> </tuple>
+   <types> <type ID="18"/> <type ID="29"/> </types>
+</field>
+
+<sig label="this/c63_total_performance" ID="29" parentID="2">
+   <atom label="c63_total_performance$0"/>
+</sig>
+
+<field label="c63_total_performance_ref" ID="30" parentID="29">
+   <tuple> <atom label="c63_total_performance$0"/> <atom label="296"/> </tuple>
+   <types> <type ID="29"/> <type ID="1"/> </types>
+</field>
+
+<sig label="this/bag_extra_ints" ID="31" parentID="2">
+   <atom label="concrete_int_bag%"/>
+</sig>
+
+<field label="extra_ints" ID="32" parentID="31">
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-7"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-52"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-48"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-41"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-37"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-33"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-22"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-18"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="8"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="11"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="19"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="30"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="34"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="41"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="45"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="53"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="57"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="64"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="68"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="72"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="79"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="83"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="87"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="90"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="94"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="98"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="102"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="109"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="113"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="116"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="117"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="120"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="124"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="128"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="131"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="132"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="135"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="139"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="143"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="146"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="154"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="158"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="161"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="165"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="169"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="176"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="180"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="184"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="191"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="195"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="203"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="207"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="214"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="218"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="222"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="229"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="233"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="237"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="240"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="244"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="248"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="255"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="259"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="263"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="266"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="270"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="274"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="281"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="285"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="289"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="296"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="300"/> </tuple>
+   <types> <type ID="31"/> <type ID="1"/> </types>
+</field>
+
+<sig label="univ" ID="2" builtin="yes">
+</sig>
+
+</instance>
+
+</alloy>

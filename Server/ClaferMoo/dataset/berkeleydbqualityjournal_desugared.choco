@@ -1,0 +1,71 @@
+ConstraintMandatoryFeatures:c1:Choco.eq(c5_BerkeleyDbC, 1)
+ConstraintMandatoryFeatures:c2:Choco.eq(c38_HAVE_INDEXES, 1)
+ConstraintMandatoryFeatures:c3:Choco.eq(c54_HAVE_BTREE, 1)
+ConstraintChildrenImpliesParent:c4:Choco.implies(Choco.eq(c70_BTREE_FAST, 1), Choco.eq(c54_HAVE_BTREE, 1))
+ConstraintChildrenImpliesParent:c5:Choco.implies(Choco.eq(c86_BTREE_SMALL, 1), Choco.eq(c54_HAVE_BTREE, 1))
+ConstraintChildrenImpliesParent:c6:Choco.implies(Choco.eq(c54_HAVE_BTREE, 1), Choco.eq(c38_HAVE_INDEXES, 1))
+ConstraintMandatoryChildEqualParent:c7:Choco.eq(c54_HAVE_BTREE, c38_HAVE_INDEXES)
+ConstraintChildrenImpliesParent:c8:Choco.implies(Choco.eq(c102_HAVE_HASH, 1), Choco.eq(c38_HAVE_INDEXES, 1))
+ConstraintChildrenImpliesParent:c9:Choco.implies(Choco.eq(c118_HAVE_QUEUE, 1), Choco.eq(c38_HAVE_INDEXES, 1))
+ConstraintChildrenImpliesParent:c10:Choco.implies(Choco.eq(c6_HAVE_STATISTICS, 1), Choco.eq(c5_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c11:Choco.implies(Choco.eq(c22_HAVE_CRYPTO, 1), Choco.eq(c5_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c12:Choco.implies(Choco.eq(c38_HAVE_INDEXES, 1), Choco.eq(c5_BerkeleyDbC, 1))
+ConstraintMandatoryChildEqualParent:c13:Choco.eq(c38_HAVE_INDEXES, c5_BerkeleyDbC)
+ConstraintChildrenImpliesParent:c14:Choco.implies(Choco.eq(c134_HAVE_REPLICATION, 1), Choco.eq(c5_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c15:Choco.implies(Choco.eq(c150_HAVE_VERIFY, 1), Choco.eq(c5_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c16:Choco.implies(Choco.eq(c166_DIAGNOSTIC, 1), Choco.eq(c5_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c17:Choco.implies(Choco.eq(c182_HAVE_SEQUENCE, 1), Choco.eq(c5_BerkeleyDbC, 1))
+ConstraintExclusiveOr:c18:Choco.ifOnlyIf(Choco.eq(c70_BTREE_FAST, 1), Choco.and(Choco.not(Choco.eq(c86_BTREE_SMALL, 1)),Choco.eq(c54_HAVE_BTREE, 1)))
+ConstraintExclusiveOr:c19:Choco.ifOnlyIf(Choco.eq(c86_BTREE_SMALL, 1), Choco.and(Choco.not(Choco.eq(c70_BTREE_FAST, 1)),Choco.eq(c54_HAVE_BTREE, 1)))
+BinaryVariable:c6_HAVE_STATISTICS
+BinaryVariable:c22_HAVE_CRYPTO
+BinaryVariable:c38_HAVE_INDEXES
+BinaryVariable:c54_HAVE_BTREE
+BinaryVariable:c70_BTREE_FAST
+BinaryVariable:c86_BTREE_SMALL
+BinaryVariable:c102_HAVE_HASH
+BinaryVariable:c118_HAVE_QUEUE
+BinaryVariable:c134_HAVE_REPLICATION
+BinaryVariable:c150_HAVE_VERIFY
+BinaryVariable:c166_DIAGNOSTIC
+BinaryVariable:c182_HAVE_SEQUENCE
+BinaryVariable:c5_BerkeleyDbC
+ProductLevelNfpAttribute:c3_footprint
+ProductLevelNfpAttribute:c2_price
+ProductLevelNfpAttribute:c4_reliability
+ProductLevelNfpFeatureContribution:c4_reliability,c6_HAVE_STATISTICS,0
+ProductLevelNfpFeatureContribution:c4_reliability,c22_HAVE_CRYPTO,300
+ProductLevelNfpFeatureContribution:c4_reliability,c38_HAVE_INDEXES,0
+ProductLevelNfpFeatureContribution:c4_reliability,c54_HAVE_BTREE,0
+ProductLevelNfpFeatureContribution:c4_reliability,c70_BTREE_FAST,0
+ProductLevelNfpFeatureContribution:c4_reliability,c86_BTREE_SMALL,0
+ProductLevelNfpFeatureContribution:c4_reliability,c102_HAVE_HASH,125
+ProductLevelNfpFeatureContribution:c4_reliability,c118_HAVE_QUEUE,50
+ProductLevelNfpFeatureContribution:c4_reliability,c134_HAVE_REPLICATION,200
+ProductLevelNfpFeatureContribution:c4_reliability,c150_HAVE_VERIFY,100
+ProductLevelNfpFeatureContribution:c4_reliability,c166_DIAGNOSTIC,0
+ProductLevelNfpFeatureContribution:c4_reliability,c182_HAVE_SEQUENCE,50
+ProductLevelNfpFeatureContribution:c4_reliability,c6_HAVE_STATISTICS,139
+ProductLevelNfpFeatureContribution:c4_reliability,c22_HAVE_CRYPTO,19
+ProductLevelNfpFeatureContribution:c4_reliability,c38_HAVE_INDEXES,0
+ProductLevelNfpFeatureContribution:c4_reliability,c54_HAVE_BTREE,0
+ProductLevelNfpFeatureContribution:c4_reliability,c70_BTREE_FAST,1800
+ProductLevelNfpFeatureContribution:c4_reliability,c86_BTREE_SMALL,340
+ProductLevelNfpFeatureContribution:c4_reliability,c102_HAVE_HASH,56
+ProductLevelNfpFeatureContribution:c4_reliability,c118_HAVE_QUEUE,28
+ProductLevelNfpFeatureContribution:c4_reliability,c134_HAVE_REPLICATION,89
+ProductLevelNfpFeatureContribution:c4_reliability,c150_HAVE_VERIFY,50
+ProductLevelNfpFeatureContribution:c4_reliability,c166_DIAGNOSTIC,191
+ProductLevelNfpFeatureContribution:c4_reliability,c182_HAVE_SEQUENCE,20
+ProductLevelNfpFeatureContribution:c4_reliability,c6_HAVE_STATISTICS,0
+ProductLevelNfpFeatureContribution:c4_reliability,c22_HAVE_CRYPTO,0
+ProductLevelNfpFeatureContribution:c4_reliability,c38_HAVE_INDEXES,0
+ProductLevelNfpFeatureContribution:c4_reliability,c54_HAVE_BTREE,0
+ProductLevelNfpFeatureContribution:c4_reliability,c70_BTREE_FAST,0
+ProductLevelNfpFeatureContribution:c4_reliability,c86_BTREE_SMALL,0
+ProductLevelNfpFeatureContribution:c4_reliability,c102_HAVE_HASH,0
+ProductLevelNfpFeatureContribution:c4_reliability,c118_HAVE_QUEUE,0
+ProductLevelNfpFeatureContribution:c4_reliability,c134_HAVE_REPLICATION,1
+ProductLevelNfpFeatureContribution:c4_reliability,c150_HAVE_VERIFY,1
+ProductLevelNfpFeatureContribution:c4_reliability,c166_DIAGNOSTIC,1
+ProductLevelNfpFeatureContribution:c4_reliability,c182_HAVE_SEQUENCE,0

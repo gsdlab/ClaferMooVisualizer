@@ -1,0 +1,37 @@
+<solution>
+	<instance>
+		<variable id='c3_Apache'>
+			<value>1</value>
+		</variable>
+		<variable id='c10_HostnameLookups'>
+			<value>0</value>
+		</variable>
+		<variable id='c49_InMemory'>
+			<value>1</value>
+		</variable>
+		<variable id='c4_Base'>
+			<value>1</value>
+		</variable>
+		<variable id='c23_EnableSendfile'>
+			<value>1</value>
+		</variable>
+		<variable id='c57_Handle'>
+			<value>0</value>
+		</variable>
+		<variable id='c42_ExtendedStatus'>
+			<value>0</value>
+		</variable>
+		<variable id='c35_AccessLog'>
+			<value>0</value>
+		</variable>
+		<variable id='c17_KeepAlive'>
+			<value>1</value>
+		</variable>
+		<variable id='c29_FollowSymLinks'>
+			<value>0</value>
+		</variable>
+		<variable id='c2_performance'>
+			<value>296</value>
+		</variable>
+	</instance>
+</solution>

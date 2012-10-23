@@ -1,0 +1,33 @@
+ConstraintMandatoryFeatures:c1:Choco.eq(c3_BerkeleyDbC, 1)
+ConstraintMandatoryFeatures:c2:Choco.eq(c52_SYNTETHIC_BASE_FEATURE, 1)
+ConstraintChildrenImpliesParent:c3:Choco.implies(Choco.eq(c4_HAVE_CRYPTO, 1), Choco.eq(c3_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c4:Choco.implies(Choco.eq(c10_HAVE_HASH, 1), Choco.eq(c3_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c5:Choco.implies(Choco.eq(c16_HAVE_QUEUE, 1), Choco.eq(c3_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c6:Choco.implies(Choco.eq(c22_HAVE_REPLICATION, 1), Choco.eq(c3_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c7:Choco.implies(Choco.eq(c28_HAVE_VERIFY, 1), Choco.eq(c3_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c8:Choco.implies(Choco.eq(c34_HAVE_SEQUENCE, 1), Choco.eq(c3_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c9:Choco.implies(Choco.eq(c40_HAVE_STATISTICS, 1), Choco.eq(c3_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c10:Choco.implies(Choco.eq(c46_DIAGNOSTIC, 1), Choco.eq(c3_BerkeleyDbC, 1))
+ConstraintChildrenImpliesParent:c11:Choco.implies(Choco.eq(c52_SYNTETHIC_BASE_FEATURE, 1), Choco.eq(c3_BerkeleyDbC, 1))
+ConstraintMandatoryChildEqualParent:c12:Choco.eq(c52_SYNTETHIC_BASE_FEATURE, c3_BerkeleyDbC)
+BinaryVariable:c4_HAVE_CRYPTO
+BinaryVariable:c10_HAVE_HASH
+BinaryVariable:c16_HAVE_QUEUE
+BinaryVariable:c22_HAVE_REPLICATION
+BinaryVariable:c28_HAVE_VERIFY
+BinaryVariable:c34_HAVE_SEQUENCE
+BinaryVariable:c40_HAVE_STATISTICS
+BinaryVariable:c46_DIAGNOSTIC
+BinaryVariable:c52_SYNTETHIC_BASE_FEATURE
+BinaryVariable:c3_BerkeleyDbC
+ProductLevelNfpAttribute:c2_footprint
+ProductLevelNfpFeatureContribution:c2_footprint,c4_HAVE_CRYPTO,10
+ProductLevelNfpFeatureContribution:c2_footprint,c10_HAVE_HASH,56
+ProductLevelNfpFeatureContribution:c2_footprint,c16_HAVE_QUEUE,28
+ProductLevelNfpFeatureContribution:c2_footprint,c22_HAVE_REPLICATION,44
+ProductLevelNfpFeatureContribution:c2_footprint,c28_HAVE_VERIFY,25
+ProductLevelNfpFeatureContribution:c2_footprint,c34_HAVE_SEQUENCE,10
+ProductLevelNfpFeatureContribution:c2_footprint,c40_HAVE_STATISTICS,139
+ProductLevelNfpFeatureContribution:c2_footprint,c46_DIAGNOSTIC,54
+ProductLevelNfpFeatureContribution:c2_footprint,c52_SYNTETHIC_BASE_FEATURE,881
+ObjectiveSense:False

@@ -1,0 +1,55 @@
+ConstraintMandatoryFeatures:c1:Choco.eq(c6_Violet, 1)
+ConstraintMandatoryFeatures:c2:Choco.eq(c7_VioletDef, 1)
+ConstraintMandatoryFeatures:c3:Choco.eq(c18_base, 1)
+ConstraintChildrenImpliesParent:c4:Choco.implies(Choco.eq(c18_base, 1), Choco.eq(c7_VioletDef, 1))
+ConstraintMandatoryChildEqualParent:c5:Choco.eq(c18_base, c7_VioletDef)
+ConstraintChildrenImpliesParent:c6:Choco.implies(Choco.eq(c29_MenuResources, 1), Choco.eq(c7_VioletDef, 1))
+ConstraintChildrenImpliesParent:c7:Choco.implies(Choco.eq(c40_GraphUtility, 1), Choco.eq(c7_VioletDef, 1))
+ConstraintChildrenImpliesParent:c8:Choco.implies(Choco.eq(c51_ExtensionFilter, 1), Choco.eq(c7_VioletDef, 1))
+ConstraintChildrenImpliesParent:c9:Choco.implies(Choco.eq(c62_FileUtility, 1), Choco.eq(c7_VioletDef, 1))
+ConstraintChildrenImpliesParent:c10:Choco.implies(Choco.eq(c73_InternalFrame, 1), Choco.eq(c7_VioletDef, 1))
+ConstraintChildrenImpliesParent:c11:Choco.implies(Choco.eq(c84_Read, 1), Choco.eq(c7_VioletDef, 1))
+ConstraintChildrenImpliesParent:c12:Choco.implies(Choco.eq(c90_FileMenu, 1), Choco.eq(c7_VioletDef, 1))
+ConstraintChildrenImpliesParent:c13:Choco.implies(Choco.eq(c101_NewFile, 1), Choco.eq(c7_VioletDef, 1))
+ConstraintChildrenImpliesParent:c14:Choco.implies(Choco.eq(c132_UseCaseD, 1), Choco.eq(c7_VioletDef, 1))
+ConstraintChildrenImpliesParent:c15:Choco.implies(Choco.eq(c7_VioletDef, 1), Choco.eq(c6_Violet, 1))
+ConstraintMandatoryChildEqualParent:c16:Choco.eq(c7_VioletDef, c6_Violet)
+BinaryVariable:c7_VioletDef
+BinaryVariable:c18_base
+BinaryVariable:c29_MenuResources
+BinaryVariable:c40_GraphUtility
+BinaryVariable:c51_ExtensionFilter
+BinaryVariable:c62_FileUtility
+BinaryVariable:c73_InternalFrame
+BinaryVariable:c84_Read
+BinaryVariable:c90_FileMenu
+BinaryVariable:c101_NewFile
+BinaryVariable:c132_UseCaseD
+BinaryVariable:c6_Violet
+ProductLevelNfpAttribute:c2_footprint
+ProductLevelNfpAttribute:c5_portability
+ProductLevelNfpAttribute:c3_usability
+ProductLevelNfpFeatureContribution:c3_usability,c7_VioletDef,18
+ProductLevelNfpFeatureContribution:c3_usability,c18_base,3
+ProductLevelNfpFeatureContribution:c3_usability,c29_MenuResources,3
+ProductLevelNfpFeatureContribution:c3_usability,c40_GraphUtility,3
+ProductLevelNfpFeatureContribution:c3_usability,c51_ExtensionFilter,3
+ProductLevelNfpFeatureContribution:c3_usability,c62_FileUtility,3
+ProductLevelNfpFeatureContribution:c3_usability,c73_InternalFrame,3
+ProductLevelNfpFeatureContribution:c3_usability,c90_FileMenu,3
+ProductLevelNfpFeatureContribution:c3_usability,c101_NewFile,0
+ProductLevelNfpFeatureContribution:c3_usability,c132_UseCaseD,0
+ProductLevelNfpFeatureContribution:c3_usability,c7_VioletDef,0
+ProductLevelNfpFeatureContribution:c3_usability,c18_base,0
+ProductLevelNfpFeatureContribution:c3_usability,c29_MenuResources,0
+ProductLevelNfpFeatureContribution:c3_usability,c40_GraphUtility,0
+ProductLevelNfpFeatureContribution:c3_usability,c51_ExtensionFilter,0
+ProductLevelNfpFeatureContribution:c3_usability,c62_FileUtility,0
+ProductLevelNfpFeatureContribution:c3_usability,c73_InternalFrame,0
+ProductLevelNfpFeatureContribution:c3_usability,c90_FileMenu,0
+ProductLevelNfpFeatureContribution:c3_usability,c101_NewFile,1
+ProductLevelNfpFeatureContribution:c3_usability,c132_UseCaseD,3
+ProductLevelNfpFeatureContribution:c3_usability,c84_Read,4
+ObjectiveSense:True
+ObjectiveSense:False
+ObjectiveSense:True

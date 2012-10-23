@@ -1,0 +1,21 @@
+// Adapated from Scalable Prediction of Non-functional Properties in Software Product Lines.
+// Scaled down by dividing numbers by 200 and rounding.
+//To execute in alloy: run  show for ...
+
+
+abstract IMeasurable
+
+
+abstract PKJab
+	Base : IMeasurable 
+	ContactListSource : IMeasurable 
+		ServerRoster : IMeasurable 
+	XEP0085 : IMeasurable  ?
+		Composing : IMeasurable 
+		SendComposing : IMeasurable  ?
+	History : IMeasurable  ?
+	Timestamps : IMeasurable  ?
+	XEP0092 : IMeasurable  ?
+		SendVersion : IMeasurable  ?
+	ThemeSelection : IMeasurable  ?
+

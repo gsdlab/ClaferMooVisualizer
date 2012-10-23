@@ -1,0 +1,32 @@
+ConstraintMandatoryFeatures:c1:Choco.eq(c6_MobilePhone, 1)
+ConstraintMandatoryFeatures:c2:Choco.eq(c7_Connectivity, 1)
+ConstraintChildrenImpliesParent:c3:Choco.implies(Choco.eq(c7_Connectivity, 1), Choco.eq(c6_MobilePhone, 1))
+ConstraintMandatoryChildEqualParent:c4:Choco.eq(c7_Connectivity, c6_MobilePhone)
+ConstraintChildrenImpliesParent:c5:Choco.implies(Choco.eq(c51_PasswordProtection, 1), Choco.eq(c6_MobilePhone, 1))
+ConstraintChildrenImpliesParent:c6:Choco.implies(Choco.eq(c18_Bluetooth, 1), Choco.eq(c7_Connectivity, 1))
+ConstraintChildrenImpliesParent:c7:Choco.implies(Choco.eq(c29_USB, 1), Choco.eq(c7_Connectivity, 1))
+ConstraintChildrenImpliesParent:c8:Choco.implies(Choco.eq(c40_Wifi, 1), Choco.eq(c7_Connectivity, 1))
+ConstraintOr:c9:Choco.ifOnlyIf(Choco.or(GROUPVARS(c18_Bluetooth,c29_USB,c40_Wifi)), Choco.eq(c7_Connectivity, 1))
+BinaryVariable:c7_Connectivity
+BinaryVariable:c18_Bluetooth
+BinaryVariable:c29_USB
+BinaryVariable:c40_Wifi
+BinaryVariable:c51_PasswordProtection
+BinaryVariable:c6_MobilePhone
+ProductLevelNfpAttribute:c2_performance
+ProductLevelNfpAttribute:c5_security
+ProductLevelNfpAttribute:c3_cost
+ProductLevelNfpFeatureContribution:c3_cost,c7_Connectivity,0
+ProductLevelNfpFeatureContribution:c3_cost,c18_Bluetooth,9
+ProductLevelNfpFeatureContribution:c3_cost,c29_USB,15
+ProductLevelNfpFeatureContribution:c3_cost,c40_Wifi,22
+ProductLevelNfpFeatureContribution:c3_cost,c51_PasswordProtection,1
+ProductLevelNfpFeatureContribution:c3_cost,c7_Connectivity,0
+ProductLevelNfpFeatureContribution:c3_cost,c18_Bluetooth,10
+ProductLevelNfpFeatureContribution:c3_cost,c29_USB,7
+ProductLevelNfpFeatureContribution:c3_cost,c40_Wifi,17
+ProductLevelNfpFeatureContribution:c3_cost,c51_PasswordProtection,2
+ProductLevelNfpFeatureContribution:c3_cost,c51_PasswordProtection,1
+ObjectiveSense:True
+ObjectiveSense:False
+ObjectiveSense:True

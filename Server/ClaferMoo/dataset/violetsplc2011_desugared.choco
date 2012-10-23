@@ -1,0 +1,342 @@
+ConstraintMandatoryFeatures:c1:Choco.eq(c3_Violet, 1)
+ConstraintMandatoryFeatures:c2:Choco.eq(c4_VioletDef, 1)
+ConstraintMandatoryFeatures:c3:Choco.eq(c10_base, 1)
+ConstraintChildrenImpliesParent:c4:Choco.implies(Choco.eq(c384_SequenceNoteEdge, 1), Choco.eq(c370_SequenceDiagram, 1))
+ConstraintChildrenImpliesParent:c5:Choco.implies(Choco.eq(c392_SequenceReturnEdge, 1), Choco.eq(c370_SequenceDiagram, 1))
+ConstraintChildrenImpliesParent:c6:Choco.implies(Choco.eq(c400_SequenceCallEdge, 1), Choco.eq(c370_SequenceDiagram, 1))
+ConstraintChildrenImpliesParent:c7:Choco.implies(Choco.eq(c408_SequenceNoteNode, 1), Choco.eq(c370_SequenceDiagram, 1))
+ConstraintChildrenImpliesParent:c8:Choco.implies(Choco.eq(c414_SequenceCallNode, 1), Choco.eq(c370_SequenceDiagram, 1))
+ConstraintChildrenImpliesParent:c9:Choco.implies(Choco.eq(c420_SequenceParameterNode, 1), Choco.eq(c370_SequenceDiagram, 1))
+ConstraintChildrenImpliesParent:c10:Choco.implies(Choco.eq(c324_StateNoteEdge, 1), Choco.eq(c310_StateDiagram, 1))
+ConstraintChildrenImpliesParent:c11:Choco.implies(Choco.eq(c332_StateTransitionEdge, 1), Choco.eq(c310_StateDiagram, 1))
+ConstraintChildrenImpliesParent:c12:Choco.implies(Choco.eq(c340_StateNoteNode, 1), Choco.eq(c310_StateDiagram, 1))
+ConstraintChildrenImpliesParent:c13:Choco.implies(Choco.eq(c346_FinalStateNode, 1), Choco.eq(c310_StateDiagram, 1))
+ConstraintChildrenImpliesParent:c14:Choco.implies(Choco.eq(c352_InitialStateNode, 1), Choco.eq(c310_StateDiagram, 1))
+ConstraintChildrenImpliesParent:c15:Choco.implies(Choco.eq(c358_StateNode, 1), Choco.eq(c310_StateDiagram, 1))
+ConstraintChildrenImpliesParent:c16:Choco.implies(Choco.eq(c792_Preferences, 1), Choco.eq(c769_Additional, 1))
+ConstraintChildrenImpliesParent:c17:Choco.implies(Choco.eq(c798_SetTitle, 1), Choco.eq(c769_Additional, 1))
+ConstraintChildrenImpliesParent:c18:Choco.implies(Choco.eq(c804_ImageFilter, 1), Choco.eq(c769_Additional, 1))
+ConstraintChildrenImpliesParent:c19:Choco.implies(Choco.eq(c815_VioletFilter, 1), Choco.eq(c769_Additional, 1))
+ConstraintChildrenImpliesParent:c20:Choco.implies(Choco.eq(c823_VersionChecker, 1), Choco.eq(c769_Additional, 1))
+ConstraintChildrenImpliesParent:c21:Choco.implies(Choco.eq(c829_CommandLine, 1), Choco.eq(c769_Additional, 1))
+ConstraintChildrenImpliesParent:c22:Choco.implies(Choco.eq(c262_ObjectNoteEdge, 1), Choco.eq(c248_ObjectDiagram, 1))
+ConstraintChildrenImpliesParent:c23:Choco.implies(Choco.eq(c270_ObjectAssociationEdge, 1), Choco.eq(c248_ObjectDiagram, 1))
+ConstraintChildrenImpliesParent:c24:Choco.implies(Choco.eq(c278_ObjectReferenceEdge, 1), Choco.eq(c248_ObjectDiagram, 1))
+ConstraintChildrenImpliesParent:c25:Choco.implies(Choco.eq(c286_ObjectNoteNode, 1), Choco.eq(c248_ObjectDiagram, 1))
+ConstraintChildrenImpliesParent:c26:Choco.implies(Choco.eq(c292_ObjectFieldNode, 1), Choco.eq(c248_ObjectDiagram, 1))
+ConstraintChildrenImpliesParent:c27:Choco.implies(Choco.eq(c298_ObjectNode, 1), Choco.eq(c248_ObjectDiagram, 1))
+ConstraintChildrenImpliesParent:c28:Choco.implies(Choco.eq(c110_OpenFile, 1), Choco.eq(c84_File, 1))
+ConstraintChildrenImpliesParent:c29:Choco.implies(Choco.eq(c116_RecentFile, 1), Choco.eq(c84_File, 1))
+ConstraintChildrenImpliesParent:c30:Choco.implies(Choco.eq(c124_SaveAs, 1), Choco.eq(c84_File, 1))
+ConstraintChildrenImpliesParent:c31:Choco.implies(Choco.eq(c130_SaveFile, 1), Choco.eq(c84_File, 1))
+ConstraintChildrenImpliesParent:c32:Choco.implies(Choco.eq(c138_ExportImage, 1), Choco.eq(c84_File, 1))
+ConstraintChildrenImpliesParent:c33:Choco.implies(Choco.eq(c144_Print, 1), Choco.eq(c84_File, 1))
+ConstraintChildrenImpliesParent:c34:Choco.implies(Choco.eq(c150_Exit, 1), Choco.eq(c84_File, 1))
+ConstraintChildrenImpliesParent:c35:Choco.implies(Choco.eq(c10_base, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintMandatoryChildEqualParent:c36:Choco.eq(c10_base, c4_VioletDef)
+ConstraintChildrenImpliesParent:c37:Choco.implies(Choco.eq(c16_MenuResources, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c38:Choco.implies(Choco.eq(c22_GraphUtility, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c39:Choco.implies(Choco.eq(c28_ExtensionFilter, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c40:Choco.implies(Choco.eq(c34_FileUtility, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c41:Choco.implies(Choco.eq(c40_InternalFrame, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c42:Choco.implies(Choco.eq(c46_Read, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c43:Choco.implies(Choco.eq(c52_FileMenu, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c44:Choco.implies(Choco.eq(c58_NewFile, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c45:Choco.implies(Choco.eq(c84_File, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c46:Choco.implies(Choco.eq(c157_DiagramSupport, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c47:Choco.implies(Choco.eq(c163_UseCaseD, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c48:Choco.implies(Choco.eq(c169_UseCaseDiagram, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c49:Choco.implies(Choco.eq(c242_ObjectD, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c50:Choco.implies(Choco.eq(c248_ObjectDiagram, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c51:Choco.implies(Choco.eq(c304_StateD, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c52:Choco.implies(Choco.eq(c310_StateDiagram, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c53:Choco.implies(Choco.eq(c364_SequenceD, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c54:Choco.implies(Choco.eq(c370_SequenceDiagram, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c55:Choco.implies(Choco.eq(c427_ClassD, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c56:Choco.implies(Choco.eq(c433_ClassDiagram, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c57:Choco.implies(Choco.eq(c527_EditMenu, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c58:Choco.implies(Choco.eq(c533_Edit, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c59:Choco.implies(Choco.eq(c583_ViewMenu, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c60:Choco.implies(Choco.eq(c589_View, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c61:Choco.implies(Choco.eq(c663_WindowMenu, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c62:Choco.implies(Choco.eq(c669_Window, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c63:Choco.implies(Choco.eq(c725_HelpMenu, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c64:Choco.implies(Choco.eq(c731_Help, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c65:Choco.implies(Choco.eq(c769_Additional, 1), Choco.eq(c4_VioletDef, 1))
+ConstraintChildrenImpliesParent:c66:Choco.implies(Choco.eq(c695_NextWindow, 1), Choco.eq(c669_Window, 1))
+ConstraintChildrenImpliesParent:c67:Choco.implies(Choco.eq(c701_PreviousWindow, 1), Choco.eq(c669_Window, 1))
+ConstraintChildrenImpliesParent:c68:Choco.implies(Choco.eq(c707_MaximizeWindow, 1), Choco.eq(c669_Window, 1))
+ConstraintChildrenImpliesParent:c69:Choco.implies(Choco.eq(c713_RestoreWindow, 1), Choco.eq(c669_Window, 1))
+ConstraintChildrenImpliesParent:c70:Choco.implies(Choco.eq(c719_CloseWindow, 1), Choco.eq(c669_Window, 1))
+ConstraintChildrenImpliesParent:c71:Choco.implies(Choco.eq(c757_License, 1), Choco.eq(c731_Help, 1))
+ConstraintChildrenImpliesParent:c72:Choco.implies(Choco.eq(c763_About, 1), Choco.eq(c731_Help, 1))
+ConstraintChildrenImpliesParent:c73:Choco.implies(Choco.eq(c615_HideGrid, 1), Choco.eq(c589_View, 1))
+ConstraintChildrenImpliesParent:c74:Choco.implies(Choco.eq(c621_LargerGrid, 1), Choco.eq(c589_View, 1))
+ConstraintChildrenImpliesParent:c75:Choco.implies(Choco.eq(c627_SmallerGrid, 1), Choco.eq(c589_View, 1))
+ConstraintChildrenImpliesParent:c76:Choco.implies(Choco.eq(c633_ClipDrawingArea, 1), Choco.eq(c589_View, 1))
+ConstraintChildrenImpliesParent:c77:Choco.implies(Choco.eq(c639_GrowDrawingArea, 1), Choco.eq(c589_View, 1))
+ConstraintChildrenImpliesParent:c78:Choco.implies(Choco.eq(c645_ZoomIn, 1), Choco.eq(c589_View, 1))
+ConstraintChildrenImpliesParent:c79:Choco.implies(Choco.eq(c651_ZoomOut, 1), Choco.eq(c589_View, 1))
+ConstraintChildrenImpliesParent:c80:Choco.implies(Choco.eq(c657_LookAndFeel, 1), Choco.eq(c589_View, 1))
+ConstraintChildrenImpliesParent:c81:Choco.implies(Choco.eq(c4_VioletDef, 1), Choco.eq(c3_Violet, 1))
+ConstraintMandatoryChildEqualParent:c82:Choco.eq(c4_VioletDef, c3_Violet)
+ConstraintChildrenImpliesParent:c83:Choco.implies(Choco.eq(c559_SelectPrevious, 1), Choco.eq(c533_Edit, 1))
+ConstraintChildrenImpliesParent:c84:Choco.implies(Choco.eq(c565_SelectNext, 1), Choco.eq(c533_Edit, 1))
+ConstraintChildrenImpliesParent:c85:Choco.implies(Choco.eq(c571_DeleteItem, 1), Choco.eq(c533_Edit, 1))
+ConstraintChildrenImpliesParent:c86:Choco.implies(Choco.eq(c577_EditProperties, 1), Choco.eq(c533_Edit, 1))
+ConstraintChildrenImpliesParent:c87:Choco.implies(Choco.eq(c183_UseCaseNoteEdge, 1), Choco.eq(c169_UseCaseDiagram, 1))
+ConstraintChildrenImpliesParent:c88:Choco.implies(Choco.eq(c191_UseCaseGeneralizationEdge, 1), Choco.eq(c169_UseCaseDiagram, 1))
+ConstraintChildrenImpliesParent:c89:Choco.implies(Choco.eq(c199_IncludeRelationshipEdge, 1), Choco.eq(c169_UseCaseDiagram, 1))
+ConstraintChildrenImpliesParent:c90:Choco.implies(Choco.eq(c207_ExtendRelationshipEdge, 1), Choco.eq(c169_UseCaseDiagram, 1))
+ConstraintChildrenImpliesParent:c91:Choco.implies(Choco.eq(c215_UseCaseAssociationEdge, 1), Choco.eq(c169_UseCaseDiagram, 1))
+ConstraintChildrenImpliesParent:c92:Choco.implies(Choco.eq(c223_UseCaseNoteNode, 1), Choco.eq(c169_UseCaseDiagram, 1))
+ConstraintChildrenImpliesParent:c93:Choco.implies(Choco.eq(c229_UseCaseNode, 1), Choco.eq(c169_UseCaseDiagram, 1))
+ConstraintChildrenImpliesParent:c94:Choco.implies(Choco.eq(c235_Actor, 1), Choco.eq(c169_UseCaseDiagram, 1))
+ConstraintChildrenImpliesParent:c95:Choco.implies(Choco.eq(c447_ClassNoteEdge, 1), Choco.eq(c433_ClassDiagram, 1))
+ConstraintChildrenImpliesParent:c96:Choco.implies(Choco.eq(c455_ClassInterfaceEdge, 1), Choco.eq(c433_ClassDiagram, 1))
+ConstraintChildrenImpliesParent:c97:Choco.implies(Choco.eq(c463_ClassCompositionEdge, 1), Choco.eq(c433_ClassDiagram, 1))
+ConstraintChildrenImpliesParent:c98:Choco.implies(Choco.eq(c471_ClassAssociationEdge, 1), Choco.eq(c433_ClassDiagram, 1))
+ConstraintChildrenImpliesParent:c99:Choco.implies(Choco.eq(c479_ClassAggregationEdge, 1), Choco.eq(c433_ClassDiagram, 1))
+ConstraintChildrenImpliesParent:c100:Choco.implies(Choco.eq(c487_ClassInheritanceEdge, 1), Choco.eq(c433_ClassDiagram, 1))
+ConstraintChildrenImpliesParent:c101:Choco.implies(Choco.eq(c495_ClassDependencyEdge, 1), Choco.eq(c433_ClassDiagram, 1))
+ConstraintChildrenImpliesParent:c102:Choco.implies(Choco.eq(c503_ClassNoteNode, 1), Choco.eq(c433_ClassDiagram, 1))
+ConstraintChildrenImpliesParent:c103:Choco.implies(Choco.eq(c509_PackageNode, 1), Choco.eq(c433_ClassDiagram, 1))
+ConstraintChildrenImpliesParent:c104:Choco.implies(Choco.eq(c515_InterfaceNode, 1), Choco.eq(c433_ClassDiagram, 1))
+ConstraintChildrenImpliesParent:c105:Choco.implies(Choco.eq(c521_ClassNode, 1), Choco.eq(c433_ClassDiagram, 1))
+ConstraintOr:c106:Choco.ifOnlyIf(Choco.or(GROUPVARS(c110_OpenFile,c116_RecentFile,c124_SaveAs,c130_SaveFile,c138_ExportImage,c144_Print,c150_Exit)), Choco.eq(c84_File, 1))
+ConstraintOr:c107:Choco.ifOnlyIf(Choco.or(GROUPVARS(c183_UseCaseNoteEdge,c191_UseCaseGeneralizationEdge,c199_IncludeRelationshipEdge,c207_ExtendRelationshipEdge,c215_UseCaseAssociationEdge,c223_UseCaseNoteNode,c229_UseCaseNode,c235_Actor)), Choco.eq(c169_UseCaseDiagram, 1))
+ConstraintOr:c108:Choco.ifOnlyIf(Choco.or(GROUPVARS(c262_ObjectNoteEdge,c270_ObjectAssociationEdge,c278_ObjectReferenceEdge,c286_ObjectNoteNode,c292_ObjectFieldNode,c298_ObjectNode)), Choco.eq(c248_ObjectDiagram, 1))
+ConstraintOr:c109:Choco.ifOnlyIf(Choco.or(GROUPVARS(c324_StateNoteEdge,c332_StateTransitionEdge,c340_StateNoteNode,c346_FinalStateNode,c352_InitialStateNode,c358_StateNode)), Choco.eq(c310_StateDiagram, 1))
+ConstraintOr:c110:Choco.ifOnlyIf(Choco.or(GROUPVARS(c384_SequenceNoteEdge,c392_SequenceReturnEdge,c400_SequenceCallEdge,c408_SequenceNoteNode,c414_SequenceCallNode,c420_SequenceParameterNode)), Choco.eq(c370_SequenceDiagram, 1))
+ConstraintOr:c111:Choco.ifOnlyIf(Choco.or(GROUPVARS(c447_ClassNoteEdge,c455_ClassInterfaceEdge,c463_ClassCompositionEdge,c471_ClassAssociationEdge,c479_ClassAggregationEdge,c487_ClassInheritanceEdge,c495_ClassDependencyEdge,c503_ClassNoteNode,c509_PackageNode,c515_InterfaceNode,c521_ClassNode)), Choco.eq(c433_ClassDiagram, 1))
+ConstraintOr:c112:Choco.ifOnlyIf(Choco.or(GROUPVARS(c559_SelectPrevious,c565_SelectNext,c571_DeleteItem,c577_EditProperties)), Choco.eq(c533_Edit, 1))
+ConstraintOr:c113:Choco.ifOnlyIf(Choco.or(GROUPVARS(c615_HideGrid,c621_LargerGrid,c627_SmallerGrid,c633_ClipDrawingArea,c639_GrowDrawingArea,c645_ZoomIn,c651_ZoomOut,c657_LookAndFeel)), Choco.eq(c589_View, 1))
+ConstraintOr:c114:Choco.ifOnlyIf(Choco.or(GROUPVARS(c695_NextWindow,c701_PreviousWindow,c707_MaximizeWindow,c713_RestoreWindow,c719_CloseWindow)), Choco.eq(c669_Window, 1))
+ConstraintOr:c115:Choco.ifOnlyIf(Choco.or(GROUPVARS(c757_License,c763_About)), Choco.eq(c731_Help, 1))
+ConstraintOr:c116:Choco.ifOnlyIf(Choco.or(GROUPVARS(c792_Preferences,c798_SetTitle,c804_ImageFilter,c815_VioletFilter,c823_VersionChecker,c829_CommandLine)), Choco.eq(c769_Additional, 1))
+ConstraintCrossTree:c117:Choco.implies(Choco.eq(c116_RecentFile, 1), Choco.eq(c110_OpenFile, 1))
+ConstraintCrossTree:c118:Choco.implies(Choco.eq(c130_SaveFile, 1), Choco.eq(c124_SaveAs, 1))
+ConstraintCrossTree:c119:Choco.implies(Choco.eq(c183_UseCaseNoteEdge, 1), Choco.eq(c223_UseCaseNoteNode, 1))
+ConstraintCrossTree:c120:Choco.implies(Choco.eq(c191_UseCaseGeneralizationEdge, 1), Choco.eq(c235_Actor, 1))
+ConstraintCrossTree:c121:Choco.implies(Choco.eq(c199_IncludeRelationshipEdge, 1), Choco.eq(c235_Actor, 1))
+ConstraintCrossTree:c122:Choco.implies(Choco.eq(c207_ExtendRelationshipEdge, 1), Choco.eq(c235_Actor, 1))
+ConstraintCrossTree:c123:Choco.implies(Choco.eq(c215_UseCaseAssociationEdge, 1), Choco.eq(c235_Actor, 1))
+ConstraintCrossTree:c124:Choco.implies(Choco.eq(c262_ObjectNoteEdge, 1), Choco.eq(c286_ObjectNoteNode, 1))
+ConstraintCrossTree:c125:Choco.implies(Choco.eq(c270_ObjectAssociationEdge, 1), Choco.eq(c298_ObjectNode, 1))
+ConstraintCrossTree:c126:Choco.implies(Choco.eq(c278_ObjectReferenceEdge, 1), Choco.eq(c298_ObjectNode, 1))
+ConstraintCrossTree:c127:Choco.implies(Choco.eq(c324_StateNoteEdge, 1), Choco.eq(c340_StateNoteNode, 1))
+ConstraintCrossTree:c128:Choco.implies(Choco.eq(c332_StateTransitionEdge, 1), Choco.eq(c358_StateNode, 1))
+ConstraintCrossTree:c129:Choco.implies(Choco.eq(c384_SequenceNoteEdge, 1), Choco.eq(c408_SequenceNoteNode, 1))
+ConstraintCrossTree:c130:Choco.implies(Choco.eq(c392_SequenceReturnEdge, 1), Choco.eq(c414_SequenceCallNode, 1))
+ConstraintCrossTree:c131:Choco.implies(Choco.eq(c400_SequenceCallEdge, 1), Choco.eq(c414_SequenceCallNode, 1))
+ConstraintCrossTree:c132:Choco.implies(Choco.eq(c447_ClassNoteEdge, 1), Choco.eq(c503_ClassNoteNode, 1))
+ConstraintCrossTree:c133:Choco.implies(Choco.eq(c455_ClassInterfaceEdge, 1), Choco.eq(c521_ClassNode, 1))
+ConstraintCrossTree:c134:Choco.implies(Choco.eq(c463_ClassCompositionEdge, 1), Choco.eq(c521_ClassNode, 1))
+ConstraintCrossTree:c135:Choco.implies(Choco.eq(c471_ClassAssociationEdge, 1), Choco.eq(c521_ClassNode, 1))
+ConstraintCrossTree:c136:Choco.implies(Choco.eq(c479_ClassAggregationEdge, 1), Choco.eq(c521_ClassNode, 1))
+ConstraintCrossTree:c137:Choco.implies(Choco.eq(c487_ClassInheritanceEdge, 1), Choco.eq(c521_ClassNode, 1))
+ConstraintCrossTree:c138:Choco.implies(Choco.eq(c495_ClassDependencyEdge, 1), Choco.eq(c521_ClassNode, 1))
+ConstraintCrossTree:c139:Choco.implies(Choco.eq(c815_VioletFilter, 1), Choco.eq(c28_ExtensionFilter, 1))
+ConstraintCrossTree:c140:Choco.implies(Choco.eq(c829_CommandLine, 1), Choco.eq(c110_OpenFile, 1))
+BinaryVariable:c4_VioletDef
+BinaryVariable:c10_base
+BinaryVariable:c16_MenuResources
+BinaryVariable:c22_GraphUtility
+BinaryVariable:c28_ExtensionFilter
+BinaryVariable:c34_FileUtility
+BinaryVariable:c40_InternalFrame
+BinaryVariable:c46_Read
+BinaryVariable:c52_FileMenu
+BinaryVariable:c58_NewFile
+BinaryVariable:c84_File
+BinaryVariable:c110_OpenFile
+BinaryVariable:c116_RecentFile
+BinaryVariable:c124_SaveAs
+BinaryVariable:c130_SaveFile
+BinaryVariable:c138_ExportImage
+BinaryVariable:c144_Print
+BinaryVariable:c150_Exit
+BinaryVariable:c157_DiagramSupport
+BinaryVariable:c163_UseCaseD
+BinaryVariable:c169_UseCaseDiagram
+BinaryVariable:c183_UseCaseNoteEdge
+BinaryVariable:c191_UseCaseGeneralizationEdge
+BinaryVariable:c199_IncludeRelationshipEdge
+BinaryVariable:c207_ExtendRelationshipEdge
+BinaryVariable:c215_UseCaseAssociationEdge
+BinaryVariable:c223_UseCaseNoteNode
+BinaryVariable:c229_UseCaseNode
+BinaryVariable:c235_Actor
+BinaryVariable:c242_ObjectD
+BinaryVariable:c248_ObjectDiagram
+BinaryVariable:c262_ObjectNoteEdge
+BinaryVariable:c270_ObjectAssociationEdge
+BinaryVariable:c278_ObjectReferenceEdge
+BinaryVariable:c286_ObjectNoteNode
+BinaryVariable:c292_ObjectFieldNode
+BinaryVariable:c298_ObjectNode
+BinaryVariable:c304_StateD
+BinaryVariable:c310_StateDiagram
+BinaryVariable:c324_StateNoteEdge
+BinaryVariable:c332_StateTransitionEdge
+BinaryVariable:c340_StateNoteNode
+BinaryVariable:c346_FinalStateNode
+BinaryVariable:c352_InitialStateNode
+BinaryVariable:c358_StateNode
+BinaryVariable:c364_SequenceD
+BinaryVariable:c370_SequenceDiagram
+BinaryVariable:c384_SequenceNoteEdge
+BinaryVariable:c392_SequenceReturnEdge
+BinaryVariable:c400_SequenceCallEdge
+BinaryVariable:c408_SequenceNoteNode
+BinaryVariable:c414_SequenceCallNode
+BinaryVariable:c420_SequenceParameterNode
+BinaryVariable:c427_ClassD
+BinaryVariable:c433_ClassDiagram
+BinaryVariable:c447_ClassNoteEdge
+BinaryVariable:c455_ClassInterfaceEdge
+BinaryVariable:c463_ClassCompositionEdge
+BinaryVariable:c471_ClassAssociationEdge
+BinaryVariable:c479_ClassAggregationEdge
+BinaryVariable:c487_ClassInheritanceEdge
+BinaryVariable:c495_ClassDependencyEdge
+BinaryVariable:c503_ClassNoteNode
+BinaryVariable:c509_PackageNode
+BinaryVariable:c515_InterfaceNode
+BinaryVariable:c521_ClassNode
+BinaryVariable:c527_EditMenu
+BinaryVariable:c533_Edit
+BinaryVariable:c559_SelectPrevious
+BinaryVariable:c565_SelectNext
+BinaryVariable:c571_DeleteItem
+BinaryVariable:c577_EditProperties
+BinaryVariable:c583_ViewMenu
+BinaryVariable:c589_View
+BinaryVariable:c615_HideGrid
+BinaryVariable:c621_LargerGrid
+BinaryVariable:c627_SmallerGrid
+BinaryVariable:c633_ClipDrawingArea
+BinaryVariable:c639_GrowDrawingArea
+BinaryVariable:c645_ZoomIn
+BinaryVariable:c651_ZoomOut
+BinaryVariable:c657_LookAndFeel
+BinaryVariable:c663_WindowMenu
+BinaryVariable:c669_Window
+BinaryVariable:c695_NextWindow
+BinaryVariable:c701_PreviousWindow
+BinaryVariable:c707_MaximizeWindow
+BinaryVariable:c713_RestoreWindow
+BinaryVariable:c719_CloseWindow
+BinaryVariable:c725_HelpMenu
+BinaryVariable:c731_Help
+BinaryVariable:c757_License
+BinaryVariable:c763_About
+BinaryVariable:c769_Additional
+BinaryVariable:c792_Preferences
+BinaryVariable:c798_SetTitle
+BinaryVariable:c804_ImageFilter
+BinaryVariable:c815_VioletFilter
+BinaryVariable:c823_VersionChecker
+BinaryVariable:c829_CommandLine
+BinaryVariable:c3_Violet
+ProductLevelNfpAttribute:c2_footprint
+ProductLevelNfpFeatureContribution:c2_footprint,c4_VioletDef,1516
+ProductLevelNfpFeatureContribution:c2_footprint,c10_base,0
+ProductLevelNfpFeatureContribution:c2_footprint,c16_MenuResources,0
+ProductLevelNfpFeatureContribution:c2_footprint,c22_GraphUtility,0
+ProductLevelNfpFeatureContribution:c2_footprint,c28_ExtensionFilter,0
+ProductLevelNfpFeatureContribution:c2_footprint,c34_FileUtility,0
+ProductLevelNfpFeatureContribution:c2_footprint,c40_InternalFrame,0
+ProductLevelNfpFeatureContribution:c2_footprint,c46_Read,0
+ProductLevelNfpFeatureContribution:c2_footprint,c52_FileMenu,0
+ProductLevelNfpFeatureContribution:c2_footprint,c58_NewFile,0
+ProductLevelNfpFeatureContribution:c2_footprint,c84_File,104677
+ProductLevelNfpFeatureContribution:c2_footprint,c110_OpenFile,0
+ProductLevelNfpFeatureContribution:c2_footprint,c116_RecentFile,1989
+ProductLevelNfpFeatureContribution:c2_footprint,c124_SaveAs,4281
+ProductLevelNfpFeatureContribution:c2_footprint,c130_SaveFile,1144
+ProductLevelNfpFeatureContribution:c2_footprint,c138_ExportImage,1535
+ProductLevelNfpFeatureContribution:c2_footprint,c144_Print,13428
+ProductLevelNfpFeatureContribution:c2_footprint,c150_Exit,-2263
+ProductLevelNfpFeatureContribution:c2_footprint,c157_DiagramSupport,0
+ProductLevelNfpFeatureContribution:c2_footprint,c163_UseCaseD,0
+ProductLevelNfpFeatureContribution:c2_footprint,c169_UseCaseDiagram,132402
+ProductLevelNfpFeatureContribution:c2_footprint,c183_UseCaseNoteEdge,56
+ProductLevelNfpFeatureContribution:c2_footprint,c191_UseCaseGeneralizationEdge,577
+ProductLevelNfpFeatureContribution:c2_footprint,c199_IncludeRelationshipEdge,0
+ProductLevelNfpFeatureContribution:c2_footprint,c207_ExtendRelationshipEdge,0
+ProductLevelNfpFeatureContribution:c2_footprint,c215_UseCaseAssociationEdge,573
+ProductLevelNfpFeatureContribution:c2_footprint,c223_UseCaseNoteNode,56
+ProductLevelNfpFeatureContribution:c2_footprint,c229_UseCaseNode,1710
+ProductLevelNfpFeatureContribution:c2_footprint,c235_Actor,-4
+ProductLevelNfpFeatureContribution:c2_footprint,c242_ObjectD,0
+ProductLevelNfpFeatureContribution:c2_footprint,c248_ObjectDiagram,143403
+ProductLevelNfpFeatureContribution:c2_footprint,c262_ObjectNoteEdge,56
+ProductLevelNfpFeatureContribution:c2_footprint,c270_ObjectAssociationEdge,241
+ProductLevelNfpFeatureContribution:c2_footprint,c278_ObjectReferenceEdge,67
+ProductLevelNfpFeatureContribution:c2_footprint,c286_ObjectNoteNode,56
+ProductLevelNfpFeatureContribution:c2_footprint,c292_ObjectFieldNode,342
+ProductLevelNfpFeatureContribution:c2_footprint,c298_ObjectNode,58
+ProductLevelNfpFeatureContribution:c2_footprint,c304_StateD,0
+ProductLevelNfpFeatureContribution:c2_footprint,c310_StateDiagram,134566
+ProductLevelNfpFeatureContribution:c2_footprint,c324_StateNoteEdge,56
+ProductLevelNfpFeatureContribution:c2_footprint,c332_StateTransitionEdge,4291
+ProductLevelNfpFeatureContribution:c2_footprint,c340_StateNoteNode,56
+ProductLevelNfpFeatureContribution:c2_footprint,c346_FinalStateNode,108
+ProductLevelNfpFeatureContribution:c2_footprint,c352_InitialStateNode,65
+ProductLevelNfpFeatureContribution:c2_footprint,c358_StateNode,2181
+ProductLevelNfpFeatureContribution:c2_footprint,c364_SequenceD,0
+ProductLevelNfpFeatureContribution:c2_footprint,c370_SequenceDiagram,148721
+ProductLevelNfpFeatureContribution:c2_footprint,c384_SequenceNoteEdge,56
+ProductLevelNfpFeatureContribution:c2_footprint,c392_SequenceReturnEdge,58
+ProductLevelNfpFeatureContribution:c2_footprint,c400_SequenceCallEdge,21
+ProductLevelNfpFeatureContribution:c2_footprint,c408_SequenceNoteNode,56
+ProductLevelNfpFeatureContribution:c2_footprint,c414_SequenceCallNode,21
+ProductLevelNfpFeatureContribution:c2_footprint,c420_SequenceParameterNode,-4
+ProductLevelNfpFeatureContribution:c2_footprint,c427_ClassD,0
+ProductLevelNfpFeatureContribution:c2_footprint,c433_ClassDiagram,143951
+ProductLevelNfpFeatureContribution:c2_footprint,c447_ClassNoteEdge,57
+ProductLevelNfpFeatureContribution:c2_footprint,c455_ClassInterfaceEdge,569
+ProductLevelNfpFeatureContribution:c2_footprint,c463_ClassCompositionEdge,412
+ProductLevelNfpFeatureContribution:c2_footprint,c471_ClassAssociationEdge,398
+ProductLevelNfpFeatureContribution:c2_footprint,c479_ClassAggregationEdge,406
+ProductLevelNfpFeatureContribution:c2_footprint,c487_ClassInheritanceEdge,405
+ProductLevelNfpFeatureContribution:c2_footprint,c495_ClassDependencyEdge,401
+ProductLevelNfpFeatureContribution:c2_footprint,c503_ClassNoteNode,56
+ProductLevelNfpFeatureContribution:c2_footprint,c509_PackageNode,59
+ProductLevelNfpFeatureContribution:c2_footprint,c515_InterfaceNode,61
+ProductLevelNfpFeatureContribution:c2_footprint,c521_ClassNode,57
+ProductLevelNfpFeatureContribution:c2_footprint,c527_EditMenu,0
+ProductLevelNfpFeatureContribution:c2_footprint,c533_Edit,102602
+ProductLevelNfpFeatureContribution:c2_footprint,c559_SelectPrevious,1234
+ProductLevelNfpFeatureContribution:c2_footprint,c565_SelectNext,1155
+ProductLevelNfpFeatureContribution:c2_footprint,c571_DeleteItem,1146
+ProductLevelNfpFeatureContribution:c2_footprint,c577_EditProperties,1156
+ProductLevelNfpFeatureContribution:c2_footprint,c583_ViewMenu,0
+ProductLevelNfpFeatureContribution:c2_footprint,c589_View,102575
+ProductLevelNfpFeatureContribution:c2_footprint,c615_HideGrid,2953
+ProductLevelNfpFeatureContribution:c2_footprint,c621_LargerGrid,1186
+ProductLevelNfpFeatureContribution:c2_footprint,c627_SmallerGrid,1187
+ProductLevelNfpFeatureContribution:c2_footprint,c633_ClipDrawingArea,1549
+ProductLevelNfpFeatureContribution:c2_footprint,c639_GrowDrawingArea,1963
+ProductLevelNfpFeatureContribution:c2_footprint,c645_ZoomIn,1178
+ProductLevelNfpFeatureContribution:c2_footprint,c651_ZoomOut,1179
+ProductLevelNfpFeatureContribution:c2_footprint,c657_LookAndFeel,2229
+ProductLevelNfpFeatureContribution:c2_footprint,c663_WindowMenu,0
+ProductLevelNfpFeatureContribution:c2_footprint,c669_Window,102606
+ProductLevelNfpFeatureContribution:c2_footprint,c695_NextWindow,1256
+ProductLevelNfpFeatureContribution:c2_footprint,c701_PreviousWindow,1259
+ProductLevelNfpFeatureContribution:c2_footprint,c707_MaximizeWindow,1090
+ProductLevelNfpFeatureContribution:c2_footprint,c713_RestoreWindow,1089
+ProductLevelNfpFeatureContribution:c2_footprint,c719_CloseWindow,1086
+ProductLevelNfpFeatureContribution:c2_footprint,c725_HelpMenu,0
+ProductLevelNfpFeatureContribution:c2_footprint,c731_Help,102602
+ProductLevelNfpFeatureContribution:c2_footprint,c757_License,1755
+ProductLevelNfpFeatureContribution:c2_footprint,c763_About,1598
+ProductLevelNfpFeatureContribution:c2_footprint,c769_Additional,102224
+ProductLevelNfpFeatureContribution:c2_footprint,c792_Preferences,3343
+ProductLevelNfpFeatureContribution:c2_footprint,c798_SetTitle,321
+ProductLevelNfpFeatureContribution:c2_footprint,c804_ImageFilter,0
+ProductLevelNfpFeatureContribution:c2_footprint,c815_VioletFilter,183
+ProductLevelNfpFeatureContribution:c2_footprint,c823_VersionChecker,1882
+ProductLevelNfpFeatureContribution:c2_footprint,c829_CommandLine,256
