@@ -13,7 +13,7 @@ $(document).ready(function() {
             height: 470,
             posx: 500,
             posy: 0,
-            content: '<table width="95%" height="95%"><tr height="90%"><td id="dropPointY" class="axis_drop" ondrop="drop(event)" ondragover="allowDrop(event)">&nbsp;&nbsp;</td><td id="chart" style="display:none; width:100%; height:100%"></td></tr><tr><td colspan="2" id="dropPointX" class="axis_drop" ondrop="drop(event)" ondragover="allowDrop(event)">&nbsp;</td></tr></table>',
+            content: '<table width="95%" height="95%"><tr height="90%"><td id="dropPointY" class="axis_drop" ondrop="drop(event)" ondragover="allowDrop(event)">&nbsp;&nbsp;</td><td id="chart" style="display:none; width:95%; height:100%"></td><td id="dropPointZ" class="axis_drop" ondrop="drop(event)" ondragover="allowDrop(event)">&nbsp;&nbsp;</td></tr><tr><td colspan="3" id="dropPointX" class="axis_drop" ondrop="drop(event)" ondragover="allowDrop(event)">&nbsp;</td></tr></table>',
             onDragBegin : null,
             onDragEnd : null,
             onResizeBegin : null,
@@ -238,8 +238,11 @@ function redrawParetoFront()
 
 	var arg2 = $("#dropPointYAxisConfig_arg").val();
 	var label2 = $("#dropPointYAxisConfig_label").val();
+
+	var arg3 = $("#dropPointZAxisConfig_arg").val();
+	var label3 = $("#dropPointZAxisConfig_label").val();
 	
-	PFVisualizer.draw(processor, [arg1, arg2], [label1, label2]);
+	PFVisualizer.draw(processor, [arg1, arg2, arg3], [label1, label2, label3]);
 }
 
 function assignToAxis(axis, arg, label)
@@ -503,6 +506,14 @@ function onDataPreProcessed()
 		$("#chart").show();
 		assignToAxis("dropPointX", goals[0].arg, goals[0].label);
 		assignToAxis("dropPointY", goals[1].arg, goals[1].label);
+        
+        if (goals.length == 3)
+        {
+            assignToAxis("dropPointZ", goals[2].arg, goals[2].label);
+        }
+        else 
+            assignToAxis("dropPointZ", "", "");
+        
         redrawParetoFront();
 	}
 	else

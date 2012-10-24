@@ -23,11 +23,11 @@ abstract MobilePhone
 		[ this.performance = 20]
 		[ this.cost = 10 ]
 	total_performance : integer
-	[ total_performance = sum Feature.performance ]
+	[ total_performance = Connectivity.performance + Bluetooth.performance + USB.performance + Wifi.performance + PasswordProtection.performance ]
 	total_cost : integer
-	[ total_cost = sum Feature.cost ]
+	[ total_cost = Connectivity.cost + Bluetooth.cost + USB.cost + Wifi.cost + PasswordProtection.cost ]
 	total_security : integer
-	[ total_security = sum SecurityFeature.security ]
+	[ total_security = PasswordProtection.security ]
 
 MyPhone : MobilePhone
 

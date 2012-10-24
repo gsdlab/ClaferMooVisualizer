@@ -32,11 +32,11 @@ abstract sig c6_MobilePhone
 { r_c7_Connectivity : one c7_Connectivity
 , r_c51_PasswordProtection : one c51_PasswordProtection
 , r_c67_total_performance : one c67_total_performance
-, r_c74_total_cost : one c74_total_cost
-, r_c81_total_security : one c81_total_security }
-{ (this.@r_c67_total_performance.@c67_total_performance_ref) = (sum(c1_Feature.@r_c2_performance.@c2_performance_ref))
-  (this.@r_c74_total_cost.@c74_total_cost_ref) = (sum(c1_Feature.@r_c3_cost.@c3_cost_ref))
-  (this.@r_c81_total_security.@c81_total_security_ref) = (sum(c4_SecurityFeature.@r_c5_security.@c5_security_ref)) }
+, r_c89_total_cost : one c89_total_cost
+, r_c111_total_security : one c111_total_security }
+{ (this.@r_c67_total_performance.@c67_total_performance_ref) = ((((((this.@r_c7_Connectivity).@r_c2_performance.@c2_performance_ref).add[(((this.@r_c7_Connectivity).@r_c18_Bluetooth).@r_c2_performance.@c2_performance_ref)]).add[(((this.@r_c7_Connectivity).@r_c29_USB).@r_c2_performance.@c2_performance_ref)]).add[(((this.@r_c7_Connectivity).@r_c40_Wifi).@r_c2_performance.@c2_performance_ref)]).add[((this.@r_c51_PasswordProtection).@r_c2_performance.@c2_performance_ref)])
+  (this.@r_c89_total_cost.@c89_total_cost_ref) = ((((((this.@r_c7_Connectivity).@r_c3_cost.@c3_cost_ref).add[(((this.@r_c7_Connectivity).@r_c18_Bluetooth).@r_c3_cost.@c3_cost_ref)]).add[(((this.@r_c7_Connectivity).@r_c29_USB).@r_c3_cost.@c3_cost_ref)]).add[(((this.@r_c7_Connectivity).@r_c40_Wifi).@r_c3_cost.@c3_cost_ref)]).add[((this.@r_c51_PasswordProtection).@r_c3_cost.@c3_cost_ref)])
+  (this.@r_c111_total_security.@c111_total_security_ref) = ((this.@r_c51_PasswordProtection).@r_c5_security.@c5_security_ref) }
 
 sig c7_Connectivity extends c1_Feature
 { r_c18_Bluetooth : lone c18_Bluetooth
@@ -76,20 +76,20 @@ sig c67_total_performance
 { c67_total_performance_ref : one Int }
 { one @r_c67_total_performance.this }
 
-sig c74_total_cost
-{ c74_total_cost_ref : one Int }
-{ one @r_c74_total_cost.this }
+sig c89_total_cost
+{ c89_total_cost_ref : one Int }
+{ one @r_c89_total_cost.this }
 
-sig c81_total_security
-{ c81_total_security_ref : one Int }
-{ one @r_c81_total_security.this }
+sig c111_total_security
+{ c111_total_security_ref : one Int }
+{ one @r_c111_total_security.this }
 
-one sig c88_MyPhone extends c6_MobilePhone
+one sig c117_MyPhone extends c6_MobilePhone
 {}
 
 objectives o_global {
-maximize c88_MyPhone.@r_c67_total_performance.@c67_total_performance_ref ,
-minimize c88_MyPhone.@r_c74_total_cost.@c74_total_cost_ref 
+maximize c117_MyPhone.@r_c67_total_performance.@c67_total_performance_ref ,
+minimize c117_MyPhone.@r_c89_total_cost.@c89_total_cost_ref 
 }sig bag_extra_ints{
   extra_ints : set Int
 }
