@@ -82,7 +82,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     {
         colorAxisLegendPosition = "top";
         chartTop = 26;
-        chartHeight = "90%";
+        chartHeight = "88%";
     }
     else 
     {
