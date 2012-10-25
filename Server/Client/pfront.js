@@ -81,12 +81,14 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     if (hasThird)
     {
         colorAxisLegendPosition = "top";
-        chartTop = 30;
+        chartTop = 26;
+        chartHeight = "90%";
     }
     else 
     {
         colorAxisLegendPosition = "none";
         chartTop = 10;
+        chartHeight = "91%";
     }
     
     data.addRows(rows);          
@@ -94,7 +96,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 	var options = {
 //	  theme: 'maximized', 
 	  title: '',
-      chartArea: {left:"20", top:chartTop, width: "100%", height: "88%"},
+      chartArea: {left:"20", top:chartTop, width: "100%", height: chartHeight},
       titleTextStyle: {color: "black", fontName: "Arial", fontSize: 12},
 	  hAxis: {maxValue: maxX, minValue: minX},
 	  vAxis: {maxValue: maxY, minValue: minY},
