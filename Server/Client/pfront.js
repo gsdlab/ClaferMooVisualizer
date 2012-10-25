@@ -17,7 +17,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 	}
 	
     var hasThird = (args.length == 3); // has third dimension
-    
+
 	var instanceCount = processor.getInstanceCount();
 	
     var data = new google.visualization.DataTable();
@@ -30,6 +30,12 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 	
     var rows = new Array();
     
+    var maxX = 0;
+    var minX = 10000000000;
+    
+    var maxY = 0;
+    var minY = 10000000000;
+
 	for (var i = 1; i <= instanceCount; i++)
 	{
 		var first = processor.getFeatureValue(i, args[0], true); // get only numeric
@@ -39,6 +45,20 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 		point.push("" + i);
 		point.push(first);
 		point.push(second);
+        
+        var delta = 1;
+        
+        if (first < minX)
+            minX = first - delta;
+
+        if (first >= maxX)
+            maxX = first + delta;
+        
+        if (second < minY)
+            minY = second - delta;
+
+        if (second >= maxY)
+            maxY = second + delta;
 
         if (hasThird)
         {
@@ -49,18 +69,45 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 		rows.push(point);
 	}
     
+    if (minY > 0)
+        minY = 0;
+        
+    if (minX > 0)
+        minX = 0;
+        
+    if (maxX > maxY)
+        maxY = maxX;
+    
+    if (hasThird)
+    {
+        colorAxisLegendPosition = "top";
+        chartTop = 30;
+    }
+    else 
+    {
+        colorAxisLegendPosition = "none";
+        chartTop = 10;
+    }
+    
     data.addRows(rows);          
 
 	var options = {
 //	  theme: 'maximized', 
-	  title: 'Pareto Front',
-	  hAxis: {title: labels[0], minValue: 0, maxValue: 15},
-	  vAxis: {title: labels[1], minValue: 0, maxValue: 15},
+	  title: '',
+      chartArea: {left:"20", top:chartTop, width: "100%", height: "88%"},
+      titleTextStyle: {color: "black", fontName: "Arial", fontSize: 12},
+	  hAxis: {maxValue: maxX, minValue: minX},
+	  vAxis: {maxValue: maxY, minValue: minY},
+      axisTitlesPosition: 'in',
+//	  hAxis: {title: labels[0], viewWindowMode: "pretty"},
+//	  vAxis: {title: labels[1], viewWindowMode: "pretty"},
 	  animation: {duration:3000},
+      colorAxis: {legend : {position : colorAxisLegendPosition}},
+      
       bubble: {textStyle: {fontSize: 12}, stroke: "black"},
       sizeAxis: {maxSize: 12, minSize: 12},
-	  legend: 'none'
-	};
+      legend: 'bottom'
+    };
 
 //	alert(data);
 	this.chart = new google.visualization.BubbleChart(document.getElementById(this.element));

@@ -22,28 +22,28 @@ abstract androidPhone
                     [ this.performance = -2]
         keyboard : ComponentWithEnergy ?
             [this.energy = 1]
-            [ this.performance = 0]
+            [ this.performance = 3]
         keyboardLight : ComponentWithEnergy ?
             [ this.energy = 2]
             [ this.performance = -1]
             [ keyboard]
         cpu : ComponentWithEnergy
-            [ this.energy = 1]
-            [ this.performance = 10 ]
+            [ this.energy = 10]
+            [ this.performance = 15 ]
 	extra_cpu : ComponentWithEnergy ?
 	    [this.energy = 2 ]
-	    [ this.performance = 15 ]
-        or location ?
-            gps : ComponentWithEnergy
-                [this.energy = 5]
-                [ this.performance = -1 ]
-           wifitriangulation : ComponentWithEnergy
-                [ this.energy = 2]
-                [ this.performance = - 3 ]
+	    [ this.performance = 20 ]
+    or location ?
+        gps : ComponentWithEnergy
+            [this.energy = 5]
+            [ this.performance = -1 ]
+       wifitriangulation : ComponentWithEnergy
+            [ this.energy = 10]
+            [ this.performance = -2 ]
     software : Component
         [ this.performance = 0 ]
     	browser : Component ?
-                [ this.performance = 0 ]
+                [ this.performance = -1 ]
                 [ extra_cpu ]
         mediaplayer : Component ?
                 [ this.performance = -2 ]

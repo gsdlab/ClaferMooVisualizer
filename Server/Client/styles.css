@@ -45,6 +45,27 @@ img.tick{
 	height:18px;
 }
 
+th{
+    text-align:center;
+}
+
+th.td_abstract{
+    text-align:left;
+    width:50%;
+}
+
+.axis_drop div{
+    text-align: center;
+}
+
+#wGraph *{
+    overflow: hidden;
+}
+
+#dropPointY  div{
+    overflow:visible;
+}
+
 td.numeric
 {
 /*	color: #222;*/

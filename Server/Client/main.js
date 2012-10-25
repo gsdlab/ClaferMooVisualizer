@@ -8,12 +8,12 @@ $(document).ready(function() {
 
 	    $.newWindow({
             id: "wGraph",
-            title: "Graph",
+            title: "Pareto Front Graph",
             width: 500,
             height: 470,
             posx: 500,
             posy: 0,
-            content: '<table width="95%" height="95%"><tr height="90%"><td id="dropPointY" class="axis_drop" ondrop="drop(event)" ondragover="allowDrop(event)">&nbsp;&nbsp;</td><td id="chart" style="display:none; width:95%; height:100%"></td><td id="dropPointZ" class="axis_drop" ondrop="drop(event)" ondragover="allowDrop(event)">&nbsp;&nbsp;</td></tr><tr><td colspan="3" id="dropPointX" class="axis_drop" ondrop="drop(event)" ondragover="allowDrop(event)">&nbsp;</td></tr></table>',
+            content: '<table cellspacing="0" cellpadding="0" id="graph_table" width="100%" height="100%"><tr><td colspan="2" id="dropPointZ" class="axis_drop" ondrop="drop(event)" ondragover="allowDrop(event)">&nbsp;</td></tr><tr><td height="90%" width="5%" id="dropPointY" class="axis_drop" ondrop="drop(event)" ondragover="allowDrop(event)">&nbsp;</td><td id="chart" style="display:none; width:95%; height:95%"></td></tr><tr><td colspan="2" id="dropPointX" class="axis_drop" ondrop="drop(event)" ondragover="allowDrop(event)">&nbsp;</td></tr></table>',
             onDragBegin : null,
             onDragEnd : null,
             onResizeBegin : null,
@@ -29,7 +29,7 @@ $(document).ready(function() {
 
         $.newWindow({
             id: "wGoals",
-            title: "Goals",
+            title: "Multiobjective Optimization Goals",
             width: 500,
             height: 60,
             posx: 0,
@@ -50,7 +50,7 @@ $(document).ready(function() {
 		
         $.newWindow({
             id: "wComparison",
-            title: "Side-by-Side Comparison",
+            title: "Side-by-Side Comparison Table",
             width: 500,
             height: 300,
             posx: 0,
@@ -71,7 +71,7 @@ $(document).ready(function() {
 
         $.newWindow({
             id: "wTextOutput",
-            title: "Outputs",
+            title: "Tool Outputs and Compatibility",
             width: 1000,
             height: 130,
             posx: 0,
@@ -92,7 +92,7 @@ $(document).ready(function() {
 
         $.newWindow({
             id: "wSource",
-            title: "Choose a Clafer File:",
+            title: "Clafer File",
             width: 500,
             height: 30,
             posx: 0,
@@ -160,10 +160,10 @@ function endQuery()  {
 	$("#preloader").remove();
 	$("#load_area #myform").show();
 	
-	var fadeColor = "#ccc";
+	var fadeColor = "#777";
 	var normalColor = "#000"
 
-	var fadeOpacity = "0.3";
+	var fadeOpacity = "0.7";
 	var normalOpacity = "1.0"
 	
 	$("#comparison table tr").not(':first').hover(
@@ -218,8 +218,18 @@ function drop(ev)
 	var arg = parts[0];
 	var label = parts[1];
 
-	assignToAxis(ev.target.id, arg, label, true);
-	redrawParetoFront();
+    var id = ev.target.id;
+    var node = ev.target;
+    
+    while (node.parentNode != null && id == "")
+    {
+        node = node.parentNode;
+        id = node.id;
+    }
+    
+	assignToAxis(id, arg, label, true);
+    
+    redrawParetoFront();
 }
 
 function assignValue(id, value)
@@ -241,8 +251,24 @@ function redrawParetoFront()
 
 	var arg3 = $("#dropPointZAxisConfig_arg").val();
 	var label3 = $("#dropPointZAxisConfig_label").val();
-	
-	PFVisualizer.draw(processor, [arg1, arg2, arg3], [label1, label2, label3]);
+    
+    var s = '<g style="z-index: 110; "><text text-anchor="middle" x="14.2" y="210.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 210.5)" stroke="none" stroke-width="0" fill="#222222">' + label2 + '</text></g>';
+    s = '<div id="svgcont" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350">' + s + '</svg></div>';
+    
+//    alert(s);
+    
+    $("#dropPointX").html("<div>" + label1 + "</div>");
+    $("#dropPointY").html(s);
+    $("#dropPointZ").html("<div>" + label3 + "</div>");
+    
+//    $("#svgcont").css("z-index", 102);
+    
+//    alert(arg3);
+    
+    if (arg3 != "")
+        PFVisualizer.draw(processor, [arg1, arg2, arg3], [label1, label2, label3]);
+    else
+    	PFVisualizer.draw(processor, [arg1, arg2], [label1, label2]);
 }
 
 function assignToAxis(axis, arg, label)
@@ -491,14 +517,112 @@ function processToolResult(result)
 	
 }
 
+var comparisonTable = "";
+var comparisonTableToggled = false;
+
+function toggleRow(row, isOn)
+{
+    if (!isOn)
+    {
+        $(row).fadeTo('slow', 0.3);    
+    }
+    else
+    {
+        $(row).fadeTo('slow', 1);
+    }
+
+/*    if (!isOn)
+    {
+        $(row).fadeTo('slow', 0).slideUp();    
+    }
+    else
+    {
+        $(row).fadeTo('slow', 1).slideDown();
+    }
+*/
+}
+
+function toggleComparisonTable()
+{
+    comparisonTableToggled = !comparisonTableToggled;
+    if (!comparisonTableToggled)
+    {
+        var table = $("#comparison table");
+        $("#toggle_link").html("Distinct");
+        
+        var rows = table.find("tr");
+        rows.each(function(i){
+            toggleRow(this, true);
+        });
+    }
+    else
+    {
+        $("#toggle_link").html("Normal");
+
+        var table = $("#comparison table");
+        
+        var row = table.find("#r1");
+        var i = 1;
+        while (row.length != 0)
+        {
+            var instanceTds = row.find(".td_instance");
+    //        return;
+    //        alert(instanceTds.length);
+            var allAreTheSame = true;
+            var last = "";
+            instanceTds.each(function() {
+                if ($(this).hasClass("tick"))
+                {
+                    if (last == "" || last == "tick")
+                        last = "tick";
+                    else allAreTheSame = false;
+                }   
+                else if ($(this).hasClass("no"))
+                {
+                    if (last == "" || last == "no")
+                        last = "no";
+                    else allAreTheSame = false;
+                }
+                else allAreTheSame = false;
+            });
+            
+            if (allAreTheSame)
+            {
+                toggleRow(row, false);
+            }
+            
+            i++;
+            var row = table.find("#r" + i);
+        }
+    }
+}
 
 function onDataPreProcessed()
 {
 	processor.ack();
 	var goals = processor.getGoals();
 	var instanceCount = processor.getInstanceCount();
-	getComparisonHtml();
 	
+    comparisonTable = getComparisonHtml();
+    
+    comparisonTableToggled = false;
+
+    $('#comparison').empty();
+    $('#comparison').append(comparisonTable);            
+    
+    $('#toggle_link').html("Distinct");
+    $('#toggle_link').click(function()
+    {
+//        alert("OK!");
+        toggleComparisonTable();
+        return true;
+    });
+    
+    
+//    $('#comparison').append('<button onclick="toggleComparisonTable()">Toggle</button>');    
+    
+//    toggleComparisonTable();
+    
 	showGoals(goals);
 	
 	if (goals.length >= 2)
@@ -610,6 +734,12 @@ function getComparisonHtml()
 		
 		var td = $('<' + tagName + '></' + tagName + '>').addClass('td_abstract');
 		td.html(output[i].displayWithMargins);
+        
+        if (i == 0)
+        {
+            td.append('&nbsp;<button id="toggle_link">Toggle</button>');
+        }
+        
 		row.append(td);
 		
 		table.append(row);
@@ -619,7 +749,7 @@ function getComparisonHtml()
 			var td = $('<' + tagName + ' id="' + tagName + i + "_" + j + '"></' + tagName + '>').addClass('td_instance');
 			
 			if (i == 0)
-				td.html("Prod#" + j);
+				td.html("P#" + j);
 			else
 			{
 				sVal = processor.getFeatureValue(j, output[i].claferId, false);
@@ -634,8 +764,6 @@ function getComparisonHtml()
 //		alert("ok");
 	}
 
-	$('#comparison').empty();
-	$('#comparison').append(table);	
-	
+	return table;	
 
 }

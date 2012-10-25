@@ -22,36 +22,36 @@ abstract androidPhone
                     [ this.performance = -2]
         keyboard : ComponentWithEnergy ?
             [this.energy = 1]
-            [ this.performance = 3]
+            [ this.performance = 0]
         keyboardLight : ComponentWithEnergy ?
             [ this.energy = 2]
             [ this.performance = -1]
             [ keyboard]
         cpu : ComponentWithEnergy
             [ this.energy = 10]
-            [ this.performance = 15 ]
+            [ this.performance = 10 ]
 	extra_cpu : ComponentWithEnergy ?
 	    [this.energy = 2 ]
-	    [ this.performance = 20 ]
-    or location ?
-        gps : ComponentWithEnergy
-            [this.energy = 5]
-            [ this.performance = -1 ]
-       wifitriangulation : ComponentWithEnergy
-            [ this.energy = 10]
-            [ this.performance = -2 ]
+	    [ this.performance = 15 ]
+        or location ?
+            gps : ComponentWithEnergy
+                [this.energy = 5]
+                [ this.performance = -1 ]
+           wifitriangulation : ComponentWithEnergy
+                [ this.energy = 20]
+                [ this.performance = -2 ]
     software : Component
         [ this.performance = 0 ]
     	browser : Component ?
-                [ this.performance = -1 ]
+                [ this.performance = 0 ]
                 [ extra_cpu ]
         mediaplayer : Component ?
                 [ this.performance = -2 ]
 
     total_performance : integer 
-      [ total_performance = hardware.performance + screen.performance + material.performance + oled.performance + amoled.performance + lcd.performance + keyboard.performance + keyboardLight.performance + cpu.performance + extra_cpu.performance + gps.performance + wifitriangulation.performance + software.performance + browser.performance + mediaplayer.performance ]
+      [ total_performance = sum Component.performance ]
     total_energy : integer
-       [ total_energy = oled.energy + amoled.energy + lcd.energy + keyboard.energy + keyboardLight.energy + cpu.energy + extra_cpu.energy + gps.energy + wifitriangulation.energy ]  
+       [ total_energy = sum ComponentWithEnergy.energy ]  
 
 aPhone : androidPhone
        [ mediaplayer ]
