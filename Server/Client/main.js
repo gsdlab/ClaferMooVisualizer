@@ -90,6 +90,36 @@ $(document).ready(function() {
             resizeable: true
         });
 
+        var st = "";
+        st = st + "As a product line engineer:<ol>";
+        st = st + "<li>How do I view all N optimal product configurations?</li>";
+        st = st + "<li>How do I see differences among all N products?</li>";
+        st = st + "<li>How do I choose only K products out of N cutting off the products with less significant, in my opinion, features?</li>";
+        st = st + "<li>How do I see the correlation between two metrics (e.g. energy significantly influences performance)?</li>";
+        st = st + "<li>How can I group together the products with similar features?</li></ol>";
+        
+        
+        $.newWindow({
+            id: "wUseCase",
+            title: "User Stories",
+            width: 1000,
+            height: 130,
+            posx: 0,
+            posy: 510,
+            content: st,
+            onDragBegin : null,
+            onDragEnd : null,
+            onResizeBegin : null,
+            onResizeEnd : null,
+            onAjaxContentLoaded : null,
+            statusBar: true,
+            minimizeButton: true,
+            maximizeButton: true,
+            closeButton: true,
+            draggable: true,
+            resizeable: true
+        });        
+        
         $.newWindow({
             id: "wSource",
             title: "Clafer File",
