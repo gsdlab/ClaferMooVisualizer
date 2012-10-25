@@ -1,6 +1,6 @@
 <alloy builddate="unknown">
 
-<instance bitwidth="4" maxseq="1" command="Run show for 1 but exactly  partial 1 bag_extra_ints, exactly  partial 89 extra_ints,  partial 1 c7_Connectivity,  partial 1 c18_Bluetooth,  partial 1 c29_USB,  partial 1 c40_Wifi,  partial 1 c51_PasswordProtection,  partial 1 c67_FingerprintProtection,  partial 6 c2_performance,  partial 6 c3_cost,  partial 2 c5_security,  partial 6 r_c2_performance,  partial 6 r_c3_cost,  partial 2 r_c5_security,  partial 6 c2_performance_ref,  partial 6 c3_cost_ref,  partial 2 c5_security_ref optimize o_global" filename="">
+<instance bitwidth="4" maxseq="1" command="Run show for 1 but exactly  partial 1 bag_extra_ints, exactly  partial 89 extra_ints,  partial 1 c7_Connectivity,  partial 1 c18_Bluetooth,  partial 1 c29_USB,  partial 1 c40_Wifi,  partial 1 c51_PasswordProtection,  partial 1 c67_FingerprintProtection,  partial 6 c2_performance,  partial 6 c3_energy,  partial 2 c5_security,  partial 6 r_c2_performance,  partial 6 r_c3_energy,  partial 2 r_c5_security,  partial 6 c2_performance_ref,  partial 6 c3_energy_ref,  partial 2 c5_security_ref optimize o_global" filename="">
 
 <sig label="seq/Int" ID="0" parentID="1" builtin="yes">
 </sig>
@@ -64,10 +64,10 @@
    <types> <type ID="7"/> <type ID="18"/> </types>
 </field>
 
-<field label="r_c3_cost" ID="19" parentID="7">
-   <tuple> <atom label="partial_c67_FingerprintProtection%"/> <atom label="cost_for_c67_FingerprintProtection_of_4%"/> </tuple>
-   <tuple> <atom label="partial_c7_Connectivity%"/> <atom label="cost_for_c7_Connectivity_of_0%"/> </tuple>
-   <tuple> <atom label="partial_c18_Bluetooth%"/> <atom label="cost_for_c18_Bluetooth_of_10%"/> </tuple>
+<field label="r_c3_energy" ID="19" parentID="7">
+   <tuple> <atom label="partial_c67_FingerprintProtection%"/> <atom label="energy_for_c67_FingerprintProtection_of_4%"/> </tuple>
+   <tuple> <atom label="partial_c7_Connectivity%"/> <atom label="energy_for_c7_Connectivity_of_0%"/> </tuple>
+   <tuple> <atom label="partial_c18_Bluetooth%"/> <atom label="energy_for_c18_Bluetooth_of_10%"/> </tuple>
    <types> <type ID="7"/> <type ID="20"/> </types>
 </field>
 
@@ -84,16 +84,16 @@
    <types> <type ID="18"/> <type ID="1"/> </types>
 </field>
 
-<sig label="this/c3_cost" ID="20" parentID="2">
-   <atom label="cost_for_c7_Connectivity_of_0%"/>
-   <atom label="cost_for_c18_Bluetooth_of_10%"/>
-   <atom label="cost_for_c67_FingerprintProtection_of_4%"/>
+<sig label="this/c3_energy" ID="20" parentID="2">
+   <atom label="energy_for_c7_Connectivity_of_0%"/>
+   <atom label="energy_for_c18_Bluetooth_of_10%"/>
+   <atom label="energy_for_c67_FingerprintProtection_of_4%"/>
 </sig>
 
-<field label="c3_cost_ref" ID="22" parentID="20">
-   <tuple> <atom label="cost_for_c7_Connectivity_of_0%"/> <atom label="0"/> </tuple>
-   <tuple> <atom label="cost_for_c18_Bluetooth_of_10%"/> <atom label="10"/> </tuple>
-   <tuple> <atom label="cost_for_c67_FingerprintProtection_of_4%"/> <atom label="4"/> </tuple>
+<field label="c3_energy_ref" ID="22" parentID="20">
+   <tuple> <atom label="energy_for_c7_Connectivity_of_0%"/> <atom label="0"/> </tuple>
+   <tuple> <atom label="energy_for_c18_Bluetooth_of_10%"/> <atom label="10"/> </tuple>
+   <tuple> <atom label="energy_for_c67_FingerprintProtection_of_4%"/> <atom label="4"/> </tuple>
    <types> <type ID="20"/> <type ID="1"/> </types>
 </field>
 
@@ -132,8 +132,8 @@
    <types> <type ID="25"/> <type ID="30"/> </types>
 </field>
 
-<field label="r_c109_total_cost" ID="31" parentID="25">
-   <tuple> <atom label="c145_MyPhone$0"/> <atom label="c109_total_cost$0"/> </tuple>
+<field label="r_c109_total_energy" ID="31" parentID="25">
+   <tuple> <atom label="c145_MyPhone$0"/> <atom label="c109_total_energy$0"/> </tuple>
    <types> <type ID="25"/> <type ID="32"/> </types>
 </field>
 
@@ -151,12 +151,12 @@
    <types> <type ID="30"/> <type ID="1"/> </types>
 </field>
 
-<sig label="this/c109_total_cost" ID="32" parentID="2">
-   <atom label="c109_total_cost$0"/>
+<sig label="this/c109_total_energy" ID="32" parentID="2">
+   <atom label="c109_total_energy$0"/>
 </sig>
 
-<field label="c109_total_cost_ref" ID="36" parentID="32">
-   <tuple> <atom label="c109_total_cost$0"/> <atom label="14"/> </tuple>
+<field label="c109_total_energy_ref" ID="36" parentID="32">
+   <tuple> <atom label="c109_total_energy$0"/> <atom label="14"/> </tuple>
    <types> <type ID="32"/> <type ID="1"/> </types>
 </field>
 

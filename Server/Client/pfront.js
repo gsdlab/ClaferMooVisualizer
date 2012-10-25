@@ -42,7 +42,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 		var second = processor.getFeatureValue(i, args[1], true); // get only numeric
 		
 		point = new Array();
-		point.push("" + i);
+		point.push("P" + i);
 		point.push(first);
 		point.push(second);
         

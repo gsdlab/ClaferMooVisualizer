@@ -3,7 +3,7 @@
 <IntLiteral>1</IntLiteral>
 </Start>
 <End><IntLiteral>3</IntLiteral>
-<IntLiteral>19</IntLiteral>
+<IntLiteral>21</IntLiteral>
 </End>
 </Position>
 <IsAbstract>true</IsAbstract>
@@ -85,7 +85,7 @@
 <IntLiteral>5</IntLiteral>
 </Start>
 <End><IntLiteral>3</IntLiteral>
-<IntLiteral>19</IntLiteral>
+<IntLiteral>21</IntLiteral>
 </End>
 </Position>
 <IsAbstract>false</IsAbstract>
@@ -96,15 +96,15 @@
 </Max>
 </Interval>
 </GroupCard>
-<Id>cost</Id>
-<UniqueId>c3_cost</UniqueId>
+<Id>energy</Id>
+<UniqueId>c3_energy</UniqueId>
 <Supers><IsOverlapping>false</IsOverlapping>
 <Super><Type xsi:type="cl:ISet" /><ParentId></ParentId>
 <Position><Start><IntLiteral>3</IntLiteral>
-<IntLiteral>12</IntLiteral>
+<IntLiteral>14</IntLiteral>
 </Start>
 <End><IntLiteral>3</IntLiteral>
-<IntLiteral>19</IntLiteral>
+<IntLiteral>21</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
@@ -249,7 +249,7 @@
 <IntLiteral>5</IntLiteral>
 </Start>
 <End><IntLiteral>20</IntLiteral>
-<IntLiteral>29</IntLiteral>
+<IntLiteral>31</IntLiteral>
 </End>
 </Position>
 <IsAbstract>false</IsAbstract>
@@ -347,7 +347,7 @@
 <IntLiteral>11</IntLiteral>
 </Start>
 <End><IntLiteral>11</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>=</Operation>
@@ -356,7 +356,7 @@
 <IntLiteral>11</IntLiteral>
 </Start>
 <End><IntLiteral>11</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -377,20 +377,20 @@
 <IntLiteral>16</IntLiteral>
 </Start>
 <End><IntLiteral>11</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c17_exp</ParentId>
 <Position><Start><IntLiteral>11</IntLiteral>
-<IntLiteral>23</IntLiteral>
+<IntLiteral>25</IntLiteral>
 </Start>
 <End><IntLiteral>11</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IIntExp"><IntLiteral>0</IntLiteral>
@@ -400,7 +400,7 @@
 <IntLiteral>9</IntLiteral>
 </Start>
 <End><IntLiteral>14</IntLiteral>
-<IntLiteral>29</IntLiteral>
+<IntLiteral>31</IntLiteral>
 </End>
 </Position>
 <IsAbstract>false</IsAbstract>
@@ -498,7 +498,7 @@
 <IntLiteral>15</IntLiteral>
 </Start>
 <End><IntLiteral>14</IntLiteral>
-<IntLiteral>29</IntLiteral>
+<IntLiteral>31</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>=</Operation>
@@ -507,7 +507,7 @@
 <IntLiteral>15</IntLiteral>
 </Start>
 <End><IntLiteral>14</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -528,20 +528,20 @@
 <IntLiteral>20</IntLiteral>
 </Start>
 <End><IntLiteral>14</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c28_exp</ParentId>
 <Position><Start><IntLiteral>14</IntLiteral>
-<IntLiteral>27</IntLiteral>
+<IntLiteral>29</IntLiteral>
 </Start>
 <End><IntLiteral>14</IntLiteral>
-<IntLiteral>29</IntLiteral>
+<IntLiteral>31</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IIntExp"><IntLiteral>10</IntLiteral>
@@ -551,7 +551,7 @@
 <IntLiteral>9</IntLiteral>
 </Start>
 <End><IntLiteral>17</IntLiteral>
-<IntLiteral>28</IntLiteral>
+<IntLiteral>30</IntLiteral>
 </End>
 </Position>
 <IsAbstract>false</IsAbstract>
@@ -649,7 +649,7 @@
 <IntLiteral>15</IntLiteral>
 </Start>
 <End><IntLiteral>17</IntLiteral>
-<IntLiteral>28</IntLiteral>
+<IntLiteral>30</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>=</Operation>
@@ -658,7 +658,7 @@
 <IntLiteral>15</IntLiteral>
 </Start>
 <End><IntLiteral>17</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -679,20 +679,20 @@
 <IntLiteral>20</IntLiteral>
 </Start>
 <End><IntLiteral>17</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c39_exp</ParentId>
 <Position><Start><IntLiteral>17</IntLiteral>
-<IntLiteral>27</IntLiteral>
+<IntLiteral>29</IntLiteral>
 </Start>
 <End><IntLiteral>17</IntLiteral>
-<IntLiteral>28</IntLiteral>
+<IntLiteral>30</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IIntExp"><IntLiteral>7</IntLiteral>
@@ -702,7 +702,7 @@
 <IntLiteral>9</IntLiteral>
 </Start>
 <End><IntLiteral>20</IntLiteral>
-<IntLiteral>29</IntLiteral>
+<IntLiteral>31</IntLiteral>
 </End>
 </Position>
 <IsAbstract>false</IsAbstract>
@@ -800,7 +800,7 @@
 <IntLiteral>15</IntLiteral>
 </Start>
 <End><IntLiteral>20</IntLiteral>
-<IntLiteral>29</IntLiteral>
+<IntLiteral>31</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>=</Operation>
@@ -809,7 +809,7 @@
 <IntLiteral>15</IntLiteral>
 </Start>
 <End><IntLiteral>20</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -830,20 +830,20 @@
 <IntLiteral>20</IntLiteral>
 </Start>
 <End><IntLiteral>20</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c50_exp</ParentId>
 <Position><Start><IntLiteral>20</IntLiteral>
-<IntLiteral>27</IntLiteral>
+<IntLiteral>29</IntLiteral>
 </Start>
 <End><IntLiteral>20</IntLiteral>
-<IntLiteral>29</IntLiteral>
+<IntLiteral>31</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IIntExp"><IntLiteral>17</IntLiteral>
@@ -853,7 +853,7 @@
 <IntLiteral>5</IntLiteral>
 </Start>
 <End><IntLiteral>24</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <IsAbstract>false</IsAbstract>
@@ -1006,7 +1006,7 @@
 <IntLiteral>11</IntLiteral>
 </Start>
 <End><IntLiteral>24</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>=</Operation>
@@ -1015,7 +1015,7 @@
 <IntLiteral>11</IntLiteral>
 </Start>
 <End><IntLiteral>24</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -1036,20 +1036,20 @@
 <IntLiteral>16</IntLiteral>
 </Start>
 <End><IntLiteral>24</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c66_exp</ParentId>
 <Position><Start><IntLiteral>24</IntLiteral>
-<IntLiteral>23</IntLiteral>
+<IntLiteral>25</IntLiteral>
 </Start>
 <End><IntLiteral>24</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IIntExp"><IntLiteral>2</IntLiteral>
@@ -1059,7 +1059,7 @@
 <IntLiteral>5</IntLiteral>
 </Start>
 <End><IntLiteral>28</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <IsAbstract>false</IsAbstract>
@@ -1212,7 +1212,7 @@
 <IntLiteral>11</IntLiteral>
 </Start>
 <End><IntLiteral>28</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>=</Operation>
@@ -1221,7 +1221,7 @@
 <IntLiteral>11</IntLiteral>
 </Start>
 <End><IntLiteral>28</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -1242,20 +1242,20 @@
 <IntLiteral>16</IntLiteral>
 </Start>
 <End><IntLiteral>28</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c82_exp</ParentId>
 <Position><Start><IntLiteral>28</IntLiteral>
-<IntLiteral>23</IntLiteral>
+<IntLiteral>25</IntLiteral>
 </Start>
 <End><IntLiteral>28</IntLiteral>
-<IntLiteral>24</IntLiteral>
+<IntLiteral>26</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IIntExp"><IntLiteral>4</IntLiteral>
@@ -1803,7 +1803,7 @@
 <IntLiteral>5</IntLiteral>
 </Start>
 <End><IntLiteral>31</IntLiteral>
-<IntLiteral>25</IntLiteral>
+<IntLiteral>27</IntLiteral>
 </End>
 </Position>
 <IsAbstract>false</IsAbstract>
@@ -1814,15 +1814,15 @@
 </Max>
 </Interval>
 </GroupCard>
-<Id>total_cost</Id>
-<UniqueId>c109_total_cost</UniqueId>
+<Id>total_energy</Id>
+<UniqueId>c109_total_energy</UniqueId>
 <Supers><IsOverlapping>false</IsOverlapping>
 <Super><Type xsi:type="cl:ISet" /><ParentId></ParentId>
 <Position><Start><IntLiteral>31</IntLiteral>
-<IntLiteral>18</IntLiteral>
+<IntLiteral>20</IntLiteral>
 </Start>
 <End><IntLiteral>31</IntLiteral>
-<IntLiteral>25</IntLiteral>
+<IntLiteral>27</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
@@ -1846,7 +1846,7 @@
 <IntLiteral>7</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>132</IntLiteral>
+<IntLiteral>146</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>=</Operation>
@@ -1855,7 +1855,7 @@
 <IntLiteral>7</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>17</IntLiteral>
+<IntLiteral>19</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -1880,70 +1880,70 @@
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c109_total_cost</Id>
+<Id>c109_total_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c112_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>132</IntLiteral>
+<IntLiteral>146</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>+</Operation>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c113_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>103</IntLiteral>
+<IntLiteral>115</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>+</Operation>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c114_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>77</IntLiteral>
+<IntLiteral>87</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>+</Operation>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c115_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>65</IntLiteral>
+<IntLiteral>73</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>+</Operation>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c116_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>54</IntLiteral>
+<IntLiteral>60</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>+</Operation>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c117_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>37</IntLiteral>
+<IntLiteral>41</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
 <Argument><Type xsi:type="cl:ISet" /><ParentId>c118_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>20</IntLiteral>
+<IntLiteral>22</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>32</IntLiteral>
+<IntLiteral>34</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -1974,32 +1974,32 @@
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c119_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>33</IntLiteral>
+<IntLiteral>35</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>37</IntLiteral>
+<IntLiteral>41</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c120_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>40</IntLiteral>
+<IntLiteral>44</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>54</IntLiteral>
+<IntLiteral>60</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
 <Argument><Type xsi:type="cl:ISet" /><ParentId>c121_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>40</IntLiteral>
+<IntLiteral>44</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>49</IntLiteral>
+<IntLiteral>53</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -2052,33 +2052,33 @@
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c122_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>50</IntLiteral>
+<IntLiteral>54</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>54</IntLiteral>
+<IntLiteral>60</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c123_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>57</IntLiteral>
+<IntLiteral>63</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>65</IntLiteral>
+<IntLiteral>73</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
 <Argument><Type xsi:type="cl:ISet" /><ParentId>c124_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>57</IntLiteral>
+<IntLiteral>63</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>60</IntLiteral>
+<IntLiteral>66</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -2131,33 +2131,33 @@
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c125_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>61</IntLiteral>
+<IntLiteral>67</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>65</IntLiteral>
+<IntLiteral>73</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c126_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>68</IntLiteral>
+<IntLiteral>76</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>77</IntLiteral>
+<IntLiteral>87</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
 <Argument><Type xsi:type="cl:ISet" /><ParentId>c127_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>68</IntLiteral>
+<IntLiteral>76</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>72</IntLiteral>
+<IntLiteral>80</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -2210,33 +2210,33 @@
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c128_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>73</IntLiteral>
+<IntLiteral>81</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>77</IntLiteral>
+<IntLiteral>87</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c129_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>80</IntLiteral>
+<IntLiteral>90</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>103</IntLiteral>
+<IntLiteral>115</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
 <Argument><Type xsi:type="cl:ISet" /><ParentId>c130_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>80</IntLiteral>
+<IntLiteral>90</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>98</IntLiteral>
+<IntLiteral>108</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -2267,33 +2267,33 @@
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c131_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>99</IntLiteral>
+<IntLiteral>109</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>103</IntLiteral>
+<IntLiteral>115</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c132_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>106</IntLiteral>
+<IntLiteral>118</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>132</IntLiteral>
+<IntLiteral>146</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
 <Argument><Type xsi:type="cl:ISet" /><ParentId>c133_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>106</IntLiteral>
+<IntLiteral>118</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>127</IntLiteral>
+<IntLiteral>139</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -2324,14 +2324,14 @@
 </Exp></Argument>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c134_exp</ParentId>
 <Position><Start><IntLiteral>32</IntLiteral>
-<IntLiteral>128</IntLiteral>
+<IntLiteral>140</IntLiteral>
 </Start>
 <End><IntLiteral>32</IntLiteral>
-<IntLiteral>132</IntLiteral>
+<IntLiteral>146</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c3_cost</Id>
+<Id>c3_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
@@ -2733,16 +2733,16 @@
 <IntLiteral>4</IntLiteral>
 </Start>
 <End><IntLiteral>39</IntLiteral>
-<IntLiteral>33</IntLiteral>
+<IntLiteral>28</IntLiteral>
 </End>
 </Position>
-<Exp xsi:type="cl:IFunctionExp"><Operation>max</Operation>
+<Exp xsi:type="cl:IFunctionExp"><Operation>min</Operation>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c154_exp</ParentId>
 <Position><Start><IntLiteral>39</IntLiteral>
 <IntLiteral>8</IntLiteral>
 </Start>
 <End><IntLiteral>39</IntLiteral>
-<IntLiteral>33</IntLiteral>
+<IntLiteral>28</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -2763,11 +2763,11 @@
 <IntLiteral>16</IntLiteral>
 </Start>
 <End><IntLiteral>39</IntLiteral>
-<IntLiteral>33</IntLiteral>
+<IntLiteral>28</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c83_total_performance</Id>
+<Id>c109_total_energy</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>
@@ -2778,16 +2778,16 @@
 <IntLiteral>4</IntLiteral>
 </Start>
 <End><IntLiteral>40</IntLiteral>
-<IntLiteral>26</IntLiteral>
+<IntLiteral>33</IntLiteral>
 </End>
 </Position>
-<Exp xsi:type="cl:IFunctionExp"><Operation>min</Operation>
+<Exp xsi:type="cl:IFunctionExp"><Operation>max</Operation>
 <Argument><Type xsi:type="cl:IInteger" /><ParentId>c158_exp</ParentId>
 <Position><Start><IntLiteral>40</IntLiteral>
 <IntLiteral>8</IntLiteral>
 </Start>
 <End><IntLiteral>40</IntLiteral>
-<IntLiteral>26</IntLiteral>
+<IntLiteral>33</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IFunctionExp"><Operation>.</Operation>
@@ -2808,11 +2808,11 @@
 <IntLiteral>16</IntLiteral>
 </Start>
 <End><IntLiteral>40</IntLiteral>
-<IntLiteral>26</IntLiteral>
+<IntLiteral>33</IntLiteral>
 </End>
 </Position>
 <Exp xsi:type="cl:IClaferId"><ModuleName></ModuleName>
-<Id>c109_total_cost</Id>
+<Id>c83_total_performance</Id>
 <IsTop>false</IsTop>
 </Exp></Argument>
 </Exp></Argument>

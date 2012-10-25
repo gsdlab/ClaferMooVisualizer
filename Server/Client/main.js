@@ -749,7 +749,7 @@ function getComparisonHtml()
 			var td = $('<' + tagName + ' id="' + tagName + i + "_" + j + '"></' + tagName + '>').addClass('td_instance');
 			
 			if (i == 0)
-				td.html("P#" + j);
+				td.html("P" + j);
 			else
 			{
 				sVal = processor.getFeatureValue(j, output[i].claferId, false);

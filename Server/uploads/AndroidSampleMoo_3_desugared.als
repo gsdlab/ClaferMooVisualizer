@@ -11,15 +11,15 @@ pred show {}
 
 abstract sig c1_Feature
 { r_c2_performance : one c2_performance
-, r_c3_cost : one c3_cost }
+, r_c3_energy : one c3_energy }
 
 sig c2_performance
 { c2_performance_ref : one Int }
 { one @r_c2_performance.this }
 
-sig c3_cost
-{ c3_cost_ref : one Int }
-{ one @r_c3_cost.this }
+sig c3_energy
+{ c3_energy_ref : one Int }
+{ one @r_c3_energy.this }
 
 abstract sig c4_SecurityFeature extends c1_Feature
 { r_c5_security : one c5_security }
@@ -33,10 +33,10 @@ abstract sig c6_MobilePhone
 , r_c51_PasswordProtection : lone c51_PasswordProtection
 , r_c67_FingerprintProtection : lone c67_FingerprintProtection
 , r_c83_total_performance : one c83_total_performance
-, r_c109_total_cost : one c109_total_cost
+, r_c109_total_energy : one c109_total_energy
 , r_c135_total_security : one c135_total_security }
 { (this.@r_c83_total_performance.@c83_total_performance_ref) = (((((((this.@r_c7_Connectivity).@r_c2_performance.@c2_performance_ref).add[(((this.@r_c7_Connectivity).@r_c18_Bluetooth).@r_c2_performance.@c2_performance_ref)]).add[(((this.@r_c7_Connectivity).@r_c29_USB).@r_c2_performance.@c2_performance_ref)]).add[(((this.@r_c7_Connectivity).@r_c40_Wifi).@r_c2_performance.@c2_performance_ref)]).add[((this.@r_c51_PasswordProtection).@r_c2_performance.@c2_performance_ref)]).add[((this.@r_c67_FingerprintProtection).@r_c2_performance.@c2_performance_ref)])
-  (this.@r_c109_total_cost.@c109_total_cost_ref) = (((((((this.@r_c7_Connectivity).@r_c3_cost.@c3_cost_ref).add[(((this.@r_c7_Connectivity).@r_c18_Bluetooth).@r_c3_cost.@c3_cost_ref)]).add[(((this.@r_c7_Connectivity).@r_c29_USB).@r_c3_cost.@c3_cost_ref)]).add[(((this.@r_c7_Connectivity).@r_c40_Wifi).@r_c3_cost.@c3_cost_ref)]).add[((this.@r_c51_PasswordProtection).@r_c3_cost.@c3_cost_ref)]).add[((this.@r_c67_FingerprintProtection).@r_c3_cost.@c3_cost_ref)])
+  (this.@r_c109_total_energy.@c109_total_energy_ref) = (((((((this.@r_c7_Connectivity).@r_c3_energy.@c3_energy_ref).add[(((this.@r_c7_Connectivity).@r_c18_Bluetooth).@r_c3_energy.@c3_energy_ref)]).add[(((this.@r_c7_Connectivity).@r_c29_USB).@r_c3_energy.@c3_energy_ref)]).add[(((this.@r_c7_Connectivity).@r_c40_Wifi).@r_c3_energy.@c3_energy_ref)]).add[((this.@r_c51_PasswordProtection).@r_c3_energy.@c3_energy_ref)]).add[((this.@r_c67_FingerprintProtection).@r_c3_energy.@c3_energy_ref)])
   (this.@r_c135_total_security.@c135_total_security_ref) = (((this.@r_c51_PasswordProtection).@r_c5_security.@c5_security_ref).add[((this.@r_c67_FingerprintProtection).@r_c5_security.@c5_security_ref)]) }
 
 sig c7_Connectivity extends c1_Feature
@@ -46,47 +46,47 @@ sig c7_Connectivity extends c1_Feature
 { one @r_c7_Connectivity.this
   let children = (r_c18_Bluetooth + r_c29_USB + r_c40_Wifi) | some children
   (this.@r_c2_performance.@c2_performance_ref) = 0
-  (this.@r_c3_cost.@c3_cost_ref) = 0 }
+  (this.@r_c3_energy.@c3_energy_ref) = 0 }
 
 sig c18_Bluetooth extends c1_Feature
 {}
 { one @r_c18_Bluetooth.this
   (this.@r_c2_performance.@c2_performance_ref) = 9
-  (this.@r_c3_cost.@c3_cost_ref) = 10 }
+  (this.@r_c3_energy.@c3_energy_ref) = 10 }
 
 sig c29_USB extends c1_Feature
 {}
 { one @r_c29_USB.this
   (this.@r_c2_performance.@c2_performance_ref) = 15
-  (this.@r_c3_cost.@c3_cost_ref) = 7 }
+  (this.@r_c3_energy.@c3_energy_ref) = 7 }
 
 sig c40_Wifi extends c1_Feature
 {}
 { one @r_c40_Wifi.this
   (this.@r_c2_performance.@c2_performance_ref) = 22
-  (this.@r_c3_cost.@c3_cost_ref) = 17 }
+  (this.@r_c3_energy.@c3_energy_ref) = 17 }
 
 sig c51_PasswordProtection extends c4_SecurityFeature
 {}
 { one @r_c51_PasswordProtection.this
   (this.@r_c5_security.@c5_security_ref) = 5
   (this.@r_c2_performance.@c2_performance_ref) = 1
-  (this.@r_c3_cost.@c3_cost_ref) = 2 }
+  (this.@r_c3_energy.@c3_energy_ref) = 2 }
 
 sig c67_FingerprintProtection extends c4_SecurityFeature
 {}
 { one @r_c67_FingerprintProtection.this
   (this.@r_c5_security.@c5_security_ref) = 5
   (this.@r_c2_performance.@c2_performance_ref) = 2
-  (this.@r_c3_cost.@c3_cost_ref) = 4 }
+  (this.@r_c3_energy.@c3_energy_ref) = 4 }
 
 sig c83_total_performance
 { c83_total_performance_ref : one Int }
 { one @r_c83_total_performance.this }
 
-sig c109_total_cost
-{ c109_total_cost_ref : one Int }
-{ one @r_c109_total_cost.this }
+sig c109_total_energy
+{ c109_total_energy_ref : one Int }
+{ one @r_c109_total_energy.this }
 
 sig c135_total_security
 { c135_total_security_ref : one Int }
@@ -97,8 +97,8 @@ one sig c145_MyPhone extends c6_MobilePhone
 { (some (this.@r_c7_Connectivity).@r_c18_Bluetooth) && (no (this.@r_c7_Connectivity).@r_c29_USB) }
 
 objectives o_global {
+minimize c145_MyPhone.@r_c109_total_energy.@c109_total_energy_ref ,
 maximize c145_MyPhone.@r_c83_total_performance.@c83_total_performance_ref ,
-minimize c145_MyPhone.@r_c109_total_cost.@c109_total_cost_ref ,
 maximize c145_MyPhone.@r_c135_total_security.@c135_total_security_ref 
 }sig bag_extra_ints{
   extra_ints : set Int
@@ -114,13 +114,13 @@ inst partial_speedup {
    , c51_PasswordProtection in partial_c51_PasswordProtection
    , c67_FingerprintProtection in partial_c67_FingerprintProtection
     ,  c2_performance in performance_for_c7_Connectivity_of_0 + performance_for_c18_Bluetooth_of_9 + performance_for_c29_USB_of_15 + performance_for_c40_Wifi_of_22 + performance_for_c51_PasswordProtection_of_1 + performance_for_c67_FingerprintProtection_of_2
-    ,  c3_cost in cost_for_c7_Connectivity_of_0 + cost_for_c18_Bluetooth_of_10 + cost_for_c29_USB_of_7 + cost_for_c40_Wifi_of_17 + cost_for_c51_PasswordProtection_of_2 + cost_for_c67_FingerprintProtection_of_4
+    ,  c3_energy in energy_for_c7_Connectivity_of_0 + energy_for_c18_Bluetooth_of_10 + energy_for_c29_USB_of_7 + energy_for_c40_Wifi_of_17 + energy_for_c51_PasswordProtection_of_2 + energy_for_c67_FingerprintProtection_of_4
     ,  c5_security in security_for_c51_PasswordProtection_of_5 + security_for_c67_FingerprintProtection_of_5
     , r_c2_performance in partial_c7_Connectivity->performance_for_c7_Connectivity_of_0 + partial_c18_Bluetooth->performance_for_c18_Bluetooth_of_9 + partial_c29_USB->performance_for_c29_USB_of_15 + partial_c40_Wifi->performance_for_c40_Wifi_of_22 + partial_c51_PasswordProtection->performance_for_c51_PasswordProtection_of_1 + partial_c67_FingerprintProtection->performance_for_c67_FingerprintProtection_of_2
-    , r_c3_cost in partial_c7_Connectivity->cost_for_c7_Connectivity_of_0 + partial_c18_Bluetooth->cost_for_c18_Bluetooth_of_10 + partial_c29_USB->cost_for_c29_USB_of_7 + partial_c40_Wifi->cost_for_c40_Wifi_of_17 + partial_c51_PasswordProtection->cost_for_c51_PasswordProtection_of_2 + partial_c67_FingerprintProtection->cost_for_c67_FingerprintProtection_of_4
+    , r_c3_energy in partial_c7_Connectivity->energy_for_c7_Connectivity_of_0 + partial_c18_Bluetooth->energy_for_c18_Bluetooth_of_10 + partial_c29_USB->energy_for_c29_USB_of_7 + partial_c40_Wifi->energy_for_c40_Wifi_of_17 + partial_c51_PasswordProtection->energy_for_c51_PasswordProtection_of_2 + partial_c67_FingerprintProtection->energy_for_c67_FingerprintProtection_of_4
     , r_c5_security in partial_c51_PasswordProtection->security_for_c51_PasswordProtection_of_5 + partial_c67_FingerprintProtection->security_for_c67_FingerprintProtection_of_5
     , c2_performance_ref in performance_for_c7_Connectivity_of_0-> 0 + performance_for_c18_Bluetooth_of_9-> 9 + performance_for_c29_USB_of_15-> 15 + performance_for_c40_Wifi_of_22-> 22 + performance_for_c51_PasswordProtection_of_1-> 1 + performance_for_c67_FingerprintProtection_of_2-> 2
-    , c3_cost_ref in cost_for_c7_Connectivity_of_0-> 0 + cost_for_c18_Bluetooth_of_10-> 10 + cost_for_c29_USB_of_7-> 7 + cost_for_c40_Wifi_of_17-> 17 + cost_for_c51_PasswordProtection_of_2-> 2 + cost_for_c67_FingerprintProtection_of_4-> 4
+    , c3_energy_ref in energy_for_c7_Connectivity_of_0-> 0 + energy_for_c18_Bluetooth_of_10-> 10 + energy_for_c29_USB_of_7-> 7 + energy_for_c40_Wifi_of_17-> 17 + energy_for_c51_PasswordProtection_of_2-> 2 + energy_for_c67_FingerprintProtection_of_4-> 4
     , c5_security_ref in security_for_c51_PasswordProtection_of_5-> 5 + security_for_c67_FingerprintProtection_of_5-> 5
 }
 run show for partial_speedup optimize o_global
