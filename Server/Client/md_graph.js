@@ -1,5 +1,13 @@
 function Graph(host)
 {
+    this.id = "mdGraph";
+    this.title = "Pareto Front Graph";
+
+    this.width = 500;
+    this.height = 470;
+    this.posx = 500;
+    this.posy = 0;
+    
     this.instanceProcessor = null;
     this.axisArray = new Array();
     this.PFVisualizer = new ParetoFrontVisualizer("chart");
@@ -12,7 +20,7 @@ Graph.method("onDataLoaded", function(data){
 
 Graph.method("onRendered", function()
 {
-    this.goals = mdGoals.goals;
+    this.goals = this.host.findModule("mdGoals").goals;
     
     var dropPlaces = $(".axis_drop");
     for (var i = 0; i < dropPlaces.length; i++)

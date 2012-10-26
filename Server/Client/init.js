@@ -31,3 +31,28 @@ Function.method('inherits', function (parent) {
     });
     return this;
 });
+
+// some general useful functions
+
+var stringToFunction = function(str) {
+  var arr = str.split(".");
+
+  var fn = (window || this);
+  for (var i = 0, len = arr.length; i < len; i++) {
+    fn = fn[arr[i]];
+  }
+
+  if (typeof fn !== "function") {
+    throw new Error("function not found");
+  }
+
+  return  fn;
+};
+
+ RegExp.quote = function(str) {
+     return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+ };
+
+ String.prototype.replaceAll = function (replaceThis, withThis) {
+	return this.split(replaceThis).join(withThis);
+}

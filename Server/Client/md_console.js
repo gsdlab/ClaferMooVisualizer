@@ -1,5 +1,14 @@
 function Console(host)
 { 
+    this.id = "mdConsole";
+    this.title = "Output and Compatibility";
+    
+    this.width = 1000;
+    this.height = 130;
+    this.posx = 0;
+    this.posy = 510;
+
+    this.host = host;
     this.claferXML = "";
     this.instancesXML = "";
     this.output = "";
@@ -11,12 +20,16 @@ Console.method("onDataLoaded", function(data){
     this.output = data.output;
 });
 
+Console.method("onError", function(result)
+{
+    $('#output').html(result);
+});
+
 Console.method("onRendered", function()
 {
 	$('#abstractXMLOutput').val(this.claferXML);
 	$('#instancesXMLOutput').val(this.instancesXML);
-    $('#output').html(this.output);	
-
+    $('#output').html(this.output);
 });
 
 Console.method("getContent", function()

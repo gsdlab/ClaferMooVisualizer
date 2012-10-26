@@ -1,5 +1,15 @@
-function ComparisonTable()
+function ComparisonTable(host)
 { 
+    this.id = "mdComparisonTable";
+    this.title = "Pareto Front Table";
+
+    this.width = 500;
+    this.height = 300;
+    this.posx = 0;
+    this.posy = 170;
+    
+    this.host = host;
+
 	this.fadeColor = "#777";
 	this.normalColor = "#000"
 
@@ -151,7 +161,7 @@ ComparisonTable.method("getHtmlCode", function()
 //		alert("ok");
 	}
 
-	return table;	
+	return $('<div id="comparison"></div>').append(table);
 
 });
 
@@ -250,5 +260,5 @@ ComparisonTable.method("addHovering", function()
 
 ComparisonTable.method("getInitContent", function()
 {
-	return '<div id="comparison"></div>';	   
+	return '';	   
 });
