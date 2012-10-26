@@ -1,88 +1,85 @@
-function InstanceProcessor(instances)
-{
-	this.instances = instances;
+// Instance Processor is used to work with sets of configurations presented as XML
+
+function InstanceProcessor (sourceXML) {
+    this.source = sourceXML;
+    this.xmlHelper = new XMLHelper();
 }
 
-InstanceProcessor.prototype.convertFromClaferMooOutputToXML = function(){
-	myRegExp = /\b([^:= ]*)[ ]*\:?[ ]*([^:=]*)[ ]*\=?[ ]*([^ ]*)\b/;
-	var result = "";
-	list = this.instances.split("\n");
-	
-	result = '<?xml version="1.0"?><instances><instance>';
-	var temp = "";
-	var oldpos = -1;
-	var pos = 0;
-	var empty = true;
-	
-	for (var i = 0; i < list.length; i++)
+// returns the number of instances in the set
+InstanceProcessor.method("getInstanceCount", function() 
+{
+	var elements = this.source.getElementsByTagName("instance");
+	if (elements == null)
+		return 0;
+		
+	return elements.length;
+});
+
+// returns the base abstract clafer of all instances (they should have the same base abstract clafer)
+
+InstanceProcessor.method("getInstanceSuperClafer", function() 
+{
+	try
 	{
-		var s = list[i];
-
-		if (s == "")
-			continue;
-	
-		empty = false;
-	
-		myMatch = myRegExp.exec(s);
-		if (myMatch == null)
-			continue;
-			
-		pos = myMatch.index;
-		
-		var indent = 0;
-		
-		if (oldpos != -1)
-		{		
-			if (pos > oldpos) // nesting level increases, only by one!!!
-			{
-				result += "";
-			}
-			
-			if (pos < oldpos)
-			{
-				for (var j = 0; j < (oldpos - pos + 1); j++)
-				{
-					result += "</subclafers></clafer>";
-				}
-			}
-			
-			if (pos == oldpos) // clearly NO children
-			{
-				result += "</subclafers></clafer>";
-			}
-				
-			if (pos == 0) // new instance begins
-			{
-				result += "</instance><instance>";
-			}
-			
-			oldpos = pos;
-		}
-		else oldpos = 0;
-		
-		clafer = myMatch[1];
-//		if (clafer == "c7_connectivity") alert("yes!");
-			
-		super_clafer = myMatch[2];
-		value = myMatch[3];
-		result += '<clafer id="' + clafer + '"><super>' + super_clafer + '</super><value>' + value + '</value><subclafers>';
-
+		var rootClafer = this.xmlHelper.queryXML(this.source, "/instances/instance/clafer/super[1]")[0].firstChild.nodeValue;
 	}
-	
-	if (empty)
+	catch(e)
 	{
+		alert("Could not get a super clafer of the instance root");
 		return "";
 	}
 	
-	if (0 < oldpos)
+	return rootClafer;
+});
+
+
+// returns feature value of featureName feature of an instance number instanceIndex
+// forceNumeric forces to return an integer
+
+InstanceProcessor.method("getFeatureValue", function(instanceIndex, featureName, forceNumeric) 
+{
+	try
 	{
-		for (var j = 0; j < (oldpos + 1); j++)
-		{
-			result += "</subclafers></clafer>";
+        var clafers = this.xmlHelper.queryXML(this.source, 'instances/instance[' + instanceIndex + ']' + '//clafer[@id="' + featureName + '"]');
+		if (clafers.length == 1)
+		{	
+			var result;
+			if (forceNumeric)
+				result = 1;
+			else
+				result = "yes";			
+		
+			for (var i = 0; i < clafers[0].childNodes.length; i++)
+			{
+				var current = clafers[0].childNodes[i];
+
+				if (current.tagName == "value")
+				{
+					if (current.firstChild)
+					{
+						result = current.firstChild.nodeValue;
+						if (forceNumeric)
+							result = parseInt(result);
+					}
+					
+					break;
+				}
+			}
+			
+			return result;
 		}
-	}	
-	
-	result += "</instance></instances>"
-	
-	return result;
-}
+		else
+        {
+			if (forceNumeric)
+				return 0;
+			else
+				return "-";			
+        }
+	}
+	catch(e)
+	{
+		alert("Error while checking the feature specified by: '" + instanceIndex + " " + featureName + "'");
+		return "";
+	}
+		
+});

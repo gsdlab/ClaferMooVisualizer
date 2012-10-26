@@ -1,191 +1,297 @@
 <alloy builddate="unknown">
 
-<instance bitwidth="4" maxseq="1" command="Run show for 1 but exactly  partial 1 bag_extra_ints, exactly  partial 89 extra_ints,  partial 1 c7_Connectivity,  partial 1 c18_Bluetooth,  partial 1 c29_USB,  partial 1 c40_Wifi,  partial 1 c51_PasswordProtection,  partial 1 c67_FingerprintProtection,  partial 6 c2_performance,  partial 6 c3_energy,  partial 2 c5_security,  partial 6 r_c2_performance,  partial 6 r_c3_energy,  partial 2 r_c5_security,  partial 6 c2_performance_ref,  partial 6 c3_energy_ref,  partial 2 c5_security_ref optimize o_global" filename="">
+<instance bitwidth="4" maxseq="1" command="Run show for 1 but exactly  partial 1 bag_extra_ints, exactly  partial 82 extra_ints,  partial 1 c6_hardware,  partial 1 c12_screen,  partial 1 c18_material,  partial 1 c24_oled,  partial 1 c36_amoled,  partial 1 c48_lcd,  partial 1 c60_keyboard,  partial 1 c71_keyboardLight,  partial 1 c85_cpu,  partial 1 c96_extra_cpu,  partial 1 c107_location,  partial 1 c108_gps,  partial 1 c120_wifitriangulation,  partial 1 c132_software,  partial 1 c138_browser,  partial 1 c147_mediaplayer,  partial 15 c2_performance,  partial 9 c4_energy,  partial 15 r_c2_performance,  partial 9 r_c4_energy,  partial 15 c2_performance_ref,  partial 9 c4_energy_ref optimize o_global" filename="">
 
 <sig label="seq/Int" ID="0" parentID="1" builtin="yes">
 </sig>
 
 <sig label="Int" ID="1" parentID="2" builtin="yes">
-<int value="8"/><int value="9"/><int value="10"/><int value="11"/><int value="12"/><int value="13"/><int value="14"/><int value="15"/><int value="16"/><int value="17"/><int value="18"/><int value="19"/><int value="20"/><int value="21"/><int value="22"/><int value="23"/><int value="24"/><int value="25"/><int value="26"/><int value="27"/><int value="28"/><int value="29"/><int value="30"/><int value="31"/><int value="32"/><int value="33"/><int value="34"/><int value="35"/><int value="36"/><int value="37"/><int value="38"/><int value="39"/><int value="40"/><int value="41"/><int value="42"/><int value="43"/><int value="44"/><int value="45"/><int value="46"/><int value="47"/><int value="48"/><int value="49"/><int value="50"/><int value="51"/><int value="52"/><int value="53"/><int value="54"/><int value="55"/><int value="56"/><int value="57"/><int value="58"/><int value="59"/><int value="60"/><int value="61"/><int value="62"/><int value="63"/><int value="64"/><int value="65"/><int value="66"/><int value="67"/><int value="68"/><int value="69"/><int value="70"/><int value="71"/><int value="72"/><int value="73"/><int value="74"/><int value="75"/><int value="76"/><int value="77"/><int value="78"/><int value="79"/><int value="80"/><int value="81"/><int value="82"/><int value="83"/><int value="84"/><int value="85"/><int value="86"/><int value="87"/><int value="88"/><int value="89"/><int value="90"/><int value="91"/><int value="92"/><int value="93"/><int value="94"/><int value="95"/><int value="96"/><int value="97"/><int value="98"/><int value="99"/>
+<int value="-17"/><int value="-16"/><int value="-15"/><int value="-14"/><int value="-13"/><int value="-12"/><int value="-11"/><int value="-10"/><int value="-9"/><int value="8"/><int value="9"/><int value="10"/><int value="11"/><int value="12"/><int value="13"/><int value="14"/><int value="15"/><int value="16"/><int value="17"/><int value="18"/><int value="19"/><int value="20"/><int value="21"/><int value="22"/><int value="23"/><int value="24"/><int value="25"/><int value="26"/><int value="27"/><int value="28"/><int value="29"/><int value="30"/><int value="31"/><int value="32"/><int value="33"/><int value="34"/><int value="35"/><int value="36"/><int value="37"/><int value="38"/><int value="39"/><int value="40"/><int value="41"/><int value="42"/><int value="43"/><int value="44"/><int value="45"/><int value="46"/><int value="47"/><int value="48"/><int value="49"/><int value="50"/><int value="51"/><int value="52"/><int value="53"/><int value="54"/><int value="55"/><int value="56"/><int value="57"/><int value="58"/><int value="59"/><int value="60"/><int value="61"/><int value="62"/><int value="63"/><int value="64"/><int value="65"/><int value="66"/><int value="67"/><int value="68"/><int value="69"/><int value="70"/><int value="71"/><int value="72"/><int value="73"/><int value="74"/><int value="75"/><int value="76"/><int value="77"/>
 </sig>
 
 <sig label="String" ID="3" parentID="2" builtin="yes">
 </sig>
 
-<sig label="this/c51_PasswordProtection" ID="4" parentID="5">
+<sig label="this/c24_oled" ID="4" parentID="5">
+   <atom label="partial_c24_oled%"/>
 </sig>
 
-<sig label="this/c67_FingerprintProtection" ID="6" parentID="5">
-   <atom label="partial_c67_FingerprintProtection%"/>
+<sig label="this/c36_amoled" ID="6" parentID="5">
+   <atom label="partial_c36_amoled%"/>
 </sig>
 
-<sig label="this/c4_SecurityFeature" ID="5" parentID="7" abstract="yes">
+<sig label="this/c48_lcd" ID="7" parentID="5">
+   <atom label="partial_c48_lcd%"/>
 </sig>
 
-<field label="r_c5_security" ID="8" parentID="5">
-   <tuple> <atom label="partial_c67_FingerprintProtection%"/> <atom label="security_for_c67_FingerprintProtection_of_5%"/> </tuple>
-   <types> <type ID="5"/> <type ID="9"/> </types>
-</field>
-
-<sig label="this/c7_Connectivity" ID="10" parentID="7">
-   <atom label="partial_c7_Connectivity%"/>
+<sig label="this/c60_keyboard" ID="8" parentID="5">
+   <atom label="partial_c60_keyboard%"/>
 </sig>
 
-<field label="r_c18_Bluetooth" ID="11" parentID="10">
-   <tuple> <atom label="partial_c7_Connectivity%"/> <atom label="partial_c18_Bluetooth%"/> </tuple>
-   <types> <type ID="10"/> <type ID="12"/> </types>
-</field>
-
-<field label="r_c29_USB" ID="13" parentID="10">
-   <types> <type ID="10"/> <type ID="14"/> </types>
-</field>
-
-<field label="r_c40_Wifi" ID="15" parentID="10">
-   <types> <type ID="10"/> <type ID="16"/> </types>
-</field>
-
-<sig label="this/c18_Bluetooth" ID="12" parentID="7">
-   <atom label="partial_c18_Bluetooth%"/>
+<sig label="this/c71_keyboardLight" ID="9" parentID="5">
 </sig>
 
-<sig label="this/c29_USB" ID="14" parentID="7">
+<sig label="this/c85_cpu" ID="10" parentID="5">
+   <atom label="partial_c85_cpu%"/>
 </sig>
 
-<sig label="this/c40_Wifi" ID="16" parentID="7">
+<sig label="this/c96_extra_cpu" ID="11" parentID="5">
 </sig>
 
-<sig label="this/c1_Feature" ID="7" parentID="2" abstract="yes">
+<sig label="this/c108_gps" ID="12" parentID="5">
 </sig>
 
-<field label="r_c2_performance" ID="17" parentID="7">
-   <tuple> <atom label="partial_c67_FingerprintProtection%"/> <atom label="performance_for_c67_FingerprintProtection_of_2%"/> </tuple>
-   <tuple> <atom label="partial_c7_Connectivity%"/> <atom label="performance_for_c7_Connectivity_of_0%"/> </tuple>
-   <tuple> <atom label="partial_c18_Bluetooth%"/> <atom label="performance_for_c18_Bluetooth_of_9%"/> </tuple>
-   <types> <type ID="7"/> <type ID="18"/> </types>
-</field>
-
-<field label="r_c3_energy" ID="19" parentID="7">
-   <tuple> <atom label="partial_c67_FingerprintProtection%"/> <atom label="energy_for_c67_FingerprintProtection_of_4%"/> </tuple>
-   <tuple> <atom label="partial_c7_Connectivity%"/> <atom label="energy_for_c7_Connectivity_of_0%"/> </tuple>
-   <tuple> <atom label="partial_c18_Bluetooth%"/> <atom label="energy_for_c18_Bluetooth_of_10%"/> </tuple>
-   <types> <type ID="7"/> <type ID="20"/> </types>
-</field>
-
-<sig label="this/c2_performance" ID="18" parentID="2">
-   <atom label="performance_for_c7_Connectivity_of_0%"/>
-   <atom label="performance_for_c18_Bluetooth_of_9%"/>
-   <atom label="performance_for_c67_FingerprintProtection_of_2%"/>
+<sig label="this/c120_wifitriangulation" ID="13" parentID="5">
+   <atom label="partial_c120_wifitriangulation%"/>
 </sig>
 
-<field label="c2_performance_ref" ID="21" parentID="18">
-   <tuple> <atom label="performance_for_c7_Connectivity_of_0%"/> <atom label="0"/> </tuple>
-   <tuple> <atom label="performance_for_c18_Bluetooth_of_9%"/> <atom label="9"/> </tuple>
-   <tuple> <atom label="performance_for_c67_FingerprintProtection_of_2%"/> <atom label="2"/> </tuple>
-   <types> <type ID="18"/> <type ID="1"/> </types>
-</field>
-
-<sig label="this/c3_energy" ID="20" parentID="2">
-   <atom label="energy_for_c7_Connectivity_of_0%"/>
-   <atom label="energy_for_c18_Bluetooth_of_10%"/>
-   <atom label="energy_for_c67_FingerprintProtection_of_4%"/>
+<sig label="this/c3_ComponentWithEnergy" ID="5" parentID="14" abstract="yes">
 </sig>
 
-<field label="c3_energy_ref" ID="22" parentID="20">
-   <tuple> <atom label="energy_for_c7_Connectivity_of_0%"/> <atom label="0"/> </tuple>
-   <tuple> <atom label="energy_for_c18_Bluetooth_of_10%"/> <atom label="10"/> </tuple>
-   <tuple> <atom label="energy_for_c67_FingerprintProtection_of_4%"/> <atom label="4"/> </tuple>
-   <types> <type ID="20"/> <type ID="1"/> </types>
+<field label="r_c4_energy" ID="15" parentID="5">
+   <tuple> <atom label="partial_c24_oled%"/> <atom label="energy_for_c24_oled_of_3%"/> </tuple>
+   <tuple> <atom label="partial_c36_amoled%"/> <atom label="energy_for_c36_amoled_of_2%"/> </tuple>
+   <tuple> <atom label="partial_c48_lcd%"/> <atom label="energy_for_c48_lcd_of_4%"/> </tuple>
+   <tuple> <atom label="partial_c60_keyboard%"/> <atom label="energy_for_c60_keyboard_of_1%"/> </tuple>
+   <tuple> <atom label="partial_c85_cpu%"/> <atom label="energy_for_c85_cpu_of_10%"/> </tuple>
+   <tuple> <atom label="partial_c120_wifitriangulation%"/> <atom label="energy_for_c120_wifitriangulation_of_10%"/> </tuple>
+   <types> <type ID="5"/> <type ID="16"/> </types>
 </field>
 
-<sig label="this/c5_security" ID="9" parentID="2">
-   <atom label="security_for_c67_FingerprintProtection_of_5%"/>
+<sig label="this/c6_hardware" ID="17" parentID="14">
+   <atom label="partial_c6_hardware%"/>
 </sig>
 
-<field label="c5_security_ref" ID="23" parentID="9">
-   <tuple> <atom label="security_for_c67_FingerprintProtection_of_5%"/> <atom label="5"/> </tuple>
-   <types> <type ID="9"/> <type ID="1"/> </types>
+<field label="r_c12_screen" ID="18" parentID="17">
+   <tuple> <atom label="partial_c6_hardware%"/> <atom label="partial_c12_screen%"/> </tuple>
+   <types> <type ID="17"/> <type ID="19"/> </types>
 </field>
 
-<sig label="this/c145_MyPhone" ID="24" parentID="25" one="yes">
-   <atom label="c145_MyPhone$0"/>
+<field label="r_c18_material" ID="20" parentID="17">
+   <tuple> <atom label="partial_c6_hardware%"/> <atom label="partial_c18_material%"/> </tuple>
+   <types> <type ID="17"/> <type ID="21"/> </types>
+</field>
+
+<field label="r_c24_oled" ID="22" parentID="17">
+   <tuple> <atom label="partial_c6_hardware%"/> <atom label="partial_c24_oled%"/> </tuple>
+   <types> <type ID="17"/> <type ID="4"/> </types>
+</field>
+
+<field label="r_c36_amoled" ID="23" parentID="17">
+   <tuple> <atom label="partial_c6_hardware%"/> <atom label="partial_c36_amoled%"/> </tuple>
+   <types> <type ID="17"/> <type ID="6"/> </types>
+</field>
+
+<field label="r_c48_lcd" ID="24" parentID="17">
+   <tuple> <atom label="partial_c6_hardware%"/> <atom label="partial_c48_lcd%"/> </tuple>
+   <types> <type ID="17"/> <type ID="7"/> </types>
+</field>
+
+<field label="r_c60_keyboard" ID="25" parentID="17">
+   <tuple> <atom label="partial_c6_hardware%"/> <atom label="partial_c60_keyboard%"/> </tuple>
+   <types> <type ID="17"/> <type ID="8"/> </types>
+</field>
+
+<field label="r_c71_keyboardLight" ID="26" parentID="17">
+   <types> <type ID="17"/> <type ID="9"/> </types>
+</field>
+
+<field label="r_c85_cpu" ID="27" parentID="17">
+   <tuple> <atom label="partial_c6_hardware%"/> <atom label="partial_c85_cpu%"/> </tuple>
+   <types> <type ID="17"/> <type ID="10"/> </types>
+</field>
+
+<field label="r_c96_extra_cpu" ID="28" parentID="17">
+   <types> <type ID="17"/> <type ID="11"/> </types>
+</field>
+
+<sig label="this/c12_screen" ID="19" parentID="14">
+   <atom label="partial_c12_screen%"/>
 </sig>
 
-<sig label="this/c6_MobilePhone" ID="25" parentID="2" abstract="yes">
+<sig label="this/c18_material" ID="21" parentID="14">
+   <atom label="partial_c18_material%"/>
 </sig>
 
-<field label="r_c7_Connectivity" ID="26" parentID="25">
-   <tuple> <atom label="c145_MyPhone$0"/> <atom label="partial_c7_Connectivity%"/> </tuple>
-   <types> <type ID="25"/> <type ID="10"/> </types>
-</field>
-
-<field label="r_c51_PasswordProtection" ID="27" parentID="25">
-   <types> <type ID="25"/> <type ID="4"/> </types>
-</field>
-
-<field label="r_c67_FingerprintProtection" ID="28" parentID="25">
-   <tuple> <atom label="c145_MyPhone$0"/> <atom label="partial_c67_FingerprintProtection%"/> </tuple>
-   <types> <type ID="25"/> <type ID="6"/> </types>
-</field>
-
-<field label="r_c83_total_performance" ID="29" parentID="25">
-   <tuple> <atom label="c145_MyPhone$0"/> <atom label="c83_total_performance$0"/> </tuple>
-   <types> <type ID="25"/> <type ID="30"/> </types>
-</field>
-
-<field label="r_c109_total_energy" ID="31" parentID="25">
-   <tuple> <atom label="c145_MyPhone$0"/> <atom label="c109_total_energy$0"/> </tuple>
-   <types> <type ID="25"/> <type ID="32"/> </types>
-</field>
-
-<field label="r_c135_total_security" ID="33" parentID="25">
-   <tuple> <atom label="c145_MyPhone$0"/> <atom label="c135_total_security$0"/> </tuple>
-   <types> <type ID="25"/> <type ID="34"/> </types>
-</field>
-
-<sig label="this/c83_total_performance" ID="30" parentID="2">
-   <atom label="c83_total_performance$0"/>
+<sig label="this/c132_software" ID="29" parentID="14">
+   <atom label="partial_c132_software%"/>
 </sig>
 
-<field label="c83_total_performance_ref" ID="35" parentID="30">
-   <tuple> <atom label="c83_total_performance$0"/> <atom label="11"/> </tuple>
-   <types> <type ID="30"/> <type ID="1"/> </types>
+<field label="r_c138_browser" ID="30" parentID="29">
+   <types> <type ID="29"/> <type ID="31"/> </types>
 </field>
 
-<sig label="this/c109_total_energy" ID="32" parentID="2">
-   <atom label="c109_total_energy$0"/>
+<field label="r_c147_mediaplayer" ID="32" parentID="29">
+   <tuple> <atom label="partial_c132_software%"/> <atom label="partial_c147_mediaplayer%"/> </tuple>
+   <types> <type ID="29"/> <type ID="33"/> </types>
+</field>
+
+<sig label="this/c138_browser" ID="31" parentID="14">
 </sig>
 
-<field label="c109_total_energy_ref" ID="36" parentID="32">
-   <tuple> <atom label="c109_total_energy$0"/> <atom label="14"/> </tuple>
-   <types> <type ID="32"/> <type ID="1"/> </types>
-</field>
-
-<sig label="this/c135_total_security" ID="34" parentID="2">
-   <atom label="c135_total_security$0"/>
+<sig label="this/c147_mediaplayer" ID="33" parentID="14">
+   <atom label="partial_c147_mediaplayer%"/>
 </sig>
 
-<field label="c135_total_security_ref" ID="37" parentID="34">
-   <tuple> <atom label="c135_total_security$0"/> <atom label="5"/> </tuple>
-   <types> <type ID="34"/> <type ID="1"/> </types>
+<sig label="this/c1_Component" ID="14" parentID="2" abstract="yes">
+</sig>
+
+<field label="r_c2_performance" ID="34" parentID="14">
+   <tuple> <atom label="partial_c24_oled%"/> <atom label="performance_for_c24_oled_of_minus3%"/> </tuple>
+   <tuple> <atom label="partial_c36_amoled%"/> <atom label="performance_for_c36_amoled_of_minus5%"/> </tuple>
+   <tuple> <atom label="partial_c48_lcd%"/> <atom label="performance_for_c48_lcd_of_minus2%"/> </tuple>
+   <tuple> <atom label="partial_c60_keyboard%"/> <atom label="performance_for_c60_keyboard_of_3%"/> </tuple>
+   <tuple> <atom label="partial_c85_cpu%"/> <atom label="performance_for_c85_cpu_of_15%"/> </tuple>
+   <tuple> <atom label="partial_c120_wifitriangulation%"/> <atom label="performance_for_c120_wifitriangulation_of_minus2%"/> </tuple>
+   <tuple> <atom label="partial_c6_hardware%"/> <atom label="performance_for_c6_hardware_of_0%"/> </tuple>
+   <tuple> <atom label="partial_c12_screen%"/> <atom label="performance_for_c12_screen_of_0%"/> </tuple>
+   <tuple> <atom label="partial_c18_material%"/> <atom label="performance_for_c18_material_of_0%"/> </tuple>
+   <tuple> <atom label="partial_c132_software%"/> <atom label="performance_for_c132_software_of_0%"/> </tuple>
+   <tuple> <atom label="partial_c147_mediaplayer%"/> <atom label="performance_for_c147_mediaplayer_of_minus2%"/> </tuple>
+   <types> <type ID="14"/> <type ID="35"/> </types>
 </field>
 
-<sig label="this/bag_extra_ints" ID="38" parentID="2">
+<sig label="this/c2_performance" ID="35" parentID="2">
+   <atom label="performance_for_c6_hardware_of_0%"/>
+   <atom label="performance_for_c12_screen_of_0%"/>
+   <atom label="performance_for_c18_material_of_0%"/>
+   <atom label="performance_for_c24_oled_of_minus3%"/>
+   <atom label="performance_for_c36_amoled_of_minus5%"/>
+   <atom label="performance_for_c48_lcd_of_minus2%"/>
+   <atom label="performance_for_c60_keyboard_of_3%"/>
+   <atom label="performance_for_c85_cpu_of_15%"/>
+   <atom label="performance_for_c120_wifitriangulation_of_minus2%"/>
+   <atom label="performance_for_c132_software_of_0%"/>
+   <atom label="performance_for_c147_mediaplayer_of_minus2%"/>
+</sig>
+
+<field label="c2_performance_ref" ID="36" parentID="35">
+   <tuple> <atom label="performance_for_c6_hardware_of_0%"/> <atom label="0"/> </tuple>
+   <tuple> <atom label="performance_for_c12_screen_of_0%"/> <atom label="0"/> </tuple>
+   <tuple> <atom label="performance_for_c18_material_of_0%"/> <atom label="0"/> </tuple>
+   <tuple> <atom label="performance_for_c24_oled_of_minus3%"/> <atom label="-3"/> </tuple>
+   <tuple> <atom label="performance_for_c36_amoled_of_minus5%"/> <atom label="-5"/> </tuple>
+   <tuple> <atom label="performance_for_c48_lcd_of_minus2%"/> <atom label="-2"/> </tuple>
+   <tuple> <atom label="performance_for_c60_keyboard_of_3%"/> <atom label="3"/> </tuple>
+   <tuple> <atom label="performance_for_c85_cpu_of_15%"/> <atom label="15"/> </tuple>
+   <tuple> <atom label="performance_for_c120_wifitriangulation_of_minus2%"/> <atom label="-2"/> </tuple>
+   <tuple> <atom label="performance_for_c132_software_of_0%"/> <atom label="0"/> </tuple>
+   <tuple> <atom label="performance_for_c147_mediaplayer_of_minus2%"/> <atom label="-2"/> </tuple>
+   <types> <type ID="35"/> <type ID="1"/> </types>
+</field>
+
+<sig label="this/c4_energy" ID="16" parentID="2">
+   <atom label="energy_for_c24_oled_of_3%"/>
+   <atom label="energy_for_c36_amoled_of_2%"/>
+   <atom label="energy_for_c48_lcd_of_4%"/>
+   <atom label="energy_for_c60_keyboard_of_1%"/>
+   <atom label="energy_for_c85_cpu_of_10%"/>
+   <atom label="energy_for_c120_wifitriangulation_of_10%"/>
+</sig>
+
+<field label="c4_energy_ref" ID="37" parentID="16">
+   <tuple> <atom label="energy_for_c24_oled_of_3%"/> <atom label="3"/> </tuple>
+   <tuple> <atom label="energy_for_c36_amoled_of_2%"/> <atom label="2"/> </tuple>
+   <tuple> <atom label="energy_for_c48_lcd_of_4%"/> <atom label="4"/> </tuple>
+   <tuple> <atom label="energy_for_c60_keyboard_of_1%"/> <atom label="1"/> </tuple>
+   <tuple> <atom label="energy_for_c85_cpu_of_10%"/> <atom label="10"/> </tuple>
+   <tuple> <atom label="energy_for_c120_wifitriangulation_of_10%"/> <atom label="10"/> </tuple>
+   <types> <type ID="16"/> <type ID="1"/> </types>
+</field>
+
+<sig label="this/c254_aPhone" ID="38" parentID="39" one="yes">
+   <atom label="c254_aPhone$0"/>
+</sig>
+
+<sig label="this/c5_androidPhone" ID="39" parentID="2" abstract="yes">
+</sig>
+
+<field label="r_c6_hardware" ID="40" parentID="39">
+   <tuple> <atom label="c254_aPhone$0"/> <atom label="partial_c6_hardware%"/> </tuple>
+   <types> <type ID="39"/> <type ID="17"/> </types>
+</field>
+
+<field label="r_c107_location" ID="41" parentID="39">
+   <types> <type ID="39"/> <type ID="42"/> </types>
+</field>
+
+<field label="r_c120_wifitriangulation" ID="43" parentID="39">
+   <tuple> <atom label="c254_aPhone$0"/> <atom label="partial_c120_wifitriangulation%"/> </tuple>
+   <types> <type ID="39"/> <type ID="13"/> </types>
+</field>
+
+<field label="r_c132_software" ID="44" parentID="39">
+   <tuple> <atom label="c254_aPhone$0"/> <atom label="partial_c132_software%"/> </tuple>
+   <types> <type ID="39"/> <type ID="29"/> </types>
+</field>
+
+<field label="r_c154_total_performance" ID="45" parentID="39">
+   <tuple> <atom label="c254_aPhone$0"/> <atom label="c154_total_performance$0"/> </tuple>
+   <types> <type ID="39"/> <type ID="46"/> </types>
+</field>
+
+<field label="r_c216_total_energy" ID="47" parentID="39">
+   <tuple> <atom label="c254_aPhone$0"/> <atom label="c216_total_energy$0"/> </tuple>
+   <types> <type ID="39"/> <type ID="48"/> </types>
+</field>
+
+<sig label="this/c107_location" ID="42" parentID="2">
+</sig>
+
+<field label="r_c108_gps" ID="49" parentID="42">
+   <types> <type ID="42"/> <type ID="12"/> </types>
+</field>
+
+<sig label="this/c154_total_performance" ID="46" parentID="2">
+   <atom label="c154_total_performance$0"/>
+</sig>
+
+<field label="c154_total_performance_ref" ID="50" parentID="46">
+   <tuple> <atom label="c154_total_performance$0"/> <atom label="4"/> </tuple>
+   <types> <type ID="46"/> <type ID="1"/> </types>
+</field>
+
+<sig label="this/c216_total_energy" ID="48" parentID="2">
+   <atom label="c216_total_energy$0"/>
+</sig>
+
+<field label="c216_total_energy_ref" ID="51" parentID="48">
+   <tuple> <atom label="c216_total_energy$0"/> <atom label="30"/> </tuple>
+   <types> <type ID="48"/> <type ID="1"/> </types>
+</field>
+
+<sig label="this/bag_extra_ints" ID="52" parentID="2">
    <atom label="concrete_int_bag%"/>
 </sig>
 
-<field label="extra_ints" ID="39" parentID="38">
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="3"/> </tuple>
+<field label="extra_ints" ID="53" parentID="52">
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-8"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-7"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-6"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-4"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="6"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="7"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-17"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-16"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-15"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-14"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-13"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-12"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-11"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-10"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="-9"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="8"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="9"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="11"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="12"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="13"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="14"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="16"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="17"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="18"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="19"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="20"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="21"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="22"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="23"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="24"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="25"/> </tuple>
@@ -241,29 +347,7 @@
    <tuple> <atom label="concrete_int_bag%"/> <atom label="75"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="76"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="77"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="78"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="79"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="80"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="81"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="82"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="83"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="84"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="85"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="86"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="87"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="88"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="89"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="90"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="91"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="92"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="93"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="94"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="95"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="96"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="97"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="98"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="99"/> </tuple>
-   <types> <type ID="38"/> <type ID="1"/> </types>
+   <types> <type ID="52"/> <type ID="1"/> </types>
 </field>
 
 <sig label="univ" ID="2" builtin="yes">
