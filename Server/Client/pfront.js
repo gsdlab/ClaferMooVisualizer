@@ -1,11 +1,10 @@
 function ParetoFrontVisualizer (element) 
 {
 	this.element = element;
-	google.load("visualization", "1", {packages:["corechart"]});
-    google.setOnLoadCallback(loadCallback);
-        function loadCallback() 
-        {
-        }
+//    google.setOnLoadCallback(loadCallback);
+//        function loadCallback() 
+//        {
+//        }
 }
 
 ParetoFrontVisualizer.prototype.draw = function(processor, args, labels) 

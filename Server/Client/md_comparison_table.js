@@ -248,3 +248,7 @@ ComparisonTable.method("addHovering", function()
 	);
 });
 
+ComparisonTable.method("getInitContent", function()
+{
+	return '<div id="comparison"></div>';	   
+});

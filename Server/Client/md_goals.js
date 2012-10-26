@@ -35,3 +35,8 @@ Goals.method("getContent", function()
     
     return table;
 });
+
+Goals.method("getInitContent", function()
+{
+	return '<div id="goals"></div>';  
+});

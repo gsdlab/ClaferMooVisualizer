@@ -1,8 +1,11 @@
 function Graph(host)
 { 
-    this.host = host;
     this.PFVisualizer = new ParetoFrontVisualizer("chart");
+    this.host = host;
 }
+
+Graph.method("onLoaded", function(claferXML, instancesXML){
+});
 
 Graph.method("onDataLoaded", function(claferXML, instancesXML){
     this.processor = new ClaferProcessor(claferXML);
@@ -11,18 +14,22 @@ Graph.method("onDataLoaded", function(claferXML, instancesXML){
 
 Graph.method("onRendered", function()
 {
-	if (this.host.mdGoals.goals.length >= 2)
+    this.goals = mdGoals.goals;
+
+//    if (this.PFVisualizer == null)
+
+	if (this.goals.length >= 2)
 	{
 		$("#chart").show();
-		this.assignToAxis("dropPointX", this.host.mdGoals.goals[0].arg, this.host.mdGoals.goals[0].label);
-		this.assignToAxis("dropPointY", this.host.mdGoals.goals[1].arg, this.host.mdGoals.goals[1].label);
+		this.assignToAxis("dropPointX", this.goals[0].arg, this.goals[0].label);
+		this.assignToAxis("dropPointY", this.goals[1].arg, this.goals[1].label);
         
-        if (this.host.mdGoals.goals.length == 3)
+        if (this.goals.length == 3)
         {
-            assignToAxis("dropPointZ", this.host.mdGoals.goals[2].arg, this.host.mdGoals.goals[2].label);
+            this.assignToAxis("dropPointZ", this.goals[2].arg, this.goals[2].label);
         }
         else 
-            assignToAxis("dropPointZ", "", "");
+            this.assignToAxis("dropPointZ", "", "");
         
         this.redrawParetoFront();
 	}
@@ -145,4 +152,9 @@ Graph.method("getContent", function()
 		
 	return table;	
     
+});
+
+Graph.method("getInitContent", function()
+{
+	return this.getContent();
 });

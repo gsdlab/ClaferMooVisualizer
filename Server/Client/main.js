@@ -6,13 +6,15 @@ var mdComparisonTable;
 var mdGoals;
 var mdGraph;
 
+google.load("visualization", "1", {packages:["corechart"]});
+
 $(document).ready(function()
 {
 //	$("#chart").hide();
 
     mdComparisonTable = new ComparisonTable();
     mdGoals = new Goals();
-//    mdGraph = new Graph(this);
+    mdGraph = new Graph(null);
     
 $.newWindow({
     id: "wGraph",
@@ -21,7 +23,7 @@ $.newWindow({
     height: 470,
     posx: 500,
     posy: 0,
-    content: 'x',
+    content: '',
     onDragBegin : null,
     onDragEnd : null,
     onResizeBegin : null,
@@ -42,7 +44,7 @@ $.newWindow({
     height: 60,
     posx: 0,
     posy: 70,
-    content: '<div id="goals"></div>',
+    content: '',
     onDragBegin : null,
     onDragEnd : null,
     onResizeBegin : null,
@@ -63,7 +65,7 @@ $.newWindow({
     height: 300,
     posx: 0,
     posy: 170,
-    content: '<div id="comparison"></div>',
+    content: '',
     onDragBegin : null,
     onDragEnd : null,
     onResizeBegin : null,
@@ -149,8 +151,9 @@ $.newWindow({
     resizeable: true
 });
 
-
-
+$.updateWindowContent("wGraph", mdGraph.getInitContent());
+$.updateWindowContent("wComparison", mdComparisonTable.getInitContent());
+$.updateWindowContent("wGoals", mdGoals.getInitContent());
 
 		
 $(':file').change(function(){
@@ -356,7 +359,8 @@ function onDataPreProcessed()
 
     mdGoals.onRendered();    
 
-    $('#wGraph').setContent(mdGraph.getContent());
+    
+//    $('#wGraph').setContent();
     
     mdGraph.onRendered();
     
