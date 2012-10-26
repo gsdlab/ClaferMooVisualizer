@@ -8,9 +8,9 @@ function ComparisonTable()
 
 }
 
-ComparisonTable.method("onDataLoaded", function(claferXML, instancesXML){
-    this.instanceProcessor = new InstanceProcessor(instancesXML);
-    this.processor = new ClaferProcessor(claferXML);
+ComparisonTable.method("onDataLoaded", function(data){
+    this.instanceProcessor = new InstanceProcessor(data.instancesXML);
+    this.processor = new ClaferProcessor(data.claferXML);
     this.abstractClaferOutput = "";    
     this.toggled = false;
     this.content = this.getHtmlCode();

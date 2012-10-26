@@ -1,7 +1,7 @@
 // Instance Processor is used to work with sets of configurations presented as XML
 
 function InstanceProcessor (sourceXML) {
-    this.source = sourceXML;
+    this.source = (new XMLHelper()).stringToXML(sourceXML);
     this.xmlHelper = new XMLHelper();
 }
 

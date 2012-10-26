@@ -1,5 +1,5 @@
 function ClaferProcessor (sourceXML) {
-    this.source = sourceXML;
+    this.source = (new XMLHelper()).stringToXML(sourceXML);
     this.xmlHelper = new XMLHelper();
 }
 

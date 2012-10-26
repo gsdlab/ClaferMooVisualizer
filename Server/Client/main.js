@@ -1,20 +1,20 @@
-var processor = null;
-var instanceProcessor = null;
-
 var serverAction = "/upload";
+
 var mdComparisonTable;
 var mdGoals;
 var mdGraph;
+var mdConsole;
 
 google.load("visualization", "1", {packages:["corechart"]});
 
+
 $(document).ready(function()
 {
-//	$("#chart").hide();
-
     mdComparisonTable = new ComparisonTable();
     mdGoals = new Goals();
     mdGraph = new Graph(null);
+    mdConsole = new Console(null);
+
     
 $.newWindow({
     id: "wGraph",
@@ -86,7 +86,7 @@ $.newWindow({
     height: 130,
     posx: 0,
     posy: 510,
-    content: '<table width="100%" height="100%" cellspacing="15"><tr height="1em" style="height:1em;"><th width="50%">ClaferMoo:</th><th width="25%">Abstract Clafers:</th><th width="25%">Instances:</th></tr><td><div class="parent"><textarea id="output" class="child" style="height:100%; overflow:scroll; width:100%"></textarea></div></td><td><div class="parent"><textarea class="child" id="abstractXMLOutput" style="height:100%; overflow:scroll; width:100%;"></textarea></div></td><td><div class="parent"><textarea id="instancesXMLOutput" class="child" style="height:100%; overflow:scroll; width:100%;"></textarea></div></td></tr></table>',
+    content: '',
     onDragBegin : null,
     onDragEnd : null,
     onResizeBegin : null,
@@ -99,7 +99,7 @@ $.newWindow({
     draggable: true,
     resizeable: true
 });
-
+/*
 var st = "";
 st = st + "As a product line engineer:<ol>";
 st = st + "<li>How do I view all N optimal product configurations?</li>";
@@ -129,7 +129,7 @@ $.newWindow({
     draggable: true,
     resizeable: true
 });        
-
+*/
 $.newWindow({
     id: "wSource",
     title: "Clafer File",
@@ -154,32 +154,24 @@ $.newWindow({
 $.updateWindowContent("wGraph", mdGraph.getInitContent());
 $.updateWindowContent("wComparison", mdComparisonTable.getInitContent());
 $.updateWindowContent("wGoals", mdGoals.getInitContent());
-
-		
-$(':file').change(function(){
-//    var file = this.files[0];
-//    name = file.name;
-//    size = file.size;
-//    type = file.type;
-    //your validation
-});
-
-//    $(':button').click(getFile);
-
-//	getFile();
-
+$.updateWindowContent("wTextOutput", mdConsole.getInitContent());
 
     var options = { 
-        beforeSubmit:  beginQuery,  // pre-submit callback 
-        success:       showResponse // post-submit callback 
-        
+        beforeSubmit: beginQuery,  // pre-submit callback 
+        success: showResponse // post-submit callback 
         //timeout:   3000 
     }; 
  
-    // bind form using 'ajaxForm' 
     $('#myform').ajaxForm(options); 
 	$('#myform').submit();
+
 });
+
+function drag(ev)
+{
+    var data = ev.target.id + "|" + ev.target.className;
+	ev.dataTransfer.setData("Text", data);
+}
 
 function beginQuery(formData, jqForm, options) { 
 	$("#load_area #myform").hide();
@@ -204,21 +196,10 @@ function showRequest(formData, jqForm, options) {
  
 // post-submit callback 
 function showResponse(responseText, statusText, xhr, $form)  { 
-	processToolResult(responseText);
+    processToolResult(responseText);
+    
 	endQuery();
 } 
-
-function StringtoXML(text){
-	if (window.ActiveXObject){
-                  var doc=new ActiveXObject('Microsoft.XMLDOM');
-                  doc.async='false';
-                  doc.loadXML(text);
-                } else {
-                  var parser=new DOMParser();
-                  var doc=parser.parseFromString(text,'text/xml');
-	}
-	return doc;
-}
 
  RegExp.quote = function(str) {
      return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
@@ -226,8 +207,6 @@ function StringtoXML(text){
 
  String.prototype.replaceAll = function (replaceThis, withThis) {
 	return this.split(replaceThis).join(withThis);
-//   var re = new RegExp(RegExp.quote(replaceThis),"g"); 
-//   return this.replace(re, withThis);
 }
 
 function convertHtmlTags(input) {
@@ -235,11 +214,7 @@ function convertHtmlTags(input) {
   var in_var=false;
   var output = new String("");
 
-//  var input = s.toString();
-//  sys.debug(input.charAt(0) + input.charAt(1));
   var length = input.length;
-  
-//  alert(length);
   
   for (var i=0; i< length; i++) 
     {
@@ -275,53 +250,45 @@ function convertHtmlTags(input) {
 		if (ch == '<') 
 		{
 			in_tag = true;
-//			alert(
 		}
 		output += ch;
       }
     }
 
-// sys.debug(output);	
-//	alert(output);
   return output;
 }
 
-
+function updateData(data)
+{
+    mdComparisonTable.onDataLoaded(data);
+    mdGoals.onDataLoaded(data);
+	mdGraph.onDataLoaded(data);
+	mdConsole.onDataLoaded(data);    
+}
 
 function processToolResult(result)
 {
 	if (!result) return;
 	
-//	alert(result);
-	
 	ar = result.split("=====");
 	if (ar.length != 3)
 	{
 		$('#output').html("Error: " + result);		
-//		alert("Error, not all parts present in query result");
 		return;
 	}
 	
-	misc = ar[0];
-	instancesXMLText = (new InstanceConverter(ar[1])).convertFromClaferMooOutputToXML();
-	abstractXMLText = ar[2];
+	var instancesXMLText = (new InstanceConverter(ar[1])).convertFromClaferMooOutputToXML();
+	var abstractXMLText = ar[2];
 
-	$('#output').html(misc);	
-	
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
 	
-//	alert(abstractXMLText.length);
-
 	abstractXMLText = abstractXMLText.replaceAll("&quot;", "\"");
 	abstractXMLText = abstractXMLText.replaceAll("&gt;", ">");
 	abstractXMLText = abstractXMLText.replaceAll("&lt;", "<");
 	abstractXMLText = abstractXMLText.replaceAll("&amp;", "&");
-
-//	alert(abstractXMLText.length);
 	
 	abstractXMLText = convertHtmlTags(abstractXMLText);
 	
-
 	
 	// clean namespaces
 	abstractXMLText = abstractXMLText.replaceAll('<?xml version="1.0"?>', '');
@@ -329,25 +296,13 @@ function processToolResult(result)
 	abstractXMLText = abstractXMLText.replaceAll('cl:', '');
 	abstractXMLText = abstractXMLText.replaceAll('xsi:', '');
 
-	$('#abstractXMLOutput').val(abstractXMLText);
-	$('#instancesXMLOutput').val(instancesXMLText);
-	
-	var abstractXMLDocument = StringtoXML(abstractXMLText);
-	var instancesXMLDocument = StringtoXML(instancesXMLText);
+    var data = new Object();
+    data.output = ar[0];
+    data.instancesXML = instancesXMLText;
+    data.claferXML = abstractXMLText;
 
-    mdComparisonTable.onDataLoaded(abstractXMLDocument, instancesXMLDocument);
-    mdGoals.onDataLoaded(abstractXMLDocument, instancesXMLDocument);
-	mdGraph.onDataLoaded(abstractXMLDocument, instancesXMLDocument)
+    updateData(data);
     
-	processor = new ClaferProcessor(abstractXMLDocument);
-	instanceProcessor = new InstanceProcessor(instancesXMLDocument);
-	onDataPreProcessed();
-	
-}
-
-function onDataPreProcessed()
-{
-
     $('#comparison').empty();
     $('#comparison').append(mdComparisonTable.getContent());            
 
@@ -363,8 +318,7 @@ function onDataPreProcessed()
 //    $('#wGraph').setContent();
     
     mdGraph.onRendered();
+    mdConsole.onRendered();    
     
-//	var instanceCount = instanceProcessor.getInstanceCount();
-	
 
 }

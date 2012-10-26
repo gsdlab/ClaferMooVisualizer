@@ -3,8 +3,8 @@ function Goals()
     this.goals = null;
 }
 
-Goals.method("onDataLoaded", function(claferXML, instancesXML){
-    this.processor = new ClaferProcessor(claferXML);
+Goals.method("onDataLoaded", function(data){
+    this.processor = new ClaferProcessor(data.claferXML);
     this.goals = this.processor.getGoals();
 });
 

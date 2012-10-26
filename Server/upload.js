@@ -12,7 +12,7 @@ var python = "python";
 
 var port = 8080;
 
-var useCache = false;
+var useCache = true;
 var cacheFileName = "cache.txt";
 
 var server = http.createServer(function(req, res) {
@@ -101,8 +101,15 @@ function upload_file(req, res) {
     stream.onPartBegin = function(part) {
         sys.debug("Started part, name = " + part.name + ", filename = " + part.filename);
 
+        if (part.filename == "")
+        {
+            sys.debug("Filename is empty");
+            return;
+        }      
+
 		try
 		{		
+            
 			// Construct file name
 			fileName = __dirname + "/" + "uploads/" + basename(stream.part.filename);
 
