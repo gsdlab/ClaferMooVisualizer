@@ -1,8 +1,10 @@
-var mdComparisonTable;
-var mdGoals;
-var mdGraph;
-var mdConsole;
-var mdInput;
+//var mdComparisonTable;
+//var mdGoals;
+//var mdGraph;
+//var mdConsole;
+//var mdInput;
+
+var host;
 
 google.load("visualization", "1", {packages:["corechart"]});
 
@@ -16,12 +18,14 @@ $(document).ready(function()
     modules.push("Graph");
     modules.push("Console");
     modules.push("Input");
+    modules.push("UseCases");
     
-    var host = new Host(modules);
+    host = new Host(modules);
 });
 
 function Host(modules)
 {
+    this.selector = new Selector();
     this.modules = new Array();
     
     for (var i = 0; i < modules.length; i++)
@@ -34,48 +38,17 @@ function Host(modules)
         
         this.modules.push(instance);
     }    
-/*
-var st = "";
-st = st + "As a product line engineer:<ol>";
-st = st + "<li>How do I view all N optimal product configurations?</li>";
-st = st + "<li>How do I see differences among all N products?</li>";
-st = st + "<li>How do I choose only K products out of N cutting off the products with less significant, in my opinion, features?</li>";
-st = st + "<li>How do I see the correlation between two metrics (e.g. energy significantly influences performance)?</li>";
-st = st + "<li>How can I group together the products with similar features?</li></ol>";
-
-
-$.newWindow({
-    id: "wUseCase",
-    title: "User Stories",
-    width: 1000,
-    height: 130,
-    posx: 0,
-    posy: 510,
-    content: st,
-    onDragBegin : null,
-    onDragEnd : null,
-    onResizeBegin : null,
-    onResizeEnd : null,
-    onAjaxContentLoaded : null,
-    statusBar: true,
-    minimizeButton: true,
-    maximizeButton: true,
-    closeButton: true,
-    draggable: true,
-    resizeable: true
-});        
-*/
 
     for (var i = 0; i < this.modules.length; i++)
     {
         var resize = null;
         
-        if (this.modules[i].graphResize)
+        if (this.modules[i].resize)
         {
-            resize = this.modules[i].graphResize;
+            resize = this.modules[i].resize;
         }
         
-        $.newWindow({
+        var x = $.newWindow({
             id: this.modules[i].id,
             title: this.modules[i].title,
             width: this.modules[i].width,

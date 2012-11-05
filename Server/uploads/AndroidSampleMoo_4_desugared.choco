@@ -1,0 +1,45 @@
+ConstraintMandatoryFeatures:c1:Choco.eq(c7_MobilePhone, 1)
+ConstraintMandatoryFeatures:c2:Choco.eq(c8_Connectivity, 1)
+ConstraintChildrenImpliesParent:c3:Choco.implies(Choco.eq(c8_Connectivity, 1), Choco.eq(c7_MobilePhone, 1))
+ConstraintMandatoryChildEqualParent:c4:Choco.eq(c8_Connectivity, c7_MobilePhone)
+ConstraintChildrenImpliesParent:c5:Choco.implies(Choco.eq(c72_PasswordProtection, 1), Choco.eq(c7_MobilePhone, 1))
+ConstraintChildrenImpliesParent:c6:Choco.implies(Choco.eq(c93_FingerprintProtection, 1), Choco.eq(c7_MobilePhone, 1))
+ConstraintChildrenImpliesParent:c7:Choco.implies(Choco.eq(c24_Bluetooth, 1), Choco.eq(c8_Connectivity, 1))
+ConstraintChildrenImpliesParent:c8:Choco.implies(Choco.eq(c40_USB, 1), Choco.eq(c8_Connectivity, 1))
+ConstraintChildrenImpliesParent:c9:Choco.implies(Choco.eq(c56_Wifi, 1), Choco.eq(c8_Connectivity, 1))
+ConstraintOr:c10:Choco.ifOnlyIf(Choco.or(GROUPVARS(c24_Bluetooth,c40_USB,c56_Wifi)), Choco.eq(c8_Connectivity, 1))
+BinaryVariable:c8_Connectivity
+BinaryVariable:c24_Bluetooth
+BinaryVariable:c40_USB
+BinaryVariable:c56_Wifi
+BinaryVariable:c72_PasswordProtection
+BinaryVariable:c93_FingerprintProtection
+BinaryVariable:c7_MobilePhone
+ProductLevelNfpAttribute:c2_performance
+ProductLevelNfpAttribute:c3_energy
+ProductLevelNfpAttribute:c4_mass
+ProductLevelNfpAttribute:c6_security
+ProductLevelNfpFeatureContribution:c6_security,c8_Connectivity,0
+ProductLevelNfpFeatureContribution:c6_security,c24_Bluetooth,9
+ProductLevelNfpFeatureContribution:c6_security,c40_USB,10
+ProductLevelNfpFeatureContribution:c6_security,c56_Wifi,22
+ProductLevelNfpFeatureContribution:c6_security,c72_PasswordProtection,1
+ProductLevelNfpFeatureContribution:c6_security,c93_FingerprintProtection,2
+ProductLevelNfpFeatureContribution:c6_security,c8_Connectivity,0
+ProductLevelNfpFeatureContribution:c6_security,c24_Bluetooth,10
+ProductLevelNfpFeatureContribution:c6_security,c40_USB,5
+ProductLevelNfpFeatureContribution:c6_security,c56_Wifi,17
+ProductLevelNfpFeatureContribution:c6_security,c72_PasswordProtection,2
+ProductLevelNfpFeatureContribution:c6_security,c93_FingerprintProtection,4
+ProductLevelNfpFeatureContribution:c6_security,c8_Connectivity,0
+ProductLevelNfpFeatureContribution:c6_security,c24_Bluetooth,2
+ProductLevelNfpFeatureContribution:c6_security,c40_USB,3
+ProductLevelNfpFeatureContribution:c6_security,c56_Wifi,6
+ProductLevelNfpFeatureContribution:c6_security,c72_PasswordProtection,0
+ProductLevelNfpFeatureContribution:c6_security,c93_FingerprintProtection,0
+ProductLevelNfpFeatureContribution:c6_security,c72_PasswordProtection,5
+ProductLevelNfpFeatureContribution:c6_security,c93_FingerprintProtection,5
+ObjectiveSense:False
+ObjectiveSense:True
+ObjectiveSense:True
+ObjectiveSense:False

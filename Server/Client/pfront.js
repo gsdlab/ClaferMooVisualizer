@@ -118,6 +118,9 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 //	alert(data);
 	this.chart = new google.visualization.BubbleChart(document.getElementById(this.element));
 
+    
+    
+/*    
         google.visualization.events.addListener(this.chart, 'select', function(e) {
             //  alert('A table row was selected');
                 //alert(this.chart.getSelection);
@@ -126,7 +129,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
             //    alert(this.chart.getSelection);
                 var sel = this.getSelection();
                 
-                alert(sel);
+//                alert(sel.tagName);
                 
                 }
                 catch(ex)
@@ -138,11 +141,62 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
             }
         
         );
-
+*/
 	this.chart.draw(data, options);
 		
-	
+    $('#chart text').click(pointClick);
+/*        
+	$("text").click(function(){
+        var pid = this.firstChild.nodeValue;
+        
+        
+        
+        if (this.host.selector.isSelected(pid))
+        {
+            deselectObject(this);
+        }
+            alert();
+        $(this).attr("fill", "#ff0000");
+    });
+*/
 }
+
+function pointClick()
+{
+    var pid = this.firstChild.nodeValue;
+    if (!pid)
+        return;
+        
+//    myregexp = new RegExp("P").    
+    if (pid.charAt(0) != "P")
+        return;
+        
+    if (host.selector.isSelected(pid))
+    {
+        deselectObject(this);
+        host.selector.onDeselected(pid);
+    }
+    else
+    {
+        selectObject(this);
+        host.selector.onSelected(pid);
+    }
+} 
+
+function selectObject(o)
+{
+    $(o).attr("fill", "#ff0000");    
+}
+
+function deselectObject(o)
+{
+    $(o).attr("fill", "#000000");    
+}
+
+
+//deselectObject(this);
+
+//$('#toggle_link').click(this.toggleDistinct.bind(this));
 
 /* SCATTER */
 

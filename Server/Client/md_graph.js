@@ -35,7 +35,7 @@ Graph.method("onRendered", function()
 		this.assignToAxis("dropPointX", this.goals[0].arg, this.goals[0].label);
 		this.assignToAxis("dropPointY", this.goals[1].arg, this.goals[1].label);
         
-        if (this.goals.length == 3)
+        if (this.goals.length >= 3)
         {
             this.assignToAxis("dropPointZ", this.goals[2].arg, this.goals[2].label);
         }
@@ -49,9 +49,9 @@ Graph.method("onRendered", function()
 
 });
 
-Graph.method("graphResize", function(e)
+Graph.method("resize", function(e) // not attached to the window anymore, so need to call the method
 {
-	this.redrawParetoFront();
+    host.findModule("mdGraph").redrawParetoFront();
 	return true;
 });
 
@@ -132,7 +132,7 @@ Graph.method("getContent", function()
 	
     var tdZ = $('<td colspan="2" id="dropPointZ" class="axis_drop"></td>');
     var tdY = $('<td height="90%" width="5%" id="dropPointY" class="axis_drop"></td>');
-    var tdChart = $('<td id="chart" style="display:none; width:95%; height:95%"></td>');
+    var tdChart = $('<td id="chart" style="display:none; width:95%; height:95%; overflow:hidden"></td>');
     var tdX = $('<td colspan="2" id="dropPointX" class="axis_drop"></td>');
 
     this.axisArray.splice(0, this.axisArray.length); // clear the array

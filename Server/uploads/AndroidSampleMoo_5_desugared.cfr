@@ -1,0 +1,61 @@
+abstract Feature
+    performance : integer
+    energy : integer
+    mass: integer
+    cost: integer
+    
+abstract SecurityFeature : Feature
+    security : integer
+        
+abstract MobilePhone
+    or Connectivity : Feature
+        [ this.performance = 0]
+        [ this.energy = 0]
+        [ this.mass = 0]
+        [ this.cost = 12]
+        Bluetooth : Feature
+            [ this.performance = 9]
+            [ this.energy = 10 ]        
+            [ this.mass = 2]
+            [ this.cost = 3]            
+        USB : Feature
+            [ this.performance = 10]
+            [ this.energy = 5 ]        
+            [ this.mass = 3]
+            [ this.cost = 5]
+        Wifi : Feature    
+            [ this.performance = 22]
+            [ this.energy = 17 ]
+            [ this.mass = 6]
+            [ this.cost = 5]
+    PasswordProtection : SecurityFeature ?
+        [ this.security = 5]
+        [ this.performance = 1]
+        [ this.energy = 2 ]
+        [ this.mass = 0]
+        [ this.cost = 12]
+        [ this.cost = 2]
+    FingerprintProtection : SecurityFeature ?
+        [ this.mass = 0]
+        [ this.security = 5]
+        [ this.performance = 2]
+        [ this.energy = 4 ]
+        [ this.cost = 2]
+    total_performance : integer
+    [ total_performance = Connectivity.performance + Bluetooth.performance + USB.performance + Wifi.performance + PasswordProtection.performance + FingerprintProtection.performance ]
+    total_energy : integer
+    [ total_energy = Connectivity.energy + Bluetooth.energy + USB.energy + Wifi.energy + PasswordProtection.energy + FingerprintProtection.energy ]
+    total_security : integer
+    [ total_security = PasswordProtection.security + FingerprintProtection.security ]
+    total_mass : integer
+    [ total_mass = Connectivity.mass + Bluetooth.mass + USB.mass + Wifi.mass + PasswordProtection.mass + FingerprintProtection.mass ]
+    total_cost : integer
+    [ total_cost = Connectivity.cost + Bluetooth.cost + USB.cost + Wifi.cost + PasswordProtection.cost + FingerprintProtection.cost ]
+
+MyPhone : MobilePhone
+    
+<< min MyPhone.total_energy >>
+<< max MyPhone.total_performance >>
+<< max MyPhone.total_security >>
+<< min MyPhone.total_mass >>    
+<< min MyPhone.total_cost >>    

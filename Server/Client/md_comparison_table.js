@@ -16,6 +16,9 @@ function ComparisonTable(host)
 	this.fadeOpacity = "0.7";
 	this.normalOpacity = "1.0"
 
+//    this.dataTable.matrix = null;
+//    this.dataTable.
+    
 }
 
 ComparisonTable.method("onDataLoaded", function(data){
@@ -23,7 +26,9 @@ ComparisonTable.method("onDataLoaded", function(data){
     this.processor = new ClaferProcessor(data.claferXML);
     this.abstractClaferOutput = "";    
     this.toggled = false;
-    this.content = this.getHtmlCode();
+    
+    this.dataTable = this.getDataTable();    
+    this.content = new TableVisualizer().getHTML(this.dataTable);
 });
 
 ComparisonTable.method("onRendered", function()
@@ -49,8 +54,8 @@ ComparisonTable.method("collector", function(clafer, spaceCount)
 
 	unit.displayWithMargins = unit.displayId;
 	
-	for (var i = 0; i < spaceCount * 3; i++)
-		unit.displayWithMargins = "&nbsp;" + unit.displayWithMargins;
+	for (var i = 0; i < spaceCount; i++)
+		unit.displayWithMargins = " " + unit.displayWithMargins;
 
 	abstractClaferOutput.push(unit);
 });
@@ -64,41 +69,7 @@ ComparisonTable.method("traverse", function(clafer, level)
 	}
 });
 
-ComparisonTable.method("isNumeric", function(input)
-{
-    return (input - 0) == input && input.length > 0;
-});
-
-ComparisonTable.method("mapValue", function(sVal)
-{
-	var result = new Object();
-	result.tdStyle = "";
-	result.html = sVal;
-	
-	if (sVal == "yes")
-	{
-		result.html = '<img class="tick" src="/Client/images/tick.png"/>';
-		result.tdStyle = 'tick';
-	}
-	
-	if (sVal == "-")
-	{
-		result.html = '-';
-		result.tdStyle = 'no';
-	}
-
-	if (this.isNumeric(sVal))
-	{
-		result.tdStyle = 'numeric';
-		result.html = '<span class="number">' + sVal + '</span>'
-	}
-		
-	return result;
-});
-
-// The Main Content Generator
-
-ComparisonTable.method("getHtmlCode", function()
+ComparisonTable.method("getDataTable", function()
 {
 	var instanceCount = this.instanceProcessor.getInstanceCount();
 	var instanceSuperClafer = this.instanceProcessor.getInstanceSuperClafer();
@@ -118,50 +89,54 @@ ComparisonTable.method("getHtmlCode", function()
 	this.traverse(current, 0);
 	output = abstractClaferOutput;
 	
-	var table = $('<table width="100%" cellspacing="0" cellspadding="0"></table>').addClass('foo');
+
+    var result = new DataTable();
+    result.title = output[0].displayWithMargins;
+    
+    for (var j = 1; j <= instanceCount; j++)
+    {
+        result.products.push("P" + j);
+    }
 	
 	for (var i = 0; i < output.length; i++)
 	{
-		if (i == 0)
-			tagName = "th"; // to make headers
-		else
-			tagName = "td";
-			
-		var row = $('<tr id="r' + i +'"></tr>').addClass('bar');//
-		
-		var td = $('<' + tagName + '></' + tagName + '>').addClass('td_abstract');
-		td.html(output[i].displayWithMargins);
+        var currentMatrixRow = new Array();
+        var currentContextRow = new Array();
+
+        if (i > 0) // do not push the parent clafer
+            result.features.push(output[i].displayWithMargins);
+            
+        currentContextRow.push(output[i].displayWithMargins);
         
-        if (i == 0)
-        {
-            td.append('&nbsp;<button id="toggle_link">Toggle</button>');
-        }
+        denyAddContextRow = false;
         
-		row.append(td);
-		
-		table.append(row);
-		
 		for (var j = 1; j <= instanceCount; j++)
 		{
-			var td = $('<' + tagName + ' id="' + tagName + i + "_" + j + '"></' + tagName + '>').addClass('td_instance');
-			
 			if (i == 0)
-				td.html("P" + j);
+            {
+				currentContextRow.push("P" + j);
+            }
 			else
 			{
 				sVal = this.instanceProcessor.getFeatureValue(j, output[i].claferId, false);
-				mappedValue = this.mapValue(sVal);
-				td.html(mappedValue.html);
-				td.addClass(mappedValue.tdStyle);
+				currentMatrixRow.push(sVal);
+                if (sVal == "yes")
+                    currentContextRow.push("X");
+                else if (sVal == "-")
+                    currentContextRow.push("");
+                else
+                    denyAddContextRow = true;
 			}
-				
-			row.append(td);
 		}
 		
-//		alert("ok");
+        if (i > 0)
+            result.matrix.push(currentMatrixRow);
+            
+        if (!denyAddContextRow)
+            result.formalContext.push(currentContextRow);
 	}
 
-	return $('<div id="comparison"></div>').append(table);
+	return result;
 
 });
 

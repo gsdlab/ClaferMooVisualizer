@@ -56,3 +56,9 @@ var stringToFunction = function(str) {
  String.prototype.replaceAll = function (replaceThis, withThis) {
 	return this.split(replaceThis).join(withThis);
 }
+
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};

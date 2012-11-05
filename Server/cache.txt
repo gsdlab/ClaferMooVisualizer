@@ -1,140 +1,600 @@
 Return code = 0
-Adding Mandatory Feature c6_MobilePhone
-Adding Mandatory Feature c7_Connectivity
+Adding Mandatory Feature c7_MobilePhone
+Adding Mandatory Feature c8_Connectivity
 get_corsstree_constraints
 Runing  alloy on generated als 
 Finished Running alloy on generated als.
 =====
-c145_MyPhone : c6_MobilePhone 
-	c67_FingerprintProtection : c4_SecurityFeature 
-		c2_performance  =  2 
-		c3_energy  =  4 
-		c5_security  =  5 
-	c7_Connectivity : c1_Feature 
-		c18_Bluetooth : c1_Feature 
-			c2_performance  =  9 
-			c3_energy  =  10 
-		c40_Wifi : c1_Feature 
-			c2_performance  =  22 
-			c3_energy  =  17 
-		c2_performance  =  0 
-		c3_energy  =  0 
-	c83_total_performance  =  33 
-	c109_total_energy  =  31 
-	c135_total_security  =  5 
-c145_MyPhone : c6_MobilePhone 
-	c67_FingerprintProtection : c4_SecurityFeature 
-		c2_performance  =  2 
-		c3_energy  =  4 
-		c5_security  =  5 
-	c7_Connectivity : c1_Feature 
-		c18_Bluetooth : c1_Feature 
-			c2_performance  =  9 
-			c3_energy  =  10 
-		c2_performance  =  0 
-		c3_energy  =  0 
-	c83_total_performance  =  11 
-	c109_total_energy  =  14 
-	c135_total_security  =  5 
-c145_MyPhone : c6_MobilePhone 
-	c51_PasswordProtection : c4_SecurityFeature 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
 		c2_performance  =  1 
 		c3_energy  =  2 
-		c5_security  =  5 
-	c67_FingerprintProtection : c4_SecurityFeature 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c93_FingerprintProtection : c5_SecurityFeature 
 		c2_performance  =  2 
 		c3_energy  =  4 
-		c5_security  =  5 
-	c7_Connectivity : c1_Feature 
-		c18_Bluetooth : c1_Feature 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
 			c2_performance  =  9 
 			c3_energy  =  10 
-		c40_Wifi : c1_Feature 
-			c2_performance  =  22 
-			c3_energy  =  17 
+			c4_mass  =  2 
 		c2_performance  =  0 
 		c3_energy  =  0 
-	c83_total_performance  =  34 
-	c109_total_energy  =  33 
-	c135_total_security  =  10 
-c145_MyPhone : c6_MobilePhone 
-	c7_Connectivity : c1_Feature 
-		c18_Bluetooth : c1_Feature 
-			c2_performance  =  9 
-			c3_energy  =  10 
-		c2_performance  =  0 
-		c3_energy  =  0 
-	c83_total_performance  =  9 
-	c109_total_energy  =  10 
-	c135_total_security  =  0 
-c145_MyPhone : c6_MobilePhone 
-	c51_PasswordProtection : c4_SecurityFeature 
-		c2_performance  =  1 
-		c3_energy  =  2 
-		c5_security  =  5 
-	c7_Connectivity : c1_Feature 
-		c18_Bluetooth : c1_Feature 
-			c2_performance  =  9 
-			c3_energy  =  10 
-		c2_performance  =  0 
-		c3_energy  =  0 
-	c83_total_performance  =  10 
-	c109_total_energy  =  12 
-	c135_total_security  =  5 
-c145_MyPhone : c6_MobilePhone 
-	c51_PasswordProtection : c4_SecurityFeature 
-		c2_performance  =  1 
-		c3_energy  =  2 
-		c5_security  =  5 
-	c67_FingerprintProtection : c4_SecurityFeature 
+		c4_mass  =  0 
+	c114_total_performance  =  12 
+	c140_total_energy  =  16 
+	c166_total_security  =  10 
+	c176_total_mass  =  2 
+c202_MyPhone : c7_MobilePhone 
+	c93_FingerprintProtection : c5_SecurityFeature 
 		c2_performance  =  2 
 		c3_energy  =  4 
-		c5_security  =  5 
-	c7_Connectivity : c1_Feature 
-		c18_Bluetooth : c1_Feature 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
 			c2_performance  =  9 
 			c3_energy  =  10 
-		c2_performance  =  0 
-		c3_energy  =  0 
-	c83_total_performance  =  12 
-	c109_total_energy  =  16 
-	c135_total_security  =  10 
-c145_MyPhone : c6_MobilePhone 
-	c7_Connectivity : c1_Feature 
-		c18_Bluetooth : c1_Feature 
-			c2_performance  =  9 
-			c3_energy  =  10 
-		c40_Wifi : c1_Feature 
+			c4_mass  =  2 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c56_Wifi : c1_Feature 
 			c2_performance  =  22 
 			c3_energy  =  17 
+			c4_mass  =  6 
 		c2_performance  =  0 
 		c3_energy  =  0 
-	c83_total_performance  =  31 
-	c109_total_energy  =  27 
-	c135_total_security  =  0 
-c145_MyPhone : c6_MobilePhone 
-	c51_PasswordProtection : c4_SecurityFeature 
+		c4_mass  =  0 
+	c114_total_performance  =  43 
+	c140_total_energy  =  36 
+	c166_total_security  =  5 
+	c176_total_mass  =  11 
+c202_MyPhone : c7_MobilePhone 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  9 
+	c140_total_energy  =  10 
+	c166_total_security  =  0 
+	c176_total_mass  =  2 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
 		c2_performance  =  1 
 		c3_energy  =  2 
-		c5_security  =  5 
-	c7_Connectivity : c1_Feature 
-		c18_Bluetooth : c1_Feature 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
 			c2_performance  =  9 
 			c3_energy  =  10 
-		c40_Wifi : c1_Feature 
-			c2_performance  =  22 
-			c3_energy  =  17 
+			c4_mass  =  2 
 		c2_performance  =  0 
 		c3_energy  =  0 
-	c83_total_performance  =  32 
-	c109_total_energy  =  29 
-	c135_total_security  =  5 
+		c4_mass  =  0 
+	c114_total_performance  =  10 
+	c140_total_energy  =  12 
+	c166_total_security  =  5 
+	c176_total_mass  =  2 
+c202_MyPhone : c7_MobilePhone 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  41 
+	c140_total_energy  =  32 
+	c166_total_security  =  0 
+	c176_total_mass  =  11 
+c202_MyPhone : c7_MobilePhone 
+	c8_Connectivity : c1_Feature 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  22 
+	c140_total_energy  =  17 
+	c166_total_security  =  0 
+	c176_total_mass  =  6 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  20 
+	c140_total_energy  =  17 
+	c166_total_security  =  5 
+	c176_total_mass  =  5 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  42 
+	c140_total_energy  =  34 
+	c166_total_security  =  5 
+	c176_total_mass  =  11 
+c202_MyPhone : c7_MobilePhone 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  19 
+	c140_total_energy  =  15 
+	c166_total_security  =  0 
+	c176_total_mass  =  5 
+c202_MyPhone : c7_MobilePhone 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  11 
+	c140_total_energy  =  14 
+	c166_total_security  =  5 
+	c176_total_mass  =  2 
+c202_MyPhone : c7_MobilePhone 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  12 
+	c140_total_energy  =  9 
+	c166_total_security  =  5 
+	c176_total_mass  =  3 
+c202_MyPhone : c7_MobilePhone 
+	c8_Connectivity : c1_Feature 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  10 
+	c140_total_energy  =  5 
+	c166_total_security  =  0 
+	c176_total_mass  =  3 
+c202_MyPhone : c7_MobilePhone 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  24 
+	c140_total_energy  =  21 
+	c166_total_security  =  5 
+	c176_total_mass  =  6 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  34 
+	c140_total_energy  =  33 
+	c166_total_security  =  10 
+	c176_total_mass  =  8 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  11 
+	c140_total_energy  =  7 
+	c166_total_security  =  5 
+	c176_total_mass  =  3 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  13 
+	c140_total_energy  =  11 
+	c166_total_security  =  10 
+	c176_total_mass  =  3 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  33 
+	c140_total_energy  =  24 
+	c166_total_security  =  5 
+	c176_total_mass  =  9 
+c202_MyPhone : c7_MobilePhone 
+	c8_Connectivity : c1_Feature 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  32 
+	c140_total_energy  =  22 
+	c166_total_security  =  0 
+	c176_total_mass  =  9 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  25 
+	c140_total_energy  =  23 
+	c166_total_security  =  10 
+	c176_total_mass  =  6 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  22 
+	c140_total_energy  =  21 
+	c166_total_security  =  10 
+	c176_total_mass  =  5 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  23 
+	c140_total_energy  =  19 
+	c166_total_security  =  5 
+	c176_total_mass  =  6 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  44 
+	c140_total_energy  =  38 
+	c166_total_security  =  10 
+	c176_total_mass  =  11 
+c202_MyPhone : c7_MobilePhone 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  21 
+	c140_total_energy  =  19 
+	c166_total_security  =  5 
+	c176_total_mass  =  5 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  35 
+	c140_total_energy  =  28 
+	c166_total_security  =  10 
+	c176_total_mass  =  9 
+c202_MyPhone : c7_MobilePhone 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c40_USB : c1_Feature 
+			c2_performance  =  10 
+			c3_energy  =  5 
+			c4_mass  =  3 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  34 
+	c140_total_energy  =  26 
+	c166_total_security  =  5 
+	c176_total_mass  =  9 
+c202_MyPhone : c7_MobilePhone 
+	c93_FingerprintProtection : c5_SecurityFeature 
+		c2_performance  =  2 
+		c3_energy  =  4 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  33 
+	c140_total_energy  =  31 
+	c166_total_security  =  5 
+	c176_total_mass  =  8 
+c202_MyPhone : c7_MobilePhone 
+	c72_PasswordProtection : c5_SecurityFeature 
+		c2_performance  =  1 
+		c3_energy  =  2 
+		c4_mass  =  0 
+		c6_security  =  5 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  32 
+	c140_total_energy  =  29 
+	c166_total_security  =  5 
+	c176_total_mass  =  8 
+c202_MyPhone : c7_MobilePhone 
+	c8_Connectivity : c1_Feature 
+		c24_Bluetooth : c1_Feature 
+			c2_performance  =  9 
+			c3_energy  =  10 
+			c4_mass  =  2 
+		c56_Wifi : c1_Feature 
+			c2_performance  =  22 
+			c3_energy  =  17 
+			c4_mass  =  6 
+		c2_performance  =  0 
+		c3_energy  =  0 
+		c4_mass  =  0 
+	c114_total_performance  =  31 
+	c140_total_energy  =  27 
+	c166_total_security  =  0 
+	c176_total_mass  =  8 
 =====&lt;?xml version=&quot;1.0&quot;?&gt;&lt;Module xmlns=&quot;http://clafer.org/ir&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:cl=&quot;http://clafer.org/ir&quot; xsi:schemaLocation=&quot;http://clafer.org/ir https://github.com/gsdlab/clafer/blob/master/src/ClaferIR.xsd&quot;&gt;&lt;Name&gt;&lt;/Name&gt;
 &lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;3&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;4&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;18&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;IsAbstract&gt;true&lt;/IsAbstract&gt;
@@ -253,10 +713,51 @@ c145_MyPhone : c6_MobilePhone
 &lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
 &lt;/Max&gt;
 &lt;/GlobalCard&gt;
-&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;4&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;4&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;18&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;IsAbstract&gt;false&lt;/IsAbstract&gt;
+&lt;GroupCard&gt;&lt;IsKeyword&gt;false&lt;/IsKeyword&gt;
+&lt;Interval&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/Interval&gt;
+&lt;/GroupCard&gt;
+&lt;Id&gt;mass&lt;/Id&gt;
+&lt;UniqueId&gt;c4_mass&lt;/UniqueId&gt;
+&lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
+&lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;4&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;4&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;18&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;integer&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Super&gt;
+&lt;/Supers&gt;
+&lt;Card&gt;&lt;Min&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/Card&gt;
+&lt;GlobalCard&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/GlobalCard&gt;
+&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;6&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;6&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -269,13 +770,13 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Interval&gt;
 &lt;/GroupCard&gt;
 &lt;Id&gt;SecurityFeature&lt;/Id&gt;
-&lt;UniqueId&gt;c4_SecurityFeature&lt;/UniqueId&gt;
+&lt;UniqueId&gt;c5_SecurityFeature&lt;/UniqueId&gt;
 &lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
 &lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;6&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;6&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -294,10 +795,10 @@ c145_MyPhone : c6_MobilePhone
 &lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
 &lt;/Max&gt;
 &lt;/GlobalCard&gt;
-&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;6&lt;/IntLiteral&gt;
+&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;6&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -310,13 +811,13 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Interval&gt;
 &lt;/GroupCard&gt;
 &lt;Id&gt;security&lt;/Id&gt;
-&lt;UniqueId&gt;c5_security&lt;/UniqueId&gt;
+&lt;UniqueId&gt;c6_security&lt;/UniqueId&gt;
 &lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
 &lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;6&lt;/IntLiteral&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;6&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -335,11 +836,11 @@ c145_MyPhone : c6_MobilePhone
 &lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
 &lt;/Max&gt;
 &lt;/GlobalCard&gt;
-&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;8&lt;/IntLiteral&gt;
+&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;9&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;84&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;132&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;IsAbstract&gt;true&lt;/IsAbstract&gt;
@@ -351,7 +852,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Interval&gt;
 &lt;/GroupCard&gt;
 &lt;Id&gt;MobilePhone&lt;/Id&gt;
-&lt;UniqueId&gt;c6_MobilePhone&lt;/UniqueId&gt;
+&lt;UniqueId&gt;c7_MobilePhone&lt;/UniqueId&gt;
 &lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
 &lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
 &lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
@@ -376,11 +877,11 @@ c145_MyPhone : c6_MobilePhone
 &lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
 &lt;/Max&gt;
 &lt;/GlobalCard&gt;
-&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;9&lt;/IntLiteral&gt;
+&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;IsAbstract&gt;false&lt;/IsAbstract&gt;
@@ -392,13 +893,13 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Interval&gt;
 &lt;/GroupCard&gt;
 &lt;Id&gt;Connectivity&lt;/Id&gt;
-&lt;UniqueId&gt;c7_Connectivity&lt;/UniqueId&gt;
+&lt;UniqueId&gt;c8_Connectivity&lt;/UniqueId&gt;
 &lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
 &lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;9&lt;/IntLiteral&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;9&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -418,29 +919,29 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Max&gt;
 &lt;/GlobalCard&gt;
 &lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c8_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c9_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c9_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c10_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c10_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c11_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -448,11 +949,11 @@ c145_MyPhone : c6_MobilePhone
 &lt;Id&gt;this&lt;/Id&gt;
 &lt;IsTop&gt;true&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c11_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c12_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -461,11 +962,11 @@ c145_MyPhone : c6_MobilePhone
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c12_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c13_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -473,29 +974,29 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
 &lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c13_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c14_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c14_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c15_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c15_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c16_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -503,11 +1004,11 @@ c145_MyPhone : c6_MobilePhone
 &lt;Id&gt;this&lt;/Id&gt;
 &lt;IsTop&gt;true&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c16_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c17_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -516,22 +1017,77 @@ c145_MyPhone : c6_MobilePhone
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c17_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c18_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c19_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c20_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c21_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c22_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c23_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;9&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;17&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;IsAbstract&gt;false&lt;/IsAbstract&gt;
@@ -543,13 +1099,13 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Interval&gt;
 &lt;/GroupCard&gt;
 &lt;Id&gt;Bluetooth&lt;/Id&gt;
-&lt;UniqueId&gt;c18_Bluetooth&lt;/UniqueId&gt;
+&lt;UniqueId&gt;c24_Bluetooth&lt;/UniqueId&gt;
 &lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
 &lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;12&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -569,29 +1125,29 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Max&gt;
 &lt;/GlobalCard&gt;
 &lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c19_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c25_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c20_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c26_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c21_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c27_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;19&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -599,11 +1155,11 @@ c145_MyPhone : c6_MobilePhone
 &lt;Id&gt;this&lt;/Id&gt;
 &lt;IsTop&gt;true&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c22_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c28_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -612,11 +1168,11 @@ c145_MyPhone : c6_MobilePhone
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c23_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c29_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;13&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -624,108 +1180,12 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
 &lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c24_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c25_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c26_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;19&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;this&lt;/Id&gt;
-&lt;IsTop&gt;true&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c27_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c3_energy&lt;/Id&gt;
-&lt;IsTop&gt;false&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c28_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;14&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;9&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;17&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;IsAbstract&gt;false&lt;/IsAbstract&gt;
-&lt;GroupCard&gt;&lt;IsKeyword&gt;false&lt;/IsKeyword&gt;
-&lt;Interval&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Min&gt;
-&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
-&lt;/Max&gt;
-&lt;/Interval&gt;
-&lt;/GroupCard&gt;
-&lt;Id&gt;USB&lt;/Id&gt;
-&lt;UniqueId&gt;c29_USB&lt;/UniqueId&gt;
-&lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
-&lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c1_Feature&lt;/Id&gt;
-&lt;IsTop&gt;true&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Super&gt;
-&lt;/Supers&gt;
-&lt;Card&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Min&gt;
-&lt;Max&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
-&lt;/Max&gt;
-&lt;/Card&gt;
-&lt;GlobalCard&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Min&gt;
-&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
-&lt;/Max&gt;
-&lt;/GlobalCard&gt;
-&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
 &lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c30_exp&lt;/ParentId&gt;
 &lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
@@ -734,7 +1194,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
@@ -755,23 +1215,23 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c2_performance&lt;/Id&gt;
+&lt;Id&gt;c3_energy&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c34_exp&lt;/ParentId&gt;
 &lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
 &lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
@@ -780,7 +1240,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;17&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
@@ -789,7 +1249,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;17&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
@@ -810,30 +1270,30 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;17&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c3_energy&lt;/Id&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c39_exp&lt;/ParentId&gt;
 &lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;17&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;17&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;2&lt;/IntLiteral&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
 &lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;18&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;9&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;IsAbstract&gt;false&lt;/IsAbstract&gt;
@@ -844,15 +1304,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Max&gt;
 &lt;/Interval&gt;
 &lt;/GroupCard&gt;
-&lt;Id&gt;Wifi&lt;/Id&gt;
-&lt;UniqueId&gt;c40_Wifi&lt;/UniqueId&gt;
+&lt;Id&gt;USB&lt;/Id&gt;
+&lt;UniqueId&gt;c40_USB&lt;/UniqueId&gt;
 &lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
 &lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
 &lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;18&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;18&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
@@ -922,7 +1382,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;10&lt;/IntLiteral&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
 &lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
@@ -931,7 +1391,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
@@ -974,17 +1434,278 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c51_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c52_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c53_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;19&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c54_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c55_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;3&lt;/IntLiteral&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;9&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;IsAbstract&gt;false&lt;/IsAbstract&gt;
+&lt;GroupCard&gt;&lt;IsKeyword&gt;false&lt;/IsKeyword&gt;
+&lt;Interval&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/Interval&gt;
+&lt;/GroupCard&gt;
+&lt;Id&gt;Wifi&lt;/Id&gt;
+&lt;UniqueId&gt;c56_Wifi&lt;/UniqueId&gt;
+&lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
+&lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c1_Feature&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Super&gt;
+&lt;/Supers&gt;
+&lt;Card&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/Card&gt;
+&lt;GlobalCard&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/GlobalCard&gt;
+&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c57_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c58_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c59_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;19&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c60_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c2_performance&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c61_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c62_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c63_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c64_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;19&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c65_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c3_energy&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c66_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;17&lt;/IntLiteral&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c67_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c68_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c69_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;19&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c70_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c71_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;6&lt;/IntLiteral&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;IsAbstract&gt;false&lt;/IsAbstract&gt;
@@ -996,18 +1717,18 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Interval&gt;
 &lt;/GroupCard&gt;
 &lt;Id&gt;PasswordProtection&lt;/Id&gt;
-&lt;UniqueId&gt;c51_PasswordProtection&lt;/UniqueId&gt;
+&lt;UniqueId&gt;c72_PasswordProtection&lt;/UniqueId&gt;
 &lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
 &lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c4_SecurityFeature&lt;/Id&gt;
+&lt;Id&gt;c5_SecurityFeature&lt;/Id&gt;
 &lt;IsTop&gt;true&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Super&gt;
 &lt;/Supers&gt;
@@ -1022,273 +1743,12 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Max&gt;
 &lt;/GlobalCard&gt;
 &lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c52_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c53_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c54_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;this&lt;/Id&gt;
-&lt;IsTop&gt;true&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c55_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c5_security&lt;/Id&gt;
-&lt;IsTop&gt;false&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c56_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c57_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c58_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c59_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;this&lt;/Id&gt;
-&lt;IsTop&gt;true&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c60_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c2_performance&lt;/Id&gt;
-&lt;IsTop&gt;false&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c61_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c62_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c63_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c64_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;this&lt;/Id&gt;
-&lt;IsTop&gt;true&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c65_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c3_energy&lt;/Id&gt;
-&lt;IsTop&gt;false&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c66_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;2&lt;/IntLiteral&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;IsAbstract&gt;false&lt;/IsAbstract&gt;
-&lt;GroupCard&gt;&lt;IsKeyword&gt;false&lt;/IsKeyword&gt;
-&lt;Interval&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Min&gt;
-&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
-&lt;/Max&gt;
-&lt;/Interval&gt;
-&lt;/GroupCard&gt;
-&lt;Id&gt;FingerprintProtection&lt;/Id&gt;
-&lt;UniqueId&gt;c67_FingerprintProtection&lt;/UniqueId&gt;
-&lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
-&lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;44&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c4_SecurityFeature&lt;/Id&gt;
-&lt;IsTop&gt;true&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Super&gt;
-&lt;/Supers&gt;
-&lt;Card&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Min&gt;
-&lt;Max&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
-&lt;/Max&gt;
-&lt;/Card&gt;
-&lt;GlobalCard&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Min&gt;
-&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
-&lt;/Max&gt;
-&lt;/GlobalCard&gt;
-&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c68_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c69_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c70_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;this&lt;/Id&gt;
-&lt;IsTop&gt;true&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c71_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c5_security&lt;/Id&gt;
-&lt;IsTop&gt;false&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c72_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
 &lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c73_exp&lt;/ParentId&gt;
 &lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
@@ -1297,7 +1757,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
@@ -1318,23 +1778,23 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c2_performance&lt;/Id&gt;
+&lt;Id&gt;c6_security&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c77_exp&lt;/ParentId&gt;
 &lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;2&lt;/IntLiteral&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
 &lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
@@ -1343,7 +1803,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
@@ -1352,7 +1812,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
@@ -1373,6 +1833,61 @@ c145_MyPhone : c6_MobilePhone
 &lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
 &lt;/Start&gt;
 &lt;End&gt;&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c2_performance&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c82_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c83_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c84_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c85_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c86_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1381,21 +1896,337 @@ c145_MyPhone : c6_MobilePhone
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c82_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c87_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;2&lt;/IntLiteral&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c88_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c89_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c90_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c91_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c92_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;IsAbstract&gt;false&lt;/IsAbstract&gt;
+&lt;GroupCard&gt;&lt;IsKeyword&gt;false&lt;/IsKeyword&gt;
+&lt;Interval&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/Interval&gt;
+&lt;/GroupCard&gt;
+&lt;Id&gt;FingerprintProtection&lt;/Id&gt;
+&lt;UniqueId&gt;c93_FingerprintProtection&lt;/UniqueId&gt;
+&lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
+&lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;44&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c5_SecurityFeature&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Super&gt;
+&lt;/Supers&gt;
+&lt;Card&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/Card&gt;
+&lt;GlobalCard&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/GlobalCard&gt;
+&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c94_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c95_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c96_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c97_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c98_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;23&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c99_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c100_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c101_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c102_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c6_security&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c103_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c104_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c105_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c106_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c107_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c2_performance&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c108_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;2&lt;/IntLiteral&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c109_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c110_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c111_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c112_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c3_energy&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c113_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IIntExp&quot;&gt;&lt;IntLiteral&gt;4&lt;/IntLiteral&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1408,13 +2239,13 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Interval&gt;
 &lt;/GroupCard&gt;
 &lt;Id&gt;total_performance&lt;/Id&gt;
-&lt;UniqueId&gt;c83_total_performance&lt;/UniqueId&gt;
+&lt;UniqueId&gt;c114_total_performance&lt;/UniqueId&gt;
 &lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
 &lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1434,20 +2265,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Max&gt;
 &lt;/GlobalCard&gt;
 &lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c84_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c115_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;181&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c85_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c116_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1473,69 +2304,69 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c83_total_performance&lt;/Id&gt;
+&lt;Id&gt;c114_total_performance&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c86_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c117_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;181&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c87_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c118_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;145&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c88_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c119_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;112&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c89_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c120_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;93&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c90_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c121_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;75&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c91_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c122_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;51&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c92_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c123_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1561,15 +2392,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c7_Connectivity&lt;/Id&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c93_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c124_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;51&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1578,20 +2409,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c94_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c125_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;54&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;75&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c95_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c126_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;54&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;63&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1626,7 +2457,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c7_Connectivity&lt;/Id&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
@@ -1639,15 +2470,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c18_Bluetooth&lt;/Id&gt;
+&lt;Id&gt;c24_Bluetooth&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c96_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c127_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;64&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;75&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1657,20 +2488,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c97_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c128_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;78&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;93&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c98_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c129_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;78&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;81&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1705,7 +2536,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c7_Connectivity&lt;/Id&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
@@ -1718,15 +2549,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c29_USB&lt;/Id&gt;
+&lt;Id&gt;c40_USB&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c99_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c130_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;82&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;93&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1736,20 +2567,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c100_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c131_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;96&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;112&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c101_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c132_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;96&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;100&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1784,7 +2615,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c7_Connectivity&lt;/Id&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
@@ -1797,15 +2628,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c40_Wifi&lt;/Id&gt;
+&lt;Id&gt;c56_Wifi&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c102_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c133_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;101&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;112&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1815,20 +2646,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c103_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c134_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;115&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;145&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c104_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c135_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;115&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;133&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1854,15 +2685,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c51_PasswordProtection&lt;/Id&gt;
+&lt;Id&gt;c72_PasswordProtection&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c105_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c136_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;134&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;145&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1872,20 +2703,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c106_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c137_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;148&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;181&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c107_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c138_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;148&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;169&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1911,15 +2742,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c67_FingerprintProtection&lt;/Id&gt;
+&lt;Id&gt;c93_FingerprintProtection&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c108_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c139_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;170&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;181&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1930,10 +2761,10 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;38&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;38&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1946,13 +2777,13 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Interval&gt;
 &lt;/GroupCard&gt;
 &lt;Id&gt;total_energy&lt;/Id&gt;
-&lt;UniqueId&gt;c109_total_energy&lt;/UniqueId&gt;
+&lt;UniqueId&gt;c140_total_energy&lt;/UniqueId&gt;
 &lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
 &lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;38&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;31&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;38&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;27&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -1972,20 +2803,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Max&gt;
 &lt;/GlobalCard&gt;
 &lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c110_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c141_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;146&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c111_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c142_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;19&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2011,69 +2842,69 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c109_total_energy&lt;/Id&gt;
+&lt;Id&gt;c140_total_energy&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c112_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c143_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;146&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c113_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c144_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;115&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c114_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c145_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;87&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c115_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c146_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;73&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c116_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c147_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;60&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c117_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c148_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c118_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c149_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2099,15 +2930,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c7_Connectivity&lt;/Id&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c119_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c150_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;35&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2116,20 +2947,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c120_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c151_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;44&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;60&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c121_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c152_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;44&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;53&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2164,7 +2995,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c7_Connectivity&lt;/Id&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
@@ -2177,15 +3008,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c18_Bluetooth&lt;/Id&gt;
+&lt;Id&gt;c24_Bluetooth&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c122_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c153_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;54&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;60&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2195,20 +3026,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c123_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c154_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;63&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;73&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c124_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c155_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;63&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;66&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2243,7 +3074,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c7_Connectivity&lt;/Id&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
@@ -2256,15 +3087,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c29_USB&lt;/Id&gt;
+&lt;Id&gt;c40_USB&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c125_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c156_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;67&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;73&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2274,20 +3105,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c126_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c157_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;76&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;87&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c127_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c158_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;76&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;80&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2322,7 +3153,7 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c7_Connectivity&lt;/Id&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
@@ -2335,15 +3166,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c40_Wifi&lt;/Id&gt;
+&lt;Id&gt;c56_Wifi&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c128_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c159_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;81&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;87&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2353,20 +3184,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c129_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c160_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;90&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;115&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c130_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c161_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;90&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;108&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2392,15 +3223,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c51_PasswordProtection&lt;/Id&gt;
+&lt;Id&gt;c72_PasswordProtection&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c131_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c162_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;109&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;115&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2410,20 +3241,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c132_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c163_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;118&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;146&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c133_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c164_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;118&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;139&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2449,15 +3280,15 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c67_FingerprintProtection&lt;/Id&gt;
+&lt;Id&gt;c93_FingerprintProtection&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c134_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c165_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;140&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;146&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2468,10 +3299,10 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2484,13 +3315,13 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Interval&gt;
 &lt;/GroupCard&gt;
 &lt;Id&gt;total_security&lt;/Id&gt;
-&lt;UniqueId&gt;c135_total_security&lt;/UniqueId&gt;
+&lt;UniqueId&gt;c166_total_security&lt;/UniqueId&gt;
 &lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
 &lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2510,20 +3341,20 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Max&gt;
 &lt;/GlobalCard&gt;
 &lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c136_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c167_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;84&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c137_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c168_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;21&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2549,33 +3380,33 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c135_total_security&lt;/Id&gt;
+&lt;Id&gt;c166_total_security&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c138_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c169_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;84&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c139_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c170_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;51&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c140_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c171_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;24&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;42&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2601,37 +3432,37 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c51_PasswordProtection&lt;/Id&gt;
+&lt;Id&gt;c72_PasswordProtection&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c141_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c172_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;51&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c5_security&lt;/Id&gt;
+&lt;Id&gt;c6_security&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c142_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c173_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;54&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;84&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c143_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c174_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;54&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;75&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
@@ -2657,30 +3488,568 @@ c145_MyPhone : c6_MobilePhone
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c67_FingerprintProtection&lt;/Id&gt;
+&lt;Id&gt;c93_FingerprintProtection&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c144_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c175_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;76&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;84&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c5_security&lt;/Id&gt;
+&lt;Id&gt;c6_security&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;42&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;5&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;42&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;IsAbstract&gt;false&lt;/IsAbstract&gt;
+&lt;GroupCard&gt;&lt;IsKeyword&gt;false&lt;/IsKeyword&gt;
+&lt;Interval&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/Interval&gt;
+&lt;/GroupCard&gt;
+&lt;Id&gt;total_mass&lt;/Id&gt;
+&lt;UniqueId&gt;c176_total_mass&lt;/UniqueId&gt;
+&lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
+&lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;42&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;18&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;42&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;25&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;integer&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Super&gt;
+&lt;/Supers&gt;
+&lt;Card&gt;&lt;Min&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/Card&gt;
+&lt;GlobalCard&gt;&lt;Min&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Min&gt;
+&lt;Max&gt;&lt;IntLiteral&gt;-1&lt;/IntLiteral&gt;
+&lt;/Max&gt;
+&lt;/GlobalCard&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c177_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;132&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;=&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c178_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;17&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c176_total_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c179_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;132&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c180_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;103&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c181_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;77&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c182_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;65&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c183_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;54&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;+&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c184_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c185_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;32&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c186_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c187_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;54&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c188_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;49&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c24_Bluetooth&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c189_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;50&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;54&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c190_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;57&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;65&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c191_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;57&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;60&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c40_USB&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c192_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;61&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;65&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c193_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;68&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;77&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c194_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;68&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;72&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c8_Connectivity&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c56_Wifi&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c195_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;73&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;77&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c196_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;80&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;103&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c197_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;80&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;98&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c72_PasswordProtection&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c198_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;99&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;103&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c199_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;106&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;132&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c200_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;106&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;127&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;this&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c93_FingerprintProtection&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c201_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;128&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;43&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;132&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c4_mass&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IClafer&quot;&gt;&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;45&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;45&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;IsAbstract&gt;false&lt;/IsAbstract&gt;
@@ -2692,18 +4061,18 @@ c145_MyPhone : c6_MobilePhone
 &lt;/Interval&gt;
 &lt;/GroupCard&gt;
 &lt;Id&gt;MyPhone&lt;/Id&gt;
-&lt;UniqueId&gt;c145_MyPhone&lt;/UniqueId&gt;
+&lt;UniqueId&gt;c202_MyPhone&lt;/UniqueId&gt;
 &lt;Supers&gt;&lt;IsOverlapping&gt;false&lt;/IsOverlapping&gt;
 &lt;Super&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;45&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;11&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;36&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;45&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;22&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c6_MobilePhone&lt;/Id&gt;
+&lt;Id&gt;c7_MobilePhone&lt;/Id&gt;
 &lt;IsTop&gt;true&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Super&gt;
 &lt;/Supers&gt;
@@ -2717,278 +4086,182 @@ c145_MyPhone : c6_MobilePhone
 &lt;Max&gt;&lt;IntLiteral&gt;1&lt;/IntLiteral&gt;
 &lt;/Max&gt;
 &lt;/GlobalCard&gt;
-&lt;Declaration xsi:type=&quot;cl:IConstraint&quot;&gt;&lt;IsHard&gt;true&lt;/IsHard&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c146_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;&amp;amp;&amp;amp;&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c147_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IDeclarationParentExp&quot;&gt;&lt;Quantifier xsi:type=&quot;cl:ISome&quot; /&gt;&lt;BodyParentExp&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c148_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c149_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;7&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;19&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;this&lt;/Id&gt;
-&lt;IsTop&gt;true&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c7_Connectivity&lt;/Id&gt;
-&lt;IsTop&gt;false&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c150_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;20&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;29&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c18_Bluetooth&lt;/Id&gt;
-&lt;IsTop&gt;false&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/BodyParentExp&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IBoolean&quot; /&gt;&lt;ParentId&gt;c151_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IDeclarationParentExp&quot;&gt;&lt;Quantifier xsi:type=&quot;cl:INo&quot; /&gt;&lt;BodyParentExp&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c152_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;34&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;37&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;this&lt;/Id&gt;
-&lt;IsTop&gt;true&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c7_Connectivity&lt;/Id&gt;
-&lt;IsTop&gt;false&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;IntLiteral&gt;0&lt;/IntLiteral&gt;
-&lt;/End&gt;
-&lt;/Position&gt;
-&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c29_USB&lt;/Id&gt;
-&lt;IsTop&gt;false&lt;/IsTop&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/BodyParentExp&gt;
-&lt;/Exp&gt;&lt;/Argument&gt;
-&lt;/Exp&gt;&lt;/ParentExp&gt;
-&lt;/Declaration&gt;&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IGoal&quot;&gt;&lt;IsMaximize&gt;true&lt;/IsMaximize&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c153_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IGoal&quot;&gt;&lt;IsMaximize&gt;true&lt;/IsMaximize&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c203_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;47&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;4&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;47&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;min&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c154_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c204_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;47&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;8&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;47&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c155_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c205_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;47&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;8&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;47&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c145_MyPhone&lt;/Id&gt;
+&lt;Id&gt;c202_MyPhone&lt;/Id&gt;
 &lt;IsTop&gt;true&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c156_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c206_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;47&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;39&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;47&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;28&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c109_total_energy&lt;/Id&gt;
+&lt;Id&gt;c140_total_energy&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
 &lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IGoal&quot;&gt;&lt;IsMaximize&gt;true&lt;/IsMaximize&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c157_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c207_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;48&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;4&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;48&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;max&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c158_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c208_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;48&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;8&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;48&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c159_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c209_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;48&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;8&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;48&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c145_MyPhone&lt;/Id&gt;
+&lt;Id&gt;c202_MyPhone&lt;/Id&gt;
 &lt;IsTop&gt;true&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c160_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c210_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;48&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;40&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;48&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;33&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c83_total_performance&lt;/Id&gt;
+&lt;Id&gt;c114_total_performance&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/ParentExp&gt;
 &lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IGoal&quot;&gt;&lt;IsMaximize&gt;true&lt;/IsMaximize&gt;
-&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c161_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c211_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;49&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;4&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;49&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;max&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c162_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c212_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;49&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;8&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;49&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c163_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c213_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;49&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;8&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;49&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c145_MyPhone&lt;/Id&gt;
+&lt;Id&gt;c202_MyPhone&lt;/Id&gt;
 &lt;IsTop&gt;true&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
-&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c164_exp&lt;/ParentId&gt;
-&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c214_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;49&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
 &lt;/Start&gt;
-&lt;End&gt;&lt;IntLiteral&gt;41&lt;/IntLiteral&gt;
+&lt;End&gt;&lt;IntLiteral&gt;49&lt;/IntLiteral&gt;
 &lt;IntLiteral&gt;30&lt;/IntLiteral&gt;
 &lt;/End&gt;
 &lt;/Position&gt;
 &lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
-&lt;Id&gt;c135_total_security&lt;/Id&gt;
+&lt;Id&gt;c166_total_security&lt;/Id&gt;
+&lt;IsTop&gt;false&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;/Exp&gt;&lt;/ParentExp&gt;
+&lt;/Declaration&gt;&lt;Declaration xsi:type=&quot;cl:IGoal&quot;&gt;&lt;IsMaximize&gt;true&lt;/IsMaximize&gt;
+&lt;ParentExp&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c215_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;50&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;4&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;50&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;min&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c216_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;50&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;8&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;50&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IFunctionExp&quot;&gt;&lt;Operation&gt;.&lt;/Operation&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:ISet&quot; /&gt;&lt;ParentId&gt;c217_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;50&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;8&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;50&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;15&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c202_MyPhone&lt;/Id&gt;
+&lt;IsTop&gt;true&lt;/IsTop&gt;
+&lt;/Exp&gt;&lt;/Argument&gt;
+&lt;Argument&gt;&lt;Type xsi:type=&quot;cl:IInteger&quot; /&gt;&lt;ParentId&gt;c218_exp&lt;/ParentId&gt;
+&lt;Position&gt;&lt;Start&gt;&lt;IntLiteral&gt;50&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;16&lt;/IntLiteral&gt;
+&lt;/Start&gt;
+&lt;End&gt;&lt;IntLiteral&gt;50&lt;/IntLiteral&gt;
+&lt;IntLiteral&gt;26&lt;/IntLiteral&gt;
+&lt;/End&gt;
+&lt;/Position&gt;
+&lt;Exp xsi:type=&quot;cl:IClaferId&quot;&gt;&lt;ModuleName&gt;&lt;/ModuleName&gt;
+&lt;Id&gt;c176_total_mass&lt;/Id&gt;
 &lt;IsTop&gt;false&lt;/IsTop&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;
 &lt;/Exp&gt;&lt;/Argument&gt;

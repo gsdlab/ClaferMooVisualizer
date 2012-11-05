@@ -15,6 +15,10 @@ textarea.child {
       height:100%;
 }
   
+text{
+    cursor:pointer;
+}
+  
 div.parent {height:60px;}
 textarea.child {height:100%;}
 
