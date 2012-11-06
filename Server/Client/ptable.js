@@ -39,8 +39,6 @@ TableVisualizer.method("mapValue", function(sVal)
 
 TableVisualizer.prototype.getHTML = function(data) 
 {
-    data = data.subset(["P1", "P3", "P28"]);
-
 	var instanceCount = data.products.length;    
 	var table = $('<table width="100%" cellspacing="0" cellspadding="0"></table>').addClass('foo');
 
@@ -90,7 +88,7 @@ TableVisualizer.prototype.getHTML = function(data)
         table.append(row);
 	}
 
-	return $('<div id="comparison"></div>').append(table);
+	return table;
 
 }
 

@@ -28,7 +28,7 @@ ComparisonTable.method("onDataLoaded", function(data){
     this.toggled = false;
     
     this.dataTable = this.getDataTable();    
-    this.content = new TableVisualizer().getHTML(this.dataTable);
+    this.content = $('<div id="comparison"></div>').append(new TableVisualizer().getHTML(this.dataTable));
 });
 
 ComparisonTable.method("onRendered", function()

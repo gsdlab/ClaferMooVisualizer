@@ -7,6 +7,7 @@ function Selector(host)
 
 Selector.method("onSelected", function(pid){
     this.selection.push(pid);
+    this.host.selectionChanged(this.selection);
 });
 
 Selector.method("onDeselected", function(pid)
@@ -16,6 +17,7 @@ Selector.method("onDeselected", function(pid)
         return;
      
     this.selection[selectedIndex - 1] = null;
+    this.host.selectionChanged(this.selection);
 });
 
 Selector.method("isSelected", function(pid){

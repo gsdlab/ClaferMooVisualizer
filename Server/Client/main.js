@@ -19,13 +19,14 @@ $(document).ready(function()
     modules.push("Console");
     modules.push("Input");
     modules.push("UseCases");
+    modules.push("Analysis");
     
     host = new Host(modules);
 });
 
 function Host(modules)
 {
-    this.selector = new Selector();
+    this.selector = new Selector(this);
     this.modules = new Array();
     
     for (var i = 0; i < modules.length; i++)
@@ -87,6 +88,17 @@ Host.method("findModule", function(id)
     
     return null;
 
+});
+
+Host.method("selectionChanged", function(data)
+{
+
+    for (var i = 0; i < this.modules.length; i++)
+    {
+        if (this.modules[i].onSelectionChanged)
+            this.modules[i].onSelectionChanged(data);
+    }
+    
 });
 
 Host.method("updateData", function(data)

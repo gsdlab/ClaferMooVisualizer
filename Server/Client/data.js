@@ -14,6 +14,11 @@ DataTable.method("subset", function(arrayProducts)
     
     var marked = new Array();
     var newProducts = new Array;
+    var newFormalContext = new Array();
+    
+    var newFormalContextRow = new Array();
+    
+    newFormalContextRow.push(this.title);
     
     for (var i = 0; i < this.products.length; i++)
     {
@@ -28,22 +33,43 @@ DataTable.method("subset", function(arrayProducts)
         }
         marked.push(found);
         if (found)
+        {
             newProducts.push(this.products[i]);
+            newFormalContextRow.push(this.products[i]);
+        }
     }
+    
+    newFormalContext.push(newFormalContextRow);
     
     var newMatrix = new Array();
     
     for (var i = 0; i < this.features.length; i++)
     {
         var newMatrixRow = new Array();
+        var newFormalContextRow = new Array();
+        var denyAddContextRow = false;
+        
+        if (i < this.formalContext.length)
+            newFormalContextRow.push(this.formalContext[i][0]);
+        
         for (var j = 0; j < this.products.length; j++)
         {
             if (marked[j])
             {
-                newMatrixRow.push(this.matrix[i][j]);
-//                newFormalContextRow.push(this.matrix[i][j]);
+                var sVal = this.matrix[i][j];
+                newMatrixRow.push(sVal);
+                
+                if (sVal == "yes")
+                    newFormalContextRow.push("X");
+                else if (sVal == "-")
+                    newFormalContextRow.push("");
+                else
+                    denyAddContextRow = true;
             }
         }
+        
+        if (!denyAddContextRow)
+            newFormalContext.push(newFormalContextRow);
         
         newMatrix.push(newMatrixRow);
     }
@@ -53,7 +79,30 @@ DataTable.method("subset", function(arrayProducts)
     result.matrix = newMatrix;
     result.title = this.title;
     
-    result.formalContext = this.formalContext; // !!! to be changed
+    result.formalContext = newFormalContext;
     
+    return result;
+});
+
+DataTable.method("toArrayOfSetJS", function()
+{
+    var result = new Array();
+
+    for (var j = 0; j < this.products.length; j++)
+    {
+        var currentSet = new JS.Set([]);
+        
+        for (var i = 1; i < this.formalContext.length; i++)
+        {
+//            alert(this.formalContext[i][j]);
+            if (this.formalContext[i][j + 1] == "X")
+            {
+                currentSet.add(this.features[i - 1]);
+            }
+        }
+        
+        result.push(currentSet);
+    }
+
     return result;
 });
