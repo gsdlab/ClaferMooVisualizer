@@ -28,11 +28,14 @@ ComparisonTable.method("onDataLoaded", function(data){
     this.toggled = false;
     
     this.dataTable = this.getDataTable();    
-    this.content = $('<div id="comparison"></div>').append(new TableVisualizer().getHTML(this.dataTable));
+    this.content = $('<div id="comparison" class="comparison"></div>').append(new TableVisualizer().getHTML(this.dataTable));
 });
 
 ComparisonTable.method("onRendered", function()
 {
+    var td = $('#comparison .table_title')[0];
+    $(td).append('&nbsp;<button id="toggle_link">Toggle</button>');
+
     $('#toggle_link').html("Distinct");
     $('#toggle_link').click(this.toggleDistinct.bind(this));
     

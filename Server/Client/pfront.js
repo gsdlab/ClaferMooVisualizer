@@ -15,8 +15,13 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 		return;
 	}
 	
-    var hasThird = (args.length == 3); // has third dimension
+    var hasThird = (args.length >= 3); // has third dimension
+    var hasForth = (args.length >= 4); // has forth dimension
 
+    var sizeTLimit = 20; // bubbles cannot be bigger than this
+    
+//    alert(args[3]);
+    
 	var instanceCount = processor.getInstanceCount();
 	
     var data = new google.visualization.DataTable();
@@ -27,6 +32,9 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     if (hasThird)
         data.addColumn({type:'number', label: labels[2], role:'data'});
 	
+    if (hasForth)
+        data.addColumn({type:'number', label: labels[3], role:'data'});
+
     var rows = new Array();
     
     var maxX = 0;
@@ -35,6 +43,21 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     var maxY = 0;
     var minY = 10000000000;
 
+    var maxT = 0;
+    var minT = 10000000000;
+    
+    var minTSize = 12;
+    var maxTSize;
+  
+    if (hasForth)
+    {
+        maxTSize = sizeTLimit;
+    }
+    else 
+    {
+        maxTSize = minTSize;
+    }
+    
 	for (var i = 1; i <= instanceCount; i++)
 	{
 		var first = processor.getFeatureValue(i, args[0], true); // get only numeric
@@ -58,12 +81,28 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 
         if (second >= maxY)
             maxY = second + delta;
-
+            
+            
         if (hasThird)
         {
             var third = processor.getFeatureValue(i, args[2], true); // get only numeric
             point.push(third);
         }
+
+        if (hasForth)
+        {
+            var forth = processor.getFeatureValue(i, args[3], true); // get only numeric
+            
+            if (forth < minT)
+                minT = forth;
+            
+            if (forth >= maxT)
+                maxT = forth;
+
+//            alert(forth);
+            point.push(forth);
+        }
+
         
 		rows.push(point);
 	}
@@ -94,6 +133,8 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         chartHeight = "91%";
         chartWidth = "91%";
     }
+
+
     
     data.addRows(rows);          
 
@@ -105,199 +146,20 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 	  hAxis: {maxValue: maxX, minValue: minX},
 	  vAxis: {maxValue: maxY, minValue: minY},
       axisTitlesPosition: 'in',
+	  sizeAxis: {maxValue: maxT, maxSize: maxTSize, minValue: minT, minSize: minTSize},
+      
 //	  hAxis: {title: labels[0], viewWindowMode: "pretty"},
 //	  vAxis: {title: labels[1], viewWindowMode: "pretty"},
 	  animation: {duration:3000},
       colorAxis: {legend : {position : colorAxisLegendPosition}},
       
       bubble: {textStyle: {fontSize: 12}, stroke: "black"},
-      sizeAxis: {maxSize: 12, minSize: 12},
+//      sizeAxis: {maxSize: 12, minSize: 12},
       legend: 'bottom'
     };
 
-//	alert(data);
 	this.chart = new google.visualization.BubbleChart(document.getElementById(this.element));
 
-    
-    
-/*    
-        google.visualization.events.addListener(this.chart, 'select', function(e) {
-            //  alert('A table row was selected');
-                //alert(this.chart.getSelection);
-                try{
-            //        alert(e);
-            //    alert(this.chart.getSelection);
-                var sel = this.getSelection();
-                
-//                alert(sel.tagName);
-                
-                }
-                catch(ex)
-                {
-                    alert(ex);
-                }
-                
-              return true;
-            }
-        
-        );
-*/
 	this.chart.draw(data, options);
-		
-    $('#chart text').click(pointClick);
-/*        
-	$("text").click(function(){
-        var pid = this.firstChild.nodeValue;
-        
-        
-        
-        if (this.host.selector.isSelected(pid))
-        {
-            deselectObject(this);
-        }
-            alert();
-        $(this).attr("fill", "#ff0000");
-    });
-*/
-}
-
-function pointClick()
-{
-    var pid = this.firstChild.nodeValue;
-    if (!pid)
-        return;
-        
-//    myregexp = new RegExp("P").    
-    if (pid.charAt(0) != "P")
-        return;
-        
-    if (host.selector.isSelected(pid))
-    {
-        deselectObject(this);
-        host.selector.onDeselected(pid);
-    }
-    else
-    {
-        selectObject(this);
-        host.selector.onSelected(pid);
-    }
-} 
-
-function selectObject(o)
-{
-    $(o).attr("fill", "#ff0000");    
-}
-
-function deselectObject(o)
-{
-    $(o).attr("fill", "#000000");    
-}
-
-
-//deselectObject(this);
-
-//$('#toggle_link').click(this.toggleDistinct.bind(this));
-
-/* SCATTER */
-
-function ParetoFrontVisualizerScatter (element) 
-{
-	this.element = element;
-	google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Age', 'Weight'],
-          [ 8,      12],
-          [ 4,      5.5],
-          [ 11,     14],
-          [ 4,      5],
-          [ 3,      3.5],
-          [ 6.5,    7]
-        ]);
-
-        var options = {
-          title: 'Age vs. Weight comparison',
-          hAxis: {title: 'Age', minValue: -15, maxValue: 15},
-          vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
-          legend: 'none'
-        };
-
-        this.chart = new google.visualization.ScatterChart(document.getElementById(element));
-
- //       chart.draw(data, options);
-	}
-}
-
-ParetoFrontVisualizerScatter.prototype.draw = function(processor, args, labels) 
-{
-	if (args.length != 2 || args.length != labels.length)
-	{
-		alert("Should have exatly 2 values in each argument");
-		return;
-	}
-	
-	var instanceCount = processor.getInstanceCount();
-	
-    var data = new google.visualization.DataTable();
-    data.addColumn({type:'string', label: 'PID'}); 
-    data.addColumn({type:'number', label: labels[0], role:'domain'}); 
-    data.addColumn({type:'number', label: labels[1], role:'data'});  
-    data.addColumn({type:'string', label: 'tooltip', role:'tooltip'});
-	
-    var rows = new Array();
     
-	for (var i = 1; i <= instanceCount; i++)
-	{
-		var first = processor.getFeatureValue(i, args[0], true); // get only numeric
-		var second = processor.getFeatureValue(i, args[1], true); // get only numeric
-		
-		point = new Array();
-		point.push("P" + i);
-		point.push(first);
-		point.push(second);
-//		point.push("Prod#" + i);
-		
-		rows.push(point);
-	}
-    
-    data.addRows(rows);          
-
-	var options = {
-/*	  theme: 'maximized', */
-	  title: 'Pareto Front',
-	  hAxis: {title: labels[0], minValue: 0, maxValue: 15},
-	  vAxis: {title: labels[1], minValue: 0, maxValue: 15},
-	  animation: {duration:3000},
-      bubble: {textStyle: {fontSize: 11}},      
-	  legend: 'none'
-	};
-
-//	alert(data);
-	this.chart = new google.visualization.BubbleChart(document.getElementById(this.element));
-	google.visualization.events.addListener(this.chart, 'select', function(e) {
-        //  alert('A table row was selected');
-            //alert(this.chart.getSelection);
-            try{
-        //        alert(e);
-        //    alert(this.chart.getSelection);
-            var sel = this.getSelection();
-            
-            alert(sel);
-            
-            }
-            catch(ex)
-            {
-                alert(ex);
-            }
-            
-          return true;
-        }
-    
-    );
-
-	this.chart.draw(data, options);
-		
-	
 }
-

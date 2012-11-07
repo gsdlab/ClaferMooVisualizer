@@ -8,7 +8,7 @@ function DataTable ()
 
 }
 
-DataTable.method("subset", function(arrayProducts)
+DataTable.method("subsetByProducts", function(arrayProducts)
 {
     var result = new DataTable();
     
@@ -84,25 +84,117 @@ DataTable.method("subset", function(arrayProducts)
     return result;
 });
 
-DataTable.method("toArrayOfSetJS", function()
+DataTable.method("subsetByFeatures", function(arrayFeatures)
 {
-    var result = new Array();
-
-    for (var j = 0; j < this.products.length; j++)
+    var result = new DataTable();
+    
+    var marked = new Array();
+    var newFeatures = new Array;
+    var newFormalContext = new Array();
+    
+//    var newFormalContextRow = new Array();
+    
+//    newFormalContextRow.push(this.title);
+    
+    for (var i = 0; i < this.features.length; i++)
     {
-        var currentSet = new JS.Set([]);
-        
-        for (var i = 1; i < this.formalContext.length; i++)
+        var found = false;
+        for (var j = 0; j < arrayFeatures.length; j++)
         {
-//            alert(this.formalContext[i][j]);
-            if (this.formalContext[i][j + 1] == "X")
+            if (arrayFeatures[j] == this.features[i])
             {
-                currentSet.add(this.features[i - 1]);
+                found = true;
+                break;
+            }
+        }
+        marked.push(found);
+        if (found)
+        {
+            newFeatures.push(this.features[i]);
+        }
+    }
+    
+    var newMatrix = new Array();
+    
+    for (var i = 0; i < this.features.length; i++)
+    {
+        if (!marked[i])
+            continue;
+    
+        var newMatrixRow = new Array();
+        var newFormalContextRow = new Array();
+        var denyAddContextRow = false;
+        
+        if (i < this.formalContext.length)
+            newFormalContextRow.push(this.formalContext[i][0]);
+        
+        for (var j = 0; j < this.products.length; j++)
+        {
+            var sVal = this.matrix[i][j];
+            newMatrixRow.push(sVal);
+            
+            if (sVal == "yes")
+                newFormalContextRow.push("X");
+            else if (sVal == "-")
+                newFormalContextRow.push("");
+            else
+                denyAddContextRow = true;
+        }
+        
+        if (!denyAddContextRow)
+            newFormalContext.push(newFormalContextRow);
+        
+        newMatrix.push(newMatrixRow);
+    }
+    
+    result.features = newFeatures;
+    result.products = this.products;    
+    result.matrix = newMatrix;
+    result.title = this.title;    
+    result.formalContext = newFormalContext;
+    
+    return result;
+
+});
+
+DataTable.method("getCommon", function()
+{
+    var result = new DataTable();
+
+    if (this.products.length <= 1)
+        return result; // the task is not meaningful
+
+    result.title = "Commonalities";
+    var jointProductName = "(Product Set)";
+    result.products.push(jointProductName);
+     
+    for (var i = 0; i < this.features.length; i++)
+    {
+        var same = true;
+        var pivot = this.matrix[i][0];
+        
+        for (var j = 0; j < this.products.length; j++)
+        {
+            if (this.matrix[i][j] != pivot)
+            {
+                same = false;
+                break;
             }
         }
         
-        result.push(currentSet);
+        if (same)
+        {
+            result.features.push(this.features[i]);
+            result.matrix.push(new Array(pivot));
+        }
     }
 
+    return result;
+});
+
+DataTable.method("toSetOfFeatures", function()
+{
+    var result = new JS.Set(this.features);
+    
     return result;
 });

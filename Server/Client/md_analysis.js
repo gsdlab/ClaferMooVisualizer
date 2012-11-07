@@ -21,7 +21,7 @@ Analysis.method("onRendered", function()
 
 Analysis.method("getContent", function()
 {
-    return '<div id="analysis"><div id="intersection"></div>';
+    return '<div id="analysis"><div id="common" class="comparison"></div><br/><div id="unique" class="comparison"></div></div>';
 });
 
 Analysis.method("getInitContent", function()
@@ -32,25 +32,37 @@ Analysis.method("getInitContent", function()
 Analysis.method("onSelectionChanged", function(list){
     
     var data = this.host.findModule("mdComparisonTable").dataTable;    
-    data = data.subset(list);
+    data = data.subsetByProducts(list);
     
-    var sets = data.toArrayOfSetJS();
-    
-    if (sets.length == 0)
+    if (data.products.length <= 1)
     {
-        $("#analysis").html('No Items')
-        return;
+        $("#analysis #common").html("No Data");
+        $("#analysis #unique").html("No Data");    
     }
-    
-    var intersectionSet = sets[0];
-//    var differencesSet = sets[0];
-    
-    for (var i = 1; i < sets.length; i++)
-    {
-        intersectionSet = intersectionSet.intersection(sets[i]);
-    }
-    
-    $("#analysis #intersection").html(intersectionSet + " ");
-//    alert(sets);
 
+    var allFeatures = data.toSetOfFeatures();
+
+    var commonData = data.getCommon(); // ALL COMMON DATA
+    var commonFeatures = commonData.toSetOfFeatures();
+    commonData.title = "Commonalities";
+    
+    var differentFeatures = allFeatures.difference(commonFeatures);
+    var differentData = data.subsetByFeatures(differentFeatures.toArray()); // ALL DIFFERENT DATA
+    differentData.title = "Differences";
+    
+    if (commonFeatures.length > 0)
+    {    
+        $("#analysis #common").html(new TableVisualizer().getHTML(commonData));
+    }
+    else
+        $("#analysis #common").html("No Data");
+
+        
+    if (differentFeatures.length > 0)
+    {    
+        $("#analysis #unique").html(new TableVisualizer().getHTML(differentData));
+    }
+    else
+        $("#analysis #unique").html("No Data");
+        
 });

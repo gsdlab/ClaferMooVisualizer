@@ -38,6 +38,14 @@ Graph.method("onRendered", function()
         if (this.goals.length >= 3)
         {
             this.assignToAxis("dropPointZ", this.goals[2].arg, this.goals[2].label);
+
+            if (this.goals.length >= 4)
+            {
+                this.assignToAxis("dropPointT", this.goals[3].arg, this.goals[3].label);
+            }
+            else 
+                this.assignToAxis("dropPointT", "", "");
+
         }
         else 
             this.assignToAxis("dropPointZ", "", "");
@@ -107,17 +115,101 @@ Graph.method("redrawParetoFront", function()
 	var arg3 = $("#dropPointZAxisConfig_arg").val();
 	var label3 = $("#dropPointZAxisConfig_label").val();
     
-    var s = '<g style="z-index: 110; "><text text-anchor="middle" x="14.2" y="210.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 210.5)" stroke="none" stroke-width="0" fill="#222222">' + label2 + '</text></g>';
-    s = '<div id="svgcont" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350">' + s + '</svg></div>';
+	var arg4 = $("#dropPointTAxisConfig_arg").val();
+	var label4 = $("#dropPointTAxisConfig_label").val();
+    
+    var sLabel2 = '<g style="z-index: 110; "><text text-anchor="middle" x="14.2" y="210.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 210.5)" stroke="none" stroke-width="0" fill="#222222">' + label2 + '</text></g>';
+    sLabel2 = '<div id="svgcont" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350">' + sLabel2 + '</svg></div>';
         
+    var sLabel4 = '<g style="z-index: 110; "><text text-anchor="middle" x="14.2" y="210.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 210.5)" stroke="none" stroke-width="0" fill="#222222">' + label4 + '</text></g>';
+    sLabel4 = '<div id="svgcont" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350">' + sLabel4 + '</svg></div>';
+
     $("#dropPointX").html("<div>" + label1 + "</div>");
-    $("#dropPointY").html(s);
+    $("#dropPointY").html(sLabel2);
     $("#dropPointZ").html("<div>" + label3 + "</div>");
-        
+    $("#dropPointT").html(sLabel4);
+
+    var args = new Array();
+    var labels = new Array();
+    
+    args.push(arg1);
+    labels.push(label1);
+    
+    args.push(arg2);
+    labels.push(label2);
+    
     if (arg3 != "")
-        this.PFVisualizer.draw(this.instanceProcessor, [arg1, arg2, arg3], [label1, label2, label3]);
+    {
+        args.push(arg3);
+        labels.push(label3);
+    }
+    
+    if (arg4 != "")
+    {
+        args.push(arg4);
+        labels.push(label4);
+    }
+    
+    this.PFVisualizer.draw(this.instanceProcessor, args, labels);
+
+    $('#chart text').click(pointClick);
+     
+    this.makePointsSelected(this.host.selector.selection);
+});
+
+    
+
+function pointClick()
+{
+    var pid = this.firstChild.nodeValue;
+    if (!pid)
+        return;
+        
+    if (pid.charAt(0) != "P")
+        return;
+        
+    if (host.selector.isSelected(pid))
+    {
+        deselectObject(this);
+        host.selector.onDeselected(pid);
+    }
     else
-    	this.PFVisualizer.draw(this.instanceProcessor, [arg1, arg2], [label1, label2]);
+    {
+        selectObject(this);
+        host.selector.onSelected(pid);
+    }
+} 
+
+function selectObject(o)
+{
+    $(o).attr("fill", "#ff0000");    
+}
+
+function deselectObject(o)
+{
+    $(o).attr("fill", "#000000");    
+}
+
+Graph.method("makePointsSelected", function(points)
+{
+    for (var i = 0; i < points.length; i++)
+    {
+//        alert(points[i]);
+        $('#chart text').each(function()
+        {
+            if (this.firstChild)
+            {
+                if (this.firstChild.nodeValue == points[i])
+                    selectObject(this);// alert(this.firstChild.nodeValue);
+            }
+                
+//            if (el.firstChild && el.firstChild.nodeValue == points[i])
+//            {
+//                alert("OK!");
+//                selectObject(el);
+//            }
+        });
+    }
 });
 
 Graph.method("assignToAxis", function(axis, arg, label)
@@ -132,7 +224,8 @@ Graph.method("getContent", function()
 	
     var tdZ = $('<td colspan="2" id="dropPointZ" class="axis_drop"></td>');
     var tdY = $('<td height="90%" width="5%" id="dropPointY" class="axis_drop"></td>');
-    var tdChart = $('<td id="chart" style="display:none; width:95%; height:95%; overflow:hidden"></td>');
+    var tdT = $('<td height="90%" width="5%" id="dropPointT" class="axis_drop"></td>');
+    var tdChart = $('<td id="chart" style="display:none; width:90%; height:95%; overflow:hidden"></td>');
     var tdX = $('<td colspan="2" id="dropPointX" class="axis_drop"></td>');
 
     this.axisArray.splice(0, this.axisArray.length); // clear the array
@@ -140,6 +233,7 @@ Graph.method("getContent", function()
     this.axisArray.push(tdX);
     this.axisArray.push(tdY);
     this.axisArray.push(tdZ);
+    this.axisArray.push(tdT);
     
     for (var i = 0; i < this.axisArray.length; i++)
     {
@@ -147,7 +241,7 @@ Graph.method("getContent", function()
     }
     
     var row1 = $('<tr></tr>').append(tdZ);
-    var row2 = $('<tr></tr>').append(tdY).append(tdChart);
+    var row2 = $('<tr></tr>').append(tdY).append(tdChart).append(tdT);
     var row3 = $('<tr></tr>').append(tdX);
         
 		

@@ -31,10 +31,7 @@ function Host(modules)
     
     for (var i = 0; i < modules.length; i++)
     {
-//        var func = window[modules[i]];
-        
         var MyClass = stringToFunction(modules[i]);        
-//        alert(MyClass);
         var instance = new MyClass(this);
         
         this.modules.push(instance);

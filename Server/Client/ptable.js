@@ -46,9 +46,8 @@ TableVisualizer.prototype.getHTML = function(data)
     
     var row = $('<tr id="r' + 0 +'"></tr>').addClass('bar');//
 	var tagName = "th"; // to make headers
-	var td = $('<' + tagName + '></' + tagName + '>').addClass('td_abstract');
+	var td = $('<' + tagName + '></' + tagName + '>').addClass('td_abstract').addClass('table_title');
 	td.html(data.title);
-    td.append('&nbsp;<button id="toggle_link">Toggle</button>');
 	row.append(td);
     
     for (var j = 0; j < instanceCount; j++)
