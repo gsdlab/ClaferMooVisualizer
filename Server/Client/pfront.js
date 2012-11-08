@@ -160,6 +160,44 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 
 	this.chart = new google.visualization.BubbleChart(document.getElementById(this.element));
 
+    google.visualization.events.addListener(this.chart, 'select', this.myClickHandler);    
+    host.chart = this.chart;
+    
 	this.chart.draw(data, options);
     
 }
+
+ParetoFrontVisualizer.prototype.myClickHandler = function()
+{
+//    alert(this);
+  var selection = host.chart.getSelection();
+  host.chart.setSelection(null);
+
+  var id = -1;
+  
+  for (var i = 0; i < selection.length; i++) 
+  {
+    var item = selection[i];
+    if (item.row != null) 
+    {
+        id = item.row;
+    }
+    
+    if (id == -1)
+        return;
+       
+    var pid = "P" + (id + 1);
+       
+    if (host.selector.isSelected(pid))
+    {
+        host.findModule("mdGraph").makePointsDeselected([pid]);
+        host.selector.onDeselected(pid);
+    }
+    else
+    {
+        host.findModule("mdGraph").makePointsSelected([pid]);
+        host.selector.onSelected(pid);
+    }
+  }
+}
+

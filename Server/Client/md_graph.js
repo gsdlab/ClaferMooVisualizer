@@ -152,16 +152,31 @@ Graph.method("redrawParetoFront", function()
     
     this.PFVisualizer.draw(this.instanceProcessor, args, labels);
 
-    $('#chart text').click(pointClick);
+//    $('#chart circle').click(pointClick);
      
     this.makePointsSelected(this.host.selector.selection);
 });
 
-    
 
+
+/*
 function pointClick()
 {
-    var pid = this.firstChild.nodeValue;
+    alert(this.tagName);
+    var nextEl = $(this).next(); // get next g
+    alert(nextEl.tagName);
+    if (nextEl.tagName != "g")
+        return;
+        
+    var next = $(nextEl);
+    textChildren = next.children();
+    
+    if (textChildren.length != 2)
+        return;
+
+    var textElement = this.textChildren[0];
+        
+    var pid = textElement.firstChild.nodeValue;
     if (!pid)
         return;
         
@@ -170,47 +185,61 @@ function pointClick()
         
     if (host.selector.isSelected(pid))
     {
-        deselectObject(this);
+        deselectObject(textElement);
         host.selector.onDeselected(pid);
     }
     else
     {
-        selectObject(this);
+        selectObject(textElement);
         host.selector.onSelected(pid);
     }
 } 
+*/
 
-function selectObject(o)
+Graph.method("selectObject", function(o)
 {
     $(o).attr("fill", "#ff0000");    
-}
+});
 
-function deselectObject(o)
+Graph.method("deselectObject", function(o)
 {
     $(o).attr("fill", "#000000");    
-}
+});
 
 Graph.method("makePointsSelected", function(points)
 {
+    var module = this;
+    
     for (var i = 0; i < points.length; i++)
     {
-//        alert(points[i]);
         $('#chart text').each(function()
         {
             if (this.firstChild)
             {
                 if (this.firstChild.nodeValue == points[i])
-                    selectObject(this);// alert(this.firstChild.nodeValue);
+                    module.selectObject(this);// alert(this.firstChild.nodeValue);
             }
-                
-//            if (el.firstChild && el.firstChild.nodeValue == points[i])
-//            {
-//                alert("OK!");
-//                selectObject(el);
-//            }
         });
     }
 });
+
+Graph.method("makePointsDeselected", function(points)
+{
+    var module = this;
+
+    for (var i = 0; i < points.length; i++)
+    {
+        $('#chart text').each(function()
+        {
+            if (this.firstChild)
+            {
+                if (this.firstChild.nodeValue == points[i])
+                    module.deselectObject(this);// alert(this.firstChild.nodeValue);
+            }
+        });
+    }
+});
+
 
 Graph.method("assignToAxis", function(axis, arg, label)
 {

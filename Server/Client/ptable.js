@@ -22,7 +22,7 @@ TableVisualizer.method("mapValue", function(sVal)
 	
 	if (sVal == "-")
 	{
-		result.html = '-';
+		result.html = '<img class="no" src="/Client/images/no.png"/>';
 		result.tdStyle = 'no';
 	}
 

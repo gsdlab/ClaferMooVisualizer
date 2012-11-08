@@ -15,7 +15,7 @@ textarea.child {
       height:100%;
 }
   
-text{
+circle, text{
     cursor:pointer;
 }
   
@@ -44,6 +44,11 @@ textarea.child {height:100%;}
 }
 
 img.tick{
+	width:18px;
+	height:18px;
+}
+
+img.no{
 	width:18px;
 	height:18px;
 }
