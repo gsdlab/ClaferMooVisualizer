@@ -21,7 +21,14 @@ Analysis.method("onRendered", function()
 
 Analysis.method("getContent", function()
 {
-    return '<div id="analysis"><div id="common" class="comparison"></div><br/><div id="unique" class="comparison"></div></div>';
+    var content = '<div id="analysis">';
+    
+    content += '<div id="completeness"></div><br/>';
+    content += '<div id="common" class="comparison"></div><br/><div id="unique" class="comparison"></div>';
+    
+    content += '</div>';
+    
+    return content;
 });
 
 Analysis.method("getInitContent", function()
@@ -31,8 +38,8 @@ Analysis.method("getInitContent", function()
 
 Analysis.method("onSelectionChanged", function(list){
     
-    var data = this.host.findModule("mdComparisonTable").dataTable;    
-    data = data.subsetByProducts(list);
+    var originalData = this.host.findModule("mdComparisonTable").dataTable;    
+    data = originalData.subsetByProducts(list);
     
     if (data.products.length <= 1)
     {
@@ -44,11 +51,39 @@ Analysis.method("onSelectionChanged", function(list){
 
     var commonData = data.getCommon(true); // ALL COMMON DATA
     var commonFeatures = commonData.toSetOfFeatures();
-//    commonData.title = "Commonalities";
     
     var differentFeatures = allFeatures.difference(commonFeatures);
     var differentData = data.subsetByFeatures(differentFeatures.toArray()); // ALL DIFFERENT DATA
     differentData.title = "Differences";
+
+    
+    // get the products that are missing to make up the complete set.
+    var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), list);
+  
+  
+    var label = "[Complete] - The set is a complete concept";
+    
+    if (commonFeatures.length > 0)
+    {    
+        if (missingProducts.length > 0)
+        {
+            if (missingProducts.length <= 10) // reasonable to add products to make the set complete
+            {
+                label = "[Not Complete], add [" + missingProducts.toString() + "]";
+            }
+            else
+            {
+                label = "[Not Complete], should add more than 10 products...";
+            }
+            
+        }
+    }
+    else
+        label = "Please select more products for analysis";
+
+    $("#analysis #completeness").html(label);
+    
+//    commonData.products[0] = label;
     
     if (commonFeatures.length > 0)
     {    
@@ -64,5 +99,7 @@ Analysis.method("onSelectionChanged", function(list){
     }
     else
         $("#analysis #unique").html("No Data");
+
+//    alert(missingProducts);
         
 });

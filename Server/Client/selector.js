@@ -17,6 +17,9 @@ Selector.method("onDeselected", function(pid)
         return;
      
     this.selection[selectedIndex - 1] = null;
+    
+    this.selection = this.selection.filter(function(e){return e}); // remove empty elements
+    
     this.host.selectionChanged(this.selection);
 });
 

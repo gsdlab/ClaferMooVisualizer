@@ -48,12 +48,7 @@ img.tick{
 	height:18px;
 }
 
-table{
-  table-layout:fixed;
-  border-spacing:0px;
-}
-
-table td, table tr{
+#graph_table{
   table-layout:fixed;
   border-spacing:0px;
 }

@@ -170,8 +170,8 @@ DataTable.method("getCommon", function(needAggregate)
     if (this.products.length <= 1)
         return result; // the task is not meaningful
 
-    result.title = "Common and Aggreagate";
-    var jointProductName = "(Group 1)";
+    result.title = "Common/Aggregate Features";
+    var jointProductName = "Value";
     result.products.push(jointProductName);
     
     for (var i = 0; i < this.features.length; i++)
@@ -221,6 +221,54 @@ DataTable.method("getCommon", function(needAggregate)
         }
     }
 
+    return result;
+});
+
+DataTable.method("getMissingProductsInCommonData", function(commonData, productList)
+{
+    var commonProducts = new Array();
+
+//    if (this.products.length <= 1)
+//        return result; // the task is not meaningful
+    
+    
+    for (var j = 0; j < this.products.length; j++)
+    {
+        var goes = true;
+        for (var i = 0; i < commonData.features.length; i++)
+        {
+            for (var k = 0; k < this.features.length; k++)
+            {
+                if (commonData.features[i] == this.features[k])
+                {
+                    if (this.matrix[k][j] != commonData.matrix[i][0])
+                    {
+                        goes = false;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (goes)
+            commonProducts.push(this.products[j]);
+    }
+
+    var commonSet = new JS.Set(commonProducts); 
+    
+    if (productList.length == 0)
+        return;
+    
+//    alert(productList);
+    
+    var baseSet = new JS.Set(productList);
+    
+    var missingSet = commonSet.difference(baseSet); // subtract what we have from what we get    
+    if (missingSet.length == 0)
+        return new Array();
+        
+    var result = missingSet.toArray();
+    
     return result;
 });
 
