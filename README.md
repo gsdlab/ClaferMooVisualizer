@@ -1,3 +1,8 @@
+ClaferMooVisualizer
+===================
+
+Visualizes Pareto Front and allows to perform analysis on the Pareto Front.
+
 General Description
 ======
 
