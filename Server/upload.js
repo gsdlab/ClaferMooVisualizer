@@ -12,7 +12,7 @@ var python = "python";
 
 var port = 8080;
 
-var useCache = false;
+var useCache = true;
 var cacheFileName = "cache.txt";
 
 var server = http.createServer(function(req, res) {

@@ -60,12 +60,6 @@ Graph.method("onRendered", function()
 
 });
 
-Graph.method("resize", function(e) // not attached to the window anymore, so need to call the method
-{
-    host.findModule("mdGraph").redrawParetoFront();
-	return true;
-});
-
 Graph.method("allowDrop", function(ev)
 {
 	ev.preventDefault();
@@ -109,6 +103,9 @@ Graph.method("assignValue", function (id, value)
 
 Graph.method("redrawParetoFront", function()
 {
+    if (this.instanceProcessor == null)
+        return; // no data, so just resize
+
 	var arg1 = $("#dropPointXAxisConfig_arg").val();
 	var label1 = $("#dropPointXAxisConfig_label").val();
 
@@ -158,50 +155,9 @@ Graph.method("redrawParetoFront", function()
     }
     
     this.PFVisualizer.draw(this.instanceProcessor, args, labels);
-
-//    $('#chart circle').click(pointClick);
      
     this.makePointsSelected(this.host.selector.selection);
 });
-
-
-
-/*
-function pointClick()
-{
-    alert(this.tagName);
-    var nextEl = $(this).next(); // get next g
-    alert(nextEl.tagName);
-    if (nextEl.tagName != "g")
-        return;
-        
-    var next = $(nextEl);
-    textChildren = next.children();
-    
-    if (textChildren.length != 2)
-        return;
-
-    var textElement = this.textChildren[0];
-        
-    var pid = textElement.firstChild.nodeValue;
-    if (!pid)
-        return;
-        
-    if (pid.charAt(0) != "P")
-        return;
-        
-    if (host.selector.isSelected(pid))
-    {
-        deselectObject(textElement);
-        host.selector.onDeselected(pid);
-    }
-    else
-    {
-        selectObject(textElement);
-        host.selector.onSelected(pid);
-    }
-} 
-*/
 
 Graph.method("selectObject", function(o)
 {
@@ -224,7 +180,7 @@ Graph.method("makePointsSelected", function(points)
             if (this.firstChild)
             {
                 if (this.firstChild.nodeValue == points[i])
-                    module.selectObject(this);// alert(this.firstChild.nodeValue);
+                    module.selectObject(this);
             }
         });
     }
@@ -256,13 +212,13 @@ Graph.method("assignToAxis", function(axis, arg, label)
 
 Graph.method("getContent", function()
 {
-	var table = $('<table cellspacing="0" cellpadding="0" id="graph_table" width="100%" height="100%"></table>');
+	var table = $('<table cellspacing="0" cellpadding="0" id="graph_table"></table>');
 	
-    var tdZ = $('<td colspan="2" id="dropPointZ" class="axis_drop"></td>');
-    var tdY = $('<td height="90%" width="5%" id="dropPointY" class="axis_drop"></td>');
-    var tdT = $('<td height="90%" width="5%" id="dropPointT" class="axis_drop"></td>');
-    var tdChart = $('<td id="chart" style="display:none; width:90%; height:95%; overflow:hidden"></td>');
-    var tdX = $('<td colspan="2" id="dropPointX" class="axis_drop"></td>');
+    var tdZ = $('<td colspan="3" id="dropPointZ" class="axis_drop"></td>');
+    var tdY = $('<td id="dropPointY" class="axis_drop"></td>');
+    var tdT = $('<td id="dropPointT" class="axis_drop"></td>');
+    var tdChart = $('<td id="chart" style="display:none; overflow:hidden"></td>');
+    var tdX = $('<td colspan="3" id="dropPointX" class="axis_drop"></td>');
 
     this.axisArray.splice(0, this.axisArray.length); // clear the array
     this.axisArray = new Array();
@@ -292,4 +248,81 @@ Graph.method("getContent", function()
 Graph.method("getInitContent", function()
 {
 	return this.getContent();
+});
+
+function setDim(el, w, h)
+{
+//    alert(el);
+//    alert(w + "px");
+//    alert(h + "px");
+
+//    el.setAttribute('height', w);
+//    el.setAttribute('width', h);
+
+      $(el).width(w + "px");
+      $(el).height(h + "px");
+
+//    el.style.width = w + "px";
+//    el.style.height = h + "px";
+    
+//    $(el).css("width", w + "px");
+//    $(el).css("height", h + "px");
+}
+
+Graph.method("resize", function() // not attached to the window anymore, so need to call the method
+{
+
+    // need to resize dynamically, since it does not do this automatically
+
+    var e = $('#mdGraph div.window-content')[0];
+//    alert(e);
+    
+    var sw = document.defaultView.getComputedStyle(e,null).getPropertyValue("width");
+    var sh = document.defaultView.getComputedStyle(e,null).getPropertyValue("height");
+
+    var w = parseInt(sw);
+    var h = parseInt(sh);
+
+    
+	var table = $('#graph_table')[0];	
+    
+    var tdZ = $('#dropPointZ')[0];
+    var tdY = $('#dropPointY')[0];
+    var tdT = $('#dropPointT')[0];
+    
+    var tdChart = $('#chart')[0];
+    var tdX = $('#dropPointX')[0];    
+        
+    var unit = 20;
+        
+//    alert(w);
+//    alert(h);
+        
+    setDim(table, w, h);
+    setDim(tdZ, w, unit);
+    setDim(tdY, unit, h - 2 * unit);
+    setDim(tdChart, w - 2 * unit, h - 2 * unit);
+    setDim(tdT, unit, h - 2 * unit);
+    setDim(tdX, w, unit);
+    
+    
+//    tdChart.css("width", w - 2 * unit);
+//    tdChart.css("height", h - 2 * unit);
+
+    
+/*
+    var sw = $("#mdGraph").css("width"); // returns the string 400px
+    var sh = $("#mdGraph").css("height"); // returns the string 400px
+
+    sw = sw.replace("px", "");
+    sh = sh.replace("px", "");
+*/    
+
+//    alert(w + " " + h);
+    
+    if (host.findModule("mdGraph"))
+    {    
+        host.findModule("mdGraph").redrawParetoFront();
+    }
+	return true;
 });
