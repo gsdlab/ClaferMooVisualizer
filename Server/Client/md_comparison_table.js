@@ -4,9 +4,9 @@ function ComparisonTable(host)
     this.title = "Pareto Front Table";
 
     this.width = 500;
-    this.height = 300;
+    this.height = 400;
     this.posx = 0;
-    this.posy = 170;
+    this.posy = 100;
     
     this.host = host;
 

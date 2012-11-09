@@ -62,7 +62,7 @@ function Host(modules)
             statusBar: true,
             minimizeButton: true,
             maximizeButton: true,
-            closeButton: true,
+            closeButton: false,
             draggable: true,
             resizeable: true
         });    
@@ -73,6 +73,9 @@ function Host(modules)
         if (this.modules[i].onInitRendered)
             this.modules[i].onInitRendered();        
     }
+    
+    $.minimizeWindow("mdGoals");
+    $.minimizeWindow("mdComparisonTable");    
 }
 
 Host.method("findModule", function(id)
@@ -110,6 +113,8 @@ Host.method("updateData", function(data)
         
         return;
     }
+
+    this.selector.clearSelection();
 
     for (var i = 0; i < this.modules.length; i++)
     {

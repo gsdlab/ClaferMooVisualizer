@@ -56,6 +56,8 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     else 
     {
         maxTSize = minTSize;
+        maxT = 0;
+        minT = 0;
     }
     
 	for (var i = 1; i <= instanceCount; i++)

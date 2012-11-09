@@ -6,7 +6,7 @@ function UseCases(host)
     this.width = 1000;
     this.height = 130;
     this.posx = 0;
-    this.posy = 510;
+    this.posy = 545;
     
     this.host = host;
 }

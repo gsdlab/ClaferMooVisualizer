@@ -4,7 +4,7 @@ function Graph(host)
     this.title = "Pareto Front Graph";
 
     this.width = 500;
-    this.height = 470;
+    this.height = 505;
     this.posx = 500;
     this.posy = 0;
     
@@ -48,7 +48,10 @@ Graph.method("onRendered", function()
 
         }
         else 
+        {
             this.assignToAxis("dropPointZ", "", "");
+            this.assignToAxis("dropPointT", "", "");
+        }
         
         this.redrawParetoFront();
 	}
@@ -138,13 +141,17 @@ Graph.method("redrawParetoFront", function()
     args.push(arg2);
     labels.push(label2);
     
-    if (arg3 != "")
+//    alert(arg3);
+    
+    if (arg3 && arg3 != "")
     {
         args.push(arg3);
         labels.push(label3);
     }
     
-    if (arg4 != "")
+//    alert(arg4);
+
+    if (arg4 && arg4 != "")
     {
         args.push(arg4);
         labels.push(label4);
