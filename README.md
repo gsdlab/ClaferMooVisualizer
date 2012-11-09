@@ -26,12 +26,12 @@ A special installation procedure is not required. Modified ClaferMoo version is 
 
 ### Dependencies for running
 
-* Dependencies for [ClaferMoo](https://github.com/gsdlab/claferMooStandalone) must be satisfied *
-* [Node.JS Framework](http://nodejs.org/dist/), the stable version "0.2.4". Exactly this version should be installed, since the tool has not been tested in other versions, but the newest one may not work *
+* Dependencies for [ClaferMoo](https://github.com/gsdlab/claferMooStandalone) must be satisfied
+* [Node.JS Framework](http://nodejs.org/dist/), the stable version "0.2.4". Exactly this version should be installed, since the tool has not been tested in other versions, but the newest one may not work
 
 On Windows only
 
-* [Installation procedure of Node.JS](http://www.lucashills.com/articles/3) for Windows is shown here.
+* [Installation procedure of Node.JS for Windows](http://www.lucashills.com/articles/3)
   
 ### Preliminary settings
 
