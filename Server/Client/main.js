@@ -118,9 +118,6 @@ Host.method("updateData", function(data)
 
     for (var i = 0; i < this.modules.length; i++)
     {
-        if (this.modules[i].resize)
-            this.modules[i].resize(); // should call resize first
-    
         if (this.modules[i].onDataLoaded)
             this.modules[i].onDataLoaded(data);
     }
@@ -131,7 +128,11 @@ Host.method("updateData", function(data)
             $.updateWindowContent(this.modules[i].id, this.modules[i].getContent());
 
         if (this.modules[i].onRendered)
-            this.modules[i].onRendered();        
+            this.modules[i].onRendered();
+            
+        if (this.modules[i].resize)
+            this.modules[i].resize();
+                
     }
     
 });

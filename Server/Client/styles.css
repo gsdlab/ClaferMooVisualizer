@@ -48,6 +48,16 @@ img.tick{
 	height:18px;
 }
 
+table{
+  table-layout:fixed;
+  border-spacing:0px;
+}
+
+table td, table tr{
+  table-layout:fixed;
+  border-spacing:0px;
+}
+
 img.no{
 	width:18px;
 	height:18px;

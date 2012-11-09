@@ -212,12 +212,12 @@ Graph.method("assignToAxis", function(axis, arg, label)
 
 Graph.method("getContent", function()
 {
-	var table = $('<table cellspacing="0" cellpadding="0" id="graph_table"></table>');
+	var table = $('<table cellspacing="0" cellpadding="0" border="0" id="graph_table"></table>');
 	
     var tdZ = $('<td colspan="3" id="dropPointZ" class="axis_drop"></td>');
     var tdY = $('<td id="dropPointY" class="axis_drop"></td>');
     var tdT = $('<td id="dropPointT" class="axis_drop"></td>');
-    var tdChart = $('<td id="chart" style="display:none; overflow:hidden"></td>');
+    var tdChart = $('<td id="chart" style="display:none; width: 300px; height: 200px; overflow:hidden"></td>'); // need to keep width here since first time is not rendered good
     var tdX = $('<td colspan="3" id="dropPointX" class="axis_drop"></td>');
 
     this.axisArray.splice(0, this.axisArray.length); // clear the array
@@ -256,8 +256,8 @@ function setDim(el, w, h)
 //    alert(w + "px");
 //    alert(h + "px");
 
-//    el.setAttribute('height', w);
-//    el.setAttribute('width', h);
+//    el.setAttribute('height', w + "px");
+//    el.setAttribute('width', h + "px");
 
       $(el).width(w + "px");
       $(el).height(h + "px");
@@ -282,7 +282,6 @@ Graph.method("resize", function() // not attached to the window anymore, so need
 
     var w = parseInt(sw);
     var h = parseInt(sh);
-
     
 	var table = $('#graph_table')[0];	
     
@@ -298,6 +297,10 @@ Graph.method("resize", function() // not attached to the window anymore, so need
 //    alert(w);
 //    alert(h);
         
+//    table.setAttribute('height', w);
+//    table.setAttribute('width', h);
+//    setDim(table, 0, 0);
+
     setDim(table, w, h);
     setDim(tdZ, w, unit);
     setDim(tdY, unit, h - 2 * unit);
@@ -319,6 +322,8 @@ Graph.method("resize", function() // not attached to the window anymore, so need
 */    
 
 //    alert(w + " " + h);
+    
+    $(chart).empty(); // clear the old graph
     
     if (host.findModule("mdGraph"))
     {    
