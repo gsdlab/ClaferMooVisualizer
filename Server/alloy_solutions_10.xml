@@ -1,250 +1,217 @@
 <alloy builddate="unknown">
 
-<instance bitwidth="4" maxseq="1" command="Run show for 1 but exactly  partial 1 bag_extra_ints, exactly  partial 121 extra_ints,  partial 1 c9_Connectivity,  partial 1 c30_Bluetooth,  partial 1 c51_USB,  partial 1 c72_Wifi,  partial 1 c93_PasswordProtection,  partial 1 c124_FingerprintProtection,  partial 6 c2_performance,  partial 6 c3_energy,  partial 6 c4_mass,  partial 6 c5_cost,  partial 2 c7_security,  partial 6 r_c2_performance,  partial 6 r_c3_energy,  partial 6 r_c4_mass,  partial 6 r_c5_cost,  partial 2 r_c7_security,  partial 6 c2_performance_ref,  partial 6 c3_energy_ref,  partial 6 c4_mass_ref,  partial 6 c5_cost_ref,  partial 2 c7_security_ref optimize o_global" filename="">
+<instance bitwidth="4" maxseq="1" command="Run show for 1 but exactly  partial 1 bag_extra_ints, exactly  partial 93 extra_ints,  partial 1 c8_Connectivity,  partial 1 c24_Bluetooth,  partial 1 c40_USB,  partial 1 c56_Wifi,  partial 1 c72_PasswordProtection,  partial 1 c93_FingerprintProtection,  partial 6 c2_performance,  partial 6 c3_energy,  partial 6 c4_mass,  partial 2 c6_security,  partial 6 r_c2_performance,  partial 6 r_c3_energy,  partial 6 r_c4_mass,  partial 2 r_c6_security,  partial 6 c2_performance_ref,  partial 6 c3_energy_ref,  partial 6 c4_mass_ref,  partial 2 c6_security_ref optimize o_global" filename="">
 
 <sig label="seq/Int" ID="0" parentID="1" builtin="yes">
 </sig>
 
 <sig label="Int" ID="1" parentID="2" builtin="yes">
-<int value="8"/><int value="9"/><int value="10"/><int value="11"/><int value="12"/><int value="13"/><int value="14"/><int value="15"/><int value="16"/><int value="17"/><int value="18"/><int value="19"/><int value="20"/><int value="21"/><int value="22"/><int value="23"/><int value="24"/><int value="25"/><int value="26"/><int value="27"/><int value="28"/><int value="29"/><int value="30"/><int value="31"/><int value="32"/><int value="33"/><int value="34"/><int value="35"/><int value="36"/><int value="37"/><int value="38"/><int value="39"/><int value="40"/><int value="41"/><int value="42"/><int value="43"/><int value="44"/><int value="45"/><int value="46"/><int value="47"/><int value="48"/><int value="49"/><int value="50"/><int value="51"/><int value="52"/><int value="53"/><int value="54"/><int value="55"/><int value="56"/><int value="57"/><int value="58"/><int value="59"/><int value="60"/><int value="61"/><int value="62"/><int value="63"/><int value="64"/><int value="65"/><int value="66"/><int value="67"/><int value="68"/><int value="69"/><int value="70"/><int value="71"/><int value="72"/><int value="73"/><int value="74"/><int value="75"/><int value="76"/><int value="77"/><int value="78"/><int value="79"/><int value="80"/><int value="81"/><int value="82"/><int value="83"/><int value="84"/><int value="85"/><int value="86"/><int value="87"/><int value="88"/><int value="89"/><int value="90"/><int value="91"/><int value="92"/><int value="93"/><int value="94"/><int value="95"/><int value="96"/><int value="97"/><int value="98"/><int value="99"/><int value="100"/><int value="101"/><int value="102"/><int value="103"/><int value="104"/><int value="105"/><int value="106"/><int value="107"/><int value="108"/><int value="109"/><int value="110"/><int value="111"/><int value="112"/><int value="113"/><int value="114"/><int value="115"/><int value="116"/><int value="117"/><int value="118"/><int value="119"/><int value="120"/><int value="121"/><int value="122"/><int value="123"/><int value="124"/><int value="125"/><int value="126"/><int value="127"/><int value="128"/><int value="129"/><int value="130"/><int value="131"/><int value="132"/>
+<int value="8"/><int value="9"/><int value="10"/><int value="11"/><int value="12"/><int value="13"/><int value="14"/><int value="15"/><int value="16"/><int value="17"/><int value="18"/><int value="19"/><int value="20"/><int value="21"/><int value="22"/><int value="23"/><int value="24"/><int value="25"/><int value="26"/><int value="27"/><int value="28"/><int value="29"/><int value="30"/><int value="31"/><int value="32"/><int value="33"/><int value="34"/><int value="35"/><int value="36"/><int value="37"/><int value="38"/><int value="39"/><int value="40"/><int value="41"/><int value="42"/><int value="43"/><int value="44"/><int value="45"/><int value="46"/><int value="47"/><int value="48"/><int value="49"/><int value="50"/><int value="51"/><int value="52"/><int value="53"/><int value="54"/><int value="55"/><int value="56"/><int value="57"/><int value="58"/><int value="59"/><int value="60"/><int value="61"/><int value="62"/><int value="63"/><int value="64"/><int value="65"/><int value="66"/><int value="67"/><int value="68"/><int value="69"/><int value="70"/><int value="71"/><int value="72"/><int value="73"/><int value="74"/><int value="75"/><int value="76"/><int value="77"/><int value="78"/><int value="79"/><int value="80"/><int value="81"/><int value="82"/><int value="83"/><int value="84"/><int value="85"/><int value="86"/><int value="87"/><int value="88"/><int value="89"/><int value="90"/><int value="91"/><int value="92"/><int value="93"/><int value="94"/><int value="95"/><int value="96"/><int value="97"/><int value="98"/><int value="99"/><int value="100"/><int value="101"/><int value="102"/><int value="103"/>
 </sig>
 
 <sig label="String" ID="3" parentID="2" builtin="yes">
 </sig>
 
-<sig label="this/c93_PasswordProtection" ID="4" parentID="5">
+<sig label="this/c72_PasswordProtection" ID="4" parentID="5">
 </sig>
 
-<sig label="this/c124_FingerprintProtection" ID="6" parentID="5">
-   <atom label="partial_c124_FingerprintProtection%"/>
+<sig label="this/c93_FingerprintProtection" ID="6" parentID="5">
+   <atom label="partial_c93_FingerprintProtection%"/>
 </sig>
 
-<sig label="this/c6_SecurityFeature" ID="5" parentID="7" abstract="yes">
+<sig label="this/c5_SecurityFeature" ID="5" parentID="7" abstract="yes">
 </sig>
 
-<field label="r_c7_security" ID="8" parentID="5">
-   <tuple> <atom label="partial_c124_FingerprintProtection%"/> <atom label="security_for_c124_FingerprintProtection_of_5%"/> </tuple>
+<field label="r_c6_security" ID="8" parentID="5">
+   <tuple> <atom label="partial_c93_FingerprintProtection%"/> <atom label="security_for_c93_FingerprintProtection_of_5%"/> </tuple>
    <types> <type ID="5"/> <type ID="9"/> </types>
 </field>
 
-<sig label="this/c9_Connectivity" ID="10" parentID="7">
-   <atom label="partial_c9_Connectivity%"/>
+<sig label="this/c8_Connectivity" ID="10" parentID="7">
+   <atom label="partial_c8_Connectivity%"/>
 </sig>
 
-<field label="r_c30_Bluetooth" ID="11" parentID="10">
+<field label="r_c24_Bluetooth" ID="11" parentID="10">
+   <tuple> <atom label="partial_c8_Connectivity%"/> <atom label="partial_c24_Bluetooth%"/> </tuple>
    <types> <type ID="10"/> <type ID="12"/> </types>
 </field>
 
-<field label="r_c51_USB" ID="13" parentID="10">
+<field label="r_c40_USB" ID="13" parentID="10">
    <types> <type ID="10"/> <type ID="14"/> </types>
 </field>
 
-<field label="r_c72_Wifi" ID="15" parentID="10">
-   <tuple> <atom label="partial_c9_Connectivity%"/> <atom label="partial_c72_Wifi%"/> </tuple>
+<field label="r_c56_Wifi" ID="15" parentID="10">
    <types> <type ID="10"/> <type ID="16"/> </types>
 </field>
 
-<sig label="this/c30_Bluetooth" ID="12" parentID="7">
+<sig label="this/c24_Bluetooth" ID="12" parentID="7">
+   <atom label="partial_c24_Bluetooth%"/>
 </sig>
 
-<sig label="this/c51_USB" ID="14" parentID="7">
+<sig label="this/c40_USB" ID="14" parentID="7">
 </sig>
 
-<sig label="this/c72_Wifi" ID="16" parentID="7">
-   <atom label="partial_c72_Wifi%"/>
+<sig label="this/c56_Wifi" ID="16" parentID="7">
 </sig>
 
 <sig label="this/c1_Feature" ID="7" parentID="2" abstract="yes">
 </sig>
 
 <field label="r_c2_performance" ID="17" parentID="7">
-   <tuple> <atom label="partial_c124_FingerprintProtection%"/> <atom label="performance_for_c124_FingerprintProtection_of_2%"/> </tuple>
-   <tuple> <atom label="partial_c9_Connectivity%"/> <atom label="performance_for_c9_Connectivity_of_0%"/> </tuple>
-   <tuple> <atom label="partial_c72_Wifi%"/> <atom label="performance_for_c72_Wifi_of_22%"/> </tuple>
+   <tuple> <atom label="partial_c93_FingerprintProtection%"/> <atom label="performance_for_c93_FingerprintProtection_of_2%"/> </tuple>
+   <tuple> <atom label="partial_c8_Connectivity%"/> <atom label="performance_for_c8_Connectivity_of_0%"/> </tuple>
+   <tuple> <atom label="partial_c24_Bluetooth%"/> <atom label="performance_for_c24_Bluetooth_of_9%"/> </tuple>
    <types> <type ID="7"/> <type ID="18"/> </types>
 </field>
 
 <field label="r_c3_energy" ID="19" parentID="7">
-   <tuple> <atom label="partial_c124_FingerprintProtection%"/> <atom label="energy_for_c124_FingerprintProtection_of_4%"/> </tuple>
-   <tuple> <atom label="partial_c9_Connectivity%"/> <atom label="energy_for_c9_Connectivity_of_0%"/> </tuple>
-   <tuple> <atom label="partial_c72_Wifi%"/> <atom label="energy_for_c72_Wifi_of_17%"/> </tuple>
+   <tuple> <atom label="partial_c93_FingerprintProtection%"/> <atom label="energy_for_c93_FingerprintProtection_of_4%"/> </tuple>
+   <tuple> <atom label="partial_c8_Connectivity%"/> <atom label="energy_for_c8_Connectivity_of_0%"/> </tuple>
+   <tuple> <atom label="partial_c24_Bluetooth%"/> <atom label="energy_for_c24_Bluetooth_of_10%"/> </tuple>
    <types> <type ID="7"/> <type ID="20"/> </types>
 </field>
 
 <field label="r_c4_mass" ID="21" parentID="7">
-   <tuple> <atom label="partial_c124_FingerprintProtection%"/> <atom label="mass_for_c124_FingerprintProtection_of_0%"/> </tuple>
-   <tuple> <atom label="partial_c9_Connectivity%"/> <atom label="mass_for_c9_Connectivity_of_0%"/> </tuple>
-   <tuple> <atom label="partial_c72_Wifi%"/> <atom label="mass_for_c72_Wifi_of_6%"/> </tuple>
+   <tuple> <atom label="partial_c93_FingerprintProtection%"/> <atom label="mass_for_c93_FingerprintProtection_of_0%"/> </tuple>
+   <tuple> <atom label="partial_c8_Connectivity%"/> <atom label="mass_for_c8_Connectivity_of_0%"/> </tuple>
+   <tuple> <atom label="partial_c24_Bluetooth%"/> <atom label="mass_for_c24_Bluetooth_of_2%"/> </tuple>
    <types> <type ID="7"/> <type ID="22"/> </types>
 </field>
 
-<field label="r_c5_cost" ID="23" parentID="7">
-   <tuple> <atom label="partial_c124_FingerprintProtection%"/> <atom label="cost_for_c124_FingerprintProtection_of_2%"/> </tuple>
-   <tuple> <atom label="partial_c9_Connectivity%"/> <atom label="cost_for_c9_Connectivity_of_12%"/> </tuple>
-   <tuple> <atom label="partial_c72_Wifi%"/> <atom label="cost_for_c72_Wifi_of_5%"/> </tuple>
-   <types> <type ID="7"/> <type ID="24"/> </types>
-</field>
-
 <sig label="this/c2_performance" ID="18" parentID="2">
-   <atom label="performance_for_c9_Connectivity_of_0%"/>
-   <atom label="performance_for_c72_Wifi_of_22%"/>
-   <atom label="performance_for_c124_FingerprintProtection_of_2%"/>
+   <atom label="performance_for_c8_Connectivity_of_0%"/>
+   <atom label="performance_for_c24_Bluetooth_of_9%"/>
+   <atom label="performance_for_c93_FingerprintProtection_of_2%"/>
 </sig>
 
-<field label="c2_performance_ref" ID="25" parentID="18">
-   <tuple> <atom label="performance_for_c9_Connectivity_of_0%"/> <atom label="0"/> </tuple>
-   <tuple> <atom label="performance_for_c72_Wifi_of_22%"/> <atom label="22"/> </tuple>
-   <tuple> <atom label="performance_for_c124_FingerprintProtection_of_2%"/> <atom label="2"/> </tuple>
+<field label="c2_performance_ref" ID="23" parentID="18">
+   <tuple> <atom label="performance_for_c8_Connectivity_of_0%"/> <atom label="0"/> </tuple>
+   <tuple> <atom label="performance_for_c24_Bluetooth_of_9%"/> <atom label="9"/> </tuple>
+   <tuple> <atom label="performance_for_c93_FingerprintProtection_of_2%"/> <atom label="2"/> </tuple>
    <types> <type ID="18"/> <type ID="1"/> </types>
 </field>
 
 <sig label="this/c3_energy" ID="20" parentID="2">
-   <atom label="energy_for_c9_Connectivity_of_0%"/>
-   <atom label="energy_for_c72_Wifi_of_17%"/>
-   <atom label="energy_for_c124_FingerprintProtection_of_4%"/>
+   <atom label="energy_for_c8_Connectivity_of_0%"/>
+   <atom label="energy_for_c24_Bluetooth_of_10%"/>
+   <atom label="energy_for_c93_FingerprintProtection_of_4%"/>
 </sig>
 
-<field label="c3_energy_ref" ID="26" parentID="20">
-   <tuple> <atom label="energy_for_c9_Connectivity_of_0%"/> <atom label="0"/> </tuple>
-   <tuple> <atom label="energy_for_c72_Wifi_of_17%"/> <atom label="17"/> </tuple>
-   <tuple> <atom label="energy_for_c124_FingerprintProtection_of_4%"/> <atom label="4"/> </tuple>
+<field label="c3_energy_ref" ID="24" parentID="20">
+   <tuple> <atom label="energy_for_c8_Connectivity_of_0%"/> <atom label="0"/> </tuple>
+   <tuple> <atom label="energy_for_c24_Bluetooth_of_10%"/> <atom label="10"/> </tuple>
+   <tuple> <atom label="energy_for_c93_FingerprintProtection_of_4%"/> <atom label="4"/> </tuple>
    <types> <type ID="20"/> <type ID="1"/> </types>
 </field>
 
 <sig label="this/c4_mass" ID="22" parentID="2">
-   <atom label="mass_for_c9_Connectivity_of_0%"/>
-   <atom label="mass_for_c72_Wifi_of_6%"/>
-   <atom label="mass_for_c124_FingerprintProtection_of_0%"/>
+   <atom label="mass_for_c8_Connectivity_of_0%"/>
+   <atom label="mass_for_c24_Bluetooth_of_2%"/>
+   <atom label="mass_for_c93_FingerprintProtection_of_0%"/>
 </sig>
 
-<field label="c4_mass_ref" ID="27" parentID="22">
-   <tuple> <atom label="mass_for_c9_Connectivity_of_0%"/> <atom label="0"/> </tuple>
-   <tuple> <atom label="mass_for_c72_Wifi_of_6%"/> <atom label="6"/> </tuple>
-   <tuple> <atom label="mass_for_c124_FingerprintProtection_of_0%"/> <atom label="0"/> </tuple>
+<field label="c4_mass_ref" ID="25" parentID="22">
+   <tuple> <atom label="mass_for_c8_Connectivity_of_0%"/> <atom label="0"/> </tuple>
+   <tuple> <atom label="mass_for_c24_Bluetooth_of_2%"/> <atom label="2"/> </tuple>
+   <tuple> <atom label="mass_for_c93_FingerprintProtection_of_0%"/> <atom label="0"/> </tuple>
    <types> <type ID="22"/> <type ID="1"/> </types>
 </field>
 
-<sig label="this/c5_cost" ID="24" parentID="2">
-   <atom label="cost_for_c9_Connectivity_of_12%"/>
-   <atom label="cost_for_c72_Wifi_of_5%"/>
-   <atom label="cost_for_c124_FingerprintProtection_of_2%"/>
+<sig label="this/c6_security" ID="9" parentID="2">
+   <atom label="security_for_c93_FingerprintProtection_of_5%"/>
 </sig>
 
-<field label="c5_cost_ref" ID="28" parentID="24">
-   <tuple> <atom label="cost_for_c9_Connectivity_of_12%"/> <atom label="12"/> </tuple>
-   <tuple> <atom label="cost_for_c72_Wifi_of_5%"/> <atom label="5"/> </tuple>
-   <tuple> <atom label="cost_for_c124_FingerprintProtection_of_2%"/> <atom label="2"/> </tuple>
-   <types> <type ID="24"/> <type ID="1"/> </types>
-</field>
-
-<sig label="this/c7_security" ID="9" parentID="2">
-   <atom label="security_for_c124_FingerprintProtection_of_5%"/>
-</sig>
-
-<field label="c7_security_ref" ID="29" parentID="9">
-   <tuple> <atom label="security_for_c124_FingerprintProtection_of_5%"/> <atom label="5"/> </tuple>
+<field label="c6_security_ref" ID="26" parentID="9">
+   <tuple> <atom label="security_for_c93_FingerprintProtection_of_5%"/> <atom label="5"/> </tuple>
    <types> <type ID="9"/> <type ID="1"/> </types>
 </field>
 
-<sig label="this/c264_MyPhone" ID="30" parentID="31" one="yes">
-   <atom label="c264_MyPhone$0"/>
+<sig label="this/c202_MyPhone" ID="27" parentID="28" one="yes">
+   <atom label="c202_MyPhone$0"/>
 </sig>
 
-<sig label="this/c8_MobilePhone" ID="31" parentID="2" abstract="yes">
+<sig label="this/c7_MobilePhone" ID="28" parentID="2" abstract="yes">
 </sig>
 
-<field label="r_c9_Connectivity" ID="32" parentID="31">
-   <tuple> <atom label="c264_MyPhone$0"/> <atom label="partial_c9_Connectivity%"/> </tuple>
-   <types> <type ID="31"/> <type ID="10"/> </types>
+<field label="r_c8_Connectivity" ID="29" parentID="28">
+   <tuple> <atom label="c202_MyPhone$0"/> <atom label="partial_c8_Connectivity%"/> </tuple>
+   <types> <type ID="28"/> <type ID="10"/> </types>
 </field>
 
-<field label="r_c93_PasswordProtection" ID="33" parentID="31">
-   <types> <type ID="31"/> <type ID="4"/> </types>
+<field label="r_c72_PasswordProtection" ID="30" parentID="28">
+   <types> <type ID="28"/> <type ID="4"/> </types>
 </field>
 
-<field label="r_c124_FingerprintProtection" ID="34" parentID="31">
-   <tuple> <atom label="c264_MyPhone$0"/> <atom label="partial_c124_FingerprintProtection%"/> </tuple>
-   <types> <type ID="31"/> <type ID="6"/> </types>
+<field label="r_c93_FingerprintProtection" ID="31" parentID="28">
+   <tuple> <atom label="c202_MyPhone$0"/> <atom label="partial_c93_FingerprintProtection%"/> </tuple>
+   <types> <type ID="28"/> <type ID="6"/> </types>
 </field>
 
-<field label="r_c150_total_performance" ID="35" parentID="31">
-   <tuple> <atom label="c264_MyPhone$0"/> <atom label="c150_total_performance$0"/> </tuple>
-   <types> <type ID="31"/> <type ID="36"/> </types>
+<field label="r_c114_total_performance" ID="32" parentID="28">
+   <tuple> <atom label="c202_MyPhone$0"/> <atom label="c114_total_performance$0"/> </tuple>
+   <types> <type ID="28"/> <type ID="33"/> </types>
 </field>
 
-<field label="r_c176_total_energy" ID="37" parentID="31">
-   <tuple> <atom label="c264_MyPhone$0"/> <atom label="c176_total_energy$0"/> </tuple>
-   <types> <type ID="31"/> <type ID="38"/> </types>
+<field label="r_c140_total_energy" ID="34" parentID="28">
+   <tuple> <atom label="c202_MyPhone$0"/> <atom label="c140_total_energy$0"/> </tuple>
+   <types> <type ID="28"/> <type ID="35"/> </types>
 </field>
 
-<field label="r_c202_total_security" ID="39" parentID="31">
-   <tuple> <atom label="c264_MyPhone$0"/> <atom label="c202_total_security$0"/> </tuple>
-   <types> <type ID="31"/> <type ID="40"/> </types>
+<field label="r_c166_total_security" ID="36" parentID="28">
+   <tuple> <atom label="c202_MyPhone$0"/> <atom label="c166_total_security$0"/> </tuple>
+   <types> <type ID="28"/> <type ID="37"/> </types>
 </field>
 
-<field label="r_c212_total_mass" ID="41" parentID="31">
-   <tuple> <atom label="c264_MyPhone$0"/> <atom label="c212_total_mass$0"/> </tuple>
-   <types> <type ID="31"/> <type ID="42"/> </types>
+<field label="r_c176_total_mass" ID="38" parentID="28">
+   <tuple> <atom label="c202_MyPhone$0"/> <atom label="c176_total_mass$0"/> </tuple>
+   <types> <type ID="28"/> <type ID="39"/> </types>
 </field>
 
-<field label="r_c238_total_cost" ID="43" parentID="31">
-   <tuple> <atom label="c264_MyPhone$0"/> <atom label="c238_total_cost$0"/> </tuple>
-   <types> <type ID="31"/> <type ID="44"/> </types>
-</field>
-
-<sig label="this/c150_total_performance" ID="36" parentID="2">
-   <atom label="c150_total_performance$0"/>
+<sig label="this/c114_total_performance" ID="33" parentID="2">
+   <atom label="c114_total_performance$0"/>
 </sig>
 
-<field label="c150_total_performance_ref" ID="45" parentID="36">
-   <tuple> <atom label="c150_total_performance$0"/> <atom label="24"/> </tuple>
-   <types> <type ID="36"/> <type ID="1"/> </types>
+<field label="c114_total_performance_ref" ID="40" parentID="33">
+   <tuple> <atom label="c114_total_performance$0"/> <atom label="11"/> </tuple>
+   <types> <type ID="33"/> <type ID="1"/> </types>
 </field>
 
-<sig label="this/c176_total_energy" ID="38" parentID="2">
-   <atom label="c176_total_energy$0"/>
+<sig label="this/c140_total_energy" ID="35" parentID="2">
+   <atom label="c140_total_energy$0"/>
 </sig>
 
-<field label="c176_total_energy_ref" ID="46" parentID="38">
-   <tuple> <atom label="c176_total_energy$0"/> <atom label="21"/> </tuple>
-   <types> <type ID="38"/> <type ID="1"/> </types>
+<field label="c140_total_energy_ref" ID="41" parentID="35">
+   <tuple> <atom label="c140_total_energy$0"/> <atom label="14"/> </tuple>
+   <types> <type ID="35"/> <type ID="1"/> </types>
 </field>
 
-<sig label="this/c202_total_security" ID="40" parentID="2">
-   <atom label="c202_total_security$0"/>
+<sig label="this/c166_total_security" ID="37" parentID="2">
+   <atom label="c166_total_security$0"/>
 </sig>
 
-<field label="c202_total_security_ref" ID="47" parentID="40">
-   <tuple> <atom label="c202_total_security$0"/> <atom label="5"/> </tuple>
-   <types> <type ID="40"/> <type ID="1"/> </types>
+<field label="c166_total_security_ref" ID="42" parentID="37">
+   <tuple> <atom label="c166_total_security$0"/> <atom label="5"/> </tuple>
+   <types> <type ID="37"/> <type ID="1"/> </types>
 </field>
 
-<sig label="this/c212_total_mass" ID="42" parentID="2">
-   <atom label="c212_total_mass$0"/>
+<sig label="this/c176_total_mass" ID="39" parentID="2">
+   <atom label="c176_total_mass$0"/>
 </sig>
 
-<field label="c212_total_mass_ref" ID="48" parentID="42">
-   <tuple> <atom label="c212_total_mass$0"/> <atom label="6"/> </tuple>
-   <types> <type ID="42"/> <type ID="1"/> </types>
+<field label="c176_total_mass_ref" ID="43" parentID="39">
+   <tuple> <atom label="c176_total_mass$0"/> <atom label="2"/> </tuple>
+   <types> <type ID="39"/> <type ID="1"/> </types>
 </field>
 
-<sig label="this/c238_total_cost" ID="44" parentID="2">
-   <atom label="c238_total_cost$0"/>
-</sig>
-
-<field label="c238_total_cost_ref" ID="49" parentID="44">
-   <tuple> <atom label="c238_total_cost$0"/> <atom label="19"/> </tuple>
-   <types> <type ID="44"/> <type ID="1"/> </types>
-</field>
-
-<sig label="this/bag_extra_ints" ID="50" parentID="2">
+<sig label="this/bag_extra_ints" ID="44" parentID="2">
    <atom label="concrete_int_bag%"/>
 </sig>
 
-<field label="extra_ints" ID="51" parentID="50">
+<field label="extra_ints" ID="45" parentID="44">
    <tuple> <atom label="concrete_int_bag%"/> <atom label="7"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="8"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="11"/> </tuple>
+   <tuple> <atom label="concrete_int_bag%"/> <atom label="12"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="13"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="14"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="15"/> </tuple>
@@ -334,36 +301,7 @@
    <tuple> <atom label="concrete_int_bag%"/> <atom label="101"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="102"/> </tuple>
    <tuple> <atom label="concrete_int_bag%"/> <atom label="103"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="104"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="105"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="106"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="107"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="108"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="109"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="110"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="111"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="112"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="113"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="114"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="115"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="116"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="117"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="118"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="119"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="120"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="121"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="122"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="123"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="124"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="125"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="126"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="127"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="128"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="129"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="130"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="131"/> </tuple>
-   <tuple> <atom label="concrete_int_bag%"/> <atom label="132"/> </tuple>
-   <types> <type ID="50"/> <type ID="1"/> </types>
+   <types> <type ID="44"/> <type ID="1"/> </types>
 </field>
 
 <sig label="univ" ID="2" builtin="yes">
