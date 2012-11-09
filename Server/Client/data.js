@@ -157,35 +157,67 @@ DataTable.method("subsetByFeatures", function(arrayFeatures)
 
 });
 
-DataTable.method("getCommon", function()
+DataTable.method("makeAggregatedFeature", function(s)
+{
+    return s + " (mean)";
+});
+
+
+DataTable.method("getCommon", function(needAggregate)
 {
     var result = new DataTable();
 
     if (this.products.length <= 1)
         return result; // the task is not meaningful
 
-    result.title = "Commonalities";
-    var jointProductName = "(Product Set)";
+    result.title = "Common and Aggreagate";
+    var jointProductName = "(Group 1)";
     result.products.push(jointProductName);
-     
+    
     for (var i = 0; i < this.features.length; i++)
     {
         var same = true;
         var pivot = this.matrix[i][0];
+        var isNumber = isNumeric(pivot) && needAggregate;
+        
+        
+        var aggregator;
+        
+        if (isNumber)
+        {
+            aggregator = 0;
+        }
         
         for (var j = 0; j < this.products.length; j++)
         {
+            if (isNumber)
+                aggregator += parseInt(this.matrix[i][j]);
+                
             if (this.matrix[i][j] != pivot)
             {
                 same = false;
-                break;
+                if (!isNumber)
+                    break;
             }
         }
         
         if (same)
         {
             result.features.push(this.features[i]);
-            result.matrix.push(new Array(pivot));
+            var tempAr = new Array();
+            tempAr.push(pivot);
+            result.matrix.push(tempAr);
+        }
+        else
+        {
+            if (isNumber)
+            {
+                aggregator = aggregator / this.products.length;
+                result.features.push(this.makeAggregatedFeature(this.features[i]));
+                var tempAr = new Array();
+                tempAr.push(Math.round(aggregator * 100) / 100);
+                result.matrix.push(tempAr);
+            }   
         }
     }
 

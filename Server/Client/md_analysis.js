@@ -4,9 +4,9 @@ function Analysis(host)
     this.title = "Analysis";
     
     this.width = 500;
-    this.height = 60;
+    this.height = 365;
     this.posx = 0;
-    this.posy = 70;
+    this.posy = 140;
     
     this.host = host;
     this.dataTable = null;
@@ -42,9 +42,9 @@ Analysis.method("onSelectionChanged", function(list){
 
     var allFeatures = data.toSetOfFeatures();
 
-    var commonData = data.getCommon(); // ALL COMMON DATA
+    var commonData = data.getCommon(true); // ALL COMMON DATA
     var commonFeatures = commonData.toSetOfFeatures();
-    commonData.title = "Commonalities";
+//    commonData.title = "Commonalities";
     
     var differentFeatures = allFeatures.difference(commonFeatures);
     var differentData = data.subsetByFeatures(differentFeatures.toArray()); // ALL DIFFERENT DATA

@@ -3,11 +3,6 @@ function TableVisualizer ()
 //	this.data = data;
 }
 
-TableVisualizer.method("isNumeric", function(input)
-{
-    return (input - 0) == input && input.length > 0;
-});
-
 TableVisualizer.method("mapValue", function(sVal)
 {
 	var result = new Object();
@@ -26,7 +21,7 @@ TableVisualizer.method("mapValue", function(sVal)
 		result.tdStyle = 'no';
 	}
 
-	if (this.isNumeric(sVal))
+	if (isNumeric(sVal))
 	{
 		result.tdStyle = 'numeric';
 		result.html = '<span class="number">' + sVal + '</span>'

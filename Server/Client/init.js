@@ -65,3 +65,9 @@ Array.prototype.remove = function(from, to) {
 
 JS.require('JS.Set', function() {
 });
+
+function isNumeric(input)
+{
+    return (input - 0) == input && input.length > 0;
+}
+
