@@ -3,10 +3,10 @@ function ComparisonTable(host)
     this.id = "mdComparisonTable";
     this.title = "Pareto Front Table";
 
-    this.width = 500;
-    this.height = 400;
+    this.width = 1000;
+    this.height = 130;
     this.posx = 0;
-    this.posy = 100;
+    this.posy = 545;
     
     this.host = host;
 

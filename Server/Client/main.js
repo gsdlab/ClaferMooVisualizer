@@ -13,13 +13,13 @@ $(document).ready(function()
 {
     var modules = Array();
     
-    modules.push("ComparisonTable");
     modules.push("Goals");
     modules.push("Graph");
     modules.push("Console");
     modules.push("Input");
-    modules.push("UseCases");
+//    modules.push("UseCases");
     modules.push("Analysis");
+    modules.push("ComparisonTable");
     
     host = new Host(modules);
 });
@@ -74,8 +74,8 @@ function Host(modules)
             this.modules[i].onInitRendered();        
     }
     
-    $.minimizeWindow("mdGoals");
-    $.minimizeWindow("mdComparisonTable");    
+//    $.minimizeWindow("mdGoals");
+//    $.minimizeWindow("mdComparisonTable");    
 }
 
 Host.method("findModule", function(id)

@@ -4,9 +4,9 @@ function Analysis(host)
     this.title = "Analysis";
     
     this.width = 500;
-    this.height = 365;
+    this.height = 310;
     this.posx = 0;
-    this.posy = 140;
+    this.posy = 195;
     
     this.host = host;
     this.dataTable = null;

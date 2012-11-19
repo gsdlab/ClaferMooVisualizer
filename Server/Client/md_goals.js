@@ -4,7 +4,7 @@ function Goals(host)
     this.title = "Goals";
     
     this.width = 500;
-    this.height = 60;
+    this.height = 85;
     this.posx = 0;
     this.posy = 70;
     
