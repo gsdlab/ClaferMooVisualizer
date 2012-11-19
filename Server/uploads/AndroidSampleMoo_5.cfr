@@ -33,14 +33,13 @@ abstract MobilePhone
         [ this.performance = 1]
         [ this.energy = 2 ]
         [ this.mass = 0]
-        [ this.cost = 12]
         [ this.cost = 2]
     FingerprintProtection : SecurityFeature ?
         [ this.mass = 0]
         [ this.security = 5]
-        [ this.performance = 2]
-        [ this.energy = 4 ]
-        [ this.cost = 2]
+        [ this.performance = 3]
+        [ this.energy = 1 ]
+        [ this.cost = 13]
     total_performance : integer
     [ total_performance = sum Feature.performance ]
     total_energy : integer

@@ -1,19 +1,19 @@
 ConstraintMandatoryFeatures:c1:Choco.eq(c8_MobilePhone, 1)
 ConstraintMandatoryFeatures:c2:Choco.eq(c9_Connectivity, 1)
-ConstraintChildrenImpliesParent:c3:Choco.implies(Choco.eq(c30_Bluetooth, 1), Choco.eq(c9_Connectivity, 1))
-ConstraintChildrenImpliesParent:c4:Choco.implies(Choco.eq(c51_USB, 1), Choco.eq(c9_Connectivity, 1))
-ConstraintChildrenImpliesParent:c5:Choco.implies(Choco.eq(c72_Wifi, 1), Choco.eq(c9_Connectivity, 1))
-ConstraintChildrenImpliesParent:c6:Choco.implies(Choco.eq(c9_Connectivity, 1), Choco.eq(c8_MobilePhone, 1))
-ConstraintMandatoryChildEqualParent:c7:Choco.eq(c9_Connectivity, c8_MobilePhone)
-ConstraintChildrenImpliesParent:c8:Choco.implies(Choco.eq(c93_PasswordProtection, 1), Choco.eq(c8_MobilePhone, 1))
-ConstraintChildrenImpliesParent:c9:Choco.implies(Choco.eq(c124_FingerprintProtection, 1), Choco.eq(c8_MobilePhone, 1))
+ConstraintChildrenImpliesParent:c3:Choco.implies(Choco.eq(c9_Connectivity, 1), Choco.eq(c8_MobilePhone, 1))
+ConstraintMandatoryChildEqualParent:c4:Choco.eq(c9_Connectivity, c8_MobilePhone)
+ConstraintChildrenImpliesParent:c5:Choco.implies(Choco.eq(c93_PasswordProtection, 1), Choco.eq(c8_MobilePhone, 1))
+ConstraintChildrenImpliesParent:c6:Choco.implies(Choco.eq(c119_FingerprintProtection, 1), Choco.eq(c8_MobilePhone, 1))
+ConstraintChildrenImpliesParent:c7:Choco.implies(Choco.eq(c30_Bluetooth, 1), Choco.eq(c9_Connectivity, 1))
+ConstraintChildrenImpliesParent:c8:Choco.implies(Choco.eq(c51_USB, 1), Choco.eq(c9_Connectivity, 1))
+ConstraintChildrenImpliesParent:c9:Choco.implies(Choco.eq(c72_Wifi, 1), Choco.eq(c9_Connectivity, 1))
 ConstraintOr:c10:Choco.ifOnlyIf(Choco.or(GROUPVARS(c30_Bluetooth,c51_USB,c72_Wifi)), Choco.eq(c9_Connectivity, 1))
 BinaryVariable:c9_Connectivity
 BinaryVariable:c30_Bluetooth
 BinaryVariable:c51_USB
 BinaryVariable:c72_Wifi
 BinaryVariable:c93_PasswordProtection
-BinaryVariable:c124_FingerprintProtection
+BinaryVariable:c119_FingerprintProtection
 BinaryVariable:c8_MobilePhone
 ProductLevelNfpAttribute:c2_performance
 ProductLevelNfpAttribute:c3_energy
@@ -25,27 +25,27 @@ ProductLevelNfpFeatureContribution:c7_security,c30_Bluetooth,9
 ProductLevelNfpFeatureContribution:c7_security,c51_USB,10
 ProductLevelNfpFeatureContribution:c7_security,c72_Wifi,22
 ProductLevelNfpFeatureContribution:c7_security,c93_PasswordProtection,1
-ProductLevelNfpFeatureContribution:c7_security,c124_FingerprintProtection,2
+ProductLevelNfpFeatureContribution:c7_security,c119_FingerprintProtection,3
 ProductLevelNfpFeatureContribution:c7_security,c9_Connectivity,0
 ProductLevelNfpFeatureContribution:c7_security,c30_Bluetooth,10
 ProductLevelNfpFeatureContribution:c7_security,c51_USB,5
 ProductLevelNfpFeatureContribution:c7_security,c72_Wifi,17
 ProductLevelNfpFeatureContribution:c7_security,c93_PasswordProtection,2
-ProductLevelNfpFeatureContribution:c7_security,c124_FingerprintProtection,4
+ProductLevelNfpFeatureContribution:c7_security,c119_FingerprintProtection,1
 ProductLevelNfpFeatureContribution:c7_security,c9_Connectivity,0
 ProductLevelNfpFeatureContribution:c7_security,c30_Bluetooth,2
 ProductLevelNfpFeatureContribution:c7_security,c51_USB,3
 ProductLevelNfpFeatureContribution:c7_security,c72_Wifi,6
 ProductLevelNfpFeatureContribution:c7_security,c93_PasswordProtection,0
-ProductLevelNfpFeatureContribution:c7_security,c124_FingerprintProtection,0
+ProductLevelNfpFeatureContribution:c7_security,c119_FingerprintProtection,0
 ProductLevelNfpFeatureContribution:c7_security,c9_Connectivity,12
 ProductLevelNfpFeatureContribution:c7_security,c30_Bluetooth,3
 ProductLevelNfpFeatureContribution:c7_security,c51_USB,5
 ProductLevelNfpFeatureContribution:c7_security,c72_Wifi,5
 ProductLevelNfpFeatureContribution:c7_security,c93_PasswordProtection,2
-ProductLevelNfpFeatureContribution:c7_security,c124_FingerprintProtection,2
+ProductLevelNfpFeatureContribution:c7_security,c119_FingerprintProtection,13
 ProductLevelNfpFeatureContribution:c7_security,c93_PasswordProtection,5
-ProductLevelNfpFeatureContribution:c7_security,c124_FingerprintProtection,5
+ProductLevelNfpFeatureContribution:c7_security,c119_FingerprintProtection,5
 ObjectiveSense:False
 ObjectiveSense:True
 ObjectiveSense:True
