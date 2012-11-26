@@ -46,10 +46,10 @@ server.listen(port);
  * Display upload form
  */
 function display_page(req, res) {
-    res.sendHeader(200, {"Content-Type": "text/html"});
+    res.writeHead(200, {"Content-Type": "text/html"});
 	var contents = fs.readFileSync("./Client/app.html");
     res.write(contents);
-    res.close();
+    res.end();
 }
 
 /*
@@ -89,7 +89,7 @@ function basename(str)
  
 function upload_file(req, res) {
     // Request body is binary
-    req.setBodyEncoding("binary");
+    req.setEncoding("binary");
 
     // Handle request as multipart
     var stream = parse_multipart(req);
@@ -259,7 +259,7 @@ function upload_complete(res, fileName) {
  * Handles page not found error
  */
 function show_404(req, res) {
-    res.sendHeader(404, {"Content-Type": "text/html"});
+    res.writeHeader(404, {"Content-Type": "text/html"});
     res.write("Not found!");
     res.end();
 }
@@ -285,7 +285,7 @@ function getPath(req, res) {
 	try
 	{
 		var contentType = getMimeByExt(url.parse(req.url).pathname);
-		res.sendHeader(200, { "Content-Type": contentType });
+		res.writeHeader(200, { "Content-Type": contentType });
 
 		sys.debug(url.parse(req.url).pathname);
 		contents = fs.readFileSync("." + url.parse(req.url).pathname);
