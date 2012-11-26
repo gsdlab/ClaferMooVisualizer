@@ -1,10 +1,12 @@
 ClaferMooVisualizer
 ===================
+v0.3.2.17-12-2012
 
 Visualizes Pareto Front and allows to perform analysis of the Pareto Front.
 
-General Description
-======
+### Background
+
+[Clafer](http://clafer.org) is a general-purpose lightweight structural modeling language developed at [GSD Lab](http://gsd.uwaterloo.ca/), [University of Waterloo](http://uwaterloo.ca). Clafer can be used for *product-line modeling* and *multi-objective optimization*, whereby a the model of a product line can be used to find optimal products given a set of optimization goals. 
 
 ### Functions
 
@@ -19,27 +21,43 @@ General Description
 ClaferMoo Visualizer is a web-based application. Its server side (implemented with Node.JS) only runs ClaferMoo and passes back its output.
 The client-side is implemented using Javascript/HTML and handles all the basic functionality.
 
+### Live demo
+
+[http://gsd.uwaterloo.ca/clafermoovisualizer](http://gsd.uwaterloo.ca/clafermoovisualizer)
+
 Installation
---------------------
+------------
 
 A special installation procedure is not required. Modified ClaferMoo version is on the package.
 
 ### Dependencies for running
 
 * Dependencies for [ClaferMoo](https://github.com/gsdlab/claferMooStandalone) must be satisfied
-* [Node.JS Framework](http://nodejs.org/dist/), the stable version "0.2.4". Exactly this version should be installed, since the tool has not been tested in other versions, but the newest one may not work
+* [Node.JS Framework](http://nodejs.org/download/), the stable version "0.8.15". Exactly this version should be installed, since the tool has not been tested with ther versions.
 
-On Windows only
+### Settings
 
-* [Installation procedure of Node.JS for Windows](http://www.lucashills.com/articles/3)
-  
-### Preliminary settings
+1. Make sure the port `8080` is free, or change the variable value in `server.js`:
+`var port = 8080;` to any free one. This would be brought to the configuration settings file later.
 
-1. Make sure the port 8080 is free, or change the variable value in server.js:
-  var port = 8080;
-to any free one. This would be brought to the configuration settings file later.
+2. Make sure `clafer`, `python` and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
 
-2. Make sure *clafer*, *python* and *java* are in PATH environment variables, so they can be executed without any path prefixes.
+Running the following commands should produce the following results:
+
+`clafer -V` 
+
+> `Clafer v0.3.1.17-10-2012`
+
+`python -V`
+
+> `Python 2.7.3`
+
+`java -version`
+
+> `java version 1.7.0_09`
+> `Java(TM) SE Runtime Environment (build 1.7.0_09-b05`)
+> `Java HotSpot(TM) 64-Bit Server VM (build 23.5-b02`, mixed mode)
+
 
 3. Make sure *uploads* folder is accessible for writing, since temporary files will be stored there.
 
