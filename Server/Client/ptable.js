@@ -11,13 +11,13 @@ TableVisualizer.method("mapValue", function(sVal)
 	
 	if (sVal == "yes")
 	{
-		result.html = '<img class="tick" src="/Client/images/tick.png"/>';
+		result.html = '<img class="tick" src="/images/tick.png"/>';
 		result.tdStyle = 'tick';
 	}
 	
 	if (sVal == "-")
 	{
-		result.html = '<img class="no" src="/Client/images/no.png"/>';
+		result.html = '<img class="no" src="/images/no.png"/>';
 		result.tdStyle = 'no';
 	}
 

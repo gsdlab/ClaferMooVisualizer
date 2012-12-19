@@ -29,7 +29,7 @@ Input.method("onInitRendered", function()
 
 Input.method("beginQuery", function(formData, jqForm, options) { 
 	$("#load_area #myform").hide();
-	$("#load_area").append('<div id="preloader"><img id="preloader_img" src="/Client/images/preloader.gif" alt="Loading..."/><span>Loading and processing...</span></div>');	
+	$("#load_area").append('<div id="preloader"><img id="preloader_img" src="/images/preloader.gif" alt="Loading..."/><span>Loading and processing...</span></div>');	
     return true; 
 });
  
