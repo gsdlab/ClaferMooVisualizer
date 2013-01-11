@@ -104,7 +104,7 @@ Input.method("convertHtmlTags", function(input) {
 
 Input.method("processToolResult", function(result)
 {
-	if (!result) return;
+	if (!result) return;	
 	
 	var ar = result.split("=====");
 	if (ar.length != 3)

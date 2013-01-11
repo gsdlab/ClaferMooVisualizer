@@ -92,7 +92,6 @@ Host.method("findModule", function(id)
 
 Host.method("selectionChanged", function(data)
 {
-
     for (var i = 0; i < this.modules.length; i++)
     {
         if (this.modules[i].onSelectionChanged)

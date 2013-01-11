@@ -300,7 +300,7 @@ Graph.method("resize", function() // not attached to the window anymore, so need
 //    table.setAttribute('height', w);
 //    table.setAttribute('width', h);
 //    setDim(table, 0, 0);
-
+    
     setDim(table, w, h);
     setDim(tdZ, w, unit);
     setDim(tdY, unit, h - 2 * unit);
@@ -321,6 +321,7 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     sh = sh.replace("px", "");
 */    
 
+    $("#graph_table").css("table-layout", "auto"); //A fix for horizontal compression on non-chrome browsers (Jan 11th 2013)
 //    alert(w + " " + h);
     
     $(chart).empty(); // clear the old graph

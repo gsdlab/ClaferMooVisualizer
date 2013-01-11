@@ -9,6 +9,7 @@ var tool_path = __dirname + "/ClaferMoo/spl_datagenerator/";
 var python_file_name = "IntegratedFeatureModelOptimizer.py";
 var python = "python";
 
+
 var port = 8080;
 
 var server = express();
@@ -37,11 +38,11 @@ server.post('/upload', function(req, res, next) {
     // read the contents of the uploaded file
 	fs.readFile(req.files.claferFile.path, function (err, data) {
         file_contents = data.toString();
-		 
+		
+		console.log("processing file with integratedFMO");
 		var util  = require('util'),
 		spawn = require('child_process').spawn,
 		tool  = spawn(python, [tool_path + python_file_name, req.files.claferFile.path]);
-	
 		var error_result = "";
 		var data_result = "";
 		
@@ -57,7 +58,7 @@ server.post('/upload', function(req, res, next) {
 		tool.on('exit', function (code) 
 		{
 			var result = "";
-			
+			console.log("Parsing alloy solution");
 			if (code === 0) 
 			{
 				result = "Return code = " + code + "\n" + data_result + "=====";
@@ -65,22 +66,53 @@ server.post('/upload', function(req, res, next) {
 				result += xml.toString();
 				
 				result = escapeHtml(result);
+				
 			}
 			else 
 			{
 				result = 'Error, return code: ' + code + '\n' + error_result;
 			}
-		  
-		  
+			res.writeHead(200, { "Content-Type": "text/html"});
 			res.end(result);
-			  
+			cleanupOldFiles(req.files.claferFile.path);
+
 		});
-		 
+		
 	});
 
-    	
 });
  
+function cleanupOldFiles(path) {
+
+	//cleanup old files
+	console.log("Running Cleanup");
+	fs.unlink(path, function (err) {   //delete .cfr
+  	if (err) throw err;
+ 		console.log("successfully deleted " + path);
+	});
+	fs.unlink(changeFileExt(path, '.cfr', '.xml'), function (err) {   //delete .xml
+  		if (err) throw err;
+ 		console.log("successfully deleted " + changeFileExt(path, '.cfr', '.xml'));
+	});
+	fs.unlink(changeFileExt(path, '.cfr', '_desugared.xml'), function (err) {   //delete _desugared.xml
+		if (err) throw err;
+		console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.xml'));
+	});
+	fs.unlink(changeFileExt(path, '.cfr', '_desugared.als'), function (err) {    //delete _desugared.als
+		if (err) throw err;
+		console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.als'));
+	});
+	fs.unlink(changeFileExt(path, '.cfr', '_desugared.cfr'), function (err) {    //delete _desugared.cfr
+		if (err) throw err;
+		console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.cfr'));
+	});
+	fs.unlink(changeFileExt(path, '.cfr', '_desugared.choco'), function (err) {    //delete _desugared.choco
+		if (err) throw err;
+		console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.choco'));
+	});
+//done cleanup
+}
+
 function escapeHtml(unsafe) {
   return unsafe
       .replace(/&/g, "&amp;")
