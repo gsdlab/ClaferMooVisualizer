@@ -85,31 +85,34 @@ server.post('/upload', function(req, res, next) {
 function cleanupOldFiles(path) {
 
 	//cleanup old files
+	var ending = path.toLowerCase().substring(path.length - 4);
 	console.log("Running Cleanup");
 	fs.unlink(path, function (err) {   //delete .cfr
   	if (err) throw err;
  		console.log("successfully deleted " + path);
 	});
-	fs.unlink(changeFileExt(path, '.cfr', '.xml'), function (err) {   //delete .xml
-  		if (err) throw err;
- 		console.log("successfully deleted " + changeFileExt(path, '.cfr', '.xml'));
-	});
-	fs.unlink(changeFileExt(path, '.cfr', '_desugared.xml'), function (err) {   //delete _desugared.xml
-		if (err) throw err;
-		console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.xml'));
-	});
-	fs.unlink(changeFileExt(path, '.cfr', '_desugared.als'), function (err) {    //delete _desugared.als
-		if (err) throw err;
-		console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.als'));
-	});
-	fs.unlink(changeFileExt(path, '.cfr', '_desugared.cfr'), function (err) {    //delete _desugared.cfr
-		if (err) throw err;
-		console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.cfr'));
-	});
-	fs.unlink(changeFileExt(path, '.cfr', '_desugared.choco'), function (err) {    //delete _desugared.choco
-		if (err) throw err;
-		console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.choco'));
-	});
+	if (ending == "cfr"){   //just added this because I realized people could kill the server with a bad file
+		fs.unlink(changeFileExt(path, '.cfr', '.xml'), function (err) {   //delete .xml
+	  		if (err) throw err;
+ 			console.log("successfully deleted " + changeFileExt(path, '.cfr', '.xml'));
+		});
+		fs.unlink(changeFileExt(path, '.cfr', '_desugared.xml'), function (err) {   //delete _desugared.xml
+			if (err) throw err;
+			console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.xml'));
+		});
+		fs.unlink(changeFileExt(path, '.cfr', '_desugared.als'), function (err) {    //delete _desugared.als
+			if (err) throw err;
+			console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.als'));
+		});
+		fs.unlink(changeFileExt(path, '.cfr', '_desugared.cfr'), function (err) {    //delete _desugared.cfr
+			if (err) throw err;
+			console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.cfr'));
+		});
+		fs.unlink(changeFileExt(path, '.cfr', '_desugared.choco'), function (err) {    //delete _desugared.choco
+			if (err) throw err;
+			console.log("successfully deleted " + changeFileExt(path, '.cfr', '_desugared.choco'));
+		});
+	}
 //done cleanup
 }
 
