@@ -91,7 +91,7 @@ function cleanupOldFiles(path) {
   	if (err) throw err;
  		console.log("successfully deleted " + path);
 	});
-	if (ending == "cfr"){   //just added this because I realized people could kill the server with a bad file
+	if (ending == ".cfr"){   //just added this because I realized people could kill the server with a bad file
 		fs.unlink(changeFileExt(path, '.cfr', '.xml'), function (err) {   //delete .xml
 	  		if (err) throw err;
  			console.log("successfully deleted " + changeFileExt(path, '.cfr', '.xml'));
