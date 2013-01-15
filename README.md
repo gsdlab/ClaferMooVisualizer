@@ -23,24 +23,41 @@ The client-side is implemented using Javascript/HTML and handles all the basic f
 
 ### Live demo
 
-[http://gsd.uwaterloo.ca/clafermoovisualizer](http://gsd.uwaterloo.ca/clafermoovisualizer)
+[http://gsd.uwaterloo.ca/5002](http://gsd.uwaterloo.ca/5002)
 
 Installation
 ------------
 
-A special installation procedure is not required. Modified ClaferMoo version is on the package.
-
 ### Dependencies for running
 
-* Dependencies for [ClaferMoo](https://github.com/gsdlab/claferMooStandalone) must be satisfied
-* [Node.JS Framework](http://nodejs.org/download/), the stable version "0.8.15". Exactly this version should be installed, since the tool has not been tested with ther versions.
+* [Clafer](https://github.com/gsdlab/clafer.git) - can also be downloaded [claferIG downloads](https://github.com/gsdlab/claferig/downloads) page as a binary
+
+* [Java](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
+
+* [Python](http://www.python.org/getit/) 2.x >= 2.7 
+
+* [Node.JS Framework](http://nodejs.org/download/), the stable version "0.8.16". Exactly this version should be installed, since the tool has not been tested with other versions.
+
+### Installation
+
+-Download claferMooVisualizer to some directory
+
+-From that directory go to ClaferMooVisualizer/Server and run 
+	
+	`npm install`
+
+-To run the server run
+	
+	`node server.js`
+ 
+ from /ClaferMooVisualizer/Server/
 
 ### Settings
 
 1. Make sure the port `8080` is free, or change the variable value in `server.js`:
 `var port = 8080;` to any free one. This would be brought to the configuration settings file later.
 
-2. Make sure `clafer`, `python` and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
+2. Make sure `clafer`, `node`, `python`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
 
 Running the following commands should produce the following results:
 
@@ -58,6 +75,10 @@ Running the following commands should produce the following results:
 > `Java(TM) SE Runtime Environment (build 1.7.0_09-b05`)
 > `Java HotSpot(TM) 64-Bit Server VM (build 23.5-b02`, mixed mode)
 
+`node -v`
+
+>v0.8.16
+
 
 3. Make sure *uploads* folder is accessible for writing, since temporary files will be stored there.
 
@@ -65,4 +86,10 @@ Running the following commands should produce the following results:
 
 ### Running
 
-Go to the browser and type "http://localhost:[port]/". Then open any Clafer file with objectives in it.
+To run the server run
+	
+	`node server.js`
+ 
+from /ClaferMooVisualizer/Server/
+
+Then you can go to any browser and type "http://localhost:[port]/" and open any Clafer file with objectives in it.
