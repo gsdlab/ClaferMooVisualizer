@@ -40,17 +40,11 @@ Installation
 
 ### Installation
 
--Download claferMooVisualizer to some directory
+1. Download claferMooVisualizer to some directory
 
--From that directory go to ClaferMooVisualizer/Server and run 
+2. From that directory go to ClaferMooVisualizer/Server and run 
 	
  `npm install`
-
--To run the server run
-	
- `node server.js`
- 
- from /ClaferMooVisualizer/Server/
 
 ### Settings
 
