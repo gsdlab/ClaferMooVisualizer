@@ -44,11 +44,11 @@ Installation
 
 -From that directory go to ClaferMooVisualizer/Server and run 
 	
-	`npm install`
+ `npm install`
 
 -To run the server run
 	
-	`node server.js`
+ `node server.js`
  
  from /ClaferMooVisualizer/Server/
 
@@ -88,7 +88,7 @@ Running the following commands should produce the following results:
 
 To run the server run
 	
-	`node server.js`
+`node server.js`
  
 from /ClaferMooVisualizer/Server/
 
