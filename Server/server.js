@@ -22,27 +22,51 @@ server.use(express.static(__dirname + '/Client'));
 server.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/uploads' }));
 
 server.get('/', function(req, res) {
+//uploads now and runs once app.html is fully loaded
+//works because client currently sends one empty post upon completion of loading
+//!!!still has serious concurrency issues!!!
+	if (req.query.claferFileURL){
+		var uploadedFilePath = "./uploads/temporaryFile.cfr";
+		console.log("downloading file at " + req.query.claferFileURL);
+		var file = fs.createWriteStream(uploadedFilePath);
+		http.get(req.query.claferFileURL, function(res){
+			res.on('data', function (data) {
+				file.write(data);
+			}).on('end', function(){
+				file.end();
+				console.log("file downloaded to ./uploads");
+			});
+		});
+	}
     res.sendfile("Client/app.html");
 });
+
 
 /*
  * Handle file upload
  */
 server.post('/upload', function(req, res, next) {
-    if (req.files.claferFile === undefined) {
-		res.send('no clafer file submitted');
-		return;
+   	if (req.files.claferFile === undefined){
+   			if (fs.existsSync("./uploads/temporaryFile.cfr")){
+   				var uploadedFilePath = "./uploads/temporaryFile.cfr";
+   			} else {
+	   			res.send('no clafer file submitted');
+				return;
+   			}		
+	} else {
+		var uploadedFilePath = req.files.claferFile.path;
 	}
+
 	var file_contents;
-	
+	console.log("proceeding with " + uploadedFilePath);
     // read the contents of the uploaded file
-	fs.readFile(req.files.claferFile.path, function (err, data) {
+	fs.readFile(uploadedFilePath, function (err, data) {
         file_contents = data.toString();
 		
 		console.log("processing file with integratedFMO");
 		var util  = require('util'),
 		spawn = require('child_process').spawn,
-		tool  = spawn(python, [tool_path + python_file_name, req.files.claferFile.path]);
+		tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath]);
 		var error_result = "";
 		var data_result = "";
 		
@@ -62,7 +86,7 @@ server.post('/upload', function(req, res, next) {
 			if (code === 0) 
 			{
 				result = "Return code = " + code + "\n" + data_result + "=====";
-				var xml = fs.readFileSync(changeFileExt(req.files.claferFile.path, '.cfr', '_desugared.xml'));
+				var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '_desugared.xml'));
 				result += xml.toString();
 				
 				result = escapeHtml(result);
@@ -74,7 +98,7 @@ server.post('/upload', function(req, res, next) {
 			}
 			res.writeHead(200, { "Content-Type": "text/html"});
 			res.end(result);
-			cleanupOldFiles(req.files.claferFile.path);
+			cleanupOldFiles(uploadedFilePath);
 
 		});
 		

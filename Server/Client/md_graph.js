@@ -324,7 +324,7 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     $("#graph_table").css("table-layout", "auto"); //A fix for horizontal compression on non-chrome browsers (Jan 11th 2013)
 //    alert(w + " " + h);
     
-    $(chart).empty(); // clear the old graph
+    $("chart").empty(); // clear the old graph
     
     if (host.findModule("mdGraph"))
     {    
