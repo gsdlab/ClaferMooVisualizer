@@ -15,28 +15,25 @@ var port = 8080;
 var server = express();
 
 //support for sessions - not needed yet
-//server.use(express.cookieParser('asasdhf89adfhj0dfjask'));
-//server.use(express.session());
+server.use(express.cookieParser('asasdhf89adfhj0dfjask'));
+var store = new express.session.MemoryStore;
+server.use(express.session({secret: 'supersecretstring', store: store}));
 
 server.use(express.static(__dirname + '/Client'));
 server.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/uploads' }));
+
+var URLs = [];
+
 
 server.get('/', function(req, res) {
 //uploads now and runs once app.html is fully loaded
 //works because client currently sends one empty post upon completion of loading
 //!!!still has serious concurrency issues!!!
-	if (req.query.claferFileURL){
-		var uploadedFilePath = "./uploads/temporaryFile.cfr";
-		console.log("downloading file at " + req.query.claferFileURL);
-		var file = fs.createWriteStream(uploadedFilePath);
-		http.get(req.query.claferFileURL, function(res){
-			res.on('data', function (data) {
-				file.write(data);
-			}).on('end', function(){
-				file.end();
-				console.log("file downloaded to ./uploads");
-			});
-		});
+	if (req.query.claferFileURL) {
+		var sessionURL = new Object
+		sessionURL.session = req.sessionID;
+		sessionURL.url = req.query.claferFileURL;
+		URLs.push(sessionURL);
 	}
     res.sendfile("Client/app.html");
 });
@@ -46,12 +43,29 @@ server.get('/', function(req, res) {
  * Handle file upload
  */
 server.post('/upload', function(req, res, next) {
+	//check if client has either a file directly uploaded or a url location of a file
    	if (req.files.claferFile === undefined){
-   			if (fs.existsSync("./uploads/temporaryFile.cfr")){
-   				var uploadedFilePath = "./uploads/temporaryFile.cfr";
-   			} else {
-	   			res.send('no clafer file submitted');
-				return;
+   			for (var x=0; x <= URLs.length; x++){
+   				if (x === URLs.length){
+   					res.send("no clafer file submitted");
+   					return;
+   				} else if (URLs[x].session === req.sessionID){
+   					var uploadedFilePath = req.sessionID;
+   					uploadedFilePath = uploadedFilePath.replace("/", "");
+   					uploadedFilePath = "./uploads/" + uploadedFilePath + ".cfr"
+					console.log("downloading file at " + URLs[x].url);
+					var file = fs.createWriteStream(uploadedFilePath);
+					http.get(URLs[x].url, function(res){
+						res.on('data', function (data) {
+							file.write(data);
+						}).on('end', function(){
+							file.end();
+							console.log("file downloaded to ./uploads");
+						});
+					});
+					URLs.splice(x,1);
+					break;
+   				}
    			}		
 	} else {
 		var uploadedFilePath = req.files.claferFile.path;
