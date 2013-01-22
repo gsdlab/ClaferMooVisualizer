@@ -145,8 +145,7 @@ Input.method("processToolResult", function(result)
 
     this.host.updateData(data);
 });
-
-{
 Input.method("getInitContent", function()
-	return '<div id="load_area"><form id="myform" action="' + this.serverAction + '" method="post" enctype="multipart/form-data">' + '<input type="file" name="claferFile">' + '<input type="hidden" name=claferFileURL value=' + window.location + '>' + '<input type="submit" value="Upload">'+'</form></div>';  
+{
+	return '<div id="load_area"><form id="myform" action="' + this.serverAction + '" method="post" enctype="multipart/form-data">' + '<input type="file" name="claferFile">' + '<input type="hidden" name="claferFileURL" value="' + window.location + '">' + '<input type="submit" value="Upload">'+'</form></div>';  
 });
