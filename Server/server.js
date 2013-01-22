@@ -28,12 +28,12 @@ var URLs = [];
 server.get('/', function(req, res) {
 //uploads now and runs once app.html is fully loaded
 //works because client currently sends one empty post upon completion of loading
-//!!!still has serious concurrency issues!!!
 	if (req.query.claferFileURL) {
 		var sessionURL = new Object
 		sessionURL.session = req.sessionID;
 		sessionURL.url = req.query.claferFileURL;
 		URLs.push(sessionURL);
+		console.log(req.sessionID);
 	}
     res.sendfile("Client/app.html");
 });
@@ -49,10 +49,15 @@ server.post('/upload', function(req, res, next) {
    				if (x === URLs.length){
    					res.send("no clafer file submitted");
    					return;
-   				} else if (URLs[x].session === req.sessionID){
+   				} else if (URLs[x].session === req.sessionID && ("claferFileURL=" + URLs[x].url) === url.parse(req.body.claferFileURL).query){
+   					var i = 0;
    					var uploadedFilePath = req.sessionID;
    					uploadedFilePath = uploadedFilePath.replace("/", "");
-   					uploadedFilePath = "./uploads/" + uploadedFilePath + ".cfr"
+   					uploadedFilePath = "./uploads/" + uploadedFilePath;
+   					while(fs.existsSync(uploadedFilePath + i.toString() + ".cfr")){
+   						i = i+1;
+   					}
+   					uploadedFilePath = uploadedFilePath + i.toString() + ".cfr";
 					console.log("downloading file at " + URLs[x].url);
 					var file = fs.createWriteStream(uploadedFilePath);
 					http.get(URLs[x].url, function(res){
