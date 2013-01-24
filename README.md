@@ -1,6 +1,6 @@
 ClaferMooVisualizer
 ===================
-v0.3.2.17-12-2012
+v0.3.2.24-01-2013
 
 Visualizes Pareto Front and allows to perform analysis of the Pareto Front.
 
@@ -32,18 +32,21 @@ Installation
 
 * [Clafer](https://github.com/gsdlab/clafer.git) - can also be downloaded [claferIG downloads](https://github.com/gsdlab/claferig/downloads) page as a binary
 
+* [ClaferMoo](https://github.com/gsdlab/claferMooStandalone)
+
 * [Java](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
 
 * [Python](http://www.python.org/getit/) 2.x >= 2.7 
 
-* [Node.JS Framework](http://nodejs.org/download/), the stable version "0.8.16". Exactly this version should be installed, since the tool has not been tested with other versions.
+* [Node.JS Framework](http://nodejs.org/download/), the stable version "0.8.18". Exactly this version should be installed, since the tool has not been tested with other versions.
 
 ### Installation
 
-1. Install [ClaferMooStandalone](https://github.com/gsdlab/claferMooStandalone) to some directory
-2. Download [ClaferMooVisualizer](https://github.com/gsdlab/claferMooVisualizer) to some directory `<ClaferMooVisualizer>`
-3. Copy `spl_datagenerator` and `tools` folders from `ClaferMooStandalone/2012-models-clafermultiobjective-data-generator/` into `<ClaferMooVisualizer>/Server/ClaferMoo`
-4. Go to `<ClaferMooVisualizer>/Server` and execute
+1. Install [ClaferMooStandalone](https://github.com/gsdlab/claferMooStandalone) to some directory `<ClaferMooStandalone>`
+  * Clafer is installed as part of this procedure
+2. Download [ClaferMooVisualizer](https://github.com/gsdlab/claferMooVisualizer) to some directory `<target directory>`
+3. Copy folders `spl_datagenerator` and `tools` folders from `<ClaferMooStandalone>/2012-models-clafermultiobjective-data-generator/` into `<target directory>/ClaferMooVisualizer/Server/ClaferMoo`
+4. Go to `<target directory>/ClaferMooVisualizer/Server` and execute
 	
  `npm install`
 
@@ -72,8 +75,7 @@ Running the following commands should produce the following results:
 
 `node -v`
 
->v0.8.16
-
+>v0.8.18
 
 3. Make sure *uploads* folder is accessible for writing, since temporary files will be stored there.
 
@@ -85,6 +87,6 @@ To run the server execute
 	
 `node server.js`
  
-from `/ClaferMooVisualizer/Server/`
+from `<target directory>/ClaferMooVisualizer/Server/`
 
 Then you can go to any browser and type `http://localhost:[port]/` and open any Clafer file with objectives in it.
