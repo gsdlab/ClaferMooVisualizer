@@ -13,7 +13,7 @@ import math
 _namespaces = {'c1': 'http://gsd.uwaterloo.ca/clafer', 'xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
 
 
-def generate_and_append_partial_instances_and_gaols(xml_filename, als_filehandle):
+def generate_and_append_partial_instances_and_goals(xml_filename, als_filehandle):
         
     spl_transformer =  spl_claferanalyzer.SPL_ClaferAnalyzer(xml_filename)
     
@@ -88,51 +88,6 @@ def write_partial_instance_number_container_to_number_rel(als_filehandle, spl_tr
                                                           spl_transformer.get_property_value(childFeature, non_functional_property_clafer_id) )   \
                      for childFeature in spl_transformer.get_features_as_xml_elements(FeatureType_UniqueId)]) + "\n")    
             
-    
-"""        
-    # als_filehandle.write(partial instances of individual features, children of IMeasurable.
-    for clafer_features in spl_transformer.get_features_as_xml_elements():
-        als_filehandle.write("   , %s in partial_%s\n" %  (spl_transformer.get_clafer_UniqueId(clafer_features), spl_transformer.get_clafer_UniqueId(clafer_features) ))    
-
-    
-
-    # print relationship for the nonfunctional properties for each feature.
-    for non_functional_property in  spl_transformer.get_non_functional_properties_listing():
-        als_filehandle.write("    ,  %s in " % spl_transformer.get_non_functional_property_unique_id(non_functional_property))
-     
-        list_of_IMeasurableChildren = []
-        for clafer_features in spl_transformer.get_features_as_xml_elements(non_functional_property):
-            
-            print "Adding for feature %s , non-functional property  %s " % (spl_transformer.get_clafer_UniqueId(clafer_features), non_functional_property)
-            list_of_IMeasurableChildren.append("%s_for_%s_of_%s" % (non_functional_property, \
-                                                                    spl_transformer.get_clafer_UniqueId(clafer_features), \
-                                                                    spl_transformer.get_property_value(clafer_features, non_functional_property).replace('-', 'minus')))        
-        als_filehandle.write(' + '.join(list_of_IMeasurableChildren) + "\n")
-
-    
-    # print Partial Instance of non-functional property relationship mapping features to number container.
-    for non_functional_property in  spl_transformer.get_non_functional_properties_listing():        
-        als_filehandle.write('    , r_%s in ' % spl_transformer.get_non_functional_property_unique_id(non_functional_property))
-               
-        als_filehandle.write(' + '.join([ "partial_%s->%s_for_%s_of_%s" % (spl_transformer.get_clafer_UniqueId(clafer_features), \
-                                                            non_functional_property, \
-                                                            spl_transformer.get_clafer_UniqueId(clafer_features) , \
-                                                            spl_transformer.get_property_value(clafer_features, non_functional_property).replace('-', 'minus') )   \
-                 for clafer_features in spl_transformer.get_features_as_xml_elements(non_functional_property)]) + "\n")
-
-    #  als_filehandle.write(Number Container   to  number   relation.
-    for non_functional_property in  spl_transformer.non_functional_properties.keys():
-        non_functional_property_unique_id =  spl_transformer.get_non_functional_property_unique_id(non_functional_property)       
-        als_filehandle.write('    , %s_ref in ' % non_functional_property_unique_id)
-                   
-    
-        als_filehandle.write(' + '.join([ "%s_for_%s_of_%s-> %s" % ( non_functional_property , \
-                                                      spl_transformer.get_clafer_UniqueId(clafer_features), \
-                                                      spl_transformer.get_property_value(clafer_features, non_functional_property).replace('-', 'minus'),  \
-                                                      spl_transformer.get_property_value(clafer_features, non_functional_property) )   \
-                 for clafer_features in spl_transformer.get_features_as_xml_elements()]) + "\n")    
-    als_filehandle.write("}\n")
-"""
 
 
 

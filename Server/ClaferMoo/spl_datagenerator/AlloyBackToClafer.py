@@ -3,7 +3,9 @@ Created on Aug 14, 2012
 
 @author: rafaelolaechea
 '''
-import re
+import re, os
+from xml_parser_helper import load_xml_model
+
 def show_clafer(element, tab_count,  instance_xml, preserve_clafer_names, spl_transformer):
     """
     Recursively shows clafer, as well as return a set of values for product-level attributes.
@@ -101,6 +103,26 @@ def convert_ClaferUniqueIdLabel_to_ClaferName(UniqueIdLabel, PreserveIDs, spl_tr
     regex_remove_pre = re.compile(r'this/c\d+_')
     if PreserveIDs:
         regex_remove_pre = re.compile(r'this/')
-
     match = regex_remove_pre.search(UniqueIdLabel)
     return UniqueIdLabel.replace(match.group(0), '')
+
+def show_clafers_from_alloy_solutions(preserve_clafer_names, spl_transformer):
+    """
+    Write Back Alloy Answer as Clafer, 
+        : and return a list of sets for product-level attributes in the pareto front.    
+    """
+    configured_product_UniqueId = spl_transformer.get_clafer_UniqueId(spl_transformer.get_concrete_instance_as_xml_element())
+    configured_product_label = "this/" + configured_product_UniqueId    
+    product_level_values_list =[]
+    i = 1
+    while(os.path.exists("alloy_solutions_" + str(i)+ ".xml")):
+        
+        instance_xml = load_xml_model("alloy_solutions_"+ str(i) + ".xml")
+        
+        top_level_product_sig = instance_xml.find("./instance/sig[@label='%s']" % configured_product_label)
+        top_level_product_atom = top_level_product_sig.find("./atom")
+    
+        product_level_values_list.append(show_clafer((top_level_product_sig, top_level_product_atom), 0, instance_xml, preserve_clafer_names, spl_transformer))
+        #print "\n\n Product Level Values %s " % str(product_level_values) 
+        i += 1
+    return product_level_values_list
