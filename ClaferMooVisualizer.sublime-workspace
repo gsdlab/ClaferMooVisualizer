@@ -1,0 +1,284 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"arro",
+				"arrowtail"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"tex",
+				"text-decoration"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"font-",
+				"font-style"
+			],
+			[
+				"fon",
+				"font-weight"
+			],
+			[
+				"bac",
+				"background-repeat"
+			],
+			[
+				"back",
+				"background-position"
+			],
+			[
+				"c",
+				"color"
+			],
+			[
+				"in",
+				"input	Tag"
+			],
+			[
+				"border-c",
+				"border-color"
+			],
+			[
+				"background-",
+				"background-clip"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"img",
+				"background-image"
+			],
+			[
+				"A",
+				"a"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 81.0,
+		"selected_items":
+		[
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Pac",
+				"Package Control: Install Package"
+			],
+			[
+				"package control: ",
+				"Package Control: List Packages"
+			]
+		],
+		"width": 512.0
+	},
+	"console":
+	{
+		"height": 160.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/mantkiew/AppData/Roaming/Sublime Text 2/Packages/CoffeeCompile/CoffeeCompile.sublime-settings",
+		"/D/projects/ClaferMooVisualizer/README.md",
+		"/D/projects/claferMooStandalone/README.md",
+		"/D/projects/claferMooStandalone/2012-models-clafermultiobjective-data-generator/spl_datagenerator/IntegratedFeatureModelOptimizer.py",
+		"/D/projects/claferMooStandalone/2012-models-clafermultiobjective-data-generator/spl_datagenerator/MemoryUtil.java",
+		"/D/projects/modelwiki/gitit.cnf",
+		"/D/projects/clafer/src/Language/Clafer/Generator/Graph.hs",
+		"/D/projects/claferwiki/claferwiki.sh",
+		"/D/projects/claferwiki/README.md",
+		"/D/projects/modelwiki/wikidata/ClaferWiki-Specific Help.page",
+		"/D/projects/claferwiki/templates/footer.st",
+		"/D/projects/claferwiki/plugins/ClaferWriter.hs",
+		"/D/projects/claferwiki/static/css/clafer.css",
+		"/D/projects/modelwiki/plugins/ClaferWriter.hs",
+		"/D/projects/claferwiki/static/img/test.html",
+		"/D/projects/claferwiki/static/css/custom.css",
+		"/D/projects/claferwiki/plugins/ClaferCompiler.hs",
+		"/D/projects/claferwiki/static/clafer/25078e6cbaff6a897094bc0287858a634a0f5d6e.html",
+		"/C/Users/mantkiew/Downloads/25078e6cbaff6a897094bc0287858a634a0f5d6e (1).cfr",
+		"/C/Users/mantkiew/Downloads/25078e6cbaff6a897094bc0287858a634a0f5d6e.cfr",
+		"/D/projects/clafer/src/Language/Clafer/Generator/Html.hs",
+		"/D/projects/ClaferMooVisualizer/Talk_Samples/AndroidSampleMoo_2.cfr",
+		"/C/Users/mantkiew/Downloads/d589c3ce18ea6acea9357ff8963e35991b432135.cfr",
+		"/D/projects/ClaferMooVisualizer/Server/server.js",
+		"/D/projects/z3/RELEASE_NOTES",
+		"/D/projects/z3/scripts/README",
+		"/D/projects/z3/README",
+		"/D/projects/z3/examples/python/README",
+		"/D/projects/claferIG/src/Sugarer.hs",
+		"/D/projects/claferIG/src/CommandLineParser.hs",
+		"/D/projects/claferIG/src/CommandLine.hs",
+		"/D/projects/claferIG/src/Constraints.hs",
+		"/D/projects/claferIG/src/Solution.hs",
+		"/D/projects/claferIG/src/ClaferModel.hs",
+		"/D/projects/claferMooStandalone/2012-models-clafermultiobjective-data-generator/spl_datagenerator/AlloyBackToClafer.py",
+		"/D/projects/claferMooStandalone/2012-models-clafermultiobjective-data-generator/spl_datagenerator/xml_parser_helper.py",
+		"/C/temp/idn.coffee",
+		"/D/projects/eclipse4.2.1/2013-ecoop-clafer/doc.tex",
+		"/C/Users/mantkiew/AppData/Roaming/Sublime Text 2/Packages/LaTeXTools/README.markdown",
+		"/C/Users/mantkiew/AppData/Roaming/Sublime Text 2/Packages/User/LaTeXTools Preferences.sublime-settings",
+		"/C/Users/mantkiew/AppData/Roaming/Sublime Text 2/Packages/LaTeXTools/LaTeXTools Preferences.sublime-settings",
+		"/C/Users/mantkiew/AppData/Roaming/npm/node_modules/coffee-script/CONTRIBUTING.md",
+		"/C/temp/idn.js",
+		"/C/Users/mantkiew/AppData/Roaming/Sublime Text 2/Packages/LaTeXTools/LaTeX.sublime-build",
+		"/C/Program Files/Sublime Text 2/Pristine Packages/LaTeX.sublime-package",
+		"/C/temp/temp.sublime-project",
+		"/C/Users/mantkiew/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/mantkiew/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/mantkiew/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"bread",
+			"arrowsize=0.75",
+			"onormal",
+			"gray",
+			"dashed",
+			"onormal",
+			"dashed",
+			"vee",
+			"{-",
+			"autoconf",
+			"i_name",
+			"sugar",
+			"A$3",
+			"d$2"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"arrowsize=0.6"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 304.0
+	},
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"idn",
+				"/C/temp/idn.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/D/projects/claferMooStandalone/claferMoo.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 240.0,
+	"status_bar_visible": true
+}

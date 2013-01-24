@@ -40,9 +40,10 @@ Installation
 
 ### Installation
 
-1. Download claferMooVisualizer to some directory
-
-2. From that directory go to ClaferMooVisualizer/Server and run 
+1. Install [ClaferMooStandalone](https://github.com/gsdlab/claferMooStandalone) to some directory
+2. Download [ClaferMooVisualizer](https://github.com/gsdlab/claferMooVisualizer) to some directory `<ClaferMooVisualizer>`
+3. Copy `spl_datagenerator` and `tools` folders from `ClaferMooStandalone/2012-models-clafermultiobjective-data-generator/` into `<ClaferMooVisualizer>/Server/ClaferMoo`
+4. Go to `<ClaferMooVisualizer>/Server` and execute
 	
  `npm install`
 
@@ -66,8 +67,8 @@ Running the following commands should produce the following results:
 `java -version`
 
 > `java version 1.7.0_09`
-> `Java(TM) SE Runtime Environment (build 1.7.0_09-b05`)
-> `Java HotSpot(TM) 64-Bit Server VM (build 23.5-b02`, mixed mode)
+> `Java(TM) SE Runtime Environment (build 1.7.0_09-b05)`
+> `Java HotSpot(TM) 64-Bit Server VM (build 23.5-b02, mixed mode)`
 
 `node -v`
 
@@ -80,10 +81,10 @@ Running the following commands should produce the following results:
 
 ### Running
 
-To run the server run
+To run the server execute
 	
 `node server.js`
  
-from /ClaferMooVisualizer/Server/
+from `/ClaferMooVisualizer/Server/`
 
-Then you can go to any browser and type "http://localhost:[port]/" and open any Clafer file with objectives in it.
+Then you can go to any browser and type `http://localhost:[port]/` and open any Clafer file with objectives in it.
