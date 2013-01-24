@@ -85,7 +85,7 @@ server.post('/upload', function(req, res, next) {
 		console.log("processing file with integratedFMO");
 		var util  = require('util'),
 		spawn = require('child_process').spawn,
-		tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath]);
+		tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath], --preservenames);
 		var error_result = "";
 		var data_result = "";
 		
