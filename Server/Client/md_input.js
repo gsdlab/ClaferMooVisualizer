@@ -22,6 +22,7 @@ Input.method("onInitRendered", function()
     var options = new Object();
     options.beforeSubmit = this.beginQuery.bind(this);
     options.success = this.showResponse.bind(this);
+    options.error = this.handleError.bind(this);
  
     $('#myform').ajaxForm(options); 
 	$('#myform').submit();
@@ -51,6 +52,12 @@ Input.method("showRequest", function(formData, jqForm, options) {
 Input.method("showResponse", function(responseText, statusText, xhr, $form)  { 
     this.processToolResult(responseText);    
 	this.endQuery();
+});
+
+Input.method("handleError", function(responseText, statusText, xhr, $form)  { 
+	alert(xhr);
+	this.endQuery();
+    this.processToolResult(responseText);    
 });
 
 Input.method("convertHtmlTags", function(input) {

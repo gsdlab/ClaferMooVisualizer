@@ -115,7 +115,10 @@ server.post('/upload', function(req, res, next) {
 			{
 				result = 'Error, return code: ' + code + '\n' + error_result;
 			}
-			res.writeHead(200, { "Content-Type": "text/html"});
+			if (code === 0)
+				res.writeHead(200, { "Content-Type": "text/html"});
+			else
+				res.writeHead(400, { "Content-Type": "text/html"});
 			res.end(result);
 			cleanupOldFiles(uploadedFilePath);
 
