@@ -55,7 +55,7 @@ Input.method("showResponse", function(responseText, statusText, xhr, $form)  {
 });
 
 Input.method("handleError", function(responseText, statusText, xhr, $form)  { 
-	alert(xhr);
+	alert(xhr + '\n' + responseText.responseText);
 	this.endQuery();
     this.processToolResult(responseText);    
 });
