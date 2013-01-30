@@ -27,15 +27,15 @@ Input.method("onInitRendered", function()
     $('#myform').ajaxForm(options); 
 	$('#myform').submit();
 });
-
-Input.method("beginQuery", function(formData, jqForm, options) { 
-	var that = this;
-	this.timeout = setTimeout(function(){that.handleTimeout();}, 65000);
+ 
+Input.method("beginQuery", function(formData, jqForm, options) {
+    	var that = this;
+    	this.timeout = setTimeout(function(){that.handleTimeout();}, 65000);   
 	$("#load_area #myform").hide();
 	$("#load_area").append('<div id="preloader"><img id="preloader_img" src="/images/preloader.gif" alt="Loading..."/><span>Loading and processing...</span></div>');	
     return true; 
 });
- 
+
 // post-submit callback 
 Input.method("endQuery", function()  { 
 	$("#preloader").remove();
@@ -45,29 +45,39 @@ Input.method("endQuery", function()  {
 });
 
 // pre-submit callback 
-Input.method("showRequest", function(formData, jqForm, options) {  
+Input.method("showRequest", function(formData, jqForm, options) {
     var queryString = $.param(formData); 
     return true; 
 });
  
 // post-submit callback 
 Input.method("showResponse", function(responseText, statusText, xhr, $form)  { 
-    this.clearTimeout(this.timeout);
-	this.processToolResult(responseText);    
+	clearTimeout(this.timeout); 
+	this.processToolResult(responseText);   
 	this.endQuery();
 });
 
 Input.method("handleError", function(responseText, statusText, xhr, $form)  { 
-	this.clearTimeout(this.timeout);
-	alert(xhr + '\n' + responseText.responseText);
+	clearTimeout(this.timeout);
+	var er = document.getElementById("error_overlay");
+	er.style.visibility = "visible";	
+	document.getElementById("error_report").innerHTML = ('<input id="close_error" type="image" src="images/no.png" alt="close" style="position: relative; left: -325px; top: 0px; width: 20px; height: 20px;"><p>' + xhr + '<br>' + responseText.responseText.replace("\n", "<br>") + "</p>");
+	document.getElementById("close_error").onclick = function(){ 
+		document.getElementById("error_overlay").style.visibility = "hidden";
+	};
 	this.endQuery();
-    this.processToolResult(responseText);    
+    
 });
 
 Input.method("handleTimeout", function(responseText, statusText, xhr, $form)  { 
-	alert("Request timed out.");
-	this.endQuery();
-    this.processToolResult(responseText);    
+	clearTimeout(this.timeout);
+	var er = document.getElementById("error_overlay");
+	er.style.visibility = "visible";	
+	document.getElementById("error_report").innerHTML = ('<input id="close_error" type="image" src="images/no.png" alt="close" style="position: relative; left: -325px; top: 0px; width: 20px; height: 20px;"><p> Error: <br> The request timed out. </p>');
+	document.getElementById("close_error").onclick = function(){ 
+		document.getElementById("error_overlay").style.visibility = "hidden";
+	};
+	this.endQuery();     
 });
 
 Input.method("convertHtmlTags", function(input) {
