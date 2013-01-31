@@ -29,6 +29,7 @@ ComparisonTable.method("onDataLoaded", function(data){
     
     this.dataTable = this.getDataTable();    
     this.content = $('<div id="comparison" class="comparison"></div>').append(new TableVisualizer().getHTML(this.dataTable));
+    this.hidden = [];
 });
 
 ComparisonTable.method("onRendered", function()
@@ -40,6 +41,80 @@ ComparisonTable.method("onRendered", function()
     $('#toggle_link').click(this.toggleDistinct.bind(this));
     
     this.addHovering();
+
+    var i = 1;
+    row = $("#r" + i);
+    var that = this;
+    while (row.length != 0){
+        if (!row.find(".numeric").length)
+            $("#r" + i + " .td_abstract").prepend('<image id="r' + i + 'box" src="images/checkbox_empty.bmp" class="maybe">');
+        $("#r" + i + "box").click(function(){
+            if (this.className == "maybe"){
+                this.src = "images/checkbox_ticked.bmp";
+                this.className = "wanted";
+                that.filterContent();
+            } else if (this.className == "wanted"){
+                this.src = "images/checkbox_x.bmp";
+                this.className = "unwanted";
+                that.filterContent();
+            } else {
+                this.src = "images/checkbox_empty.bmp";
+                this.className = "maybe";
+                that.filterContent();
+            }
+        });
+        i++;
+        row = $("#r" + i);
+    }
+
+});
+
+ComparisonTable.method("filterContent", function(){
+    this.unFilter();
+    console.log("filter called");
+    var i = 1;
+    row = $("#r" + i);
+    row_length = row.find(".td_instance").length
+    while (row.length != 0){
+        if (!row.find(".numeric").length){
+            filter = $("#r" + i + "box").attr("Class");
+            for (var x = 1; x <= row_length; x++){
+                if (filter == "maybe")
+                    break;
+                else if (filter == "wanted" && $("#td" + (i-1) + "_" + x).hasClass("no")) {
+                    $("#th0_" + x).hide();
+                    this.hidden.push("#th0_" + x)
+                    var y = 1;
+                    var row_with_removal = $("#r" + y);
+                    while (row_with_removal.length != 0){
+                        $("#td"+ (y-1) +"_" + x).hide();
+                        this.hidden.push("#td"+ (y-1) +"_" + x)
+                        y++;
+                        row_with_removal = $("#r" + y);
+                    }
+                } else if (filter == "unwanted" && $("#td" + (i-1) + "_" + x).hasClass("tick")) {
+                    $("#th0_" + x).hide();
+                    this.hidden.push("#th0_" + x)
+                    var y = 1;
+                    var row_with_removal = $("#r" + y);
+                    while (row_with_removal.length != 0){
+                        $("#td"+ (y-1) +"_" + x).hide();
+                        this.hidden.push("#td"+ (y-1) +"_" + x)
+                        y++;
+                        row_with_removal = $("#r" + y);
+                    }
+                }
+            }
+        }
+        i++;
+        row = $("#r" + i);
+    }
+});
+
+ComparisonTable.method("unFilter", function(){
+    while(this.hidden.length){
+        $(this.hidden.pop()).show();
+    }
 });
 
 ComparisonTable.method("getContent", function()
