@@ -39,7 +39,7 @@ ComparisonTable.method("onRendered", function()
 
     $('#toggle_link').html("Distinct");
     $('#toggle_link').click(this.toggleDistinct.bind(this));
-    
+
     this.addHovering();
 
     var i = 1;
@@ -71,8 +71,17 @@ ComparisonTable.method("onRendered", function()
 
 ComparisonTable.method("filterContent", function(){
     this.unFilter();
+
     console.log("filter called");
     var i = 1;
+    
+    var graph_data = $("g:contains('P1')")[2];
+    var circle_pairs = [];
+    for (i=0; i<graph_data.children.length;i+=2){
+        circle_pairs.push({ circle: graph_data.children[i], text_data: graph_data.children[i+1] });
+    }
+
+    i=0;
     row = $("#r" + i);
     row_length = row.find(".td_instance").length
     while (row.length != 0){
@@ -83,23 +92,32 @@ ComparisonTable.method("filterContent", function(){
                     break;
                 else if (filter == "wanted" && $("#td" + (i-1) + "_" + x).hasClass("no")) {
                     $("#th0_" + x).hide();
-                    this.hidden.push("#th0_" + x)
+                    this.hidden.push("#th0_" + x);
+                    console.log(circle_pairs[x-1].circle);
+                    $(circle_pairs[x-1].circle).hide();
+                    $(circle_pairs[x-1].text_data).hide();
+                    this.hidden.push(circle_pairs[x-1].circle);
+                    this.hidden.push(circle_pairs[x-1].text_data);
                     var y = 1;
                     var row_with_removal = $("#r" + y);
                     while (row_with_removal.length != 0){
                         $("#td"+ (y-1) +"_" + x).hide();
-                        this.hidden.push("#td"+ (y-1) +"_" + x)
+                        this.hidden.push("#td"+ (y-1) +"_" + x);
                         y++;
                         row_with_removal = $("#r" + y);
                     }
                 } else if (filter == "unwanted" && $("#td" + (i-1) + "_" + x).hasClass("tick")) {
                     $("#th0_" + x).hide();
-                    this.hidden.push("#th0_" + x)
+                    this.hidden.push("#th0_" + x);
+                    $(circle_pairs[x-1].circle).hide();
+                    $(circle_pairs[x-1].text_data).hide();
+                    this.hidden.push(circle_pairs[x-1].circle);
+                    this.hidden.push(circle_pairs[x-1].text_data);
                     var y = 1;
                     var row_with_removal = $("#r" + y);
                     while (row_with_removal.length != 0){
                         $("#td"+ (y-1) +"_" + x).hide();
-                        this.hidden.push("#td"+ (y-1) +"_" + x)
+                        this.hidden.push("#td"+ (y-1) +"_" + x);
                         y++;
                         row_with_removal = $("#r" + y);
                     }
