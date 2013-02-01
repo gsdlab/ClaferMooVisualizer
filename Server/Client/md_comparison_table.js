@@ -40,6 +40,12 @@ ComparisonTable.method("onRendered", function()
     $('#toggle_link').html("Distinct");
     $('#toggle_link').click(this.toggleDistinct.bind(this));
 
+    var td = $('#comparison .table_title')[0];
+    $(td).append('&nbsp;<button id="filter_reset">Toggle</button>');
+
+    $('#filter_reset').html("Reset");
+    $('#filter_reset').click(this.resetFilters.bind(this));
+
     this.addHovering();
 
     var i = 1;
@@ -144,6 +150,21 @@ ComparisonTable.method("unFilter", function(){
     while(this.hidden.length){
         $(this.hidden.pop()).show();
     }
+});
+
+ComparisonTable.method("resetFilters", function(){
+    var i = 1;
+    row = $("#r" + i);
+    while (row.length != 0){
+        if (!row.find(".numeric").length){
+            current = document.getElementById("r" + i + "box");
+            current.src = "images/checkbox_empty.bmp";
+            current.className = "maybe";
+        }
+        i++;
+        row = $("#r" + i);
+    }
+    this.filterContent();
 });
 
 ComparisonTable.method("getContent", function()
