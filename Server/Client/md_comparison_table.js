@@ -68,7 +68,14 @@ ComparisonTable.method("onRendered", function()
                 this.className = "maybe";
                 that.filterContent();
             }
+//            if (this.hasClass("wanted") || this.hasClass("unwanted"))
+//                if (that.toggled)
+//                    toggleRow($("#r" + i), true);
+//            else
+//                if (that.toggled)
+//                    toggleRow($("#r" + i), false);
         });
+            
         i++;
         row = $("#r" + i);
     }
@@ -311,20 +318,22 @@ ComparisonTable.method("toggleDistinct", function()
 
             for (var j = 0; j < instanceTds.length; j++)
             {
-
-                if ($(instanceTds[j]).hasClass("tick"))
+                if ($(instanceTds[j]).css("display") == "none"){
+                    //do nothing
+                }
+                else if ($(instanceTds[j]).hasClass("tick"))
                 {
                     if (last == "" || last == "tick")
                         last = "tick";
-                    else allAreTheSame = false;
+                    else {allAreTheSame = false; break;}
                 }   
                 else if ($(instanceTds[j]).hasClass("no"))
                 {
                     if (last == "" || last == "no")
                         last = "no";
-                    else allAreTheSame = false;
+                    else {allAreTheSame = false; break;}
                 }
-                else allAreTheSame = false;
+                else {allAreTheSame = false; break;}
             }
             
             if (allAreTheSame)
