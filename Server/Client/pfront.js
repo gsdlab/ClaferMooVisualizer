@@ -192,12 +192,10 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
        
     if (host.selector.isSelected(pid))
     {
-        host.findModule("mdGraph").makePointsDeselected([pid]);
         host.selector.onDeselected(pid);
     }
     else
     {
-        host.findModule("mdGraph").makePointsSelected([pid]);
         host.selector.onSelected(pid);
     }
   }

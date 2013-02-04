@@ -37,7 +37,6 @@ Analysis.method("getInitContent", function()
 });
 
 Analysis.method("onSelectionChanged", function(list){
-    
     var originalData = this.host.findModule("mdComparisonTable").dataTable;    
     data = originalData.subsetByProducts(list);
     

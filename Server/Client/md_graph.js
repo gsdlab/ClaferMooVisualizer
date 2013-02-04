@@ -155,7 +155,6 @@ Graph.method("redrawParetoFront", function()
     }
     
     this.PFVisualizer.draw(this.instanceProcessor, args, labels);
-     
     this.makePointsSelected(this.host.selector.selection);
 });
 

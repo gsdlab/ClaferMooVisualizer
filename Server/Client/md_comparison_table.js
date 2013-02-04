@@ -40,7 +40,6 @@ ComparisonTable.method("onRendered", function()
     $('#toggle_link').html("Distinct");
     $('#toggle_link').click(this.toggleDistinct.bind(this));
 
-    var td = $('#comparison .table_title')[0];
     $(td).append('&nbsp;<button id="filter_reset">Toggle</button>');
 
     $('#filter_reset').html("Reset");
@@ -73,11 +72,25 @@ ComparisonTable.method("onRendered", function()
 //                    toggleRow($("#r" + i), true);
 //            else
 //                if (that.toggled)
-//                    toggleRow($("#r" + i), false);
+//                    toggleRow($("#r" + i), false); //wont work because I is wrong. 
+                                                     //commented out because not currently necessary
         });
             
         i++;
         row = $("#r" + i);
+    }
+
+    var length = $("#r0").find(".td_instance").length;
+    console.log(length);
+    for(i=1; i<=length; i++){
+        $("#th0_" + i).click(function(){
+            var pid = "P" + $(this).attr('id').substring(4)
+            var locationInArray = $.inArray(pid, host.selector.selection)
+            if (locationInArray == -1)
+                host.selector.onSelected(pid);
+            else
+                host.selector.onDeselected(pid);
+        });
     }
 
 });
@@ -101,10 +114,6 @@ ComparisonTable.method("filterContent", function(){
     circle_pairs.sort(function(a,b){
         return a.ident - b.ident;
     });
-
-    for (i=0; i<circle_pairs.length; i++){
-        console.log(circle_pairs[i].ident);
-    }
 
     i=0;
     row = $("#mdComparisonTable #r" + i);
@@ -165,8 +174,10 @@ ComparisonTable.method("resetFilters", function(){
     while (row.length != 0){
         if (!(row.find(".numeric").length)){
             current = document.getElementById("r" + i + "box");
-            current.src = "images/checkbox_empty.bmp";
-            current.className = "maybe";
+            if (current){
+                current.src = "images/checkbox_empty.bmp";
+                current.className = "maybe";
+            }
         }
         i++;
         row = $("#r" + i);
@@ -368,6 +379,25 @@ ComparisonTable.method("addHovering", function()
 		$(this).css("background", "");
 	  }
 	);
+
+    $("#comparison #r0 .td_instance").hover(
+      function () {
+        $(this).css("background", "#ffffcc");
+      }, 
+      function () {
+        $(this).css("background", "");
+      }
+    );
+
+});
+
+ComparisonTable.method("makePointsSelected", function (pid){;
+    $("#mdComparisonTable #th0_" + pid.substring(1)).css("color", "red");
+});
+
+ComparisonTable.method("makePointsDeselected", function (pid){
+    console.log(pid.substring(1));
+    $("#mdComparisonTable #th0_" + pid.substring(1)).css("color", "black");
 });
 
 ComparisonTable.method("getInitContent", function()
