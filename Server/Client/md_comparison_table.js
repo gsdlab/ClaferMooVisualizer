@@ -72,7 +72,7 @@ ComparisonTable.method("onRendered", function()
 //                    toggleRow($("#r" + i), true);
 //            else
 //                if (that.toggled)
-//                    toggleRow($("#r" + i), false); //wont work because I is wrong. 
+//                    toggleRow($("#r" + i), false); //wont work because i is wrong. 
                                                      //commented out because not currently necessary
         });
             
@@ -396,7 +396,6 @@ ComparisonTable.method("makePointsSelected", function (pid){;
 });
 
 ComparisonTable.method("makePointsDeselected", function (pid){
-    console.log(pid.substring(1));
     $("#mdComparisonTable #th0_" + pid.substring(1)).css("color", "black");
 });
 

@@ -99,6 +99,31 @@ Analysis.method("onSelectionChanged", function(list){
     else
         $("#analysis #unique").html("No Data");
 
+// add buttons to remove products
+    var i;
+    var differentProducts = $("#unique #r0").find(".td_instance");
+    for (i=0; i<$(differentProducts).length; i++){
+        console.log($(differentProducts[i]).text());
+        $(differentProducts[i]).append('<image id="rem' + $(differentProducts[i]).text() + '" src="images/remove.png" alt="remove">')
+        var buttonId = "#rem" + $(differentProducts[i]).text()
+        $(buttonId).click(function(){
+            console.log($(this).attr("id").substring(3))
+            host.selector.onDeselected($(this).attr("id").substring(3));
+        });
+        $(buttonId).css("float", "left");
+        $(buttonId).css("margin-right", "-12px");
+        $(buttonId).css("vertical-align", "middle");
+        
+        $(buttonId).hover(
+        function () {
+            $(this).attr("src", "images/removeMouseOver.png");
+        }, 
+        function () {
+            $(this).attr("src", "images/remove.png");
+        });      
+    }
+
 //    alert(missingProducts);
+
         
 });
