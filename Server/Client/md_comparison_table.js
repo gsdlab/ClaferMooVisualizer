@@ -163,7 +163,7 @@ ComparisonTable.method("resetFilters", function(){
     var i = 1;
     row = $("#r" + i);
     while (row.length != 0){
-        if (!row.find(".numeric").length){
+        if (!(row.find(".numeric").length)){
             current = document.getElementById("r" + i + "box");
             current.src = "images/checkbox_empty.bmp";
             current.className = "maybe";
