@@ -52,7 +52,7 @@ server.post('/upload', function(req, res, next) {
    				} else if (URLs[x].session === req.sessionID && ("claferFileURL=" + URLs[x].url) === url.parse(req.body.claferFileURL).query){
    					var i = 0;
    					var uploadedFilePath = req.sessionID;
-   					uploadedFilePath = uploadedFilePath.replace("/", "");
+   					uploadedFilePath = uploadedFilePath.replace(/\\/g, "").replace('/', "");
    					uploadedFilePath = "./uploads/" + uploadedFilePath;
    					while(fs.existsSync(uploadedFilePath + i.toString() + ".cfr")){
    						i = i+1;
