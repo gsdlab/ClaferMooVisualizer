@@ -104,10 +104,10 @@ ComparisonTable.method("filterContent", function(){
     var graph_data = $("#chart g:contains('P1')")[2];
     var circle_pairs = [];
     for (i=0; i<$(graph_data).children().length;i+=2){
-        circle_pairs.push({ circle: $(graph_data).children[i], text_data: $(graph_data).children[i+1], ident: ""});
+        circle_pairs.push({ circle: $(graph_data).children()[i], text_data: $(graph_data).children()[i+1], ident: ""});
     }
 
-    for (i=0; i<$(circle_pairs).length; i++){
+    for (i=0; i<circle_pairs.length; i++){
         circle_pairs[i].ident = $(circle_pairs[i].text_data).text().replace(/[A-Za-z]/g, "");
     }
 
