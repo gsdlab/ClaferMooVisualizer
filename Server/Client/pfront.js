@@ -108,7 +108,12 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         
 		rows.push(point);
 	}
-    
+
+    if (hasForth){
+        $("#MaxCircleLegend").text(maxT);
+        $("#MinCircleLegend").text(minT);
+    }
+
     if (minY > 0)
         minY = 0;
         
@@ -166,7 +171,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     host.chart = this.chart;
     
 	this.chart.draw(data, options);
-    
+
 }
 
 ParetoFrontVisualizer.prototype.myClickHandler = function()
