@@ -307,7 +307,6 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     setDim(tdT, unit, h - 2 * unit);
     setDim(tdX, w, unit);
     
-    
 //    tdChart.css("width", w - 2 * unit);
 //    tdChart.css("height", h - 2 * unit);
 
@@ -329,5 +328,10 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     {    
         host.findModule("mdGraph").redrawParetoFront();
     }
+
+
+    $('#dropPointY #svgcont').children().width("15"); //fix for bug where axis were way wider than they should be
+    $('#dropPointT #svgcont').children().width("15");
+
 	return true;
 });

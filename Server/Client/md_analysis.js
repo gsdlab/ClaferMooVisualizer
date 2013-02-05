@@ -103,7 +103,6 @@ Analysis.method("onSelectionChanged", function(list){
     var i;
     var differentProducts = $("#unique #r0").find(".td_instance");
     for (i=0; i<$(differentProducts).length; i++){
-        console.log($(differentProducts[i]).text());
         $(differentProducts[i]).prepend('<image id="rem' + $(differentProducts[i]).text() + '" src="images/remove.png" alt="remove">')
         var buttonId = "#rem" + $(differentProducts[i]).text()
         $(buttonId).click(function(){

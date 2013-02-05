@@ -11,6 +11,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 
 $(document).ready(function()
 {
+    
     var modules = Array();
     
     modules.push("Goals");

@@ -30,7 +30,7 @@ Input.method("onInitRendered", function()
  
 Input.method("beginQuery", function(formData, jqForm, options) {
     	var that = this;
-    	this.timeout = setTimeout(function(){that.handleTimeout();}, 65000);   
+//    	this.timeout = setTimeout(function(){that.handleTimeout();}, 65000);   
 	$("#load_area #myform").hide();
 	$("#load_area").append('<div id="preloader"><img id="preloader_img" src="/images/preloader.gif" alt="Loading..."/><span>Loading and processing...</span></div>');	
     return true; 
@@ -52,13 +52,13 @@ Input.method("showRequest", function(formData, jqForm, options) {
  
 // post-submit callback 
 Input.method("showResponse", function(responseText, statusText, xhr, $form)  { 
-	clearTimeout(this.timeout); 
+//	clearTimeout(this.timeout); 
 	this.processToolResult(responseText);   
 	this.endQuery();
 });
 
 Input.method("handleError", function(responseText, statusText, xhr, $form)  { 
-	clearTimeout(this.timeout);
+//	clearTimeout(this.timeout);
 	var er = document.getElementById("error_overlay");
 	er.style.visibility = "visible";	
 	document.getElementById("error_report").innerHTML = ('<input id="close_error" type="image" src="images/no.png" alt="close" style="position: relative; left: -325px; top: 0px; width: 20px; height: 20px;"><p>' + xhr + '<br>' + responseText.responseText.replace("\n", "<br>") + "</p>");
@@ -70,7 +70,7 @@ Input.method("handleError", function(responseText, statusText, xhr, $form)  {
 });
 
 Input.method("handleTimeout", function(responseText, statusText, xhr, $form)  { 
-	clearTimeout(this.timeout);
+//	clearTimeout(this.timeout);
 	var er = document.getElementById("error_overlay");
 	er.style.visibility = "visible";	
 	document.getElementById("error_report").innerHTML = ('<input id="close_error" type="image" src="images/no.png" alt="close" style="position: relative; left: -325px; top: 0px; width: 20px; height: 20px;"><p> Error: <br> The request timed out. </p>');
