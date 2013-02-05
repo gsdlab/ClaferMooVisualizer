@@ -90,6 +90,7 @@ Graph.method("drop", function(ev)
     
 	this.assignToAxis(id, arg, label, true);
     this.redrawParetoFront();
+    host.findModule("mdComparisonTable").filterContent();
 });
 
 Graph.method("assignValue", function (id, value)
