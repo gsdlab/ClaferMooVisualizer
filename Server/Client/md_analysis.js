@@ -73,7 +73,8 @@ Analysis.method("onSelectionChanged", function(list){
             }
             else
             {
-                label = "[Not Complete], should add more than 10 products...";
+                var addButton = '<button id="addMissing">add</button>'
+                label = "[Not Complete], should " + addButton + " more than 10 products...";
             }
             
         }
