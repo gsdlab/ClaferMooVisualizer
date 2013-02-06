@@ -112,6 +112,9 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     if (hasForth){
         $("#MaxCircleLegend").text(maxT);
         $("#MinCircleLegend").text(minT);
+        $("#svgcontT").show();
+    } else {
+        $("#svgcontT").hide();
     }
 
     if (minY > 0)
