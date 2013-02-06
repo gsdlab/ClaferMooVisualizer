@@ -68,7 +68,8 @@ Analysis.method("onSelectionChanged", function(list){
         {
             if (missingProducts.length <= 10) // reasonable to add products to make the set complete
             {
-                label = "[Not Complete], add [" + missingProducts.toString() + "]";
+                var addButton = '<button id="addMissing">add</button>'
+                label = "[Not Complete], " + addButton + " [" + missingProducts.toString() + "]";
             }
             else
             {
@@ -81,6 +82,14 @@ Analysis.method("onSelectionChanged", function(list){
         label = "Please select more products for analysis";
 
     $("#analysis #completeness").html(label);
+    if($("#addMissing")){
+        $("#addMissing").click(function(){
+            var i;
+            for (i = 0; i<missingProducts.length; i++){
+                host.selector.onSelected(missingProducts[i]);
+            }
+        });
+    }
     
 //    commonData.products[0] = label;
     
