@@ -34,19 +34,26 @@ ComparisonTable.method("onDataLoaded", function(data){
 
 ComparisonTable.method("onRendered", function()
 {
+
+// Adding buttons for comparison table
+// Distinct button for greying out non-distinct features
     var td = $('#comparison .table_title')[0];
     $(td).append('&nbsp;<button id="toggle_link">Toggle</button>');
 
     $('#toggle_link').html("Distinct");
     $('#toggle_link').click(this.toggleDistinct.bind(this));
 
+// Reset button for reseting filters
+
     $(td).append('&nbsp;<button id="filter_reset">Toggle</button>');
 
     $('#filter_reset').html("Reset");
     $('#filter_reset').click(this.resetFilters.bind(this));
 
+// Add mouseover effects to table
     this.addHovering();
 
+// Add tristate checkboxes for filtering features
     var i = 1;
     row = $("#r" + i);
     var that = this;
@@ -67,12 +74,13 @@ ComparisonTable.method("onRendered", function()
                 this.className = "maybe";
                 that.filterContent();
             }
+// left in in case we want to switch checkboxes to refresh the distinct rows.
 //            if (this.hasClass("wanted") || this.hasClass("unwanted"))
 //                if (that.toggled)
 //                    toggleRow($("#r" + i), true);
 //            else
 //                if (that.toggled)
-//                    toggleRow($("#r" + i), false); //wont work because i is wrong. 
+//                    toggleRow($("#r" + i), false); //will not work because i is wrong. 
                                                      //commented out because not currently necessary
         });
             
@@ -80,6 +88,7 @@ ComparisonTable.method("onRendered", function()
         row = $("#r" + i);
     }
 
+// Selection of instances for analysis from top row of table
     var length = $("#r0").find(".td_instance").length;
     console.log(length);
     for(i=1; i<=length; i++){
@@ -95,12 +104,15 @@ ComparisonTable.method("onRendered", function()
 
 });
 
+/* unfilters table then hides columns that don't pass 
+   the filters*/
 ComparisonTable.method("filterContent", function(){
     this.unFilter();
 
     console.log("filter called");
+
+// Get graph bubble html locations
     var i = 1;
-    
     var graph_data = $("#chart g:contains('P1')")[2];
     var circle_pairs = [];
     for (i=0; i<$(graph_data).children().length;i+=2){
@@ -111,26 +123,31 @@ ComparisonTable.method("filterContent", function(){
         circle_pairs[i].ident = $(circle_pairs[i].text_data).text().replace(/[A-Za-z]/g, "");
     }
 
+// sort bubbles by PID
     circle_pairs.sort(function(a,b){
         return a.ident - b.ident;
     });
 
+// loop to go through each element
     i=0;
     row = $("#mdComparisonTable #r" + i);
     row_length = row.find(".td_instance").length;
     while (row.length != 0){
         if (!row.find(".numeric").length){
-            filter = $("#mdComparisonTable #r" + i + "box").attr("Class");
+            filter = $("#mdComparisonTable #r" + i + "box").attr("Class"); //pull filter type from checkbox
             for (var x = 1; x <= row_length; x++){
-                if (filter == "maybe")
+                if (filter == "maybe") //filter nothing for this row
                     break;
-                else if (filter == "wanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("no")) {
+                else if (filter == "wanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("no")) { //filter out column and bubble
+                    //hide table header (row 0)
                     $("#mdComparisonTable #th0_" + x).hide();
                     this.hidden.push("#mdComparisonTable #th0_" + x);
+                    //hide graph bubble
                     $(circle_pairs[x-1].circle).hide();
                     $(circle_pairs[x-1].text_data).hide();
                     this.hidden.push(circle_pairs[x-1].text_data);
                     this.hidden.push(circle_pairs[x-1].circle);
+                    //hide whole column
                     var y = 1;
                     var row_with_removal = $("#mdComparisonTable #r" + y);
                     while (row_with_removal.length != 0){
@@ -139,13 +156,16 @@ ComparisonTable.method("filterContent", function(){
                         y++;
                         row_with_removal = $("#mdComparisonTable #r" + y);
                     }
-                } else if (filter == "unwanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("tick")) {
+                } else if (filter == "unwanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("tick")) { //filter out column and bubble
+                    //hide table header (row 0)
                     $("#mdComparisonTable #th0_" + x).hide();
                     this.hidden.push("#mdComparisonTable #th0_" + x);
+                    //hide graph bubble
                     $(circle_pairs[x-1].circle).hide();
                     $(circle_pairs[x-1].text_data).hide();
                     this.hidden.push(circle_pairs[x-1].text_data);
                     this.hidden.push(circle_pairs[x-1].circle);
+                    //hide whole column
                     var y = 1;
                     var row_with_removal = $("#mdComparisonTable #r" + y);
                     while (row_with_removal.length != 0){
@@ -162,13 +182,20 @@ ComparisonTable.method("filterContent", function(){
     }
 });
 
+
+//unhides everything in the hidden stack (all things that have been filtered out)
 ComparisonTable.method("unFilter", function(){
     while(this.hidden.length){
         $(this.hidden.pop()).show();
     }
 });
 
+/*Reset function that turns all checkboxes to maybe
+  then unfilters content.*/
+
 ComparisonTable.method("resetFilters", function(){
+
+    //reset all checkboxes to maybe
     var i = 1;
     row = $("#r" + i);
     while (row.length != 0){
@@ -182,7 +209,14 @@ ComparisonTable.method("resetFilters", function(){
         i++;
         row = $("#r" + i);
     }
-    this.filterContent();
+    //unfilter
+    this.unFilter();
+
+    //if currently set to distinct mode, refresh distinct rows
+    if (this.toggled){
+        this.toggleDistinct(); //one to turn off distinct
+        this.toggleDistinct(); //one to reapply it
+    }
 });
 
 ComparisonTable.method("getContent", function()
@@ -329,7 +363,7 @@ ComparisonTable.method("toggleDistinct", function()
 
             for (var j = 0; j < instanceTds.length; j++)
             {
-                if ($(instanceTds[j]).css("display") == "none"){
+                if ($(instanceTds[j]).css("display") == "none"){ //case for filtered out elements that are hidden
                     //do nothing
                 }
                 else if ($(instanceTds[j]).hasClass("tick"))
@@ -391,10 +425,12 @@ ComparisonTable.method("addHovering", function()
 
 });
 
+//makes instance red on graph, for actual selection function see onSelected(pid) in selector.js
 ComparisonTable.method("makePointsSelected", function (pid){;
     $("#mdComparisonTable #th0_" + pid.substring(1)).css("color", "red");
 });
 
+//makes instance red on graph, for actual deselection function see onDeselected(pid) in selector.js
 ComparisonTable.method("makePointsDeselected", function (pid){
     $("#mdComparisonTable #th0_" + pid.substring(1)).css("color", "black");
 });
