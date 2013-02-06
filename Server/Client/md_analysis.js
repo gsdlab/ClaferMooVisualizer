@@ -59,7 +59,7 @@ Analysis.method("onSelectionChanged", function(list){
     // get the products that are missing to make up the complete set.
     var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), list);
   
-    var clearButton = '<button id="clearAnalysis">Clear</button><br>';
+    var clearButton = '<button id="clearAnalysis">Clear</button> ';
     var label = clearButton;
     
     if (commonFeatures.length > 0)
