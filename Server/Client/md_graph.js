@@ -119,9 +119,9 @@ Graph.method("redrawParetoFront", function()
 	var arg4 = $("#dropPointTAxisConfig_arg").val();
 	var label4 = $("#dropPointTAxisConfig_label").val();
     
-    var sLabel2 = '<g style="z-index: 110; "><text text-anchor="middle" x="15" y="210.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 210.5)" stroke="none" stroke-width="0" fill="#222222">' + label2 + '</text><image xlink:href="images/verticalAxis.png" alt="yaxis" x="20" y="130" width="12" height="175"></g>';
-    sLabel2 = '<div id="svgcont" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350" width="35">' + sLabel2 + '</svg></div>';
-        
+    var sLabel2 = '<g style="z-index: 110; "><text text-anchor="middle" x="15" y="320.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 320.5)" stroke="none" stroke-width="0" fill="#222222">' + label2 + '</text><image xlink:href="images/verticalAxis.png" alt="yaxis" x="5" y="90" width="12" height="155"></g>';
+    sLabel2 = '<div id="svgcont" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="450" width="18">' + sLabel2 + '</svg></div>';
+    
     var sLabel4 = '<g style="z-index: 110; "><text text-anchor="middle" x="14.2" y="210.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 210.5)" stroke="none" stroke-width="0" fill="#222222">' + label4;
     sLabel4 = sLabel4 + '</text><circle cx="40" cy="240" r="12" stroke="black" stroke-width="1" fill="#efe6dc"/><circle cx="40" cy="185" r="20" stroke="black" stroke-width="1" fill="#efe6dc"/><text id="MaxCircleLegend" text-anchor="middle" x="40" y="190" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222">X1</text><text id="MinCircleLegend" text-anchor="middle" x="40" y="245" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222">X2</text></g>';
     sLabel4 = '<div id="svgcont" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350" width="60">' + sLabel4 + '</svg></div>';
