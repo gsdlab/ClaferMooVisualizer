@@ -82,7 +82,7 @@ Graph.method("drop", function(ev)
     var id = ev.target.id;
     var node = ev.target;
     
-    while (node.parentNode != null && (id == "" || id == "svgcont"))
+    while (node.parentNode != null && (id == "" || id == "svgcontY"|| id == "svgcontT"))
     {
         node = node.parentNode;
         id = node.id;
