@@ -95,7 +95,7 @@ Analysis.method("onSelectionChanged", function(list){
             for (i = 0; i<missingProducts.length; i++){
                 host.selector.onSelected(missingProducts[i]);
             }
-        });
+        }).css("cursor", "pointer");
     }
 
 // add function for clear button
@@ -105,7 +105,7 @@ Analysis.method("onSelectionChanged", function(list){
             host.selector.onDeselected(selected[selected.length-1]);
             selected.pop();
         };
-    });
+    }).css("cursor", "pointer");
     
 //    commonData.products[0] = label;
     
@@ -136,6 +136,7 @@ Analysis.method("onSelectionChanged", function(list){
         });
         $(buttonId).css("float", "left");
         $(buttonId).css("vertical-align", "middle");
+        $(buttonId).css("cursor", "pointer");
         $(differentProducts[i]).append('<span style="visibility: hidden;">--</span>')
         
         $(buttonId).hover(

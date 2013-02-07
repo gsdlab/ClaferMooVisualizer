@@ -41,14 +41,14 @@ ComparisonTable.method("onRendered", function()
     $(td).append('&nbsp;<button id="toggle_link">Toggle</button>');
 
     $('#toggle_link').html("Distinct");
-    $('#toggle_link').click(this.toggleDistinct.bind(this));
+    $('#toggle_link').click(this.toggleDistinct.bind(this)).css("cursor", "pointer");;
 
 // Reset button for reseting filters
 
     $(td).append('&nbsp;<button id="filter_reset">Toggle</button>');
 
     $('#filter_reset').html("Reset");
-    $('#filter_reset').click(this.resetFilters.bind(this));
+    $('#filter_reset').click(this.resetFilters.bind(this)).css("cursor", "pointer");;
 
 // Add mouseover effects to table
     this.addHovering();
@@ -82,7 +82,7 @@ ComparisonTable.method("onRendered", function()
 //                if (that.toggled)
 //                    toggleRow($("#r" + i), false); //will not work because i is wrong. 
                                                      //commented out because not currently necessary
-        });
+        }).css("cursor", "pointer");
             
         i++;
         row = $("#r" + i);
@@ -99,7 +99,7 @@ ComparisonTable.method("onRendered", function()
                 host.selector.onSelected(pid);
             else
                 host.selector.onDeselected(pid);
-        });
+        }).css("cursor", "pointer");
     }
 
 });
