@@ -53,7 +53,7 @@ server.post('/upload', function(req, res, next) {
    					var i = 0;
    					var uploadedFilePath = req.sessionID;
    					uploadedFilePath = uploadedFilePath.replace(/\\/g, "").replace('/', "");
-   					uploadedFilePath = "./uploads/" + uploadedFilePath;
+   					uploadedFilePath = __dirname + "/uploads/" + uploadedFilePath;
    					while(fs.existsSync(uploadedFilePath + i.toString() + ".cfr")){
    						i = i+1;
    					}
@@ -81,6 +81,7 @@ server.post('/upload', function(req, res, next) {
 	while(fs.existsSync("./uploads/" + i + "tempfolder/")){
 		i++;
 	}
+	console.log(uploadedFilePath);
 	var pathTokens = "." + uploadedFilePath.split("Server")[1];
 	pathTokens = pathTokens.split("/");
 	var oldPath = uploadedFilePath
