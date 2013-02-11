@@ -4,13 +4,14 @@ var sys = require("sys");
 var fs = require("fs");
 var path = require('path');
 var express = require('express');
+var config = require('./config.json');
 
 var tool_path = __dirname + "/ClaferMoo/spl_datagenerator/";
 var python_file_name = "IntegratedFeatureModelOptimizer.py";
-var python = "python";
+var python = config.pythonPath;
 
 
-var port = 8080;
+var port = config.port;
 
 var server = express();
 
