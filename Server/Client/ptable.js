@@ -35,7 +35,7 @@ TableVisualizer.method("mapValue", function(sVal)
 TableVisualizer.prototype.getHTML = function(data) 
 {
 	var instanceCount = data.products.length;    
-	var table = $('<table width="100%" cellspacing="0" cellspadding="0"></table>').addClass('foo');
+	var table = $('<table  id="tBody" width="100%" cellspacing="0" cellspadding="0"></table>').addClass('foo');
 
     // first row - headers
     

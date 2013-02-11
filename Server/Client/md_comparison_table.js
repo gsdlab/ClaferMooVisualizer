@@ -48,13 +48,40 @@ ComparisonTable.method("onRendered", function()
     $(td).append('&nbsp;<button id="filter_reset">Toggle</button>');
 
     $('#filter_reset').html("Reset");
-    $('#filter_reset').click(this.resetFilters.bind(this)).css("cursor", "pointer");;
+    $('#filter_reset').click(this.resetFilters.bind(this)).css("cursor", "pointer");
+
+// Clone headers into new div
+    $("#comparison").prepend('<div id="tHeadContainer" ><table id="tHead" width="100%" cellspacing="0" cellspadding="0"></table></div>');
+    $("#tHead").append($("#comparison #r0"));
+
+// make headers positioning always on top
+    $('#mdComparisonTable .window-content').scroll(function(){
+        $("#comparison #tHeadContainer").css("position", "relative");
+        $("#comparison #tHeadContainer").css("top", $('#mdComparisonTable .window-content').scrollTop());
+    })
+
+// Clone body into new div
+    $("#comparison").append('<div id="tBodyContainer" ></div>');
+    $("#tBodyContainer").append($("#comparison #tBody"));
+
+
+
+// fix formatting for new headers
+    var i;
+    for(i=1; i<$("#tHead #r0").children().length; i++){
+        $("#tHead #th0_" + i).width($("#tBody #td0_" + i).width());
+    }
+    $("#tHead .td_abstract").width("40%");
+    $("#tBody .td_abstract").width("40%");
+
+
+
 
 // Add mouseover effects to table
     this.addHovering();
 
 // Add tristate checkboxes for filtering features
-    var i = 1;
+    i = 1;
     row = $("#r" + i);
     var that = this;
     while (row.length != 0){
