@@ -50,32 +50,73 @@ ComparisonTable.method("onRendered", function()
     $('#filter_reset').html("Reset");
     $('#filter_reset').click(this.resetFilters.bind(this)).css("cursor", "pointer");
 
-// Clone headers into new div
-    $("#comparison").prepend('<div id="tHeadContainer" ><table id="tHead" width="100%" cellspacing="0" cellspadding="0"></table></div>');
+// Move headers into new div
+    $("#comparison").prepend('<div id="tHeadContainer"><table id="tHead" width="100%" cellspacing="0" cellspadding="0"></table></div>');
     $("#tHead").append($("#comparison #r0"));
 
-// make headers positioning always on top
+// make headers positioning always on top of window
     $('#mdComparisonTable .window-content').scroll(function(){
-        $("#comparison #tHeadContainer").css("position", "relative");
-        $("#comparison #tHeadContainer").css("top", $('#mdComparisonTable .window-content').scrollTop());
-    })
+            $("#comparison #tHeadContainer").css("position", "relative");
+            $("#comparison #tHeadContainer").css("top", $('#mdComparisonTable .window-content').scrollTop());
+    });
 
-// Clone body into new div
+// Move body into new div
     $("#comparison").append('<div id="tBodyContainer" ></div>');
     $("#tBodyContainer").append($("#comparison #tBody"));
 
 
 
 // fix formatting for new headers
+// shrink table to obtain minimum widths
+    $("#tBodyContainer").css("width", "10%")
+    $("#tHeadContainer").css("width", "10%")
+
+// obtain minimum widths
     var i;
-    for(i=1; i<$("#tHead #r0").children().length; i++){
-        $("#tHead #th0_" + i).width($("#tBody #td0_" + i).width());
-    }
+
     $("#tHead .td_abstract").width("40%");
     $("#tBody .td_abstract").width("40%");
 
+    i = 0;
+    var row = $("#r" + i);
+    var minWidth = 0;
+    while ($(row).children().length != 0){
+        for (var x = 1; x<=$(row).children().length; x++){
+            var current = $(row).children()[x];
+            if ($(current).width() > minWidth)
+                minWidth = $(current).width();
+        }
+        i++;
+        row = $("#r" + i);
+    }
 
+    var minAbstractWidth = $("#tBody .td_abstract").width();
+    console.log(minWidth);
 
+// Set new widths and minimum widths (important to do both for cross browser functionality)
+    for(i=1; i<$("#tHead #r0").children().length; i++){
+        $("#tHead #th0_" + i).width(minWidth);
+        $("#tBody #td0_" + i).width(minWidth);
+        $("#tHead #th0_" + i).css("min-width", minWidth);
+        $("#tBody #td0_" + i).css("min-width", minWidth);
+        var x = 1;
+        row = $("#r" + x);
+        while ($(row).children().length != 0){
+            $("#tBody #td" + x + "_" + i).width(minWidth);
+            $("#tBody #td" + x + "_" + i).css("min-width", minWidth);
+            x++;
+            row = $("#r" + x);
+        }
+    }
+
+    $("#tHead .td_abstract").width(minAbstractWidth);
+    $("#tBody .td_abstract").width(minAbstractWidth);
+    $("#tHead .td_abstract").css("min-width", minAbstractWidth);
+    $("#tBody .td_abstract").css("min-width", minAbstractWidth);
+
+// reset table widths to 100%
+    $("#tBodyContainer").css("width", "100%")
+    $("#tHeadContainer").css("width", "100%")
 
 // Add mouseover effects to table
     this.addHovering();
