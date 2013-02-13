@@ -144,7 +144,11 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         chartWidth = "91%";
     }
 
-
+    if ($('[name~="' + labels[2] + '"]').attr("id") == "operation_min"){
+        var colorList = ['green', 'yellow', 'red'];
+    } else {
+        var colorList = ['red', 'yellow', 'green'];
+    }
     
     data.addRows(rows);          
 
@@ -161,7 +165,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 //	  hAxis: {title: labels[0], viewWindowMode: "pretty"},
 //	  vAxis: {title: labels[1], viewWindowMode: "pretty"},
 	  animation: {duration:3000},
-      colorAxis: {legend : {position : colorAxisLegendPosition}},
+      colorAxis: {legend : {position : colorAxisLegendPosition}, colors: colorList},
       
       bubble: {textStyle: {fontSize: 12}, stroke: "black"},
 //      sizeAxis: {maxSize: 12, minSize: 12},

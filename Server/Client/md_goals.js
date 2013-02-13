@@ -59,7 +59,7 @@ Goals.method("getContent", function()
 	{
         //optimization direction
 		var row = $('<tr></tr>').addClass('bar');
-		td = $('<td id="operation_' + this.goals[i].operation + '"></td>').addClass('td_operation');
+		td = $('<td id="operation_' + this.goals[i].operation + '" name="' + this.goals[i].label + '"></td>').addClass('td_operation');
 		td.html(this.goals[i].operation);
 		row.append(td);
 		
