@@ -91,7 +91,7 @@ ComparisonTable.method("onRendered", function()
     }
 
     var minAbstractWidth = $("#tBody .td_abstract").width();
-    console.log(minWidth);
+//    console.log(minWidth);
 
 // Set new widths and minimum widths (important to do both for cross browser functionality)
     for(i=1; i<$("#tHead #r0").children().length; i++){
@@ -142,14 +142,6 @@ ComparisonTable.method("onRendered", function()
                 this.className = "maybe";
                 that.filterContent();
             }
-// left in in case we want to switch checkboxes to refresh the distinct rows.
-//            if (this.hasClass("wanted") || this.hasClass("unwanted"))
-//                if (that.toggled)
-//                    toggleRow($("#r" + i), true);
-//            else
-//                if (that.toggled)
-//                    toggleRow($("#r" + i), false); //will not work because i is wrong. 
-                                                     //commented out because not currently necessary
         }).css("cursor", "pointer");
             
         i++;
@@ -158,7 +150,7 @@ ComparisonTable.method("onRendered", function()
 
 // Selection of instances for analysis from top row of table
     var length = $("#r0").find(".td_instance").length;
-    console.log(length);
+//    console.log(length);
     for(i=1; i<=length; i++){
         $("#th0_" + i).click(function(){
             var pid = "P" + $(this).attr('id').substring(4)
@@ -177,7 +169,61 @@ ComparisonTable.method("onRendered", function()
 ComparisonTable.method("filterContent", function(){
     this.unFilter();
 
-    console.log("filter called");
+
+
+// loop to go through each element
+    i=0;
+    row = $("#mdComparisonTable #r" + i);
+    row_length = row.find(".td_instance").length;
+    while (row.length != 0){
+
+        //filtering by features
+        if (!row.find(".numeric").length){
+            var filter = $("#mdComparisonTable #r" + i + "box").attr("Class"); //pull filter type from checkbox
+            for (var x = 1; x <= row_length; x++){
+                if (filter == "maybe") //filter nothing for this row
+                    break;
+                else if (filter == "wanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("no")) { //filter out column and bubble
+                    this.hideInstance(x);
+                } else if (filter == "unwanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("tick")) { //filter out column and bubble
+                    this.hideInstance(x);
+                }
+            }
+        }
+
+        //filtering by goals
+        else{
+            var filter;
+            var filterName = $("#mdComparisonTable #r" + i + " .td_abstract").text().replace(/\s+/g, '');
+            for (var x = 0; x<=this.host.findModule("mdGoals").ranges.length; x++){;
+                if (x == this.host.findModule("mdGoals").ranges.length){
+                    break;
+                } else if (filterName == this.host.findModule("mdGoals").ranges[x].goal){
+                    filter = this.host.findModule("mdGoals").ranges[x];
+                }
+            }
+//            console.log(filter);
+//            console.log(this.host.findModule("mdGoals").ranges[x]);
+//            console.log(this.host.findModule("mdGoals").ranges);
+
+            for (x=1; x<= row_length; x++){
+                var value = $("#mdComparisonTable #td" + (i-1) + "_" + x).text();
+                var min = parseInt(filter.min);
+                var max = parseInt(filter.max)
+                if (min > value || max < value)
+                    this.hideInstance(x);
+            }
+        }
+
+        //increment row
+        i++;
+        row = $("#mdComparisonTable #r" + i);
+    }
+
+
+});
+
+ComparisonTable.method("hideInstance", function(x){
 
 // Get graph bubble html locations
     var i = 1;
@@ -195,61 +241,24 @@ ComparisonTable.method("filterContent", function(){
     circle_pairs.sort(function(a,b){
         return a.ident - b.ident;
     });
-
-// loop to go through each element
-    i=0;
-    row = $("#mdComparisonTable #r" + i);
-    row_length = row.find(".td_instance").length;
-    while (row.length != 0){
-        if (!row.find(".numeric").length){
-            filter = $("#mdComparisonTable #r" + i + "box").attr("Class"); //pull filter type from checkbox
-            for (var x = 1; x <= row_length; x++){
-                if (filter == "maybe") //filter nothing for this row
-                    break;
-                else if (filter == "wanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("no")) { //filter out column and bubble
-                    //hide table header (row 0)
-                    $("#mdComparisonTable #th0_" + x).hide();
-                    this.hidden.push("#mdComparisonTable #th0_" + x);
-                    //hide graph bubble
-                    $(circle_pairs[x-1].circle).hide();
-                    $(circle_pairs[x-1].text_data).hide();
-                    this.hidden.push(circle_pairs[x-1].text_data);
-                    this.hidden.push(circle_pairs[x-1].circle);
-                    //hide whole column
-                    var y = 1;
-                    var row_with_removal = $("#mdComparisonTable #r" + y);
-                    while (row_with_removal.length != 0){
-                        $("#mdComparisonTable #td"+ (y-1) +"_" + x).hide();
-                        this.hidden.push("#mdComparisonTable #td"+ (y-1) +"_" + x);
-                        y++;
-                        row_with_removal = $("#mdComparisonTable #r" + y);
-                    }
-                } else if (filter == "unwanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("tick")) { //filter out column and bubble
-                    //hide table header (row 0)
-                    $("#mdComparisonTable #th0_" + x).hide();
-                    this.hidden.push("#mdComparisonTable #th0_" + x);
-                    //hide graph bubble
-                    $(circle_pairs[x-1].circle).hide();
-                    $(circle_pairs[x-1].text_data).hide();
-                    this.hidden.push(circle_pairs[x-1].text_data);
-                    this.hidden.push(circle_pairs[x-1].circle);
-                    //hide whole column
-                    var y = 1;
-                    var row_with_removal = $("#mdComparisonTable #r" + y);
-                    while (row_with_removal.length != 0){
-                        $("#mdComparisonTable #td"+ (y-1) +"_" + x).hide();
-                        this.hidden.push("#mdComparisonTable #td"+ (y-1) +"_" + x);
-                        y++;
-                        row_with_removal = $("#mdComparisonTable #r" + y);
-                    }
-                }
-            }
-        }
-        i++;
-        row = $("#mdComparisonTable #r" + i);
+    //hide table header (row 0)
+    $("#mdComparisonTable #th0_" + x).hide();
+    this.hidden.push("#mdComparisonTable #th0_" + x);
+    //hide graph bubble
+    $(circle_pairs[x-1].circle).hide();
+    $(circle_pairs[x-1].text_data).hide();
+    this.hidden.push(circle_pairs[x-1].text_data);
+    this.hidden.push(circle_pairs[x-1].circle);
+    //hide whole column
+    var y = 1;
+    var row_with_removal = $("#mdComparisonTable #r" + y);
+    while (row_with_removal.length != 0){
+        $("#mdComparisonTable #td"+ (y-1) +"_" + x).hide();
+        this.hidden.push("#mdComparisonTable #td"+ (y-1) +"_" + x);
+        y++;
+        row_with_removal = $("#mdComparisonTable #r" + y);
     }
 });
-
 
 //unhides everything in the hidden stack (all things that have been filtered out)
 ComparisonTable.method("unFilter", function(){
