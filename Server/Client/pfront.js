@@ -66,7 +66,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 		var second = processor.getFeatureValue(i, args[1], true); // get only numeric
 		
 		point = new Array();
-		point.push("P" + i);
+		point.push("V" + i);
 		point.push(first);
 		point.push(second);
         
@@ -200,7 +200,7 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
     if (id == -1)
         return;
        
-    var pid = "P" + (id + 1);
+    var pid = "V" + (id + 1);
        
     if (host.selector.isSelected(pid))
     {

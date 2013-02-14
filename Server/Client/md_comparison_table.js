@@ -30,6 +30,9 @@ ComparisonTable.method("onDataLoaded", function(data){
     this.dataTable = this.getDataTable();    
     this.content = $('<div id="comparison" class="comparison"></div>').append(new TableVisualizer().getHTML(this.dataTable));
     this.hidden = [];
+    $("#mdComparisonTable .window-titleBar-content").text(this.dataTable.title);
+    this.currentRow = 1;
+
 });
 
 ComparisonTable.method("onRendered", function()
@@ -37,8 +40,8 @@ ComparisonTable.method("onRendered", function()
 
 // Adding buttons for comparison table
 // Distinct button for greying out non-distinct features
-    var td = $('#comparison .table_title')[0];
-    $(td).append('&nbsp;<button id="toggle_link">Toggle</button>');
+    var td = $('#comparison .TableSearch')[0];
+    $(td).append('<button id="toggle_link">Toggle</button>');
 
     $('#toggle_link').html("Distinct");
     $('#toggle_link').click(this.toggleDistinct.bind(this)).css("cursor", "pointer");;
@@ -58,6 +61,7 @@ ComparisonTable.method("onRendered", function()
     $('#mdComparisonTable .window-content').scroll(function(){
             $("#comparison #tHeadContainer").css("position", "relative");
             $("#comparison #tHeadContainer").css("top", $('#mdComparisonTable .window-content').scrollTop());
+            this.currentRow = 1;
     });
 
 // Move body into new div
@@ -153,7 +157,7 @@ ComparisonTable.method("onRendered", function()
 //    console.log(length);
     for(i=1; i<=length; i++){
         $("#th0_" + i).click(function(){
-            var pid = "P" + $(this).attr('id').substring(4)
+            var pid = "V" + $(this).attr('id').substring(4)
             var locationInArray = $.inArray(pid, host.selector.selection)
             if (locationInArray == -1)
                 host.selector.onSelected(pid);
@@ -161,6 +165,12 @@ ComparisonTable.method("onRendered", function()
                 host.selector.onDeselected(pid);
         }).css("cursor", "pointer");
     }
+
+// add handler to search bar
+    that = this;
+        $('#search').keyup(function(){
+            that.scrollToSearch($(this).val());
+        }); 
 
 });
 
@@ -227,7 +237,7 @@ ComparisonTable.method("hideInstance", function(x){
 
 // Get graph bubble html locations
     var i = 1;
-    var graph_data = $("#chart g:contains('P1')")[2];
+    var graph_data = $("#chart g:contains('V1')")[2];
     var circle_pairs = [];
     for (i=0; i<$(graph_data).children().length;i+=2){
         circle_pairs.push({ circle: $(graph_data).children()[i], text_data: $(graph_data).children()[i+1], ident: ""});
@@ -352,7 +362,7 @@ ComparisonTable.method("getDataTable", function()
     
     for (var j = 1; j <= instanceCount; j++)
     {
-        result.products.push("P" + j);
+        result.products.push("V" + j);
     }
 	
 	for (var i = 0; i < output.length; i++)
@@ -371,7 +381,7 @@ ComparisonTable.method("getDataTable", function()
 		{
 			if (i == 0)
             {
-				currentContextRow.push("P" + j);
+				currentContextRow.push("V" + j);
             }
 			else
 			{
@@ -510,6 +520,33 @@ ComparisonTable.method("makePointsSelected", function (pid){;
 //makes instance red on graph, for actual deselection function see onDeselected(pid) in selector.js
 ComparisonTable.method("makePointsDeselected", function (pid){
     $("#mdComparisonTable #th0_" + pid.substring(1)).css("color", "black");
+});
+
+ComparisonTable.method("scrollToSearch", function (input){
+    if (input == ""){
+        $('#mdComparisonTable .window-content').scrollTop(0);
+    }
+    var firstPass = true;
+    var iteratedRow = this.currentRow;
+
+    if (input == this.previousInput){
+        firstPass = false;
+        iteratedRow++;
+    }
+    this.previousInput = input;
+
+    while(iteratedRow != this.currentRow || firstPass){
+        if (iteratedRow >= ($("#tBody tbody").children().length + 1))
+            iteratedRow = 0;
+        else if ($("#tBody #r" + iteratedRow).text().indexOf(input) !== -1){
+            $('#mdComparisonTable .window-content').scrollTop(0);
+            $('#mdComparisonTable .window-content').scrollTop($("#tBody #r" + iteratedRow).position().top - 73);
+            this.currentRow = iteratedRow;
+            return;
+        }
+        iteratedRow++;
+        firstPass = false;
+    }
 });
 
 ComparisonTable.method("getInitContent", function()

@@ -15,7 +15,8 @@ function Graph(host)
 }
 
 Graph.method("onDataLoaded", function(data){
-    this.instanceProcessor = new InstanceProcessor(data.instancesXML);     
+    this.instanceProcessor = new InstanceProcessor(data.instancesXML);    
+    $("#mdGraph .window-titleBar-content").text(data.title); 
 });
 
 Graph.method("onRendered", function()

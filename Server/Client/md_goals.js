@@ -73,7 +73,7 @@ Goals.method("getContent", function()
         //range input
         td = $('<td></td>').addClass('td_argument');
         //(2nd input added to keep form from submitting on hitting enter)
-        var input = $('<form><input type="text" id="' + this.goals[i].label + 'min" placeholder="min" style="width: 40px">..<input type="text" id="' + this.goals[i].label + 'max" placeholder="max" style="width: 40px"></form>');
+        var input = $('<form><input type="text" class="text_input" id="' + this.goals[i].label + 'min" placeholder="min" style="width: 40px">..<input type="text" class="text_input" id="' + this.goals[i].label + 'max" placeholder="max" style="width: 40px"></form>');
 		td.append(input);
         row.append(td);
 
