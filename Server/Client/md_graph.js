@@ -175,6 +175,13 @@ Graph.method("addIds", function(){
         circle_pairs[i].ident = $(circle_pairs[i].text_data).text().replace(/[A-Za-z]/g, "");
     }
 
+    
+
+    circle_pairs.sort(function(a,b){
+        return a.ident - b.ident;
+    });
+
+
     for(i=0; i<circle_pairs.length; i++){
         $(circle_pairs[i].circle).attr("id", "P" + (i+1) + "c");
         $(circle_pairs[i].text_data).attr("id", "P" + (i+1) + "t");
@@ -182,7 +189,7 @@ Graph.method("addIds", function(){
 
 });
 
-Graph.method("makePointsNew", function(id){
+Graph.method("makePointsNew", function(){
     this.addIds();
 // Get graph bubble html locations
     var circle_pairs = [];
