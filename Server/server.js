@@ -148,7 +148,7 @@ server.post('/upload', function(req, res, next) {
 				res.writeHead(400, { "Content-Type": "text/html"});
 			res.end(result);
 //			clearTimeout(serverTimeout);
-//			cleanupOldFiles(uploadedFilePath, dlDir);
+			cleanupOldFiles(uploadedFilePath, dlDir);
 		});
 		
 	});
