@@ -38,9 +38,14 @@ ComparisonTable.method("onDataLoaded", function(data){
 ComparisonTable.method("onRendered", function()
 {
 
+// Add search bar 
+    var td = $('#comparison .table_title')[0];
+    $(td).html('<form name="searchForm" style="width: 110px"><input type="text" id="search" class="text_input" placeholder="search" style="width: 100px"><input type="text" style="display:none"></form> ');
+    $(td).addClass("TableSearch");
+
 // Adding buttons for comparison table
 // Distinct button for greying out non-distinct features
-    var td = $('#comparison .TableSearch')[0];
+    td = $('#comparison .TableSearch')[0];
     $(td).append('<button id="toggle_link">Toggle</button>');
 
     $('#toggle_link').html("Distinct");
@@ -182,6 +187,7 @@ ComparisonTable.method("filterContent", function(){
 
 
 // loop to go through each element
+    this.host.findModule("mdGraph").addIds();
     i=0;
     row = $("#mdComparisonTable #r" + i);
     row_length = row.find(".td_instance").length;
@@ -236,21 +242,10 @@ ComparisonTable.method("filterContent", function(){
 ComparisonTable.method("hideInstance", function(x){
 
 // Get graph bubble html locations
-    var i = 1;
-    var graph_data = $("#chart g:contains('V1')")[2];
     var circle_pairs = [];
-    for (i=0; i<$(graph_data).children().length;i+=2){
-        circle_pairs.push({ circle: $(graph_data).children()[i], text_data: $(graph_data).children()[i+1], ident: ""});
+    for (var i=1; i<=$("#chart circle").length; i++){
+        circle_pairs.push({circle: $("#P" + i + "c"), text_data: $("#P" + i + "t"), ident: i});
     }
-
-    for (i=0; i<circle_pairs.length; i++){
-        circle_pairs[i].ident = $(circle_pairs[i].text_data).text().replace(/[A-Za-z]/g, "");
-    }
-
-// sort bubbles by PID
-    circle_pairs.sort(function(a,b){
-        return a.ident - b.ident;
-    });
     //hide table header (row 0)
     $("#mdComparisonTable #th0_" + x).hide();
     this.hidden.push("#mdComparisonTable #th0_" + x);

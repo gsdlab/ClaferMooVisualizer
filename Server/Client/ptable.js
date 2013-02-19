@@ -40,8 +40,8 @@ TableVisualizer.prototype.getHTML = function(data)
     // first row - headers
     var row = $('<tr id="r' + 0 +'"></tr>').addClass('bar');//
 	var tagName = "th"; // to make headers
-	var td = $('<' + tagName + '></' + tagName + '>').addClass('td_abstract').addClass('TableSearch');
-	td.html('<form name="searchForm" style="width: 110px"><input type="text" id="search" class="text_input" placeholder="search" style="width: 100px"><input type="text" style="display:none"></form> ');
+	var td = $('<' + tagName + '></' + tagName + '>').addClass('td_abstract').addClass('table_title');
+	td.html(data.title);
 	row.append(td);
     
     for (var j = 0; j < instanceCount; j++)

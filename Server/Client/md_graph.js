@@ -16,7 +16,6 @@ function Graph(host)
 
 Graph.method("onDataLoaded", function(data){
     this.instanceProcessor = new InstanceProcessor(data.instancesXML);    
-    $("#mdGraph .window-titleBar-content").text(data.title); 
 });
 
 Graph.method("onRendered", function()
@@ -59,6 +58,7 @@ Graph.method("onRendered", function()
 	else
 		$("#chart").hide();
 
+    this.addIds();
 });
 
 Graph.method("allowDrop", function(ev)
@@ -159,6 +159,62 @@ Graph.method("redrawParetoFront", function()
     
     this.PFVisualizer.draw(this.instanceProcessor, args, labels);
     this.makePointsSelected(this.host.selector.selection);
+    this.addIds();
+    this.makePointsNew();
+});
+
+Graph.method("addIds", function(){
+    var i = 1;
+    var graph_data = $("#chart g:contains('V1')")[2];
+    var circle_pairs = [];
+    for (i=0; i<$(graph_data).children().length;i+=2){
+        circle_pairs.push({ circle: $(graph_data).children()[i], text_data: $(graph_data).children()[i+1], ident: ""});
+    }
+
+    for (i=0; i<circle_pairs.length; i++){
+        circle_pairs[i].ident = $(circle_pairs[i].text_data).text().replace(/[A-Za-z]/g, "");
+    }
+
+    for(i=0; i<circle_pairs.length; i++){
+        $(circle_pairs[i].circle).attr("id", "P" + (i+1) + "c");
+        $(circle_pairs[i].text_data).attr("id", "P" + (i+1) + "t");
+    }
+
+});
+
+Graph.method("makePointsNew", function(id){
+    this.addIds();
+// Get graph bubble html locations
+    var circle_pairs = [];
+    for (var i=(this.host.findModule("mdInput").originalPoints + 1); i<=$("#chart circle").length; i++){
+        circle_pairs.push({circle: $("#P" + i + "c"), text_data: $("#P" + i + "t"), ident: i});
+    }
+    //hide table header (row 0)
+    i = 0;
+    while (circle_pairs.length != 0){
+        circlePair = circle_pairs.pop();
+        var size = $(circlePair.circle).attr("r");
+        var xpos = $(circlePair.circle).attr("cx") - size;
+        var ypos = $(circlePair.circle).attr("cy") - size;
+        var fill = $(circlePair.circle).attr("fill");
+        var id = "#P" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "r"
+        var NS="http://www.w3.org/2000/svg";
+        var rect= document.createElementNS(NS,"rect");
+        rect.width.baseVal.value=size;
+        rect.height.baseVal.value=size;
+        rect.setAttribute("height",size*2);
+        rect.setAttribute("width",size*2);
+        rect.setAttribute("x",xpos);
+        rect.setAttribute("y",ypos);
+        rect.setAttribute("id",id);
+        rect.setAttribute("stroke","#000000");
+        rect.setAttribute("stroke-width","1");
+        rect.setAttribute("fill-opacity","0.8");
+        rect.style.fill=fill;
+        $(circlePair.text_data).prepend(rect);
+        $(circlePair.circle).attr("fill-opacity","0");
+        $(circlePair.circle).attr("stroke-width","0");
+    }
 });
 
 Graph.method("selectObject", function(o)
@@ -174,7 +230,7 @@ Graph.method("deselectObject", function(o)
 Graph.method("makePointsSelected", function(points)
 {
     var module = this;
-    
+
     for (var i = 0; i < points.length; i++)
     {
         $('#chart text').each(function()

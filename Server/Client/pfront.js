@@ -174,7 +174,33 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 
 	this.chart = new google.visualization.BubbleChart(document.getElementById(this.element));
 
-    google.visualization.events.addListener(this.chart, 'select', this.myClickHandler);    
+    google.visualization.events.addListener(this.chart, 'select', this.myClickHandler); 
+    google.visualization.events.addListener(this.chart, 'onmouseover', function(data){
+        var originalPoints = this.host.findModule("mdInput").originalPoints;
+        $("#chart circle").each(function(){
+            if (data.row >= originalPoints){
+                if ($(this).attr("id") == null){
+                    $(this).attr("fill-opacity","0");
+                    $(this).attr("stroke-width","0");
+                }
+            }
+        });
+    }); 
+    google.visualization.events.addListener(this.chart, 'onmouseout', function(data){
+        $("#chart circle").each(function(){
+            if ($(this).attr("id") == null){
+                $(this).attr("id", "P" + (data.row + 1) + "c");
+            }
+        });
+
+        var originalPoints = this.host.findModule("mdInput").originalPoints;
+        for (var i = 1; i <= ($("#chart circle").length); i++){
+            if (i > originalPoints){
+                $("#P" + i + "c").attr("fill-opacity","0");
+                $("#P" + i + "c").attr("stroke-width","0");
+            }
+        }
+    }); 
     host.chart = this.chart;
     
 	this.chart.draw(data, options);
@@ -186,8 +212,19 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
 //    alert(this);
   var selection = host.chart.getSelection();
   host.chart.setSelection(null);
-
+  var originalPoints = this.host.findModule("mdInput").originalPoints;
   var id = -1;
+
+  for (var y = 0; y < selection.length; y++){
+        $("#chart circle").each(function(){
+            if (selection[y].row >= originalPoints){
+                if ($(this).attr("id") == null){
+                    $(this).attr("fill-opacity","0");
+                    $(this).attr("stroke-width","0");
+                }
+            }
+        });
+  }
   
   for (var i = 0; i < selection.length; i++) 
   {

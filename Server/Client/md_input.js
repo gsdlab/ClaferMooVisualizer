@@ -19,11 +19,21 @@ Input.method("onDataLoaded", function(data){
 
 Input.method("onInitRendered", function()
 {
+    this.optimizeFlag = 1;
+    this.addInstancesFlag = 1;
+    this.previousData = "";
+    that = this; 
+
+    $("#optimize").click(this.OptimizeCall.bind(this));
+    $("#addInstances").click(this.addInstancesCall.bind(this));
+    $("#myform [type='file']").change(this.inputChange.bind(this));
+ 
     var options = new Object();
     options.beforeSubmit = this.beginQuery.bind(this);
     options.success = this.showResponse.bind(this);
     options.error = this.handleError.bind(this);
- 
+
+
     $('#myform').ajaxForm(options); 
 	$('#myform').submit();
 });
@@ -129,23 +139,68 @@ Input.method("convertHtmlTags", function(input) {
   return output;
 });
 
+Input.method("OptimizeCall", function(){
+   	this.optimizeFlag = 1;
+   	this.addInstancesFlag = 0;
+   	this.previousData = "";
+});
+
+Input.method("addInstancesCall", function(){
+   	this.optimizeFlag = 0;
+   	this.addInstancesFlag = 1;
+});
+
+Input.method("inputChange", function(){
+	var filename = $("#myform [type='file']").val()
+	if (filename.substring(filename.length-4) == ".cfr"){
+		$("#optimize").removeAttr("disabled")
+		$("#addInstances").attr("disabled", "disabled");
+	} else if (filename.substring(filename.length-5) == ".data"){
+		$("#optimize").attr("disabled", "disabled");
+		$("#addInstances").removeAttr("disabled")
+	}
+});
+
 Input.method("processToolResult", function(result)
 {
+
 	if (!result) return;	
 	
-	var ar = result.split("=====");
-	if (ar.length != 3)
-	{
-        var data = new Object();
-        data.error = true;
-        data.output = result;
-        data.instancesXML = null;
-        data.claferXML = null;
-        this.host.updateData(data);
-        return;
-    }   
-	
+	var ar = [];
+
+	if (this.optimizeFlag){
+		ar = result.split("=====");
+		this.optimizeFlag = 0;
+    	this.addInstancesFlag = 0;
+    	if (ar.length != 3)
+		{
+        	var data = new Object();
+   	    	data.error = true;
+    		data.output = result;
+       		data.instancesXML = null;
+       		data.claferXML = null;
+       		this.host.updateData(data);
+       		return;
+   		}
+    } else if (this.addInstancesFlag) {
+		ar = this.previousData;
+		this.optimizeFlag = 0;
+    	this.addInstancesFlag = 0;
+		if (ar == null || ar.length != 3)
+		{
+        	var data = new Object();
+   	    	data.error = true;
+    		data.output = result;
+       		data.instancesXML = null;
+       		data.claferXML = null;
+       		this.host.updateData(data);
+       		return;
+   		}
+		ar[1] += result.replaceAll("  ", " ");
+	}
+
 	var instancesXMLText = (new InstanceConverter(ar[1])).convertFromClaferMooOutputToXML();
+	console.log(instancesXMLText)
 	var abstractXMLText = ar[2];
 
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
@@ -169,10 +224,17 @@ Input.method("processToolResult", function(result)
     data.output = ar[0];
     data.instancesXML = instancesXMLText;
     data.claferXML = abstractXMLText;
-
+    if (this.previousData == ""){
+    	var lines = ar[1].match(/^.*([\n\r]+|$)/gm);
+    	lines = ar[1].split(lines[1]);
+    	this.originalPoints = lines.length - 1;
+    }
+    data.originalPoints = this.originalPoints;
+    console.log(data);
+    this.previousData = ar;
     this.host.updateData(data);
 });
 Input.method("getInitContent", function()
 {
-	return '<div id="load_area"><form id="myform" action="' + this.serverAction + '" method="post" enctype="multipart/form-data">' + '<input type="file" name="claferFile">' + '<input type="hidden" name="claferFileURL" value="' + window.location + '">' + '<input type="submit" value="Upload">'+'</form></div>';  
+	return '<div id="load_area"><form id="myform" action="' + this.serverAction + '" method="post" enctype="multipart/form-data">' + '<input type="file" size="15" name="claferFile">' + '<input type="hidden" name="claferFileURL" value="' + window.location + '">' + '<input id="optimize" type="submit" value="Optimize">'+ '<input id="addInstances" type="submit" value="Add Instances">' + '</form></div>';  
 });

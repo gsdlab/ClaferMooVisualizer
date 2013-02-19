@@ -74,7 +74,7 @@ server.post('/upload', function(req, res, next) {
    				}
    			}		
 	} else {
-		var uploadedFilePath = req.files.claferFile.path;
+		var uploadedFilePath = req.files.claferFile.path;				
 	}
 
 //make temp folder for files and move file there
@@ -99,8 +99,13 @@ server.post('/upload', function(req, res, next) {
     //	res.send ("Serverside Timeout.");
     //}, 60000);
 	fs.readFile(uploadedFilePath, function (err, data) {
-        file_contents = data.toString();
-		
+    file_contents = data.toString();
+		if (req.files.claferFile.path.substring(req.files.claferFile.path.length - 5) == ".data"){
+			res.writeHead(200, { "Content-Type": "text/html"});
+			res.end(file_contents);
+			cleanupOldFiles(uploadedFilePath, dlDir);
+			return;
+		}
 		console.log("processing file with integratedFMO");
 		var util  = require('util'),
 		spawn = require('child_process').spawn,
@@ -143,7 +148,7 @@ server.post('/upload', function(req, res, next) {
 				res.writeHead(400, { "Content-Type": "text/html"});
 			res.end(result);
 //			clearTimeout(serverTimeout);
-			cleanupOldFiles(uploadedFilePath, dlDir);
+//			cleanupOldFiles(uploadedFilePath, dlDir);
 		});
 		
 	});
