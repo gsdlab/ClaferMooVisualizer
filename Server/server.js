@@ -100,7 +100,7 @@ server.post('/upload', function(req, res, next) {
     //}, 60000);
 	fs.readFile(uploadedFilePath, function (err, data) {
     file_contents = data.toString();
-		if (req.files.claferFile.path.substring(req.files.claferFile.path.length - 5) == ".data"){
+		if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data"){
 			res.writeHead(200, { "Content-Type": "text/html"});
 			res.end(file_contents);
 			cleanupOldFiles(uploadedFilePath, dlDir);
