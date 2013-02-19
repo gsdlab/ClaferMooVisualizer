@@ -207,16 +207,16 @@ Graph.method("makePointsNew", function(){
         var id = "#P" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "r"
         var NS="http://www.w3.org/2000/svg";
         var rect= document.createElementNS(NS,"rect");
-        rect.width.baseVal.value=size;
-        rect.height.baseVal.value=size;
-        rect.setAttribute("height",size*2);
-        rect.setAttribute("width",size*2);
-        rect.setAttribute("x",xpos);
-        rect.setAttribute("y",ypos);
-        rect.setAttribute("id",id);
-        rect.setAttribute("stroke","#000000");
-        rect.setAttribute("stroke-width","1");
-        rect.setAttribute("fill-opacity","0.8");
+//        rect.width.baseVal.value=size;
+//        rect.height.baseVal.value=size;
+        rect.setAttributeNS(null, "height",size*2);
+        rect.setAttributeNS(null, "width",size*2);
+        rect.setAttributeNS(null, "x",xpos);
+        rect.setAttributeNS(null, "y",ypos);
+        rect.setAttributeNS(null, "id",id);
+        rect.setAttributeNS(null, "stroke","#000000");
+        rect.setAttributeNS(null, "stroke-width","1");
+        rect.setAttributeNS(null, "fill-opacity","0.8");
         rect.style.fill=fill;
         $(circlePair.text_data).prepend(rect);
         $(circlePair.circle).attr("fill-opacity","0");
