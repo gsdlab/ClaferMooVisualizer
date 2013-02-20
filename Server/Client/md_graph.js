@@ -240,7 +240,6 @@ Graph.method("makePointsNew", function(){
         $(circlePair.circle).attr("fill-opacity","0");
         $(circlePair.circle).attr("stroke-width","0");
     }
-    host.findModule("mdComparisonTable").filterContent();
 });
 
 Graph.method("getSVGHexagon", function(x, y, r){

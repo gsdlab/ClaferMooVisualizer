@@ -43,6 +43,9 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     var maxY = 0;
     var minY = 10000000000;
 
+    var maxZ = 0;
+    var minZ = 10000000000;
+
     var maxT = 0;
     var minT = 10000000000;
     
@@ -59,9 +62,10 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         maxT = 0;
         minT = 0;
     }
-    
+
 	for (var i = 1; i <= instanceCount; i++)
 	{
+
 		var first = processor.getFeatureValue(i, args[0], true); // get only numeric
 		var second = processor.getFeatureValue(i, args[1], true); // get only numeric
 		
@@ -89,6 +93,12 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         {
             var third = processor.getFeatureValue(i, args[2], true); // get only numeric
             point.push(third);
+
+            if (third < minZ)
+                minZ = third;
+
+            if (third >= maxZ)
+                maxZ = third;
         }
 
         if (hasForth)
@@ -116,6 +126,22 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     } else {
         $("#svgcontT").hide();
     }
+
+    //update goals placeholders
+    for (var y = 0; y < args.length; y++){
+        var maxG = 0;
+        var minG = 10000000000;
+        for (var i = 1; i <= instanceCount; i++){
+            var test = processor.getFeatureValue(i, args[y], true);
+            if (test < minG)
+                minG = test;
+            
+            if (test >= maxG)
+                maxG = test;
+        }
+        this.showGoal(labels[y], minG, maxG);
+    }
+        
 
     if (minY > 0)
         minY = 0;
@@ -248,5 +274,10 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
         host.selector.onSelected(pid);
     }
   }
+}
+
+ParetoFrontVisualizer.prototype.showGoal = function(goal, min, max){
+    $("#"+goal+"min").attr("placeholder", min);
+    $("#"+goal+"max").attr("placeholder", max);
 }
 
