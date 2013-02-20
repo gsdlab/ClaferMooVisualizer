@@ -143,6 +143,7 @@ Input.method("OptimizeCall", function(){
    	this.optimizeFlag = 1;
    	this.addInstancesFlag = 0;
    	this.previousData = "";
+   	host.findModule("mdComparisonTable").permaHidden = {};
 });
 
 Input.method("addInstancesCall", function(){

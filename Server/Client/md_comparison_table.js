@@ -30,6 +30,7 @@ ComparisonTable.method("onDataLoaded", function(data){
     this.dataTable = this.getDataTable();    
     this.content = $('<div id="comparison" class="comparison"></div>').append(new TableVisualizer().getHTML(this.dataTable));
     this.hidden = [];
+    this.permaHidden = {};
     $("#mdComparisonTable .window-titleBar-content").text(this.dataTable.title);
     this.currentRow = 1;
 
@@ -173,10 +174,11 @@ ComparisonTable.method("onRendered", function()
 
 // add handler to search bar
     that = this;
-        $('#search').keyup(function(){
-            that.scrollToSearch($(this).val());
-        }); 
+    $('#search').keyup(function(){
+        that.scrollToSearch($(this).val());
+    }); 
 
+    this.filterContent();
 });
 
 /* unfilters table then hides columns that don't pass 
@@ -208,7 +210,7 @@ ComparisonTable.method("filterContent", function(){
         }
 
         //filtering by goals
-        else{
+        else {
             var filter;
             var filterName = $("#mdComparisonTable #r" + i + " .td_abstract").text().replace(/\s+/g, '');
             for (var x = 0; x<=this.host.findModule("mdGoals").ranges.length; x++){;
@@ -236,6 +238,11 @@ ComparisonTable.method("filterContent", function(){
         row = $("#mdComparisonTable #r" + i);
     }
 
+    //filtering by permaHidden
+    for (var instance in this.permaHidden){
+        if (this.permaHidden.hasOwnProperty(instance))
+            this.hideInstance(instance.substring(1));
+    }
 
 });
 

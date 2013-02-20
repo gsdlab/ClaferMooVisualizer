@@ -189,39 +189,87 @@ Graph.method("addIds", function(){
 
 });
 
+// Make instances squares or hexagons
 Graph.method("makePointsNew", function(){
     this.addIds();
+
 // Get graph bubble html locations
+    originalCirclePairs = [];
+    for (var i=1; i<=this.host.findModule("mdInput").originalPoints; i++){
+        originalCirclePairs.push({circle: $("#P" + i + "c"), text_data: $("#P" + i + "t"), ident: i});
+    }
+
     var circle_pairs = [];
     for (var i=(this.host.findModule("mdInput").originalPoints + 1); i<=$("#chart circle").length; i++){
         circle_pairs.push({circle: $("#P" + i + "c"), text_data: $("#P" + i + "t"), ident: i});
     }
     //hide table header (row 0)
-    i = 0;
     while (circle_pairs.length != 0){
         circlePair = circle_pairs.pop();
-        var size = $(circlePair.circle).attr("r");
-        var xpos = $(circlePair.circle).attr("cx") - size;
-        var ypos = $(circlePair.circle).attr("cy") - size;
+        var r = $(circlePair.circle).attr("r");
+        var xpos = $(circlePair.circle).attr("cx");
+        var ypos = $(circlePair.circle).attr("cy");
         var fill = $(circlePair.circle).attr("fill");
-        var id = "#P" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "r"
+        var id = "P" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "r"
         var NS="http://www.w3.org/2000/svg";
-        var rect= document.createElementNS(NS,"rect");
-//        rect.width.baseVal.value=size;
-//        rect.height.baseVal.value=size;
-        rect.setAttributeNS(null, "height",size*2);
-        rect.setAttributeNS(null, "width",size*2);
-        rect.setAttributeNS(null, "x",xpos);
-        rect.setAttributeNS(null, "y",ypos);
-        rect.setAttributeNS(null, "id",id);
-        rect.setAttributeNS(null, "stroke","#000000");
-        rect.setAttributeNS(null, "stroke-width","1");
-        rect.setAttributeNS(null, "fill-opacity","0.8");
-        rect.style.fill=fill;
-        $(circlePair.text_data).prepend(rect);
+        var isOptimal = false;
+        for (i=0; i<originalCirclePairs.length; i++){
+            if ($(circlePair.circle).attr("cx") == $(originalCirclePairs[i].circle).attr("cx"))
+                if ($(circlePair.circle).attr("cy") == $(originalCirclePairs[i].circle).attr("cy")){
+                    isOptimal = true;
+                    break;
+                }
+        }
+        if (isOptimal){
+            var shape = this.getSVGHexagon(xpos, ypos, r);
+            var newID = "P" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "h " + $(originalCirclePairs[i].circle).attr("id");
+            shape.setAttributeNS(null, "id", newID);
+            $(originalCirclePairs[i].circle).hide();
+            $(originalCirclePairs[i].text_data).hide();
+            host.findModule("mdComparisonTable").permaHidden["P"+(i+1)] = true;
+        } else {
+            var shape = this.getSVGSquare(xpos, ypos, r)
+            shape.setAttributeNS(null, "id", "P" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "s");
+        }
+        shape.setAttributeNS(null, "id",id);
+        shape.setAttributeNS(null, "stroke","#000000");
+        shape.setAttributeNS(null, "stroke-width","1");
+        shape.setAttributeNS(null, "fill-opacity","0.8");
+        shape.style.fill=fill;
+        $(circlePair.text_data).prepend(shape);
         $(circlePair.circle).attr("fill-opacity","0");
         $(circlePair.circle).attr("stroke-width","0");
     }
+    host.findModule("mdComparisonTable").filterContent();
+});
+
+Graph.method("getSVGHexagon", function(x, y, r){
+    var NS="http://www.w3.org/2000/svg";
+    var hex= document.createElementNS(NS,"polygon");
+    x = Number(x);
+    y = Number(y);
+    r = Number(r);
+    var xcoords = [x, x-(r), x+(r)];
+    var ycoords = [y-r, y-(r/2), y+(r/2), y+r];
+    var points = (xcoords[0])+","+(ycoords[0])+" "; //top
+    points += (xcoords[1])+","+(ycoords[1]) + " " ; //top left
+    points += (xcoords[1])+","+(ycoords[2])+" "; //bottom left
+    points += (xcoords[0])+","+(ycoords[3])+" "; //bottom
+    points += (xcoords[2])+","+(ycoords[2])+" "; //bottom right
+    points += (xcoords[2])+","+(ycoords[1]); //top right
+    console.log(points)
+    hex.setAttributeNS(null, "points", points);
+    return hex;
+});
+
+Graph.method("getSVGSquare", function(cx, cy, r){
+    var NS="http://www.w3.org/2000/svg";
+    var rect= document.createElementNS(NS,"rect");
+    rect.setAttributeNS(null, "height",r*2);
+    rect.setAttributeNS(null, "width",r*2);
+    rect.setAttributeNS(null, "x",cx-r);
+    rect.setAttributeNS(null, "y",cy-r);
+    return rect;
 });
 
 Graph.method("selectObject", function(o)
