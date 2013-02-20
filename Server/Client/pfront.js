@@ -93,12 +93,6 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         {
             var third = processor.getFeatureValue(i, args[2], true); // get only numeric
             point.push(third);
-
-            if (third < minZ)
-                minZ = third;
-
-            if (third >= maxZ)
-                maxZ = third;
         }
 
         if (hasForth)

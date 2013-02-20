@@ -184,7 +184,7 @@ Input.method("processToolResult", function(result)
        		return;
    		}
     } else if (this.addInstancesFlag) {
-		ar = this.previousData;
+		ar = this.previousData.Unparsed;
 		this.optimizeFlag = 0;
     	this.addInstancesFlag = 0;
 		if (ar == null || ar.length != 3)
@@ -197,11 +197,15 @@ Input.method("processToolResult", function(result)
        		this.host.updateData(data);
        		return;
    		}
-		ar[1] += result.replaceAll("  ", " ");
+
+		var parser = new IGInstanceParser(result, this.previousData.abstractXML);
+		ar[1] += parser.convertFromClaferIGOutputToClaferMoo(result, this.previousData.abstractXML);
 	}
 
+//	console.log(ar[1]);
+//	var parsedInstances = (new InstanceParser(ar[1]))
+
 	var instancesXMLText = (new InstanceConverter(ar[1])).convertFromClaferMooOutputToXML();
-	console.log(instancesXMLText)
 	var abstractXMLText = ar[2];
 
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
@@ -232,7 +236,7 @@ Input.method("processToolResult", function(result)
     }
     data.originalPoints = this.originalPoints;
     console.log(data);
-    this.previousData = ar;
+    this.previousData = { Unparsed: ar, abstractXML: data.claferXML };
     this.host.updateData(data);
 });
 Input.method("getInitContent", function()

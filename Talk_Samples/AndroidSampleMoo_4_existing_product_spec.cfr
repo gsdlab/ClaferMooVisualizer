@@ -45,6 +45,6 @@ abstract MobilePhone
 MyPhone : MobilePhone
     [ no Bluetooth 
       USB
-      WiFi
+      Wifi
       no PasswordProtection
       FingerprintProtection]
