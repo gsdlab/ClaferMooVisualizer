@@ -4,13 +4,14 @@ var sys = require("sys");
 var fs = require("fs");
 var path = require('path');
 var express = require('express');
+var config = require('./config.json');
 
 var tool_path = __dirname + "/ClaferMoo/spl_datagenerator/";
 var python_file_name = "IntegratedFeatureModelOptimizer.py";
-var python = "python";
+var python = config.pythonPath;
 
 
-var port = 8080;
+var port = config.port;
 
 var server = express();
 
@@ -53,7 +54,7 @@ server.post('/upload', function(req, res, next) {
    					var i = 0;
    					var uploadedFilePath = req.sessionID;
    					uploadedFilePath = uploadedFilePath.replace(/\\/g, "").replace('/', "");
-   					uploadedFilePath = "./uploads/" + uploadedFilePath;
+   					uploadedFilePath = __dirname + "/uploads/" + uploadedFilePath;
    					while(fs.existsSync(uploadedFilePath + i.toString() + ".cfr")){
    						i = i+1;
    					}
@@ -73,8 +74,23 @@ server.post('/upload', function(req, res, next) {
    				}
    			}		
 	} else {
-		var uploadedFilePath = req.files.claferFile.path;
+		var uploadedFilePath = req.files.claferFile.path;				
 	}
+
+//make temp folder for files and move file there
+	var i = 0;
+	while(fs.existsSync("./uploads/" + i + "tempfolder/")){
+		i++;
+	}
+	console.log(uploadedFilePath);
+	var pathTokens = "." + uploadedFilePath.split("Server")[1];
+	pathTokens = pathTokens.split("/");
+	var oldPath = uploadedFilePath
+	uploadedFilePath = __dirname + "/" + pathTokens[1] + "/" + i + "tempfolder/";
+	fs.mkdir(uploadedFilePath);
+	var dlDir = uploadedFilePath;
+	uploadedFilePath += pathTokens[2];
+	fs.rename(oldPath, uploadedFilePath);
 
 	var file_contents;
 	console.log("proceeding with " + uploadedFilePath);
@@ -83,12 +99,17 @@ server.post('/upload', function(req, res, next) {
     //	res.send ("Serverside Timeout.");
     //}, 60000);
 	fs.readFile(uploadedFilePath, function (err, data) {
-        file_contents = data.toString();
-		
+    file_contents = data.toString();
+		if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data"){
+			res.writeHead(200, { "Content-Type": "text/html"});
+			res.end(file_contents);
+			cleanupOldFiles(uploadedFilePath, dlDir);
+			return;
+		}
 		console.log("processing file with integratedFMO");
 		var util  = require('util'),
 		spawn = require('child_process').spawn,
-		tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath, "--preservenames"]);
+		tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
 		var error_result = "";
 		var data_result = "";
 		
@@ -127,15 +148,14 @@ server.post('/upload', function(req, res, next) {
 				res.writeHead(400, { "Content-Type": "text/html"});
 			res.end(result);
 //			clearTimeout(serverTimeout);
-			cleanupOldFiles(uploadedFilePath);
-
+			cleanupOldFiles(uploadedFilePath, dlDir);
 		});
 		
 	});
 
 });
  
-function cleanupOldFiles(path) {
+function cleanupOldFiles(path, dir) {
 
 	//cleanup old files
 	var ending = path.toLowerCase().substring(path.length - 4);
@@ -146,12 +166,27 @@ function cleanupOldFiles(path) {
  			console.log("successfully deleted " + path);
 		});
 	}
-	if (ending == ".cfr"){   //just added this because I realized people could kill the server with a bad file
+	if (ending == ".cfr"){
 		deleteOld(path, ".xml");
 		deleteOld(path, "_desugared.cfr");
 		deleteOld(path, "_desugared.xml");
 		deleteOld(path, "_desugared.als");
 		deleteOld(path, "_desugared.choco");
+	}
+
+	var i=1;
+	while (fs.existsSync(dir + "/alloy_solutions_" + i + ".xml")){
+		fs.unlink(dir + "alloy_solutions_" + i + ".xml", function (err) {   //delete .cfr
+  			if (err) throw err;
+		});
+		i++;
+	}
+
+	if (fs.existsSync(dir)){
+		fs.rmdir(dir, function (err) {   //delete .cfr
+  			if (err) throw err;
+ 			console.log("successfully deleted " + dir +" along with alloy_solutions");
+		});
 	}
 //done cleanup
 }

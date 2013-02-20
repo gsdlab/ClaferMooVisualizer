@@ -15,7 +15,7 @@ function Graph(host)
 }
 
 Graph.method("onDataLoaded", function(data){
-    this.instanceProcessor = new InstanceProcessor(data.instancesXML);     
+    this.instanceProcessor = new InstanceProcessor(data.instancesXML);    
 });
 
 Graph.method("onRendered", function()
@@ -58,6 +58,7 @@ Graph.method("onRendered", function()
 	else
 		$("#chart").hide();
 
+    this.addIds();
 });
 
 Graph.method("allowDrop", function(ev)
@@ -82,7 +83,7 @@ Graph.method("drop", function(ev)
     var id = ev.target.id;
     var node = ev.target;
     
-    while (node.parentNode != null && (id == "" || id == "svgcont"))
+    while (node.parentNode != null && (id == "" || id == "svgcontY"|| id == "svgcontT"))
     {
         node = node.parentNode;
         id = node.id;
@@ -119,13 +120,14 @@ Graph.method("redrawParetoFront", function()
 	var arg4 = $("#dropPointTAxisConfig_arg").val();
 	var label4 = $("#dropPointTAxisConfig_label").val();
     
-    var sLabel2 = '<g style="z-index: 110; "><text text-anchor="middle" x="14.2" y="210.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 210.5)" stroke="none" stroke-width="0" fill="#222222">' + label2 + '</text></g>';
-    sLabel2 = '<div id="svgcont" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350">' + sLabel2 + '</svg></div>';
-        
-    var sLabel4 = '<g style="z-index: 110; "><text text-anchor="middle" x="14.2" y="210.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 210.5)" stroke="none" stroke-width="0" fill="#222222">' + label4 + '</text></g>';
-    sLabel4 = '<div id="svgcont" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350">' + sLabel4 + '</svg></div>';
+    var sLabel2 = '<g style="z-index: 110; "><text text-anchor="middle" x="15" y="320.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 320.5)" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">' + label2 + '</text><image xlink:href="images/verticalAxis.png" alt="yaxis" x="5" y="90" width="12" height="155"></g>';
+    sLabel2 = '<div id="svgcontY" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="450" width="18">' + sLabel2 + '</svg></div>';
+    
+    var sLabel4 = '<g style="z-index: 110; "><text text-anchor="middle" x="14.2" y="210.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 210.5)" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">' + label4;
+    sLabel4 = sLabel4 + '</text><circle cx="40" cy="240" r="12" stroke="black" stroke-width="1" fill="#efe6dc" style="cursor: default;"/><circle cx="40" cy="185" r="20" stroke="black" stroke-width="1" fill="#efe6dc" style="cursor: default;"/><text id="MaxCircleLegend" text-anchor="middle" x="40" y="190" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">X1</text><text id="MinCircleLegend" text-anchor="middle" x="40" y="245" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">X2</text></g>';
+    sLabel4 = '<div id="svgcontT" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350" width="60">' + sLabel4 + '</svg></div>';
 
-    $("#dropPointX").html("<div>" + label1 + "</div>");
+    $("#dropPointX").html('<div>' + label1 + '<image src="images/horizontalAxis.png" alt="x-axis"></div>');
     $("#dropPointY").html(sLabel2);
     $("#dropPointZ").html("<div>" + label3 + "</div>");
     $("#dropPointT").html(sLabel4);
@@ -157,6 +159,117 @@ Graph.method("redrawParetoFront", function()
     
     this.PFVisualizer.draw(this.instanceProcessor, args, labels);
     this.makePointsSelected(this.host.selector.selection);
+    this.addIds();
+    this.makePointsNew();
+});
+
+Graph.method("addIds", function(){
+    var i = 1;
+    var graph_data = $("#chart g:contains('V1')")[2];
+    var circle_pairs = [];
+    for (i=0; i<$(graph_data).children().length;i+=2){
+        circle_pairs.push({ circle: $(graph_data).children()[i], text_data: $(graph_data).children()[i+1], ident: ""});
+    }
+
+    for (i=0; i<circle_pairs.length; i++){
+        circle_pairs[i].ident = $(circle_pairs[i].text_data).text().replace(/[A-Za-z]/g, "");
+    }
+
+    
+
+    circle_pairs.sort(function(a,b){
+        return a.ident - b.ident;
+    });
+
+
+    for(i=0; i<circle_pairs.length; i++){
+        $(circle_pairs[i].circle).attr("id", "P" + (i+1) + "c");
+        $(circle_pairs[i].text_data).attr("id", "P" + (i+1) + "t");
+    }
+
+});
+
+// Make instances squares or hexagons
+Graph.method("makePointsNew", function(){
+    this.addIds();
+
+// Get graph bubble html locations
+    originalCirclePairs = [];
+    for (var i=1; i<=this.host.findModule("mdInput").originalPoints; i++){
+        originalCirclePairs.push({circle: $("#P" + i + "c"), text_data: $("#P" + i + "t"), ident: i});
+    }
+
+    var circle_pairs = [];
+    for (var i=(this.host.findModule("mdInput").originalPoints + 1); i<=$("#chart circle").length; i++){
+        circle_pairs.push({circle: $("#P" + i + "c"), text_data: $("#P" + i + "t"), ident: i});
+    }
+    //hide table header (row 0)
+    while (circle_pairs.length != 0){
+        circlePair = circle_pairs.pop();
+        var r = $(circlePair.circle).attr("r");
+        var xpos = $(circlePair.circle).attr("cx");
+        var ypos = $(circlePair.circle).attr("cy");
+        var fill = $(circlePair.circle).attr("fill");
+        var id = "P" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "r"
+        var NS="http://www.w3.org/2000/svg";
+        var isOptimal = false;
+        for (i=0; i<originalCirclePairs.length; i++){
+            if ($(circlePair.circle).attr("cx") == $(originalCirclePairs[i].circle).attr("cx"))
+                if ($(circlePair.circle).attr("cy") == $(originalCirclePairs[i].circle).attr("cy")){
+                    isOptimal = true;
+                    break;
+                }
+        }
+        if (isOptimal){
+            var shape = this.getSVGHexagon(xpos, ypos, r);
+            var newID = "P" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "h " + $(originalCirclePairs[i].circle).attr("id");
+            shape.setAttributeNS(null, "id", newID);
+            $(originalCirclePairs[i].circle).hide();
+            $(originalCirclePairs[i].text_data).hide();
+            host.findModule("mdComparisonTable").permaHidden["P"+(i+1)] = true;
+        } else {
+            var shape = this.getSVGSquare(xpos, ypos, r)
+            shape.setAttributeNS(null, "id", "P" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "s");
+        }
+        shape.setAttributeNS(null, "id",id);
+        shape.setAttributeNS(null, "stroke","#000000");
+        shape.setAttributeNS(null, "stroke-width","1");
+        shape.setAttributeNS(null, "fill-opacity","0.8");
+        shape.style.fill=fill;
+        $(circlePair.text_data).prepend(shape);
+        $(circlePair.circle).attr("fill-opacity","0");
+        $(circlePair.circle).attr("stroke-width","0");
+    }
+    host.findModule("mdComparisonTable").filterContent();
+});
+
+Graph.method("getSVGHexagon", function(x, y, r){
+    var NS="http://www.w3.org/2000/svg";
+    var hex= document.createElementNS(NS,"polygon");
+    x = Number(x);
+    y = Number(y);
+    r = Number(r);
+    var xcoords = [x, x-(r), x+(r)];
+    var ycoords = [y-r, y-(r/2), y+(r/2), y+r];
+    var points = (xcoords[0])+","+(ycoords[0])+" "; //top
+    points += (xcoords[1])+","+(ycoords[1]) + " " ; //top left
+    points += (xcoords[1])+","+(ycoords[2])+" "; //bottom left
+    points += (xcoords[0])+","+(ycoords[3])+" "; //bottom
+    points += (xcoords[2])+","+(ycoords[2])+" "; //bottom right
+    points += (xcoords[2])+","+(ycoords[1]); //top right
+    console.log(points)
+    hex.setAttributeNS(null, "points", points);
+    return hex;
+});
+
+Graph.method("getSVGSquare", function(cx, cy, r){
+    var NS="http://www.w3.org/2000/svg";
+    var rect= document.createElementNS(NS,"rect");
+    rect.setAttributeNS(null, "height",r*2);
+    rect.setAttributeNS(null, "width",r*2);
+    rect.setAttributeNS(null, "x",cx-r);
+    rect.setAttributeNS(null, "y",cy-r);
+    return rect;
 });
 
 Graph.method("selectObject", function(o)
@@ -172,7 +285,7 @@ Graph.method("deselectObject", function(o)
 Graph.method("makePointsSelected", function(points)
 {
     var module = this;
-    
+
     for (var i = 0; i < points.length; i++)
     {
         $('#chart text').each(function()
@@ -329,10 +442,6 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     {    
         host.findModule("mdGraph").redrawParetoFront();
     }
-
-
-    $('#dropPointY #svgcont').children().width("15"); //fix for bug where axis were way wider than they should be
-    $('#dropPointT #svgcont').children().width("15");
 
 	return true;
 });

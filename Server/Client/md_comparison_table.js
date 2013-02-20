@@ -30,24 +30,109 @@ ComparisonTable.method("onDataLoaded", function(data){
     this.dataTable = this.getDataTable();    
     this.content = $('<div id="comparison" class="comparison"></div>').append(new TableVisualizer().getHTML(this.dataTable));
     this.hidden = [];
+    this.permaHidden = {};
+    $("#mdComparisonTable .window-titleBar-content").text(this.dataTable.title);
+    this.currentRow = 1;
+
 });
 
 ComparisonTable.method("onRendered", function()
 {
+
+// Add search bar 
     var td = $('#comparison .table_title')[0];
-    $(td).append('&nbsp;<button id="toggle_link">Toggle</button>');
+    $(td).html('<form name="searchForm" style="width: 110px"><input type="text" id="search" class="text_input" placeholder="search" style="width: 100px"><input type="text" style="display:none"></form> ');
+    $(td).addClass("TableSearch");
+
+// Adding buttons for comparison table
+// Distinct button for greying out non-distinct features
+    td = $('#comparison .TableSearch')[0];
+    $(td).append('<button id="toggle_link">Toggle</button>');
 
     $('#toggle_link').html("Distinct");
-    $('#toggle_link').click(this.toggleDistinct.bind(this));
+    $('#toggle_link').click(this.toggleDistinct.bind(this)).css("cursor", "pointer");;
+
+// Reset button for reseting filters
 
     $(td).append('&nbsp;<button id="filter_reset">Toggle</button>');
 
     $('#filter_reset').html("Reset");
-    $('#filter_reset').click(this.resetFilters.bind(this));
+    $('#filter_reset').click(this.resetFilters.bind(this)).css("cursor", "pointer");
 
+// Move headers into new div
+    $("#comparison").prepend('<div id="tHeadContainer"><table id="tHead" width="100%" cellspacing="0" cellspadding="0"></table></div>');
+    $("#tHead").append($("#comparison #r0"));
+
+// make headers positioning always on top of window
+    $('#mdComparisonTable .window-content').scroll(function(){
+            $("#comparison #tHeadContainer").css("position", "relative");
+            $("#comparison #tHeadContainer").css("top", $('#mdComparisonTable .window-content').scrollTop());
+            this.currentRow = 1;
+    });
+
+// Move body into new div
+    $("#comparison").append('<div id="tBodyContainer" ></div>');
+    $("#tBodyContainer").append($("#comparison #tBody"));
+
+
+
+// fix formatting for new headers
+// shrink table to obtain minimum widths
+    $("#tBodyContainer").css("width", "10%")
+    $("#tHeadContainer").css("width", "10%")
+
+// obtain minimum widths
+    var i;
+
+    $("#tHead .td_abstract").width("40%");
+    $("#tBody .td_abstract").width("40%");
+
+    i = 0;
+    var row = $("#r" + i);
+    var minWidth = 0;
+    while ($(row).children().length != 0){
+        for (var x = 1; x<=$(row).children().length; x++){
+            var current = $(row).children()[x];
+            if ($(current).width() > minWidth)
+                minWidth = $(current).width();
+        }
+        i++;
+        row = $("#r" + i);
+    }
+
+    var minAbstractWidth = $("#tBody .td_abstract").width();
+//    console.log(minWidth);
+
+// Set new widths and minimum widths (important to do both for cross browser functionality)
+    for(i=1; i<$("#tHead #r0").children().length; i++){
+        $("#tHead #th0_" + i).width(minWidth);
+        $("#tBody #td0_" + i).width(minWidth);
+        $("#tHead #th0_" + i).css("min-width", minWidth);
+        $("#tBody #td0_" + i).css("min-width", minWidth);
+        var x = 1;
+        row = $("#r" + x);
+        while ($(row).children().length != 0){
+            $("#tBody #td" + x + "_" + i).width(minWidth);
+            $("#tBody #td" + x + "_" + i).css("min-width", minWidth);
+            x++;
+            row = $("#r" + x);
+        }
+    }
+
+    $("#tHead .td_abstract").width(minAbstractWidth);
+    $("#tBody .td_abstract").width(minAbstractWidth);
+    $("#tHead .td_abstract").css("min-width", minAbstractWidth);
+    $("#tBody .td_abstract").css("min-width", minAbstractWidth);
+
+// reset table widths to 100%
+    $("#tBodyContainer").css("width", "100%")
+    $("#tHeadContainer").css("width", "100%")
+
+// Add mouseover effects to table
     this.addHovering();
 
-    var i = 1;
+// Add tristate checkboxes for filtering features
+    i = 1;
     row = $("#r" + i);
     var that = this;
     while (row.length != 0){
@@ -67,108 +152,139 @@ ComparisonTable.method("onRendered", function()
                 this.className = "maybe";
                 that.filterContent();
             }
-//            if (this.hasClass("wanted") || this.hasClass("unwanted"))
-//                if (that.toggled)
-//                    toggleRow($("#r" + i), true);
-//            else
-//                if (that.toggled)
-//                    toggleRow($("#r" + i), false); //wont work because i is wrong. 
-                                                     //commented out because not currently necessary
-        });
+        }).css("cursor", "pointer");
             
         i++;
         row = $("#r" + i);
     }
 
+// Selection of instances for analysis from top row of table
     var length = $("#r0").find(".td_instance").length;
-    console.log(length);
+//    console.log(length);
     for(i=1; i<=length; i++){
         $("#th0_" + i).click(function(){
-            var pid = "P" + $(this).attr('id').substring(4)
+            var pid = "V" + $(this).attr('id').substring(4)
             var locationInArray = $.inArray(pid, host.selector.selection)
             if (locationInArray == -1)
                 host.selector.onSelected(pid);
             else
                 host.selector.onDeselected(pid);
-        });
+        }).css("cursor", "pointer");
     }
 
+// add handler to search bar
+    that = this;
+    $('#search').keyup(function(){
+        that.scrollToSearch($(this).val());
+    }); 
+
+    this.filterContent();
 });
 
+/* unfilters table then hides columns that don't pass 
+   the filters*/
 ComparisonTable.method("filterContent", function(){
     this.unFilter();
 
-    console.log("filter called");
-    var i = 1;
-    
-    var graph_data = $("#chart g:contains('P1')")[2];
-    var circle_pairs = [];
-    for (i=0; i<$(graph_data).children().length;i+=2){
-        circle_pairs.push({ circle: $(graph_data).children()[i], text_data: $(graph_data).children()[i+1], ident: ""});
-    }
 
-    for (i=0; i<circle_pairs.length; i++){
-        circle_pairs[i].ident = $(circle_pairs[i].text_data).text().replace(/[A-Za-z]/g, "");
-    }
 
-    circle_pairs.sort(function(a,b){
-        return a.ident - b.ident;
-    });
-
+// loop to go through each element
+    this.host.findModule("mdGraph").addIds();
     i=0;
     row = $("#mdComparisonTable #r" + i);
     row_length = row.find(".td_instance").length;
     while (row.length != 0){
+
+        //filtering by features
         if (!row.find(".numeric").length){
-            filter = $("#mdComparisonTable #r" + i + "box").attr("Class");
+            var filter = $("#mdComparisonTable #r" + i + "box").attr("Class"); //pull filter type from checkbox
             for (var x = 1; x <= row_length; x++){
-                if (filter == "maybe")
+                if (filter == "maybe") //filter nothing for this row
                     break;
-                else if (filter == "wanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("no")) {
-                    $("#mdComparisonTable #th0_" + x).hide();
-                    this.hidden.push("#mdComparisonTable #th0_" + x);
-                    $(circle_pairs[x-1].circle).hide();
-                    $(circle_pairs[x-1].text_data).hide();
-                    this.hidden.push(circle_pairs[x-1].text_data);
-                    this.hidden.push(circle_pairs[x-1].circle);
-                    var y = 1;
-                    var row_with_removal = $("#mdComparisonTable #r" + y);
-                    while (row_with_removal.length != 0){
-                        $("#mdComparisonTable #td"+ (y-1) +"_" + x).hide();
-                        this.hidden.push("#mdComparisonTable #td"+ (y-1) +"_" + x);
-                        y++;
-                        row_with_removal = $("#mdComparisonTable #r" + y);
-                    }
-                } else if (filter == "unwanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("tick")) {
-                    $("#mdComparisonTable #th0_" + x).hide();
-                    this.hidden.push("#mdComparisonTable #th0_" + x);
-                    $(circle_pairs[x-1].circle).hide();
-                    $(circle_pairs[x-1].text_data).hide();
-                    this.hidden.push(circle_pairs[x-1].text_data);
-                    this.hidden.push(circle_pairs[x-1].circle);
-                    var y = 1;
-                    var row_with_removal = $("#mdComparisonTable #r" + y);
-                    while (row_with_removal.length != 0){
-                        $("#mdComparisonTable #td"+ (y-1) +"_" + x).hide();
-                        this.hidden.push("#mdComparisonTable #td"+ (y-1) +"_" + x);
-                        y++;
-                        row_with_removal = $("#mdComparisonTable #r" + y);
-                    }
+                else if (filter == "wanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("no")) { //filter out column and bubble
+                    this.hideInstance(x);
+                } else if (filter == "unwanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("tick")) { //filter out column and bubble
+                    this.hideInstance(x);
                 }
             }
         }
+
+        //filtering by goals
+        else {
+            var filter;
+            var filterName = $("#mdComparisonTable #r" + i + " .td_abstract").text().replace(/\s+/g, '');
+            for (var x = 0; x<=this.host.findModule("mdGoals").ranges.length; x++){;
+                if (x == this.host.findModule("mdGoals").ranges.length){
+                    break;
+                } else if (filterName == this.host.findModule("mdGoals").ranges[x].goal){
+                    filter = this.host.findModule("mdGoals").ranges[x];
+                }
+            }
+//            console.log(filter);
+//            console.log(this.host.findModule("mdGoals").ranges[x]);
+//            console.log(this.host.findModule("mdGoals").ranges);
+
+            for (x=1; x<= row_length; x++){
+                var value = $("#mdComparisonTable #td" + (i-1) + "_" + x).text();
+                var min = parseInt(filter.min);
+                var max = parseInt(filter.max)
+                if (min > value || max < value)
+                    this.hideInstance(x);
+            }
+        }
+
+        //increment row
         i++;
         row = $("#mdComparisonTable #r" + i);
     }
+
+    //filtering by permaHidden
+    for (var instance in this.permaHidden){
+        if (this.permaHidden.hasOwnProperty(instance))
+            this.hideInstance(instance.substring(1));
+    }
+
 });
 
+ComparisonTable.method("hideInstance", function(x){
+
+// Get graph bubble html locations
+    var circle_pairs = [];
+    for (var i=1; i<=$("#chart circle").length; i++){
+        circle_pairs.push({circle: $("#P" + i + "c"), text_data: $("#P" + i + "t"), ident: i});
+    }
+    //hide table header (row 0)
+    $("#mdComparisonTable #th0_" + x).hide();
+    this.hidden.push("#mdComparisonTable #th0_" + x);
+    //hide graph bubble
+    $(circle_pairs[x-1].circle).hide();
+    $(circle_pairs[x-1].text_data).hide();
+    this.hidden.push(circle_pairs[x-1].text_data);
+    this.hidden.push(circle_pairs[x-1].circle);
+    //hide whole column
+    var y = 1;
+    var row_with_removal = $("#mdComparisonTable #r" + y);
+    while (row_with_removal.length != 0){
+        $("#mdComparisonTable #td"+ (y-1) +"_" + x).hide();
+        this.hidden.push("#mdComparisonTable #td"+ (y-1) +"_" + x);
+        y++;
+        row_with_removal = $("#mdComparisonTable #r" + y);
+    }
+});
+
+//unhides everything in the hidden stack (all things that have been filtered out)
 ComparisonTable.method("unFilter", function(){
     while(this.hidden.length){
         $(this.hidden.pop()).show();
     }
 });
 
+/*Reset function that turns all checkboxes to maybe
+  then unfilters content.*/
+
 ComparisonTable.method("resetFilters", function(){
+
+    //reset all checkboxes to maybe
     var i = 1;
     row = $("#r" + i);
     while (row.length != 0){
@@ -182,7 +298,14 @@ ComparisonTable.method("resetFilters", function(){
         i++;
         row = $("#r" + i);
     }
-    this.filterContent();
+    //unfilter
+    this.unFilter();
+
+    //if currently set to distinct mode, refresh distinct rows
+    if (this.toggled){
+        this.toggleDistinct(); //one to turn off distinct
+        this.toggleDistinct(); //one to reapply it
+    }
 });
 
 ComparisonTable.method("getContent", function()
@@ -241,7 +364,7 @@ ComparisonTable.method("getDataTable", function()
     
     for (var j = 1; j <= instanceCount; j++)
     {
-        result.products.push("P" + j);
+        result.products.push("V" + j);
     }
 	
 	for (var i = 0; i < output.length; i++)
@@ -260,7 +383,7 @@ ComparisonTable.method("getDataTable", function()
 		{
 			if (i == 0)
             {
-				currentContextRow.push("P" + j);
+				currentContextRow.push("V" + j);
             }
 			else
 			{
@@ -329,7 +452,7 @@ ComparisonTable.method("toggleDistinct", function()
 
             for (var j = 0; j < instanceTds.length; j++)
             {
-                if ($(instanceTds[j]).css("display") == "none"){
+                if ($(instanceTds[j]).css("display") == "none"){ //case for filtered out elements that are hidden
                     //do nothing
                 }
                 else if ($(instanceTds[j]).hasClass("tick"))
@@ -391,12 +514,41 @@ ComparisonTable.method("addHovering", function()
 
 });
 
+//makes instance red on graph, for actual selection function see onSelected(pid) in selector.js
 ComparisonTable.method("makePointsSelected", function (pid){;
     $("#mdComparisonTable #th0_" + pid.substring(1)).css("color", "red");
 });
 
+//makes instance red on graph, for actual deselection function see onDeselected(pid) in selector.js
 ComparisonTable.method("makePointsDeselected", function (pid){
     $("#mdComparisonTable #th0_" + pid.substring(1)).css("color", "black");
+});
+
+ComparisonTable.method("scrollToSearch", function (input){
+    if (input == ""){
+        $('#mdComparisonTable .window-content').scrollTop(0);
+    }
+    var firstPass = true;
+    var iteratedRow = this.currentRow;
+
+    if (input == this.previousInput){
+        firstPass = false;
+        iteratedRow++;
+    }
+    this.previousInput = input;
+
+    while(iteratedRow != this.currentRow || firstPass){
+        if (iteratedRow >= ($("#tBody tbody").children().length + 1))
+            iteratedRow = 0;
+        else if ($("#tBody #r" + iteratedRow).text().indexOf(input) !== -1){
+            $('#mdComparisonTable .window-content').scrollTop(0);
+            $('#mdComparisonTable .window-content').scrollTop($("#tBody #r" + iteratedRow).position().top - 73);
+            this.currentRow = iteratedRow;
+            return;
+        }
+        iteratedRow++;
+        firstPass = false;
+    }
 });
 
 ComparisonTable.method("getInitContent", function()

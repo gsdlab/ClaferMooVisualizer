@@ -66,7 +66,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 		var second = processor.getFeatureValue(i, args[1], true); // get only numeric
 		
 		point = new Array();
-		point.push("P" + i);
+		point.push("V" + i);
 		point.push(first);
 		point.push(second);
         
@@ -108,7 +108,15 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         
 		rows.push(point);
 	}
-    
+
+    if (hasForth){
+        $("#MaxCircleLegend").text(maxT);
+        $("#MinCircleLegend").text(minT);
+        $("#svgcontT").show();
+    } else {
+        $("#svgcontT").hide();
+    }
+
     if (minY > 0)
         minY = 0;
         
@@ -136,7 +144,11 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         chartWidth = "91%";
     }
 
-
+    if ($('[name~="' + labels[2] + '"]').attr("id") == "operation_min"){
+        var colorList = ['green', 'yellow', 'red'];
+    } else {
+        var colorList = ['red', 'yellow', 'green'];
+    }
     
     data.addRows(rows);          
 
@@ -153,7 +165,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 //	  hAxis: {title: labels[0], viewWindowMode: "pretty"},
 //	  vAxis: {title: labels[1], viewWindowMode: "pretty"},
 	  animation: {duration:3000},
-      colorAxis: {legend : {position : colorAxisLegendPosition}},
+      colorAxis: {legend : {position : colorAxisLegendPosition}, colors: colorList},
       
       bubble: {textStyle: {fontSize: 12}, stroke: "black"},
 //      sizeAxis: {maxSize: 12, minSize: 12},
@@ -162,11 +174,37 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 
 	this.chart = new google.visualization.BubbleChart(document.getElementById(this.element));
 
-    google.visualization.events.addListener(this.chart, 'select', this.myClickHandler);    
+    google.visualization.events.addListener(this.chart, 'select', this.myClickHandler); 
+    google.visualization.events.addListener(this.chart, 'onmouseover', function(data){
+        var originalPoints = this.host.findModule("mdInput").originalPoints;
+        $("#chart circle").each(function(){
+            if (data.row >= originalPoints){
+                if ($(this).attr("id") == null){
+                    $(this).attr("fill-opacity","0");
+                    $(this).attr("stroke-width","0");
+                }
+            }
+        });
+    }); 
+    google.visualization.events.addListener(this.chart, 'onmouseout', function(data){
+        $("#chart circle").each(function(){
+            if ($(this).attr("id") == null){
+                $(this).attr("id", "P" + (data.row + 1) + "c");
+            }
+        });
+
+        var originalPoints = this.host.findModule("mdInput").originalPoints;
+        for (var i = 1; i <= ($("#chart circle").length); i++){
+            if (i > originalPoints){
+                $("#P" + i + "c").attr("fill-opacity","0");
+                $("#P" + i + "c").attr("stroke-width","0");
+            }
+        }
+    }); 
     host.chart = this.chart;
     
 	this.chart.draw(data, options);
-    
+
 }
 
 ParetoFrontVisualizer.prototype.myClickHandler = function()
@@ -174,8 +212,19 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
 //    alert(this);
   var selection = host.chart.getSelection();
   host.chart.setSelection(null);
-
+  var originalPoints = this.host.findModule("mdInput").originalPoints;
   var id = -1;
+
+  for (var y = 0; y < selection.length; y++){
+        $("#chart circle").each(function(){
+            if (selection[y].row >= originalPoints){
+                if ($(this).attr("id") == null){
+                    $(this).attr("fill-opacity","0");
+                    $(this).attr("stroke-width","0");
+                }
+            }
+        });
+  }
   
   for (var i = 0; i < selection.length; i++) 
   {
@@ -188,7 +237,7 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
     if (id == -1)
         return;
        
-    var pid = "P" + (id + 1);
+    var pid = "V" + (id + 1);
        
     if (host.selector.isSelected(pid))
     {

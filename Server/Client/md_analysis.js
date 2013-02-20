@@ -59,8 +59,8 @@ Analysis.method("onSelectionChanged", function(list){
     // get the products that are missing to make up the complete set.
     var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), list);
   
-  
-    var label = "[Complete] - The set is a complete concept";
+    var clearButton = '<button id="clearAnalysis">Clear</button> ';
+    var label = clearButton;
     
     if (commonFeatures.length > 0)
     {    
@@ -68,19 +68,44 @@ Analysis.method("onSelectionChanged", function(list){
         {
             if (missingProducts.length <= 10) // reasonable to add products to make the set complete
             {
-                label = "[Not Complete], add [" + missingProducts.toString() + "]";
+                var addButton = '<button id="addMissing">add</button>';
+                label += "[Not Complete], " + addButton + " [" + missingProducts.toString() + "]";
             }
             else
             {
-                label = "[Not Complete], should add more than 10 products...";
+                var addButton = '<button id="addMissing">add</button>';
+                label += "[Not Complete], should " + addButton + " more than 10 products...";
             }
             
         }
+        else
+        {
+            label += '[Complete] - The set is a complete concept';
+        }
     }
     else
-        label = "Please select more products for analysis";
+        label += "Please select more products for analysis";
 
     $("#analysis #completeness").html(label);
+
+// add function to addMissing button
+    if($("#addMissing")){
+        $("#addMissing").click(function(){
+            var i;
+            for (i = 0; i<missingProducts.length; i++){
+                host.selector.onSelected(missingProducts[i]);
+            }
+        }).css("cursor", "pointer");
+    }
+
+// add function for clear button
+    $("#clearAnalysis").click(function(){
+        var selected = host.selector.selection;
+        while (selected.length > 0){
+            host.selector.onDeselected(selected[selected.length-1]);
+            selected.pop();
+        };
+    }).css("cursor", "pointer");
     
 //    commonData.products[0] = label;
     
@@ -111,6 +136,7 @@ Analysis.method("onSelectionChanged", function(list){
         });
         $(buttonId).css("float", "left");
         $(buttonId).css("vertical-align", "middle");
+        $(buttonId).css("cursor", "pointer");
         $(differentProducts[i]).append('<span style="visibility: hidden;">--</span>')
         
         $(buttonId).hover(
