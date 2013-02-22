@@ -58,7 +58,15 @@ Analysis.method("onSelectionChanged", function(list){
     
     // get the products that are missing to make up the complete set.
     var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), list);
-  
+    var permaHidden = this.host.findModule("mdComparisonTable").permaHidden;
+
+    if (missingProducts){
+        for (var i = 0; i < missingProducts.length; i++){
+            if (permaHidden.hasOwnProperty(missingProducts[i]))
+                missingProducts.splice(i, 1);
+        }
+    }
+
     var clearButton = '<button id="clearAnalysis">Clear</button> ';
     var label = clearButton;
     

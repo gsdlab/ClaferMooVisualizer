@@ -27,6 +27,9 @@ Input.method("onInitRendered", function()
     $("#optimize").click(this.OptimizeCall.bind(this));
     $("#addInstances").click(this.addInstancesCall.bind(this));
     $("#myform [type='file']").change(this.inputChange.bind(this));
+
+    $("#optimize").attr("disabled", "disabled");
+    $("#addInstances").attr("disabled", "disabled");
  
     var options = new Object();
     options.beforeSubmit = this.beginQuery.bind(this);

@@ -38,10 +38,10 @@ Goals.method("onRendered", function()
             
             //add handler for range box 
             that = this;
-            $('#' + this.goals[i].label + 'max').change(function(){
+            $('#' + this.goals[i].label + 'max').keyup(function(){
                 that.filterByGoals($(this).attr("id").substring(0, $(this).attr("id").length - 3));
             });  
-            $('#' + this.goals[i].label + 'min').change(function(){
+            $('#' + this.goals[i].label + 'min').keyup(function(){
                 that.filterByGoals($(this).attr("id").substring(0, $(this).attr("id").length - 3));
             });
         }
@@ -73,7 +73,7 @@ Goals.method("getContent", function()
         //range input
         td = $('<td></td>').addClass('td_argument');
         //(2nd input added to keep form from submitting on hitting enter)
-        var input = $('<form><input type="text" class="text_input" id="' + this.goals[i].label + 'min" placeholder="min" style="width: 40px">..<input type="text" class="text_input" id="' + this.goals[i].label + 'max" placeholder="max" style="width: 40px"></form>');
+        var input = $('<input type="text" class="text_input" id="' + this.goals[i].label + 'min" placeholder="min" style="width: 40px">..<input type="text" class="text_input" id="' + this.goals[i].label + 'max" placeholder="max" style="width: 40px">');
 		td.append(input);
         row.append(td);
 
@@ -83,7 +83,7 @@ Goals.method("getContent", function()
         this.ranges.push({
             goal: this.goals[i].label,
             min: 0,
-            max: 1000000
+            max: 10000000
         });
 	}
     
@@ -109,7 +109,7 @@ Goals.method("filterByGoals", function(input)
     if (jQuery.isNumeric( max ))
         this.ranges[x].max = max;
     else
-        this.ranges[x].max = 1000000;
+        this.ranges[x].max = 10000000;
 
     this.host.findModule("mdComparisonTable").filterContent();
 });

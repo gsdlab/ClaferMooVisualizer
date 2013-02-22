@@ -200,8 +200,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         $("#chart circle").each(function(){
             if (data.row >= originalPoints){
                 if ($(this).attr("id") == null){
-                    $(this).attr("fill-opacity","0");
-                    $(this).attr("stroke-width","0");
+                    $(this).hide();
                 }
             }
         });
@@ -209,15 +208,14 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     google.visualization.events.addListener(this.chart, 'onmouseout', function(data){
         $("#chart circle").each(function(){
             if ($(this).attr("id") == null){
-                $(this).attr("id", "P" + (data.row + 1) + "c");
+                $(this).attr("id", "V" + (data.row + 1) + "c");
             }
         });
 
         var originalPoints = this.host.findModule("mdInput").originalPoints;
         for (var i = 1; i <= ($("#chart circle").length); i++){
             if (i > originalPoints){
-                $("#P" + i + "c").attr("fill-opacity","0");
-                $("#P" + i + "c").attr("stroke-width","0");
+                $("#V" + i + "c").hide();
             }
         }
     }); 
@@ -239,8 +237,7 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
         $("#chart circle").each(function(){
             if (selection[y].row >= originalPoints){
                 if ($(this).attr("id") == null){
-                    $(this).attr("fill-opacity","0");
-                    $(this).attr("stroke-width","0");
+                    $(this).hide()
                 }
             }
         });

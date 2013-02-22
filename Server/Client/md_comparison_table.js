@@ -41,7 +41,7 @@ ComparisonTable.method("onRendered", function()
 
 // Add search bar 
     var td = $('#comparison .table_title')[0];
-    $(td).html('<form name="searchForm" style="width: 110px"><input type="text" id="search" class="text_input" placeholder="search" style="width: 100px"><input type="text" style="display:none"></form> ');
+    $(td).html('<input type="text" id="search" class="text_input" placeholder="search" style="width: 100px">');
     $(td).addClass("TableSearch");
 
 // Adding buttons for comparison table
@@ -251,7 +251,7 @@ ComparisonTable.method("hideInstance", function(x){
 // Get graph bubble html locations
     var circle_pairs = [];
     for (var i=1; i<=$("#chart circle").length; i++){
-        circle_pairs.push({circle: $("#P" + i + "c"), text_data: $("#P" + i + "t"), ident: i});
+        circle_pairs.push({circle: $("#V" + i + "c"), text_data: $("#V" + i + "t"), ident: i});
     }
     //hide table header (row 0)
     $("#mdComparisonTable #th0_" + x).hide();
@@ -542,7 +542,7 @@ ComparisonTable.method("scrollToSearch", function (input){
             iteratedRow = 0;
         else if ($("#tBody #r" + iteratedRow).text().indexOf(input) !== -1){
             $('#mdComparisonTable .window-content').scrollTop(0);
-            $('#mdComparisonTable .window-content').scrollTop($("#tBody #r" + iteratedRow).position().top - 73);
+            $('#mdComparisonTable .window-content').scrollTop($("#tBody #r" + iteratedRow).position().top);
             this.currentRow = iteratedRow;
             return;
         }

@@ -112,3 +112,7 @@ td.tick, td.no
      overflow-x:scroll;
      overflow-y:scroll;
 }
+
+.text_input {
+     height: 12px;
+}
