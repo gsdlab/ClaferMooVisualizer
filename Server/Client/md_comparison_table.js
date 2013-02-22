@@ -50,7 +50,7 @@ ComparisonTable.method("onRendered", function()
     $(td).append('<button id="toggle_link">Toggle</button>');
 
     $('#toggle_link').html("Distinct");
-    $('#toggle_link').click(this.toggleDistinct.bind(this)).css("cursor", "pointer");;
+    $('#toggle_link').click(this.toggleDistinct.bind(this)).css("cursor", "pointer");
 
 // Reset button for reseting filters
 

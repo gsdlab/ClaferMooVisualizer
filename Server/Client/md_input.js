@@ -198,8 +198,8 @@ Input.method("processToolResult", function(result)
        		return;
    		}
 
-		var parser = new IGInstanceParser(result, this.previousData.abstractXML);
-		ar[1] += parser.convertFromClaferIGOutputToClaferMoo(result, this.previousData.abstractXML);
+		var parser = new InstanceParser(result);
+		ar[1] += parser.convertFromClaferIGOutputToClaferMoo(this.previousData.abstractXML);
 	}
 
 //	console.log(ar[1]);

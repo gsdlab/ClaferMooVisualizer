@@ -256,7 +256,7 @@ Graph.method("getSVGHexagon", function(x, y, r){
     points += (xcoords[0])+","+(ycoords[3])+" "; //bottom
     points += (xcoords[2])+","+(ycoords[2])+" "; //bottom right
     points += (xcoords[2])+","+(ycoords[1]); //top right
-    console.log(points)
+//    console.log(points)
     hex.setAttributeNS(null, "points", points);
     return hex;
 });

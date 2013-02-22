@@ -86,6 +86,9 @@ Analysis.method("onSelectionChanged", function(list){
     else
         label += "Please select more products for analysis";
 
+    var saveButton = '<form id="SaveForm" action="/" method="post" enctype="multipart/form-data">' + '<input type="button" id="saveSelected" value="Save Selected">' + '<input type="hidden" name="data" id="saveData" value="">' + '</form>';
+    label += saveButton;
+
     $("#analysis #completeness").html(label);
 
 // add function to addMissing button
@@ -107,6 +110,9 @@ Analysis.method("onSelectionChanged", function(list){
         };
     }).css("cursor", "pointer");
     
+// add function for save button
+    $('#saveSelected').click(this.saveSelected.bind(this)).css("cursor", "pointer");
+
 //    commonData.products[0] = label;
     
     if (commonFeatures.length > 0)
@@ -151,4 +157,17 @@ Analysis.method("onSelectionChanged", function(list){
 //    alert(missingProducts);
 
         
+});
+
+
+Analysis.method("saveSelected", function(){
+    var selection = this.host.selector.selection;
+    var instances = this.host.findModule('mdInput').previousData.Unparsed[1];
+    var parser = new InstanceParser(instances);
+    var data = "";
+    for (var i=0; i < selection.length; i++){
+        data += parser.getInstanceData(selection[i]);
+    }
+    $("#saveData").val(data);
+    $("#SaveForm").submit();
 });

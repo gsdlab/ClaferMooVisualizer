@@ -39,6 +39,17 @@ server.get('/', function(req, res) {
     res.sendfile("Client/app.html");
 });
 
+/*
+ * Handle Clientside save requests
+ */
+server.post('/', function(req, res, next) {
+	console.log("returning instances.cfr.data file");
+   	res.writeHead(200, { "Content-Type": "text/html",
+   						 "Content-Disposition": "attachment; filename=Instances.cfr.data"});
+	res.end(req.body.data);
+});
+
+
 
 /*
  * Handle file upload
