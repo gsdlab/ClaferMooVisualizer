@@ -94,7 +94,7 @@ Analysis.method("onSelectionChanged", function(list){
     else
         label += "Please select more products for analysis";
 
-    var saveButton = '<form id="SaveForm" action="/" method="post" enctype="multipart/form-data">' + '<input type="button" id="saveSelected" value="Save Selected">' + '<input type="hidden" name="data" id="saveData" value="">' + '</form>';
+    var saveButton = ' <input type="button" id="saveSelected" value="Save Selected">' + '<form id="SaveForm" action="/" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value="">' + '</form>';
     label += saveButton;
 
     $("#analysis #completeness").html(label);

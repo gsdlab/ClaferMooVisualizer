@@ -525,6 +525,19 @@ ComparisonTable.method("makePointsDeselected", function (pid){
 });
 
 ComparisonTable.method("scrollToSearch", function (input){
+
+    var iteratedRow = 0;
+    while (iteratedRow <= $("#tBody tbody").children().length){
+        if ($("#tBody #r" + iteratedRow).text().indexOf(input) === -1){
+            $("#tBody #r" + iteratedRow).hide();
+
+        } else {
+            $("#tBody #r" + iteratedRow).show();
+        }
+        iteratedRow++;
+    }
+
+/*  OLD VERSION -- CAN REVERT IF NEEDED
     if (input == ""){
         $('#mdComparisonTable .window-content').scrollTop(0);
     }
@@ -549,6 +562,8 @@ ComparisonTable.method("scrollToSearch", function (input){
         iteratedRow++;
         firstPass = false;
     }
+*/
+
 });
 
 ComparisonTable.method("getInitContent", function()
