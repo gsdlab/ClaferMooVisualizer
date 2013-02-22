@@ -1,0 +1,88 @@
+abstract Feature
+    productivity : integer
+    cost : integer
+    batterylife : integer
+    security : integer
+    
+abstract MobilePhone
+    Connectivity : Feature
+        [this.batterylife = -12]
+        [this.productivity = 14]
+        [this.security = 43]
+        [this.cost = 101]        
+        xor Bluetooth : Feature        
+            [this.batterylife = 0]
+            [this.productivity = 0]
+            [this.security = 0]
+            [this.cost = 0]
+            Bluetooth20EDR : Feature
+                [this.batterylife = -4]
+                [this.productivity = 1]
+                [this.security = -15]
+                [this.cost = 1]
+            Bluetooth21EDR : Feature
+                [this.batterylife = -2]
+                [this.productivity = 4]
+                [this.security = -10]
+                [this.cost = 1]
+            Bluetooth40 : Feature
+                [this.batterylife = -1]
+                [this.productivity = 16]
+                [this.security = -2]
+                [this.cost = 2]
+        Cellular : Feature
+            [this.batterylife = 0]
+            [this.productivity = 0]
+            [this.security = 0]
+            [this.cost = 0]
+            GSM : Feature
+                [this.batterylife = -2]
+                [this.productivity = 2]
+                [this.security = -10]
+                [this.cost = 1]
+            LTE : Feature ?
+                [this.batterylife = -1]
+                [this.productivity = 16]
+                [this.security = -3]
+                [this.cost = 3]
+        WiFi: Feature ?
+            [this.batterylife = -10]
+            [this.productivity = 20]
+            [this.security = -15]
+            [this.cost = 20]
+        USB : Feature ?
+            [this.batterylife = 10]
+            [this.productivity = 20]
+            [this.security = 0]
+            [this.cost = 3]
+    xor Battery : Feature
+        [this.batterylife = 0]
+        [this.productivity = 0]
+        [this.security = 0]
+        [this.cost = 0]
+        LiBattery1150 : Feature
+            [this.batterylife = 60]
+            [this.productivity = 0]
+            [this.security = 0]
+            [this.cost = 10]
+        LiBattery1400 : Feature
+            [this.batterylife = 70]
+            [this.productivity = 0]
+            [this.security = 0]
+            [this.cost = 15]
+    total_productivity : integer
+    [ total_productivity = sum Feature.productivity ]
+    total_batterylife : integer
+    [ total_batterylife = sum Feature.batterylife ]
+    total_security : integer
+    [ total_security = sum Feature.security ]
+    total_cost : integer
+    [ total_cost = sum Feature.cost ]
+
+MyPhone : MobilePhone
+    [Bluetooth20EDR && LiBattery1150 && !USB && !WiFi && !LTE]
+
+<< max MyPhone.total_batterylife >>
+<< max MyPhone.total_productivity >>
+<< max MyPhone.total_security >>
+<< min MyPhone.total_cost >>
