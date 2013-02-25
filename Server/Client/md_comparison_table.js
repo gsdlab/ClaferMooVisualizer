@@ -136,23 +136,42 @@ ComparisonTable.method("onRendered", function()
     row = $("#r" + i);
     var that = this;
     while (row.length != 0){
-        if (!row.find(".numeric").length)
+        if (!row.find(".numeric").length){
             $("#r" + i + " .td_abstract").prepend('<image id="r' + i + 'box" src="images/checkbox_empty.bmp" class="maybe">');
-        $("#r" + i + "box").click(function(){
-            if (this.className == "maybe"){
-                this.src = "images/checkbox_ticked.bmp";
-                this.className = "wanted";
-                that.filterContent();
-            } else if (this.className == "wanted"){
-                this.src = "images/checkbox_x.bmp";
-                this.className = "unwanted";
-                that.filterContent();
-            } else {
-                this.src = "images/checkbox_empty.bmp";
-                this.className = "maybe";
-                that.filterContent();
-            }
-        }).css("cursor", "pointer");
+            $("#r" + i + "box").click(function(){
+                if (this.className == "maybe"){
+                    this.src = "images/checkbox_ticked.bmp";
+                    this.className = "wanted";
+                    that.filterContent();
+                } else if (this.className == "wanted"){
+                    this.src = "images/checkbox_x.bmp";
+                    this.className = "unwanted";
+                    that.filterContent();
+                } else {
+                    this.src = "images/checkbox_empty.bmp";
+                    this.className = "maybe";
+                    that.filterContent();
+                }
+            }).css("cursor", "pointer");
+        }
+//  Add sorting to quality attributes
+        else {
+            $("#r" + i + " .td_abstract").append('<div id=sortText style="display:inline"></div>');
+            $("#r" + i + " .td_abstract").addClass('noSort');
+            $("#r" + i + " .td_abstract").click(function(){
+                if($(this).hasClass("sortAsc")){
+                    $(this).toggleClass("sortAsc sortDesc");
+                    $(this).find("#sortText").text(" \u25B6");
+                } else if ($(this).hasClass("sortDesc")){
+                    $(this).toggleClass("sortDesc noSort");
+                    $(this).find("#sortText").text("  ");
+                } else if ($(this).hasClass("noSort")){
+                    $(this).toggleClass("noSort sortAsc");
+                    $(this).find("#sortText").text(" \u25C0");
+                }
+                that.rowSort($(this).text());
+            }).css("cursor", "pointer");
+        }
             
         i++;
         row = $("#r" + i);
@@ -565,6 +584,63 @@ ComparisonTable.method("scrollToSearch", function (input){
     }
 */
 
+});
+
+ComparisonTable.method("rowSort", function(rowText){
+    var i=0;
+    var row = $("#comparison #r" + i);
+    while (row.length != 0){
+        if (row.find(".numeric").length != 0){
+            var current = $(row).find(".td_abstract");
+            if ($(current).text() == rowText){
+                if($(current).hasClass("noSort")){
+                    row = $("#comparison #r0");
+                }
+                var instances = row.find(".td_instance");
+                var sortableArray = [];
+                for(var j=0; j<instances.length; j++){
+                    sortableArray.push({ instance: $(instances[j]).attr("id"), value: $(instances[j]).text()} );
+                }
+                if($(current).hasClass("sortDesc")){
+                    sortableArray.sort(function(a,b){
+                        return a.value - b.value;
+                    });
+                }
+                else if($(current).hasClass("sortAsc")){
+                    sortableArray.sort(function(a,b){
+                        return b.value - a.value;
+                    });
+                }
+                else if ($(current).hasClass("noSort")){
+                    sortableArray.sort(function(a,b){
+                        return b.value.substring(1) - a.value.substring(1);
+                    });
+                }
+                while(sortableArray.length){
+                    current = sortableArray.pop().instance;
+                    current = current.replace(/[^_]{1,}/, "");
+                    //headers
+                    $("#comparison #th0" + current).appendTo("#comparison #r0");
+                    //body
+                    j = 1;
+                    row = $("#comparison #r" + j);
+                    while (row.length != 0){
+                        $("#comparison #td" + (j-1) + current).appendTo(row);
+                        j++;
+                        row = $("#comparison #r" + j);
+                    }
+
+                }
+
+            } else {
+                current.find("#sortText").text("  ");
+                current.removeClass();
+                current.addClass("noSort td_abstract");
+            }
+        }
+        i++;
+        row = $("#comparison #r" + i);
+    }
 });
 
 ComparisonTable.method("getInitContent", function()

@@ -275,13 +275,8 @@ Graph.method("isOptimal", function(id)
         values[goals[i].arg] = this.instanceProcessor.getFeatureValue(id, goals[i].arg, true);
     }
     console.log(values);
-    var instanceCount = this.instanceProcessor.getInstanceCount();
+    var instanceCount = this.findModule("mdInput").originalPoints;
     for (i=1; i<=instanceCount; i++){
-        if (i == id){
-            i++;
-            if (i > instanceCount)
-                break;
-        }
         var isOptimal = true;
         for (j=0; j<goals.length; j++){
             var check =  this.instanceProcessor.getFeatureValue(i, goals[j].arg, true);
