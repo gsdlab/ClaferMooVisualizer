@@ -479,7 +479,7 @@ ComparisonTable.method("toggleDistinct", function()
             row = table.find("#r" + i);
         }
     }
-    
+    this.scrollToSearch($("#search").val());
     return true;
 });
 
@@ -527,12 +527,12 @@ ComparisonTable.method("makePointsDeselected", function (pid){
 ComparisonTable.method("scrollToSearch", function (input){
 
     var iteratedRow = 0;
-    while (iteratedRow <= $("#tBody tbody").children().length){
-        if ($("#tBody #r" + iteratedRow).text().indexOf(input) === -1){
-            $("#tBody #r" + iteratedRow).hide();
+    while (iteratedRow <= $("#comparison #tBody tbody").children().length){
+        if ($("#comparison #tBody #r" + iteratedRow).text().toLowerCase().indexOf(input.toLowerCase()) === -1){
+            $("#comparison #tBody #r" + iteratedRow).hide();
 
         } else {
-            $("#tBody #r" + iteratedRow).show();
+            $("#comparison #tBody #r" + iteratedRow).show();
         }
         iteratedRow++;
     }
