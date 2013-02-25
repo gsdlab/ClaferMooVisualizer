@@ -48,16 +48,22 @@ ComparisonTable.method("onRendered", function()
 // Distinct button for greying out non-distinct features
     td = $('#comparison .TableSearch')[0];
     $(td).append('<button id="toggle_link">Toggle</button>');
-
+    var that = this;
     $('#toggle_link').html("Distinct");
-    $('#toggle_link').click(this.toggleDistinct.bind(this)).css("cursor", "pointer");
+    $('#toggle_link').click(function(event){
+        event.stopPropagation();
+        that.toggleDistinct();
+    }).css("cursor", "pointer");
 
 // Reset button for reseting filters
 
     $(td).append('&nbsp;<button id="filter_reset">Toggle</button>');
 
     $('#filter_reset').html("Reset");
-    $('#filter_reset').click(this.resetFilters.bind(this)).css("cursor", "pointer");
+    $('#filter_reset').click(function(event){
+        event.stopPropagation();
+        that.resetFilters();
+    }).css("cursor", "pointer");
 
 // Move headers into new div
     $("#comparison").prepend('<div id="tHeadContainer"><table id="tHead" width="100%" cellspacing="0" cellspadding="0"></table></div>');
@@ -66,13 +72,14 @@ ComparisonTable.method("onRendered", function()
 // make headers positioning always on top of window
     $('#mdComparisonTable .window-content').scroll(function(){
             $("#comparison #tHeadContainer").css("position", "relative");
-            $("#comparison #tHeadContainer").css("top", $('#mdComparisonTable .window-content').scrollTop());
+            $("#comparison #tHeadContainer").css("top", ($("#comparison").height() - $('#mdComparisonTable .window-content').scrollTop())*(-1) + $("#comparison #tHeadContainer").height());
             this.currentRow = 1;
     });
 
 // Move body into new div
-    $("#comparison").append('<div id="tBodyContainer" ></div>');
-    $("#tBodyContainer").append($("#comparison #tBody"));
+    $("#comparison").prepend('<div id="tBodyContainer" style="position: relative;"></div>');
+    $("#tBodyContainer").prepend($("#comparison #tBody"));
+    $("#tBodyContainer").css("top" , $("#comparison #tHeadContainer").height());
 
 
 
@@ -163,8 +170,8 @@ ComparisonTable.method("onRendered", function()
                     $(this).toggleClass("sortAsc sortDesc");
                     $(this).find("#sortText").text(" \u25B6");
                 } else if ($(this).hasClass("sortDesc")){
-                    $(this).toggleClass("sortDesc noSort");
-                    $(this).find("#sortText").text("  ");
+                    $(this).toggleClass("sortDesc sortAsc");
+                    $(this).find("#sortText").text(" \u25C0");
                 } else if ($(this).hasClass("noSort")){
                     $(this).toggleClass("noSort sortAsc");
                     $(this).find("#sortText").text(" \u25C0");
@@ -176,7 +183,22 @@ ComparisonTable.method("onRendered", function()
         i++;
         row = $("#r" + i);
     }
-
+//  Add sorting by instance names (default);
+    $("#r" + 0 + " .td_abstract").append('<div id=sortText style="display:inline"> \u25C0</div>');
+    $("#r" + 0 + " .td_abstract").addClass('sortAsc');
+    $("#r" + 0 + " .td_abstract").click(function(){
+        if($(this).hasClass("sortAsc")){
+            $(this).toggleClass("sortAsc sortDesc");
+            $(this).find("#sortText").text(" \u25B6");
+        } else if ($(this).hasClass("sortDesc")){
+            $(this).toggleClass("sortDesc sortAsc");
+            $(this).find("#sortText").text(" \u25C0");
+        } else if ($(this).hasClass("noSort")){
+            $(this).toggleClass("noSort sortAsc");
+            $(this).find("#sortText").text(" \u25C0");
+        }
+        that.rowSort($(this).text());
+    }).css("cursor", "pointer");
 // Selection of instances for analysis from top row of table
     var length = $("#r0").find(".td_instance").length;
 //    console.log(length);
@@ -196,6 +218,9 @@ ComparisonTable.method("onRendered", function()
     $('#search').keyup(function(){
         that.scrollToSearch($(this).val());
     }); 
+    $('#search').click(function(event){
+        event.stopPropagation();
+    });
 
     this.filterContent();
 });
@@ -263,6 +288,9 @@ ComparisonTable.method("filterContent", function(){
         if (this.permaHidden.hasOwnProperty(instance))
             this.hideInstance(instance.substring(1));
     }
+
+    //fire the scroll handler to align table
+    $('#mdComparisonTable .window-content').scroll();
 
 });
 
@@ -459,7 +487,7 @@ ComparisonTable.method("toggleDistinct", function()
     {
         $("#toggle_link").html("Normal");
 
-        var table = $("#comparison table");
+        var table = $("#comparison");
         
         var row = table.find("#r1");
         var i = 1;
@@ -556,6 +584,7 @@ ComparisonTable.method("scrollToSearch", function (input){
         }
         iteratedRow++;
     }
+    $('#mdComparisonTable .window-content').scroll();
 
 /*  OLD VERSION -- CAN REVERT IF NEEDED
     if (input == ""){
@@ -590,7 +619,7 @@ ComparisonTable.method("rowSort", function(rowText){
     var i=0;
     var row = $("#comparison #r" + i);
     while (row.length != 0){
-        if (row.find(".numeric").length != 0){
+        if (row.find(".numeric").length != 0 || i==0){
             var current = $(row).find(".td_abstract");
             if ($(current).text() == rowText){
                 if($(current).hasClass("noSort")){
@@ -602,19 +631,24 @@ ComparisonTable.method("rowSort", function(rowText){
                     sortableArray.push({ instance: $(instances[j]).attr("id"), value: $(instances[j]).text()} );
                 }
                 if($(current).hasClass("sortDesc")){
-                    sortableArray.sort(function(a,b){
-                        return a.value - b.value;
-                    });
+                    if (row.attr("id") == "r0")
+                        sortableArray.sort(function(a,b){
+                            return a.value.substring(1) - b.value.substring(1);
+                        });
+                    else
+                        sortableArray.sort(function(a,b){
+                            return a.value - b.value;
+                        });
                 }
                 else if($(current).hasClass("sortAsc")){
-                    sortableArray.sort(function(a,b){
-                        return b.value - a.value;
-                    });
-                }
-                else if ($(current).hasClass("noSort")){
-                    sortableArray.sort(function(a,b){
-                        return b.value.substring(1) - a.value.substring(1);
-                    });
+                    if (row.attr("id") == "r0")
+                        sortableArray.sort(function(a,b){
+                            return b.value.substring(1) - a.value.substring(1);
+                        });
+                    else
+                        sortableArray.sort(function(a,b){
+                            return b.value - a.value;
+                        });
                 }
                 while(sortableArray.length){
                     current = sortableArray.pop().instance;
@@ -634,8 +668,8 @@ ComparisonTable.method("rowSort", function(rowText){
 
             } else {
                 current.find("#sortText").text("  ");
-                current.removeClass();
-                current.addClass("noSort td_abstract");
+                current.removeClass("sortAsc sortDesc");
+                current.addClass("noSort");
             }
         }
         i++;
