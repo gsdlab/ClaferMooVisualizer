@@ -190,6 +190,7 @@ ComparisonTable.method("filterContent", function(){
 
 // loop to go through each element
     this.host.findModule("mdGraph").addIds();
+    var x;
     i=0;
     row = $("#mdComparisonTable #r" + i);
     row_length = row.find(".td_instance").length;

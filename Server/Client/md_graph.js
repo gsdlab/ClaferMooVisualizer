@@ -212,21 +212,14 @@ Graph.method("makePointsNew", function(){
         var fill = $(circlePair.circle).attr("fill");
         var id = "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "r"
         var NS="http://www.w3.org/2000/svg";
-        var isOptimal = false;
-        for (i=0; i<originalCirclePairs.length; i++){
-            if ($(circlePair.circle).attr("cx") == $(originalCirclePairs[i].circle).attr("cx"))
-                if ($(circlePair.circle).attr("cy") == $(originalCirclePairs[i].circle).attr("cy")){
-                    isOptimal = true;
-                    break;
-                }
-        }
-        if (isOptimal){
+        var IdenticalId = this.isOptimal((circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) - 1;
+        if (IdenticalId != -1){
             var shape = this.getSVGHexagon(xpos, ypos, r);
-            var newID = "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "h " + $(originalCirclePairs[i].circle).attr("id");
+            var newID = "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "h " + $(originalCirclePairs[IdenticalId].circle).attr("id");
             shape.setAttributeNS(null, "id", newID);
-            $(originalCirclePairs[i].circle).hide();
-            $(originalCirclePairs[i].text_data).hide();
-            host.findModule("mdComparisonTable").permaHidden["V"+(i+1)] = true;
+            $(originalCirclePairs[IdenticalId].circle).hide();
+            $(originalCirclePairs[IdenticalId].text_data).hide();
+            host.findModule("mdComparisonTable").permaHidden["V"+(IdenticalId+1)] = true;
         } else {
             var shape = this.getSVGSquare(xpos, ypos, r)
             shape.setAttributeNS(null, "id", "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "s");
@@ -269,6 +262,38 @@ Graph.method("getSVGSquare", function(cx, cy, r){
     rect.setAttributeNS(null, "x",cx-r);
     rect.setAttributeNS(null, "y",cy-r);
     return rect;
+});
+
+// if instance is optimal, returns identical optimal instance id, else returns -1
+Graph.method("isOptimal", function(id)
+{
+    var abstractXML = this.host.findModule("mdInput").previousData.abstractXML;
+    var goals = (new ClaferProcessor(abstractXML)).getGoals();
+    console.log(id);
+    var values={};
+    for (i=0; i<goals.length; i++){
+        values[goals[i].arg] = this.instanceProcessor.getFeatureValue(id, goals[i].arg, true);
+    }
+    console.log(values);
+    var instanceCount = this.instanceProcessor.getInstanceCount();
+    for (i=1; i<=instanceCount; i++){
+        if (i == id){
+            i++;
+            if (i > instanceCount)
+                break;
+        }
+        var isOptimal = true;
+        for (j=0; j<goals.length; j++){
+            var check =  this.instanceProcessor.getFeatureValue(i, goals[j].arg, true);
+            if (check != values[goals[j].arg]){
+                isOptimal = false;
+                break;
+            }
+        }
+        if (isOptimal)
+            return i;
+    }
+    return -1;
 });
 
 Graph.method("selectObject", function(o)
