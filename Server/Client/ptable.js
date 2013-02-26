@@ -80,7 +80,6 @@ TableVisualizer.prototype.getHTML = function(data)
 
         table.append(row);
 	}
-	console.log(table);
 	return table;
 
 }

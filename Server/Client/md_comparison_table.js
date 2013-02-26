@@ -425,7 +425,7 @@ ComparisonTable.method("getDataTable", function()
         }
         else 
             currentContextRow.push(output[i].displayWithMargins);
-        
+
         denyAddContextRow = false;
         
 		for (var j = 1; j <= instanceCount; j++)
@@ -482,7 +482,7 @@ ComparisonTable.method("toggleDistinct", function()
         for (var i = 0; i < rows.length; i++)
         {
             this.toggleRow(rows[i], true);
-        }DataTable
+        }
     }
     else
     {
