@@ -15,7 +15,8 @@ function Graph(host)
 }
 
 Graph.method("onDataLoaded", function(data){
-    this.instanceProcessor = new InstanceProcessor(data.instancesXML);    
+    this.instanceProcessor = new InstanceProcessor(data.instancesXML);
+    this.Processor = new ClaferProcessor(data.claferXML)    
 });
 
 Graph.method("onRendered", function()
@@ -185,6 +186,10 @@ Graph.method("addIds", function(){
     for(i=0; i<circle_pairs.length; i++){
         $(circle_pairs[i].circle).attr("id", "V" + (i+1) + "c");
         $(circle_pairs[i].text_data).attr("id", "V" + (i+1) + "t");
+        var child1 = $(circle_pairs[i].text_data).children()[0]
+        var child2 = $(circle_pairs[i].text_data).children()[1]
+        $(child1).text($(child1).text().replace("V", ""));
+        $(child2).text($(child1).text().replace("V", ""));
     }
 
 });
@@ -192,15 +197,16 @@ Graph.method("addIds", function(){
 // Make instances squares or hexagons
 Graph.method("makePointsNew", function(){
     this.addIds();
-
+    var goals = this.Processor.getGoals();
+    var originalPoints = this.host.findModule("mdInput").originalPoints
 // Get graph bubble html locations
     originalCirclePairs = [];
-    for (var i=1; i<=this.host.findModule("mdInput").originalPoints; i++){
+    for (var i=1; i<=originalPoints; i++){
         originalCirclePairs.push({circle: $("#V" + i + "c"), text_data: $("#V" + i + "t"), ident: i});
     }
 
     var circle_pairs = [];
-    for (var i=(this.host.findModule("mdInput").originalPoints + 1); i<=$("#chart circle").length; i++){
+    for (var i=(originalPoints + 1); i<=$("#chart circle").length; i++){
         circle_pairs.push({circle: $("#V" + i + "c"), text_data: $("#V" + i + "t"), ident: i});
     }
     //hide table header (row 0)
@@ -212,7 +218,7 @@ Graph.method("makePointsNew", function(){
         var fill = $(circlePair.circle).attr("fill");
         var id = "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "r"
         var NS="http://www.w3.org/2000/svg";
-        var IdenticalId = this.isOptimal((circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) - 1;
+        var IdenticalId = this.instanceProcessor.getIdenticalID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, ""), goals, originalPoints) - 1;
         if (IdenticalId != -1){
             var shape = this.getSVGHexagon(xpos, ypos, r);
             var newID = "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "h " + $(originalCirclePairs[IdenticalId].circle).attr("id");
@@ -230,8 +236,7 @@ Graph.method("makePointsNew", function(){
         shape.setAttributeNS(null, "fill-opacity","0.8");
         shape.style.fill=fill;
         $(circlePair.text_data).prepend(shape);
-        $(circlePair.circle).attr("fill-opacity","0");
-        $(circlePair.circle).attr("stroke-width","0");
+        $(circlePair.circle).hide();
     }
 });
 
@@ -264,33 +269,6 @@ Graph.method("getSVGSquare", function(cx, cy, r){
     return rect;
 });
 
-// if instance is optimal, returns identical optimal instance id, else returns -1
-Graph.method("isOptimal", function(id)
-{
-    var abstractXML = this.host.findModule("mdInput").previousData.abstractXML;
-    var goals = (new ClaferProcessor(abstractXML)).getGoals();
-    console.log(id);
-    var values={};
-    for (i=0; i<goals.length; i++){
-        values[goals[i].arg] = this.instanceProcessor.getFeatureValue(id, goals[i].arg, true);
-    }
-    console.log(values);
-    var instanceCount = this.findModule("mdInput").originalPoints;
-    for (i=1; i<=instanceCount; i++){
-        var isOptimal = true;
-        for (j=0; j<goals.length; j++){
-            var check =  this.instanceProcessor.getFeatureValue(i, goals[j].arg, true);
-            if (check != values[goals[j].arg]){
-                isOptimal = false;
-                break;
-            }
-        }
-        if (isOptimal)
-            return i;
-    }
-    return -1;
-});
-
 Graph.method("selectObject", function(o)
 {
     $(o).attr("fill", "#ff0000");    
@@ -311,7 +289,7 @@ Graph.method("makePointsSelected", function(points)
         {
             if (this.firstChild)
             {
-                if (this.firstChild.nodeValue == points[i])
+                if (this.firstChild.nodeValue == points[i].replace("V", ""))
                     module.selectObject(this);
             }
         });
@@ -328,7 +306,7 @@ Graph.method("makePointsDeselected", function(points)
         {
             if (this.firstChild)
             {
-                if (this.firstChild.nodeValue == points[i])
+                if (this.firstChild.nodeValue == points[i].replace("V", ""))
                     module.deselectObject(this);// alert(this.firstChild.nodeValue);
             }
         });

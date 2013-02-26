@@ -13,6 +13,8 @@ function Analysis(host)
 }
 
 Analysis.method("onDataLoaded", function(data){
+    this.instanceProcessor = new InstanceProcessor(data.instancesXML);
+    this.Processor = new ClaferProcessor(data.claferXML);
 });
 
 Analysis.method("onRendered", function()
@@ -37,8 +39,22 @@ Analysis.method("getInitContent", function()
 });
 
 Analysis.method("onSelectionChanged", function(list){
-    var originalData = this.host.findModule("mdComparisonTable").dataTable;    
-    data = originalData.subsetByProducts(list);
+    var originalData = this.host.findModule("mdComparisonTable").dataTable;
+    var newlist = [];
+    for (var i = 0; i < list.length; i++){
+        newlist.push(list[i].replace("V", ""));
+    }   
+    console.log(newlist);
+    console.log(list);
+    var originalPoints = this.host.findModule("mdInput").originalPoints;
+    var goalNames = this.Processor.getGoals();
+    for (var i = 0; i < newlist.length; i++){
+        newlist[i] = newlist[i] + this.instanceProcessor.getInstanceShape(newlist[i], goalNames, originalPoints);
+    }
+    console.log(newlist);
+    console.log(list);
+
+    data = originalData.subsetByProducts(newlist);
     
     if (data.products.length <= 1)
     {
@@ -57,12 +73,12 @@ Analysis.method("onSelectionChanged", function(list){
 
     
     // get the products that are missing to make up the complete set.
-    var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), list);
+    var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), newlist);
     var permaHidden = this.host.findModule("mdComparisonTable").permaHidden;
 
     if (missingProducts){
         for (var i = 0; i < missingProducts.length; i++){
-            if (permaHidden.hasOwnProperty(missingProducts[i]))
+            if (permaHidden.hasOwnProperty("V" + missingProducts[i].replace(/[\u2B22\u25CF\u25A0]/g, "")))
                 missingProducts.splice(i, 1);
         }
     }
@@ -104,7 +120,7 @@ Analysis.method("onSelectionChanged", function(list){
         $("#addMissing").click(function(){
             var i;
             for (i = 0; i<missingProducts.length; i++){
-                host.selector.onSelected(missingProducts[i]);
+                host.selector.onSelected("V" + missingProducts[i].replace(/[\u2B22\u25CF\u25A0]/g, ""));
             }
         }).css("cursor", "pointer");
     }

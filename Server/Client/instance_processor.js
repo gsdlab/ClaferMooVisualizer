@@ -83,3 +83,49 @@ InstanceProcessor.method("getFeatureValue", function(instanceIndex, featureName,
 	}
 		
 });
+
+
+InstanceProcessor.method("getInstanceShape", function(id, goals, originalPoints){
+    if (id>originalPoints){
+	    var values={};
+    	for (var i=0; i<goals.length; i++){
+    	    values[goals[i].arg] = this.getFeatureValue(id, goals[i].arg, true);
+    	}
+    	for (i=1; i<=originalPoints; i++){
+    	    var isOptimal = true;
+    	    for (j=0; j<goals.length; j++){
+    	        var check =  this.getFeatureValue(i, goals[j].arg, true);
+    	        if (check != values[goals[j].arg]){
+    	            isOptimal = false;
+    	            break;
+    	        }
+        	}
+        	if (isOptimal)
+        	    return "\u2B22";
+    	}
+    	return "\u25A0";
+    } else
+    	return "\u25CF";
+});
+
+InstanceProcessor.method("getIdenticalID", function(id, goals, originalPoints){
+   	if (id>originalPoints){
+    	var values={};
+   		for (var i=0; i<goals.length; i++){
+   		   	values[goals[i].arg] = this.getFeatureValue(id, goals[i].arg, true);
+   		}
+	   	for (i=1; i<=originalPoints; i++){
+   		    var isOptimal = true;
+   	    	for (j=0; j<goals.length; j++){
+   	        	var check =  this.getFeatureValue(i, goals[j].arg, true);
+   	        	if (check != values[goals[j].arg]){
+   	        	   	isOptimal = false;
+   	        	    break;
+   	        	}
+       		}
+       		if (isOptimal)
+       		    return i;
+   		}
+   		return 0;
+   	}
+});

@@ -406,13 +406,14 @@ ComparisonTable.method("getDataTable", function()
 	this.traverse(current, 0);
 	output = abstractClaferOutput;
 	
-
+    var originalPoints = this.host.findModule("mdInput").originalPoints;
+    var goalNames = this.processor.getGoals();
     var result = new DataTable();   
     result.title = output[0].displayWithMargins;
     
     for (var j = 1; j <= instanceCount; j++)
     {
-        result.products.push("V" + j);
+        result.products.push(j + this.instanceProcessor.getInstanceShape(j, goalNames, originalPoints));
     }
 	
 	for (var i = 0; i < output.length; i++)
@@ -432,7 +433,7 @@ ComparisonTable.method("getDataTable", function()
 		{
 			if (i == 0)
             {
-				currentContextRow.push("V" + j);
+				currentContextRow.push(j + this.instanceProcessor.getInstanceShape(j, goalNames, originalPoints));
             }
 			else
 			{
