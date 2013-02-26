@@ -110,7 +110,15 @@ server.post('/upload', function(req, res, next) {
     //	res.send ("Serverside Timeout.");
     //}, 60000);
 	fs.readFile(uploadedFilePath, function (err, data) {
-    file_contents = data.toString();
+		if(data)
+    		file_contents = data.toString();
+    	else{
+    		res.writeHead(500, { "Content-Type": "text/html"});
+			res.end();
+			cleanupOldFiles(uploadedFilePath, dlDir);
+			return;
+    	}
+
 		if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data"){
 			res.writeHead(200, { "Content-Type": "text/html"});
 			res.end(file_contents);
