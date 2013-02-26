@@ -31,7 +31,7 @@ ComparisonTable.method("onDataLoaded", function(data){
     this.content = $('<div id="comparison" class="comparison"></div>').append(new TableVisualizer().getHTML(this.dataTable));
     this.hidden = [];
     this.permaHidden = {};
-    $("#mdComparisonTable .window-titleBar-content").text(this.dataTable.title);
+    $("#mdComparisonTable .window-titleBar-content").text("Pareto Front Table: " + this.dataTable.title);
     this.currentRow = 1;
 
 });
@@ -393,7 +393,7 @@ ComparisonTable.method("getDataTable", function()
 //	alert(instanceSuperClafer);
 	var abstractClaferTree = this.processor.getAbstractClaferTree("/module/declaration/uniqueid", instanceSuperClafer);
 
-	
+//    console.log(abstractClaferTree)	;
 //	alert(abstractClaferTree.subclafers[0].subclafers.length);
 	
 //	alert(instanceSuperClafer);
@@ -402,12 +402,12 @@ ComparisonTable.method("getDataTable", function()
 	var parent = null;
 	var current = abstractClaferTree;
 	abstractClaferOutput = new Array();
-	
+
 	this.traverse(current, 0);
 	output = abstractClaferOutput;
 	
 
-    var result = new DataTable();
+    var result = new DataTable();   
     result.title = output[0].displayWithMargins;
     
     for (var j = 1; j <= instanceCount; j++)
@@ -419,11 +419,12 @@ ComparisonTable.method("getDataTable", function()
 	{
         var currentMatrixRow = new Array();
         var currentContextRow = new Array();
-
-        if (i > 0) // do not push the parent clafer
-            result.features.push(output[i].displayWithMargins);
-            
-        currentContextRow.push(output[i].displayWithMargins);
+        if (i > 0){ // do not push the parent clafer
+            result.features.push(output[i].displayWithMargins + this.processor.getIfMandatory(output[i].claferId));
+            currentContextRow.push(output[i].displayWithMargins + this.processor.getIfMandatory(output[i].claferId));
+        }
+        else 
+            currentContextRow.push(output[i].displayWithMargins);
         
         denyAddContextRow = false;
         
@@ -481,7 +482,7 @@ ComparisonTable.method("toggleDistinct", function()
         for (var i = 0; i < rows.length; i++)
         {
             this.toggleRow(rows[i], true);
-        }
+        }DataTable
     }
     else
     {

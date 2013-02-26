@@ -169,7 +169,6 @@ Input.method("processToolResult", function(result)
 {
 
 	if (!result) return;	
-	
 	var ar = [];
 
 	if (this.optimizeFlag){

@@ -57,7 +57,7 @@ Graph.method("onRendered", function()
 	}
 	else
 		$("#chart").hide();
-
+    $("#mdGraph .window-titleBar-content").text("Pareto Front Graph: " + this.instanceProcessor.getInstanceSuperClafer().replace(/[^_]{1,}[_]/, ""));
     this.addIds();
 });
 

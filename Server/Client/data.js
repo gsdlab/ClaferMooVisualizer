@@ -170,7 +170,7 @@ DataTable.method("getCommon", function(needAggregate)
     if (this.products.length <= 1)
         return result; // the task is not meaningful
 
-    result.title = "Common/Aggregate Features";
+    result.title = "Commonalities";
     var jointProductName = "Value";
     result.products.push(jointProductName);
     
@@ -211,12 +211,12 @@ DataTable.method("getCommon", function(needAggregate)
         else
         {
             if (isNumber)
-            {
+            {/*
                 aggregator = aggregator / this.products.length;
                 result.features.push(this.makeAggregatedFeature(this.features[i]));
                 var tempAr = new Array();
                 tempAr.push(Math.round(aggregator * 100) / 100);
-                result.matrix.push(tempAr);
+                result.matrix.push(tempAr);*/
             }   
         }
     }

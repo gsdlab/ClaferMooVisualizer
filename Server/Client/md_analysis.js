@@ -1,7 +1,7 @@
 function Analysis(host)
 { 
     this.id = "mdAnalysis";
-    this.title = "Analysis";
+    this.title = "Comparison View";
     
     this.width = 500;
     this.height = 310;
@@ -88,7 +88,7 @@ Analysis.method("onSelectionChanged", function(list){
         }
         else
         {
-            label += '[Complete] - The set is a complete concept';
+            label += '[Complete] - The set defines a complete class';
         }
     }
     else

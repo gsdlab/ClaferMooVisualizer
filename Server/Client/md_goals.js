@@ -1,7 +1,7 @@
 function Goals(host)
 { 
     this.id = "mdGoals";
-    this.title = "Goals";
+    this.title = "Objectives";
     
     this.width = 500;
     this.height = 85;
