@@ -44,15 +44,12 @@ Analysis.method("onSelectionChanged", function(list){
     for (var i = 0; i < list.length; i++){
         newlist.push(list[i].replace("V", ""));
     }   
-    console.log(newlist);
-    console.log(list);
-    var originalPoints = this.host.findModule("mdInput").originalPoints;
-    var goalNames = this.Processor.getGoals();
+
+//    console.log(list);
     for (var i = 0; i < newlist.length; i++){
-        newlist[i] = newlist[i] + this.instanceProcessor.getInstanceShape(newlist[i], goalNames, originalPoints);
+        newlist[i] = newlist[i];
     }
-    console.log(newlist);
-    console.log(list);
+//    console.log(newlist);
 
     data = originalData.subsetByProducts(newlist);
     
@@ -74,11 +71,12 @@ Analysis.method("onSelectionChanged", function(list){
     
     // get the products that are missing to make up the complete set.
     var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), newlist);
+//    console.log(originalData)
     var permaHidden = this.host.findModule("mdComparisonTable").permaHidden;
 
     if (missingProducts){
         for (var i = 0; i < missingProducts.length; i++){
-            if (permaHidden.hasOwnProperty("V" + missingProducts[i].replace(/[\u2B22\u25CF\u25A0]/g, "")))
+            if (permaHidden.hasOwnProperty("V" + missingProducts[i]))
                 missingProducts.splice(i, 1);
         }
     }
@@ -154,15 +152,18 @@ Analysis.method("onSelectionChanged", function(list){
     else
         $("#analysis #unique").html("No Data");
 
+// make circles get added after circles get ID back
+    this.addShapes();
+
 // add buttons to remove products
     var i;
     var differentProducts = $("#unique #r0").find(".td_instance");
     for (i=0; i<$(differentProducts).length; i++){
-        $(differentProducts[i]).prepend('<image id="rem' + $(differentProducts[i]).text() + '" src="images/remove.png" alt="remove">')
-        var buttonId = "#rem" + $(differentProducts[i]).text()
+        $(differentProducts[i]).prepend('<image id="rem' + $(differentProducts[i]).find(".svghead :last-child").text() + '" src="images/remove.png" alt="remove">')
+        var buttonId = "#rem" + $(differentProducts[i]).find(".svghead :last-child").text()
         $(buttonId).click(function(){
-            console.log($(this).attr("id").substring(3))
-            host.selector.onDeselected($(this).attr("id").substring(3));
+            console.log("V" + String($(this).attr("id").substring(3)));
+            host.selector.onDeselected("V" + String($(this).attr("id").substring(3)));
         });
         $(buttonId).css("float", "left");
         $(buttonId).css("vertical-align", "middle");
@@ -183,6 +184,16 @@ Analysis.method("onSelectionChanged", function(list){
         
 });
 
+Analysis.method("addShapes", function(){
+    Arow = $("#analysis #unique #r0 .td_instance");
+    for (var i=0; i<Arow.length; i++){
+        var correspondingCell = $("#comparison #th0_" + $(Arow[i]).text());
+        $(Arow[i]).html('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svghead" height="22px" width="22px"><text text-anchor="middle" x="11px" y="16px" stroke="#ffffff" stroke-width="3px">' + $(Arow[i]).text() + '</text><text text-anchor="middle" x="11px" y="16px">' + $(Arow[i]).text() + '</text></svg>')
+        $(correspondingCell).find("circle").clone().prependTo($(Arow[i]).find(".svghead"));
+        $(correspondingCell).find("rect").clone().prependTo($(Arow[i]).find(".svghead"));
+        $(correspondingCell).find("polygon").clone().prependTo($(Arow[i]).find(".svghead"));
+    }
+})
 
 Analysis.method("saveSelected", function(){
     var selection = this.host.selector.selection;

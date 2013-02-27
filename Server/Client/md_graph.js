@@ -92,6 +92,7 @@ Graph.method("drop", function(ev)
     
 	this.assignToAxis(id, arg, label, true);
     this.redrawParetoFront();
+    host.findModule("mdComparisonTable").addShapes();
     host.findModule("mdComparisonTable").filterContent();
 });
 
@@ -221,16 +222,15 @@ Graph.method("makePointsNew", function(){
         var IdenticalId = this.instanceProcessor.getIdenticalID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, ""), goals, originalPoints) - 1;
         if (IdenticalId != -1){
             var shape = this.getSVGHexagon(xpos, ypos, r);
-            var newID = "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "h " + $(originalCirclePairs[IdenticalId].circle).attr("id");
+            var newID = "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "h";
             shape.setAttributeNS(null, "id", newID);
             $(originalCirclePairs[IdenticalId].circle).hide();
             $(originalCirclePairs[IdenticalId].text_data).hide();
             host.findModule("mdComparisonTable").permaHidden["V"+(IdenticalId+1)] = true;
         } else {
             var shape = this.getSVGSquare(xpos, ypos, r)
-            shape.setAttributeNS(null, "id", "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "s");
+            shape.setAttributeNS(null, "id", "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "r");
         }
-        shape.setAttributeNS(null, "id",id);
         shape.setAttributeNS(null, "stroke","#000000");
         shape.setAttributeNS(null, "stroke-width","1");
         shape.setAttributeNS(null, "fill-opacity","0.8");
@@ -282,35 +282,13 @@ Graph.method("deselectObject", function(o)
 Graph.method("makePointsSelected", function(points)
 {
     var module = this;
-
-    for (var i = 0; i < points.length; i++)
-    {
-        $('#chart text').each(function()
-        {
-            if (this.firstChild)
-            {
-                if (this.firstChild.nodeValue == points[i].replace("V", ""))
-                    module.selectObject(this);
-            }
-        });
-    }
+    this.selectObject($("#" + points + "t text")[1]);
 });
 
 Graph.method("makePointsDeselected", function(points)
 {
     var module = this;
-
-    for (var i = 0; i < points.length; i++)
-    {
-        $('#chart text').each(function()
-        {
-            if (this.firstChild)
-            {
-                if (this.firstChild.nodeValue == points[i].replace("V", ""))
-                    module.deselectObject(this);// alert(this.firstChild.nodeValue);
-            }
-        });
-    }
+    this.deselectObject($("#" + points + "t text")[1]);
 });
 
 

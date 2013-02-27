@@ -38,6 +38,8 @@ ComparisonTable.method("onDataLoaded", function(data){
 
 ComparisonTable.method("onRendered", function()
 {
+// Add circles to table headers
+    this.addShapes();
 
 // Add search bar 
     var td = $('#comparison .table_title')[0];
@@ -73,13 +75,13 @@ ComparisonTable.method("onRendered", function()
     $('#mdComparisonTable .window-content').scroll(function(){
             $("#comparison #tHeadContainer").css("position", "relative");
             $("#comparison #tHeadContainer").css("top", ($("#comparison").height() - $('#mdComparisonTable .window-content').scrollTop())*(-1) + $("#comparison #tHeadContainer").height());
-            this.currentRow = 1;
+            $("#comparison #tBodyContainer").css("top" , $("#comparison #tHeadContainer").height());
     });
 
 // Move body into new div
     $("#comparison").prepend('<div id="tBodyContainer" style="position: relative;"></div>');
     $("#tBodyContainer").prepend($("#comparison #tBody"));
-    $("#tBodyContainer").css("top" , $("#comparison #tHeadContainer").height());
+    
 
 
 
@@ -222,7 +224,10 @@ ComparisonTable.method("onRendered", function()
         event.stopPropagation();
     });
 
+    //fire the scroll handler to align table after half a second (fixes chrome bug)
+    setTimeout(function(){$('#mdComparisonTable .window-content').scroll()},500);
     this.filterContent();
+
 });
 
 /* unfilters table then hides columns that don't pass 
@@ -413,7 +418,7 @@ ComparisonTable.method("getDataTable", function()
     
     for (var j = 1; j <= instanceCount; j++)
     {
-        result.products.push(j + this.instanceProcessor.getInstanceShape(j, goalNames, originalPoints));
+        result.products.push(String(j));
     }
 	
 	for (var i = 0; i < output.length; i++)
@@ -433,7 +438,7 @@ ComparisonTable.method("getDataTable", function()
 		{
 			if (i == 0)
             {
-				currentContextRow.push(j + this.instanceProcessor.getInstanceShape(j, goalNames, originalPoints));
+				currentContextRow.push(String(j));
             }
 			else
 			{
@@ -566,12 +571,12 @@ ComparisonTable.method("addHovering", function()
 
 //makes instance red on graph, for actual selection function see onSelected(pid) in selector.js
 ComparisonTable.method("makePointsSelected", function (pid){;
-    $("#mdComparisonTable #th0_" + pid.substring(1)).css("color", "red");
+    $("#mdComparisonTable #th0_" + pid.substring(1)).find("text").css("fill", "Red");
 });
 
 //makes instance red on graph, for actual deselection function see onDeselected(pid) in selector.js
 ComparisonTable.method("makePointsDeselected", function (pid){
-    $("#mdComparisonTable #th0_" + pid.substring(1)).css("color", "black");
+    $("#mdComparisonTable #th0_" + pid.substring(1)).find("text").css("fill", "Black");
 });
 
 ComparisonTable.method("scrollToSearch", function (input){
@@ -635,7 +640,7 @@ ComparisonTable.method("rowSort", function(rowText){
                 if($(current).hasClass("sortDesc")){
                     if (row.attr("id") == "r0")
                         sortableArray.sort(function(a,b){
-                            return a.value.substring(1) - b.value.substring(1);
+                            return a.value - b.value
                         });
                     else
                         sortableArray.sort(function(a,b){
@@ -645,7 +650,7 @@ ComparisonTable.method("rowSort", function(rowText){
                 else if($(current).hasClass("sortAsc")){
                     if (row.attr("id") == "r0")
                         sortableArray.sort(function(a,b){
-                            return b.value.substring(1) - a.value.substring(1);
+                            return b.value - a.value
                         });
                     else
                         sortableArray.sort(function(a,b){
@@ -678,6 +683,42 @@ ComparisonTable.method("rowSort", function(rowText){
         row = $("#comparison #r" + i);
     }
 });
+
+ComparisonTable.method("addShapes", function(){
+    var that = this;
+    $("#r0 .td_instance").each(function(){
+        $(this).find("circle").remove()
+        var text = $(this).text() 
+        $(this).html('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svghead" height="22px" width="22px"><text text-anchor="middle" x="11px" y="16px" stroke="#ffffff" stroke-width="3px">' + text + '</text><text text-anchor="middle" x="11px" y="16px">' + text + '</text></svg>')
+        if ($("#V" + text + "c").length == 1){
+            $("#V" + text + "c").clone()
+            var thisCircle = $("#V" + text + "c").clone();
+            $(thisCircle).removeAttr("id");
+            $(thisCircle).attr("cx", "11px");
+            $(thisCircle).attr("cy", "11px");
+            $(thisCircle).attr("r", "10px");
+            $(thisCircle).prependTo($(this).find(".svghead"));
+        }
+    // This will get any hidden circles and then put the new shape on top
+        if ($("#V" + text + "r").length == 1){
+            $("#V" + text + "r").clone().prependTo($(this).find(".svghead"));
+            var thisRect = $(this).find("rect");
+            $(thisRect).removeAttr("id");
+            $(thisRect).attr("x", "1px");
+            $(thisRect).attr("y", "1px");
+            $(thisRect).attr("width", "20px");
+            $(thisRect).attr("height", "20px");
+        } else if ($("#V" + text + "h").length == 1){
+            var fill = $("#V" + text + "h").css("fill");
+            console.log(that);
+            var thisHex = that.host.findModule("mdGraph").getSVGHexagon(10, 11, 10);
+            $(thisHex).css("fill", fill);
+            $(thisHex).attr("stroke-width", "1");
+            $(thisHex).attr("stroke", "#000000");
+            $(thisHex).prependTo($(this).find(".svghead"));
+        } 
+    });
+})
 
 ComparisonTable.method("getInitContent", function()
 {
