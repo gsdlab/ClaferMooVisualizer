@@ -1,5 +1,4 @@
-
-c509_MyPhone : c6_MobilePhone 
+c472_MyPhone  : c6_MobilePhone 
 	c7_Connectivity : c1_Feature 
 		c29_Bluetooth : c1_Feature 
 			c50_Bluetooth20EDR : c1_Feature 
@@ -11,31 +10,26 @@ c509_MyPhone : c6_MobilePhone
 			c3_cost  =  0 
 			c4_batterylife  =  0 
 			c5_security  =  0 
-		c119_Cellular : c1_Feature 
-			c140_GSM : c1_Feature 
-				c2_productivity  =  2 
-				c3_cost  =  1 
-				c4_batterylife  =  -2 
-				c5_security  =  -10 
-			c2_productivity  =  0 
-			c3_cost  =  0 
-			c4_batterylife  =  0 
-			c5_security  =  0 
+		c119_GSM : c1_Feature 
+			c2_productivity  =  2 
+			c3_cost  =  1 
+			c4_batterylife  =  -2 
+			c5_security  =  -10 
 		c2_productivity  =  14 
 		c3_cost  =  101 
 		c4_batterylife  =  -12 
 		c5_security  =  43 
-	c230_Battery : c1_Feature 
-		c272_LiBattery1400 : c1_Feature 
+	c209_Battery : c1_Feature 
+		c230_LiBattery1150 : c1_Feature 
 			c2_productivity  =  0 
-			c3_cost  =  15 
-			c4_batterylife  =  70 
+			c3_cost  =  10 
+			c4_batterylife  =  60 
 			c5_security  =  0 
 		c2_productivity  =  0 
 		c3_cost  =  0 
 		c4_batterylife  =  0 
 		c5_security  =  0 
-	c293_total_productivity  =  17 
-	c347_total_batterylife  =  52 
-	c401_total_security  =  18 
-	c455_total_cost  =  118 
+	c272_total_productivity  =  17 
+	c322_total_batterylife  =  42 
+	c372_total_security  =  18 
+	c422_total_cost  =  113 
