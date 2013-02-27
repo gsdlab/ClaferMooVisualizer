@@ -690,9 +690,16 @@ ComparisonTable.method("rowSort", function(rowText){
 
 ComparisonTable.method("addShapes", function(){
     var that = this;
-    $("#r0 .td_instance").each(function(){
+    $("#comparison #r0 .td_instance").each(function(){
         $(this).find("circle").remove()
-        var text = $(this).text() 
+        $(this).find("rect").remove()
+        $(this).find("polygon").remove()
+        if ($(this).find(".svghead").length == 0)
+            var text = $(this).text();
+        else 
+            var text  = $($(this).find(".svghead text")[0]).text(); 
+
+        console.log(text);
         $(this).html('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svghead" height="22px" width="22px"><text text-anchor="middle" x="11px" y="16px" stroke="#ffffff" stroke-width="3px">' + text + '</text><text text-anchor="middle" x="11px" y="16px">' + text + '</text></svg>')
         if ($("#V" + text + "c").length == 1){
             $("#V" + text + "c").clone()
@@ -721,8 +728,9 @@ ComparisonTable.method("addShapes", function(){
             $(thisHex).attr("stroke", "#000000");
             $(thisHex).prependTo($(this).find(".svghead"));
         } 
+
     });
-})
+});
 
 ComparisonTable.method("getInitContent", function()
 {

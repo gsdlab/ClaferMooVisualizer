@@ -187,8 +187,13 @@ Analysis.method("onSelectionChanged", function(list){
 Analysis.method("addShapes", function(){
     Arow = $("#analysis #unique #r0 .td_instance");
     for (var i=0; i<Arow.length; i++){
-        var correspondingCell = $("#comparison #th0_" + $(Arow[i]).text());
-        $(Arow[i]).html('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svghead" height="22px" width="22px"><text text-anchor="middle" x="11px" y="16px" stroke="#ffffff" stroke-width="3px">' + $(Arow[i]).text() + '</text><text text-anchor="middle" x="11px" y="16px">' + $(Arow[i]).text() + '</text></svg>')
+        if ($(Arow[i]).find(".svghead").length == 0)
+            var text = $(Arow[i]).text()
+        else 
+            var text  = $($(Arow[i]).find(".svghead text")[0]).text(); 
+        console.log(text);
+        var correspondingCell = $("#comparison #th0_" + text);
+        $(Arow[i]).html('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svghead" height="22px" width="22px"><text text-anchor="middle" x="11px" y="16px" stroke="#ffffff" stroke-width="3px">' + text + '</text><text text-anchor="middle" x="11px" y="16px">' + text + '</text></svg>')
         $(correspondingCell).find("circle").clone().prependTo($(Arow[i]).find(".svghead"));
         $(correspondingCell).find("rect").clone().prependTo($(Arow[i]).find(".svghead"));
         $(correspondingCell).find("polygon").clone().prependTo($(Arow[i]).find(".svghead"));
