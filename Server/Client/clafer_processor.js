@@ -148,6 +148,6 @@ ClaferProcessor.method("getIfMandatory", function(claferID){
 	if (min.length != 0)
 		return "";
 	else 
-		return "?";
+		return "<b>?</b>";
 
 });

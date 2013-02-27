@@ -78,6 +78,10 @@ ComparisonTable.method("onRendered", function()
             $("#comparison #tBodyContainer").css("top" , $("#comparison #tHeadContainer").height());
     });
 
+    $("#mdComparisonTable").resize(function(){
+        $('#mdComparisonTable .window-content').scroll();
+    })
+
 // Move body into new div
     $("#comparison").prepend('<div id="tBodyContainer" style="position: relative;"></div>');
     $("#tBodyContainer").prepend($("#comparison #tBody"));
@@ -426,8 +430,8 @@ ComparisonTable.method("getDataTable", function()
         var currentMatrixRow = new Array();
         var currentContextRow = new Array();
         if (i > 0){ // do not push the parent clafer
-            result.features.push(output[i].displayWithMargins + this.processor.getIfMandatory(output[i].claferId));
-            currentContextRow.push(output[i].displayWithMargins + this.processor.getIfMandatory(output[i].claferId));
+            result.features.push(output[i].displayWithMargins + " " + this.processor.getIfMandatory(output[i].claferId));
+            currentContextRow.push(output[i].displayWithMargins + " " + this.processor.getIfMandatory(output[i].claferId));
         }
         else 
             currentContextRow.push(output[i].displayWithMargins);
@@ -459,7 +463,7 @@ ComparisonTable.method("getDataTable", function()
         if (!denyAddContextRow)
             result.formalContext.push(currentContextRow);
 	}
-
+    //console.log(result)
 	return result;
 
 });
