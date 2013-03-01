@@ -546,6 +546,8 @@ ComparisonTable.method("toggleDistinct", function()
 ComparisonTable.method("addHovering", function()
 {	
     var that = this;
+    this.interval = null;
+    this.timeout = null;
 	$("#comparison #tBody tr").hover(
 	  function () {
 		$('#comparison table tr:gt(0)').css("color", this.fadeColor);
@@ -574,21 +576,21 @@ ComparisonTable.method("addHovering", function()
         $("#CHX").attr("class", instance + "HL");
         $("#CHY").attr("class", instance + "HL");
 
-        var highlight = $("#V" + instance + "c").clone()
+        var highlight = $("#V" + instance + "c").clone();
         highlight = that.highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
         $("#V" + instance + "c").before(highlight);
 
-        var highlight = $("#V" + instance + "r").clone()
+        var highlight = $("#V" + instance + "r").clone();
         highlight = that.highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
         $("#V" + instance + "r").before(highlight);
 
-        var highlight = $("#V" + instance + "h").clone()
+        var highlight = $("#V" + instance + "h").clone();
         highlight = that.highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
@@ -596,7 +598,7 @@ ComparisonTable.method("addHovering", function()
         $("#V" + instance + "h").before(highlight);
 
         var myBool = true;
-        setTimeout(function(){
+        that.timeout = setTimeout(function(){
             that.interval = setInterval(function(){
                 if (myBool){
                     $("." + instance + "HL").hide(500);
@@ -613,6 +615,7 @@ ComparisonTable.method("addHovering", function()
         var instance = $(this).attr("id").substring(4);
         $("." + instance + "HL").remove();
         that.interval = clearInterval(that.interval);
+        that.timeout = clearTimeout(that.timeout);
       }
     );
 

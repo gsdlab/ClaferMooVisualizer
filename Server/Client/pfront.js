@@ -196,6 +196,9 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 
     google.visualization.events.addListener(this.chart, 'select', this.myClickHandler); 
     google.visualization.events.addListener(this.chart, 'onmouseover', function(data){
+
+        $("#comparison #th0_" + (data.row+1)).css("background", "#ffffcc");
+
         var originalPoints = this.host.findModule("mdInput").originalPoints;
         $("#chart circle").each(function(){
             if (data.row >= originalPoints){
@@ -206,6 +209,9 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         });
     }); 
     google.visualization.events.addListener(this.chart, 'onmouseout', function(data){
+
+        $("#comparison #th0_" + (data.row+1)).css("background", "");
+
         $("#chart circle").each(function(){
             if ($(this).attr("id") == null){
                 $(this).attr("id", "V" + (data.row + 1) + "c");
@@ -271,4 +277,7 @@ ParetoFrontVisualizer.prototype.showGoal = function(goal, min, max){
     $("#"+goal+"min").attr("placeholder", min);
     $("#"+goal+"max").attr("placeholder", max);
 }
+
+
+
 

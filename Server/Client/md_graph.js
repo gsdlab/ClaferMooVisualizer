@@ -162,7 +162,7 @@ Graph.method("redrawParetoFront", function()
     this.PFVisualizer.draw(this.instanceProcessor, args, labels);
     this.makePointsSelected(this.host.selector.selection);
     this.addIds();
-    this.makePointsNew();
+    this.makePointsReady();
     this.addFilters();
 });
 
@@ -197,7 +197,7 @@ Graph.method("addIds", function(){
 });
 
 // Make instances squares or hexagons
-Graph.method("makePointsNew", function(){
+Graph.method("makePointsReady", function(){
     this.addIds();
     var goals = this.Processor.getGoals();
     var originalPoints = this.host.findModule("mdInput").originalPoints
