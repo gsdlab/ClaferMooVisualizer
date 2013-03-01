@@ -198,6 +198,13 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     google.visualization.events.addListener(this.chart, 'onmouseover', function(data){
 
         $("#comparison #th0_" + (data.row+1)).css("background", "#ffffcc");
+        var tomodify = $("#analysis #unique th").has("text:contains('" + (data.row+1) +"')");
+        var text = String((data.row+1)) + String((data.row+1)) + "--";
+        tomodify.each(function(){
+            var thistext = $(this).text();
+            if (thistext == text)
+                $(this).css("background", "#ffffcc");
+        });
 
         var originalPoints = this.host.findModule("mdInput").originalPoints;
         $("#chart circle").each(function(){
@@ -211,6 +218,15 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     google.visualization.events.addListener(this.chart, 'onmouseout', function(data){
 
         $("#comparison #th0_" + (data.row+1)).css("background", "");
+        var tomodify = $("#analysis #unique th").has("text:contains('" + (data.row+1) +"')");
+        var text = String((data.row+1)) + String((data.row+1)) + "--";
+        tomodify.each(function(){
+            var thistext = $(this).text();
+            if (thistext == text)
+                $(this).css("background", "");
+        });
+
+
 
         $("#chart circle").each(function(){
             if ($(this).attr("id") == null){
