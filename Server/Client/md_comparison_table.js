@@ -567,30 +567,44 @@ ComparisonTable.method("addHovering", function()
       function () {
         $(this).css("background", "#ffffcc");
         var instance = $(this).attr("id").substring(4);
+
+        //get crosshairs 
+        var hairs = that.getCrosshairs($("#V" + instance + "c").attr("cx"), $("#V" + instance + "c").attr("cy"));
+        $("#V" + instance + "c").before(hairs);
+        $("#CHX").attr("class", instance + "HL");
+        $("#CHY").attr("class", instance + "HL");
+
         var highlight = $("#V" + instance + "c").clone()
         highlight = that.highlight(highlight);
-        $(highlight).attr("id", instance + "HL");
+        $(highlight).removeAttr("id");
+        $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
         $("#V" + instance + "c").before(highlight);
 
         var highlight = $("#V" + instance + "r").clone()
         highlight = that.highlight(highlight);
-        $(highlight).attr("id", instance + "HL");
+        $(highlight).removeAttr("id");
+        $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
         $("#V" + instance + "r").before(highlight);
 
         var highlight = $("#V" + instance + "h").clone()
         highlight = that.highlight(highlight);
-        $(highlight).attr("id", instance + "HL");
+        $(highlight).removeAttr("id");
+        $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
         $("#V" + instance + "h").before(highlight);
+
+
+
+
         var myBool = true;
         that.interval = setInterval(function(){
             if (myBool){
-                $("#" + instance + "HL").hide(500);
+                $("." + instance + "HL").hide(500);
                 myBool = false;
             } else {
-                $("#" + instance + "HL").show(500);
+                $("." + instance + "HL").show(500);
                 myBool = true;
             }
         }, 500);
@@ -598,7 +612,7 @@ ComparisonTable.method("addHovering", function()
       function () {
         $(this).css("background", "");
         var instance = $(this).attr("id").substring(4);
-        $("#" + instance.replace(/[a-zA-Z]/g, "") + "HL").remove();
+        $("." + instance + "HL").remove();
         that.interval = clearInterval(that.interval);
       }
     );
@@ -771,9 +785,33 @@ ComparisonTable.method("addShapes", function(){
 
 ComparisonTable.method("highlight", function(obj){
     $(obj).attr("filter", "url(#blur)");
-    $(obj).attr("stroke-width", "8");
+    $(obj).attr("stroke-width", "6");
     $(obj).attr("stroke", "yellow");
     return obj;
+});
+
+ComparisonTable.method("getCrosshairs", function(x, y){
+    var NS="http://www.w3.org/2000/svg";
+    var crossX = document.createElementNS(NS,"line");
+    crossX.setAttribute("x1", "0");
+    crossX.setAttribute("x2", "1000");
+    crossX.setAttribute("y1", y);
+    crossX.setAttribute("y2", y);
+    crossX.setAttribute("id", "CHX")
+    //crossX.setAttribute("filter", "url(#blur)");
+    crossX.setAttribute("stroke", "yellow");
+    crossX.setAttribute("stroke-width", "2");
+
+    var crossY = document.createElementNS(NS,"line");
+    crossY.setAttribute("y1", "0");
+    crossY.setAttribute("y2", "1000");
+    crossY.setAttribute("x1", x);
+    crossY.setAttribute("x2", x);
+    crossY.setAttribute("id", "CHY")
+    crossY.setAttribute("stroke", "yellow");
+    crossY.setAttribute("stroke-width", "2");
+
+    return [crossX, crossY];
 });
 
 ComparisonTable.method("getInitContent", function()
