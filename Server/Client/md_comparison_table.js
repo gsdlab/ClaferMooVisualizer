@@ -572,11 +572,34 @@ ComparisonTable.method("addHovering", function()
         $(highlight).attr("id", instance + "HL");
         //add highlight element behind circle
         $("#V" + instance + "c").before(highlight);
+
+        var highlight = $("#V" + instance + "r").clone()
+        highlight = that.highlight(highlight);
+        $(highlight).attr("id", instance + "HL");
+        //add highlight element behind circle
+        $("#V" + instance + "r").before(highlight);
+
+        var highlight = $("#V" + instance + "h").clone()
+        highlight = that.highlight(highlight);
+        $(highlight).attr("id", instance + "HL");
+        //add highlight element behind circle
+        $("#V" + instance + "h").before(highlight);
+        var myBool = true;
+        that.interval = setInterval(function(){
+            if (myBool){
+                $("#" + instance + "HL").hide(500);
+                myBool = false;
+            } else {
+                $("#" + instance + "HL").show(500);
+                myBool = true;
+            }
+        }, 500);
       }, 
       function () {
         $(this).css("background", "");
         var instance = $(this).attr("id").substring(4);
-        $("#" + instance + "HL").remove();
+        $("#" + instance.replace(/[a-zA-Z]/g, "") + "HL").remove();
+        that.interval = clearInterval(that.interval);
       }
     );
 
