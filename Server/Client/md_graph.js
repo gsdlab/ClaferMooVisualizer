@@ -163,6 +163,7 @@ Graph.method("redrawParetoFront", function()
     this.makePointsSelected(this.host.selector.selection);
     this.addIds();
     this.makePointsNew();
+    this.addFilters();
 });
 
 Graph.method("addIds", function(){
@@ -419,4 +420,20 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     }
 
 	return true;
+});
+
+Graph.method("addFilters", function(){
+    var defs  = $("#defs");
+    var NS="http://www.w3.org/2000/svg";
+    var filter= document.createElementNS(NS,"filter");
+    filter.setAttribute("id", "blur");
+
+    var gaussian = document.createElementNS(NS,"feGaussianBlur");
+    gaussian.setAttribute("in","SourceGraphic");
+    gaussian.setAttribute("stdDeviation","1");
+
+    $(filter).append(gaussian);
+    $(defs).append(filter);
+
+
 });

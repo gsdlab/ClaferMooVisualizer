@@ -545,7 +545,8 @@ ComparisonTable.method("toggleDistinct", function()
 
 ComparisonTable.method("addHovering", function()
 {	
-	$("#comparison table tr").not(':first').hover(
+    var that = this;
+	$("#comparison #tBody tr").hover(
 	  function () {
 		$('#comparison table tr:gt(0)').css("color", this.fadeColor);
 		$('#comparison table tr:gt(0) img').css("opacity", this.fadeOpacity);
@@ -565,9 +566,17 @@ ComparisonTable.method("addHovering", function()
     $("#comparison #r0 .td_instance").hover(
       function () {
         $(this).css("background", "#ffffcc");
+        var instance = $(this).attr("id").substring(4);
+        var highlight = $("#V" + instance + "c").clone()
+        highlight = that.highlight(highlight);
+        $(highlight).attr("id", instance + "HL");
+        //add highlight element behind circle
+        $("#V" + instance + "c").before(highlight);
       }, 
       function () {
         $(this).css("background", "");
+        var instance = $(this).attr("id").substring(4);
+        $("#" + instance + "HL").remove();
       }
     );
 
@@ -735,6 +744,12 @@ ComparisonTable.method("addShapes", function(){
         } 
 
     });
+});
+
+ComparisonTable.method("highlight", function(obj){
+    $(obj).attr("filter", "url(#blur)");
+    $(obj).attr("stroke-width", "3");
+    return obj;
 });
 
 ComparisonTable.method("getInitContent", function()
