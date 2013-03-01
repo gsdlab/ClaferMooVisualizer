@@ -595,19 +595,18 @@ ComparisonTable.method("addHovering", function()
         //add highlight element behind circle
         $("#V" + instance + "h").before(highlight);
 
-
-
-
         var myBool = true;
-        that.interval = setInterval(function(){
-            if (myBool){
-                $("." + instance + "HL").hide(500);
-                myBool = false;
-            } else {
-                $("." + instance + "HL").show(500);
-                myBool = true;
-            }
-        }, 500);
+        setTimeout(function(){
+            that.interval = setInterval(function(){
+                if (myBool){
+                    $("." + instance + "HL").hide(500);
+                    myBool = false;
+                } else {
+                    $("." + instance + "HL").show(500);
+                    myBool = true;
+                }
+            }, 500);
+        }, 1500);
       }, 
       function () {
         $(this).css("background", "");
