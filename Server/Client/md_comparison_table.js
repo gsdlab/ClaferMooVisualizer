@@ -705,6 +705,8 @@ ComparisonTable.method("addShapes", function(){
             $("#V" + text + "c").clone()
             var thisCircle = $("#V" + text + "c").clone();
             $(thisCircle).removeAttr("id");
+            //if it's ever needed to swich back to colored versions remove this line
+            $(thisCircle).css("fill", "#3366cc");
             $(thisCircle).attr("cx", "11px");
             $(thisCircle).attr("cy", "11px");
             $(thisCircle).attr("r", "10px");
@@ -715,6 +717,8 @@ ComparisonTable.method("addShapes", function(){
             $("#V" + text + "r").clone().prependTo($(this).find(".svghead"));
             var thisRect = $(this).find("rect");
             $(thisRect).removeAttr("id");
+            //if it's ever needed to swich back to colored versions remove this line
+            $(thisRect).css("fill", "#3366cc");
             $(thisRect).attr("x", "1px");
             $(thisRect).attr("y", "1px");
             $(thisRect).attr("width", "20px");
@@ -723,7 +727,8 @@ ComparisonTable.method("addShapes", function(){
             var fill = $("#V" + text + "h").css("fill");
             console.log(that);
             var thisHex = that.host.findModule("mdGraph").getSVGHexagon(10, 11, 10);
-            $(thisHex).css("fill", fill);
+            //if it's ever needed to swich back to colored versions "#3366cc" to fill
+            $(thisHex).css("fill", "#3366cc");
             $(thisHex).attr("stroke-width", "1");
             $(thisHex).attr("stroke", "#000000");
             $(thisHex).prependTo($(this).find(".svghead"));
