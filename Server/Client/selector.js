@@ -25,6 +25,7 @@ Selector.method("onDeselected", function(pid)
 
     host.findModule("mdGraph").makePointsDeselected(pid);           // update graph and comparison table
     host.findModule("mdComparisonTable").makePointsDeselected(pid);
+    $("." + pid.substring(1) + "HL").remove();
     
     this.host.selectionChanged(this.selection);
 });
