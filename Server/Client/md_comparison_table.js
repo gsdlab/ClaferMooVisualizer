@@ -266,7 +266,7 @@ ComparisonTable.method("filterContent", function(){
         //filtering by goals
         else {
             var filter;
-            var filterName = $("#mdComparisonTable #r" + i + " .td_abstract").text().replace(/\s+/g, '');
+            var filterName = $("#mdComparisonTable #r" + i + " .td_abstract").text().replace(/\s+/g, '').replace(/[\u25B6\u25C0]/g, "");
             for (var x = 0; x<=this.host.findModule("mdGoals").ranges.length; x++){;
                 if (x == this.host.findModule("mdGoals").ranges.length){
                     break;
