@@ -356,7 +356,7 @@ ComparisonTable.method("resetFilters", function(){
         row = $("#r" + i);
     }
     //unfilter
-    this.unFilter();
+    this.filterContent();
 
     //if currently set to distinct mode, refresh distinct rows
     if (this.toggled){
