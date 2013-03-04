@@ -632,15 +632,19 @@ ComparisonTable.method("makePointsDeselected", function (pid){
 });
 
 ComparisonTable.method("scrollToSearch", function (input){
-
+    //doesn't actually scroll... hides rows not containing input.
+    var searchStrings = input.split(/[,\s]{1,}/g);
     var iteratedRow = 0;
     while (iteratedRow <= $("#comparison #tBody tbody").children().length){
-        if ($("#comparison #tBody #r" + iteratedRow).text().toLowerCase().indexOf(input.toLowerCase()) === -1){
-            $("#comparison #tBody #r" + iteratedRow).hide();
-
-        } else {
-            $("#comparison #tBody #r" + iteratedRow).show();
+        var found = false;
+        for (var i = 0; i<searchStrings.length; i++){
+            if ($("#comparison #tBody #r" + iteratedRow).text().toLowerCase().indexOf(searchStrings[i].toLowerCase()) != -1)
+                found = true;
         }
+        if (found)
+            $("#comparison #tBody #r" + iteratedRow).show();
+        else
+            $("#comparison #tBody #r" + iteratedRow).hide();
         iteratedRow++;
     }
     $('#mdComparisonTable .window-content').scroll();
