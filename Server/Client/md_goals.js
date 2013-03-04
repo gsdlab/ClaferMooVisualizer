@@ -37,7 +37,7 @@ Goals.method("onRendered", function()
             $(sid)[i].ondragstart = this.drag.bind(this);
             
             //add handler for range box 
-            that = this;
+            var that = this;
             $('#' + this.goals[i].label + 'max').keyup(function(){
                 that.filterByGoals($(this).attr("id").substring(0, $(this).attr("id").length - 3));
             });  
