@@ -108,7 +108,7 @@ Analysis.method("onSelectionChanged", function(list){
     else
         label += "Please select more products for analysis";
 
-    var saveButton = ' <input type="button" id="saveSelected" value="Save Selected">' + '<form id="SaveForm" action="/" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value="">' + '</form>';
+    var saveButton = ' <input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value="">' + '</form>';
     label += saveButton;
 
     $("#analysis #completeness").html(label);
@@ -134,11 +134,15 @@ Analysis.method("onSelectionChanged", function(list){
     
 // add function for save button
     $('#saveSelected').click(this.saveSelected.bind(this)).css("cursor", "pointer");
+    if (host.selector.selection.length > 0)
+        $("#saveSelected").removeAttr("disabled");
+    else
+        $("#saveSelected").attr("disabled", "disabled");
 
 //    commonData.products[0] = label;
     
     if (commonFeatures.length > 0)
-    {    
+    {            
         $("#analysis #common").html(new TableVisualizer().getHTML(commonData));
     }
     else
