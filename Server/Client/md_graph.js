@@ -196,7 +196,7 @@ Graph.method("addIds", function(){
 
 });
 
-// Make instances squares or hexagons
+// Make instances squares or octagons
 Graph.method("makePointsReady", function(){
     this.addIds();
     var goals = this.Processor.getGoals();
@@ -222,7 +222,7 @@ Graph.method("makePointsReady", function(){
         var NS="http://www.w3.org/2000/svg";
         var IdenticalId = this.instanceProcessor.getIdenticalID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, ""), goals, originalPoints) - 1;
         if (IdenticalId != -1){
-            var shape = this.getSVGHexagon(xpos, ypos, r);
+            var shape = this.getSVGOctagon(xpos, ypos, r);
             var newID = "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "h";
             shape.setAttributeNS(null, "id", newID);
             $(originalCirclePairs[IdenticalId].circle).hide();
@@ -241,23 +241,25 @@ Graph.method("makePointsReady", function(){
     }
 });
 
-Graph.method("getSVGHexagon", function(x, y, r){
+Graph.method("getSVGOctagon", function(x, y, r){
     var NS="http://www.w3.org/2000/svg";
-    var hex= document.createElementNS(NS,"polygon");
+    var oct= document.createElementNS(NS,"polygon");
     x = Number(x);
     y = Number(y);
     r = Number(r);
-    var xcoords = [x, x-(r), x+(r)];
-    var ycoords = [y-r, y-(r/2), y+(r/2), y+r];
-    var points = (xcoords[0])+","+(ycoords[0])+" "; //top
-    points += (xcoords[1])+","+(ycoords[1]) + " " ; //top left
-    points += (xcoords[1])+","+(ycoords[2])+" "; //bottom left
-    points += (xcoords[0])+","+(ycoords[3])+" "; //bottom
-    points += (xcoords[2])+","+(ycoords[2])+" "; //bottom right
-    points += (xcoords[2])+","+(ycoords[1]); //top right
+    var xcoords = [x-(r/3), x+(r/3), x+r, x-r]
+    var ycoords = [y-(r/3), y+(r/3), y+r, y-r];
+    var points = (xcoords[0])+","+(ycoords[3])+" ";
+    points += (xcoords[1])+","+(ycoords[3]) + " ";
+    points += (xcoords[2])+","+(ycoords[0]) + " ";
+    points += (xcoords[2])+","+(ycoords[1]) + " ";
+    points += (xcoords[1])+","+(ycoords[2]) + " ";
+    points += (xcoords[0])+","+(ycoords[2]) + " ";
+    points += (xcoords[3])+","+(ycoords[1]) + " ";
+    points += (xcoords[3])+","+(ycoords[0]);
 //    console.log(points)
-    hex.setAttributeNS(null, "points", points);
-    return hex;
+    oct.setAttributeNS(null, "points", points);
+    return oct;
 });
 
 Graph.method("getSVGSquare", function(cx, cy, r){

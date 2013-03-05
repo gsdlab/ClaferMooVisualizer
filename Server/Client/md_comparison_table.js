@@ -778,12 +778,12 @@ ComparisonTable.method("addShapes", function(){
         } else if ($("#V" + text + "h").length == 1){
             var fill = $("#V" + text + "h").css("fill");
             console.log(that);
-            var thisHex = that.host.findModule("mdGraph").getSVGHexagon(10, 11, 10);
+            var thisOct = that.host.findModule("mdGraph").getSVGOctagon(10, 11, 10);
             //if it's ever needed to swich back to colored versions "#3366cc" to fill
-            $(thisHex).css("fill", "white");
-            $(thisHex).attr("stroke-width", "1");
-            $(thisHex).attr("stroke", "#000000");
-            $(thisHex).prependTo($(this).find(".svghead"));
+            $(thisOct).css("fill", "white");
+            $(thisOct).attr("stroke-width", "1");
+            $(thisOct).attr("stroke", "#000000");
+            $(thisOct).prependTo($(this).find(".svghead"));
         } 
 
     });

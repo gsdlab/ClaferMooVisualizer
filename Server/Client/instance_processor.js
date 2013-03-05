@@ -84,7 +84,7 @@ InstanceProcessor.method("getFeatureValue", function(instanceIndex, featureName,
 		
 });
 
-
+/* Artifact function -- returns shape of instance --could be useful later so left in
 InstanceProcessor.method("getInstanceShape", function(id, goals, originalPoints){
     if (id>originalPoints){
 	    var values={};
@@ -101,12 +101,13 @@ InstanceProcessor.method("getInstanceShape", function(id, goals, originalPoints)
     	        }
         	}
         	if (isOptimal)
-        	    return "\u2B22";
+        	    return "\u2B22";//returns hexagon
     	}
-    	return "\u25A0";
+    	return "\u25A0";//returns square
     } else
-    	return "\u25CF";
+    	return "\u25CF";//returns circle
 });
+*/
 
 InstanceProcessor.method("getIdenticalID", function(id, goals, originalPoints){
    	if (id>originalPoints){
