@@ -1,7 +1,7 @@
 function ComparisonTable(host)
 { 
     this.id = "mdComparisonTable";
-    this.title = "Pareto Front Table";
+    this.title = "Feature and Quality Matrix";
 
     this.width = 1000;
     this.height = 130;

@@ -1,7 +1,7 @@
 function Graph(host)
 {
     this.id = "mdGraph";
-    this.title = "Pareto Front Graph";
+    this.title = "Bubble Front Graph";
 
     this.width = 500;
     this.height = 505;
