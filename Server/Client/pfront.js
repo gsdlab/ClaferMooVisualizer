@@ -175,8 +175,8 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 	var options = {
 //	  theme: 'maximized', 
 	  title: '',
-      chartArea: {left:"20", top:chartTop, width: chartWidth, height: chartHeight},
-      titleTextStyle: {color: "black", fontName: "Arial", fontSize: 12},
+      chartArea: {left:"30", top:chartTop, width: chartWidth, height: chartHeight},
+      titleTextStyle: {color: "black", fontName: "Arial", fontSize: 10},
 	  hAxis: {maxValue: maxX, minValue: minX},
 	  vAxis: {maxValue: maxY, minValue: minY},
       axisTitlesPosition: 'in',
