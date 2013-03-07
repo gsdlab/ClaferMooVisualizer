@@ -214,6 +214,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
                 }
             }
         });
+        $($("#chart g:contains('V" + (data.row+1) + "') text")[0]).text("Variant " + (data.row+1));
     }); 
     google.visualization.events.addListener(this.chart, 'onmouseout', function(data){
 
@@ -249,12 +250,14 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 
 ParetoFrontVisualizer.prototype.myClickHandler = function()
 {
+
+  $($("#chart g:contains('V" + (data.row+1) + "') text")[0]).text("Variant " + (data.row+1));
 //    alert(this);
   var selection = host.chart.getSelection();
   host.chart.setSelection(null);
   var originalPoints = this.host.findModule("mdInput").originalPoints;
   var id = -1;
-
+ 
   for (var y = 0; y < selection.length; y++){
         $("#chart circle").each(function(){
             if (selection[y].row >= originalPoints){
