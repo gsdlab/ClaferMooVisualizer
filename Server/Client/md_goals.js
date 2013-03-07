@@ -90,6 +90,7 @@ Goals.method("getContent", function()
     return $('<div id="goals"></div>').append(table);
 });
 
+//get ranges to set landing zone else get minimum/maximum values for the ranges. After that filter
 Goals.method("filterByGoals", function(input)
 {
     
@@ -105,11 +106,11 @@ Goals.method("filterByGoals", function(input)
     if (jQuery.isNumeric( min ))
         this.ranges[x].min = min;
     else
-        this.ranges[x].min = 0;
+        this.ranges[x].min = parseInt($("#" + input + "min").attr("placeholder"));
     if (jQuery.isNumeric( max ))
         this.ranges[x].max = max;
     else
-        this.ranges[x].max = 10000000;
+        this.ranges[x].max = parseInt($("#" + input + "max").attr("placeholder"));
 
     this.host.findModule("mdComparisonTable").filterContent();
 });

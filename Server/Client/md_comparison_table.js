@@ -31,7 +31,7 @@ ComparisonTable.method("onDataLoaded", function(data){
     this.content = $('<div id="comparison" class="comparison"></div>').append(new TableVisualizer().getHTML(this.dataTable));
     this.hidden = [];
     this.permaHidden = {};
-    $("#mdComparisonTable .window-titleBar-content").text("Pareto Front Table: " + this.dataTable.title);
+    $("#mdComparisonTable .window-titleBar-content").text("Feature and Quality Matrix: " + this.dataTable.title);
     this.currentRow = 1;
 
 });
@@ -53,7 +53,7 @@ ComparisonTable.method("onRendered", function()
     var that = this;
     $('#toggle_link').html("Distinct");
     $('#toggle_link').click(function(event){
-        event.stopPropagation();
+        event.stopPropagation();  //to keep table from sorting by instance number
         that.toggleDistinct();
     }).css("cursor", "pointer");
 
@@ -63,9 +63,11 @@ ComparisonTable.method("onRendered", function()
 
     $('#filter_reset').html("Reset");
     $('#filter_reset').click(function(event){
-        event.stopPropagation();
+        event.stopPropagation(); //to keep table from sorting by instance number
         that.resetFilters();
     }).css("cursor", "pointer");
+
+//************************* Most of the following is to get proper formatting on the table  *******************
 
 // Move headers into new div
     $("#comparison").prepend('<div id="tHeadContainer"><table id="tHead" width="100%" cellspacing="0" cellspadding="0"></table></div>');
@@ -140,6 +142,8 @@ ComparisonTable.method("onRendered", function()
 // reset table widths to 100%
     $("#tBodyContainer").css("width", "100%")
     $("#tHeadContainer").css("width", "100%")
+
+// Mostly done formatting table
 
 // Add mouseover effects to table
     this.addHovering();
@@ -225,7 +229,7 @@ ComparisonTable.method("onRendered", function()
         that.scrollToSearch($(this).val());
     }); 
     $('#search').click(function(event){
-        event.stopPropagation();
+        event.stopPropagation(); //to keep table from sorting by instance number
     });
 
     //fire the scroll handler to align table after half a second (fixes chrome bug)

@@ -58,7 +58,7 @@ Graph.method("onRendered", function()
 	}
 	else
 		$("#chart").hide();
-    $("#mdGraph .window-titleBar-content").text("Pareto Front Graph: " + this.instanceProcessor.getInstanceSuperClafer().replace(/[^_]{1,}[_]/, ""));
+    $("#mdGraph .window-titleBar-content").text("Bubble Front Graph: " + this.instanceProcessor.getInstanceSuperClafer().replace(/[^_]{1,}[_]/, ""));
     this.addIds();
 });
 
@@ -161,7 +161,6 @@ Graph.method("redrawParetoFront", function()
     
     this.PFVisualizer.draw(this.instanceProcessor, args, labels);
     this.makePointsSelected(this.host.selector.selection);
-    this.addIds();
     this.makePointsReady();
     this.addFilters();
 });

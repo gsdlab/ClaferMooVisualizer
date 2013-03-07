@@ -1,7 +1,7 @@
 function Analysis(host)
 { 
     this.id = "mdAnalysis";
-    this.title = "Comparison View";
+    this.title = "Variant Comparer";
     
     this.width = 500;
     this.height = 310;
