@@ -252,7 +252,7 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
 {
   var selection = host.chart.getSelection();
 
-  $($("#chart g:contains('V" + (selection[0].row+1) + "') text")[0]).text("Variant " + (data.row+1));
+  $($("#chart g:contains('V" + (selection[0].row+1) + "') text")[0]).text("Variant " + (selection[0].row+1));
 //    alert(this);
   host.chart.setSelection(null);
   var originalPoints = this.host.findModule("mdInput").originalPoints;
