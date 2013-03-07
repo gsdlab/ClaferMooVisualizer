@@ -250,16 +250,17 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 
 ParetoFrontVisualizer.prototype.myClickHandler = function()
 {
-
-  $($("#chart g:contains('V" + (data.row+1) + "') text")[0]).text("Variant " + (data.row+1));
-//    alert(this);
   var selection = host.chart.getSelection();
+
+  $($("#chart g:contains('V" + (selection[0].row+1) + "') text")[0]).text("Variant " + (data.row+1));
+//    alert(this);
   host.chart.setSelection(null);
   var originalPoints = this.host.findModule("mdInput").originalPoints;
   var id = -1;
  
   for (var y = 0; y < selection.length; y++){
         $("#chart circle").each(function(){
+
             if (selection[y].row >= originalPoints){
                 if ($(this).attr("id") == null){
                     $(this).hide()
