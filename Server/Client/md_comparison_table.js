@@ -413,6 +413,9 @@ ComparisonTable.method("toggleDistinct", function()
                         last = "no";
                     else {allAreTheSame = false; break;}
                 }
+                else if ($(instanceTds[j]).hasClass("EffectMan")){
+                    allAreTheSame = true; break;
+                }
                 else {allAreTheSame = false; break;}
             }
             
