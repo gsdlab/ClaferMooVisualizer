@@ -175,8 +175,8 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 	var options = {
 //	  theme: 'maximized', 
 	  title: '',
-      chartArea: {left:"20", top:chartTop, width: chartWidth, height: chartHeight},
-      titleTextStyle: {color: "black", fontName: "Arial", fontSize: 12},
+      chartArea: {left:"30", top:chartTop, width: chartWidth, height: chartHeight},
+      titleTextStyle: {color: "black", fontName: "Arial", fontSize: 10},
 	  hAxis: {maxValue: maxX, minValue: minX},
 	  vAxis: {maxValue: maxY, minValue: minY},
       axisTitlesPosition: 'in',
@@ -214,6 +214,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
                 }
             }
         });
+        $($("#chart g:contains('V" + (data.row+1) + "') text")[0]).text("Variant " + (data.row+1));
     }); 
     google.visualization.events.addListener(this.chart, 'onmouseout', function(data){
 
@@ -249,14 +250,17 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 
 ParetoFrontVisualizer.prototype.myClickHandler = function()
 {
-//    alert(this);
   var selection = host.chart.getSelection();
+
+  
+//    alert(this);
   host.chart.setSelection(null);
   var originalPoints = this.host.findModule("mdInput").originalPoints;
   var id = -1;
-
+ 
   for (var y = 0; y < selection.length; y++){
         $("#chart circle").each(function(){
+
             if (selection[y].row >= originalPoints){
                 if ($(this).attr("id") == null){
                     $(this).hide()
@@ -287,6 +291,7 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
         host.selector.onSelected(pid);
     }
   }
+  $($("#chart g:contains('V" + (selection[0].row+1) + "') text")[0]).text("Variant " + (selection[0].row+1));
 }
 
 ParetoFrontVisualizer.prototype.showGoal = function(goal, min, max){

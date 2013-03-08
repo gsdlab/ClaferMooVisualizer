@@ -1,7 +1,7 @@
 function ComparisonTable(host)
 { 
     this.id = "mdComparisonTable";
-    this.title = "Pareto Front Table";
+    this.title = "Feature and Quality Matrix";
 
     this.width = 1000;
     this.height = 130;
@@ -31,8 +31,9 @@ ComparisonTable.method("onDataLoaded", function(data){
     this.content = $('<div id="comparison" class="comparison"></div>').append(new TableVisualizer().getHTML(this.dataTable));
     this.hidden = [];
     this.permaHidden = {};
-    $("#mdComparisonTable .window-titleBar-content").text("Pareto Front Table: " + this.dataTable.title);
+    $("#mdComparisonTable .window-titleBar-content").text("Feature and Quality Matrix: " + this.dataTable.title);
     this.currentRow = 1;
+    this.EMfeatures = [];
 
 });
 
@@ -53,7 +54,7 @@ ComparisonTable.method("onRendered", function()
     var that = this;
     $('#toggle_link').html("Distinct");
     $('#toggle_link').click(function(event){
-        event.stopPropagation();
+        event.stopPropagation();  //to keep table from sorting by instance number
         that.toggleDistinct();
     }).css("cursor", "pointer");
 
@@ -63,9 +64,11 @@ ComparisonTable.method("onRendered", function()
 
     $('#filter_reset').html("Reset");
     $('#filter_reset').click(function(event){
-        event.stopPropagation();
+        event.stopPropagation(); //to keep table from sorting by instance number
         that.resetFilters();
     }).css("cursor", "pointer");
+
+//************************* Most of the following is to get proper formatting on the table  *******************
 
 // Move headers into new div
     $("#comparison").prepend('<div id="tHeadContainer"><table id="tHead" width="100%" cellspacing="0" cellspadding="0"></table></div>');
@@ -141,6 +144,8 @@ ComparisonTable.method("onRendered", function()
     $("#tBodyContainer").css("width", "100%")
     $("#tHeadContainer").css("width", "100%")
 
+// Mostly done formatting table
+
 // Add mouseover effects to table
     this.addHovering();
 
@@ -149,7 +154,7 @@ ComparisonTable.method("onRendered", function()
     row = $("#r" + i);
     var that = this;
     while (row.length != 0){
-        if (!row.find(".numeric").length){
+        if (!row.find(".numeric").length && !row.find(".EffectMan").length){
             $("#r" + i + " .td_abstract").prepend('<image id="r' + i + 'box" src="images/checkbox_empty.bmp" class="maybe">');
             $("#r" + i + "box").click(function(){
                 if (this.className == "maybe"){
@@ -166,6 +171,10 @@ ComparisonTable.method("onRendered", function()
                     that.filterContent();
                 }
             }).css("cursor", "pointer");
+        }
+//  Add Greyed out checkboxes to denote effectively mandatory features
+        else if (!row.find(".numeric").length){
+            $("#r" + i + " .td_abstract").prepend('<image id="r' + i + 'box" src="images/checkbox_ticked_greyed.png" class="wanted">');
         }
 //  Add sorting to quality attributes
         else {
@@ -225,7 +234,7 @@ ComparisonTable.method("onRendered", function()
         that.scrollToSearch($(this).val());
     }); 
     $('#search').click(function(event){
-        event.stopPropagation();
+        event.stopPropagation(); //to keep table from sorting by instance number
     });
 
     //fire the scroll handler to align table after half a second (fixes chrome bug)
@@ -401,7 +410,7 @@ ComparisonTable.method("getDataTable", function()
 	var instanceSuperClafer = this.instanceProcessor.getInstanceSuperClafer();
 //	alert(instanceSuperClafer);
 	var abstractClaferTree = this.processor.getAbstractClaferTree("/module/declaration/uniqueid", instanceSuperClafer);
-
+    var EMfeatures = this.processor.getEffectivelyMandatoryFeatures(abstractClaferTree)
 //    console.log(abstractClaferTree)	;
 //	alert(abstractClaferTree.subclafers[0].subclafers.length);
 	
@@ -415,6 +424,7 @@ ComparisonTable.method("getDataTable", function()
 	this.traverse(current, 0);
 	output = abstractClaferOutput;
 	
+
     var originalPoints = this.host.findModule("mdInput").originalPoints;
     var goalNames = this.processor.getGoals();
     var result = new DataTable();   
@@ -432,6 +442,7 @@ ComparisonTable.method("getDataTable", function()
         if (i > 0){ // do not push the parent clafer
             result.features.push(output[i].displayWithMargins + " " + this.processor.getIfMandatory(output[i].claferId));
             currentContextRow.push(output[i].displayWithMargins + " " + this.processor.getIfMandatory(output[i].claferId));
+            var featureIsEM = (EMfeatures.indexOf(output[i].displayId) != -1);
         }
         else 
             currentContextRow.push(output[i].displayWithMargins);
@@ -462,6 +473,9 @@ ComparisonTable.method("getDataTable", function()
             
         if (!denyAddContextRow)
             result.formalContext.push(currentContextRow);
+            result.EMcontext.push(featureIsEM);
+
+
 	}
     //console.log(result)
 	return result;
@@ -751,7 +765,7 @@ ComparisonTable.method("addShapes", function(){
         else 
             var text  = $($(this).find(".svghead text")[0]).text(); 
 
-        console.log(text);
+//        console.log(text);
         $(this).html('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svghead" height="22px" width="22px"><text text-anchor="middle" x="11px" y="16px" stroke="#ffffff" stroke-width="3px">' + text + '</text><text text-anchor="middle" x="11px" y="16px">' + text + '</text></svg>')
         if ($("#V" + text + "c").length == 1){
             $("#V" + text + "c").clone()
@@ -777,7 +791,7 @@ ComparisonTable.method("addShapes", function(){
             $(thisRect).attr("height", "20px");
         } else if ($("#V" + text + "h").length == 1){
             var fill = $("#V" + text + "h").css("fill");
-            console.log(that);
+//            console.log(that);
             var thisOct = that.host.findModule("mdGraph").getSVGOctagon(10, 11, 10);
             //if it's ever needed to swich back to colored versions "#3366cc" to fill
             $(thisOct).css("fill", "white");

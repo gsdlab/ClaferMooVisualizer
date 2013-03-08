@@ -3,7 +3,7 @@ function TableVisualizer ()
 //	this.data = data;
 }
 
-TableVisualizer.method("mapValue", function(sVal)
+TableVisualizer.method("mapValue", function(sVal, isEM)
 {
 	var result = new Object();
 	result.tdStyle = "";
@@ -19,6 +19,12 @@ TableVisualizer.method("mapValue", function(sVal)
 	{
 		result.html = '<img class="no" src="/images/no.png"/>';
 		result.tdStyle = 'no';
+	}
+
+	if (isEM)
+	{
+		result.html = ''
+		result.tdStyle = 'EffectMan';
 	}
 
 	if (isNumeric(sVal))
@@ -71,7 +77,7 @@ TableVisualizer.prototype.getHTML = function(data)
 		{
 			var td = $('<' + tagName + ' id="' + tagName + i + "_" + (j + 1) + '"></' + tagName + '>').addClass('td_instance');
 			
-            mappedValue = this.mapValue(data.matrix[i][j]);
+            mappedValue = this.mapValue(data.matrix[i][j], data.EMcontext[i+1]);
             td.html(mappedValue.html);
             td.addClass(mappedValue.tdStyle);
 

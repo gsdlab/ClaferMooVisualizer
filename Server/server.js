@@ -115,7 +115,7 @@ server.post('/upload', function(req, res, next) {
     	else{
     		res.writeHead(500, { "Content-Type": "text/html"});
 			res.end();
-			cleanupOldFiles(uploadedFilePath, dlDir);
+//			cleanupOldFiles(uploadedFilePath, dlDir);
 			return;
     	}
 
@@ -160,6 +160,7 @@ server.post('/upload', function(req, res, next) {
 			else 
 			{
 				result = 'Error, return code: ' + code + '\n' + error_result;
+				console.log(data_result);
 			}
 			if (code === 0)
 				res.writeHead(200, { "Content-Type": "text/html"});
@@ -190,7 +191,7 @@ function cleanupOldFiles(path, dir) {
 		deleteOld(path, "_desugared.cfr");
 		deleteOld(path, "_desugared.xml");
 		deleteOld(path, "_desugared.als");
-		deleteOld(path, "_desugared.choco");
+		deleteOld(path, "_desugared_tmp.als");
 	}
 
 	var i=1;
@@ -212,7 +213,7 @@ function cleanupOldFiles(path, dir) {
 
 function deleteOld(path, ext){
 	if (fs.existsSync(changeFileExt(path, '.cfr', ext))){
-		fs.unlink(changeFileExt(path, '.cfr', ext), function (err) {   //delete .xml
+		fs.unlink(changeFileExt(path, '.cfr', ext), function (err) {   //delete .ext
 			if (err) throw err;
  			console.log("successfully deleted " + changeFileExt(path, '.cfr', ext));
 		});
@@ -238,10 +239,10 @@ function changeFileExt(name, ext, newExt)
 }
 
 /*
- * Catch all error reporting for unknown routes
+ * Catch all. error reporting for unknown routes
  */
 server.use(function(req, res, next){
-  res.send(404, 'Sorry cant find that!');
+  res.send(404, "Sorry can't find that!");
 });
 
 server.listen(port);
