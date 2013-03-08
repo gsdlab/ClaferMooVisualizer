@@ -6,55 +6,52 @@ abstract ComponentWithEnergy : Component
 	
 abstract androidPhone
     hardware : Component
-        [ this.performance = 0 ]
+        [ performance = 0 ]
         screen : Component
-                [ this.performance = 0 ]
+            [ performance = 0 ]
             xor material : Component
-                    [ this.performance = 0 ]
+                [ performance = 0 ]
                 oled : ComponentWithEnergy
-                    [this.energy = 3]
- 	            [ this.performance = -3]
+                    [ energy = 3]
+                    [ performance = -3]
                 amoled : ComponentWithEnergy
-                    [this.energy = 2]
-                    [ this.performance = -5] 
+                    [ energy = 2]
+                    [ performance = -5] 
                 lcd : ComponentWithEnergy
-                    [this.energy = 4]
-                    [ this.performance = -2]
+                    [ energy = 4]
+                    [ performance = -2]
         keyboard : ComponentWithEnergy ?
-            [this.energy = 1]
-            [ this.performance = 3]
+            [energy = 1]
+            [ performance = 3]
         keyboardLight : ComponentWithEnergy ?
-            [ this.energy = 2]
-            [ this.performance = -1]
+            [ energy = 2]
+            [ performance = -1]
             [ keyboard]
         cpu : ComponentWithEnergy
-            [ this.energy = 10]
-            [ this.performance = 15 ]
-	extra_cpu : ComponentWithEnergy ?
-	    [this.energy = 2 ]
-	    [ this.performance = 20 ]
+            [ energy = 10]
+            [ performance = 15 ]
+    	extra_cpu : ComponentWithEnergy ?
+	        [ energy = 2 ]
+	        [ performance = 20 ]
     or location ?
         gps : ComponentWithEnergy
-            [this.energy = 5]
-            [ this.performance = -1 ]
-       wifitriangulation : ComponentWithEnergy
-            [ this.energy = 10]
-            [ this.performance = -2 ]
+            [ energy = 5]
+            [ performance = -1 ]
+        wifitriangulation : ComponentWithEnergy
+            [ energy = 10]
+            [ performance = -2 ]
     software : Component
-        [ this.performance = 0 ]
+        [ performance = 0 ]
     	browser : Component ?
-                [ this.performance = -1 ]
-                [ extra_cpu ]
+            [ performance = -1 ]
+            [ extra_cpu ]
         mediaplayer : Component ?
-                [ this.performance = -2 ]
-
-    total_performance : integer 
-      [ total_performance = sum Component.performance ]
-    total_energy : integer
-       [ total_energy = sum ComponentWithEnergy.energy ]  
+            [ performance = -2 ]
+    total_performance : integer = sum Component.performance
+    total_energy : integer = sum ComponentWithEnergy.energy
 
 aPhone : androidPhone
-       [ mediaplayer ]
+    [ mediaplayer ]
 
 << min aPhone.total_energy >>
 << max aPhone.total_performance >>
