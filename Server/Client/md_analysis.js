@@ -72,7 +72,7 @@ Analysis.method("onSelectionChanged", function(list){
     // get the products that are missing to make up the complete set.
     var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), newlist);
 //    console.log(originalData)
-    var permaHidden = this.host.findModule("mdComparisonTable").permaHidden;
+    var permaHidden = this.host.findModule("mdComparisonTable").filter.permaHidden;
 
     if (missingProducts){
         for (var i = 0; i < missingProducts.length; i++){

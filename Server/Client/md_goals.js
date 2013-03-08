@@ -112,7 +112,7 @@ Goals.method("filterByGoals", function(input)
     else
         this.ranges[x].max = parseInt($("#" + input + "max").attr("placeholder"));
 
-    this.host.findModule("mdComparisonTable").filterContent();
+    this.host.findModule("mdComparisonTable").filter.filterContent();
 });
 
 Goals.method("getInitContent", function()

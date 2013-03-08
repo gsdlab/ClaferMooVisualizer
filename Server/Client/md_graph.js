@@ -93,7 +93,7 @@ Graph.method("drop", function(ev)
 	this.assignToAxis(id, arg, label, true);
     this.redrawParetoFront();
     host.findModule("mdComparisonTable").addShapes();
-    host.findModule("mdComparisonTable").filterContent();
+    host.findModule("mdComparisonTable").filter.filterContent();
 });
 
 Graph.method("assignValue", function (id, value)
@@ -226,7 +226,7 @@ Graph.method("makePointsReady", function(){
             shape.setAttributeNS(null, "id", newID);
             $(originalCirclePairs[IdenticalId].circle).hide();
             $(originalCirclePairs[IdenticalId].text_data).hide();
-            host.findModule("mdComparisonTable").permaHidden["V"+(IdenticalId+1)] = true;
+            host.findModule("mdComparisonTable").filter.permaHidden["V"+(IdenticalId+1)] = true;
         } else {
             var shape = this.getSVGSquare(xpos, ypos, r)
             shape.setAttributeNS(null, "id", "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "r");

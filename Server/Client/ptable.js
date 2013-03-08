@@ -14,17 +14,17 @@ TableVisualizer.method("mapValue", function(sVal, isEM)
 		result.html = '<img class="tick" src="/images/tick.png"/>';
 		result.tdStyle = 'tick';
 	}
-	
-	if (sVal == "-")
-	{
-		result.html = '<img class="no" src="/images/no.png"/>';
-		result.tdStyle = 'no';
-	}
 
 	if (isEM)
 	{
 		result.html = ''
 		result.tdStyle = 'EffectMan';
+	}
+	
+	if (sVal == "-")
+	{
+		result.html = '<img class="no" src="/images/no.png"/>';
+		result.tdStyle = 'no';
 	}
 
 	if (isNumeric(sVal))
