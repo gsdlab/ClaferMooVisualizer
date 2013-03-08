@@ -98,81 +98,84 @@ server.post('/upload', function(req, res, next) {
 	pathTokens = pathTokens.split("/");
 	var oldPath = uploadedFilePath
 	uploadedFilePath = __dirname + "/" + pathTokens[1] + "/" + i + "tempfolder/";
-	fs.mkdir(uploadedFilePath);
-	var dlDir = uploadedFilePath;
-	uploadedFilePath += pathTokens[2];
-	fs.rename(oldPath, uploadedFilePath);
+	fs.mkdir(uploadedFilePath, function (err){
+		if (err) throw err;
+		var dlDir = uploadedFilePath;
+		uploadedFilePath += pathTokens[2];
+		fs.rename(oldPath, uploadedFilePath, function (err){
+			if (err) throw err;
+			var file_contents;
+			console.log("proceeding with " + uploadedFilePath);
+		    // read the contents of the uploaded file
+		    //serverTimeout = setTimeout(function(){
+		    //	res.send ("Serverside Timeout.");
+		    //}, 60000);
+			fs.readFile(uploadedFilePath, function (err, data) {
 
-	var file_contents;
-	console.log("proceeding with " + uploadedFilePath);
-    // read the contents of the uploaded file
-    //serverTimeout = setTimeout(function(){
-    //	res.send ("Serverside Timeout.");
-    //}, 60000);
-	fs.readFile(uploadedFilePath, function (err, data) {
-		if(data)
-    		file_contents = data.toString();
-    	else{
-    		res.writeHead(500, { "Content-Type": "text/html"});
-			res.end();
-//			cleanupOldFiles(uploadedFilePath, dlDir);
-			return;
-    	}
+				if(data)
+		    		file_contents = data.toString();
+		    	else{
+		    		res.writeHead(500, { "Content-Type": "text/html"});
+					res.end();
+		//			cleanupOldFiles(uploadedFilePath, dlDir);
+					return;
+		    	}
 
-		if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data"){
-			res.writeHead(200, { "Content-Type": "text/html"});
-			res.end(file_contents);
-			cleanupOldFiles(uploadedFilePath, dlDir);
-			return;
-		}
-		console.log("processing file with integratedFMO");
-		var util  = require('util'),
-		spawn = require('child_process').spawn,
-		tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
-		var error_result = "";
-		var data_result = "";
-		
-		tool.stdout.on('data', function (data) 
-		{	
-		  data_result += data;
-		});
-
-		tool.stderr.on('data', function (data) {
-		  error_result += data;
-		});
-
-		tool.on('exit', function (code) 
-		{
-			var result = "";
-			console.log("Preparing to send result");
-			if(error_result.indexOf('Exception in thread "main"') > -1){
-				code = 1;
-			}
-			if (code === 0) 
-			{				
-				result = "Return code = " + code + "\n" + data_result + "=====";
-				var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '_desugared.xml'));
-				result += xml.toString();
+				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data"){
+					res.writeHead(200, { "Content-Type": "text/html"});
+					res.end(file_contents);
+					cleanupOldFiles(uploadedFilePath, dlDir);
+					return;
+				}
+				console.log("processing file with integratedFMO");
+				var util  = require('util'),
+				spawn = require('child_process').spawn,
+				tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
+				var error_result = "";
+				var data_result = "";
 				
-				result = escapeHtml(result);
+				tool.stdout.on('data', function (data) 
+				{	
+				  data_result += data;
+				});
+
+				tool.stderr.on('data', function (data) {
+				  error_result += data;
+				});
+
+				tool.on('exit', function (code) 
+				{
+					var result = "";
+					console.log("Preparing to send result");
+					if(error_result.indexOf('Exception in thread "main"') > -1){
+						code = 1;
+					}
+					if (code === 0) 
+					{				
+						result = "Return code = " + code + "\n" + data_result + "=====";
+						var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '_desugared.xml'));
+						result += xml.toString();
+						
+						result = escapeHtml(result);
+						
+					}
+					else 
+					{
+						result = 'Error, return code: ' + code + '\n' + error_result;
+						console.log(data_result);
+					}
+					if (code === 0)
+						res.writeHead(200, { "Content-Type": "text/html"});
+					else
+						res.writeHead(400, { "Content-Type": "text/html"});
+					res.end(result);
+		//			clearTimeout(serverTimeout);
+					cleanupOldFiles(uploadedFilePath, dlDir);
+				});
 				
-			}
-			else 
-			{
-				result = 'Error, return code: ' + code + '\n' + error_result;
-				console.log(data_result);
-			}
-			if (code === 0)
-				res.writeHead(200, { "Content-Type": "text/html"});
-			else
-				res.writeHead(400, { "Content-Type": "text/html"});
-			res.end(result);
-//			clearTimeout(serverTimeout);
-			cleanupOldFiles(uploadedFilePath, dlDir);
+			});
 		});
-		
 	});
-
 });
  
 function cleanupOldFiles(path, dir) {
