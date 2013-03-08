@@ -252,8 +252,9 @@ ComparisonTable.method("getContent", function()
     return this.content;
 });
 
-/* Supplementary Methods */
 
+//input: node in clafer tree, level in tree
+//output: object with unique clafer id, id for display and, display id with indentation
 ComparisonTable.method("collector", function(clafer, spaceCount)
 {
 	var unit = new Object();
@@ -268,6 +269,7 @@ ComparisonTable.method("collector", function(clafer, spaceCount)
 	abstractClaferOutput.push(unit);
 });
 
+//Traverses clafer tree to and runs collector on every node
 ComparisonTable.method("traverse", function(clafer, level)
 {
 	this.collector (clafer, level);
@@ -277,6 +279,7 @@ ComparisonTable.method("traverse", function(clafer, level)
 	}
 });
 
+//generate data table
 ComparisonTable.method("getDataTable", function()
 {
 	var instanceCount = this.instanceProcessor.getInstanceCount();
@@ -355,6 +358,7 @@ ComparisonTable.method("getDataTable", function()
 
 });
 
+//change row from tansparent to opaque or vice-versa
 ComparisonTable.method("toggleRow", function(row, isOn)
 {
     if (!isOn)
@@ -367,6 +371,8 @@ ComparisonTable.method("toggleRow", function(row, isOn)
     }
 });
 
+/*toggle all rows containing either all ticks, all bars, or rows that are effectively mandatory
+  between transparent and opaque*/
 ComparisonTable.method("toggleDistinct", function()
 {
     this.toggled = !this.toggled;
@@ -396,6 +402,10 @@ ComparisonTable.method("toggleDistinct", function()
             var allAreTheSame = true;
             var last = "";
 
+/*  loop iterates through cells until it has crossed an entire row without finding 
+    a difference (non-distinct) or it finds a difference (distinct). It will also 
+    break if it finds that the row is an effectively mandatory row (non-distinct)*/
+
             for (var j = 0; j < instanceTds.length; j++)
             {
                 if ($(instanceTds[j]).css("display") == "none"){ //case for filtered out elements that are hidden
@@ -419,6 +429,7 @@ ComparisonTable.method("toggleDistinct", function()
                 else {allAreTheSame = false; break;}
             }
             
+//  toggles based on outcome of loop
             if (allAreTheSame)
             {
                 this.toggleRow(row, false);
@@ -428,11 +439,12 @@ ComparisonTable.method("toggleDistinct", function()
             row = table.find("#r" + i);
         }
     }
+//  since the table height has potentially changed we call this to realign the headers. 
     this.scrollToSearch($("#search").val());
     return true;
 });
 
-
+//  Adds hot-tracking and highlighting for table and graph
 ComparisonTable.method("addHovering", function()
 {	
     var that = this;
@@ -466,6 +478,7 @@ ComparisonTable.method("addHovering", function()
         $("#CHX").attr("class", instance + "HL");
         $("#CHY").attr("class", instance + "HL");
 
+        //create circle highlight
         var highlight = $("#V" + instance + "c").clone();
         highlight = that.highlight(highlight);
         $(highlight).removeAttr("id");
@@ -473,6 +486,7 @@ ComparisonTable.method("addHovering", function()
         //add highlight element behind circle
         $("#V" + instance + "c").before(highlight);
 
+        //check and create square highlight if needed (note: if rectangle does not exist this does nothing)
         var highlight = $("#V" + instance + "r").clone();
         highlight = that.highlight(highlight);
         $(highlight).removeAttr("id");
@@ -480,6 +494,7 @@ ComparisonTable.method("addHovering", function()
         //add highlight element behind circle
         $("#V" + instance + "r").before(highlight);
 
+        //check and create octagonal highlight if needed (note: if Octagon does not exist this does nothing)
         var highlight = $("#V" + instance + "h").clone();
         highlight = that.highlight(highlight);
         $(highlight).removeAttr("id");
@@ -487,6 +502,7 @@ ComparisonTable.method("addHovering", function()
         //add highlight element behind circle
         $("#V" + instance + "h").before(highlight);
 
+        //Add strobing of highlights and crosshairs (starts after 1.5 seconds)
         var myBool = true;
         that.timeout = setTimeout(function(){
             that.interval = setInterval(function(){
@@ -500,6 +516,8 @@ ComparisonTable.method("addHovering", function()
             }, 500);
         }, 1500);
       }, 
+      //mouseour function removes all highlights/crosshairs and ends all relevant timers
+      //note: includes timeout function in case user mouses out before the 1.5 seconds is up
       function () {
         $(this).css("background", "");
         var instance = $(this).attr("id").substring(4);
@@ -522,7 +540,8 @@ ComparisonTable.method("makePointsDeselected", function (pid){
 });
 
 ComparisonTable.method("scrollToSearch", function (input){
-    //doesn't actually scroll... hides rows not containing input.
+    //method name is from before. doesn't actually scroll... hides rows not containing input.
+    //You can search multiple strings by seperating them with a space or comma (or both)
     var searchStrings = input.split(/[,\s]{1,}/g);
     var iteratedRow = 0;
     while (iteratedRow <= $("#comparison #tBody tbody").children().length){
@@ -539,7 +558,7 @@ ComparisonTable.method("scrollToSearch", function (input){
     }
     $('#mdComparisonTable .window-content').scroll();
 
-/*  OLD VERSION -- CAN REVERT IF NEEDED
+/*  OLD VERSION --Consider for removal
     if (input == ""){
         $('#mdComparisonTable .window-content').scrollTop(0);
     }
@@ -568,41 +587,34 @@ ComparisonTable.method("scrollToSearch", function (input){
 
 });
 
+// sorts instances in comparison table by either Instance numbers or quality values
+// gets passed the text of the row clicked
 ComparisonTable.method("rowSort", function(rowText){
     var i=0;
     var row = $("#comparison #r" + i);
     while (row.length != 0){
+        //finds the correct row
         if (row.find(".numeric").length != 0 || i==0){
             var current = $(row).find(".td_abstract");
             if ($(current).text() == rowText){
-                if($(current).hasClass("noSort")){
-                    row = $("#comparison #r0");
-                }
+                //gets cells of row and pairs them with their values
                 var instances = row.find(".td_instance");
                 var sortableArray = [];
                 for(var j=0; j<instances.length; j++){
                     sortableArray.push({ instance: $(instances[j]).attr("id"), value: $(instances[j]).text()} );
                 }
-                if($(current).hasClass("sortDesc")){
-                    if (row.attr("id") == "r0")
-                        sortableArray.sort(function(a,b){
-                            return a.value - b.value
-                        });
-                    else
-                        sortableArray.sort(function(a,b){
-                            return a.value - b.value;
-                        });
+                //checks what kind of sort is applied
+                if($(current).hasClass("sortDesc")){ //sort instances by descending value
+                    sortableArray.sort(function(a,b){
+                        return a.value - b.value;
+                    });
                 }
                 else if($(current).hasClass("sortAsc")){
-                    if (row.attr("id") == "r0")
-                        sortableArray.sort(function(a,b){
-                            return b.value - a.value
-                        });
-                    else
-                        sortableArray.sort(function(a,b){
-                            return b.value - a.value;
-                        });
+                    sortableArray.sort(function(a,b){ //sort instances by ascending value
+                        return b.value - a.value
+                    });
                 }
+                //replace all cells in the new order
                 while(sortableArray.length){
                     current = sortableArray.pop().instance;
                     current = current.replace(/[^_]{1,}/, "");
@@ -619,7 +631,7 @@ ComparisonTable.method("rowSort", function(rowText){
 
                 }
 
-            } else {
+            } else { //remove and sorting from other rows
                 current.find("#sortText").text("  ");
                 current.removeClass("sortAsc sortDesc");
                 current.addClass("noSort");
@@ -630,21 +642,26 @@ ComparisonTable.method("rowSort", function(rowText){
     }
 });
 
+//adds proper shapes and svg fields to the headers in the comparison table
 ComparisonTable.method("addShapes", function(){
     var that = this;
     $("#comparison #r0 .td_instance").each(function(){
-        $(this).find("circle").remove()
-        $(this).find("rect").remove()
-        $(this).find("polygon").remove()
+        //remove and previously added shapes
+        $(this).find("circle").remove();
+        $(this).find("rect").remove();
+        $(this).find("polygon").remove();
         if ($(this).find(".svghead").length == 0)
             var text = $(this).text();
         else 
             var text  = $($(this).find(".svghead text")[0]).text(); 
 
 //        console.log(text);
+
+// This will get any hidden circles and then put the new shape on top
+//clone corresponding circle, modify for table, and prepend.
         $(this).html('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svghead" height="22px" width="22px"><text text-anchor="middle" x="11px" y="16px" stroke="#ffffff" stroke-width="3px">' + text + '</text><text text-anchor="middle" x="11px" y="16px">' + text + '</text></svg>')
         if ($("#V" + text + "c").length == 1){
-            $("#V" + text + "c").clone()
+            $("#V" + text + "c").clone();
             var thisCircle = $("#V" + text + "c").clone();
             $(thisCircle).removeAttr("id");
             //if it's ever needed to swich back to colored versions remove this line
@@ -654,22 +671,25 @@ ComparisonTable.method("addShapes", function(){
             $(thisCircle).attr("r", "10px");
             $(thisCircle).prependTo($(this).find(".svghead"));
         }
-    // This will get any hidden circles and then put the new shape on top
+
+//clone corresponding square (if it exists), modify for table, and prepend over the hidden circle
         if ($("#V" + text + "r").length == 1){
             $("#V" + text + "r").clone().prependTo($(this).find(".svghead"));
             var thisRect = $(this).find("rect");
             $(thisRect).removeAttr("id");
-            //if it's ever needed to swich back to colored versions remove this line
+            //if it's ever needed to swich back to colored versions remove vv this vv line
             $(thisRect).css("fill", "white");
             $(thisRect).attr("x", "1px");
             $(thisRect).attr("y", "1px");
             $(thisRect).attr("width", "20px");
             $(thisRect).attr("height", "20px");
+//If hexagon exists, get a new one (note that this one is from scratch) modify for table, and prepend over the hidden circle
+//made from scratch because the points of the hexagon are not relative to center like the others
         } else if ($("#V" + text + "h").length == 1){
             var fill = $("#V" + text + "h").css("fill");
 //            console.log(that);
             var thisOct = that.host.findModule("mdGraph").getSVGOctagon(10, 11, 10);
-            //if it's ever needed to swich back to colored versions "#3366cc" to fill
+            //if it's ever needed to swich back to colored versions change "white" to fill
             $(thisOct).css("fill", "white");
             $(thisOct).attr("stroke-width", "1");
             $(thisOct).attr("stroke", "#000000");
@@ -679,6 +699,7 @@ ComparisonTable.method("addShapes", function(){
     });
 });
 
+//sets a shape to be rendered as a highlight
 ComparisonTable.method("highlight", function(obj){
     $(obj).attr("filter", "url(#blur)");
     $(obj).attr("stroke-width", "6");
@@ -686,6 +707,7 @@ ComparisonTable.method("highlight", function(obj){
     return obj;
 });
 
+//returns crosshairs for the graph that intersect at coordinates (x,y)
 ComparisonTable.method("getCrosshairs", function(x, y){
     var NS="http://www.w3.org/2000/svg";
     var crossX = document.createElementNS(NS,"line");
