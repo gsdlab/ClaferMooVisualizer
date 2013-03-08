@@ -151,3 +151,24 @@ ClaferProcessor.method("getIfMandatory", function(claferID){
 		return "<b>?</b>";
 
 });
+
+
+ClaferProcessor.method("getEffectivelyMandatoryFeatures", function(tree){
+	var list = [];
+	for (var i = 0; i<tree.subclafers.length; i++){
+		list = list.concat(this.recursiveEMcheck(tree.subclafers[i]));
+	}
+//	console.log(list);
+	return list;
+});
+
+ClaferProcessor.method("recursiveEMcheck", function(root){
+	var list = []
+	if (this.getIfMandatory(root.claferId) == ""){
+		list.push(root.displayId);
+		for (var i = 0; i<root.subclafers.length; i++){
+			list = list.concat(this.recursiveEMcheck(root.subclafers[i]));
+		}
+	}
+	return list;
+});

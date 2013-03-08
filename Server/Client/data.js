@@ -4,6 +4,7 @@ function DataTable ()
     this.products = new Array(); // product labels
     this.features = new Array(); // features
     this.formalContext = new Array(); // formal context table
+    this.EMcontext = new Array();    // Effectively mandatory array
     this.title = "";                 // instance super clafer
 
 }

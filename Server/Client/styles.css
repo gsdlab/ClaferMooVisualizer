@@ -116,3 +116,8 @@ td.tick, td.no
 .text_input {
      height: 12px;
 }
+
+#comparison .EffectMan {
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+}
