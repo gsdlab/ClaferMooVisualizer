@@ -67,7 +67,7 @@ ClaferProcessor.method("getGoals", function()
 		
 		var parts = builtExp.split(" ");
 		var operation = parts[0];
-		var rest = builtExp.replace(/[^ ]* /, "");
+		var rest = builtExp.replace(/[^ ]* /, "").replace(".ref", "");
 		rest = rest.replace(/[^.]*\./, "");
 		
 		var goal = new Object();

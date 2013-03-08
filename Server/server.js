@@ -191,7 +191,7 @@ function cleanupOldFiles(path, dir) {
 		deleteOld(path, "_desugared.cfr");
 		deleteOld(path, "_desugared.xml");
 		deleteOld(path, "_desugared.als");
-		deleteOld(path, "_desugared.choco");
+		deleteOld(path, "_desugared_tmp.als");
 	}
 
 	var i=1;
