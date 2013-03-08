@@ -118,6 +118,6 @@ td.tick, td.no
 }
 
 #comparison .EffectMan {
-    border-left: 1px solid #FFFFFF;
-    border-right: 1px solid #FFFFFF;
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
 }
