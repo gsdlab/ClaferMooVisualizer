@@ -177,48 +177,43 @@ server.post('/upload', function(req, res, next) {
 		});
 	});
 });
+
+function finishCleanup(dir, results){
+	if (fs.existsSync(dir)){
+		fs.rmdir(dir, function (err) {
+  			if (err) throw err;
+ 			console.log("successfully deleted " + dir + " along with contents:\n" + results);
+		});
+	}
+}
  
 function cleanupOldFiles(path, dir) {
 
 	//cleanup old files
-	var ending = path.toLowerCase().substring(path.length - 4);
-	console.log("Running Cleanup");
-	if (fs.existsSync(path)){
-		fs.unlink(path, function (err) {   //delete .cfr
-  			if (err) throw err;
- 			console.log("successfully deleted " + path);
-		});
-	}
-	if (ending == ".cfr"){
-		deleteOld(path, ".xml");
-		deleteOld(path, "_desugared.cfr");
-		deleteOld(path, "_desugared.xml");
-		deleteOld(path, "_desugared.als");
-		deleteOld(path, "_desugared_tmp.als");
-	}
+	fs.readdir(dir, function(err, files){
+		if (err) throw err;
+		var results = "";
+		var numFiles = files.length;
+		console.log("#files = " + numFiles);
+		if (!numFiles){
+			return finishCleanup(dir, results);
+		} else {
+			files.forEach(function(file){
+				deleteOld(dir + "/" + file);
+				results += file + "\n";
+			});	
+			finishCleanup(dir, results);
+		}
+	});
 
-	var i=1;
-	while (fs.existsSync(dir + "/alloy_solutions_" + i + ".xml")){
-		fs.unlink(dir + "alloy_solutions_" + i + ".xml", function (err) {   //delete .cfr
-  			if (err) throw err;
-		});
-		i++;
-	}
 
-	if (fs.existsSync(dir)){
-		fs.rmdir(dir, function (err) {   //delete .cfr
-  			if (err) throw err;
- 			console.log("successfully deleted " + dir +" along with alloy_solutions");
-		});
-	}
 //done cleanup
 }
 
-function deleteOld(path, ext){
-	if (fs.existsSync(changeFileExt(path, '.cfr', ext))){
-		fs.unlink(changeFileExt(path, '.cfr', ext), function (err) {   //delete .ext
+function deleteOld(path){
+	if (fs.existsSync(path)){
+		fs.unlink(path, function (err) {
 			if (err) throw err;
- 			console.log("successfully deleted " + changeFileExt(path, '.cfr', ext));
 		});
 	}
 }
