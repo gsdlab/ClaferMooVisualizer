@@ -82,7 +82,8 @@ Goals.method("getContent", function()
 
         this.ranges.push({
             goal: this.goals[i].label,
-            min: 0,
+            //placeholder values
+            min: -10000000,
             max: 10000000
         });
 	}
@@ -93,7 +94,6 @@ Goals.method("getContent", function()
 //get ranges to set landing zone else get minimum/maximum values for the ranges. After that filter
 Goals.method("filterByGoals", function(input)
 {
-    
     for (var x = 0; x<=this.ranges.length; x++){
         if (input == this.ranges[x].goal){
             break;

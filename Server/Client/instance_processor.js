@@ -84,7 +84,7 @@ InstanceProcessor.method("getFeatureValue", function(instanceIndex, featureName,
 		
 });
 
-/* Artifact function -- returns shape of instance --could be useful later so left in
+/* Old function -- returns shape of instance --could be useful later so left in
 InstanceProcessor.method("getInstanceShape", function(id, goals, originalPoints){
     if (id>originalPoints){
 	    var values={};
@@ -109,6 +109,7 @@ InstanceProcessor.method("getInstanceShape", function(id, goals, originalPoints)
 });
 */
 
+//returns the id of the first identical point that is a circle.
 InstanceProcessor.method("getIdenticalID", function(id, goals, originalPoints){
    	if (id>originalPoints){
     	var values={};

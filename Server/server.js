@@ -15,7 +15,7 @@ var port = config.port;
 
 var server = express();
 
-//support for sessions - not needed yet
+//support for sessions - used for url uploads
 server.use(express.cookieParser('asasdhf89adfhj0dfjask'));
 var store = new express.session.MemoryStore;
 server.use(express.session({secret: 'supersecretstring', store: store}));

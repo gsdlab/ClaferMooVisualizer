@@ -3,6 +3,7 @@ function InstanceParser(instances)
 	this.instances = instances;
 }
 
+//function that can change an instance given by claferIG to match the output of ClaferMoo
 InstanceParser.method("convertFromClaferIGOutputToClaferMoo", function(oldAbstractXML){
 	var instances = this.instances;
 	//remove $x
@@ -42,6 +43,7 @@ InstanceParser.method("convertFromClaferIGOutputToClaferMoo", function(oldAbstra
 	return instances;
 });
 
+//returns the data for a single instance
 InstanceParser.method("getInstanceData", function(pid){
 	var instances = this.instances;
 	var lines = instances.match(/^.*([\n\r]+|$)/gm);

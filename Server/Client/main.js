@@ -79,6 +79,7 @@ function Host(modules)
 //    $.minimizeWindow("mdComparisonTable");    
 }
 
+//returns the module object. useful for modifying or getting data from other modules.
 Host.method("findModule", function(id)
 {
     for (var i = 0; i < this.modules.length; i++)
@@ -91,6 +92,7 @@ Host.method("findModule", function(id)
 
 });
 
+//runs the "onSelectionChanged" function for each module. Called by the selector.
 Host.method("selectionChanged", function(data)
 {
     for (var i = 0; i < this.modules.length; i++)
@@ -101,6 +103,7 @@ Host.method("selectionChanged", function(data)
     
 });
 
+//runs after data is uploaded from server. Causes all modules to update their data.
 Host.method("updateData", function(data)
 {
     if (data.error == true)

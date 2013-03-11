@@ -3,10 +3,12 @@ function ClaferProcessor (sourceXML) {
     this.xmlHelper = new XMLHelper();
 }
 
+//returns claferid without the cXX_ extension
 ClaferProcessor.method("claferFilter", function(s)
 {
 	return s.replace(/c[^_]*_/g, "")
 });
+
 
 ClaferProcessor.method("operationFilter", function(s)
 {
