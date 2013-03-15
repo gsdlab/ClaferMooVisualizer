@@ -160,7 +160,7 @@ Graph.method("redrawParetoFront", function()
         labels.push(label4);
     }
     
-    this.PFVisualizer.draw(this.instanceProcessor, args, labels);
+    this.PFVisualizer.draw(this.Processor, this.instanceProcessor, args, labels);
     this.makePointsSelected(this.host.selector.selection);
     this.makePointsReady();
     this.addFilters();

@@ -1,13 +1,14 @@
 function ParetoFrontVisualizer (element) 
 {
 	this.element = element;
+       
 //    google.setOnLoadCallback(loadCallback);
 //        function loadCallback() 
 //        {
 //        }
 }
 
-ParetoFrontVisualizer.prototype.draw = function(processor, args, labels) 
+ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, labels) 
 {
 	if ((args.length < 2) || args.length != labels.length)
 	{
@@ -122,18 +123,20 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     }
 
     //update goals placeholders
-    for (var y = 0; y < args.length; y++){
+    var numgoals = cprocessor.getGoals();
+    console.log(numgoals)
+    for (var y = 0; y < numgoals.length; y++){
         var maxG = 0;
         var minG = 10000000000;
         for (var i = 1; i <= instanceCount; i++){
-            var test = processor.getFeatureValue(i, args[y], true);
+            var test = processor.getFeatureValue(i, numgoals[y].arg, true);
             if (test < minG)
                 minG = test;
             
             if (test >= maxG)
                 maxG = test;
         }
-        this.showGoal(labels[y], minG, maxG);
+        this.showGoal(numgoals[y].label, minG, maxG);
     }
         
 
