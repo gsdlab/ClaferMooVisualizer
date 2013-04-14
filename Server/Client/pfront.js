@@ -1,13 +1,14 @@
 function ParetoFrontVisualizer (element) 
 {
 	this.element = element;
+       
 //    google.setOnLoadCallback(loadCallback);
 //        function loadCallback() 
 //        {
 //        }
 }
 
-ParetoFrontVisualizer.prototype.draw = function(processor, args, labels) 
+ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, labels) 
 {
 	if ((args.length < 2) || args.length != labels.length)
 	{
@@ -43,6 +44,9 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
     var maxY = 0;
     var minY = 10000000000;
 
+    var maxZ = 0;
+    var minZ = 10000000000;
+
     var maxT = 0;
     var minT = 10000000000;
     
@@ -59,14 +63,15 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         maxT = 0;
         minT = 0;
     }
-    
+
 	for (var i = 1; i <= instanceCount; i++)
 	{
+
 		var first = processor.getFeatureValue(i, args[0], true); // get only numeric
 		var second = processor.getFeatureValue(i, args[1], true); // get only numeric
 		
 		point = new Array();
-		point.push("P" + i);
+		point.push("V" + i);
 		point.push(first);
 		point.push(second);
         
@@ -108,7 +113,33 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         
 		rows.push(point);
 	}
-    
+
+    if (hasForth){
+        $("#MaxCircleLegend").text(maxT);
+        $("#MinCircleLegend").text(minT);
+        $("#svgcontT").show();
+    } else {
+        $("#svgcontT").hide();
+    }
+
+    //update goals placeholders
+    var numgoals = cprocessor.getGoals();
+    console.log(numgoals)
+    for (var y = 0; y < numgoals.length; y++){
+        var maxG = 0;
+        var minG = 10000000000;
+        for (var i = 1; i <= instanceCount; i++){
+            var test = processor.getFeatureValue(i, numgoals[y].arg, true);
+            if (test < minG)
+                minG = test;
+            
+            if (test >= maxG)
+                maxG = test;
+        }
+        this.showGoal(numgoals[y].label, minG, maxG);
+    }
+        
+
     if (minY > 0)
         minY = 0;
         
@@ -136,15 +167,19 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
         chartWidth = "91%";
     }
 
-
+    if ($('[name~="' + labels[2] + '"]').attr("id") == "operation_min"){
+        var colorList = ['green', 'yellow', 'red'];
+    } else {
+        var colorList = ['red', 'yellow', 'green'];
+    }
     
     data.addRows(rows);          
 
 	var options = {
 //	  theme: 'maximized', 
 	  title: '',
-      chartArea: {left:"20", top:chartTop, width: chartWidth, height: chartHeight},
-      titleTextStyle: {color: "black", fontName: "Arial", fontSize: 12},
+      chartArea: {left:"30", top:chartTop, width: chartWidth, height: chartHeight},
+      titleTextStyle: {color: "black", fontName: "Arial", fontSize: 10},
 	  hAxis: {maxValue: maxX, minValue: minX},
 	  vAxis: {maxValue: maxY, minValue: minY},
       axisTitlesPosition: 'in',
@@ -153,7 +188,7 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 //	  hAxis: {title: labels[0], viewWindowMode: "pretty"},
 //	  vAxis: {title: labels[1], viewWindowMode: "pretty"},
 	  animation: {duration:3000},
-      colorAxis: {legend : {position : colorAxisLegendPosition}},
+      colorAxis: {legend : {position : colorAxisLegendPosition}, colors: colorList},
       
       bubble: {textStyle: {fontSize: 12}, stroke: "black"},
 //      sizeAxis: {maxSize: 12, minSize: 12},
@@ -162,20 +197,80 @@ ParetoFrontVisualizer.prototype.draw = function(processor, args, labels)
 
 	this.chart = new google.visualization.BubbleChart(document.getElementById(this.element));
 
-    google.visualization.events.addListener(this.chart, 'select', this.myClickHandler);    
+    google.visualization.events.addListener(this.chart, 'select', this.myClickHandler); 
+    google.visualization.events.addListener(this.chart, 'onmouseover', function(data){
+
+        $("#comparison #th0_" + (data.row+1)).css("background", "#ffffcc");
+        var tomodify = $("#analysis #unique th").has("text:contains('" + (data.row+1) +"')");
+        var text = String((data.row+1)) + String((data.row+1)) + "--";
+        tomodify.each(function(){
+            var thistext = $(this).text();
+            if (thistext == text)
+                $(this).css("background", "#ffffcc");
+        });
+
+        var originalPoints = this.host.findModule("mdInput").originalPoints;
+        $("#chart circle").each(function(){
+            if (data.row >= originalPoints){
+                if ($(this).attr("id") == null){
+                    $(this).hide();
+                }
+            }
+        });
+        $($("#chart g:contains('V" + (data.row+1) + "') text")[0]).text("Variant " + (data.row+1));
+    }); 
+    google.visualization.events.addListener(this.chart, 'onmouseout', function(data){
+
+        $("#comparison #th0_" + (data.row+1)).css("background", "");
+        var tomodify = $("#analysis #unique th").has("text:contains('" + (data.row+1) +"')");
+        var text = String((data.row+1)) + String((data.row+1)) + "--";
+        tomodify.each(function(){
+            var thistext = $(this).text();
+            if (thistext == text)
+                $(this).css("background", "");
+        });
+
+
+
+        $("#chart circle").each(function(){
+            if ($(this).attr("id") == null){
+                $(this).attr("id", "V" + (data.row + 1) + "c");
+            }
+        });
+
+        var originalPoints = this.host.findModule("mdInput").originalPoints;
+        for (var i = 1; i <= ($("#chart circle").length); i++){
+            if (i > originalPoints){
+                $("#V" + i + "c").hide();
+            }
+        }
+    }); 
     host.chart = this.chart;
     
 	this.chart.draw(data, options);
-    
+
 }
 
 ParetoFrontVisualizer.prototype.myClickHandler = function()
 {
-//    alert(this);
   var selection = host.chart.getSelection();
-  host.chart.setSelection(null);
 
+  
+//    alert(this);
+  host.chart.setSelection(null);
+  var originalPoints = this.host.findModule("mdInput").originalPoints;
   var id = -1;
+ 
+  for (var y = 0; y < selection.length; y++){
+        $("#chart circle").each(function(){
+
+            if (selection[y].row >= originalPoints){
+                if ($(this).attr("id") == null){
+                    $(this).hide()
+                }
+            }
+        });
+  }
   
   for (var i = 0; i < selection.length; i++) 
   {
@@ -188,18 +283,25 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
     if (id == -1)
         return;
        
-    var pid = "P" + (id + 1);
+    var pid = "V" + (id + 1);
        
     if (host.selector.isSelected(pid))
     {
-        host.findModule("mdGraph").makePointsDeselected([pid]);
         host.selector.onDeselected(pid);
     }
     else
     {
-        host.findModule("mdGraph").makePointsSelected([pid]);
         host.selector.onSelected(pid);
     }
   }
+  $($("#chart g:contains('V" + (selection[0].row+1) + "') text")[0]).text("Variant " + (selection[0].row+1));
 }
+
+ParetoFrontVisualizer.prototype.showGoal = function(goal, min, max){
+    $("#"+goal+"min").attr("placeholder", min);
+    $("#"+goal+"max").attr("placeholder", max);
+}
+
+
+
 

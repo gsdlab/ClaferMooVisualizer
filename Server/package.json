@@ -1,0 +1,9 @@
+{
+  "name": "ClaferMooViz",
+  "description": "A web-based GUI for Pareto front visualizer and explorer.",
+  "version": "0.3.2",
+  "private": true,
+  "dependencies": {
+    "express": "3.0.4"
+  }
+}

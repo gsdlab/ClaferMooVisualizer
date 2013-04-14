@@ -3,10 +3,12 @@ function ClaferProcessor (sourceXML) {
     this.xmlHelper = new XMLHelper();
 }
 
+//returns claferid without the cXX_ extension
 ClaferProcessor.method("claferFilter", function(s)
 {
 	return s.replace(/c[^_]*_/g, "")
 });
+
 
 ClaferProcessor.method("operationFilter", function(s)
 {
@@ -67,7 +69,7 @@ ClaferProcessor.method("getGoals", function()
 		
 		var parts = builtExp.split(" ");
 		var operation = parts[0];
-		var rest = builtExp.replace(/[^ ]* /, "");
+		var rest = builtExp.replace(/[^ ]* /, "").replace(".ref", "");
 		rest = rest.replace(/[^.]*\./, "");
 		
 		var goal = new Object();
@@ -141,4 +143,34 @@ ClaferProcessor.method("getAbstractClaferTree", function(xpathToIdSiblings, id)
 		return "";
 	}
 		
+});
+
+ClaferProcessor.method("getIfMandatory", function(claferID){
+	var min = this.xmlHelper.queryXML(this.source, "//declaration[@type='IClafer'][uniqueid='" + claferID + "']/card/min[intliteral=1]");
+	if (min.length != 0)
+		return "";
+	else 
+		return "<b>?</b>";
+
+});
+
+
+ClaferProcessor.method("getEffectivelyMandatoryFeatures", function(tree){
+	var list = [];
+	for (var i = 0; i<tree.subclafers.length; i++){
+		list = list.concat(this.recursiveEMcheck(tree.subclafers[i]));
+	}
+//	console.log(list);
+	return list;
+});
+
+ClaferProcessor.method("recursiveEMcheck", function(root){
+	var list = []
+	if (this.getIfMandatory(root.claferId) == ""){
+		list.push(root.displayId);
+		for (var i = 0; i<root.subclafers.length; i++){
+			list = list.concat(this.recursiveEMcheck(root.subclafers[i]));
+		}
+	}
+	return list;
 });

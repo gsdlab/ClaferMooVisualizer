@@ -3,7 +3,7 @@ function TableVisualizer ()
 //	this.data = data;
 }
 
-TableVisualizer.method("mapValue", function(sVal)
+TableVisualizer.method("mapValue", function(sVal, isEM)
 {
 	var result = new Object();
 	result.tdStyle = "";
@@ -11,13 +11,19 @@ TableVisualizer.method("mapValue", function(sVal)
 	
 	if (sVal == "yes")
 	{
-		result.html = '<img class="tick" src="/Client/images/tick.png"/>';
+		result.html = '<img class="tick" src="/images/tick.png"/>';
 		result.tdStyle = 'tick';
+	}
+
+	if (isEM)
+	{
+		result.html = ''
+		result.tdStyle = 'EffectMan';
 	}
 	
 	if (sVal == "-")
 	{
-		result.html = '<img class="no" src="/Client/images/no.png"/>';
+		result.html = '<img class="no" src="/images/no.png"/>';
 		result.tdStyle = 'no';
 	}
 
@@ -35,10 +41,9 @@ TableVisualizer.method("mapValue", function(sVal)
 TableVisualizer.prototype.getHTML = function(data) 
 {
 	var instanceCount = data.products.length;    
-	var table = $('<table width="100%" cellspacing="0" cellspadding="0"></table>').addClass('foo');
+	var table = $('<table  id="tBody" width="100%" cellspacing="0" cellspadding="0"></table>').addClass('foo');
 
     // first row - headers
-    
     var row = $('<tr id="r' + 0 +'"></tr>').addClass('bar');//
 	var tagName = "th"; // to make headers
 	var td = $('<' + tagName + '></' + tagName + '>').addClass('td_abstract').addClass('table_title');
@@ -72,7 +77,7 @@ TableVisualizer.prototype.getHTML = function(data)
 		{
 			var td = $('<' + tagName + ' id="' + tagName + i + "_" + (j + 1) + '"></' + tagName + '>').addClass('td_instance');
 			
-            mappedValue = this.mapValue(data.matrix[i][j]);
+            mappedValue = this.mapValue(data.matrix[i][j], data.EMcontext[i+1]);
             td.html(mappedValue.html);
             td.addClass(mappedValue.tdStyle);
 
@@ -81,7 +86,6 @@ TableVisualizer.prototype.getHTML = function(data)
 
         table.append(row);
 	}
-
 	return table;
 
 }
