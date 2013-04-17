@@ -29,6 +29,7 @@ function Host(modules)
 {
     this.selector = new Selector(this);
     this.modules = new Array();
+    this.helpGetter = new helpGetter(this);
     
     for (var i = 0; i < modules.length; i++)
     {
@@ -73,8 +74,21 @@ function Host(modules)
 
         if (this.modules[i].onInitRendered)
             this.modules[i].onInitRendered();        
+
+        var helpButton = this.getHelpButton(this.modules[i].title);
+        $("#" + this.modules[i].id + " .window-titleBar").append(helpButton);   
     }
     
+    var displayHelp=getCookie("startHelp")
+    if(displayHelp==null){
+        $("body").prepend(this.helpGetter.getInitial());
+        this.helpGetter.setListeners();
+    }else{
+        $("body").prepend(this.helpGetter.getInitial());
+        this.helpGetter.setListeners();
+        $("#help").hide();
+        $(".fadeOverlay").hide();
+    }
 //    $.minimizeWindow("mdGoals");
 //    $.minimizeWindow("mdComparisonTable");    
 }
@@ -138,4 +152,12 @@ Host.method("updateData", function(data)
                 
     }
     
+});
+
+Host.method("getHelp", function(moduleName){
+    this.helpGetter.getHelp(moduleName);
+});
+
+Host.method("getHelpButton", function(moduleName){
+    return this.helpGetter.getHelpButton(moduleName);
 });
