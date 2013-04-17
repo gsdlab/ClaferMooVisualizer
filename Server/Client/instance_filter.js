@@ -80,7 +80,7 @@ InstanceFilter.method("hideInstance", function(x){
 // Get graph bubble html locations
     var circle_pairs = [];
     for (var i=1; i<=$("#chart circle").length; i++){
-        circle_pairs.push({circle: $("#V" + i + "c"), text_data: $("#V" + i + "t"), ident: i});
+        circle_pairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
     }
     //hide table header (row 0)
     $("#mdComparisonTable #th0_" + x).hide();
@@ -105,7 +105,7 @@ InstanceFilter.method("hideInstance", function(x){
 InstanceFilter.method("unFilter", function(){
 	var circle_pairs = [];
     for (var i=1; i<=$("#chart circle").length; i++){
-        circle_pairs.push({circle: $("#V" + i + "c"), text_data: $("#V" + i + "t"), ident: i});
+        circle_pairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
     }
     while(this.hidden.length){
         $(this.hidden.pop()).show();

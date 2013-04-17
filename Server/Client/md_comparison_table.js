@@ -223,7 +223,7 @@ ComparisonTable.method("onRendered", function()
 //    console.log(length);
     for(i=1; i<=length; i++){
         $("#th0_" + i).click(function(){
-            var pid = "V" + $(this).attr('id').substring(4)
+            var pid = getPID($(this).attr('id').substring(4))
             var locationInArray = $.inArray(pid, host.selector.selection)
             if (locationInArray == -1)
                 host.selector.onSelected(pid);
@@ -473,34 +473,34 @@ ComparisonTable.method("addHovering", function()
         var instance = $(this).attr("id").substring(4);
 
         //get crosshairs 
-        var hairs = that.getCrosshairs($("#V" + instance + "c").attr("cx"), $("#V" + instance + "c").attr("cy"));
-        $("#V" + instance + "c").before(hairs);
+        var hairs = that.getCrosshairs($("#" + getPID(instance) + "c").attr("cx"), $("#" + getPID(instance) + "c").attr("cy"));
+        $("#" + getPID(instance) + "c").before(hairs);
         $("#CHX").attr("class", instance + "HL");
         $("#CHY").attr("class", instance + "HL");
 
         //create circle highlight
-        var highlight = $("#V" + instance + "c").clone();
+        var highlight = $("#" + getPID(instance) + "c").clone();
         highlight = that.highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
-        $("#V" + instance + "c").before(highlight);
+        $("#" + getPID(instance) + "c").before(highlight);
 
         //check and create square highlight if needed (note: if rectangle does not exist this does nothing)
-        var highlight = $("#V" + instance + "r").clone();
+        var highlight = $("#" + getPID(instance) + "r").clone();
         highlight = that.highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
-        $("#V" + instance + "r").before(highlight);
+        $("#" + getPID(instance) + "r").before(highlight);
 
         //check and create octagonal highlight if needed (note: if Octagon does not exist this does nothing)
-        var highlight = $("#V" + instance + "h").clone();
+        var highlight = $("#" + getPID(instance) + "h").clone();
         highlight = that.highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
-        $("#V" + instance + "h").before(highlight);
+        $("#" + getPID(instance) + "h").before(highlight);
 
         //Add strobing of highlights and crosshairs (starts after 1.5 seconds)
         var myBool = true;
@@ -660,9 +660,9 @@ ComparisonTable.method("addShapes", function(){
 // This will get any hidden circles and then put the new shape on top
 //clone corresponding circle, modify for table, and prepend.
         $(this).html('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svghead" height="22px" width="22px"><text text-anchor="middle" x="11px" y="16px" stroke="#ffffff" stroke-width="3px">' + text + '</text><text text-anchor="middle" x="11px" y="16px">' + text + '</text></svg>')
-        if ($("#V" + text + "c").length == 1){
-            $("#V" + text + "c").clone();
-            var thisCircle = $("#V" + text + "c").clone();
+        if ($("#" + getPID(text) + "c").length == 1){
+            $("#" + getPID(text) + "c").clone();
+            var thisCircle = $("#" + getPID(text) + "c").clone();
             $(thisCircle).removeAttr("id");
             //if it's ever needed to swich back to colored versions remove this line
             $(thisCircle).css("fill", "white");
@@ -673,8 +673,8 @@ ComparisonTable.method("addShapes", function(){
         }
 
 //clone corresponding square (if it exists), modify for table, and prepend over the hidden circle
-        if ($("#V" + text + "r").length == 1){
-            $("#V" + text + "r").clone().prependTo($(this).find(".svghead"));
+        if ($("#" + getPID(text) + "r").length == 1){
+            $("#" + getPID(text) + "r").clone().prependTo($(this).find(".svghead"));
             var thisRect = $(this).find("rect");
             $(thisRect).removeAttr("id");
             //if it's ever needed to swich back to colored versions remove vv this vv line
@@ -685,8 +685,8 @@ ComparisonTable.method("addShapes", function(){
             $(thisRect).attr("height", "20px");
 //If hexagon exists, get a new one (note that this one is from scratch) modify for table, and prepend over the hidden circle
 //made from scratch because the points of the hexagon are not relative to center like the others
-        } else if ($("#V" + text + "h").length == 1){
-            var fill = $("#V" + text + "h").css("fill");
+        } else if ($("#" + getPID(text) + "h").length == 1){
+            var fill = $("#" + getPID(text) + "h").css("fill");
 //            console.log(that);
             var thisOct = that.host.findModule("mdGraph").getSVGOctagon(10, 11, 10);
             //if it's ever needed to swich back to colored versions change "white" to fill

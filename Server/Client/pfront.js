@@ -71,7 +71,7 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
 		var second = processor.getFeatureValue(i, args[1], true); // get only numeric
 		
 		point = new Array();
-		point.push("V" + i);
+		point.push(getPID(i));
 		point.push(first);
 		point.push(second);
         
@@ -217,7 +217,7 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
                 }
             }
         });
-        $($("#chart g:contains('V" + (data.row+1) + "') text")[0]).text("Variant " + (data.row+1));
+        $($("#chart g:contains('" + getPID(data.row+1) + "') text")[0]).text("Variant " + (data.row+1));
     }); 
     google.visualization.events.addListener(this.chart, 'onmouseout', function(data){
 
@@ -234,14 +234,14 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
 
         $("#chart circle").each(function(){
             if ($(this).attr("id") == null){
-                $(this).attr("id", "V" + (data.row + 1) + "c");
+                $(this).attr("id", getPID(data.row + 1) + "c");
             }
         });
 
         var originalPoints = this.host.findModule("mdInput").originalPoints;
         for (var i = 1; i <= ($("#chart circle").length); i++){
             if (i > originalPoints){
-                $("#V" + i + "c").hide();
+                $("#" + getPID(i) + "c").hide();
             }
         }
     }); 
@@ -283,7 +283,7 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
     if (id == -1)
         return;
        
-    var pid = "V" + (id + 1);
+    var pid = getPID(id + 1);
        
     if (host.selector.isSelected(pid))
     {
@@ -294,7 +294,7 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
         host.selector.onSelected(pid);
     }
   }
-  $($("#chart g:contains('V" + (selection[0].row+1) + "') text")[0]).text("Variant " + (selection[0].row+1));
+  $($("#chart g:contains('" + getPID(selection[0].row+1) + "') text")[0]).text("Variant " + (selection[0].row+1));
 }
 
 ParetoFrontVisualizer.prototype.showGoal = function(goal, min, max){

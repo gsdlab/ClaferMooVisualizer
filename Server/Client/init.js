@@ -71,3 +71,11 @@ function isNumeric(input)
     return (input - 0) == input && input.length > 0;
 }
 
+function getPID(input){
+    return "V" + input;
+}
+
+function parsePID(PID){
+    return PID.replace("V", "");
+}
+
