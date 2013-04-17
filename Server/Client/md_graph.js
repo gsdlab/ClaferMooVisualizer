@@ -389,6 +389,7 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     var tdT = $('#dropPointT')[0];
     
     var tdChart = $('#chart')[0];
+    var tdDiv = $('#chart').children("div")[0]
     var tdX = $('#dropPointX')[0];    
         
     var unit = 20;
@@ -404,6 +405,7 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     setDim(tdZ, w, unit);
     setDim(tdY, unit, h - 2 * unit);
     setDim(tdChart, w - 2 * unit, h - 2 * unit);
+    setDim(tdDiv, w - 2 * unit, h - 2 * unit);
     setDim(tdT, unit, h - 2 * unit);
     setDim(tdX, w, unit);
     
