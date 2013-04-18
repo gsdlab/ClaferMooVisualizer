@@ -131,3 +131,14 @@ InstanceProcessor.method("getIdenticalID", function(id, goals, originalPoints){
    		return 0;
    	}
 });
+
+InstanceProcessor.method("getInstanceName", function(){
+	try {
+		var ClaferId = this.xmlHelper.queryXML(this.source, "/instances/instance/clafer/@id");
+	} catch(e) {
+		alert("Could not get a clafer id of the instance root");
+		return "";
+	}
+	
+	return ClaferId[0].nodeValue;
+});

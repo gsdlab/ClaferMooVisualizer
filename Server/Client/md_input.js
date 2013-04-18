@@ -200,7 +200,7 @@ Input.method("processToolResult", function(result)
        		return;
    		}
 
-		var parser = new InstanceParser(result);
+		var parser = new InstanceConverter(result)
 		ar[1] += parser.convertFromClaferIGOutputToClaferMoo(this.previousData.abstractXML);
 	}
 
