@@ -15,6 +15,8 @@ var port = config.port;
 
 var server = express();
 
+var timeout = config.timeout;
+
 //support for sessions - used for url uploads
 server.use(express.cookieParser('asasdhf89adfhj0dfjask'));
 var store = new express.session.MemoryStore;
@@ -133,7 +135,12 @@ server.post('/upload', function(req, res, next) {
 				tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
 				var error_result = "";
 				var data_result = "";
-				
+				var timedout = false;
+				var countdown = setTimeout(function(){
+					console.log("request timed out");
+					tool.kill();
+					timedout = true;
+				}, timeout);
 				tool.stdout.on('data', function (data) 
 				{	
 				  data_result += data;
@@ -145,6 +152,13 @@ server.post('/upload', function(req, res, next) {
 
 				tool.on('exit', function (code) 
 				{
+					if (timedout){
+						res.writeHead(500, { "Content-Type": "text/html"});
+						res.end("Request timed out")
+						cleanupOldFiles(uploadedFilePath, dlDir);
+						return;
+					} 
+					clearTimeout(countdown);
 					var result = "";
 					console.log("Preparing to send result");
 					if(error_result.indexOf('Exception in thread "main"') > -1){
