@@ -27,6 +27,7 @@ $(document).ready(function()
 
 function Host(modules)
 {
+    this.windowKey = Math.floor(Math.random()*1000000000).toString(16);
     this.selector = new Selector(this);
     this.modules = new Array();
     this.helpGetter = new helpGetter(this);
