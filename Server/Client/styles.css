@@ -113,6 +113,10 @@ td.tick, td.no
      overflow-y:scroll;
 }
 
+.searchOmitted {
+    display: none;
+}
+
 .text_input {
      height: 12px;
 }

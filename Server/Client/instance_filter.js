@@ -4,6 +4,8 @@ function InstanceFilter (host){
     this.hidden = [];
     this.permaHidden = {};
     this.originalPoints = host.findModule("mdInput").originalPoints
+    this.closedFeatures = [];
+    this.tableid = "#comparison"
 }
 
 //Clears then reapplies all active filters
@@ -61,6 +63,11 @@ InstanceFilter.method("filterContent", function(){
         //increment row
         i++;
         row = $("#mdComparisonTable #r" + i);
+    }
+
+    //close features
+    for(i=0; i<this.closedFeatures.length; i++){
+        this.closeFeature(this.closedFeatures[i]);
     }
 
     //filtering by permaHidden
@@ -135,5 +142,56 @@ InstanceFilter.method("resetFilters", function(){
         row = $("#r" + i);
     }
     //refresh filter
+    this.filterContent();
+});
+
+InstanceFilter.method("hideRowByName", function (name){
+    var rows = $(this.tableid + " tr");
+    for (var i=0;i<rows.length;i++){
+        var curRow = rows[i];
+        var hideThis = $($(curRow).find(':contains("' + name + '")')).parent();
+        if (hideThis.length != 0){
+            $(hideThis).hide();
+            this.hidden.push(hideThis);
+        }
+    }
+});
+
+InstanceFilter.method("closeFeature", function (feature){
+    var instanceSuperClafer = this.host.findModule("mdComparisonTable").instanceProcessor.getInstanceSuperClafer();
+    var root = this.host.findModule("mdComparisonTable").processor.getAbstractClaferTree("/module/declaration/uniqueid", instanceSuperClafer);
+    
+    root = this.findNodeInTree(root, feature)
+
+    this.hideChildren(root);
+    if (this.closedFeatures.indexOf(feature) == -1)
+        this.closedFeatures.push(feature)
+    this.host.findModule("mdComparisonTable").scrollToSearch($("#search").val());
+});
+
+InstanceFilter.method("hideChildren", function (node){;
+    for (var i=0;i<node.subclafers.length;i++){
+        this.hideChildren(node.subclafers[i]);
+        this.hideRowByName(node.subclafers[i].displayId);
+    }
+});
+
+InstanceFilter.method("findNodeInTree", function (root, feature){
+    if (root.displayId === feature)
+        return root;
+    else if (root.subclafers.length < 1)
+        return null;
+    else{
+        for (var i=0; i<root.subclafers.length; i++){
+            var ret = this.findNodeInTree(root.subclafers[i], feature);
+            if (ret != null)
+                return ret;
+        }
+    }
+}); 
+
+InstanceFilter.method("openFeature", function (feature){
+    var index = this.closedFeatures.indexOf(feature);
+    this.closedFeatures.splice(index, 1);
     this.filterContent();
 });

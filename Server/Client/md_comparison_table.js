@@ -177,8 +177,36 @@ ComparisonTable.method("onRendered", function()
             }).css("cursor", "pointer");
         }
 //  Add Greyed out checkboxes to denote effectively mandatory features
-        else if (!row.find(".numeric").length){
+        else if (!row.find(".numeric").length && row.find(".EffectMan").length){
             $("#r" + i + " .td_abstract").prepend('<image id="r' + i + 'box" src="images/checkbox_ticked_greyed.png" class="wanted">');
+        }
+        i++;
+        row = $("#r" + i);
+    }
+    //  Add collapse buttons for features with children
+    var instanceSuperClafer = this.instanceProcessor.getInstanceSuperClafer();
+    var abstractClaferTree = this.processor.getAbstractClaferTree("/module/declaration/uniqueid", instanceSuperClafer);
+    var hasChild = this.processor.getFeaturesWithChildren(abstractClaferTree)
+    i = 1;
+    row = $("#r" + i);
+    var that = this;
+    while (row.length != 0){
+        if (!row.find(".numeric").length){
+            var feature = $("#r" + i + " .td_abstract").text().replaceAll(/[\s?]{1,}/g, '');
+            if (hasChild.indexOf(feature) != -1){
+                $("#r" + i + " .td_abstract").append('<text id="r' + i + 'collapse" status="false">   \u21B4<text>')
+                $("#r" + i + "collapse").click(function(){
+                    if ($(this).attr("status") === "false"){
+                        that.filter.closeFeature($(this).parent().text().replaceAll(/[^A-z]/g, ''));
+                        $(this).attr("status", "true")
+                        $(this).text("   \u2192")
+                    } else {
+                        that.filter.openFeature($(this).parent().text().replaceAll(/[^A-z]/g, ''));
+                        $(this).attr("status", "false")
+                        $(this).text("   \u21B4")
+                    }
+                }).css("cursor", "pointer");
+            }
         }
 //  Add sorting to quality attributes
         else {
@@ -551,9 +579,9 @@ ComparisonTable.method("scrollToSearch", function (input){
                 found = true;
         }
         if (found)
-            $("#comparison #tBody #r" + iteratedRow).show();
+            $("#comparison #tBody #r" + iteratedRow).removeClass("searchOmitted");
         else
-            $("#comparison #tBody #r" + iteratedRow).hide();
+            $("#comparison #tBody #r" + iteratedRow).addClass("searchOmitted");;
         iteratedRow++;
     }
     $('#mdComparisonTable .window-content').scroll();
