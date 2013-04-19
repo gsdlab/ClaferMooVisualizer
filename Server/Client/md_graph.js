@@ -21,6 +21,7 @@ Graph.method("onDataLoaded", function(data){
 
 Graph.method("onRendered", function()
 {
+    $("#graph_table").css("overflow", "hidden");
     this.goals = this.host.findModule("mdGoals").goals;
     
     var dropPlaces = $(".axis_drop");
@@ -404,9 +405,9 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     setDim(table, w, h);
     setDim(tdZ, w, unit);
     setDim(tdY, unit, h - 2 * unit);
-    setDim(tdChart, w - 2 * unit, h - 2 * unit);
-    setDim(tdDiv, w - 2 * unit, h - 2 * unit);
-    setDim(tdT, unit, h - 2 * unit);
+    setDim(tdChart, w - 4 * unit, h - 2 * unit);
+    setDim(tdDiv, w - 4 * unit, h - 2 * unit);
+    setDim(tdT, 3 * unit, h - 2 * unit);
     setDim(tdX, w, unit);
     
 //    tdChart.css("width", w - 2 * unit);

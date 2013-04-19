@@ -80,7 +80,7 @@ function Host(modules)
         $("#" + this.modules[i].id + " .window-titleBar").append(helpButton);   
     }
     
-    var displayHelp=getCookie("startHelp")
+    var displayHelp=getCookie("startHelpMooViz")
     if(displayHelp==null){
         $("body").prepend(this.helpGetter.getInitial());
         this.helpGetter.setListeners();
