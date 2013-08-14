@@ -258,4 +258,4 @@ server.use(function(req, res, next){
 });
 
 server.listen(port);
-console.log('ClaferMooViz listening on port ' + port);
+console.log('ClaferMoo Visualizer listening on port ' + port);
