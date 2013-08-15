@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2012 Alexander Murashkin, Neil Redman <http://gsd.uwaterloo.ca>
+Copyright (C) 2012, 2013 Alexander Murashkin, Neil Redman <http://gsd.uwaterloo.ca>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -19,7 +19,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 //var mdComparisonTable;
 //var mdGoals;
 //var mdGraph;
@@ -49,8 +48,10 @@ $(document).ready(function()
 
 function Host(modules)
 {
+    this.windowKey = Math.floor(Math.random()*1000000000).toString(16);
     this.selector = new Selector(this);
     this.modules = new Array();
+    this.helpGetter = new helpGetter(this);
     
     for (var i = 0; i < modules.length; i++)
     {
@@ -95,8 +96,21 @@ function Host(modules)
 
         if (this.modules[i].onInitRendered)
             this.modules[i].onInitRendered();        
+
+        var helpButton = this.getHelpButton(this.modules[i].title);
+        $("#" + this.modules[i].id + " .window-titleBar").append(helpButton);   
     }
     
+    var displayHelp=getCookie("startHelpMooViz")
+    if(displayHelp==null){
+        $("body").prepend(this.helpGetter.getInitial());
+        this.helpGetter.setListeners();
+    }else{
+        $("body").prepend(this.helpGetter.getInitial());
+        this.helpGetter.setListeners();
+        $("#help").hide();
+        $(".fadeOverlay").hide();
+    }
 //    $.minimizeWindow("mdGoals");
 //    $.minimizeWindow("mdComparisonTable");    
 }
@@ -160,4 +174,12 @@ Host.method("updateData", function(data)
                 
     }
     
+});
+
+Host.method("getHelp", function(moduleName){
+    this.helpGetter.getHelp(moduleName);
+});
+
+Host.method("getHelpButton", function(moduleName){
+    return this.helpGetter.getHelpButton(moduleName);
 });

@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2012 Neil Redman, Alexander Murashkin <http://gsd.uwaterloo.ca>
+Copyright (C) 2012, 2013 Neil Redman, Alexander Murashkin <http://gsd.uwaterloo.ca>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -19,7 +19,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 function Graph(host)
 {
     this.id = "mdGraph";
@@ -43,6 +42,7 @@ Graph.method("onDataLoaded", function(data){
 
 Graph.method("onRendered", function()
 {
+    $("#graph_table").css("overflow", "hidden");
     this.goals = this.host.findModule("mdGoals").goals;
     
     var dropPlaces = $(".axis_drop");
@@ -191,7 +191,7 @@ Graph.method("redrawParetoFront", function()
 //adds ids to the circles and text on the graph for the other functions to use
 Graph.method("addIds", function(){
     var i = 1;
-    var graph_data = $("#chart g:contains('V1')")[2];
+    var graph_data = $("#chart g:contains('" + getPID(1) + "')")[2];
     var circle_pairs = [];
     for (i=0; i<$(graph_data).children().length;i+=2){
         circle_pairs.push({ circle: $(graph_data).children()[i], text_data: $(graph_data).children()[i+1], ident: ""});
@@ -209,12 +209,12 @@ Graph.method("addIds", function(){
 
 
     for(i=0; i<circle_pairs.length; i++){
-        $(circle_pairs[i].circle).attr("id", "V" + (i+1) + "c");
-        $(circle_pairs[i].text_data).attr("id", "V" + (i+1) + "t");
+        $(circle_pairs[i].circle).attr("id", getPID(i+1) + "c");
+        $(circle_pairs[i].text_data).attr("id", getPID(i+1) + "t");
         var child1 = $(circle_pairs[i].text_data).children()[0]
         var child2 = $(circle_pairs[i].text_data).children()[1]
-        $(child1).text($(child1).text().replace("V", ""));
-        $(child2).text($(child1).text().replace("V", ""));
+        $(child1).text(parsePID($(child1).text()));
+        $(child2).text(parsePID($(child1).text()));
     }
 
 });
@@ -227,12 +227,12 @@ Graph.method("makePointsReady", function(){
 // Get graph bubble html locations
     originalCirclePairs = [];
     for (var i=1; i<=originalPoints; i++){
-        originalCirclePairs.push({circle: $("#V" + i + "c"), text_data: $("#V" + i + "t"), ident: i});
+        originalCirclePairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
     }
 
     var circle_pairs = [];
     for (var i=(originalPoints + 1); i<=$("#chart circle").length; i++){
-        circle_pairs.push({circle: $("#V" + i + "c"), text_data: $("#V" + i + "t"), ident: i});
+        circle_pairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
     }
     //hide table header (row 0)
     while (circle_pairs.length != 0){
@@ -241,19 +241,19 @@ Graph.method("makePointsReady", function(){
         var xpos = $(circlePair.circle).attr("cx");
         var ypos = $(circlePair.circle).attr("cy");
         var fill = $(circlePair.circle).attr("fill");
-        var id = "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "r"
+        var id = getPID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) + "r"
         var NS="http://www.w3.org/2000/svg";
         var IdenticalId = this.instanceProcessor.getIdenticalID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, ""), goals, originalPoints) - 1;
         if (IdenticalId != -1){
             var shape = this.getSVGOctagon(xpos, ypos, r);
-            var newID = "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "h";
+            var newID = getPID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) + "h";
             shape.setAttributeNS(null, "id", newID);
             $(originalCirclePairs[IdenticalId].circle).hide();
             $(originalCirclePairs[IdenticalId].text_data).hide();
-            host.findModule("mdComparisonTable").filter.permaHidden["V"+(IdenticalId+1)] = true;
+            host.findModule("mdComparisonTable").filter.permaHidden[getPID((IdenticalId+1))] = true;
         } else {
             var shape = this.getSVGSquare(xpos, ypos, r)
-            shape.setAttributeNS(null, "id", "V" + $(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "") + "r");
+            shape.setAttributeNS(null, "id", getPID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) + "r");
         }
         shape.setAttributeNS(null, "stroke","#000000");
         shape.setAttributeNS(null, "stroke-width","1");
@@ -411,6 +411,7 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     var tdT = $('#dropPointT')[0];
     
     var tdChart = $('#chart')[0];
+    var tdDiv = $('#chart').children("div")[0]
     var tdX = $('#dropPointX')[0];    
         
     var unit = 20;
@@ -425,8 +426,9 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     setDim(table, w, h);
     setDim(tdZ, w, unit);
     setDim(tdY, unit, h - 2 * unit);
-    setDim(tdChart, w - 2 * unit, h - 2 * unit);
-    setDim(tdT, unit, h - 2 * unit);
+    setDim(tdChart, w - 4 * unit, h - 2 * unit);
+    setDim(tdDiv, w - 4 * unit, h - 2 * unit);
+    setDim(tdT, 3 * unit, h - 2 * unit);
     setDim(tdX, w, unit);
     
 //    tdChart.css("width", w - 2 * unit);
@@ -467,6 +469,4 @@ Graph.method("addFilters", function(){
 
     $(filter).append(gaussian);
     $(defs).append(filter);
-
-
 });

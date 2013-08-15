@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2012 Neil Redman, Alexander Murashkin <http://gsd.uwaterloo.ca>
+Copyright (C) 2012, 2013 Neil Redman, Alexander Murashkin <http://gsd.uwaterloo.ca>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -19,7 +19,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 function Analysis(host)
 { 
     this.id = "mdAnalysis";
@@ -66,7 +65,7 @@ Analysis.method("onSelectionChanged", function(list){
     var originalData = this.host.findModule("mdComparisonTable").dataTable;
     var newlist = [];
     for (var i = 0; i < list.length; i++){
-        newlist.push(list[i].replace("V", ""));
+        newlist.push(parsePID(list[i]));
     }   
 
 //    console.log(list);
@@ -100,7 +99,7 @@ Analysis.method("onSelectionChanged", function(list){
 
     if (missingProducts){
         for (var i = 0; i < missingProducts.length; i++){
-            if (permaHidden.hasOwnProperty("V" + missingProducts[i]))
+            if (permaHidden.hasOwnProperty(getPID(missingProducts[i])));
                 missingProducts.splice(i, 1);
         }
     }
@@ -142,7 +141,7 @@ Analysis.method("onSelectionChanged", function(list){
         $("#addMissing").click(function(){
             var i;
             for (i = 0; i<missingProducts.length; i++){
-                host.selector.onSelected("V" + missingProducts[i].replace(/[\u2B22\u25CF\u25A0]/g, ""));
+                host.selector.onSelected(getPID(missingProducts[i].replace(/[\u2B22\u25CF\u25A0]/g, "")));
             }
         }).css("cursor", "pointer");
     }
@@ -190,8 +189,8 @@ Analysis.method("onSelectionChanged", function(list){
         $(differentProducts[i]).prepend('<image id="rem' + $(differentProducts[i]).find(".svghead :last-child").text() + '" src="images/remove.png" alt="remove">')
         var buttonId = "#rem" + $(differentProducts[i]).find(".svghead :last-child").text()
         $(buttonId).click(function(){
-            console.log("V" + String($(this).attr("id").substring(3)));
-            host.selector.onDeselected("V" + String($(this).attr("id").substring(3)));
+            console.log(getPID(String($(this).attr("id").substring(3))));
+            host.selector.onDeselected(getPID(String($(this).attr("id").substring(3))));
         });
         $(buttonId).css("float", "left");
         $(buttonId).css("vertical-align", "middle");
@@ -253,31 +252,31 @@ Analysis.method("addHover", function(){
         var instance = $(this).find(".svghead :last-child").text();
 
         //get crosshairs 
-        var hairs = that.host.findModule("mdComparisonTable").getCrosshairs($("#V" + instance + "c").attr("cx"), $("#V" + instance + "c").attr("cy"));
-        $("#V" + instance + "c").before(hairs);
+        var hairs = that.host.findModule("mdComparisonTable").getCrosshairs($("#" + getPID(instance) + "c").attr("cx"), $("#" + getPID(instance) + "c").attr("cy"));
+        $("#" + getPID(instance) + "c").before(hairs);
         $("#CHX").attr("class", instance + "HL");
         $("#CHY").attr("class", instance + "HL");
 
-        var highlight = $("#V" + instance + "c").clone();
+        var highlight = $("#" + getPID(instance) + "c").clone();
         highlight = that.host.findModule("mdComparisonTable").highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
-        $("#V" + instance + "c").before(highlight);
+        $("#" + getPID(instance) + "c").before(highlight);
 
-        var highlight = $("#V" + instance + "r").clone();
+        var highlight = $("#" + getPID(instance) + "r").clone();
         highlight = that.host.findModule("mdComparisonTable").highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
-        $("#V" + instance + "r").before(highlight);
+        $("#" + getPID(instance) + "r").before(highlight);
 
-        var highlight = $("#V" + instance + "h").clone();
+        var highlight = $("#" + getPID(instance) + "h").clone();
         highlight = that.host.findModule("mdComparisonTable").highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
-        $("#V" + instance + "h").before(highlight);
+        $("#" + getPID(instance) + "h").before(highlight);
 
         var myBool = true;
         that.timeout = setTimeout(function(){

@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2012 Alexander Murashkin, Neil Redman <http://gsd.uwaterloo.ca>
+Copyright (C) 2012, 2013 Alexander Murashkin, Neil Redman <http://gsd.uwaterloo.ca>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -19,7 +19,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 var http = require("http");
 var url = require("url");
 var sys = require("sys");
@@ -36,6 +35,8 @@ var python = config.pythonPath;
 var port = config.port;
 
 var server = express();
+
+var timeout = config.timeout;
 
 //support for sessions - used for url uploads
 server.use(express.cookieParser('asasdhf89adfhj0dfjask'));
@@ -155,7 +156,12 @@ server.post('/upload', function(req, res, next) {
 				tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
 				var error_result = "";
 				var data_result = "";
-				
+				var timedout = false;
+				var countdown = setTimeout(function(){
+					console.log("request timed out");
+					tool.kill();
+					timedout = true;
+				}, timeout);
 				tool.stdout.on('data', function (data) 
 				{	
 				  data_result += data;
@@ -167,6 +173,13 @@ server.post('/upload', function(req, res, next) {
 
 				tool.on('exit', function (code) 
 				{
+					if (timedout){
+						res.writeHead(500, { "Content-Type": "text/html"});
+						res.end("Request timed out")
+						cleanupOldFiles(uploadedFilePath, dlDir);
+						return;
+					} 
+					clearTimeout(countdown);
 					var result = "";
 					console.log("Preparing to send result");
 					if(error_result.indexOf('Exception in thread "main"') > -1){
@@ -266,4 +279,4 @@ server.use(function(req, res, next){
 });
 
 server.listen(port);
-console.log('ClaferMooViz listening on port ' + port);
+console.log('ClaferMoo Visualizer listening on port ' + port);
