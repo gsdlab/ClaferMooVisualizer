@@ -113,6 +113,10 @@ td.tick, td.no
      overflow-y:scroll;
 }
 
+.searchOmitted {
+    display: none;
+}
+
 .text_input {
      height: 12px;
 }
@@ -121,3 +125,49 @@ td.tick, td.no
     border-left: 1px solid #CCCCCC;
     border-right: 1px solid #CCCCCC;
 }
+
+.help{
+    z-index: 10000;
+    background: #000000;
+    position: absolute;
+    width: 800px;
+    height: 550px;
+    color: #FFFFFF;
+}
+
+.fadeOverlay{
+    z-index: 9000;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #FFFFFF;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+}
+
+.window-helpButton.active{
+    background: url("/images/help_hover.png");
+}
+
+
+.window-helpButton {
+    background: url("/images/help.png");
+    cursor: pointer;
+    height: 16px;
+    right: 25px;
+    position: absolute;
+    top: 4px;
+    width: 17px;
+}
+
+pre {
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+}
+
+iframe {
+    overflow-x: hidden;
+    overflow-y: hidden;
+} 

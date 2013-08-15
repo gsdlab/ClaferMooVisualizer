@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2012 Neil Redman <http://gsd.uwaterloo.ca>
+Copyright (C) 2012, 2013 Neil Redman <http://gsd.uwaterloo.ca>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -19,13 +19,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 //filtering functions for table and graph
 function InstanceFilter (host){
     this.host = host
     this.hidden = [];
     this.permaHidden = {};
     this.originalPoints = host.findModule("mdInput").originalPoints
+    this.closedFeatures = [];
+    this.tableid = "#comparison"
 }
 
 //Clears then reapplies all active filters
@@ -85,6 +86,11 @@ InstanceFilter.method("filterContent", function(){
         row = $("#mdComparisonTable #r" + i);
     }
 
+    //close features
+    for(i=0; i<this.closedFeatures.length; i++){
+        this.closeFeature(this.closedFeatures[i]);
+    }
+
     //filtering by permaHidden
     for (var instance in this.permaHidden){
         if (this.permaHidden.hasOwnProperty(instance))
@@ -102,7 +108,7 @@ InstanceFilter.method("hideInstance", function(x){
 // Get graph bubble html locations
     var circle_pairs = [];
     for (var i=1; i<=$("#chart circle").length; i++){
-        circle_pairs.push({circle: $("#V" + i + "c"), text_data: $("#V" + i + "t"), ident: i});
+        circle_pairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
     }
     //hide table header (row 0)
     $("#mdComparisonTable #th0_" + x).hide();
@@ -127,7 +133,7 @@ InstanceFilter.method("hideInstance", function(x){
 InstanceFilter.method("unFilter", function(){
 	var circle_pairs = [];
     for (var i=1; i<=$("#chart circle").length; i++){
-        circle_pairs.push({circle: $("#V" + i + "c"), text_data: $("#V" + i + "t"), ident: i});
+        circle_pairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
     }
     while(this.hidden.length){
         $(this.hidden.pop()).show();
@@ -157,5 +163,56 @@ InstanceFilter.method("resetFilters", function(){
         row = $("#r" + i);
     }
     //refresh filter
+    this.filterContent();
+});
+
+InstanceFilter.method("hideRowByName", function (name){
+    var rows = $(this.tableid + " tr");
+    for (var i=0;i<rows.length;i++){
+        var curRow = rows[i];
+        var hideThis = $($(curRow).find(':contains("' + name + '")')).parent();
+        if (hideThis.length != 0){
+            $(hideThis).hide();
+            this.hidden.push(hideThis);
+        }
+    }
+});
+
+InstanceFilter.method("closeFeature", function (feature){
+    var instanceSuperClafer = this.host.findModule("mdComparisonTable").instanceProcessor.getInstanceSuperClafer();
+    var root = this.host.findModule("mdComparisonTable").processor.getAbstractClaferTree("/module/declaration/uniqueid", instanceSuperClafer);
+    
+    root = this.findNodeInTree(root, feature)
+
+    this.hideChildren(root);
+    if (this.closedFeatures.indexOf(feature) == -1)
+        this.closedFeatures.push(feature)
+    this.host.findModule("mdComparisonTable").scrollToSearch($("#search").val());
+});
+
+InstanceFilter.method("hideChildren", function (node){;
+    for (var i=0;i<node.subclafers.length;i++){
+        this.hideChildren(node.subclafers[i]);
+        this.hideRowByName(node.subclafers[i].displayId);
+    }
+});
+
+InstanceFilter.method("findNodeInTree", function (root, feature){
+    if (root.displayId === feature)
+        return root;
+    else if (root.subclafers.length < 1)
+        return null;
+    else{
+        for (var i=0; i<root.subclafers.length; i++){
+            var ret = this.findNodeInTree(root.subclafers[i], feature);
+            if (ret != null)
+                return ret;
+        }
+    }
+}); 
+
+InstanceFilter.method("openFeature", function (feature){
+    var index = this.closedFeatures.indexOf(feature);
+    this.closedFeatures.splice(index, 1);
     this.filterContent();
 });
