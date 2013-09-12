@@ -78,6 +78,8 @@ server.post('/', function(req, res, next) {
  * Handle file upload
  */
 server.post('/upload', function(req, res, next) {
+	console.log("/Upload request initiated.");
+
 	//check if client has either a file directly uploaded or a url location of a file
    	if (req.files.claferFile === undefined){
    			for (var x=0; x <= URLs.length; x++){
@@ -148,6 +150,7 @@ server.post('/upload', function(req, res, next) {
 				if(data)
 		    		file_contents = data.toString();
 		    	else{
+					console.log("entered path 1");
 		    		res.writeHead(500, { "Content-Type": "text/html"});
 					res.end();
 		//			cleanupOldFiles(uploadedFilePath, dlDir);
@@ -156,6 +159,7 @@ server.post('/upload', function(req, res, next) {
 
 				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data"){
 					res.writeHead(200, { "Content-Type": "text/html"});
+					console.log("entered path 2");
 					res.end(file_contents);
 					cleanupOldFiles(uploadedFilePath, dlDir);
 					return;
@@ -176,19 +180,28 @@ server.post('/upload', function(req, res, next) {
                 var error_result = "";
 				var data_result = "";
 				var timedout = false;
-				var countdown = setTimeout(function(){
-					console.log("request timed out");
-					tool.kill();
-					timedout = true;
-				}, timeout);
+//				var countdown = setTimeout(function(){
+//					console.log("request timed out");
+//					tool.kill();
+//					timedout = true;
+//				}, timeout);
 				tool.stdout.on('data', function (data) 
 				{	
 				  data_result += data;
 				});
 
 				tool.stderr.on('data', function (data) {
-				  error_result += data;
+                    error_result += data;
+					console.log("entered path 3");
 				});
+                
+                tool.on('message', function(err) {
+                    console.log("Message: " + err);
+                });
+
+                tool.on('disconnect', function(err) {
+                    console.log("Disconnect: " + err);
+                });
                 
                 tool.on('error', function(err) {
                     console.log("Error handler for process: " + err);
@@ -210,13 +223,13 @@ server.post('/upload', function(req, res, next) {
 
 				tool.on('exit', function (code) 
 				{
-					if (timedout){
-						res.writeHead(500, { "Content-Type": "text/html"});
-						res.end("Request timed out")
-						cleanupOldFiles(uploadedFilePath, dlDir);
-						return;
-					} 
-					clearTimeout(countdown);
+//					if (timedout){
+//						res.writeHead(500, { "Content-Type": "text/html"});
+//						res.end("Request timed out")
+//						cleanupOldFiles(uploadedFilePath, dlDir);
+//						return;
+//					} 
+//					clearTimeout(countdown);
 					var result = "";
 					console.log("Preparing to send result");
 					if(error_result.indexOf('Exception in thread "main"') > -1){
@@ -235,11 +248,13 @@ server.post('/upload', function(req, res, next) {
 					{
 						result = 'Error, return code: ' + code + '\n' + error_result;
 						console.log(data_result);
+                        console.log("entered path 5");
 					}
 					if (code === 0)
 						res.writeHead(200, { "Content-Type": "text/html"});
 					else
 						res.writeHead(400, { "Content-Type": "text/html"});
+					console.log("entered path 4");
 					res.end(result);
 		//			clearTimeout(serverTimeout);
 					cleanupOldFiles(uploadedFilePath, dlDir);

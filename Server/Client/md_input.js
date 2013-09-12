@@ -56,7 +56,7 @@ Input.method("onInitRendered", function()
     options.beforeSubmit = this.beginQuery.bind(this);
     options.success = this.showResponse.bind(this);
     options.error = this.handleError.bind(this);
-
+    options.timeout = 600000;
 
     $('#myform').ajaxForm(options); 
 	$('#myform').submit();
@@ -93,6 +93,7 @@ Input.method("showResponse", function(responseText, statusText, xhr, $form)  {
 
 Input.method("handleError", function(responseText, statusText, xhr, $form)  { 
 //	clearTimeout(this.timeout);
+    alert(xhr.status);
 	var er = document.getElementById("error_overlay");
 	er.style.visibility = "visible";	
 	document.getElementById("error_report").innerHTML = ('<input id="close_error" type="image" src="images/no.png" alt="close" style="position: relative; left: -325px; top: 0px; width: 20px; height: 20px;"><p>' + xhr + '<br>' + responseText.responseText.replace("\n", "<br>") + "</p>");
