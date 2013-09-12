@@ -118,9 +118,19 @@ server.post('/upload', function(req, res, next) {
 	}
 	console.log(uploadedFilePath);
 	var pathTokens = "." + uploadedFilePath.split("Server")[1];
-	pathTokens = pathTokens.split("/");
-	var oldPath = uploadedFilePath
-	uploadedFilePath = __dirname + "/" + pathTokens[1] + "/" + i + "tempfolder/";
+	console.log(pathTokens);
+	
+    pathTokensLinux = pathTokens.split("/");
+    pathTokensWindows = pathTokens.split("\\");
+    
+    if (pathTokensWindows.length > pathTokensLinux.length)
+        pathTokens = pathTokensWindows;
+    else    
+        pathTokens = pathTokensLinux;
+	
+	console.log(pathTokens);
+    var oldPath = uploadedFilePath
+	uploadedFilePath = __dirname + "/" + pathTokens[1] + "/" + i + "tempfolder/"; // this slash will work anyways
 	fs.mkdir(uploadedFilePath, function (err){
 		if (err) throw err;
 		var dlDir = uploadedFilePath;
@@ -151,10 +161,19 @@ server.post('/upload', function(req, res, next) {
 					return;
 				}
 				console.log("processing file with integratedFMO");
-				var util  = require('util'),
-				spawn = require('child_process').spawn,
-				tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
-				var error_result = "";
+                
+                try
+                {
+                    var util  = require('util');
+                    var spawn = require('child_process').spawn;
+                    var tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
+                }
+                catch(err)
+                {
+                    console.log("Error while creating a process: " + err);
+                }
+                
+                var error_result = "";
 				var data_result = "";
 				var timedout = false;
 				var countdown = setTimeout(function(){
@@ -170,6 +189,24 @@ server.post('/upload', function(req, res, next) {
 				tool.stderr.on('data', function (data) {
 				  error_result += data;
 				});
+                
+                tool.on('error', function(err) {
+                    console.log("Error handler for process: " + err);
+                    if (typeof err === "object") 
+                    {
+                        if (err.message && err.message == "spawn ENOENT") 
+                        {
+                            console.log("Could not create a process.");
+                        }
+                    } 
+                    else 
+                    {
+                        console.log('Spawn error: unknown error');
+                    }                
+
+                    res.writeHead(400, { "Content-Type": "text/html"});
+					res.end("Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.");                    
+                });
 
 				tool.on('exit', function (code) 
 				{
@@ -247,7 +284,7 @@ function cleanupOldFiles(path, dir) {
 
 function deleteOld(path){
 	if (fs.existsSync(path)){
-		fs.unlink(path, function (err) {
+		fs.unlinkSync(path, function (err) { // added Sync to make sure all files are properly removed until the removal of the directory
 			if (err) throw err;
 		});
 	}
