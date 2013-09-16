@@ -28,7 +28,11 @@ function Input(host)
     this.height = 30;
     this.posx = 0;
     this.posy = 0;
-
+    
+    this.requestTimeout = 60000;
+    this.pollingDelay = 3000;    
+    this.pollingTimeoutObject = null;
+    
     this.host = host;
     this.serverAction = "/upload";
 }
@@ -43,7 +47,6 @@ Input.method("onInitRendered", function()
     this.optimizeFlag = 1;
     this.addInstancesFlag = 1;
     this.previousData = "";
-    that = this; 
 
     $("#optimize").click(this.OptimizeCall.bind(this));
     $("#addInstances").click(this.addInstancesCall.bind(this));
@@ -54,16 +57,18 @@ Input.method("onInitRendered", function()
  
     var options = new Object();
     options.beforeSubmit = this.beginQuery.bind(this);
-    options.success = this.showResponse.bind(this);
+    options.success = this.fileSent.bind(this);
     options.error = this.handleError.bind(this);
-    options.timeout = 600000;
+    options.timeout = this.requestTimeout;
 
     $('#myform').ajaxForm(options); 
 	$('#myform').submit();
 });
- 
+
+/*
+ * Shows uploader and hides the form
+*/
 Input.method("beginQuery", function(formData, jqForm, options) {
-    	var that = this;
 //    	this.timeout = setTimeout(function(){that.handleTimeout();}, 65000);   
 	$("#load_area #myform").hide();
 	$("#load_area").append('<div id="preloader"><img id="preloader_img" src="/images/preloader.gif" alt="Loading..."/><span>Loading and processing...</span></div>');	
@@ -78,25 +83,58 @@ Input.method("endQuery", function()  {
 	return true;
 });
 
+/* Not used. We don't need it anymore
 // pre-submit callback 
 Input.method("showRequest", function(formData, jqForm, options) {
     var queryString = $.param(formData); 
     return true; 
 });
- 
-// post-submit callback 
-Input.method("showResponse", function(responseText, statusText, xhr, $form)  { 
-//	clearTimeout(this.timeout); 
-	this.processToolResult(responseText);   
-	this.endQuery();
+*/
+
+Input.method("onPoll", function(response)
+{
+    if (response !== "Working")
+    {
+        this.processToolResult(response);
+        this.endQuery();
+    }
+    else
+    {
+        this.pollingTimeoutObject = setTimeout(this.poll.bind(this), this.pollingDelay);
+    }
+});        
+
+Input.method("poll", function()
+{
+    var options = new Object();
+    options.url = "/poll";
+    options.type = "post";
+    options.data = {windowKey: this.host.key};
+    options.success = this.onPoll.bind(this);
+    options.error = this.handleError.bind(this);
+    
+    $.ajax(options);
 });
 
-Input.method("handleError", function(responseText, statusText, xhr, $form)  { 
+Input.method("fileSent", function(responseText, statusText, xhr, $form)  { 
+    if (responseText.indexOf("no clafer file submitted") == -1)
+        this.pollingTimeoutObject = setTimeout(this.poll.bind(this), this.pollingDelay);
+    else
+        this.endQuery();
+});
+
+// post-submit callback 
+//Input.method("requestComplete", function(responseText, statusText, xhr, $form)  { 
+//	clearTimeout(this.timeout); 
+//	this.processToolResult(responseText);   
+//	this.endQuery();
+//});
+
+Input.method("handleError", function(responseText, statusText, xhr)  { 
 //	clearTimeout(this.timeout);
-    alert(xhr.status);
 	var er = document.getElementById("error_overlay");
 	er.style.visibility = "visible";	
-	document.getElementById("error_report").innerHTML = ('<input id="close_error" type="image" src="images/no.png" alt="close" style="position: relative; left: -325px; top: 0px; width: 20px; height: 20px;"><p>' + xhr + '<br>' + responseText.responseText.replace("\n", "<br>") + "</p>");
+	document.getElementById("error_report").innerHTML = ('<input id="close_error" type="image" src="images/no.png" alt="close" style="position: relative; left: -325px; top: 0px; width: 20px; height: 20px;"><p>' + xhr + '<br>' + responseText.replace("\n", "<br>") + "</p>");
 	document.getElementById("close_error").onclick = function(){ 
 		document.getElementById("error_overlay").style.visibility = "hidden";
 	};

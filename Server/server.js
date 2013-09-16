@@ -106,13 +106,14 @@ server.post('/poll', function(req, res, next)
             {
                 res.writeHead(200, { "Content-Type": "text/html"});
                 res.end("Working");
+                return;
             }
         }
     }
     
     res.writeHead(400, { "Content-Type": "text/html"});
     res.end("Error: the requested process is not found.")    
-}
+});
 
 /*
  * TODO: create a Cancel request
@@ -128,7 +129,8 @@ server.post('/upload', function(req, res, next) {
    	if (req.files.claferFile === undefined){
    			for (var x=0; x <= URLs.length; x++){
    				if (x === URLs.length){
-   					res.send("no clafer file submitted");
+		    		res.writeHead(200, { "Content-Type": "text/html"});
+					res.end("no clafer file submitted");
    					return;
    				} else if (URLs[x].session === req.sessionID && ("claferFileURL=" + URLs[x].url) === url.parse(req.body.claferFileURL).query){
    					var i = 0;
@@ -193,23 +195,26 @@ server.post('/upload', function(req, res, next) {
 
 				if(data)
 		    		file_contents = data.toString();
-		    	else{
+		    	else
+                {
 		    		res.writeHead(500, { "Content-Type": "text/html"});
-					res.end();
+					res.end("No Data has been read");
 					cleanupOldFiles(uploadedFilePath, dlDir);
 					return;
 		    	}
 
-				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data"){
-					res.writeHead(200, { "Content-Type": "text/html"});
-					res.end(file_contents);
+                var d = new Date();
+                var process = { windowKey: req.body.windowKey, tool: null, folder: dlDir, lastUsed: d, completed: false, code: 0};
+
+				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data")
+                {
+                    process.result = file_contents;
+                    process.code = 0;
+                    process.completed = true;
 					cleanupOldFiles(uploadedFilePath, dlDir);
 					return;
 				}
 				console.log("processing file with integratedFMO");
-
-                var d = new Date();
-                var process = { windowKey: req.body.windowKey, tool: null, folder: dlDir, lastUsed: d, completed: false, code: 0};
 
                 try
                 {
