@@ -150,7 +150,6 @@ server.post('/upload', function(req, res, next) {
 				if(data)
 		    		file_contents = data.toString();
 		    	else{
-					console.log("entered path 1");
 		    		res.writeHead(500, { "Content-Type": "text/html"});
 					res.end();
 		//			cleanupOldFiles(uploadedFilePath, dlDir);
@@ -159,7 +158,6 @@ server.post('/upload', function(req, res, next) {
 
 				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data"){
 					res.writeHead(200, { "Content-Type": "text/html"});
-					console.log("entered path 2");
 					res.end(file_contents);
 					cleanupOldFiles(uploadedFilePath, dlDir);
 					return;
@@ -192,7 +190,6 @@ server.post('/upload', function(req, res, next) {
 
 				tool.stderr.on('data', function (data) {
                     error_result += data;
-					console.log("entered path 3");
 				});
                 
                 tool.on('message', function(err) {
@@ -248,13 +245,11 @@ server.post('/upload', function(req, res, next) {
 					{
 						result = 'Error, return code: ' + code + '\n' + error_result;
 						console.log(data_result);
-                        console.log("entered path 5");
 					}
 					if (code === 0)
 						res.writeHead(200, { "Content-Type": "text/html"});
 					else
 						res.writeHead(400, { "Content-Type": "text/html"});
-					console.log("entered path 4");
 					res.end(result);
 		//			clearTimeout(serverTimeout);
 					cleanupOldFiles(uploadedFilePath, dlDir);

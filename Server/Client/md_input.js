@@ -265,5 +265,7 @@ Input.method("processToolResult", function(result)
 });
 Input.method("getInitContent", function()
 {
-	return '<div id="load_area"><form id="myform" action="' + this.serverAction + '" method="post" enctype="multipart/form-data">' + '<input type="file" size="15" name="claferFile">' + '<input type="hidden" name="claferFileURL" value="' + window.location + '">' + '<input id="optimize" type="submit" value="Optimize">'+ '<input id="addInstances" type="submit" value="Add Instances">' + '</form></div>';  
+	return '<div id="load_area"><form id="myform" action="' + this.serverAction + '" method="post" enctype="multipart/form-data">' + '<input type="file" size="15" name="claferFile">' + '<input type="hidden" name="claferFileURL" value="' + window.location + '">' + '<input id="optimize" type="submit" value="Optimize">'+
+    '<input type="hidden" id="windowKey" name="windowKey" value="' + this.host.key + '">' +
+    '<input id="addInstances" type="submit" value="Add Instances">' + '</form></div>';  
 });
