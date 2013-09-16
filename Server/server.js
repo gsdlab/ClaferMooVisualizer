@@ -86,27 +86,54 @@ server.post('/poll', function(req, res, next)
     {
         if (processes[i].windowKey == req.body.windowKey)
         {
-            if (processes[i].completed) // the execution is completed
-            {
-                
-                if (processes[i].code == 0)
+            if (req.body.command == "ping") // normal ping
+            {                
+                if (processes[i].completed) // the execution is completed
+                {
+                    
+                    if (processes[i].code == 0)
+                    {
+                        res.writeHead(200, { "Content-Type": "text/html"});
+                    }
+                    else
+                    {
+                        res.writeHead(400, { "Content-Type": "text/html"});
+                    }
+
+                    res.end(processes[i].result);
+                    processes.splice(i, 1);
+                    return;
+                }	
+                else // still working
                 {
                     res.writeHead(200, { "Content-Type": "text/html"});
+                    res.end("Working");
+                    return;
                 }
-                else
-                {
-                    res.writeHead(400, { "Content-Type": "text/html"});
-                }
-
-                res.end(processes[i].result);
-                processes.splice(i, 1);
-                return;
-            }	
-            else // still working
+            }
+            else // if it is cancel
             {
+                var spawn = require('child_process').spawn;
+                console.log("Killing the process tree with Parent PID = " + processes[i].tool.pid);
+                
+                processes[i].killed = true;
+                
+                // first, try a Windows command
+                var killer_win  = spawn("taskkill", ["/F", "/T", "/PID", processes[i].tool.pid]);
+                
+				killer_win.on('error', function (err){	// if error occurs, then we are on Linux
+                    var killer_linux = spawn("pkill", ["-TERM", "-P", processes[i].tool.pid]);                   
+
+                    killer_linux.on('error', function(err){
+                        console.log("Cannot terminate processes.");
+                    });
+				});                
+                
+                processes.splice(i, 1);
+                
                 res.writeHead(200, { "Content-Type": "text/html"});
-                res.end("Working");
-                return;
+                res.end("Cancelled");
+                return;                
             }
         }
     }
@@ -204,7 +231,7 @@ server.post('/upload', function(req, res, next) {
 		    	}
 
                 var d = new Date();
-                var process = { windowKey: req.body.windowKey, tool: null, folder: dlDir, lastUsed: d, completed: false, code: 0};
+                var process = { windowKey: req.body.windowKey, tool: null, folder: dlDir, path: uploadedFilePath, lastUsed: d, completed: false, code: 0, killed:false};
 
 				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data")
                 {
@@ -283,7 +310,17 @@ server.post('/upload', function(req, res, next) {
 //					} 
 //					clearTimeout(countdown);
 					var result = "";
-					console.log("Preparing to send result");
+                    
+                    if (process.killed) // has been terminated
+                    {
+                        console.log("Finished cancellation");
+                        code = 9001; // just a non-zero value 
+                        cleanupOldFiles(uploadedFilePath, dlDir); 
+                        return;
+                    }
+
+                    console.log("Preparing to send result");
+                    
 					if(error_result.indexOf('Exception in thread "main"') > -1){
 						code = 1;
 					}

@@ -32,6 +32,7 @@ function Input(host)
     this.requestTimeout = 60000;
     this.pollingDelay = 3000;    
     this.pollingTimeoutObject = null;
+    this.toCancel = false;
     
     this.host = host;
     this.serverAction = "/upload";
@@ -47,6 +48,7 @@ Input.method("onInitRendered", function()
     this.optimizeFlag = 1;
     this.addInstancesFlag = 1;
     this.previousData = "";
+    this.toCancel = false;
 
     $("#optimize").click(this.OptimizeCall.bind(this));
     $("#addInstances").click(this.addInstancesCall.bind(this));
@@ -66,12 +68,24 @@ Input.method("onInitRendered", function()
 });
 
 /*
+ * Cancel request
+ */
+
+Input.method("cancelCall", function() 
+{
+    $("#cancel").hide();
+    $("#status_label").html("Cancelling...");
+    this.toCancel = true;
+});
+ 
+/*
  * Shows uploader and hides the form
 */
 Input.method("beginQuery", function(formData, jqForm, options) {
 //    	this.timeout = setTimeout(function(){that.handleTimeout();}, 65000);   
 	$("#load_area #myform").hide();
-	$("#load_area").append('<div id="preloader"><img id="preloader_img" src="/images/preloader.gif" alt="Loading..."/><span>Loading and processing...</span></div>');	
+	$("#load_area").append('<div id="preloader"><img id="preloader_img" src="/images/preloader.gif" alt="Loading..."/><span id="status_label">Loading and processing...</span><button id="cancel">Cancel</button></div>');	
+    $("#cancel").click(this.cancelCall.bind(this));
     return true; 
 });
 
@@ -93,14 +107,18 @@ Input.method("showRequest", function(formData, jqForm, options) {
 
 Input.method("onPoll", function(response)
 {
-    if (response !== "Working")
+    if (response === "Working")
     {
-        this.processToolResult(response);
+        this.pollingTimeoutObject = setTimeout(this.poll.bind(this), this.pollingDelay);
+    }
+    else if (response === "Cancelled")
+    {
         this.endQuery();
     }
     else
     {
-        this.pollingTimeoutObject = setTimeout(this.poll.bind(this), this.pollingDelay);
+        this.processToolResult(response);
+        this.endQuery();
     }
 });        
 
@@ -109,7 +127,11 @@ Input.method("poll", function()
     var options = new Object();
     options.url = "/poll";
     options.type = "post";
-    options.data = {windowKey: this.host.key};
+    if (!this.toCancel)
+        options.data = {windowKey: this.host.key, command: "ping"};
+    else
+        options.data = {windowKey: this.host.key, command: "cancel"};
+    
     options.success = this.onPoll.bind(this);
     options.error = this.handleError.bind(this);
     
@@ -117,6 +139,7 @@ Input.method("poll", function()
 });
 
 Input.method("fileSent", function(responseText, statusText, xhr, $form)  { 
+    this.toCancel = false;
     if (responseText.indexOf("no clafer file submitted") == -1)
         this.pollingTimeoutObject = setTimeout(this.poll.bind(this), this.pollingDelay);
     else
