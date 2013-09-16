@@ -47,7 +47,7 @@ server.use(express.static(__dirname + '/Client'));
 server.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/uploads' }));
 
 var URLs = [];
-
+var processes = [];
 
 server.get('/', function(req, res) {
 //uploads now and runs once app.html is fully loaded
@@ -72,7 +72,51 @@ server.post('/', function(req, res, next) {
 	res.end(req.body.data);
 });
 
+/*
+ * Handle Polling
+ * The client will poll the server to get the latest updates or the final result
+ * Polling is implemented to solve the browser timeout problem.
+ * Moreover, this helps to control the execution of ClaferMoo: to stop, or to get intermediate results.
+ * An alternative way might be to create a web socket
+ */
 
+server.post('/poll', function(req, res, next)
+{
+    for (var i = 0; i < processes.length; i++)
+    {
+        if (processes[i].windowKey == req.body.windowKey)
+        {
+            if (processes[i].completed) // the execution is completed
+            {
+                
+                if (processes[i].code == 0)
+                {
+                    res.writeHead(200, { "Content-Type": "text/html"});
+                }
+                else
+                {
+                    res.writeHead(400, { "Content-Type": "text/html"});
+                }
+
+                res.end(processes[i].result);
+                processes.splice(i, 1);
+                return;
+            }	
+            else // still working
+            {
+                res.writeHead(200, { "Content-Type": "text/html"});
+                res.end("Working");
+            }
+        }
+    }
+    
+    res.writeHead(400, { "Content-Type": "text/html"});
+    res.end("Error: the requested process is not found.")    
+}
+
+/*
+ * TODO: create a Cancel request
+ */
 
 /*
  * Handle file upload
@@ -152,7 +196,7 @@ server.post('/upload', function(req, res, next) {
 		    	else{
 		    		res.writeHead(500, { "Content-Type": "text/html"});
 					res.end();
-		//			cleanupOldFiles(uploadedFilePath, dlDir);
+					cleanupOldFiles(uploadedFilePath, dlDir);
 					return;
 		    	}
 
@@ -163,16 +207,22 @@ server.post('/upload', function(req, res, next) {
 					return;
 				}
 				console.log("processing file with integratedFMO");
-                
+
+                var d = new Date();
+                var process = { windowKey: req.body.windowKey, tool: null, folder: dlDir, lastUsed: d, completed: false, code: 0};
+
                 try
                 {
                     var util  = require('util');
                     var spawn = require('child_process').spawn;
                     var tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
-                }
+                    process.tool = tool;
+                    processes.push(process);                    
+                }                
                 catch(err)
                 {
                     console.log("Error while creating a process: " + err);
+                    // TODO: handle this error properly
                 }
                 
                 var error_result = "";
@@ -183,9 +233,8 @@ server.post('/upload', function(req, res, next) {
 //					tool.kill();
 //					timedout = true;
 //				}, timeout);
-				tool.stdout.on('data', function (data) 
-				{	
-				  data_result += data;
+				tool.stdout.on('data', function (data){	
+                    data_result += data;
 				});
 
 				tool.stderr.on('data', function (data) {
@@ -214,8 +263,9 @@ server.post('/upload', function(req, res, next) {
                         console.log('Spawn error: unknown error');
                     }                
 
-                    res.writeHead(400, { "Content-Type": "text/html"});
-					res.end("Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.");                    
+                    process.result = "Error: Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.";
+                    process.code = 9000;
+                    process.completed = true;
                 });
 
 				tool.on('exit', function (code) 
@@ -237,23 +287,24 @@ server.post('/upload', function(req, res, next) {
 						result = "Return code = " + code + "\n" + data_result + "=====";
 						var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '_desugared.xml'));
 						result += xml.toString();
-						
 						result = escapeHtml(result);
-						
 					}
 					else 
 					{
 						result = 'Error, return code: ' + code + '\n' + error_result;
 						console.log(data_result);
 					}
-					if (code === 0)
-						res.writeHead(200, { "Content-Type": "text/html"});
-					else
-						res.writeHead(400, { "Content-Type": "text/html"});
-					res.end(result);
+					
+                    process.result = result;
+                    process.code = code;
+                    process.completed = true;
 		//			clearTimeout(serverTimeout);
-					cleanupOldFiles(uploadedFilePath, dlDir);
+					cleanupOldFiles(uploadedFilePath, dlDir); 
+                    // we clean old files here, since the result is stored in the result variable
 				});
+                
+                res.writeHead(200, { "Content-Type": "text/html"});
+                res.end("OK"); // just means the file has been sent sucessfully and started to processing
 				
 			});
 		});
