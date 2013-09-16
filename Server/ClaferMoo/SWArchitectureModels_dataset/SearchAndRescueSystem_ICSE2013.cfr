@@ -1,0 +1,93 @@
+abstract PlaceHolderFeature 
+
+abstract Feature : PlaceHolderFeature
+	 RampUpTime : integer
+	 DevelopmentTime : integer
+	 DeploymentTime : integer
+	 BatteryUsage : integer
+	 ResponseTime : integer
+	 Reliability : integer
+
+abstract FeatureWithCost : Feature
+	cost : integer
+
+abstract SearchAndRescueFM
+	 xor LocationFinding : PlaceHolderFeature
+		GPS :  FeatureWithCost
+	 		[ this.RampUpTime  = 6]		
+		    [ this.cost  =  80 ]
+		RadioTriangulation : Feature
+	 		[ this.RampUpTime  = 8]					
+	 xor HardwarePlatform : PlaceHolderFeature
+	 	NexusOneHTC : FeatureWithCost
+	 		[ this.RampUpTime  = 0]	 	
+		    [ this.cost = 525 ]	 	
+	 	DroidMotoroal : FeatureWithCost
+	 		[ this.RampUpTime  = 0]	 	
+		    [ this.cost = 520 ] 
+	 xor FileSharing : PlaceHolderFeature
+	 	FileManagerOpentIntents : Feature
+	 		[ this.RampUpTime  = 9]	 	
+	 	InHouseFileManager : Feature 
+	 		[ this.RampUpTime  = 8]
+	 xor ReportSynchronization : PlaceHolderFeature 
+	 	ExplicitReportsSync : Feature
+	 		[ this.RampUpTime  = 2]	 	 
+	 	ImplicitReportsSync : Feature 
+	 		[ this.RampUpTime  = 2]	 	
+	 xor ChatProtocol : PlaceHolderFeature 
+		OpenFire : Feature 
+	 		[ this.RampUpTime  = 6]		
+		InHouseChatProtocol : Feature 
+	 		[ this.RampUpTime  = 4]		
+	 xor MapAccess : PlaceHolderFeature
+	 	OnDemandGoogleSite : Feature
+	 		[ this.RampUpTime  = 9]	 	
+	 	CachedGoogleServer : FeatureWithCost
+	 		[ this.cost = 900 ]
+	 		[ this.RampUpTime  = 9]	 	
+	 	PreloadedEsri : FeatureWithCost
+	 		[ this.cost = 170 ]	
+	 		[ this.RampUpTime  = 13]	 	
+	 xor Connectivity : PlaceHolderFeature
+	 	WiFi  : FeatureWithCost
+	 		[ this.cost = 80 ]	 	
+	 		[ this.RampUpTime  = 3]	 	
+	 	ThreeGNexusOne : FeatureWithCost
+	 		[ this.cost = 400 ]	 	
+	 		[ this.RampUpTime  = 2]	 	
+	 	ThreeDroid : FeatureWithCost
+	 		[ this.cost = 400 ]	 	
+	 		[ this.RampUpTime  = 2]	 	
+	 	Bluetooth : FeatureWithCost
+	 		[ this.cost = 70 ]	 	
+	 		[ this.RampUpTime  = 2]
+	 xor Database : PlaceHolderFeature
+	 	MySQL : Feature
+	 		[ this.RampUpTime  = 2]
+	 	sqLite  : Feature
+	 		[ this.RampUpTime  = 4]	 	
+	 xor ArchitecturalStyle: PlaceHolderFeature
+	 	PeerToPeer  : Feature
+	 		[ this.RampUpTime  = 11]
+	 	ClientServer  : Feature
+	 		[ this.RampUpTime  = 8]	 	
+	 	PushBased  : Feature
+	 		[ this.RampUpTime  = 10]	 	
+	 xor DataExchangeFormat : PlaceHolderFeature
+	 	Xml  : Feature
+	 		[ this.RampUpTime  = 3]
+	 	CompressedXML  : Feature
+	 		[ this.RampUpTime  = 5]	 	
+	 	UnformattedData  : Feature
+	 		[ this.RampUpTime  = 2]	 	
+	 	
+	total_cost : integer
+		[ this.total_cost = sum FeatureWithCost.cost ]
+	toal_RampUpTime : integer
+		[ this.toal_RampUpTime = sum Feature.RampUpTime ]	
+
+concreteSearchAndRescueSystem : SearchAndRescueFM
+
+<< min concreteSearchAndRescueSystem.total_cost >>
+<< min concreteSearchAndRescueSystem.toal_RampUpTime >>	

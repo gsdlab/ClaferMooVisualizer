@@ -1,0 +1,23 @@
+// Adapted from SQJ 2011
+// Scaled down by dividing numbers by 2048 and rounding.
+//To execute in alloy: run  show for ...
+
+
+abstract IMeasurable
+
+abstract BerkeleyDbC
+	HAVE_STATISTICS : IMeasurable  ?
+	HAVE_CRYPTO : IMeasurable  ?
+	HAVE_INDEXES : IMeasurable
+		xor HAVE_BTREE : IMeasurable
+		    BTREE_FAST : IMeasurable
+		    BTREE_SMALL : IMeasurable 
+		HAVE_HASH : IMeasurable  ?
+		HAVE_QUEUE : IMeasurable  ?
+	HAVE_REPLICATION : IMeasurable  ?
+	HAVE_VERIFY : IMeasurable  ?
+	DIAGNOSTIC : IMeasurable  ?
+	HAVE_SEQUENCE : IMeasurable  ?
+
+
+

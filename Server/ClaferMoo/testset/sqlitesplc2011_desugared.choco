@@ -1,0 +1,277 @@
+ConstraintMandatoryFeatures:c1:Choco.eq(c3_SQLite, 1)
+ConstraintMandatoryFeatures:c2:Choco.eq(c4_OperatingSystemCharacteristics, 1)
+ConstraintMandatoryFeatures:c3:Choco.eq(c64_EnableFeatures, 1)
+ConstraintMandatoryFeatures:c4:Choco.eq(c156_DisableFeatures, 1)
+ConstraintMandatoryFeatures:c5:Choco.eq(c174_OmitFeatures, 1)
+ConstraintMandatoryFeatures:c6:Choco.eq(c10_SQLITE_4_BYTE_ALIGNED_MALLOC, 1)
+ConstraintChildrenImpliesParent:c7:Choco.implies(Choco.eq(c10_SQLITE_4_BYTE_ALIGNED_MALLOC, 1), Choco.eq(c4_OperatingSystemCharacteristics, 1))
+ConstraintMandatoryChildEqualParent:c8:Choco.eq(c10_SQLITE_4_BYTE_ALIGNED_MALLOC, c4_OperatingSystemCharacteristics)
+ConstraintChildrenImpliesParent:c9:Choco.implies(Choco.eq(c16_SQLITE_CASE_SENSITIVE_LIKE, 1), Choco.eq(c4_OperatingSystemCharacteristics, 1))
+ConstraintChildrenImpliesParent:c10:Choco.implies(Choco.eq(c22_SQLITE_HAVE_ISNAN, 1), Choco.eq(c4_OperatingSystemCharacteristics, 1))
+ConstraintChildrenImpliesParent:c11:Choco.implies(Choco.eq(c28_SQLITE_SECURE_DELETE, 1), Choco.eq(c4_OperatingSystemCharacteristics, 1))
+ConstraintChildrenImpliesParent:c12:Choco.implies(Choco.eq(c34_ChooseSQLITE_TEMP_STORE, 1), Choco.eq(c4_OperatingSystemCharacteristics, 1))
+ConstraintChildrenImpliesParent:c13:Choco.implies(Choco.eq(c108_SQLITE_ENABLE_MEMSYS3, 1), Choco.eq(c102_ChooseMemSys, 1))
+ConstraintChildrenImpliesParent:c14:Choco.implies(Choco.eq(c114_SQLITE_ENABLE_MEMSYS5, 1), Choco.eq(c102_ChooseMemSys, 1))
+ConstraintChildrenImpliesParent:c15:Choco.implies(Choco.eq(c40_SQLITE_TEMP_STORE_EQ_0, 1), Choco.eq(c34_ChooseSQLITE_TEMP_STORE, 1))
+ConstraintChildrenImpliesParent:c16:Choco.implies(Choco.eq(c46_SQLITE_TEMP_STORE_EQ_1, 1), Choco.eq(c34_ChooseSQLITE_TEMP_STORE, 1))
+ConstraintChildrenImpliesParent:c17:Choco.implies(Choco.eq(c52_SQLITE_TEMP_STORE_EQ_2, 1), Choco.eq(c34_ChooseSQLITE_TEMP_STORE, 1))
+ConstraintChildrenImpliesParent:c18:Choco.implies(Choco.eq(c58_SQLITE_TEMP_STORE_EQ_3, 1), Choco.eq(c34_ChooseSQLITE_TEMP_STORE, 1))
+ConstraintChildrenImpliesParent:c19:Choco.implies(Choco.eq(c70_SQLITE_ENABLE_ATOMIC_WRITE, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c20:Choco.implies(Choco.eq(c76_SQLITE_ENABLE_COLUMN_METADATA, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c21:Choco.implies(Choco.eq(c84_SQLITE_ENABLE_FTS3, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c22:Choco.implies(Choco.eq(c90_SQLITE_ENABLE_FTS3_PARENTHESIS, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c23:Choco.implies(Choco.eq(c96_SQLITE_ENABLE_MEMORY_MANAGEMENT, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c24:Choco.implies(Choco.eq(c102_ChooseMemSys, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c25:Choco.implies(Choco.eq(c120_SQLITE_ENABLE_RTREE, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c26:Choco.implies(Choco.eq(c126_SQLITE_ENABLE_STAT2, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c27:Choco.implies(Choco.eq(c132_SQLITE_ENABLE_UPDATE_DELETE_LIMIT, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c28:Choco.implies(Choco.eq(c138_SQLITE_ENABLE_UNLOCK_NOTIFY, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c29:Choco.implies(Choco.eq(c144_SQLITE_SOUNDEX, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c30:Choco.implies(Choco.eq(c150_YYTRACKMAXSTACKDEPTH, 1), Choco.eq(c64_EnableFeatures, 1))
+ConstraintChildrenImpliesParent:c31:Choco.implies(Choco.eq(c180_SQLITE_OMIT_ALTERTABLE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c32:Choco.implies(Choco.eq(c187_SQLITE_OMIT_ANALYZE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c33:Choco.implies(Choco.eq(c194_SQLITE_OMIT_ATTACH, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c34:Choco.implies(Choco.eq(c201_SQLITE_OMIT_AUTHORIZATION, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c35:Choco.implies(Choco.eq(c208_SQLITE_OMIT_AUTOINCREMENT, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c36:Choco.implies(Choco.eq(c215_SQLITE_OMIT_AUTOMATIC_INDEX, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c37:Choco.implies(Choco.eq(c222_SQLITE_OMIT_AUTOINIT, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c38:Choco.implies(Choco.eq(c228_SQLITE_OMIT_AUTOVACUUM, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c39:Choco.implies(Choco.eq(c235_SQLITE_OMIT_BETWEEN_OPTIMIZATION, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c40:Choco.implies(Choco.eq(c241_SQLITE_OMIT_BLOB_LITERAL, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c41:Choco.implies(Choco.eq(c248_SQLITE_OMIT_BTREECOUNT, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c42:Choco.implies(Choco.eq(c255_SQLITE_OMIT_BUILTIN_TEST, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c43:Choco.implies(Choco.eq(c262_SQLITE_OMIT_CAST, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c44:Choco.implies(Choco.eq(c269_SQLITE_OMIT_CHECK, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c45:Choco.implies(Choco.eq(c276_SQLITE_OMIT_COMPILEOPTION_DIAGS, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c46:Choco.implies(Choco.eq(c283_SQLITE_OMIT_COMPLETE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c47:Choco.implies(Choco.eq(c290_SQLITE_OMIT_COMPOUND_SELECT, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c48:Choco.implies(Choco.eq(c297_SQLITE_OMIT_CONFLICT_CLAUSE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c49:Choco.implies(Choco.eq(c303_SQLITE_OMIT_DATETIME_FUNCS, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c50:Choco.implies(Choco.eq(c310_SQLITE_OMIT_DECLTYPE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c51:Choco.implies(Choco.eq(c319_SQLITE_OMIT_DEPRECATED, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c52:Choco.implies(Choco.eq(c326_SQLITE_OMIT_EXPLAIN, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c53:Choco.implies(Choco.eq(c333_SQLITE_OMIT_FLAG_PRAGMAS, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c54:Choco.implies(Choco.eq(c340_SQLITE_OMIT_FLOATING_POINT, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c55:Choco.implies(Choco.eq(c347_SQLITE_OMIT_FOREIGN_KEY, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c56:Choco.implies(Choco.eq(c354_SQLITE_OMIT_GET_TABLE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c57:Choco.implies(Choco.eq(c361_SQLITE_OMIT_INCRBLOB, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c58:Choco.implies(Choco.eq(c368_SQLITE_OMIT_INTEGRITY_CHECK, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c59:Choco.implies(Choco.eq(c375_SQLITE_OMIT_LIKE_OPTIMIZATION, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c60:Choco.implies(Choco.eq(c382_SQLITE_OMIT_LOAD_EXTENSION, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c61:Choco.implies(Choco.eq(c389_SQLITE_OMIT_LOCALTIME, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c62:Choco.implies(Choco.eq(c396_SQLITE_OMIT_LOOKASIDE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c63:Choco.implies(Choco.eq(c403_SQLITE_OMIT_MEMORYDB, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c64:Choco.implies(Choco.eq(c410_SQLITE_OMIT_OR_OPTIMIZATION, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c65:Choco.implies(Choco.eq(c417_SQLITE_OMIT_PAGER_PRAGMAS, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c66:Choco.implies(Choco.eq(c424_SQLITE_OMIT_PRAGMA, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c67:Choco.implies(Choco.eq(c431_SQLITE_OMIT_PROGRESS_CALLBACK, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c68:Choco.implies(Choco.eq(c438_SQLITE_OMIT_QUICKBALANCE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c69:Choco.implies(Choco.eq(c445_SQLITE_OMIT_REINDEX, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c70:Choco.implies(Choco.eq(c452_SQLITE_OMIT_SCHEMA_PRAGMAS, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c71:Choco.implies(Choco.eq(c459_SQLITE_OMIT_SCHEMA_VERSION_PRAGMAS, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c72:Choco.implies(Choco.eq(c466_SQLITE_OMIT_SHARED_CACHE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c73:Choco.implies(Choco.eq(c473_SQLITE_OMIT_SUBQUERY, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c74:Choco.implies(Choco.eq(c480_SQLITE_OMIT_TCL_VARIABLE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c75:Choco.implies(Choco.eq(c486_SQLITE_OMIT_TEMPDB, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c76:Choco.implies(Choco.eq(c492_SQLITE_OMIT_TRACE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c77:Choco.implies(Choco.eq(c499_SQLITE_OMIT_TRIGGER, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c78:Choco.implies(Choco.eq(c506_SQLITE_OMIT_TRUNCATE_OPTIMIZATION, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c79:Choco.implies(Choco.eq(c512_SQLITE_OMIT_UTF16, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c80:Choco.implies(Choco.eq(c519_SQLITE_OMIT_VACUUM, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c81:Choco.implies(Choco.eq(c526_SQLITE_OMIT_VIEW, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c82:Choco.implies(Choco.eq(c533_SQLITE_OMIT_VIRTUALTABLE, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c83:Choco.implies(Choco.eq(c540_SQLITE_OMIT_WAL, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c84:Choco.implies(Choco.eq(c547_SQLITE_OMIT_XFER_OPT, 1), Choco.eq(c174_OmitFeatures, 1))
+ConstraintChildrenImpliesParent:c85:Choco.implies(Choco.eq(c4_OperatingSystemCharacteristics, 1), Choco.eq(c3_SQLite, 1))
+ConstraintMandatoryChildEqualParent:c86:Choco.eq(c4_OperatingSystemCharacteristics, c3_SQLite)
+ConstraintChildrenImpliesParent:c87:Choco.implies(Choco.eq(c64_EnableFeatures, 1), Choco.eq(c3_SQLite, 1))
+ConstraintMandatoryChildEqualParent:c88:Choco.eq(c64_EnableFeatures, c3_SQLite)
+ConstraintChildrenImpliesParent:c89:Choco.implies(Choco.eq(c156_DisableFeatures, 1), Choco.eq(c3_SQLite, 1))
+ConstraintMandatoryChildEqualParent:c90:Choco.eq(c156_DisableFeatures, c3_SQLite)
+ConstraintChildrenImpliesParent:c91:Choco.implies(Choco.eq(c174_OmitFeatures, 1), Choco.eq(c3_SQLite, 1))
+ConstraintMandatoryChildEqualParent:c92:Choco.eq(c174_OmitFeatures, c3_SQLite)
+ConstraintChildrenImpliesParent:c93:Choco.implies(Choco.eq(c554_SQLITE_DEBUG, 1), Choco.eq(c3_SQLite, 1))
+ConstraintChildrenImpliesParent:c94:Choco.implies(Choco.eq(c560_SQLITE_MEMDEBUG, 1), Choco.eq(c3_SQLite, 1))
+ConstraintChildrenImpliesParent:c95:Choco.implies(Choco.eq(c162_SQLITE_DISABLE_LFS, 1), Choco.eq(c156_DisableFeatures, 1))
+ConstraintChildrenImpliesParent:c96:Choco.implies(Choco.eq(c168_SQLITE_DISABLE_DIRSYNC, 1), Choco.eq(c156_DisableFeatures, 1))
+ConstraintExclusiveOr:c97:Choco.ifOnlyIf(Choco.eq(c40_SQLITE_TEMP_STORE_EQ_0, 1), Choco.and(Choco.not(Choco.eq(c46_SQLITE_TEMP_STORE_EQ_1, 1)),Choco.not(Choco.eq(c52_SQLITE_TEMP_STORE_EQ_2, 1)),Choco.not(Choco.eq(c58_SQLITE_TEMP_STORE_EQ_3, 1)),Choco.eq(c34_ChooseSQLITE_TEMP_STORE, 1)))
+ConstraintExclusiveOr:c98:Choco.ifOnlyIf(Choco.eq(c46_SQLITE_TEMP_STORE_EQ_1, 1), Choco.and(Choco.not(Choco.eq(c40_SQLITE_TEMP_STORE_EQ_0, 1)),Choco.not(Choco.eq(c52_SQLITE_TEMP_STORE_EQ_2, 1)),Choco.not(Choco.eq(c58_SQLITE_TEMP_STORE_EQ_3, 1)),Choco.eq(c34_ChooseSQLITE_TEMP_STORE, 1)))
+ConstraintExclusiveOr:c99:Choco.ifOnlyIf(Choco.eq(c52_SQLITE_TEMP_STORE_EQ_2, 1), Choco.and(Choco.not(Choco.eq(c40_SQLITE_TEMP_STORE_EQ_0, 1)),Choco.not(Choco.eq(c46_SQLITE_TEMP_STORE_EQ_1, 1)),Choco.not(Choco.eq(c58_SQLITE_TEMP_STORE_EQ_3, 1)),Choco.eq(c34_ChooseSQLITE_TEMP_STORE, 1)))
+ConstraintExclusiveOr:c100:Choco.ifOnlyIf(Choco.eq(c58_SQLITE_TEMP_STORE_EQ_3, 1), Choco.and(Choco.not(Choco.eq(c40_SQLITE_TEMP_STORE_EQ_0, 1)),Choco.not(Choco.eq(c46_SQLITE_TEMP_STORE_EQ_1, 1)),Choco.not(Choco.eq(c52_SQLITE_TEMP_STORE_EQ_2, 1)),Choco.eq(c34_ChooseSQLITE_TEMP_STORE, 1)))
+ConstraintExclusiveOr:c101:Choco.ifOnlyIf(Choco.eq(c108_SQLITE_ENABLE_MEMSYS3, 1), Choco.and(Choco.not(Choco.eq(c114_SQLITE_ENABLE_MEMSYS5, 1)),Choco.eq(c102_ChooseMemSys, 1)))
+ConstraintExclusiveOr:c102:Choco.ifOnlyIf(Choco.eq(c114_SQLITE_ENABLE_MEMSYS5, 1), Choco.and(Choco.not(Choco.eq(c108_SQLITE_ENABLE_MEMSYS3, 1)),Choco.eq(c102_ChooseMemSys, 1)))
+ConstraintCrossTree:c103:Choco.implies(Choco.eq(c76_SQLITE_ENABLE_COLUMN_METADATA, 1), Choco.eq(c310_SQLITE_OMIT_DECLTYPE, 0))
+ConstraintCrossTree:c104:Choco.implies(Choco.eq(c310_SQLITE_OMIT_DECLTYPE, 1), Choco.eq(c76_SQLITE_ENABLE_COLUMN_METADATA, 0))
+BinaryVariable:c4_OperatingSystemCharacteristics
+BinaryVariable:c10_SQLITE_4_BYTE_ALIGNED_MALLOC
+BinaryVariable:c16_SQLITE_CASE_SENSITIVE_LIKE
+BinaryVariable:c22_SQLITE_HAVE_ISNAN
+BinaryVariable:c28_SQLITE_SECURE_DELETE
+BinaryVariable:c34_ChooseSQLITE_TEMP_STORE
+BinaryVariable:c40_SQLITE_TEMP_STORE_EQ_0
+BinaryVariable:c46_SQLITE_TEMP_STORE_EQ_1
+BinaryVariable:c52_SQLITE_TEMP_STORE_EQ_2
+BinaryVariable:c58_SQLITE_TEMP_STORE_EQ_3
+BinaryVariable:c64_EnableFeatures
+BinaryVariable:c70_SQLITE_ENABLE_ATOMIC_WRITE
+BinaryVariable:c76_SQLITE_ENABLE_COLUMN_METADATA
+BinaryVariable:c84_SQLITE_ENABLE_FTS3
+BinaryVariable:c90_SQLITE_ENABLE_FTS3_PARENTHESIS
+BinaryVariable:c96_SQLITE_ENABLE_MEMORY_MANAGEMENT
+BinaryVariable:c102_ChooseMemSys
+BinaryVariable:c108_SQLITE_ENABLE_MEMSYS3
+BinaryVariable:c114_SQLITE_ENABLE_MEMSYS5
+BinaryVariable:c120_SQLITE_ENABLE_RTREE
+BinaryVariable:c126_SQLITE_ENABLE_STAT2
+BinaryVariable:c132_SQLITE_ENABLE_UPDATE_DELETE_LIMIT
+BinaryVariable:c138_SQLITE_ENABLE_UNLOCK_NOTIFY
+BinaryVariable:c144_SQLITE_SOUNDEX
+BinaryVariable:c150_YYTRACKMAXSTACKDEPTH
+BinaryVariable:c156_DisableFeatures
+BinaryVariable:c162_SQLITE_DISABLE_LFS
+BinaryVariable:c168_SQLITE_DISABLE_DIRSYNC
+BinaryVariable:c174_OmitFeatures
+BinaryVariable:c180_SQLITE_OMIT_ALTERTABLE
+BinaryVariable:c187_SQLITE_OMIT_ANALYZE
+BinaryVariable:c194_SQLITE_OMIT_ATTACH
+BinaryVariable:c201_SQLITE_OMIT_AUTHORIZATION
+BinaryVariable:c208_SQLITE_OMIT_AUTOINCREMENT
+BinaryVariable:c215_SQLITE_OMIT_AUTOMATIC_INDEX
+BinaryVariable:c222_SQLITE_OMIT_AUTOINIT
+BinaryVariable:c228_SQLITE_OMIT_AUTOVACUUM
+BinaryVariable:c235_SQLITE_OMIT_BETWEEN_OPTIMIZATION
+BinaryVariable:c241_SQLITE_OMIT_BLOB_LITERAL
+BinaryVariable:c248_SQLITE_OMIT_BTREECOUNT
+BinaryVariable:c255_SQLITE_OMIT_BUILTIN_TEST
+BinaryVariable:c262_SQLITE_OMIT_CAST
+BinaryVariable:c269_SQLITE_OMIT_CHECK
+BinaryVariable:c276_SQLITE_OMIT_COMPILEOPTION_DIAGS
+BinaryVariable:c283_SQLITE_OMIT_COMPLETE
+BinaryVariable:c290_SQLITE_OMIT_COMPOUND_SELECT
+BinaryVariable:c297_SQLITE_OMIT_CONFLICT_CLAUSE
+BinaryVariable:c303_SQLITE_OMIT_DATETIME_FUNCS
+BinaryVariable:c310_SQLITE_OMIT_DECLTYPE
+BinaryVariable:c319_SQLITE_OMIT_DEPRECATED
+BinaryVariable:c326_SQLITE_OMIT_EXPLAIN
+BinaryVariable:c333_SQLITE_OMIT_FLAG_PRAGMAS
+BinaryVariable:c340_SQLITE_OMIT_FLOATING_POINT
+BinaryVariable:c347_SQLITE_OMIT_FOREIGN_KEY
+BinaryVariable:c354_SQLITE_OMIT_GET_TABLE
+BinaryVariable:c361_SQLITE_OMIT_INCRBLOB
+BinaryVariable:c368_SQLITE_OMIT_INTEGRITY_CHECK
+BinaryVariable:c375_SQLITE_OMIT_LIKE_OPTIMIZATION
+BinaryVariable:c382_SQLITE_OMIT_LOAD_EXTENSION
+BinaryVariable:c389_SQLITE_OMIT_LOCALTIME
+BinaryVariable:c396_SQLITE_OMIT_LOOKASIDE
+BinaryVariable:c403_SQLITE_OMIT_MEMORYDB
+BinaryVariable:c410_SQLITE_OMIT_OR_OPTIMIZATION
+BinaryVariable:c417_SQLITE_OMIT_PAGER_PRAGMAS
+BinaryVariable:c424_SQLITE_OMIT_PRAGMA
+BinaryVariable:c431_SQLITE_OMIT_PROGRESS_CALLBACK
+BinaryVariable:c438_SQLITE_OMIT_QUICKBALANCE
+BinaryVariable:c445_SQLITE_OMIT_REINDEX
+BinaryVariable:c452_SQLITE_OMIT_SCHEMA_PRAGMAS
+BinaryVariable:c459_SQLITE_OMIT_SCHEMA_VERSION_PRAGMAS
+BinaryVariable:c466_SQLITE_OMIT_SHARED_CACHE
+BinaryVariable:c473_SQLITE_OMIT_SUBQUERY
+BinaryVariable:c480_SQLITE_OMIT_TCL_VARIABLE
+BinaryVariable:c486_SQLITE_OMIT_TEMPDB
+BinaryVariable:c492_SQLITE_OMIT_TRACE
+BinaryVariable:c499_SQLITE_OMIT_TRIGGER
+BinaryVariable:c506_SQLITE_OMIT_TRUNCATE_OPTIMIZATION
+BinaryVariable:c512_SQLITE_OMIT_UTF16
+BinaryVariable:c519_SQLITE_OMIT_VACUUM
+BinaryVariable:c526_SQLITE_OMIT_VIEW
+BinaryVariable:c533_SQLITE_OMIT_VIRTUALTABLE
+BinaryVariable:c540_SQLITE_OMIT_WAL
+BinaryVariable:c547_SQLITE_OMIT_XFER_OPT
+BinaryVariable:c554_SQLITE_DEBUG
+BinaryVariable:c560_SQLITE_MEMDEBUG
+BinaryVariable:c3_SQLite
+ProductLevelNfpAttribute:c2_footprint
+ProductLevelNfpFeatureContribution:c2_footprint,c4_OperatingSystemCharacteristics,888
+ProductLevelNfpFeatureContribution:c2_footprint,c10_SQLITE_4_BYTE_ALIGNED_MALLOC,0
+ProductLevelNfpFeatureContribution:c2_footprint,c16_SQLITE_CASE_SENSITIVE_LIKE,0
+ProductLevelNfpFeatureContribution:c2_footprint,c22_SQLITE_HAVE_ISNAN,0
+ProductLevelNfpFeatureContribution:c2_footprint,c28_SQLITE_SECURE_DELETE,0
+ProductLevelNfpFeatureContribution:c2_footprint,c34_ChooseSQLITE_TEMP_STORE,0
+ProductLevelNfpFeatureContribution:c2_footprint,c40_SQLITE_TEMP_STORE_EQ_0,0
+ProductLevelNfpFeatureContribution:c2_footprint,c46_SQLITE_TEMP_STORE_EQ_1,0
+ProductLevelNfpFeatureContribution:c2_footprint,c52_SQLITE_TEMP_STORE_EQ_2,0
+ProductLevelNfpFeatureContribution:c2_footprint,c58_SQLITE_TEMP_STORE_EQ_3,0
+ProductLevelNfpFeatureContribution:c2_footprint,c64_EnableFeatures,0
+ProductLevelNfpFeatureContribution:c2_footprint,c70_SQLITE_ENABLE_ATOMIC_WRITE,3
+ProductLevelNfpFeatureContribution:c2_footprint,c76_SQLITE_ENABLE_COLUMN_METADATA,2
+ProductLevelNfpFeatureContribution:c2_footprint,c84_SQLITE_ENABLE_FTS3,100
+ProductLevelNfpFeatureContribution:c2_footprint,c90_SQLITE_ENABLE_FTS3_PARENTHESIS,0
+ProductLevelNfpFeatureContribution:c2_footprint,c96_SQLITE_ENABLE_MEMORY_MANAGEMENT,1
+ProductLevelNfpFeatureContribution:c2_footprint,c102_ChooseMemSys,3
+ProductLevelNfpFeatureContribution:c2_footprint,c108_SQLITE_ENABLE_MEMSYS3,2
+ProductLevelNfpFeatureContribution:c2_footprint,c114_SQLITE_ENABLE_MEMSYS5,0
+ProductLevelNfpFeatureContribution:c2_footprint,c120_SQLITE_ENABLE_RTREE,33
+ProductLevelNfpFeatureContribution:c2_footprint,c126_SQLITE_ENABLE_STAT2,4
+ProductLevelNfpFeatureContribution:c2_footprint,c132_SQLITE_ENABLE_UPDATE_DELETE_LIMIT,1
+ProductLevelNfpFeatureContribution:c2_footprint,c138_SQLITE_ENABLE_UNLOCK_NOTIFY,3
+ProductLevelNfpFeatureContribution:c2_footprint,c144_SQLITE_SOUNDEX,1
+ProductLevelNfpFeatureContribution:c2_footprint,c150_YYTRACKMAXSTACKDEPTH,0
+ProductLevelNfpFeatureContribution:c2_footprint,c156_DisableFeatures,0
+ProductLevelNfpFeatureContribution:c2_footprint,c162_SQLITE_DISABLE_LFS,0
+ProductLevelNfpFeatureContribution:c2_footprint,c168_SQLITE_DISABLE_DIRSYNC,0
+ProductLevelNfpFeatureContribution:c2_footprint,c174_OmitFeatures,0
+ProductLevelNfpFeatureContribution:c2_footprint,c180_SQLITE_OMIT_ALTERTABLE,-7
+ProductLevelNfpFeatureContribution:c2_footprint,c187_SQLITE_OMIT_ANALYZE,-5
+ProductLevelNfpFeatureContribution:c2_footprint,c194_SQLITE_OMIT_ATTACH,-8
+ProductLevelNfpFeatureContribution:c2_footprint,c201_SQLITE_OMIT_AUTHORIZATION,-5
+ProductLevelNfpFeatureContribution:c2_footprint,c208_SQLITE_OMIT_AUTOINCREMENT,-3
+ProductLevelNfpFeatureContribution:c2_footprint,c215_SQLITE_OMIT_AUTOMATIC_INDEX,-4
+ProductLevelNfpFeatureContribution:c2_footprint,c222_SQLITE_OMIT_AUTOINIT,0
+ProductLevelNfpFeatureContribution:c2_footprint,c228_SQLITE_OMIT_AUTOVACUUM,-14
+ProductLevelNfpFeatureContribution:c2_footprint,c235_SQLITE_OMIT_BETWEEN_OPTIMIZATION,0
+ProductLevelNfpFeatureContribution:c2_footprint,c241_SQLITE_OMIT_BLOB_LITERAL,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c248_SQLITE_OMIT_BTREECOUNT,-2
+ProductLevelNfpFeatureContribution:c2_footprint,c255_SQLITE_OMIT_BUILTIN_TEST,-2
+ProductLevelNfpFeatureContribution:c2_footprint,c262_SQLITE_OMIT_CAST,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c269_SQLITE_OMIT_CHECK,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c276_SQLITE_OMIT_COMPILEOPTION_DIAGS,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c283_SQLITE_OMIT_COMPLETE,-888
+ProductLevelNfpFeatureContribution:c2_footprint,c290_SQLITE_OMIT_COMPOUND_SELECT,-10
+ProductLevelNfpFeatureContribution:c2_footprint,c297_SQLITE_OMIT_CONFLICT_CLAUSE,0
+ProductLevelNfpFeatureContribution:c2_footprint,c303_SQLITE_OMIT_DATETIME_FUNCS,-10
+ProductLevelNfpFeatureContribution:c2_footprint,c310_SQLITE_OMIT_DECLTYPE,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c319_SQLITE_OMIT_DEPRECATED,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c326_SQLITE_OMIT_EXPLAIN,-10
+ProductLevelNfpFeatureContribution:c2_footprint,c333_SQLITE_OMIT_FLAG_PRAGMAS,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c340_SQLITE_OMIT_FLOATING_POINT,-18
+ProductLevelNfpFeatureContribution:c2_footprint,c347_SQLITE_OMIT_FOREIGN_KEY,-15
+ProductLevelNfpFeatureContribution:c2_footprint,c354_SQLITE_OMIT_GET_TABLE,-3
+ProductLevelNfpFeatureContribution:c2_footprint,c361_SQLITE_OMIT_INCRBLOB,-7
+ProductLevelNfpFeatureContribution:c2_footprint,c368_SQLITE_OMIT_INTEGRITY_CHECK,-9
+ProductLevelNfpFeatureContribution:c2_footprint,c375_SQLITE_OMIT_LIKE_OPTIMIZATION,-2
+ProductLevelNfpFeatureContribution:c2_footprint,c382_SQLITE_OMIT_LOAD_EXTENSION,-3
+ProductLevelNfpFeatureContribution:c2_footprint,c389_SQLITE_OMIT_LOCALTIME,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c396_SQLITE_OMIT_LOOKASIDE,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c403_SQLITE_OMIT_MEMORYDB,-2
+ProductLevelNfpFeatureContribution:c2_footprint,c410_SQLITE_OMIT_OR_OPTIMIZATION,-5
+ProductLevelNfpFeatureContribution:c2_footprint,c417_SQLITE_OMIT_PAGER_PRAGMAS,-5
+ProductLevelNfpFeatureContribution:c2_footprint,c424_SQLITE_OMIT_PRAGMA,-16
+ProductLevelNfpFeatureContribution:c2_footprint,c431_SQLITE_OMIT_PROGRESS_CALLBACK,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c438_SQLITE_OMIT_QUICKBALANCE,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c445_SQLITE_OMIT_REINDEX,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c452_SQLITE_OMIT_SCHEMA_PRAGMAS,-2
+ProductLevelNfpFeatureContribution:c2_footprint,c459_SQLITE_OMIT_SCHEMA_VERSION_PRAGMAS,-1
+ProductLevelNfpFeatureContribution:c2_footprint,c466_SQLITE_OMIT_SHARED_CACHE,-10
+ProductLevelNfpFeatureContribution:c2_footprint,c473_SQLITE_OMIT_SUBQUERY,-11
+ProductLevelNfpFeatureContribution:c2_footprint,c480_SQLITE_OMIT_TCL_VARIABLE,0
+ProductLevelNfpFeatureContribution:c2_footprint,c486_SQLITE_OMIT_TEMPDB,0
+ProductLevelNfpFeatureContribution:c2_footprint,c492_SQLITE_OMIT_TRACE,-3
+ProductLevelNfpFeatureContribution:c2_footprint,c499_SQLITE_OMIT_TRIGGER,-27
+ProductLevelNfpFeatureContribution:c2_footprint,c506_SQLITE_OMIT_TRUNCATE_OPTIMIZATION,0
+ProductLevelNfpFeatureContribution:c2_footprint,c512_SQLITE_OMIT_UTF16,-8
+ProductLevelNfpFeatureContribution:c2_footprint,c519_SQLITE_OMIT_VACUUM,-4
+ProductLevelNfpFeatureContribution:c2_footprint,c526_SQLITE_OMIT_VIEW,-3
+ProductLevelNfpFeatureContribution:c2_footprint,c533_SQLITE_OMIT_VIRTUALTABLE,-20
+ProductLevelNfpFeatureContribution:c2_footprint,c540_SQLITE_OMIT_WAL,-30
+ProductLevelNfpFeatureContribution:c2_footprint,c547_SQLITE_OMIT_XFER_OPT,-3
+ProductLevelNfpFeatureContribution:c2_footprint,c554_SQLITE_DEBUG,9
+ProductLevelNfpFeatureContribution:c2_footprint,c560_SQLITE_MEMDEBUG,2
+ObjectiveSense:False

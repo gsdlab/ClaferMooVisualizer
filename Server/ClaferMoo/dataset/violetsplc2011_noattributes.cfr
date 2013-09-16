@@ -1,0 +1,148 @@
+// Adapated from Scalable Prediction of Non-functional Properties in Software Product Lines.
+// Scaled down by dividing numbers by 1 and rounding.
+//To execute in alloy: run  show for ...
+
+
+abstract IMeasurable
+
+
+abstract Violet
+	VioletDef : IMeasurable 
+		base : IMeasurable 
+		MenuResources : IMeasurable  ?
+		GraphUtility : IMeasurable  ?
+		ExtensionFilter : IMeasurable  ?
+		FileUtility : IMeasurable  ?
+		InternalFrame : IMeasurable  ?
+		Read : IMeasurable  ?
+		FileMenu : IMeasurable  ?
+		NewFile : IMeasurable  ?
+			[ ExtensionFilter && InternalFrame && Read && GraphUtility && MenuResources && FileMenu && FileUtility ]
+		or File : IMeasurable  ?
+			[ ExtensionFilter && InternalFrame && Read && GraphUtility && MenuResources && FileMenu && FileUtility ]
+			OpenFile : IMeasurable 
+			RecentFile : IMeasurable 
+				[ OpenFile ]
+			SaveAs : IMeasurable 
+			SaveFile : IMeasurable 
+				[ SaveAs ]
+			ExportImage : IMeasurable 
+			Print : IMeasurable 
+			Exit : IMeasurable 
+		DiagramSupport : IMeasurable  ?
+		UseCaseD : IMeasurable  ?
+		or UseCaseDiagram : IMeasurable  ?
+			[ DiagramSupport && UseCaseD && NewFile ]
+			UseCaseNoteEdge : IMeasurable 
+				[ UseCaseNoteNode ]
+			UseCaseGeneralizationEdge : IMeasurable 
+				[ Actor ]
+			IncludeRelationshipEdge : IMeasurable 
+				[ Actor ]
+			ExtendRelationshipEdge : IMeasurable 
+				[ Actor ]
+			UseCaseAssociationEdge : IMeasurable 
+				[ Actor ]
+			UseCaseNoteNode : IMeasurable 
+			UseCaseNode : IMeasurable 
+			Actor : IMeasurable 
+		ObjectD : IMeasurable  ?
+		or ObjectDiagram : IMeasurable  ?
+			[ DiagramSupport && ObjectD && NewFile ]
+			ObjectNoteEdge : IMeasurable 
+				[ ObjectNoteNode ]
+			ObjectAssociationEdge : IMeasurable 
+				[ ObjectNode ]
+			ObjectReferenceEdge : IMeasurable 
+				[ ObjectNode ]
+			ObjectNoteNode : IMeasurable 
+			ObjectFieldNode : IMeasurable 
+			ObjectNode : IMeasurable 
+		StateD : IMeasurable  ?
+		or StateDiagram : IMeasurable  ?
+			[ DiagramSupport && StateD && NewFile ]
+			StateNoteEdge : IMeasurable 
+				[ StateNoteNode ]
+			StateTransitionEdge : IMeasurable 
+				[ StateNode ]
+			StateNoteNode : IMeasurable 
+			FinalStateNode : IMeasurable 
+			InitialStateNode : IMeasurable 
+			StateNode : IMeasurable 
+		SequenceD : IMeasurable  ?
+		or SequenceDiagram : IMeasurable  ?
+			[ SequenceD && DiagramSupport && NewFile ]
+			SequenceNoteEdge : IMeasurable 
+				[ SequenceNoteNode ]
+			SequenceReturnEdge : IMeasurable 
+				[ SequenceCallNode ]
+			SequenceCallEdge : IMeasurable 
+				[ SequenceCallNode ]
+			SequenceNoteNode : IMeasurable 
+			SequenceCallNode : IMeasurable 
+			SequenceParameterNode : IMeasurable 
+		ClassD : IMeasurable  ?
+		or ClassDiagram : IMeasurable  ?
+			[ DiagramSupport && NewFile && ClassD ]
+			ClassNoteEdge : IMeasurable 
+				[ ClassNoteNode ]
+			ClassInterfaceEdge : IMeasurable 
+				[ ClassNode ]
+			ClassCompositionEdge : IMeasurable 
+				[ ClassNode ]
+			ClassAssociationEdge : IMeasurable 
+				[ ClassNode ]
+			ClassAggregationEdge : IMeasurable 
+				[ ClassNode ]
+			ClassInheritanceEdge : IMeasurable 
+				[ ClassNode ]
+			ClassDependencyEdge : IMeasurable 
+				[ ClassNode ]
+			ClassNoteNode : IMeasurable 
+			PackageNode : IMeasurable 
+			InterfaceNode : IMeasurable 
+			ClassNode : IMeasurable 
+		EditMenu : IMeasurable  ?
+		or Edit : IMeasurable  ?
+			[ ExtensionFilter && InternalFrame && Read && GraphUtility && MenuResources && EditMenu && FileUtility ]
+			SelectPrevious : IMeasurable 
+			SelectNext : IMeasurable 
+			DeleteItem : IMeasurable 
+			EditProperties : IMeasurable 
+		ViewMenu : IMeasurable  ?
+		or View : IMeasurable  ?
+			[ ExtensionFilter && InternalFrame && ViewMenu && Read && GraphUtility && MenuResources && FileUtility ]
+			HideGrid : IMeasurable 
+			LargerGrid : IMeasurable 
+			SmallerGrid : IMeasurable 
+			ClipDrawingArea : IMeasurable 
+			GrowDrawingArea : IMeasurable 
+			ZoomIn : IMeasurable 
+			ZoomOut : IMeasurable 
+			LookAndFeel : IMeasurable 
+		WindowMenu : IMeasurable  ?
+		or Window : IMeasurable  ?
+			[ ExtensionFilter && InternalFrame && WindowMenu && Read && GraphUtility && MenuResources && FileUtility ]
+			NextWindow : IMeasurable 
+			PreviousWindow : IMeasurable 
+			MaximizeWindow : IMeasurable 
+			RestoreWindow : IMeasurable 
+			CloseWindow : IMeasurable 
+		HelpMenu : IMeasurable  ?
+		or Help : IMeasurable  ?
+			[ ExtensionFilter && InternalFrame && HelpMenu && Read && GraphUtility && MenuResources && FileUtility ]
+			License : IMeasurable 
+			About : IMeasurable 
+		or Additional : IMeasurable  ?
+			[ ExtensionFilter && InternalFrame && Read && GraphUtility && MenuResources && FileUtility ]
+			Preferences : IMeasurable 
+			SetTitle : IMeasurable 
+			ImageFilter : IMeasurable 
+				[ ExtensionFilter && ExportImage ]
+			VioletFilter : IMeasurable 
+				[ ExtensionFilter ]
+			VersionChecker : IMeasurable 
+			CommandLine : IMeasurable 
+				[ OpenFile ]
+
+

@@ -118,16 +118,20 @@ server.post('/poll', function(req, res, next)
                 
                 processes[i].killed = true;
                 
-                // first, try a Windows command
-                var killer_win  = spawn("taskkill", ["/F", "/T", "/PID", processes[i].tool.pid]);
+                if (processes[i].tool)
+                {
                 
-				killer_win.on('error', function (err){	// if error occurs, then we are on Linux
-                    var killer_linux = spawn("pkill", ["-TERM", "-P", processes[i].tool.pid]);                   
+                    // first, try a Windows command
+                    var killer_win  = spawn("taskkill", ["/F", "/T", "/PID", processes[i].tool.pid]);
+                    
+                    killer_win.on('error', function (err){	// if error occurs, then we are on Linux
+                        var killer_linux = spawn("pkill", ["-TERM", "-P", processes[i].tool.pid]);                   
 
-                    killer_linux.on('error', function(err){
-                        console.log("Cannot terminate processes.");
-                    });
-				});                
+                        killer_linux.on('error', function(err){
+                            console.log("Cannot terminate processes.");
+                        });
+                    });                
+                }
                 
                 processes.splice(i, 1);
                 
@@ -138,7 +142,7 @@ server.post('/poll', function(req, res, next)
         }
     }
     
-    res.writeHead(400, { "Content-Type": "text/html"});
+    res.writeHead(404, { "Content-Type": "text/html"});
     res.end("Error: the requested process is not found.")    
 });
 
@@ -238,8 +242,11 @@ server.post('/upload', function(req, res, next) {
                     process.result = file_contents;
                     process.code = 0;
                     process.completed = true;
+                    processes.push(process);                    
 					cleanupOldFiles(uploadedFilePath, dlDir);
-					return;
+                    res.writeHead(200, { "Content-Type": "text/html"});
+                    res.end("OK"); // just means the file has been sent sucessfully and started to processing
+                    return;
 				}
 				console.log("processing file with integratedFMO");
 
@@ -327,7 +334,7 @@ server.post('/upload', function(req, res, next) {
 					if (code === 0) 
 					{				
 						result = "Return code = " + code + "\n" + data_result + "=====";
-						var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '_desugared.xml'));
+						var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
 						result += xml.toString();
 						result = escapeHtml(result);
 					}

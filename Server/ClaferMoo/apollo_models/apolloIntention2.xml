@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<instance>
+<presentation name="?" format="XCSP 2.0"/>
+
+<domains nbDomains="6">
+<domain name="rendezvousDecision" nbValues="2">4 5</domain>
+<domain name="orbitDecision" nbValues="2">6 7</domain>
+<domain name="cmCrewNumber" nbValues="2">2 3</domain>
+<domain name="lmCrewNumber" nbValues="4">0..3</domain>
+<domain name="smFuelType" nbValues="2">8 9</domain>
+<domain name="lmFuelType" nbValues="3">8 9 10</domain>
+</domains>
+
+<variables nbVariables="9">
+<variable name="EOR" domain="rendezvousDecision"/>
+<variable name="LOR" domain="rendezvousDecision"/>
+<variable name="earthLaunch" domain="orbitDecision"/>
+<variable name="moonArrival" domain="orbitDecision"/>
+<variable name="moonDeparture" domain="orbitDecision"/>
+<variable name="cmCrew" domain="cmCrewNumber"/>
+<variable name="lmCrew" domain="lmCrewNumber"/>
+<variable name="smFuel" domain="smFuelType"/>
+<variable name="lmFuel" domain="lmFuelType"/>
+</variables>
+
+<predicates nbPredicates="6">
+<predicate name="EORConstraint">
+  <parameters>int eorValue int earthLaunchValue int eorID1 int eorID2 int eLaunchID1</parameters>
+  <expression> 
+    <functional>or(eq(eorValue,eorID2),and(eq(eorValue,eorID1),eq(earthLaunchValue,eLaunchID1)))</functional>
+  </expression>
+</predicate>
+<predicate name="LORConstraint">
+  <parameters>int lorValue int moonArrivalValue int lorID1 int lorID2 int mArrivalID1</parameters>
+  <expression> 
+    <functional>or(eq(lorValue,lorID2),and(eq(lorValue,lorID1),eq(moonArrivalValue,mArrivalID1)))</functional>
+  </expression>
+</predicate>
+<predicate name="moonLeaving">
+  <parameters>int lorValue int moonDepartureValue int lorID1 int lorID2 int mDepartureID1</parameters>
+  <expression> 
+    <functional>or(eq(lorValue,lorID2),and(eq(lorValue,lorID1),eq(moonDepartureValue,mDepartureID1)))</functional>
+  </expression>
+</predicate>
+<predicate name="lmcmCrew">
+  <parameters>int cmCrewValue int lmCrewValue</parameters>
+  <expression> 
+    <functional>ge(cmCrewValue,lmCrewValue)</functional>
+  </expression>
+</predicate>
+<predicate name="lmexists">
+  <parameters>int lorValue int lmCrewValue int lorID1 int lorID2 int lmCrewID1</parameters>
+  <expression> 
+    <functional>or(and(eq(lorValue,lorID2),eq(lmCrewValue,lmCrewID1)),and(eq(lorValue,lorID1),gt(lmCrewValue,lmCrewID1)))</functional>
+  </expression>
+</predicate>
+<predicate name="lmFuelConstraint">
+  <parameters>int lorValue int lmFuelValue int lorID1 int lorID2 int lmFuelID1</parameters>
+  <expression> 
+    <functional>or(and(eq(lorValue,lorID2),eq(lmFuelValue,lmFuelID1)),and(eq(lorValue,lorID1),ne(lmFuelValue,lmFuelID1)))</functional>
+  </expression>
+</predicate>
+</predicates>
+
+<constraints nbConstraints="6">
+<constraint name="cEORConstraint" arity="2" scope="EOR earthLaunch" reference="EORConstraint">
+  <parameters>EOR earthLaunch  4  5 6</parameters>
+</constraint>
+<constraint name="cLORConstraint" arity="2" scope="LOR moonArrival" reference="LORConstraint">
+  <parameters>LOR moonArrival 4 5 6 </parameters>
+</constraint>
+<constraint name="cmoonLeaving" arity="2" scope="LOR moonDeparture" reference="moonLeaving">
+  <parameters>LOR moonDeparture 4 5 6</parameters>
+</constraint>
+<constraint name="clmcmCrew" arity="2" scope="cmCrew lmCrew" reference="lmcmCrew">
+  <parameters>cmCrew lmCrew</parameters>
+</constraint>
+<constraint name="clmexists" arity="2" scope="LOR lmCrew" reference="lmexists">
+  <parameters>LOR lmCrew 4 5 0</parameters>
+</constraint>
+<constraint name="clmFuelConstraint" arity="2" scope="LOR lmFuel " reference="lmFuelConstraint">
+  <parameters>LOR lmFuel 4 5 8</parameters>
+</constraint>
+<constraint name="testeDif" arity="2" scope="EOR LOR" 
+reference="global:allDifferent" /> 
+
+</constraints>
+</instance>

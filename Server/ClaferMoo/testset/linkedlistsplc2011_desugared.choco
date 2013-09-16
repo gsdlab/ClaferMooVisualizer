@@ -1,0 +1,80 @@
+ConstraintMandatoryFeatures:c1:Choco.eq(c3_LinkedList, 1)
+ConstraintMandatoryFeatures:c2:Choco.eq(c4_AbstractElement, 1)
+ConstraintMandatoryFeatures:c3:Choco.eq(c29_AbstractIterator, 1)
+ConstraintMandatoryFeatures:c4:Choco.eq(c115_Base, 1)
+ConstraintChildrenImpliesParent:c5:Choco.implies(Choco.eq(c53_BubbleSort, 1), Choco.eq(c47_AbstractSort, 1))
+ConstraintChildrenImpliesParent:c6:Choco.implies(Choco.eq(c59_MergeSort, 1), Choco.eq(c47_AbstractSort, 1))
+ConstraintChildrenImpliesParent:c7:Choco.implies(Choco.eq(c65_InsertionSort, 1), Choco.eq(c47_AbstractSort, 1))
+ConstraintChildrenImpliesParent:c8:Choco.implies(Choco.eq(c71_QuickSort, 1), Choco.eq(c47_AbstractSort, 1))
+ConstraintChildrenImpliesParent:c9:Choco.implies(Choco.eq(c91_TCP_IP, 1), Choco.eq(c83_Measurement, 1))
+ConstraintMandatoryChildEqualParent:c10:Choco.eq(c91_TCP_IP, c83_Measurement)
+ConstraintChildrenImpliesParent:c11:Choco.implies(Choco.eq(c97_SyntheticPerformanceOrMemorySize, 1), Choco.eq(c83_Measurement, 1))
+ConstraintMandatoryChildEqualParent:c12:Choco.eq(c97_SyntheticPerformanceOrMemorySize, c83_Measurement)
+ConstraintChildrenImpliesParent:c13:Choco.implies(Choco.eq(c4_AbstractElement, 1), Choco.eq(c3_LinkedList, 1))
+ConstraintMandatoryChildEqualParent:c14:Choco.eq(c4_AbstractElement, c3_LinkedList)
+ConstraintChildrenImpliesParent:c15:Choco.implies(Choco.eq(c29_AbstractIterator, 1), Choco.eq(c3_LinkedList, 1))
+ConstraintMandatoryChildEqualParent:c16:Choco.eq(c29_AbstractIterator, c3_LinkedList)
+ConstraintChildrenImpliesParent:c17:Choco.implies(Choco.eq(c47_AbstractSort, 1), Choco.eq(c3_LinkedList, 1))
+ConstraintChildrenImpliesParent:c18:Choco.implies(Choco.eq(c77_print, 1), Choco.eq(c3_LinkedList, 1))
+ConstraintChildrenImpliesParent:c19:Choco.implies(Choco.eq(c83_Measurement, 1), Choco.eq(c3_LinkedList, 1))
+ConstraintChildrenImpliesParent:c20:Choco.implies(Choco.eq(c115_Base, 1), Choco.eq(c3_LinkedList, 1))
+ConstraintMandatoryChildEqualParent:c21:Choco.eq(c115_Base, c3_LinkedList)
+ConstraintChildrenImpliesParent:c22:Choco.implies(Choco.eq(c11_ElementA, 1), Choco.eq(c4_AbstractElement, 1))
+ConstraintChildrenImpliesParent:c23:Choco.implies(Choco.eq(c17_ElementB, 1), Choco.eq(c4_AbstractElement, 1))
+ConstraintChildrenImpliesParent:c24:Choco.implies(Choco.eq(c23_ElementC, 1), Choco.eq(c4_AbstractElement, 1))
+ConstraintChildrenImpliesParent:c25:Choco.implies(Choco.eq(c35_ForwardIterator, 1), Choco.eq(c29_AbstractIterator, 1))
+ConstraintChildrenImpliesParent:c26:Choco.implies(Choco.eq(c41_BackwardIterator, 1), Choco.eq(c29_AbstractIterator, 1))
+ConstraintChildrenImpliesParent:c27:Choco.implies(Choco.eq(c103_Performance, 1), Choco.eq(c97_SyntheticPerformanceOrMemorySize, 1))
+ConstraintChildrenImpliesParent:c28:Choco.implies(Choco.eq(c109_MemorySize, 1), Choco.eq(c97_SyntheticPerformanceOrMemorySize, 1))
+ConstraintExclusiveOr:c29:Choco.ifOnlyIf(Choco.eq(c11_ElementA, 1), Choco.and(Choco.not(Choco.eq(c17_ElementB, 1)),Choco.not(Choco.eq(c23_ElementC, 1)),Choco.eq(c4_AbstractElement, 1)))
+ConstraintExclusiveOr:c30:Choco.ifOnlyIf(Choco.eq(c17_ElementB, 1), Choco.and(Choco.not(Choco.eq(c11_ElementA, 1)),Choco.not(Choco.eq(c23_ElementC, 1)),Choco.eq(c4_AbstractElement, 1)))
+ConstraintExclusiveOr:c31:Choco.ifOnlyIf(Choco.eq(c23_ElementC, 1), Choco.and(Choco.not(Choco.eq(c11_ElementA, 1)),Choco.not(Choco.eq(c17_ElementB, 1)),Choco.eq(c4_AbstractElement, 1)))
+ConstraintExclusiveOr:c32:Choco.ifOnlyIf(Choco.eq(c35_ForwardIterator, 1), Choco.and(Choco.not(Choco.eq(c41_BackwardIterator, 1)),Choco.eq(c29_AbstractIterator, 1)))
+ConstraintExclusiveOr:c33:Choco.ifOnlyIf(Choco.eq(c41_BackwardIterator, 1), Choco.and(Choco.not(Choco.eq(c35_ForwardIterator, 1)),Choco.eq(c29_AbstractIterator, 1)))
+ConstraintExclusiveOr:c34:Choco.ifOnlyIf(Choco.eq(c53_BubbleSort, 1), Choco.and(Choco.not(Choco.eq(c59_MergeSort, 1)),Choco.not(Choco.eq(c65_InsertionSort, 1)),Choco.not(Choco.eq(c71_QuickSort, 1)),Choco.eq(c47_AbstractSort, 1)))
+ConstraintExclusiveOr:c35:Choco.ifOnlyIf(Choco.eq(c59_MergeSort, 1), Choco.and(Choco.not(Choco.eq(c53_BubbleSort, 1)),Choco.not(Choco.eq(c65_InsertionSort, 1)),Choco.not(Choco.eq(c71_QuickSort, 1)),Choco.eq(c47_AbstractSort, 1)))
+ConstraintExclusiveOr:c36:Choco.ifOnlyIf(Choco.eq(c65_InsertionSort, 1), Choco.and(Choco.not(Choco.eq(c53_BubbleSort, 1)),Choco.not(Choco.eq(c59_MergeSort, 1)),Choco.not(Choco.eq(c71_QuickSort, 1)),Choco.eq(c47_AbstractSort, 1)))
+ConstraintExclusiveOr:c37:Choco.ifOnlyIf(Choco.eq(c71_QuickSort, 1), Choco.and(Choco.not(Choco.eq(c53_BubbleSort, 1)),Choco.not(Choco.eq(c59_MergeSort, 1)),Choco.not(Choco.eq(c65_InsertionSort, 1)),Choco.eq(c47_AbstractSort, 1)))
+ConstraintOr:c38:Choco.ifOnlyIf(Choco.or(GROUPVARS(c103_Performance,c109_MemorySize)), Choco.eq(c97_SyntheticPerformanceOrMemorySize, 1))
+ConstraintCrossTree:c39:Choco.implies(Choco.eq(c83_Measurement, 1), Choco.eq(c47_AbstractSort, 1))
+BinaryVariable:c4_AbstractElement
+BinaryVariable:c11_ElementA
+BinaryVariable:c17_ElementB
+BinaryVariable:c23_ElementC
+BinaryVariable:c29_AbstractIterator
+BinaryVariable:c35_ForwardIterator
+BinaryVariable:c41_BackwardIterator
+BinaryVariable:c47_AbstractSort
+BinaryVariable:c53_BubbleSort
+BinaryVariable:c59_MergeSort
+BinaryVariable:c65_InsertionSort
+BinaryVariable:c71_QuickSort
+BinaryVariable:c77_print
+BinaryVariable:c83_Measurement
+BinaryVariable:c91_TCP_IP
+BinaryVariable:c97_SyntheticPerformanceOrMemorySize
+BinaryVariable:c103_Performance
+BinaryVariable:c109_MemorySize
+BinaryVariable:c115_Base
+BinaryVariable:c3_LinkedList
+ProductLevelNfpAttribute:c2_footprint
+ProductLevelNfpFeatureContribution:c2_footprint,c4_AbstractElement,-12
+ProductLevelNfpFeatureContribution:c2_footprint,c11_ElementA,12
+ProductLevelNfpFeatureContribution:c2_footprint,c17_ElementB,0
+ProductLevelNfpFeatureContribution:c2_footprint,c23_ElementC,0
+ProductLevelNfpFeatureContribution:c2_footprint,c29_AbstractIterator,0
+ProductLevelNfpFeatureContribution:c2_footprint,c35_ForwardIterator,0
+ProductLevelNfpFeatureContribution:c2_footprint,c41_BackwardIterator,1
+ProductLevelNfpFeatureContribution:c2_footprint,c47_AbstractSort,57
+ProductLevelNfpFeatureContribution:c2_footprint,c53_BubbleSort,17
+ProductLevelNfpFeatureContribution:c2_footprint,c59_MergeSort,32
+ProductLevelNfpFeatureContribution:c2_footprint,c65_InsertionSort,0
+ProductLevelNfpFeatureContribution:c2_footprint,c71_QuickSort,22
+ProductLevelNfpFeatureContribution:c2_footprint,c77_print,44
+ProductLevelNfpFeatureContribution:c2_footprint,c83_Measurement,484
+ProductLevelNfpFeatureContribution:c2_footprint,c91_TCP_IP,0
+ProductLevelNfpFeatureContribution:c2_footprint,c97_SyntheticPerformanceOrMemorySize,0
+ProductLevelNfpFeatureContribution:c2_footprint,c103_Performance,37
+ProductLevelNfpFeatureContribution:c2_footprint,c109_MemorySize,36
+ProductLevelNfpFeatureContribution:c2_footprint,c115_Base,455
+ObjectiveSense:False

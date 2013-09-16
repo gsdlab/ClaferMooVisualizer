@@ -1,0 +1,276 @@
+abstract Feature
+	RampUpTime : integer
+	cost : integer
+	DevelopmentTime : integer
+	DeploymentTime : integer
+	BatteryUsage : integer
+	ResponseTime : integer
+	
+				 
+abstract SearchAndRescueFM
+	xor LocationFinding : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]
+		[ this.DevelopmentTime = 0 ]	
+		[ this.DeploymentTime = 0 ]	
+		[ this.BatteryUsage = 0 ]
+		[ this.ResponseTime = 0 ]
+		GPS : Feature
+			[ this.RampUpTime  = 6]		
+			[ this.cost  =  80 ]
+			[ this.DevelopmentTime  =  4 ]	
+			[ this.DeploymentTime = 3 ]			
+			[ this.BatteryUsage = 10 ]			
+			[ this.ResponseTime = 500 ]	
+		RadioTriangulation : Feature
+	 		[ this.RampUpTime  = 8]					
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  14 ]	
+			[ this.DeploymentTime = 1 ]			
+			[ this.BatteryUsage = 5 ]			
+			[ this.ResponseTime = 100 ]	
+	xor HardwarePlatform : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		[ this.DeploymentTime = 0 ]	
+		[ this.BatteryUsage = 0 ]
+		[ this.ResponseTime = 0 ]
+		NexusOneHTC : Feature
+			[ this.RampUpTime  = 0]	 	
+			[ this.cost = 525 ]	 	
+			[ this.DevelopmentTime  =  0 ]	
+			[ this.DeploymentTime = 0 ]	
+			[ this.BatteryUsage = 5 ]			
+			[ this.ResponseTime = 60 ]	
+		DroidMotoroal : Feature
+			[ this.RampUpTime  = 0]	 
+			[ this.cost = 520 ] 
+			[ this.DevelopmentTime  =  0 ]	
+			[ this.DeploymentTime = 0 ]	
+			[ this.BatteryUsage = 5 ]
+			[ this.ResponseTime = 55 ]	
+	xor FileSharing : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		[ this.DeploymentTime = 0 ]	
+		[ this.BatteryUsage = 0 ]
+		[ this.ResponseTime = 0 ]
+		FileManagerOpentIntents : Feature
+			[ this.RampUpTime  = 9]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  4 ]	
+			[ this.DeploymentTime = 1 ]
+			[ this.BatteryUsage = 5 ]
+			[ this.ResponseTime = 65 ]	
+		InHouseFileManager : Feature 
+			[ this.RampUpTime  = 8]
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  6 ]	
+			[ this.DeploymentTime = 0 ]	
+			[ this.BatteryUsage = 4 ]			
+			[ this.ResponseTime = 60 ]	
+	xor ReportSynchronization : Feature 
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		[ this.DeploymentTime = 0 ]	
+		[ this.BatteryUsage = 0 ]
+		[ this.ResponseTime = 0 ]
+		ExplicitReportsSync : Feature
+			[ this.RampUpTime  = 2]	 	 
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  6 ]	
+			[ this.DeploymentTime = 2 ]	
+			[ this.BatteryUsage = 3 ]	
+			[ this.ResponseTime = 30 ]	
+		ImplicitReportsSync : Feature 
+			[ this.RampUpTime  = 2]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  4 ]	
+			[ this.DeploymentTime = 1 ]	
+			[ this.BatteryUsage = 8 ]	
+			[ this.ResponseTime = 4 ]	
+	xor ChatProtocol : Feature 
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		[ this.DeploymentTime = 0 ]	
+		[ this.BatteryUsage = 0 ]
+		[ this.ResponseTime = 0 ]
+		OpenFire : Feature 
+			[ this.RampUpTime  = 6]		
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  6 ]	
+			[ this.DeploymentTime = 1 ]	
+			[ this.BatteryUsage = 5 ]	
+			[ this.ResponseTime = 60 ]	
+		InHouseChatProtocol : Feature 
+			[ this.RampUpTime  = 4]		
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  8 ]	
+			[ this.DeploymentTime = 0 ]	
+			[ this.BatteryUsage = 3 ]	
+			[ this.ResponseTime = 40 ]	
+	xor MapAccess : Feature	
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		[ this.DeploymentTime = 0 ]
+		[ this.BatteryUsage = 0 ]
+		[ this.ResponseTime = 0 ]
+		OnDemandGoogleSite : Feature
+			[ this.RampUpTime  = 9]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  18 ]	
+			[ this.DeploymentTime = 0 ]	
+			[ this.BatteryUsage = 4 ]	
+			[ this.ResponseTime = 800 ]	
+		CachedGoogleServer : Feature
+			[ this.RampUpTime  = 9]	 	
+			[ this.cost = 900 ]
+			[ this.DevelopmentTime  =  18 ]	
+			[ this.DeploymentTime = 4 ]	
+			[ this.BatteryUsage = 5 ]	
+			[ this.ResponseTime = 4 ]	
+		PreloadedEsri : Feature
+			[ this.RampUpTime  = 13]	 	
+			[ this.cost = 170 ]	
+			[ this.DevelopmentTime  =  27 ]	
+			[ this.DeploymentTime = 4 ]
+			[ this.BatteryUsage = 7 ]	
+			[ this.ResponseTime = 2 ]	
+	xor Connectivity : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		[ this.DeploymentTime = 0 ]	
+		[ this.BatteryUsage = 0 ]
+		[ this.ResponseTime = 0 ]
+		WiFi  : Feature
+	 		[ this.RampUpTime  = 3]	 	
+			[ this.cost = 80 ]	 	
+			[ this.DevelopmentTime  =  0 ]	
+			[ this.DeploymentTime = 6 ]
+			[ this.BatteryUsage = 4 ]	
+			[ this.ResponseTime = 35 ]	
+		ThreeGNexusOne : Feature
+			[ this.RampUpTime  = 2]	 	
+			[ this.cost = 400 ]	 	
+			[ this.DevelopmentTime  =  0 ]	
+			[ this.DeploymentTime = 3 ]
+			[ this.BatteryUsage = 2 ]	
+			[ this.ResponseTime = 25 ]	
+		ThreeDroid : Feature
+			[ this.RampUpTime  = 2]	 	
+			[ this.cost = 400 ]	 	
+			[ this.DevelopmentTime  =  0 ]	
+			[ this.DeploymentTime = 3 ]
+			[ this.BatteryUsage = 4 ]	
+			[ this.ResponseTime = 25 ]	
+		Bluetooth : Feature
+			[ this.RampUpTime  = 2]
+			[ this.cost = 70 ]	 	
+			[ this.DevelopmentTime  =  0 ]	
+			[ this.DeploymentTime = 5 ]
+			[ this.BatteryUsage = 3 ]	
+			[ this.ResponseTime = 30 ]	
+	xor Database : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		[ this.DeploymentTime = 0 ]	
+		[ this.BatteryUsage = 0 ]
+		[ this.ResponseTime = 0 ]
+		MySQL : Feature
+			[ this.RampUpTime  = 2]
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  17 ]	
+			[ this.DeploymentTime = 15 ]	
+			[ this.BatteryUsage = 6 ]	
+			[ this.ResponseTime = 25 ]	
+		sqLite  : Feature
+			[ this.RampUpTime  = 4]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  16 ]	
+			[ this.DeploymentTime = 14 ]	
+			[ this.BatteryUsage = 5 ]	
+			[ this.ResponseTime = 10 ]	
+	xor ArchitecturalStyle: Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		[ this.DeploymentTime = 0 ]	
+		[ this.BatteryUsage = 0 ]
+		[ this.ResponseTime = 0 ]
+		PeerToPeer  : Feature
+			[ this.RampUpTime  = 11]
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  26 ]	
+			[ this.DeploymentTime = 18 ]	
+			[ this.BatteryUsage = 8 ]	
+			[ this.ResponseTime = 20 ]	
+		ClientServer  : Feature
+			[ this.RampUpTime  = 8]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  16 ]	
+			[ this.DeploymentTime = 9 ]	
+			[ this.BatteryUsage = 6 ]	
+			[ this.ResponseTime = 30 ]	
+		PushBased  : Feature
+			[ this.RampUpTime  = 10]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  24 ]	
+			[ this.DeploymentTime = 9 ]	
+			[ this.BatteryUsage = 4 ]	
+			[ this.ResponseTime = 25 ]	
+	xor DataExchangeFormat : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		[ this.DeploymentTime = 0 ]	
+		[ this.BatteryUsage = 0 ]
+		[ this.ResponseTime = 0 ]
+		Xml  : Feature
+			[ this.RampUpTime  = 3]
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  7 ]	
+			[ this.DeploymentTime = 0 ]	
+			[ this.BatteryUsage = 4 ]	
+			[ this.ResponseTime = 35 ]	
+		CompressedXML  : Feature
+			[ this.RampUpTime  = 5]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  9 ]	
+			[ this.DeploymentTime = 0 ]	
+			[ this.BatteryUsage = 5 ]	
+			[ this.ResponseTime = 20 ]	
+		UnformattedData  : Feature
+			[ this.RampUpTime  = 2]
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  4 ]	
+			[ this.DeploymentTime = 0 ]	
+			[ this.BatteryUsage = 1 ]	
+			[ this.ResponseTime = 10 ]	
+	total_cost : integer
+		[ total_cost = sum Feature.cost ]
+	total_RampUpTime : integer
+		[ total_RampUpTime = sum Feature.RampUpTime ]	
+	total_DevelopmentTime : integer
+		[ total_DevelopmentTime = sum Feature.DevelopmentTime ]
+	total_DeploymentTime : integer
+		[ total_DeploymentTime = sum Feature.DeploymentTime ]		
+	total_BatteryUsage : integer
+		[ total_BatteryUsage = sum Feature.BatteryUsage ]		
+	total_ResponseTime : integer
+		[ total_ResponseTime = sum Feature.ResponseTime ]		
+
+concreteSearchAndRescueSystem : SearchAndRescueFM
+
+<< min concreteSearchAndRescueSystem.total_cost >>
+<< min concreteSearchAndRescueSystem.total_RampUpTime >>	
+<< min concreteSearchAndRescueSystem.total_DevelopmentTime >>	
+<< min concreteSearchAndRescueSystem.total_DeploymentTime >>
+<< min concreteSearchAndRescueSystem.total_BatteryUsage >>
+<< min concreteSearchAndRescueSystem.total_ResponseTime >>

@@ -1,0 +1,34 @@
+ConstraintMandatoryFeatures:c1:Choco.eq(c3_Apache, 1)
+ConstraintMandatoryFeatures:c2:Choco.eq(c4_Base, 1)
+ConstraintChildrenImpliesParent:c3:Choco.implies(Choco.eq(c4_Base, 1), Choco.eq(c3_Apache, 1))
+ConstraintMandatoryChildEqualParent:c4:Choco.eq(c4_Base, c3_Apache)
+ConstraintChildrenImpliesParent:c5:Choco.implies(Choco.eq(c10_HostnameLookups, 1), Choco.eq(c3_Apache, 1))
+ConstraintChildrenImpliesParent:c6:Choco.implies(Choco.eq(c17_KeepAlive, 1), Choco.eq(c3_Apache, 1))
+ConstraintChildrenImpliesParent:c7:Choco.implies(Choco.eq(c23_EnableSendfile, 1), Choco.eq(c3_Apache, 1))
+ConstraintChildrenImpliesParent:c8:Choco.implies(Choco.eq(c29_FollowSymLinks, 1), Choco.eq(c3_Apache, 1))
+ConstraintChildrenImpliesParent:c9:Choco.implies(Choco.eq(c35_AccessLog, 1), Choco.eq(c3_Apache, 1))
+ConstraintChildrenImpliesParent:c10:Choco.implies(Choco.eq(c42_ExtendedStatus, 1), Choco.eq(c3_Apache, 1))
+ConstraintChildrenImpliesParent:c11:Choco.implies(Choco.eq(c49_InMemory, 1), Choco.eq(c3_Apache, 1))
+ConstraintChildrenImpliesParent:c12:Choco.implies(Choco.eq(c57_Handle, 1), Choco.eq(c3_Apache, 1))
+ConstraintCrossTree:c13:Choco.implies(Choco.eq(c49_InMemory, 1), Choco.eq(c57_Handle, 0))
+BinaryVariable:c4_Base
+BinaryVariable:c10_HostnameLookups
+BinaryVariable:c17_KeepAlive
+BinaryVariable:c23_EnableSendfile
+BinaryVariable:c29_FollowSymLinks
+BinaryVariable:c35_AccessLog
+BinaryVariable:c42_ExtendedStatus
+BinaryVariable:c49_InMemory
+BinaryVariable:c57_Handle
+BinaryVariable:c3_Apache
+ProductLevelNfpAttribute:c2_performance
+ProductLevelNfpFeatureContribution:c2_performance,c4_Base,150
+ProductLevelNfpFeatureContribution:c2_performance,c10_HostnameLookups,-26
+ProductLevelNfpFeatureContribution:c2_performance,c17_KeepAlive,105
+ProductLevelNfpFeatureContribution:c2_performance,c23_EnableSendfile,15
+ProductLevelNfpFeatureContribution:c2_performance,c29_FollowSymLinks,0
+ProductLevelNfpFeatureContribution:c2_performance,c35_AccessLog,-15
+ProductLevelNfpFeatureContribution:c2_performance,c42_ExtendedStatus,-11
+ProductLevelNfpFeatureContribution:c2_performance,c49_InMemory,26
+ProductLevelNfpFeatureContribution:c2_performance,c57_Handle,4
+ObjectiveSense:True

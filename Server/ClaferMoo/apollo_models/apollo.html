@@ -1,0 +1,828 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Moolloy Model</title>
+</head>
+<body>
+<hr style="page-break-before: always">
+<h2>Metrics</h2>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Metric</th>
+<th align="left">Preference</th>
+<th align="left">Operator</th>
+<th align="left">Min</th>
+<th align="left">Max</th>
+</tr>
+<tr>
+<td>Risk</td>
+<td>max</td>
+<td>*</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>min</td>
+<td>+</td>
+<td>0.0</td>
+<td>null</td>
+</tr>
+</table>
+<hr style="page-break-before: always">
+<h2>Ranges of Options</h2>
+<h3>Yes_No</h3>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Min</th>
+<th align="left">Max</th>
+</tr>
+<tr>
+<td>yes</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr>
+<td>no</td>
+<td>null</td>
+<td>null</td>
+</tr>
+</table>
+<h3>Cryogenic_Storable_NA</h3>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Min</th>
+<th align="left">Max</th>
+</tr>
+<tr>
+<td>cryogenic</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr>
+<td>storable</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr>
+<td>NA</td>
+<td>null</td>
+<td>null</td>
+</tr>
+</table>
+<h3>Orbit_Direct</h3>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Min</th>
+<th align="left">Max</th>
+</tr>
+<tr>
+<td>orbit</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr>
+<td>direct</td>
+<td>null</td>
+<td>null</td>
+</tr>
+</table>
+<h3>Integer</h3>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Min</th>
+<th align="left">Max</th>
+</tr>
+<tr>
+<td>0</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr>
+<td>1</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr>
+<td>2</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr>
+<td>3</td>
+<td>null</td>
+<td>null</td>
+</tr>
+</table>
+<hr style="page-break-before: always">
+<h2>Decisions</h2>
+<h3>cmCrew</h3>
+<p> (Integer) </p>
+<table cellpadding="10">
+<tr>
+<td> Sorted by Metric </td>
+<td> Sorted by Option </td>
+</tr>
+<tr>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Metric</th>
+<th align="left">Option</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>1</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>2</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>3</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>1</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>2</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>3</td>
+<td>1.0</td>
+</tr>
+</table></td>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Metric</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>0</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+</table></td>
+</tr>
+</table>
+<h3>moonDeparture</h3>
+<p> (Orbit_Direct) </p>
+<table cellpadding="10">
+<tr>
+<td> Sorted by Metric </td>
+<td> Sorted by Option </td>
+</tr>
+<tr>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Metric</th>
+<th align="left">Option</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>direct</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>orbit</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>direct</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>orbit</td>
+<td>0.9</td>
+</tr>
+</table></td>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Metric</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>direct</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>direct</td>
+<td>Risk</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>orbit</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>orbit</td>
+<td>Risk</td>
+<td>0.9</td>
+</tr>
+</table></td>
+</tr>
+</table>
+<h3>LOR</h3>
+<p> (Yes_No) </p>
+<table cellpadding="10">
+<tr>
+<td> Sorted by Metric </td>
+<td> Sorted by Option </td>
+</tr>
+<tr>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Metric</th>
+<th align="left">Option</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>no</td>
+<td>apollo_functions.IMLEO</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>yes</td>
+<td>apollo_functions.IMLEO</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>no</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>yes</td>
+<td>0.95</td>
+</tr>
+</table></td>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Metric</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>no</td>
+<td>IMLEO</td>
+<td>apollo_functions.IMLEO</td>
+</tr>
+<tr>
+<td>no</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>yes</td>
+<td>IMLEO</td>
+<td>apollo_functions.IMLEO</td>
+</tr>
+<tr>
+<td>yes</td>
+<td>Risk</td>
+<td>0.95</td>
+</tr>
+</table></td>
+</tr>
+</table>
+<h3>lmFuel</h3>
+<p> (Cryogenic_Storable_NA) </p>
+<table cellpadding="10">
+<tr>
+<td> Sorted by Metric </td>
+<td> Sorted by Option </td>
+</tr>
+<tr>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Metric</th>
+<th align="left">Option</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>NA</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>cryogenic</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>storable</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>NA</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>cryogenic</td>
+<td>0.9025</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>storable</td>
+<td>1.0</td>
+</tr>
+</table></td>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Metric</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>NA</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>NA</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>cryogenic</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>cryogenic</td>
+<td>Risk</td>
+<td>0.9025</td>
+</tr>
+<tr>
+<td>storable</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>storable</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+</table></td>
+</tr>
+</table>
+<h3>lmCrew</h3>
+<p> (Integer) </p>
+<table cellpadding="10">
+<tr>
+<td> Sorted by Metric </td>
+<td> Sorted by Option </td>
+</tr>
+<tr>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Metric</th>
+<th align="left">Option</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>1</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>2</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>3</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>1</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>2</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>3</td>
+<td>1.0</td>
+</tr>
+</table></td>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Metric</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>0</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Risk</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>2</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+</table></td>
+</tr>
+</table>
+<h3>smFuel</h3>
+<p> (Cryogenic_Storable_NA) </p>
+<table cellpadding="10">
+<tr>
+<td> Sorted by Metric </td>
+<td> Sorted by Option </td>
+</tr>
+<tr>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Metric</th>
+<th align="left">Option</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>NA</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>cryogenic</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>storable</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>NA</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>cryogenic</td>
+<td>apollo_functions.Risk_smFuel</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>storable</td>
+<td>1.0</td>
+</tr>
+</table></td>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Metric</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>NA</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>NA</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>cryogenic</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>cryogenic</td>
+<td>Risk</td>
+<td>apollo_functions.Risk_smFuel</td>
+</tr>
+<tr>
+<td>storable</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>storable</td>
+<td>Risk</td>
+<td>1.0</td>
+</tr>
+</table></td>
+</tr>
+</table>
+<h3>moonArrival</h3>
+<p> (Orbit_Direct) </p>
+<table cellpadding="10">
+<tr>
+<td> Sorted by Metric </td>
+<td> Sorted by Option </td>
+</tr>
+<tr>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Metric</th>
+<th align="left">Option</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>direct</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>orbit</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>direct</td>
+<td>0.95</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>orbit</td>
+<td>0.99</td>
+</tr>
+</table></td>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Metric</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>direct</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>direct</td>
+<td>Risk</td>
+<td>0.95</td>
+</tr>
+<tr>
+<td>orbit</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>orbit</td>
+<td>Risk</td>
+<td>0.99</td>
+</tr>
+</table></td>
+</tr>
+</table>
+<h3>EOR</h3>
+<p> (Yes_No) </p>
+<table cellpadding="10">
+<tr>
+<td> Sorted by Metric </td>
+<td> Sorted by Option </td>
+</tr>
+<tr>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Metric</th>
+<th align="left">Option</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>no</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>yes</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>no</td>
+<td>0.98</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>yes</td>
+<td>0.95</td>
+</tr>
+</table></td>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Metric</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>no</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>no</td>
+<td>Risk</td>
+<td>0.98</td>
+</tr>
+<tr>
+<td>yes</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>yes</td>
+<td>Risk</td>
+<td>0.95</td>
+</tr>
+</table></td>
+</tr>
+</table>
+<h3>earthLaunch</h3>
+<p> (Orbit_Direct) </p>
+<table cellpadding="10">
+<tr>
+<td> Sorted by Metric </td>
+<td> Sorted by Option </td>
+</tr>
+<tr>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Metric</th>
+<th align="left">Option</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>direct</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>IMLEO</td>
+<td>orbit</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>direct</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>orbit</td>
+<td>0.99</td>
+</tr>
+</table></td>
+<td><table border="1">
+<tr bgcolor="#9acd32">
+<th align="left">Option</th>
+<th align="left">Metric</th>
+<th align="left">Function</th>
+</tr>
+<tr>
+<td>direct</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>direct</td>
+<td>Risk</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>orbit</td>
+<td>IMLEO</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>orbit</td>
+<td>Risk</td>
+<td>0.99</td>
+</tr>
+</table></td>
+</tr>
+</table>
+<hr style="page-break-before: always">
+<h2>Constraints</h2>
+<h3></h3>
+<h3></h3>
+<h3></h3>
+<h3></h3>
+<h3></h3>
+<h3></h3>
+</body>
+</html>

@@ -1,0 +1,119 @@
+abstract Feature
+	 RampUpTime : integer
+	 cost : integer
+	 
+abstract SearchAndRescueFM
+	xor LocationFinding : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		GPS : Feature
+			[ this.RampUpTime  = 6]		
+			[ this.cost  =  80 ]
+		RadioTriangulation : Feature
+	 		[ this.RampUpTime  = 8]					
+			[ this.cost  =  0 ]	
+	xor HardwarePlatform : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		NexusOneHTC : Feature
+			[ this.RampUpTime  = 0]	 	
+			[ this.cost = 525 ]	 	
+		DroidMotoroal : Feature
+			[ this.RampUpTime  = 0]	 	
+			[ this.cost = 520 ] 
+	xor FileSharing : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		FileManagerOpentIntents : Feature
+			[ this.RampUpTime  = 9]	 	
+			[ this.cost  =  0 ]	
+		InHouseFileManager : Feature 
+			[ this.RampUpTime  = 8]
+			[ this.cost  =  0 ]	
+	xor ReportSynchronization : Feature 
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		ExplicitReportsSync : Feature
+			[ this.RampUpTime  = 2]	 	 
+			[ this.cost  =  0 ]	
+		ImplicitReportsSync : Feature 
+			[ this.RampUpTime  = 2]	 	
+			[ this.cost  =  0 ]	
+	xor ChatProtocol : Feature 
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		OpenFire : Feature 
+			[ this.RampUpTime  = 6]		
+			[ this.cost  =  0 ]	
+		InHouseChatProtocol : Feature 
+			[ this.RampUpTime  = 4]		
+			[ this.cost  =  0 ]	
+	xor MapAccess : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		OnDemandGoogleSite : Feature
+			[ this.RampUpTime  = 9]	 	
+			[ this.cost  =  0 ]	
+		CachedGoogleServer : Feature
+			[ this.RampUpTime  = 9]	 	
+			[ this.cost = 900 ]
+		PreloadedEsri : Feature
+			[ this.RampUpTime  = 13]	 	
+			[ this.cost = 170 ]	
+	xor Connectivity : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		WiFi  : Feature
+	 		[ this.RampUpTime  = 3]	 	
+			[ this.cost = 80 ]	 	
+		ThreeGNexusOne : Feature
+			[ this.RampUpTime  = 2]	 	
+			[ this.cost = 400 ]	 	
+		ThreeDroid : Feature
+			[ this.RampUpTime  = 2]	 	
+			[ this.cost = 400 ]	 	
+		Bluetooth : Feature
+			[ this.RampUpTime  = 2]
+			[ this.cost = 70 ]	 	
+	xor Database : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		MySQL : Feature
+			[ this.RampUpTime  = 2]
+			[ this.cost  =  0 ]	
+		sqLite  : Feature
+			[ this.RampUpTime  = 4]	 	
+			[ this.cost  =  0 ]	
+	xor ArchitecturalStyle: Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		PeerToPeer  : Feature
+			[ this.RampUpTime  = 11]
+			[ this.cost  =  0 ]	
+		ClientServer  : Feature
+			[ this.RampUpTime  = 8]	 	
+			[ this.cost  =  0 ]	
+		PushBased  : Feature
+			[ this.RampUpTime  = 10]	 	
+			[ this.cost  =  0 ]	
+	xor DataExchangeFormat : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		Xml  : Feature
+			[ this.RampUpTime  = 3]
+			[ this.cost  =  0 ]	
+		CompressedXML  : Feature
+			[ this.RampUpTime  = 5]	 	
+			[ this.cost  =  0 ]	
+		UnformattedData  : Feature
+			[ this.RampUpTime  = 2]
+			[ this.cost  =  0 ]	
+	total_cost : integer
+		[ total_cost = LocationFinding.cost + GPS.cost + RadioTriangulation.cost + HardwarePlatform.cost + NexusOneHTC.cost + DroidMotoroal.cost + FileSharing.cost + FileManagerOpentIntents.cost + InHouseFileManager.cost + ReportSynchronization.cost + ExplicitReportsSync.cost + ImplicitReportsSync.cost + ChatProtocol.cost + OpenFire.cost + InHouseChatProtocol.cost + MapAccess.cost + OnDemandGoogleSite.cost + CachedGoogleServer.cost + PreloadedEsri.cost + Connectivity.cost + WiFi.cost + ThreeGNexusOne.cost + ThreeDroid.cost + Bluetooth.cost + Database.cost + MySQL.cost + sqLite.cost + ArchitecturalStyle.cost + PeerToPeer.cost + ClientServer.cost + PushBased.cost + DataExchangeFormat.cost + Xml.cost + CompressedXML.cost + UnformattedData.cost ]
+	total_RampUpTime : integer
+		[ total_RampUpTime = LocationFinding.RampUpTime + GPS.RampUpTime + RadioTriangulation.RampUpTime + HardwarePlatform.RampUpTime + NexusOneHTC.RampUpTime + DroidMotoroal.RampUpTime + FileSharing.RampUpTime + FileManagerOpentIntents.RampUpTime + InHouseFileManager.RampUpTime + ReportSynchronization.RampUpTime + ExplicitReportsSync.RampUpTime + ImplicitReportsSync.RampUpTime + ChatProtocol.RampUpTime + OpenFire.RampUpTime + InHouseChatProtocol.RampUpTime + MapAccess.RampUpTime + OnDemandGoogleSite.RampUpTime + CachedGoogleServer.RampUpTime + PreloadedEsri.RampUpTime + Connectivity.RampUpTime + WiFi.RampUpTime + ThreeGNexusOne.RampUpTime + ThreeDroid.RampUpTime + Bluetooth.RampUpTime + Database.RampUpTime + MySQL.RampUpTime + sqLite.RampUpTime + ArchitecturalStyle.RampUpTime + PeerToPeer.RampUpTime + ClientServer.RampUpTime + PushBased.RampUpTime + DataExchangeFormat.RampUpTime + Xml.RampUpTime + CompressedXML.RampUpTime + UnformattedData.RampUpTime ]	
+
+concreteSearchAndRescueSystem : SearchAndRescueFM
+
+<< min concreteSearchAndRescueSystem.total_cost >>
+<< min concreteSearchAndRescueSystem.total_RampUpTime >>	

@@ -1,0 +1,23 @@
+abstract Feature
+	RampUpTime : integer	
+	cost : integer
+	
+abstract SearchAndRescueFM
+	xor LocationFinding : Feature
+		[ this.RampUpTime = 0 ]
+		[ this.cost  =  0 ]		
+		GPS : Feature
+			[ this.RampUpTime  = 6]		
+			[ this.cost  =  80 ]
+		RadioTriangulation : Feature
+			[ this.RampUpTime  = 8]		
+			[ this.cost  =  0 ]						
+	total_cost : integer
+		[ total_cost = LocationFinding.cost + GPS.cost + RadioTriangulation.cost ]
+	total_RampUpTime : integer
+		[ total_RampUpTime = LocationFinding.RampUpTime + GPS.RampUpTime + RadioTriangulation.RampUpTime ]	
+
+concreteSearchAndRescueSystem : SearchAndRescueFM
+
+<< min concreteSearchAndRescueSystem.total_cost >>
+<< min concreteSearchAndRescueSystem.total_RampUpTime >>	

@@ -1,0 +1,265 @@
+<solution>
+	<instance>
+		<variable id='c473_SQLITE_OMIT_SUBQUERY'>
+			<value>1</value>
+		</variable>
+		<variable id='c354_SQLITE_OMIT_GET_TABLE'>
+			<value>1</value>
+		</variable>
+		<variable id='c262_SQLITE_OMIT_CAST'>
+			<value>1</value>
+		</variable>
+		<variable id='c486_SQLITE_OMIT_TEMPDB'>
+			<value>0</value>
+		</variable>
+		<variable id='c187_SQLITE_OMIT_ANALYZE'>
+			<value>1</value>
+		</variable>
+		<variable id='c340_SQLITE_OMIT_FLOATING_POINT'>
+			<value>1</value>
+		</variable>
+		<variable id='c361_SQLITE_OMIT_INCRBLOB'>
+			<value>1</value>
+		</variable>
+		<variable id='c526_SQLITE_OMIT_VIEW'>
+			<value>1</value>
+		</variable>
+		<variable id='c431_SQLITE_OMIT_PROGRESS_CALLBACK'>
+			<value>1</value>
+		</variable>
+		<variable id='c3_SQLite'>
+			<value>1</value>
+		</variable>
+		<variable id='c120_SQLITE_ENABLE_RTREE'>
+			<value>0</value>
+		</variable>
+		<variable id='c108_SQLITE_ENABLE_MEMSYS3'>
+			<value>0</value>
+		</variable>
+		<variable id='c382_SQLITE_OMIT_LOAD_EXTENSION'>
+			<value>1</value>
+		</variable>
+		<variable id='c290_SQLITE_OMIT_COMPOUND_SELECT'>
+			<value>1</value>
+		</variable>
+		<variable id='c144_SQLITE_SOUNDEX'>
+			<value>0</value>
+		</variable>
+		<variable id='c16_SQLITE_CASE_SENSITIVE_LIKE'>
+			<value>0</value>
+		</variable>
+		<variable id='c156_DisableFeatures'>
+			<value>1</value>
+		</variable>
+		<variable id='c201_SQLITE_OMIT_AUTHORIZATION'>
+			<value>1</value>
+		</variable>
+		<variable id='c235_SQLITE_OMIT_BETWEEN_OPTIMIZATION'>
+			<value>0</value>
+		</variable>
+		<variable id='c459_SQLITE_OMIT_SCHEMA_VERSION_PRAGMAS'>
+			<value>1</value>
+		</variable>
+		<variable id='c102_ChooseMemSys'>
+			<value>0</value>
+		</variable>
+		<variable id='c519_SQLITE_OMIT_VACUUM'>
+			<value>1</value>
+		</variable>
+		<variable id='c445_SQLITE_OMIT_REINDEX'>
+			<value>1</value>
+		</variable>
+		<variable id='c28_SQLITE_SECURE_DELETE'>
+			<value>0</value>
+		</variable>
+		<variable id='c255_SQLITE_OMIT_BUILTIN_TEST'>
+			<value>1</value>
+		</variable>
+		<variable id='c547_SQLITE_OMIT_XFER_OPT'>
+			<value>1</value>
+		</variable>
+		<variable id='c58_SQLITE_TEMP_STORE_EQ_3'>
+			<value>0</value>
+		</variable>
+		<variable id='c70_SQLITE_ENABLE_ATOMIC_WRITE'>
+			<value>0</value>
+		</variable>
+		<variable id='c540_SQLITE_OMIT_WAL'>
+			<value>1</value>
+		</variable>
+		<variable id='c438_SQLITE_OMIT_QUICKBALANCE'>
+			<value>1</value>
+		</variable>
+		<variable id='c333_SQLITE_OMIT_FLAG_PRAGMAS'>
+			<value>1</value>
+		</variable>
+		<variable id='c499_SQLITE_OMIT_TRIGGER'>
+			<value>1</value>
+		</variable>
+		<variable id='c492_SQLITE_OMIT_TRACE'>
+			<value>1</value>
+		</variable>
+		<variable id='c180_SQLITE_OMIT_ALTERTABLE'>
+			<value>1</value>
+		</variable>
+		<variable id='c424_SQLITE_OMIT_PRAGMA'>
+			<value>1</value>
+		</variable>
+		<variable id='c22_SQLITE_HAVE_ISNAN'>
+			<value>0</value>
+		</variable>
+		<variable id='c194_SQLITE_OMIT_ATTACH'>
+			<value>1</value>
+		</variable>
+		<variable id='c506_SQLITE_OMIT_TRUNCATE_OPTIMIZATION'>
+			<value>0</value>
+		</variable>
+		<variable id='c410_SQLITE_OMIT_OR_OPTIMIZATION'>
+			<value>1</value>
+		</variable>
+		<variable id='c241_SQLITE_OMIT_BLOB_LITERAL'>
+			<value>1</value>
+		</variable>
+		<variable id='c283_SQLITE_OMIT_COMPLETE'>
+			<value>1</value>
+		</variable>
+		<variable id='c403_SQLITE_OMIT_MEMORYDB'>
+			<value>1</value>
+		</variable>
+		<variable id='c90_SQLITE_ENABLE_FTS3_PARENTHESIS'>
+			<value>0</value>
+		</variable>
+		<variable id='c64_EnableFeatures'>
+			<value>1</value>
+		</variable>
+		<variable id='c533_SQLITE_OMIT_VIRTUALTABLE'>
+			<value>1</value>
+		</variable>
+		<variable id='c368_SQLITE_OMIT_INTEGRITY_CHECK'>
+			<value>1</value>
+		</variable>
+		<variable id='c228_SQLITE_OMIT_AUTOVACUUM'>
+			<value>1</value>
+		</variable>
+		<variable id='c138_SQLITE_ENABLE_UNLOCK_NOTIFY'>
+			<value>0</value>
+		</variable>
+		<variable id='c34_ChooseSQLITE_TEMP_STORE'>
+			<value>0</value>
+		</variable>
+		<variable id='c84_SQLITE_ENABLE_FTS3'>
+			<value>0</value>
+		</variable>
+		<variable id='c319_SQLITE_OMIT_DEPRECATED'>
+			<value>1</value>
+		</variable>
+		<variable id='c52_SQLITE_TEMP_STORE_EQ_2'>
+			<value>0</value>
+		</variable>
+		<variable id='c297_SQLITE_OMIT_CONFLICT_CLAUSE'>
+			<value>0</value>
+		</variable>
+		<variable id='c76_SQLITE_ENABLE_COLUMN_METADATA'>
+			<value>0</value>
+		</variable>
+		<variable id='c162_SQLITE_DISABLE_LFS'>
+			<value>0</value>
+		</variable>
+		<variable id='c168_SQLITE_DISABLE_DIRSYNC'>
+			<value>0</value>
+		</variable>
+		<variable id='c512_SQLITE_OMIT_UTF16'>
+			<value>1</value>
+		</variable>
+		<variable id='c4_OperatingSystemCharacteristics'>
+			<value>1</value>
+		</variable>
+		<variable id='c396_SQLITE_OMIT_LOOKASIDE'>
+			<value>1</value>
+		</variable>
+		<variable id='c150_YYTRACKMAXSTACKDEPTH'>
+			<value>0</value>
+		</variable>
+		<variable id='c126_SQLITE_ENABLE_STAT2'>
+			<value>0</value>
+		</variable>
+		<variable id='c452_SQLITE_OMIT_SCHEMA_PRAGMAS'>
+			<value>1</value>
+		</variable>
+		<variable id='c375_SQLITE_OMIT_LIKE_OPTIMIZATION'>
+			<value>1</value>
+		</variable>
+		<variable id='c174_OmitFeatures'>
+			<value>1</value>
+		</variable>
+		<variable id='c215_SQLITE_OMIT_AUTOMATIC_INDEX'>
+			<value>1</value>
+		</variable>
+		<variable id='c560_SQLITE_MEMDEBUG'>
+			<value>0</value>
+		</variable>
+		<variable id='c326_SQLITE_OMIT_EXPLAIN'>
+			<value>1</value>
+		</variable>
+		<variable id='c96_SQLITE_ENABLE_MEMORY_MANAGEMENT'>
+			<value>0</value>
+		</variable>
+		<variable id='c10_SQLITE_4_BYTE_ALIGNED_MALLOC'>
+			<value>1</value>
+		</variable>
+		<variable id='c466_SQLITE_OMIT_SHARED_CACHE'>
+			<value>1</value>
+		</variable>
+		<variable id='c389_SQLITE_OMIT_LOCALTIME'>
+			<value>1</value>
+		</variable>
+		<variable id='c114_SQLITE_ENABLE_MEMSYS5'>
+			<value>0</value>
+		</variable>
+		<variable id='c310_SQLITE_OMIT_DECLTYPE'>
+			<value>1</value>
+		</variable>
+		<variable id='c208_SQLITE_OMIT_AUTOINCREMENT'>
+			<value>1</value>
+		</variable>
+		<variable id='c269_SQLITE_OMIT_CHECK'>
+			<value>1</value>
+		</variable>
+		<variable id='c554_SQLITE_DEBUG'>
+			<value>0</value>
+		</variable>
+		<variable id='c417_SQLITE_OMIT_PAGER_PRAGMAS'>
+			<value>1</value>
+		</variable>
+		<variable id='c222_SQLITE_OMIT_AUTOINIT'>
+			<value>0</value>
+		</variable>
+		<variable id='c276_SQLITE_OMIT_COMPILEOPTION_DIAGS'>
+			<value>1</value>
+		</variable>
+		<variable id='c303_SQLITE_OMIT_DATETIME_FUNCS'>
+			<value>1</value>
+		</variable>
+		<variable id='c480_SQLITE_OMIT_TCL_VARIABLE'>
+			<value>0</value>
+		</variable>
+		<variable id='c347_SQLITE_OMIT_FOREIGN_KEY'>
+			<value>1</value>
+		</variable>
+		<variable id='c46_SQLITE_TEMP_STORE_EQ_1'>
+			<value>0</value>
+		</variable>
+		<variable id='c132_SQLITE_ENABLE_UPDATE_DELETE_LIMIT'>
+			<value>0</value>
+		</variable>
+		<variable id='c40_SQLITE_TEMP_STORE_EQ_0'>
+			<value>0</value>
+		</variable>
+		<variable id='c248_SQLITE_OMIT_BTREECOUNT'>
+			<value>1</value>
+		</variable>
+		<variable id='c2_footprint'>
+			<value>-299</value>
+		</variable>
+	</instance>
+</solution>

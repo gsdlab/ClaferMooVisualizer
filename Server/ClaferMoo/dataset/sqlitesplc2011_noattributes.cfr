@@ -1,0 +1,98 @@
+// Adapated from Scalable Prediction of Non-functional Properties in Software Product Lines.
+// Scaled down by dividing numbers by 2000 and rounding.
+//To execute in alloy: run  show for ...
+
+
+abstract IMeasurable
+
+
+abstract SQLite
+	OperatingSystemCharacteristics : IMeasurable 
+		SQLITE_4_BYTE_ALIGNED_MALLOC : IMeasurable 
+		SQLITE_CASE_SENSITIVE_LIKE : IMeasurable  ?
+		SQLITE_HAVE_ISNAN : IMeasurable  ?
+		SQLITE_SECURE_DELETE : IMeasurable  ?
+		xor ChooseSQLITE_TEMP_STORE : IMeasurable  ?
+			SQLITE_TEMP_STORE_EQ_0 : IMeasurable 
+			SQLITE_TEMP_STORE_EQ_1 : IMeasurable 
+			SQLITE_TEMP_STORE_EQ_2 : IMeasurable 
+			SQLITE_TEMP_STORE_EQ_3 : IMeasurable 
+	EnableFeatures : IMeasurable 
+		SQLITE_ENABLE_ATOMIC_WRITE : IMeasurable  ?
+		SQLITE_ENABLE_COLUMN_METADATA : IMeasurable  ?
+			[ !SQLITE_OMIT_DECLTYPE ]
+		SQLITE_ENABLE_FTS3 : IMeasurable  ?
+		SQLITE_ENABLE_FTS3_PARENTHESIS : IMeasurable  ?
+		SQLITE_ENABLE_MEMORY_MANAGEMENT : IMeasurable  ?
+		xor ChooseMemSys : IMeasurable  ?
+			SQLITE_ENABLE_MEMSYS3 : IMeasurable 
+			SQLITE_ENABLE_MEMSYS5 : IMeasurable 
+		SQLITE_ENABLE_RTREE : IMeasurable  ?
+		SQLITE_ENABLE_STAT2 : IMeasurable  ?
+		SQLITE_ENABLE_UPDATE_DELETE_LIMIT : IMeasurable  ?
+		SQLITE_ENABLE_UNLOCK_NOTIFY : IMeasurable  ?
+		SQLITE_SOUNDEX : IMeasurable  ?
+		YYTRACKMAXSTACKDEPTH : IMeasurable  ?
+	DisableFeatures : IMeasurable 
+		SQLITE_DISABLE_LFS : IMeasurable  ?
+		SQLITE_DISABLE_DIRSYNC : IMeasurable  ?
+	OmitFeatures : IMeasurable 
+		SQLITE_OMIT_ALTERTABLE : IMeasurable  ?
+		SQLITE_OMIT_ANALYZE : IMeasurable  ?
+		SQLITE_OMIT_ATTACH : IMeasurable  ?
+		SQLITE_OMIT_AUTHORIZATION : IMeasurable  ?
+		SQLITE_OMIT_AUTOINCREMENT : IMeasurable  ?
+		SQLITE_OMIT_AUTOMATIC_INDEX : IMeasurable  ?
+		SQLITE_OMIT_AUTOINIT : IMeasurable  ?
+		SQLITE_OMIT_AUTOVACUUM : IMeasurable  ?
+		SQLITE_OMIT_BETWEEN_OPTIMIZATION : IMeasurable  ?
+		SQLITE_OMIT_BLOB_LITERAL : IMeasurable  ?
+		SQLITE_OMIT_BTREECOUNT : IMeasurable  ?
+		SQLITE_OMIT_BUILTIN_TEST : IMeasurable  ?
+		SQLITE_OMIT_CAST : IMeasurable  ?
+		SQLITE_OMIT_CHECK : IMeasurable  ?
+		SQLITE_OMIT_COMPILEOPTION_DIAGS : IMeasurable  ?
+		SQLITE_OMIT_COMPLETE : IMeasurable  ?
+		SQLITE_OMIT_COMPOUND_SELECT : IMeasurable  ?
+		SQLITE_OMIT_CONFLICT_CLAUSE : IMeasurable  ?
+		SQLITE_OMIT_DATETIME_FUNCS : IMeasurable  ?
+		SQLITE_OMIT_DECLTYPE : IMeasurable  ?
+			[ !SQLITE_ENABLE_COLUMN_METADATA ]
+		SQLITE_OMIT_DEPRECATED : IMeasurable  ?
+		SQLITE_OMIT_EXPLAIN : IMeasurable  ?
+		SQLITE_OMIT_FLAG_PRAGMAS : IMeasurable  ?
+		SQLITE_OMIT_FLOATING_POINT : IMeasurable  ?
+		SQLITE_OMIT_FOREIGN_KEY : IMeasurable  ?
+		SQLITE_OMIT_GET_TABLE : IMeasurable  ?
+		SQLITE_OMIT_INCRBLOB : IMeasurable  ?
+		SQLITE_OMIT_INTEGRITY_CHECK : IMeasurable  ?
+		SQLITE_OMIT_LIKE_OPTIMIZATION : IMeasurable  ?
+		SQLITE_OMIT_LOAD_EXTENSION : IMeasurable  ?
+		SQLITE_OMIT_LOCALTIME : IMeasurable  ?
+		SQLITE_OMIT_LOOKASIDE : IMeasurable  ?
+		SQLITE_OMIT_MEMORYDB : IMeasurable  ?
+		SQLITE_OMIT_OR_OPTIMIZATION : IMeasurable  ?
+		SQLITE_OMIT_PAGER_PRAGMAS : IMeasurable  ?
+		SQLITE_OMIT_PRAGMA : IMeasurable  ?
+		SQLITE_OMIT_PROGRESS_CALLBACK : IMeasurable  ?
+		SQLITE_OMIT_QUICKBALANCE : IMeasurable  ?
+		SQLITE_OMIT_REINDEX : IMeasurable  ?
+		SQLITE_OMIT_SCHEMA_PRAGMAS : IMeasurable  ?
+		SQLITE_OMIT_SCHEMA_VERSION_PRAGMAS : IMeasurable  ?
+		SQLITE_OMIT_SHARED_CACHE : IMeasurable  ?
+		SQLITE_OMIT_SUBQUERY : IMeasurable  ?
+		SQLITE_OMIT_TCL_VARIABLE : IMeasurable  ?
+		SQLITE_OMIT_TEMPDB : IMeasurable  ?
+		SQLITE_OMIT_TRACE : IMeasurable  ?
+		SQLITE_OMIT_TRIGGER : IMeasurable  ?
+		SQLITE_OMIT_TRUNCATE_OPTIMIZATION : IMeasurable  ?
+		SQLITE_OMIT_UTF16 : IMeasurable  ?
+		SQLITE_OMIT_VACUUM : IMeasurable  ?
+		SQLITE_OMIT_VIEW : IMeasurable  ?
+		SQLITE_OMIT_VIRTUALTABLE : IMeasurable  ?
+		SQLITE_OMIT_WAL : IMeasurable  ?
+		SQLITE_OMIT_XFER_OPT : IMeasurable  ?
+	SQLITE_DEBUG : IMeasurable  ?
+	SQLITE_MEMDEBUG : IMeasurable  ?
+
+

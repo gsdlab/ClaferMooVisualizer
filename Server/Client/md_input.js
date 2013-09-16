@@ -154,10 +154,11 @@ Input.method("fileSent", function(responseText, statusText, xhr, $form)  {
 //});
 
 Input.method("handleError", function(responseText, statusText, xhr)  { 
+	clearTimeout(this.pollingTimeoutObject);
 //	clearTimeout(this.timeout);
 	var er = document.getElementById("error_overlay");
 	er.style.visibility = "visible";	
-	document.getElementById("error_report").innerHTML = ('<input id="close_error" type="image" src="images/no.png" alt="close" style="position: relative; left: -325px; top: 0px; width: 20px; height: 20px;"><p>' + xhr + '<br>' + responseText.replace("\n", "<br>") + "</p>");
+	document.getElementById("error_report").innerHTML = ('<input id="close_error" type="image" src="images/no.png" alt="close" style="position: relative; left: -325px; top: 0px; width: 20px; height: 20px;"><p>' + xhr + '<br>' + responseText.responseText.replace("\n", "<br>") + "</p>");
 	document.getElementById("close_error").onclick = function(){ 
 		document.getElementById("error_overlay").style.visibility = "hidden";
 	};

@@ -1,0 +1,20 @@
+// Adapated from Scalable Prediction of Non-functional Properties in Software Product Lines.
+// Scaled down by dividing numbers by 8 and rounding.
+//To execute in alloy: run  show for ...
+
+
+abstract IMeasurable
+
+
+abstract Apache
+	Base : IMeasurable 
+	HostnameLookups : IMeasurable  ?
+	KeepAlive : IMeasurable  ?
+	EnableSendfile : IMeasurable  ?
+	FollowSymLinks : IMeasurable  ?
+	AccessLog : IMeasurable  ?
+	ExtendedStatus : IMeasurable  ?
+	InMemory : IMeasurable  ?
+		[ !Handle ]
+	Handle : IMeasurable  ?
+

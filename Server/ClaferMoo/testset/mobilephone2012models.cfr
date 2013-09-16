@@ -1,0 +1,36 @@
+abstract Feature
+	performance : integer
+	cost : integer
+	
+abstract SecurityFeature : Feature
+	security : integer
+		
+abstract MobilePhone
+	xor Connectivity : Feature
+		[ this.performance = 0]
+		[ this.cost = 0]
+		Bluetooth : Feature
+			[ this.performance = 300]
+			[ this.cost = 150 ]		
+		USB : Feature
+			[ this.performance = 500]
+			[ this.cost = 35 ]		
+		Wifi : Feature	
+			[ this.performance = 725]
+			[ this.cost = 85 ]
+	PasswordProtection : SecurityFeature ?
+		[ this.security = 1]
+		[ this.performance = 20]
+		[ this.cost = 10 ]
+	total_performance : integer
+	[ total_performance = sum Feature.performance ]
+	total_cost : integer
+	[ total_cost = sum Feature.cost ]
+	total_security : integer
+	[ total_security = sum SecurityFeature.security ]
+
+MyPhone : MobilePhone
+
+<< max MyPhone.total_performance >>
+<< min MyPhone.total_cost >>
+<< max MyPhone.total_security >>	

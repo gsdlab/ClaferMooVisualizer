@@ -1,0 +1,111 @@
+<Declaration xsi:type="cl:IConstraint">
+  <IsHard>true</IsHard>
+  <ParentExp>
+    <Type xsi:type="cl:IBoolean" />
+    <ParentId>c84_exp</ParentId>
+    <Position>
+      <Start>
+        <IntLiteral>37</IntLiteral>
+        <IntLiteral>19</IntLiteral>
+      </Start>
+      <End>
+        <IntLiteral>37</IntLiteral>
+        <IntLiteral>31</IntLiteral>
+      </End>
+    </Position>
+    <Exp xsi:type="cl:IDeclarationParentExp">
+      <Quantifier xsi:type="cl:ISome" />
+      <BodyParentExp>
+        <Type xsi:type="cl:ISet" />
+        <ParentId>c85_exp</ParentId>
+        <Position>
+          <Start>
+            <IntLiteral>0</IntLiteral>
+            <IntLiteral>0</IntLiteral>
+          </Start>
+          <End>
+            <IntLiteral>0</IntLiteral>
+            <IntLiteral>0</IntLiteral>
+          </End>
+        </Position>
+        <Exp xsi:type="cl:IFunctionExp">
+          <Operation>.</Operation>
+          <Argument>
+            <Type xsi:type="cl:ISet" />
+            <ParentId></ParentId>
+            <Position>
+              <Start>
+                <IntLiteral>0</IntLiteral>
+                <IntLiteral>0</IntLiteral>
+              </Start>
+              <End>
+                <IntLiteral>0</IntLiteral>
+                <IntLiteral>0</IntLiteral>
+              </End>
+            </Position>
+            <Exp xsi:type="cl:IFunctionExp">
+              <Operation>.</Operation>
+              <Argument>
+                <Type xsi:type="cl:ISet" />
+                <ParentId></ParentId>
+                <Position>
+                  <Start>
+                    <IntLiteral>0</IntLiteral>
+                    <IntLiteral>0</IntLiteral>
+                  </Start>
+                  <End>
+                    <IntLiteral>0</IntLiteral>
+                    <IntLiteral>0</IntLiteral>
+                  </End>
+                </Position>
+                <Exp xsi:type="cl:IClaferId">
+                  <ModuleName></ModuleName>
+                  <Id>this</Id>
+                  <IsTop>true</IsTop>
+                </Exp>
+              </Argument>
+              <Argument>
+                <Type xsi:type="cl:ISet" />
+                <ParentId></ParentId>
+                <Position>
+                  <Start>
+                    <IntLiteral>0</IntLiteral>
+                    <IntLiteral>0</IntLiteral>
+                  </Start>
+                  <End>
+                    <IntLiteral>0</IntLiteral>
+                    <IntLiteral>0</IntLiteral>
+                  </End>
+                </Position>
+                <Exp xsi:type="cl:IClaferId">
+                  <ModuleName></ModuleName>
+                  <Id>parent</Id>
+                  <IsTop>true</IsTop>
+                </Exp>
+              </Argument>
+            </Exp>
+          </Argument>
+          <Argument>
+            <Type xsi:type="cl:ISet" />
+            <ParentId></ParentId>
+            <Position>
+              <Start>
+                <IntLiteral>0</IntLiteral>
+                <IntLiteral>0</IntLiteral>
+              </Start>
+              <End>
+                <IntLiteral>0</IntLiteral>
+                <IntLiteral>0</IntLiteral>
+              </End>
+            </Position>
+            <Exp xsi:type="cl:IClaferId">
+              <ModuleName></ModuleName>
+              <Id>c47_AbstractSort</Id>
+              <IsTop>false</IsTop>
+            </Exp>
+          </Argument>
+        </Exp>
+      </BodyParentExp>
+    </Exp>
+  </ParentExp>
+</Declaration>

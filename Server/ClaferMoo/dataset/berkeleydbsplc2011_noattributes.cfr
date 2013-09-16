@@ -1,0 +1,20 @@
+// Adapated from Scalable Prediction of Non-functional Properties in Software Product Lines.
+// Scaled down by dividing numbers by 2048 and rounding.
+//To execute in alloy: run  show for ...
+
+
+abstract IMeasurable
+
+
+abstract BerkeleyDbC
+	HAVE_CRYPTO : IMeasurable  ?
+	HAVE_HASH : IMeasurable  ?
+	HAVE_QUEUE : IMeasurable  ?
+	HAVE_REPLICATION : IMeasurable  ?
+	HAVE_VERIFY : IMeasurable  ?
+	HAVE_SEQUENCE : IMeasurable  ?
+	HAVE_STATISTICS : IMeasurable  ?
+	DIAGNOSTIC : IMeasurable  ?
+	SYNTETHIC_BASE_FEATURE : IMeasurable
+
+

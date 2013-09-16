@@ -1,0 +1,30 @@
+// Adapated from Scalable Prediction of Non-functional Properties in Software Product Lines.
+// Scaled down by dividing numbers by 10 and rounding.
+//To execute in alloy: run  show for ...
+
+
+abstract IMeasurable
+
+abstract LinkedList
+	xor AbstractElement : IMeasurable 
+		ElementA : IMeasurable 
+		ElementB : IMeasurable 
+		ElementC : IMeasurable 
+	xor AbstractIterator : IMeasurable 
+		ForwardIterator : IMeasurable 
+		BackwardIterator : IMeasurable 
+	xor AbstractSort : IMeasurable  ?
+		BubbleSort : IMeasurable 
+		MergeSort : IMeasurable 
+		InsertionSort : IMeasurable 
+		QuickSort : IMeasurable 
+	print : IMeasurable  ?
+	Measurement : IMeasurable  ?
+		[ AbstractSort ]
+		TCP_IP : IMeasurable
+		or SyntheticPerformanceOrMemorySize : IMeasurable
+			Performance : IMeasurable 
+			MemorySize : IMeasurable 
+	Base : IMeasurable 
+
+//Mandatory Features all configurations will have: Base AbstractElement AbstractIterator 

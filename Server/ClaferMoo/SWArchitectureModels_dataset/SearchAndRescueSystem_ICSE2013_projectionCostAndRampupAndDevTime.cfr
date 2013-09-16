@@ -1,0 +1,158 @@
+abstract Feature
+	RampUpTime : integer
+	cost : integer
+	DevelopmentTime : integer
+				 
+abstract SearchAndRescueFM
+	xor LocationFinding : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]
+		[ this.DevelopmentTime = 0 ]	
+		GPS : Feature
+			[ this.RampUpTime  = 6]		
+			[ this.cost  =  80 ]
+			[ this.DevelopmentTime  =  4 ]	
+		RadioTriangulation : Feature
+	 		[ this.RampUpTime  = 8]					
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  14 ]	
+	xor HardwarePlatform : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		NexusOneHTC : Feature
+			[ this.RampUpTime  = 0]	 	
+			[ this.cost = 525 ]	 	
+			[ this.DevelopmentTime  =  0 ]	
+		DroidMotoroal : Feature
+			[ this.RampUpTime  = 0]	 	
+			[ this.cost = 520 ] 
+			[ this.DevelopmentTime  =  0 ]	
+	xor FileSharing : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		FileManagerOpentIntents : Feature
+			[ this.RampUpTime  = 9]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  4 ]	
+		InHouseFileManager : Feature 
+			[ this.RampUpTime  = 8]
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  6 ]	
+	xor ReportSynchronization : Feature 
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		ExplicitReportsSync : Feature
+			[ this.RampUpTime  = 2]	 	 
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  6 ]	
+		ImplicitReportsSync : Feature 
+			[ this.RampUpTime  = 2]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  4 ]	
+	xor ChatProtocol : Feature 
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		OpenFire : Feature 
+			[ this.RampUpTime  = 6]		
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  6 ]	
+		InHouseChatProtocol : Feature 
+			[ this.RampUpTime  = 4]		
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  8 ]	
+	xor MapAccess : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		OnDemandGoogleSite : Feature
+			[ this.RampUpTime  = 9]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  18 ]	
+		CachedGoogleServer : Feature
+			[ this.RampUpTime  = 9]	 	
+			[ this.cost = 900 ]
+			[ this.DevelopmentTime  =  18 ]	
+		PreloadedEsri : Feature
+			[ this.RampUpTime  = 13]	 	
+			[ this.cost = 170 ]	
+			[ this.DevelopmentTime  =  27 ]	
+	xor Connectivity : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		WiFi  : Feature
+	 		[ this.RampUpTime  = 3]	 	
+			[ this.cost = 80 ]	 	
+			[ this.DevelopmentTime  =  0 ]	
+		ThreeGNexusOne : Feature
+			[ this.RampUpTime  = 2]	 	
+			[ this.cost = 400 ]	 	
+			[ this.DevelopmentTime  =  0 ]	
+		ThreeDroid : Feature
+			[ this.RampUpTime  = 2]	 	
+			[ this.cost = 400 ]	 	
+			[ this.DevelopmentTime  =  0 ]	
+		Bluetooth : Feature
+			[ this.RampUpTime  = 2]
+			[ this.cost = 70 ]	 	
+			[ this.DevelopmentTime  =  0 ]	
+	xor Database : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		MySQL : Feature
+			[ this.RampUpTime  = 2]
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  17 ]	
+		sqLite  : Feature
+			[ this.RampUpTime  = 4]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  16 ]	
+	xor ArchitecturalStyle: Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		PeerToPeer  : Feature
+			[ this.RampUpTime  = 11]
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  26 ]	
+		ClientServer  : Feature
+			[ this.RampUpTime  = 8]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  16 ]	
+		PushBased  : Feature
+			[ this.RampUpTime  = 10]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  24 ]	
+	xor DataExchangeFormat : Feature
+		[ this.RampUpTime = 0]		
+		[ this.cost  =  0 ]	
+		[ this.DevelopmentTime = 0 ]	
+		Xml  : Feature
+			[ this.RampUpTime  = 3]
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  7 ]	
+		CompressedXML  : Feature
+			[ this.RampUpTime  = 5]	 	
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  9 ]	
+		UnformattedData  : Feature
+			[ this.RampUpTime  = 2]
+			[ this.cost  =  0 ]	
+			[ this.DevelopmentTime  =  4 ]	
+	total_cost : integer
+		[ total_cost = sum Feature.cost ]
+	total_RampUpTime : integer
+		[ total_RampUpTime = sum Feature.RampUpTime ]	
+	total_DevelopmentTime : integer
+		[ total_DevelopmentTime = sum Feature.DevelopmentTime ]
+		
+concreteSearchAndRescueSystem : SearchAndRescueFM
+
+<< min concreteSearchAndRescueSystem.total_cost >>
+<< min concreteSearchAndRescueSystem.total_RampUpTime >>	
+<< min concreteSearchAndRescueSystem.total_DevelopmentTime >>	
