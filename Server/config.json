@@ -1,5 +1,5 @@
 {
 	"pythonPath": "python",
-	"port": "8080",
+	"port": "5002",
 	"timeout": 1800000
 }
