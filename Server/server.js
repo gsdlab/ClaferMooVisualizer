@@ -188,7 +188,7 @@ server.post('/upload', function(req, res, next) {
 					if (code === 0) 
 					{				
 						result = "Return code = " + code + "\n" + data_result + "=====";
-						var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '_desugared.xml'));
+						var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
 						result += xml.toString();
 						
 						result = escapeHtml(result);
