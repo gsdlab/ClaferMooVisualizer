@@ -37,7 +37,7 @@ $(document).ready(function()
     
     modules.push("Goals");
     modules.push("Graph");
-    modules.push("Console");
+//    modules.push("Console");
     modules.push("Input");
 //    modules.push("UseCases");
     modules.push("Analysis");
@@ -154,7 +154,14 @@ Host.method("updateData", function(data)
         if (this.modules[i].onDataLoaded)
             this.modules[i].onDataLoaded(data);
     }
-
+    
+    if (console && console.log)
+    {
+        console.log(data.claferXML);
+        console.log(data.instancesXML);
+        console.log(data.output);
+    }
+    
     for (var i = 0; i < this.modules.length; i++)
     {
         if (this.modules[i].getContent)
