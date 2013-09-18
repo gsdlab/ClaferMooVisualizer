@@ -134,12 +134,14 @@ server.post('/poll', function(req, res, next)
  * Handle file upload
  */
 server.post('/upload', function(req, res, next) {
+	console.log("---------------------------");
 	console.log("/Upload request initiated.");
 
 	//check if client has either a file directly uploaded or a url location of a file
    	if (req.files.claferFile === undefined){
    			for (var x=0; x <= URLs.length; x++){
    				if (x === URLs.length){
+                	console.log("No Clafer file submitted. Returning...");
 		    		res.writeHead(200, { "Content-Type": "text/html"});
 					res.end("no clafer file submitted");
    					return;
@@ -152,14 +154,14 @@ server.post('/upload', function(req, res, next) {
    						i = i+1;
    					}
    					uploadedFilePath = uploadedFilePath + i.toString() + ".cfr";
-					console.log("downloading file at " + URLs[x].url);
+					console.log('Downloading file at "' + URLs[x].url + '"...');
 					var file = fs.createWriteStream(uploadedFilePath);
 					http.get(URLs[x].url, function(res){
 						res.on('data', function (data) {
 							file.write(data);
 						}).on('end', function(){
 							file.end();
-							console.log("file downloaded to ./uploads");
+							console.log("File downloaded to ./uploads");
 						});
 					});
 					URLs.splice(x,1);
@@ -175,9 +177,9 @@ server.post('/upload', function(req, res, next) {
 	while(fs.existsSync("./uploads/" + i + "tempfolder/")){
 		i++;
 	}
-	console.log(uploadedFilePath);
+	console.log("Uploaded file: " + uploadedFilePath);
 	var pathTokens = "." + uploadedFilePath.split("Server")[1];
-	console.log(pathTokens);
+	console.log("Partial path: " + pathTokens);
 	
     pathTokensLinux = pathTokens.split("/");
     pathTokensWindows = pathTokens.split("\\");
@@ -187,7 +189,7 @@ server.post('/upload', function(req, res, next) {
     else    
         pathTokens = pathTokensLinux;
 	
-	console.log(pathTokens);
+	console.log('Path tokens: "' + pathTokens.join('; ') + '"');
     var oldPath = uploadedFilePath
 	uploadedFilePath = __dirname + "/" + pathTokens[1] + "/" + i + "tempfolder/"; // this slash will work anyways
 	fs.mkdir(uploadedFilePath, function (err){
@@ -197,7 +199,7 @@ server.post('/upload', function(req, res, next) {
 		fs.rename(oldPath, uploadedFilePath, function (err){
 			if (err) throw err;
 			var file_contents;
-			console.log("proceeding with " + uploadedFilePath);
+			console.log("Proceeding with " + uploadedFilePath);
             
 		    // read the contents of the uploaded file
 			fs.readFile(uploadedFilePath, function (err, data) {
@@ -207,7 +209,7 @@ server.post('/upload', function(req, res, next) {
 		    	else
                 {
 		    		res.writeHead(500, { "Content-Type": "text/html"});
-					res.end("No Data has been read");
+					res.end("No data has been read");
 					cleanupOldFiles(uploadedFilePath, dlDir);
 					return;
 		    	}
@@ -217,6 +219,7 @@ server.post('/upload', function(req, res, next) {
 
 				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data")
                 {
+                    console.log("Instances have been submitted, returning them...");                
                     process.result = file_contents;
                     process.code = 0;
                     process.completed = true;
@@ -226,7 +229,7 @@ server.post('/upload', function(req, res, next) {
                     res.end("OK"); // just means the file has been sent sucessfully and started to processing
                     return;
 				}
-				console.log("processing file with integratedFMO");
+				console.log("Processing file with ClaferMoo...");
 
                 try
                 {
@@ -293,6 +296,7 @@ server.post('/upload', function(req, res, next) {
 				tool.on('exit', function (code) 
 				{
 					var result = "";
+                    console.log("Process OnExit handler...");
                     
                     if (process.killed) // has been terminated
                     {
@@ -305,7 +309,7 @@ server.post('/upload', function(req, res, next) {
                         return;
                     }
 
-                    console.log("Preparing to send result");
+                    console.log("Preparing to send the result...");
                     
 					if(error_result.indexOf('Exception in thread "main"') > -1){
 						code = 1;
@@ -326,6 +330,7 @@ server.post('/upload', function(req, res, next) {
                     process.result = result;
                     process.code = code;
                     process.completed = true;
+                    console.log("The result has been sent.");                    
                     
                     if (process.timeoutObject)
                         clearTimeout(process.timeoutObject);
@@ -346,19 +351,20 @@ function finishCleanup(dir, results){
 	if (fs.existsSync(dir)){
 		fs.rmdir(dir, function (err) {
   			if (err) throw err;
- 			console.log("successfully deleted " + dir + " along with contents:\n" + results);
+ 			console.log("Successfully deleted " + dir + " along with contents:\n" + results);
 		});
 	}
 }
  
 function cleanupOldFiles(path, dir) {
-
+                    
+    console.log("Cleaning temporary files...");                    
 	//cleanup old files
 	fs.readdir(dir, function(err, files){
 		if (err) throw err;
 		var results = "";
 		var numFiles = files.length;
-		console.log("#files = " + numFiles);
+		console.log("#Files = " + numFiles);
 		if (!numFiles){
 			return finishCleanup(dir, results);
 		} else {
