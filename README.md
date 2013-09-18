@@ -1,7 +1,7 @@
 ClaferMooVisualizer
 ===================
 
-v0.3.3.14-8-2013
+v0.3.4.18-9-2013
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 
