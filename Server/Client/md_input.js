@@ -156,9 +156,15 @@ Input.method("handleError", function(response, statusText, xhr)  {
     var caption;
     
     if (statusText == "timeout")
-        caption = "Request Timeout. <br> Please check whether the server is available.";
+        caption = "Request Timeout. <br>Please check whether the server is available.";
+    else if (statusText == "malformed_output")
+        caption = "Malformed output received from ClaferMoo. <br>Please check whether you are using the correct version of ClaferMoo. Also, an unhandled exception is possible.";        
+    else if (statusText == "empty_instances")
+        caption = "No instances returned. Possible reasons:<br><ul><li>No optimal instances, all variants are non-optimal.</li><li>An unhandled exception occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.</li></ul>.";        
+    else if (statusText == "empty_argument")
+        caption = "Empty argument given to processToolResult. <br>Please report this error.";        
     else if (statusText == "error" && response.responseText == "")
-        caption = "Request Error. <br> Please check whether the server is available.";        
+        caption = "Request Error. <br>Please check whether the server is available.";        
     else
         caption = xhr + '<br>' + response.responseText.replace("\n", "<br>");
     
@@ -244,8 +250,12 @@ Input.method("inputChange", function(){
 
 Input.method("processToolResult", function(result)
 {
-
-	if (!result) return;	
+	if (!result)
+    {
+        this.handleError(null, "empty_argument", null);
+        return;
+    }
+        
 	var ar = [];
 
 	if (this.optimizeFlag){
@@ -254,12 +264,7 @@ Input.method("processToolResult", function(result)
     	this.addInstancesFlag = 0;
     	if (ar.length != 3)
 		{
-        	var data = new Object();
-   	    	data.error = true;
-    		data.output = result;
-       		data.instancesXML = null;
-       		data.claferXML = null;
-       		this.host.updateData(data);
+            this.handleError(null, "malformed_output", null);
        		return;
    		}
     } else if (this.addInstancesFlag) {
@@ -268,12 +273,7 @@ Input.method("processToolResult", function(result)
     	this.addInstancesFlag = 0;
 		if (ar == null || ar.length != 3)
 		{
-        	var data = new Object();
-   	    	data.error = true;
-    		data.output = result;
-       		data.instancesXML = null;
-       		data.claferXML = null;
-       		this.host.updateData(data);
+            this.handleError(null, "malformed_output", null);
        		return;
    		}
 
@@ -285,7 +285,13 @@ Input.method("processToolResult", function(result)
 	var abstractXMLText = ar[2];
 
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
-	
+
+    if (instancesXMLText.length == 0 || instancesXMLText == "<instances></instances>")
+    {
+        this.handleError(null, "empty_instances", null);
+        return;
+    }
+    
 	abstractXMLText = abstractXMLText.replaceAll("&quot;", "\"");
 	abstractXMLText = abstractXMLText.replaceAll("&gt;", ">");
 	abstractXMLText = abstractXMLText.replaceAll("&lt;", "<");

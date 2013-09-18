@@ -244,7 +244,7 @@ server.post('/upload', function(req, res, next) {
 
 				process.timeoutObject = setTimeout(function(){
 					console.log("Request timed out.");
-                    process.result = "Error: Serverside Timeout";
+                    process.result = 'Error: Serverside Timeout. Please consider increasing the "timeout" value in the "config.json" file. Currently it equals ' + config.timeout + ' millisecond(s).';
                     process.code = 9003;
                     process.completed = true;
                     killProcessTree(process);
