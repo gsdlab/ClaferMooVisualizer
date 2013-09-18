@@ -29,7 +29,7 @@ var config = require('./config.json');
 
 var tool_path = __dirname + "/ClaferMoo/spl_datagenerator/";
 var python_file_name = "IntegratedFeatureModelOptimizer.py";
-var python = config.pythonPath;
+var pythonPath = config.pythonPath;
 
 
 var port = config.port;
@@ -232,7 +232,7 @@ server.post('/upload', function(req, res, next) {
                 {
                     var util  = require('util');
                     var spawn = require('child_process').spawn;
-                    var tool  = spawn(python, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
+                    var tool  = spawn(pythonPath, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
                     process.tool = tool;
                     processes.push(process);                    
                 }                
@@ -432,5 +432,89 @@ server.use(function(req, res, next){
   res.send(404, "Sorry can't find that!");
 });
 
-server.listen(port);
-console.log('ClaferMoo Visualizer listening on port ' + port);
+var dependency_count = 4; // the number of tools to be checked before the Visualizer starts
+console.log('======================================');
+console.log('| ClaferMoo Visualizer (v.0.3.4)     |');
+console.log('======================================');
+var spawn = require('child_process').spawn;
+console.log('Checking dependencies...');
+
+var clafer_compiler  = spawn("clafer", ["-V"]);
+var clafer_compiler_version = "";
+clafer_compiler.on('error', function (err){
+    console.log('ERROR: Cannot find Clafer Compiler (clafer). Please check whether it is installed and accessible.');
+});
+clafer_compiler.stdout.on('data', function (data){	
+    clafer_compiler_version += data;
+});
+clafer_compiler.on('exit', function (code){	
+    console.log(clafer_compiler_version.trim());
+    if (code == 0) dependency_ok();
+});
+
+var python  = spawn("python", ["-V"]);
+var python_version = "";
+python.on('error', function (err){
+    console.log('ERROR: Cannot find Python (python). Please check whether it is installed and accessible.');
+});
+python.stdout.on('data', function (data){	
+    python_version += data;
+});
+python.stderr.on('data', function (data){	
+    python_version += data;
+});
+python.on('exit', function (code){	
+    console.log(python_version.trim());
+    if (code == 0) dependency_ok();
+});
+
+var java  = spawn("java", ["-version"]);
+var java_version = "";
+java.on('error', function (err){
+    console.log('ERROR: Cannot find Java (java). Please check whether it is installed and accessible.');
+});
+java.stdout.on('data', function (data){	
+    java_version += data;
+});
+java.stderr.on('data', function (data){	
+    java_version += data;
+});
+java.on('exit', function (code){	
+    console.log(java_version.trim());
+    if (code == 0) dependency_ok();
+});
+
+var claferMoo  = spawn(pythonPath, [tool_path + python_file_name, "--version"]);
+var claferMoo_version = "";
+/* 'error' would mean that there is no python, which has been checked already */
+claferMoo.on('error', function (err){
+    console.log('ERROR: Cannot run ClaferMoo (' + tool_path + python_file_name + '). Please check whether it is installed and accessible.');
+});
+claferMoo.stdout.on('data', function (data){	
+    claferMoo_version += data;
+});
+claferMoo.stderr.on('data', function (data){	
+    claferMoo_version += data;
+});
+claferMoo.on('exit', function (code){	
+    if (code != 0)
+        console.log('ERROR: Cannot run ClaferMoo (' + tool_path + python_file_name + '). Please check whether it is installed and accessible.');
+    
+    console.log(claferMoo_version.trim());
+    if (code == 0) dependency_ok();
+});
+
+var node_version = process.version + ", " + JSON.stringify(process.versions);
+console.log("Node.JS: " + node_version);
+
+function dependency_ok()
+{
+    dependency_count--;
+    if (dependency_count == 0)
+    {
+        server.listen(port);
+        console.log('Dependencies found successfully. Please review their versions manually');        
+        console.log('======================================');
+        console.log('Ready. Listening on port ' + port);        
+    }
+}
