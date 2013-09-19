@@ -454,9 +454,9 @@ server.use(function(req, res, next){
 });
 
 var dependency_count = 4; // the number of tools to be checked before the Visualizer starts
-console.log('======================================');
-console.log('| ClaferMoo Visualizer (v.0.3.4)     |');
-console.log('======================================');
+console.log('=========================================');
+console.log('| ClaferMoo Visualizer v0.3.4.20-9-2013 |');
+console.log('=========================================');
 var spawn = require('child_process').spawn;
 console.log('Checking dependencies...');
 

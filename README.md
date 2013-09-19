@@ -1,7 +1,7 @@
 ClaferMooVisualizer
 ===================
 
-v0.3.4.18-9-2013
+v0.3.4.20-9-2013
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 
@@ -43,10 +43,10 @@ The following tools are not part of the binary distribution and they have to be 
 * [Java Platform (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) v6+, 32bit
 * [Python](http://www.python.org/download/) v2.7.*
   * Needed by ClaferMOO
-* [Clafer](https://github.com/gsdlab/clafer) v0.3.3
+* [Clafer](https://github.com/gsdlab/clafer) v0.3.4
   * can be from the binary distribution
 * [ClaferMoo](https://github.com/gsdlab/claferMooStandalone)
-* [Node.JS Framework](http://nodejs.org/download/), v0.10.15
+* [Node.JS Framework](http://nodejs.org/download/), v0.10.18
 
 ### Installation
 
@@ -69,7 +69,7 @@ Running the following commands should produce the following results or later ver
 
 `clafer -V` 
 
-> `Clafer v0.3.3.14-8-2013`
+> `Clafer v0.3.4.20-9-2013`
 
 `python -V`
 
@@ -81,7 +81,7 @@ Running the following commands should produce the following results or later ver
 
 `node -v`
 
->v0.10.15
+>v0.10.18
 
 3. Make sure `uploads` folder is accessible for writing, since temporary files will be stored there.
 
