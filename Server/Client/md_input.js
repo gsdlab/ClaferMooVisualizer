@@ -325,7 +325,6 @@ Input.method("processToolResult", function(result)
     	this.originalPoints = lines.length - 1;
     }
     data.originalPoints = this.originalPoints;
-    console.log(data);
     this.previousData = { Unparsed: ar, abstractXML: data.claferXML };
     this.host.updateData(data);
 });
