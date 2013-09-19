@@ -155,7 +155,7 @@ Host.method("updateData", function(data)
             this.modules[i].onDataLoaded(data);
     }
     
-    if (console && console.log)
+    if (typeof variable !== 'undefined' && console.log)
     {
         console.log(data.claferXML);
         console.log(data.instancesXML);
@@ -174,6 +174,8 @@ Host.method("updateData", function(data)
             this.modules[i].resize();
                 
     }
+    
+    $.placeholder.shim(); // fixes the placeholder issue in IE
     
 });
 

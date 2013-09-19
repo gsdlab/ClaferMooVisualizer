@@ -169,7 +169,14 @@ server.post('/upload', function(req, res, next) {
    				}
    			}		
 	} else {
-		var uploadedFilePath = req.files.claferFile.path;				
+		var uploadedFilePath = req.files.claferFile.path;
+        if (!fs.existsSync(uploadedFilePath))
+        {
+            console.log("No Clafer file submitted. Returning...");
+            res.writeHead(200, { "Content-Type": "text/html"});
+            res.end("no clafer file submitted");
+            return;
+        }
 	}
 
 //make temp folder for files and move file there
@@ -335,7 +342,7 @@ server.post('/upload', function(req, res, next) {
                     if (process.timeoutObject)
                         clearTimeout(process.timeoutObject);
                         
-                    cleanupOldFiles(uploadedFilePath, dlDir); 
+//                    cleanupOldFiles(uploadedFilePath, dlDir); 
                     // we clean old files here, since the result is stored in the result variable
 				});
 

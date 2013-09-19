@@ -68,9 +68,6 @@ InstanceFilter.method("filterContent", function(){
                     filter = this.host.findModule("mdGoals").ranges[x];
                 }
             }
-//            console.log(filter);
-//            console.log(this.host.findModule("mdGoals").ranges[x]);
-//            console.log(this.host.findModule("mdGoals").ranges);
 
             for (x=1; x<= row_length; x++){
                 var value = $("#mdComparisonTable #td" + (i-1) + "_" + x).text();
