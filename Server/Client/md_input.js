@@ -156,21 +156,21 @@ Input.method("handleError", function(response, statusText, xhr)  {
     var caption;
     
     if (statusText == "timeout")
-        caption = "Request Timeout. <br>Please check whether the server is available.";
+        caption = "<b>Request Timeout.</b><br>Please check whether the server is available.";
     else if (statusText == "malformed_output")
-        caption = "Malformed output received from ClaferMoo. <br>Please check whether you are using the correct version of ClaferMoo. Also, an unhandled exception is possible.  Please verify your input file: check syntax and integer ranges.";        
+        caption = "<b>Malformed output received from ClaferMoo.</b><br>Please check whether you are using the correct version of ClaferMoo. Also, an unhandled exception is possible.  Please verify your input file: check syntax and integer ranges.";        
     else if (statusText == "malformed_instance")
-        caption = "Malformed instance data received from ClaferMoo. <br>An unhandled exception may have occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.";        
+        caption = "<b>Malformed instance data received from ClaferMoo.</b><br>An unhandled exception may have occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.";        
     else if (statusText == "empty_instances")
-        caption = "No instances returned. Possible reasons:<br><ul><li>No optimal instances, all variants are non-optimal.</li><li>An unhandled exception occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.</li></ul>.";        
+        caption = "<b>No instances returned.</b>Possible reasons:<br><ul><li>No optimal instances, all variants are non-optimal.</li><li>An unhandled exception occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.</li></ul>.";        
     else if (statusText == "empty_argument")
-        caption = "Empty argument given to processToolResult. <br>Please report this error.";        
+        caption = "<b>Empty argument given to processToolResult.</b><br>Please report this error.";        
     else if (statusText == "error" && response.responseText == "")
-        caption = "Request Error. <br>Please check whether the server is available.";        
+        caption = "<b>Request Error.</b><br>Please check whether the server is available.";        
     else
-        caption = xhr + '<br>' + response.responseText.replace("\n", "<br>");
+        caption = '<b>' + xhr + '</b><br>' + response.responseText.replace("\n", "<br>");
     
-	document.getElementById("error_report").innerHTML = ('<input id="close_error" type="image" src="images/no.png" alt="close" style="position: relative; left: -325px; top: 0px; width: 20px; height: 20px;"><p>' + caption + "</p>");
+	document.getElementById("error_report").innerHTML = ('<span id="close_error" alt="close">Close Message</span><p>' + caption + "</p>");
 	document.getElementById("close_error").onclick = function(){ 
 		document.getElementById("error_overlay").style.visibility = "hidden";
 	};
