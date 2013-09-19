@@ -342,7 +342,7 @@ server.post('/upload', function(req, res, next) {
                     if (process.timeoutObject)
                         clearTimeout(process.timeoutObject);
                         
-//                    cleanupOldFiles(uploadedFilePath, dlDir); 
+                    cleanupOldFiles(uploadedFilePath, dlDir); 
                     // we clean old files here, since the result is stored in the result variable
 				});
 
