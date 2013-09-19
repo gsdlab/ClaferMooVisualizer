@@ -177,6 +177,14 @@ server.post('/upload', function(req, res, next) {
             res.end("no clafer file submitted");
             return;
         }
+        var pre_content = fs.readFileSync(uploadedFilePath);
+        if (pre_content.length == 0)
+        {
+            console.log("No Clafer file submitted. Returning...");
+            res.writeHead(200, { "Content-Type": "text/html"});
+            res.end("no clafer file submitted");
+            return;
+        }        
 	}
 
 //make temp folder for files and move file there
