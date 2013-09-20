@@ -36,8 +36,6 @@ var port = config.port;
 
 var server = express();
 
-var timeout = config.timeout;
-
 //support for sessions - used for url uploads
 server.use(express.cookieParser('asasdhf89adfhj0dfjask'));
 var store = new express.session.MemoryStore;
@@ -82,12 +80,22 @@ server.post('/', function(req, res, next) {
 
 server.post('/poll', function(req, res, next)
 {
+    var found = true;
     for (var i = 0; i < processes.length; i++)
     {
         if (processes[i].windowKey == req.body.windowKey)
         {
             if (req.body.command == "ping") // normal ping
             {                
+                clearTimeout(processes[i].pingTimeoutObject);
+                processes[i].pingTimeoutObject = setTimeout(function(process){
+                    process.result = 'Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).';
+                    process.code = 9004;
+                    process.completed = true;
+                    process.pingTimeout = true;
+                    killProcessTree(process);
+                }, config.pingTimeout, processes[i]);
+                
                 if (processes[i].completed) // the execution is completed
                 {
                     
@@ -101,29 +109,50 @@ server.post('/poll', function(req, res, next)
                     }
 
                     res.end(processes[i].result);
+                    clearTimeout(processes[i].pingTimeoutObject);
+                    clearTimeout(processes[i].executionTimeoutObject);                    
                     processes.splice(i, 1);
-                    return;
+                    found = true;
                 }	
                 else // still working
                 {
                     res.writeHead(200, { "Content-Type": "text/html"});
                     res.end("Working");
-                    return;
+                    found = true;
                 }
             }
             else // if it is cancel
             {
                 killProcessTree(processes[i]);
+                clearTimeout(processes[i].pingTimeoutObject);                
+                clearTimeout(processes[i].executionTimeoutObject);
                 processes.splice(i, 1);
                 res.writeHead(200, { "Content-Type": "text/html"});
                 res.end("Cancelled");
-                return;                
+                found = true;
             }
         }
+        
     }
     
-    res.writeHead(404, { "Content-Type": "text/html"});
-    res.end("Error: the requested process is not found.")    
+    var i = 0;
+    while (i < processes.length)
+    {
+        if (processes[i].pingTimeout)
+        {
+            clearTimeout(processes[i].pingTimeoutObject);
+            clearTimeout(processes[i].executionTimeoutObject);                    
+            processes.splice(i, 1);
+        }
+        else
+            i++;
+    }
+    
+    if (!found)
+    {
+        res.writeHead(404, { "Content-Type": "text/html"});
+        res.end("Error: the requested process is not found.");
+    }
 });
 
 /*
@@ -243,8 +272,7 @@ server.post('/upload', function(req, res, next) {
 					return;
 		    	}
 
-                var d = new Date();
-                var process = { windowKey: req.body.windowKey, tool: null, folder: dlDir, path: uploadedFilePath, lastUsed: d, completed: false, code: 0, killed:false};
+                var process = { windowKey: req.body.windowKey, tool: null, folder: dlDir, path: uploadedFilePath, completed: false, code: 0, killed:false};
 
 				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data")
                 {
@@ -274,13 +302,21 @@ server.post('/upload', function(req, res, next) {
                     // TODO: handle this error properly
                 }
 
-				process.timeoutObject = setTimeout(function(){
+				process.executionTimeoutObject = setTimeout(function(process){
 					console.log("Request timed out.");
-                    process.result = 'Error: Serverside Timeout. Please consider increasing the "timeout" value in the "config.json" file. Currently it equals ' + config.timeout + ' millisecond(s).';
+                    process.result = 'Error: Execution Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.executionTimeout + ' millisecond(s).';
                     process.code = 9003;
                     process.completed = true;
                     killProcessTree(process);
-				}, timeout);
+				}, config.executionTimeout, process);
+                
+                process.pingTimeoutObject = setTimeout(function(process){
+                    process.result = 'Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).';
+                    process.code = 9004;
+                    process.completed = true;
+                    process.pingTimeout = true;
+                    killProcessTree(process);
+                }, config.pingTimeout, process);
                 
                 var error_result = "";
 				var data_result = "";
@@ -318,8 +354,7 @@ server.post('/upload', function(req, res, next) {
                     process.result = "Error: Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.";
                     process.code = 9000;
                     process.completed = true;
-                    if (process.timeoutObject)
-                        clearTimeout(process.timeoutObject);
+                    clearTimeout(process.executionTimeoutObject);
                 });
 
 				tool.on('exit', function (code) 
@@ -332,8 +367,7 @@ server.post('/upload', function(req, res, next) {
                         console.log("Finished cancellation");
                         code = 9001; // just a non-zero value 
                         cleanupOldFiles(uploadedFilePath, dlDir); 
-                        if (process.timeoutObject)
-                            clearTimeout(process.timeoutObject);
+                        clearTimeout(process.timeoutObject);
 
                         return;
                     }
@@ -361,8 +395,7 @@ server.post('/upload', function(req, res, next) {
                     process.completed = true;
                     console.log("The result has been sent.");                    
                     
-                    if (process.timeoutObject)
-                        clearTimeout(process.timeoutObject);
+                    clearTimeout(process.timeoutObject);
                         
                     cleanupOldFiles(uploadedFilePath, dlDir); 
                     // we clean old files here, since the result is stored in the result variable

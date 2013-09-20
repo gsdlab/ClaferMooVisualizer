@@ -32,6 +32,25 @@ google.load("visualization", "1", {packages:["corechart"]});
 
 $(document).ready(function()
 {
+/*
+  var $closeDialog = $('<div></div>')
+    .html('The computation is still running.<br/> Are you sure you want to cancel it and close?')
+    .dialog({
+    autoOpen: false,
+    title: 'Important Notice',
+    buttons: {
+      "OK": function () {
+        $(this).dialog("close");
+//        window.open('http://google.com/');
+        return true;
+      },
+      "Cancel": function () {
+        $(this).dialog("close");
+        return false;
+      }
+    }
+  });
+*/
     
     var modules = Array();
     

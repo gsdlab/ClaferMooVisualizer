@@ -1,5 +1,6 @@
 {
 	"pythonPath": "python",
 	"port": "8080",
-	"timeout": 1800000
+	"executionTimeout": "1800000",
+	"pingTimeout": "10000"        
 }
