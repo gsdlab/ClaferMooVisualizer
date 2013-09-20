@@ -87,6 +87,7 @@ Input.method("switchToExample", function(){
 Input.method("switchToFile", function(){
     $("#exampleURL").attr("disabled", "disabled");
     $("#submitExample").attr("disabled", "disabled");
+    $("#exampleURL").val(null);
     
     $("#claferFile").removeAttr("disabled");
     $("#submitFile").removeAttr("disabled");    

@@ -194,9 +194,9 @@ Host.method("getExamples", function()
     
     result.push({url: "", label: "Choose Example"}); 
     // the first and default value must be ""
-    result.push({url: "a", label: "Example 1"});
-    result.push({url: "b", label: "Example 2"});    
-    result.push({url: "c", label: "Example 3"});
+    result.push({url: "http://t3-necsis.cs.uwaterloo.ca:8091/clafer/MOO_MobilePhone.cfr", label: "A Mobile Phone Example (4 Objectives)"});
+    result.push({url: "http://t3-necsis.cs.uwaterloo.ca:8091/clafer/MOO_Android4.cfr", label: "Android Phone Example (4 Objectives)"});    
+    result.push({url: "http://t3-necsis.cs.uwaterloo.ca:8091/clafer/MOO_BerkeleyDB.cfr", label: "BerkeleyDB Example (3 Objectives)"});
     
     return result;
 });
