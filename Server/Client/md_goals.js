@@ -23,12 +23,12 @@ SOFTWARE.
 function Goals(host)
 { 
     this.id = "mdGoals";
-    this.title = "Objectives";
+    this.title = "Objectives and Quality Ranges";
     
     this.width = 500;
-    this.height = 85;
+    this.height = 100;
     this.posx = 0;
-    this.posy = 70;
+    this.posy = 100;
     
     this.host = host;
     this.goals = null;

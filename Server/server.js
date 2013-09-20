@@ -130,6 +130,30 @@ server.post('/poll', function(req, res, next)
  * TODO: create a Cancel request
  */
 
+function downloadFile(url, uniqueID)
+{
+    var i = 0;
+    var uploadedFilePath = uniqueID;
+    uploadedFilePath = uploadedFilePath.replace(/[\/\\]/g, "");
+    uploadedFilePath = __dirname + "/uploads/" + uploadedFilePath;
+    while(fs.existsSync(uploadedFilePath + i.toString() + ".cfr")){
+        i = i+1;
+    }
+    uploadedFilePath = uploadedFilePath + i.toString() + ".cfr";
+    console.log('Downloading file at "' + url + '"...');
+    var file = fs.createWriteStream(uploadedFilePath);
+    http.get(url, function(res){
+        res.on('data', function (data) {
+            file.write(data);
+        }).on('end', function(){
+            file.end();
+            console.log("File downloaded to ./uploads");
+        });
+    });
+    
+    return uploadedFilePath;
+}
+ 
 /*
  * Handle file upload
  */
@@ -139,34 +163,24 @@ server.post('/upload', function(req, res, next) {
 
 	//check if client has either a file directly uploaded or a url location of a file
    	if (req.files.claferFile === undefined){
-   			for (var x=0; x <= URLs.length; x++){
-   				if (x === URLs.length){
-                	console.log("No Clafer file submitted. Returning...");
-		    		res.writeHead(200, { "Content-Type": "text/html"});
-					res.end("no clafer file submitted");
-   					return;
-   				} else if (URLs[x].session === req.sessionID && ("claferFileURL=" + URLs[x].url) === url.parse(req.body.claferFileURL).query){
-   					var i = 0;
-   					var uploadedFilePath = req.sessionID;
-   					uploadedFilePath = uploadedFilePath.replace(/[\/\\]/g, "");
-   					uploadedFilePath = __dirname + "/uploads/" + uploadedFilePath;
-   					while(fs.existsSync(uploadedFilePath + i.toString() + ".cfr")){
-   						i = i+1;
-   					}
-   					uploadedFilePath = uploadedFilePath + i.toString() + ".cfr";
-					console.log('Downloading file at "' + URLs[x].url + '"...');
-					var file = fs.createWriteStream(uploadedFilePath);
-					http.get(URLs[x].url, function(res){
-						res.on('data', function (data) {
-							file.write(data);
-						}).on('end', function(){
-							file.end();
-							console.log("File downloaded to ./uploads");
-						});
-					});
-					URLs.splice(x,1);
-					break;
-   				}
+            if (req.exampleURL !== undefined) // if example submitted
+            {
+                var uploadedFilePath = downloadFile(req.exampleURL, req.sessionID);                
+            }
+            else
+            {
+                for (var x=0; x <= URLs.length; x++){
+                    if (x === URLs.length){
+                        console.log("No Clafer file submitted. Returning...");
+                        res.writeHead(200, { "Content-Type": "text/html"});
+                        res.end("no clafer file submitted");
+                        return;
+                    } else if (URLs[x].session === req.sessionID && ("claferFileURL=" + URLs[x].url) === url.parse(req.body.claferFileURL).query){
+                        var uploadedFilePath = downloadFile(URLs[x].url, req.sessionID);
+                        URLs.splice(x,1);
+                        break;
+                    }
+                }
    			}		
 	} else {
 		var uploadedFilePath = req.files.claferFile.path;

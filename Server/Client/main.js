@@ -52,6 +52,7 @@ function Host(modules)
     this.selector = new Selector(this);
     this.modules = new Array();
     this.helpGetter = new helpGetter(this);
+    this.examples = this.getExamples();
     
     for (var i = 0; i < modules.length; i++)
     {
@@ -185,4 +186,17 @@ Host.method("getHelp", function(moduleName){
 
 Host.method("getHelpButton", function(moduleName){
     return this.helpGetter.getHelpButton(moduleName);
+});
+
+Host.method("getExamples", function()
+{
+    var result = new Array();
+    
+    result.push({url: "", label: "Choose Example"}); 
+    // the first and default value must be ""
+    result.push({url: "a", label: "Example 1"});
+    result.push({url: "b", label: "Example 2"});    
+    result.push({url: "c", label: "Example 3"});
+    
+    return result;
 });

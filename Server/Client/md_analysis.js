@@ -25,9 +25,9 @@ function Analysis(host)
     this.title = "Variant Comparer";
     
     this.width = 500;
-    this.height = 310;
+    this.height = 263;
     this.posx = 0;
-    this.posy = 195;
+    this.posy = 242;
     
     this.host = host;
     this.dataTable = null;

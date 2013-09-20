@@ -22,7 +22,7 @@ SOFTWARE.
 function Input(host)
 { 
     this.id = "mdInput";
-    this.title = "Input";
+    this.title = "Input File or Example";
 
     this.requestTimeout = 60000; // what is the timeout for response after sending a file
     this.pollingTimeout = 60000;  // what is the timeout when polling
@@ -30,7 +30,7 @@ function Input(host)
 
 
     this.width = 500;
-    this.height = 30;
+    this.height = 58;
     this.posx = 0;
     this.posy = 0;
     
@@ -39,6 +39,8 @@ function Input(host)
     
     this.host = host;
     this.serverAction = "/upload";
+    
+    this.dataFileChosen = false;
 }
 
 Input.method("onDataLoaded", function(data){
@@ -53,13 +55,17 @@ Input.method("onInitRendered", function()
     this.previousData = "";
     this.toCancel = false;
 
-    $("#optimize").click(this.OptimizeCall.bind(this));
-    $("#addInstances").click(this.addInstancesCall.bind(this));
+    $("#submitFile").click(this.submitFileCall.bind(this));
+    $("#submitExample").click(this.submitExampleCall.bind(this));
+    
+    $("#exampleURL").attr("disabled", "disabled");
+    $("#submitExample").attr("disabled", "disabled");
+    
+    $("#switch_example").change(this.switchToExample.bind(this));
+    $("#switch_file").change(this.switchToFile.bind(this));
+    
     $("#myform [type='file']").change(this.inputChange.bind(this));
     
-    $("#optimize").attr("disabled", "disabled");
-    $("#addInstances").attr("disabled", "disabled");
- 
     var options = new Object();
     options.beforeSubmit = this.beginQuery.bind(this);
     options.success = this.fileSent.bind(this);
@@ -68,6 +74,22 @@ Input.method("onInitRendered", function()
 
     $('#myform').ajaxForm(options); 
 	$('#myform').submit();
+});
+
+Input.method("switchToExample", function(){
+    $("#exampleURL").removeAttr("disabled");
+    $("#submitExample").removeAttr("disabled");
+    
+    $("#claferFile").attr("disabled", "disabled");
+    $("#submitFile").attr("disabled", "disabled");    
+});
+
+Input.method("switchToFile", function(){
+    $("#exampleURL").attr("disabled", "disabled");
+    $("#submitExample").attr("disabled", "disabled");
+    
+    $("#claferFile").removeAttr("disabled");
+    $("#submitFile").removeAttr("disabled");    
 });
 
 /*
@@ -227,27 +249,45 @@ Input.method("convertHtmlTags", function(input) {
   return output;
 });
 
-Input.method("OptimizeCall", function(){
-   	this.optimizeFlag = 1;
-   	this.addInstancesFlag = 0;
-   	this.previousData = "";
-   	host.findModule("mdComparisonTable").permaHidden = {};
+Input.method("submitFileCall", function(){
+    if (this.dataFileChosen)
+    {
+       	this.optimizeFlag = 0;
+        this.addInstancesFlag = 1;
+    }
+    else 
+    {
+        this.optimizeFlag = 1;
+        this.addInstancesFlag = 0;
+        this.previousData = "";
+        host.findModule("mdComparisonTable").permaHidden = {};
+    }
 });
 
-Input.method("addInstancesCall", function(){
-   	this.optimizeFlag = 0;
-   	this.addInstancesFlag = 1;
+Input.method("submitExampleCall", function(){
+    this.optimizeFlag = 1;
+    this.addInstancesFlag = 0;
+    this.previousData = "";
+    host.findModule("mdComparisonTable").permaHidden = {};
 });
 
 Input.method("inputChange", function(){
 	var filename = $("#myform [type='file']").val();
 	if (filename.substring(filename.length-4) == ".cfr"){
-		$("#optimize").removeAttr("disabled");
-		$("#addInstances").attr("disabled", "disabled");
-	} else if (filename.substring(filename.length-5) == ".data"){
-		$("#optimize").attr("disabled", "disabled");
-		$("#addInstances").removeAttr("disabled");
+		$("#submitFile").val("Optimize");
+ 		$("#submitFile").removeAttr("disabled");                      
+        this.dataFileChosen = false;
+    } else if (filename.substring(filename.length-5) == ".data"){
+		$("#submitFile").val("Add Instances");
+ 		$("#submitFile").removeAttr("disabled");             
+        this.dataFileChosen = true;
 	}
+    else{ // unknown file
+		$("#submitFile").val("Unknown File");
+ 		$("#submitFile").attr("disabled", "disabled");       
+        this.dataFileChosen = false;
+    }
+    
 });
 
 Input.method("processToolResult", function(result)
@@ -328,9 +368,36 @@ Input.method("processToolResult", function(result)
     this.previousData = { Unparsed: ar, abstractXML: data.claferXML };
     this.host.updateData(data);
 });
+
 Input.method("getInitContent", function()
 {
-	return '<div id="load_area"><form id="myform" action="' + this.serverAction + '" method="post" enctype="multipart/form-data">' + '<input type="file" size="15" name="claferFile">' + '<input type="hidden" name="claferFileURL" value="' + window.location + '">' + '<input id="optimize" type="submit" value="Optimize">'+
-    '<input type="hidden" id="windowKey" name="windowKey" value="' + this.host.key + '">' +
-    '<input id="addInstances" type="submit" value="Add Instances">' + '</form></div>';  
+    result = '<div id = "load_area">';
+    result += '<form id="myform" action="' + this.serverAction + '" method="post" enctype="multipart/form-data" style="display: block;">';
+    result += '<input type="radio" checked="checked" name="switch" id="switch_file" value="inputFile">';
+    result += '<input type="file" size="25" name="claferFile" id="claferFile" style="width: 365px;">';
+    result += '<input type="hidden" name="claferFileURL" value="' + window.location + '">';
+    result += '<input id="submitFile" type="submit" value="Optimize">';
+
+    result += '<input type="hidden" id="windowKey" name="windowKey" value="' + this.host.key + '">';
+    result += '<br>';
+    result += '<input type="radio" name="switch" id="switch_example" value="inputExample">';
+    result += '<select id="exampleURL" name="exampleURL" style="width: 365px;">';
+    
+    for (var i = 0; i < this.host.examples.length; i++)
+    {
+        var optionClass = 'normal_option';
+        
+        if (i == 0)
+            optionClass = 'first_option';
+        
+        result += '<option class="' + optionClass + '" value="' + this.host.examples[i].url + '">' + this.host.examples[i].label + '</option>';
+    }
+    
+    result += '</select>';
+    result += '<input id="submitExample" type="submit" value="Optimize"></input>';
+    result += '</form></div>';
+    
+    return result;
+// id="addInstances"    
+  
 });

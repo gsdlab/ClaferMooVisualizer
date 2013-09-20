@@ -177,3 +177,11 @@ iframe {
     overflow-x: hidden;
     overflow-y: hidden;
 } 
+
+.normal_option{
+
+}
+
+.first_option{
+    color: gray;
+}
