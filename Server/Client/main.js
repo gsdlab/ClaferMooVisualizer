@@ -198,7 +198,7 @@ Host.method("getExamples", function()
     result.push({url: "AndroidSampleMoo_4.cfr", label: "Sample Mobile Phone Example (4 Objectives)"});    
     result.push({url: "AndroidSampleMoo_5.cfr", label: "Sample Mobile Phone Example (5 Objectives)"});    
 
-    result.push({url: "Car4D.cfr", label: "Cruise Control Example (5 Objectives)"});    
+    result.push({url: "Car4D.cfr", label: "Cruise Control Example (4 Objectives)"});    
 
     result.push({url: "MOO_MobilePhone_From_Wiki.cfr", label: "Mobile Phone Example from Clafer Wiki (4 Objectives)"});
     result.push({url: "MOO_Android4_From_Wiki.cfr", label: "Android Phone Example from Clafer Wiki (4 Objectives)"});    
