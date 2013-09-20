@@ -145,7 +145,6 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
 
     //update goals placeholders
     var numgoals = cprocessor.getGoals();
-    console.log(numgoals)
     for (var y = 0; y < numgoals.length; y++){
         var maxG = 0;
         var minG = 10000000000;
