@@ -1,0 +1,54 @@
+abstract Feature
+    performance : integer
+    energy : integer
+    mass: integer
+//# FRAGMENT
+abstract SecurityFeature : Feature
+    security : integer
+//# FRAGMENT
+abstract MobilePhone
+    or Connectivity : Feature
+        [ this.performance = 0]
+        [ this.energy = 0]
+        [ this.mass = 0]
+        Bluetooth : Feature
+            [ this.performance = 9]
+            [ this.energy = 10 ]
+            [ this.mass = 2]
+        USB : Feature
+            [ this.performance = 10]
+            [ this.energy = 5 ]
+            [ this.mass = 3]
+        Wifi : Feature
+            [ this.performance = 22]
+            [ this.energy = 17 ]
+            [ this.mass = 6]
+    PasswordProtection : SecurityFeature ?
+        [ this.security = 5]
+        [ this.performance = 1]
+        [ this.energy = 2 ]
+        [ this.mass = 0]
+    FingerprintProtection : SecurityFeature ?
+        [ this.mass = 0]
+        [ this.security = 5]
+        [ this.performance = 2]
+        [ this.energy = 4 ]
+    total_performance : integer
+    [ total_performance = sum Feature.performance ]
+    total_energy : integer
+    [ total_energy = sum Feature.energy ]
+    total_security : integer
+    [ total_security = sum SecurityFeature.security ]
+    total_mass : integer
+    [ total_mass = sum Feature.mass ]
+//# FRAGMENT
+aPhone : MobilePhone
+//# FRAGMENT
+<< min aPhone.total_energy >>
+//# FRAGMENT
+<< max aPhone.total_performance >>
+//# FRAGMENT
+<< min aPhone.total_mass >>
+//# FRAGMENT
+<< max aPhone.total_security >>
+//# FRAGMENT

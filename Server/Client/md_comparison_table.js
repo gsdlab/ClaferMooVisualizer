@@ -142,7 +142,6 @@ ComparisonTable.method("onRendered", function()
     }
 
     var minAbstractWidth = $("#tBody .td_abstract").width();
-//    console.log(minWidth);
 
 // Set new widths and minimum widths (important to do both for cross browser functionality)
     for(i=1; i<$("#tHead #r0").children().length; i++){
@@ -269,7 +268,6 @@ ComparisonTable.method("onRendered", function()
     }).css("cursor", "pointer");
 // Selection of instances for analysis from top row of table
     var length = $("#r0").find(".td_instance").length;
-//    console.log(length);
     for(i=1; i<=length; i++){
         $("#th0_" + i).click(function(){
             var pid = getPID($(this).attr('id').substring(4))
@@ -333,14 +331,8 @@ ComparisonTable.method("getDataTable", function()
 {
 	var instanceCount = this.instanceProcessor.getInstanceCount();
 	var instanceSuperClafer = this.instanceProcessor.getInstanceSuperClafer();
-//	alert(instanceSuperClafer);
 	var abstractClaferTree = this.processor.getAbstractClaferTree("/module/declaration/uniqueid", instanceSuperClafer);
     var EMfeatures = this.processor.getEffectivelyMandatoryFeatures(abstractClaferTree)
-//    console.log(abstractClaferTree)	;
-//	alert(abstractClaferTree.subclafers[0].subclafers.length);
-	
-//	alert(instanceSuperClafer);
-
 	
 	var parent = null;
 	var current = abstractClaferTree;
@@ -402,7 +394,6 @@ ComparisonTable.method("getDataTable", function()
 
 
 	}
-    //console.log(result)
 	return result;
 
 });
@@ -704,8 +695,6 @@ ComparisonTable.method("addShapes", function(){
         else 
             var text  = $($(this).find(".svghead text")[0]).text(); 
 
-//        console.log(text);
-
 // This will get any hidden circles and then put the new shape on top
 //clone corresponding circle, modify for table, and prepend.
         $(this).html('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svghead" height="22px" width="22px"><text text-anchor="middle" x="11px" y="16px" stroke="#ffffff" stroke-width="3px">' + text + '</text><text text-anchor="middle" x="11px" y="16px">' + text + '</text></svg>')
@@ -736,8 +725,7 @@ ComparisonTable.method("addShapes", function(){
 //made from scratch because the points of the hexagon are not relative to center like the others
         } else if ($("#" + getPID(text) + "h").length == 1){
             var fill = $("#" + getPID(text) + "h").css("fill");
-//            console.log(that);
-            var thisOct = that.host.findModule("mdGraph").getSVGOctagon(10, 11, 10);
+                var thisOct = that.host.findModule("mdGraph").getSVGOctagon(10, 11, 10);
             //if it's ever needed to swich back to colored versions change "white" to fill
             $(thisOct).css("fill", "white");
             $(thisOct).attr("stroke-width", "1");

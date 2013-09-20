@@ -181,7 +181,6 @@ ClaferProcessor.method("getEffectivelyMandatoryFeatures", function(tree){
 	for (var i = 0; i<tree.subclafers.length; i++){
 		list = list.concat(this.recursiveEMcheck(tree.subclafers[i]));
 	}
-//	console.log(list);
 	return list;
 });
 
