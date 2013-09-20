@@ -28,7 +28,6 @@ function Selector(host)
 }
 
 Selector.method("onSelected", function(pid){
-    console.log(pid);
     this.selection.push(pid);
     host.findModule("mdGraph").makePointsSelected(pid);
     host.findModule("mdComparisonTable").makePointsSelected(pid);

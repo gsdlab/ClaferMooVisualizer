@@ -32,12 +32,11 @@ google.load("visualization", "1", {packages:["corechart"]});
 
 $(document).ready(function()
 {
-    
     var modules = Array();
     
     modules.push("Goals");
     modules.push("Graph");
-    modules.push("Console");
+//    modules.push("Console");
     modules.push("Input");
 //    modules.push("UseCases");
     modules.push("Analysis");
@@ -48,10 +47,11 @@ $(document).ready(function()
 
 function Host(modules)
 {
-    this.windowKey = Math.floor(Math.random()*1000000000).toString(16);
+    this.key = Math.floor(Math.random()*1000000000).toString(16);
     this.selector = new Selector(this);
     this.modules = new Array();
     this.helpGetter = new helpGetter(this);
+    this.examples = this.getExamples();
     
     for (var i = 0; i < modules.length; i++)
     {
@@ -142,14 +142,8 @@ Host.method("selectionChanged", function(data)
 //runs after data is uploaded from server. Causes all modules to update their data.
 Host.method("updateData", function(data)
 {
-    if (data.error == true)
+    if (data.error == true) // we do not process errors here anymore
     {
-        for (var i = 0; i < this.modules.length; i++)
-        {
-            if (this.modules[i].onError)
-                this.modules[i].onError(data.output);
-        }
-        
         return;
     }
 
@@ -160,7 +154,14 @@ Host.method("updateData", function(data)
         if (this.modules[i].onDataLoaded)
             this.modules[i].onDataLoaded(data);
     }
-
+    
+    if (typeof variable !== 'undefined' && console.log)
+    {
+        console.log(data.claferXML);
+        console.log(data.instancesXML);
+        console.log(data.output);
+    }
+    
     for (var i = 0; i < this.modules.length; i++)
     {
         if (this.modules[i].getContent)
@@ -174,6 +175,8 @@ Host.method("updateData", function(data)
                 
     }
     
+    $.placeholder.shim(); // fixes the placeholder issue in IE
+    
 });
 
 Host.method("getHelp", function(moduleName){
@@ -182,4 +185,25 @@ Host.method("getHelp", function(moduleName){
 
 Host.method("getHelpButton", function(moduleName){
     return this.helpGetter.getHelpButton(moduleName);
+});
+
+Host.method("getExamples", function()
+{
+    var result = new Array();
+    
+    result.push({url: "", label: "Or Choose Example..."}); 
+    // the first and default value must be ""
+    result.push({url: "AndroidSampleMoo_2.cfr", label: "Sample Mobile Phone Example (2 Objectives)"});    
+    result.push({url: "AndroidSampleMoo_3.cfr", label: "Sample Mobile Phone Example (3 Objectives)"});    
+    result.push({url: "AndroidSampleMoo_4.cfr", label: "Sample Mobile Phone Example (4 Objectives)"});    
+    result.push({url: "AndroidSampleMoo_5.cfr", label: "Sample Mobile Phone Example (5 Objectives)"});    
+
+    result.push({url: "Car4D.cfr", label: "Cruise Control Example (4 Objectives)"});    
+
+    result.push({url: "MOO_MobilePhone_From_Wiki.cfr", label: "Mobile Phone Example from Clafer Wiki (4 Objectives)"});
+    result.push({url: "MOO_Android4_From_Wiki.cfr", label: "Android Phone Example from Clafer Wiki (4 Objectives)"});    
+
+
+    
+    return result;
 });

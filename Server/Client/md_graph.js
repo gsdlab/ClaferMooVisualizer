@@ -281,7 +281,6 @@ Graph.method("getSVGOctagon", function(x, y, r){
     points += (xcoords[0])+","+(ycoords[2]) + " ";
     points += (xcoords[3])+","+(ycoords[1]) + " ";
     points += (xcoords[3])+","+(ycoords[0]);
-//    console.log(points)
     oct.setAttributeNS(null, "points", points);
     return oct;
 });

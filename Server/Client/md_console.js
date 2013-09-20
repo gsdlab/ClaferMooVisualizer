@@ -42,10 +42,15 @@ Console.method("onDataLoaded", function(data){
     this.output = data.output;
 });
 
+/*
+* we have deprecated this method
+*
+
 Console.method("onError", function(result)
 {
     $('#output').html(result);
 });
+*/
 
 Console.method("onRendered", function()
 {
