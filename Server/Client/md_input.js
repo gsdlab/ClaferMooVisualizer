@@ -41,7 +41,6 @@ function Input(host)
     this.serverAction = "/upload";
     
     this.dataFileChosen = false;
-    
 }
 
 Input.method("onDataLoaded", function(data){

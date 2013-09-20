@@ -47,6 +47,10 @@ server.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/u
 var URLs = [];
 var processes = [];
 
+server.get('/Examples/:file', function(req, res) {
+    res.sendfile('Examples/' + req.params.file);
+});
+
 server.get('/', function(req, res) {
 //uploads now and runs once app.html is fully loaded
 //works because client currently sends one empty post upon completion of loading
@@ -194,7 +198,8 @@ server.post('/upload', function(req, res, next) {
    	if (req.files.claferFile === undefined){
             if (req.body.exampleURL !== undefined && req.body.exampleURL !== "") // if example submitted
             {
-                var uploadedFilePath = downloadFile(req.body.exampleURL, req.sessionID);                
+                console.log(req.headers.host);
+                var uploadedFilePath = downloadFile("http://" + req.headers.host + "/Examples/" + req.body.exampleURL, req.sessionID);                
             }
             else
             {
@@ -419,7 +424,6 @@ function finishCleanup(dir, results){
 }
  
 function cleanupOldFiles(path, dir) {
-                    
     console.log("Cleaning temporary files...");                    
 	//cleanup old files
 	fs.readdir(dir, function(err, files){
@@ -497,7 +501,15 @@ function killProcessTree(process)
  * Catch all. error reporting for unknown routes
  */
 server.use(function(req, res, next){
-  res.send(404, "Sorry can't find that!");
+
+    console.log(req.url);
+    
+    if (req.url.substring(0, "/Examples/".length) == "/Examples/") // allow only Examples folder
+    {
+        res.sendFile(req.url.substring(1));
+    }
+    else
+        res.send(404, "Sorry can't find that!");
 });
 
 var dependency_count = 4; // the number of tools to be checked before the Visualizer starts

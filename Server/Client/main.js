@@ -32,26 +32,6 @@ google.load("visualization", "1", {packages:["corechart"]});
 
 $(document).ready(function()
 {
-/*
-  var $closeDialog = $('<div></div>')
-    .html('The computation is still running.<br/> Are you sure you want to cancel it and close?')
-    .dialog({
-    autoOpen: false,
-    title: 'Important Notice',
-    buttons: {
-      "OK": function () {
-        $(this).dialog("close");
-//        window.open('http://google.com/');
-        return true;
-      },
-      "Cancel": function () {
-        $(this).dialog("close");
-        return false;
-      }
-    }
-  });
-*/
-    
     var modules = Array();
     
     modules.push("Goals");
@@ -213,9 +193,17 @@ Host.method("getExamples", function()
     
     result.push({url: "", label: "Or Choose Example..."}); 
     // the first and default value must be ""
-    result.push({url: "http://t3-necsis.cs.uwaterloo.ca:8091/clafer/MOO_MobilePhone.cfr", label: "A Mobile Phone Example (4 Objectives)"});
-    result.push({url: "http://t3-necsis.cs.uwaterloo.ca:8091/clafer/MOO_Android4.cfr", label: "Android Phone Example (4 Objectives)"});    
-    result.push({url: "http://t3-necsis.cs.uwaterloo.ca:8091/clafer/MOO_BerkeleyDB.cfr", label: "BerkeleyDB Example (3 Objectives)"});
+    result.push({url: "AndroidSampleMoo_2.cfr", label: "Sample Mobile Phone Example (2 Objectives)"});    
+    result.push({url: "AndroidSampleMoo_3.cfr", label: "Sample Mobile Phone Example (3 Objectives)"});    
+    result.push({url: "AndroidSampleMoo_4.cfr", label: "Sample Mobile Phone Example (4 Objectives)"});    
+    result.push({url: "AndroidSampleMoo_5.cfr", label: "Sample Mobile Phone Example (5 Objectives)"});    
+
+    result.push({url: "Car4D.cfr", label: "Cruise Control Example (5 Objectives)"});    
+
+    result.push({url: "MOO_MobilePhone_From_Wiki.cfr", label: "Mobile Phone Example from Clafer Wiki (4 Objectives)"});
+    result.push({url: "MOO_Android4_From_Wiki.cfr", label: "Android Phone Example from Clafer Wiki (4 Objectives)"});    
+
+
     
     return result;
 });
