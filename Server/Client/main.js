@@ -192,7 +192,7 @@ Host.method("getExamples", function()
 {
     var result = new Array();
     
-    result.push({url: "", label: "Choose Example"}); 
+    result.push({url: "", label: "Or Choose Example..."}); 
     // the first and default value must be ""
     result.push({url: "http://t3-necsis.cs.uwaterloo.ca:8091/clafer/MOO_MobilePhone.cfr", label: "A Mobile Phone Example (4 Objectives)"});
     result.push({url: "http://t3-necsis.cs.uwaterloo.ca:8091/clafer/MOO_Android4.cfr", label: "Android Phone Example (4 Objectives)"});    
