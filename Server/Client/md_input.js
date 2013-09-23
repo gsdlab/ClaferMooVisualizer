@@ -387,16 +387,34 @@ Input.method("getInitContent", function()
     result += '<input type="hidden" id="windowKey" name="windowKey" value="' + this.host.key + '">';
     result += '<br>';
     result += '<select id="exampleURL" name="exampleURL" style="width: 388px;">';
-    
-    for (var i = 0; i < this.host.examples.length; i++)
-    {
-        var optionClass = 'normal_option';
+   
+
+   $.getJSON('/Examples/examples.json', 
+        function(data)
+        {
+            var examples = data.examples;
+            var options = "";
         
-        if (i == 0)
-            optionClass = 'first_option';
-        
-        result += '<option class="' + optionClass + '" value="' + this.host.examples[i].url + '">' + this.host.examples[i].label + '</option>';
-    }
+            for (var i = 0; i < examples.length; i++)
+            {
+                var optionClass = 'normal_option';
+
+                if (i == 0)
+                    optionClass = 'first_option';
+
+                options += '<option class="' + optionClass + '" value="' + examples[i].url + '">' + examples[i].label + '</option>';
+            }
+            
+            $("#exampleURL").html(options);
+
+        }
+    ).error(function() 
+        { 
+            var optionClass = 'first_option';
+            var options = '<option class="' + optionClass + '" value="">Or Choose Example (Could not load examples)</option>';
+            $("#exampleURL").html(options);
+            
+        })
     
     result += '</select>';
     result += '<input id="submitExample" type="submit" value="Optimize"></input>';
