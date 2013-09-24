@@ -93,7 +93,7 @@ server.post('/poll', function(req, res, next)
             {                
                 clearTimeout(processes[i].pingTimeoutObject);
                 processes[i].pingTimeoutObject = setTimeout(function(process){
-                    process.result = 'Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).';
+                    process.result = '{"message": "' + escapeJSON('Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).') + '"}';
                     process.code = 9004;
                     process.completed = true;
                     process.pingTimeout = true;
@@ -105,11 +105,11 @@ server.post('/poll', function(req, res, next)
                     
                     if (processes[i].code == 0)
                     {
-                        res.writeHead(200, { "Content-Type": "text/html"});
+                        res.writeHead(200, { "Content-Type": "application/json"});
                     }
                     else
                     {
-                        res.writeHead(400, { "Content-Type": "text/html"});
+                        res.writeHead(400, { "Content-Type": "application/json"});
                     }
 
                     res.end(processes[i].result);
@@ -120,8 +120,8 @@ server.post('/poll', function(req, res, next)
                 }	
                 else // still working
                 {
-                    res.writeHead(200, { "Content-Type": "text/html"});
-                    res.end("Working");
+                    res.writeHead(200, { "Content-Type": "application/json"});
+                    res.end('{"message": "Working"}');
                     found = true;
                 }
             }
@@ -131,8 +131,8 @@ server.post('/poll', function(req, res, next)
                 clearTimeout(processes[i].pingTimeoutObject);                
                 clearTimeout(processes[i].executionTimeoutObject);
                 processes.splice(i, 1);
-                res.writeHead(200, { "Content-Type": "text/html"});
-                res.end("Cancelled");
+                res.writeHead(200, { "Content-Type": "application/json"});
+                res.end('{"message": "Cancelled"}');
                 found = true;
             }
         }
@@ -282,7 +282,7 @@ server.post('/upload', function(req, res, next) {
 				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data")
                 {
                     console.log("Instances have been submitted, returning them...");                
-                    process.result = file_contents;
+                    process.result = '{"instances": "' + escapeJSON(file_contents) + '"}';
                     process.code = 0;
                     process.completed = true;
                     processes.push(process);                    
@@ -309,14 +309,14 @@ server.post('/upload', function(req, res, next) {
 
 				process.executionTimeoutObject = setTimeout(function(process){
 					console.log("Request timed out.");
-                    process.result = 'Error: Execution Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.executionTimeout + ' millisecond(s).';
+                    process.result = '{"message": "' + escapeJSON('Error: Execution Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.executionTimeout + ' millisecond(s).') + '"}';
                     process.code = 9003;
                     process.completed = true;
                     killProcessTree(process);
 				}, config.executionTimeout, process);
                 
                 process.pingTimeoutObject = setTimeout(function(process){
-                    process.result = 'Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).';
+                    process.result = '{"message": "' + escapeJSON('Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).') + '"}';
                     process.code = 9004;
                     process.completed = true;
                     process.pingTimeout = true;
@@ -356,7 +356,7 @@ server.post('/upload', function(req, res, next) {
                         console.log('Spawn error: unknown error');
                     }                
 
-                    process.result = "Error: Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.";
+                    process.result = '{"message": "' + escapeJSON('Error: Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.') + '"}';
                     process.code = 9000;
                     process.completed = true;
                     clearTimeout(process.executionTimeoutObject);
@@ -384,14 +384,19 @@ server.post('/upload', function(req, res, next) {
 					}
 					if (code === 0) 
 					{				
-						result = "Return code = " + code + "\n" + data_result + "=====";
+                        var parts = data_result.split("=====");
+                        var message = parts[0]; //
+                        var instances = parts[1]; // 
+                        // todo : error handling
+                        
 						var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
-						result += xml.toString();
-						result = escapeHtml(result);
+						result = '{"message": "' + escapeJSON(message) + '",';
+						result += '"instances": "' + escapeJSON(instances) + '",';
+						result += '"claferXML":"' + escapeJSON(xml.toString()) + '"}';
 					}
 					else 
 					{
-						result = 'Error, return code: ' + code + '\n' + error_result;
+                        result = '{"message": "' + escapeJSON('Error, return code: ' + code + '\n' + error_result) + '"}';
 						console.log(data_result);
 					}
 					
@@ -454,13 +459,16 @@ function deleteOld(path){
 	}
 }
 
-function escapeHtml(unsafe) {
-  return unsafe
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+function escapeJSON(unsafe) 
+{
+    return unsafe.replace(/[\\]/g, '\\\\')
+        .replace(/[\"]/g, '\\\"')
+        .replace(/[\/]/g, '\\/')
+        .replace(/[\b]/g, '\\b')
+        .replace(/[\f]/g, '\\f')
+        .replace(/[\n]/g, '\\n')
+        .replace(/[\r]/g, '\\r')
+        .replace(/[\t]/g, '\\t');
 }
 
 function changeFileExt(name, ext, newExt)

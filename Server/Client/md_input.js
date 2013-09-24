@@ -52,7 +52,7 @@ Input.method("onInitRendered", function()
 {
     this.optimizeFlag = 1;
     this.addInstancesFlag = 1;
-    this.previousData = "";
+    this.previousData = null;
     this.toCancel = false;
 
     $("#submitFile").click(this.submitFileCall.bind(this));
@@ -111,19 +111,19 @@ Input.method("showRequest", function(formData, jqForm, options) {
 });
 */
 
-Input.method("onPoll", function(response)
+Input.method("onPoll", function(responseObject)
 {
-    if (response === "Working")
+    if (responseObject.message === "Working")
     {
         this.pollingTimeoutObject = setTimeout(this.poll.bind(this), this.pollingDelay);
     }
-    else if (response === "Cancelled")
+    else if (responseObject.message === "Cancelled")
     {
         this.endQuery();
     }
     else
     {
-        this.processToolResult(response);
+        this.processToolResult(responseObject);
         this.endQuery();
     }
 });        
@@ -169,6 +169,10 @@ Input.method("handleError", function(response, statusText, xhr)  {
         caption = "<b>No instances returned.</b>Possible reasons:<br><ul><li>No optimal instances, all variants are non-optimal.</li><li>An unhandled exception occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.</li></ul>.";        
     else if (statusText == "empty_argument")
         caption = "<b>Empty argument given to processToolResult.</b><br>Please report this error.";        
+    else if (statusText == "empty_instance_file")
+        caption = "<b>No instances found in the specified file.";        
+    else if (statusText == "optimize_first")
+        caption = "<b>You have to run optimization first, and only then add instances.";        
     else if (statusText == "error" && response.responseText == "")
         caption = "<b>Request Error.</b><br>Please check whether the server is available.";        
     else
@@ -243,7 +247,7 @@ Input.method("submitFileCall", function(){
     {
         this.optimizeFlag = 1;
         this.addInstancesFlag = 0;
-        this.previousData = "";
+        this.previousData = null;
         host.findModule("mdComparisonTable").permaHidden = {};
     }
 });
@@ -251,7 +255,7 @@ Input.method("submitFileCall", function(){
 Input.method("submitExampleCall", function(){
     this.optimizeFlag = 1;
     this.addInstancesFlag = 0;
-    this.previousData = "";
+    this.previousData = null;
     
     $("#myform [type='file']").val(null);
     
@@ -304,34 +308,55 @@ Input.method("processToolResult", function(result)
         this.handleError(null, "empty_argument", null);
         return;
     }
-        
-	var ar = [];
+    
+//    var resultData = JSON.parse(result);
+    
+//    resultData.message = unescapeJSON(resultData.message);
+
+//    resultData.claferXML = resultData.claferXML;
+//    resultData.instances = resultData.instances;
+//    resultData.message = resultData.message;
+    
+    console.log(result);
+
+	var instances = result.instances;
+	var abstractXMLText = result.claferXML;
 
 	if (this.optimizeFlag){
-		ar = result.split("=====");
 		this.optimizeFlag = 0;
     	this.addInstancesFlag = 0;
-    	if (ar.length != 3)
+    	if (!result.instances)
 		{
             this.handleError(null, "malformed_output", null);
        		return;
    		}
     } else if (this.addInstancesFlag) {
-		ar = this.previousData.Unparsed;
+        
 		this.optimizeFlag = 0;
     	this.addInstancesFlag = 0;
-		if (ar == null || ar.length != 3)
+
+        if (this.previousData)
+        {
+            instances = this.previousData.Unparsed;
+
+            if (!result.instances)            
+            {
+                this.handleError(null, "empty_instance_file", null);
+                return;
+            }
+            
+            var parser = new InstanceConverter(result.instances);
+            instances += parser.convertFromClaferIGOutputToClaferMoo(this.previousData.abstractXML);            
+            abstractXMLText = this.previousData.abstractXML;
+        }
+        else
 		{
-            this.handleError(null, "malformed_output", null);
+            this.handleError(null, "optimize_first", null);
        		return;
    		}
-
-		var parser = new InstanceConverter(result)
-		ar[1] += parser.convertFromClaferIGOutputToClaferMoo(this.previousData.abstractXML);
 	}
 
-	var instancesXMLText = (new InstanceConverter(ar[1])).convertFromClaferMooOutputToXML();
-	var abstractXMLText = ar[2];
+	var instancesXMLText = (new InstanceConverter(instances)).convertFromClaferMooOutputToXML();
 
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
 
@@ -348,10 +373,10 @@ Input.method("processToolResult", function(result)
     }
 
     
-	abstractXMLText = abstractXMLText.replaceAll("&quot;", "\"");
-	abstractXMLText = abstractXMLText.replaceAll("&gt;", ">");
-	abstractXMLText = abstractXMLText.replaceAll("&lt;", "<");
-	abstractXMLText = abstractXMLText.replaceAll("&amp;", "&");
+//	abstractXMLText = abstractXMLText.replaceAll("&quot;", "\"");
+//	abstractXMLText = abstractXMLText.replaceAll("&gt;", ">");
+//	abstractXMLText = abstractXMLText.replaceAll("&lt;", "<");
+//	abstractXMLText = abstractXMLText.replaceAll("&amp;", "&");
 	
 	abstractXMLText = this.convertHtmlTags(abstractXMLText);
 		
@@ -363,16 +388,19 @@ Input.method("processToolResult", function(result)
 
     var data = new Object();
     data.error = false;
-    data.output = ar[0];
+    data.output = result.message;
     data.instancesXML = instancesXMLText;
     data.claferXML = abstractXMLText;
-    if (this.previousData == ""){
-    	var lines = ar[1].match(/^.*([\n\r]+|$)/gm);
-    	lines = ar[1].split(lines[1]);
+    
+    console.log(data);
+    
+    if (!this.previousData){
+    	var lines = result.instances.match(/^.*([\n\r]+|$)/gm);
+    	lines = result.instances.split(lines[1]);
     	this.originalPoints = lines.length - 1;
     }
     data.originalPoints = this.originalPoints;
-    this.previousData = { Unparsed: ar, abstractXML: data.claferXML };
+    this.previousData = { Unparsed: instances, abstractXML: data.claferXML };
     this.host.updateData(data);
 });
 
@@ -424,3 +452,17 @@ Input.method("getInitContent", function()
 // id="addInstances"    
   
 });
+
+
+function unescapeJSON(escaped) 
+{
+    return escaped
+        .replaceAll('\\\\', '\\')
+        .replaceAll('\\"', '"')
+        .replaceAll('\\/', '/')
+        .replaceAll('\\b', '\b')
+        .replaceAll('\\f', '\f')
+        .replaceAll('\\n', '\n')
+        .replaceAll('\\r', '\r')
+        .replaceAll('\\t', '\t');                  
+}
