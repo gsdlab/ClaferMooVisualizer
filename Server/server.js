@@ -160,63 +160,52 @@ server.post('/poll', function(req, res, next)
 });
 
 /*
- * TODO: create a Cancel request
- */
-
-function downloadFile(url, uniqueID)
-{
-    var i = 0;
-    var uploadedFilePath = uniqueID;
-    uploadedFilePath = uploadedFilePath.replace(/[\/\\]/g, "");
-    uploadedFilePath = __dirname + "/uploads/" + uploadedFilePath;
-    while(fs.existsSync(uploadedFilePath + i.toString() + ".cfr")){
-        i = i+1;
-    }
-    uploadedFilePath = uploadedFilePath + i.toString() + ".cfr";
-    console.log('Downloading file at "' + url + '"...');
-    var file = fs.createWriteStream(uploadedFilePath);
-    http.get(url, function(res){
-        res.on('data', function (data) {
-            file.write(data);
-        }).on('end', function(){
-            file.end();
-            console.log("File downloaded to ./uploads");
-        });
-    });
-    
-    return uploadedFilePath;
-}
- 
-/*
  * Handle file upload
  */
-server.post('/upload', function(req, res, next) {
+server.post('/upload', function(req, res, next) 
+{
 	console.log("---------------------------");
 	console.log("/Upload request initiated.");
 
+    var key = req.body.windowKey;
+    var currentURL = "";
+    
+    var uploadedFilePath = "";
+    
 	//check if client has either a file directly uploaded or a url location of a file
-   	if (req.files.claferFile === undefined){
-            if (req.body.exampleURL !== undefined && req.body.exampleURL !== "") // if example submitted
-            {
-                console.log(req.headers.host);
-                var uploadedFilePath = downloadFile("http://" + req.headers.host + "/Examples/" + req.body.exampleURL, req.sessionID);                
-            }
-            else
-            {
-                for (var x=0; x <= URLs.length; x++){
-                    if (x === URLs.length){
-                        console.log("No Clafer file submitted. Returning...");
-                        res.writeHead(200, { "Content-Type": "text/html"});
-                        res.end("no clafer file submitted");
-                        return;
-                    } else if (URLs[x].session === req.sessionID && ("claferFileURL=" + URLs[x].url) === url.parse(req.body.claferFileURL).query){
-                        var uploadedFilePath = downloadFile(URLs[x].url, req.sessionID);
-                        URLs.splice(x,1);
-                        break;
-                    }
+   	if (req.body.exampleFlag == "1")
+    {
+        if (req.body.exampleURL !== undefined && req.body.exampleURL !== "") // if example submitted
+        {
+            console.log(req.headers.host);
+            currentURL = "http://" + req.headers.host + "/Examples/" + req.body.exampleURL;                
+        }
+        else
+        {
+            for (var x=0; x <= URLs.length; x++){
+                if (x === URLs.length){
+                    console.log("No Clafer file submitted. Returning...");
+                    res.writeHead(200, { "Content-Type": "text/html"});
+                    res.end("no clafer file submitted");
+                    return;
+                } else if (URLs[x].session === req.sessionID && ("claferFileURL=" + URLs[x].url) === url.parse(req.body.claferFileURL).query){
+                    currentURL = URLs[x].url;
+                    URLs.splice(x,1);
+                    break;
                 }
-   			}		
-	} else {
+            }
+        }		
+	} 
+    else 
+    {
+        if (!req.files.claferFile)
+        {
+            console.log("No Clafer file submitted. Returning...");
+            res.writeHead(200, { "Content-Type": "text/html"});
+            res.end("no clafer file submitted");
+            return;        
+        }
+    
 		var uploadedFilePath = req.files.claferFile.path;
         if (!fs.existsSync(uploadedFilePath))
         {
@@ -234,9 +223,38 @@ server.post('/upload', function(req, res, next) {
             return;
         }        
 	}
+    
+/* downloading the file, if required */ 
 
-//make temp folder for files and move file there
+    if (currentURL != "")
+    {
+
+        var i = 0;
+        var uploadedFilePath = req.sessionID;
+        uploadedFilePath = uploadedFilePath.replace(/[\/\\]/g, "");
+        uploadedFilePath = __dirname + "/uploads/" + uploadedFilePath;
+        while(fs.existsSync(uploadedFilePath + i.toString() + ".cfr")){
+            i = i+1;
+        }
+        uploadedFilePath = uploadedFilePath + i.toString() + ".cfr";
+        
+        console.log('Downloading file at "' + currentURL + '"...');
+        var file = fs.createWriteStream(uploadedFilePath);
+        http.get(currentURL, function(httpRes){
+            httpRes.on('data', function (data) {
+                file.write(data);
+            }).on('end', function(){
+                file.end();
+                console.log("File downloaded to ./uploads");
+//                fileReady(uploadedFilePath, key, res);
+            });
+        });
+    }
+//    else
+//        fileReady(uploadedFilePath, key, res);
+                
 	var i = 0;
+//    console.log(resp);
 	while(fs.existsSync("./uploads/" + i + "tempfolder/")){
 		i++;
 	}
@@ -244,8 +262,8 @@ server.post('/upload', function(req, res, next) {
 	var pathTokens = "." + uploadedFilePath.split("Server")[1];
 	console.log("Partial path: " + pathTokens);
 	
-    pathTokensLinux = pathTokens.split("/");
-    pathTokensWindows = pathTokens.split("\\");
+    var pathTokensLinux = pathTokens.split("/");
+    var pathTokensWindows = pathTokens.split("\\");
     
     if (pathTokensWindows.length > pathTokensLinux.length)
         pathTokens = pathTokensWindows;
@@ -253,7 +271,7 @@ server.post('/upload', function(req, res, next) {
         pathTokens = pathTokensLinux;
 	
 	console.log('Path tokens: "' + pathTokens.join('; ') + '"');
-    var oldPath = uploadedFilePath
+    var oldPath = uploadedFilePath;
 	uploadedFilePath = __dirname + "/" + pathTokens[1] + "/" + i + "tempfolder/"; // this slash will work anyways
 	fs.mkdir(uploadedFilePath, function (err){
 		if (err) throw err;
@@ -268,7 +286,7 @@ server.post('/upload', function(req, res, next) {
 			fs.readFile(uploadedFilePath, function (err, data) {
 
 				if(data)
-		    		file_contents = data.toString();
+                    file_contents = data.toString();
 		    	else
                 {
 		    		res.writeHead(500, { "Content-Type": "text/html"});
@@ -277,7 +295,7 @@ server.post('/upload', function(req, res, next) {
 					return;
 		    	}
 
-                var process = { windowKey: req.body.windowKey, tool: null, folder: dlDir, path: uploadedFilePath, completed: false, code: 0, killed:false};
+                var process = { windowKey: key, tool: null, folder: dlDir, path: uploadedFilePath, completed: false, code: 0, killed:false};
 
 				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data")
                 {

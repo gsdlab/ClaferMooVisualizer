@@ -238,6 +238,8 @@ Input.method("convertHtmlTags", function(input) {
 Input.method("submitFileCall", function(){
 
     $("#exampleURL").val(null);
+    $("#exampleFlag").val("0");
+    
     if (this.dataFileChosen)
     {
        	this.optimizeFlag = 0;
@@ -257,7 +259,7 @@ Input.method("submitExampleCall", function(){
     this.addInstancesFlag = 0;
     this.previousData = null;
     
-    $("#myform [type='file']").val(null);
+    $("#exampleFlag").val("1");
     
     host.findModule("mdComparisonTable").permaHidden = {};
 });
@@ -317,8 +319,6 @@ Input.method("processToolResult", function(result)
 //    resultData.instances = resultData.instances;
 //    resultData.message = resultData.message;
     
-    console.log(result);
-
 	var instances = result.instances;
 	var abstractXMLText = result.claferXML;
 
@@ -392,8 +392,6 @@ Input.method("processToolResult", function(result)
     data.instancesXML = instancesXMLText;
     data.claferXML = abstractXMLText;
     
-    console.log(data);
-    
     if (!this.previousData){
     	var lines = result.instances.match(/^.*([\n\r]+|$)/gm);
     	lines = result.instances.split(lines[1]);
@@ -410,6 +408,7 @@ Input.method("getInitContent", function()
     result += '<form id="myform" action="' + this.serverAction + '" method="post" enctype="multipart/form-data" style="display: block;">';
     result += '<input type="file" size="25" name="claferFile" id="claferFile" style="width: 388px;">';
     result += '<input type="hidden" name="claferFileURL" value="' + window.location + '">';
+    result += '<input type="hidden" name="exampleFlag" id="exampleFlag" value="0">';
     result += '<input id="submitFile" type="submit" value="Optimize">';
 
     result += '<input type="hidden" id="windowKey" name="windowKey" value="' + this.host.key + '">';
