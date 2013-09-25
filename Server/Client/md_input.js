@@ -52,7 +52,7 @@ Input.method("onInitRendered", function()
 {
     this.optimizeFlag = 1;
     this.addInstancesFlag = 1;
-    this.previousData = "";
+    this.previousData = null;
     this.toCancel = false;
 
     $("#submitFile").click(this.submitFileCall.bind(this));
@@ -111,19 +111,19 @@ Input.method("showRequest", function(formData, jqForm, options) {
 });
 */
 
-Input.method("onPoll", function(response)
+Input.method("onPoll", function(responseObject)
 {
-    if (response === "Working")
+    if (responseObject.message === "Working")
     {
         this.pollingTimeoutObject = setTimeout(this.poll.bind(this), this.pollingDelay);
     }
-    else if (response === "Cancelled")
+    else if (responseObject.message === "Cancelled")
     {
         this.endQuery();
     }
     else
     {
-        this.processToolResult(response);
+        this.processToolResult(responseObject);
         this.endQuery();
     }
 });        
@@ -145,10 +145,27 @@ Input.method("poll", function()
     $.ajax(options);
 });
 
+Input.method("setClaferModelHTML", function(html){
+    this.host.findModule("mdClaferModel").model = html;
+    var iframe = $("#model")[0];
+    iframe.src = iframe.src; // reloads the window
+});
+
 Input.method("fileSent", function(responseText, statusText, xhr, $form)  { 
     this.toCancel = false;
-    if (responseText.indexOf("no clafer file submitted") == -1)
+
+    if (responseText == "error")
+    {
+        this.handleError(null, "compile_error", null);
+        this.endQuery();
+        return;
+    }
+
+    if (responseText != "no clafer file submitted")
+    {
+        this.setClaferModelHTML(responseText);
         this.pollingTimeoutObject = setTimeout(this.poll.bind(this), this.pollingDelay);
+    }
     else
         this.endQuery();
 });
@@ -158,8 +175,10 @@ Input.method("handleError", function(response, statusText, xhr)  {
 	var er = document.getElementById("error_overlay");
 	er.style.visibility = "visible";	
     var caption;
-    
-    if (statusText == "timeout")
+
+    if (statusText == "compile_error")
+        caption = "<b>Compile Error.</b><br>Please check whether Clafer Compiler is available, and the model is correct.";
+    else if (statusText == "timeout")
         caption = "<b>Request Timeout.</b><br>Please check whether the server is available.";
     else if (statusText == "malformed_output")
         caption = "<b>Malformed output received from ClaferMoo.</b><br>Please check whether you are using the correct version of ClaferMoo. Also, an unhandled exception is possible.  Please verify your input file: check syntax and integer ranges.";        
@@ -169,6 +188,10 @@ Input.method("handleError", function(response, statusText, xhr)  {
         caption = "<b>No instances returned.</b>Possible reasons:<br><ul><li>No optimal instances, all variants are non-optimal.</li><li>An unhandled exception occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.</li></ul>.";        
     else if (statusText == "empty_argument")
         caption = "<b>Empty argument given to processToolResult.</b><br>Please report this error.";        
+    else if (statusText == "empty_instance_file")
+        caption = "<b>No instances found in the specified file.";        
+    else if (statusText == "optimize_first")
+        caption = "<b>You have to run optimization first, and only then add instances.";        
     else if (statusText == "error" && response.responseText == "")
         caption = "<b>Request Error.</b><br>Please check whether the server is available.";        
     else
@@ -234,6 +257,8 @@ Input.method("convertHtmlTags", function(input) {
 Input.method("submitFileCall", function(){
 
     $("#exampleURL").val(null);
+    $("#exampleFlag").val("0");
+    
     if (this.dataFileChosen)
     {
        	this.optimizeFlag = 0;
@@ -243,7 +268,7 @@ Input.method("submitFileCall", function(){
     {
         this.optimizeFlag = 1;
         this.addInstancesFlag = 0;
-        this.previousData = "";
+        this.previousData = null;
         host.findModule("mdComparisonTable").permaHidden = {};
     }
 });
@@ -251,9 +276,9 @@ Input.method("submitFileCall", function(){
 Input.method("submitExampleCall", function(){
     this.optimizeFlag = 1;
     this.addInstancesFlag = 0;
-    this.previousData = "";
+    this.previousData = null;
     
-    $("#myform [type='file']").val(null);
+    $("#exampleFlag").val("1");
     
     host.findModule("mdComparisonTable").permaHidden = {};
 });
@@ -304,34 +329,53 @@ Input.method("processToolResult", function(result)
         this.handleError(null, "empty_argument", null);
         return;
     }
-        
-	var ar = [];
+    
+//    var resultData = JSON.parse(result);
+    
+//    resultData.message = unescapeJSON(resultData.message);
+
+//    resultData.claferXML = resultData.claferXML;
+//    resultData.instances = resultData.instances;
+//    resultData.message = resultData.message;
+    
+	var instances = result.instances;
+	var abstractXMLText = result.claferXML;
 
 	if (this.optimizeFlag){
-		ar = result.split("=====");
 		this.optimizeFlag = 0;
     	this.addInstancesFlag = 0;
-    	if (ar.length != 3)
+    	if (!result.instances)
 		{
             this.handleError(null, "malformed_output", null);
        		return;
    		}
     } else if (this.addInstancesFlag) {
-		ar = this.previousData.Unparsed;
+        
 		this.optimizeFlag = 0;
     	this.addInstancesFlag = 0;
-		if (ar == null || ar.length != 3)
+
+        if (this.previousData)
+        {
+            instances = this.previousData.Unparsed;
+
+            if (!result.instances)            
+            {
+                this.handleError(null, "empty_instance_file", null);
+                return;
+            }
+            
+            var parser = new InstanceConverter(result.instances);
+            instances += parser.convertFromClaferIGOutputToClaferMoo(this.previousData.abstractXML);            
+            abstractXMLText = this.previousData.abstractXML;
+        }
+        else
 		{
-            this.handleError(null, "malformed_output", null);
+            this.handleError(null, "optimize_first", null);
        		return;
    		}
-
-		var parser = new InstanceConverter(result)
-		ar[1] += parser.convertFromClaferIGOutputToClaferMoo(this.previousData.abstractXML);
 	}
 
-	var instancesXMLText = (new InstanceConverter(ar[1])).convertFromClaferMooOutputToXML();
-	var abstractXMLText = ar[2];
+	var instancesXMLText = (new InstanceConverter(instances)).convertFromClaferMooOutputToXML();
 
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
 
@@ -348,10 +392,10 @@ Input.method("processToolResult", function(result)
     }
 
     
-	abstractXMLText = abstractXMLText.replaceAll("&quot;", "\"");
-	abstractXMLText = abstractXMLText.replaceAll("&gt;", ">");
-	abstractXMLText = abstractXMLText.replaceAll("&lt;", "<");
-	abstractXMLText = abstractXMLText.replaceAll("&amp;", "&");
+//	abstractXMLText = abstractXMLText.replaceAll("&quot;", "\"");
+//	abstractXMLText = abstractXMLText.replaceAll("&gt;", ">");
+//	abstractXMLText = abstractXMLText.replaceAll("&lt;", "<");
+//	abstractXMLText = abstractXMLText.replaceAll("&amp;", "&");
 	
 	abstractXMLText = this.convertHtmlTags(abstractXMLText);
 		
@@ -363,16 +407,17 @@ Input.method("processToolResult", function(result)
 
     var data = new Object();
     data.error = false;
-    data.output = ar[0];
+    data.output = result.message;
     data.instancesXML = instancesXMLText;
     data.claferXML = abstractXMLText;
-    if (this.previousData == ""){
-    	var lines = ar[1].match(/^.*([\n\r]+|$)/gm);
-    	lines = ar[1].split(lines[1]);
+    
+    if (!this.previousData){
+    	var lines = result.instances.match(/^.*([\n\r]+|$)/gm);
+    	lines = result.instances.split(lines[1]);
     	this.originalPoints = lines.length - 1;
     }
     data.originalPoints = this.originalPoints;
-    this.previousData = { Unparsed: ar, abstractXML: data.claferXML };
+    this.previousData = { Unparsed: instances, abstractXML: data.claferXML };
     this.host.updateData(data);
 });
 
@@ -382,21 +427,40 @@ Input.method("getInitContent", function()
     result += '<form id="myform" action="' + this.serverAction + '" method="post" enctype="multipart/form-data" style="display: block;">';
     result += '<input type="file" size="25" name="claferFile" id="claferFile" style="width: 388px;">';
     result += '<input type="hidden" name="claferFileURL" value="' + window.location + '">';
+    result += '<input type="hidden" name="exampleFlag" id="exampleFlag" value="0">';
     result += '<input id="submitFile" type="submit" value="Optimize">';
 
     result += '<input type="hidden" id="windowKey" name="windowKey" value="' + this.host.key + '">';
     result += '<br>';
     result += '<select id="exampleURL" name="exampleURL" style="width: 388px;">';
-    
-    for (var i = 0; i < this.host.examples.length; i++)
-    {
-        var optionClass = 'normal_option';
+   
+
+   $.getJSON('/Examples/examples.json', 
+        function(data)
+        {
+            var examples = data.examples;
+            var options = "";
         
-        if (i == 0)
-            optionClass = 'first_option';
-        
-        result += '<option class="' + optionClass + '" value="' + this.host.examples[i].url + '">' + this.host.examples[i].label + '</option>';
-    }
+            for (var i = 0; i < examples.length; i++)
+            {
+                var optionClass = 'normal_option';
+
+                if (i == 0)
+                    optionClass = 'first_option';
+
+                options += '<option class="' + optionClass + '" value="' + examples[i].url + '">' + examples[i].label + '</option>';
+            }
+            
+            $("#exampleURL").html(options);
+
+        }
+    ).error(function() 
+        { 
+            var optionClass = 'first_option';
+            var options = '<option class="' + optionClass + '" value="">Or Choose Example (Could not load examples)</option>';
+            $("#exampleURL").html(options);
+            
+        })
     
     result += '</select>';
     result += '<input id="submitExample" type="submit" value="Optimize"></input>';
@@ -406,3 +470,17 @@ Input.method("getInitContent", function()
 // id="addInstances"    
   
 });
+
+
+function unescapeJSON(escaped) 
+{
+    return escaped
+        .replaceAll('\\\\', '\\')
+        .replaceAll('\\"', '"')
+        .replaceAll('\\/', '/')
+        .replaceAll('\\b', '\b')
+        .replaceAll('\\f', '\f')
+        .replaceAll('\\n', '\n')
+        .replaceAll('\\r', '\r')
+        .replaceAll('\\t', '\t');                  
+}
