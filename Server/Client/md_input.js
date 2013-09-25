@@ -145,10 +145,27 @@ Input.method("poll", function()
     $.ajax(options);
 });
 
+Input.method("setClaferModelHTML", function(html){
+    this.host.findModule("mdClaferModel").model = html;
+    var iframe = $("#model")[0];
+    iframe.src = iframe.src; // reloads the window
+});
+
 Input.method("fileSent", function(responseText, statusText, xhr, $form)  { 
     this.toCancel = false;
-    if (responseText.indexOf("no clafer file submitted") == -1)
+
+    if (responseText == "error")
+    {
+        this.handleError(null, "compile_error", null);
+        this.endQuery();
+        return;
+    }
+
+    if (responseText != "no clafer file submitted")
+    {
+        this.setClaferModelHTML(responseText);
         this.pollingTimeoutObject = setTimeout(this.poll.bind(this), this.pollingDelay);
+    }
     else
         this.endQuery();
 });
@@ -158,8 +175,10 @@ Input.method("handleError", function(response, statusText, xhr)  {
 	var er = document.getElementById("error_overlay");
 	er.style.visibility = "visible";	
     var caption;
-    
-    if (statusText == "timeout")
+
+    if (statusText == "compile_error")
+        caption = "<b>Compile Error.</b><br>Please check whether Clafer Compiler is available, and the model is correct.";
+    else if (statusText == "timeout")
         caption = "<b>Request Timeout.</b><br>Please check whether the server is available.";
     else if (statusText == "malformed_output")
         caption = "<b>Malformed output received from ClaferMoo.</b><br>Please check whether you are using the correct version of ClaferMoo. Also, an unhandled exception is possible.  Please verify your input file: check syntax and integer ranges.";        

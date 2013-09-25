@@ -32,23 +32,41 @@ function ClaferModel(host)
     
     this.host = host;
     this.goals = null;
+    this.model = "";
 }
 
 ClaferModel.method("onDataLoaded", function(data){
-    this.model = data.claferModel;
 });
 
 ClaferModel.method("onRendered", function()
 {
 });
 
-ClaferModel.method("getContent", function()
-{
-	return $('<div id="model">Hi</div>');
+//ClaferModel.method("getContent", function()
+//{
+//	return $('<div id="model">Hi</div>');
+//});
+
+ClaferModel.method("onDocLoad", function(){
+    if (this.model != "")
+    {
+        var iframe = $("#model")[0];
+
+        if (iframe.contentWindow)
+            iframe.contentWindow.document.write(this.model);
+        else
+            iframe.document.write(this.model);
+    }
 });
+
+ClaferModel.method("onInitRendered", function()
+{
+    $("#model")[0].onload = this.onDocLoad.bind(this);
+});
+
 ClaferModel.method("getInitContent", function()
 {
-	return $('<div id="model">Hello</div>');
+	return $('<iframe id="model" src="/htmlwrapper" width="97%" height="90%"></iframe>');
 });
 
 

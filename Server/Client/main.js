@@ -41,7 +41,7 @@ $(document).ready(function()
 //    modules.push("UseCases");
     modules.push("Analysis");
     modules.push("ComparisonTable");
-//    modules.push("ClaferModel");
+    modules.push("ClaferModel");
     
     host = new Host(modules);
 });
