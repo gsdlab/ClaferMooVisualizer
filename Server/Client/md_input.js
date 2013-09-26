@@ -163,7 +163,10 @@ Input.method("fileSent", function(responseText, statusText, xhr, $form)  {
 
     if (responseText != "no clafer file submitted")
     {
-        this.setClaferModelHTML(responseText);
+        if (responseText != "OK")
+        {
+            this.setClaferModelHTML(responseText);
+        }
         this.pollingTimeoutObject = setTimeout(this.poll.bind(this), this.pollingDelay);
     }
     else

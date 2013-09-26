@@ -26,9 +26,11 @@ function ClaferModel(host)
     this.title = "Clafer Source Model";
     
     this.width = 500;
-    this.height = 100;
-    this.posx = 400;
-    this.posy = 100;
+    this.height = 58;
+    this.posx = 500;
+    this.posy = 0;
+    this.iframeType = true;
+    this.ajaxUrl = "/htmlwrapper";
     
     this.host = host;
     this.goals = null;
@@ -41,11 +43,6 @@ ClaferModel.method("onDataLoaded", function(data){
 ClaferModel.method("onRendered", function()
 {
 });
-
-//ClaferModel.method("getContent", function()
-//{
-//	return $('<div id="model">Hi</div>');
-//});
 
 ClaferModel.method("onDocLoad", function(){
     if (this.model != "")
@@ -63,10 +60,4 @@ ClaferModel.method("onInitRendered", function()
 {
     $("#model")[0].onload = this.onDocLoad.bind(this);
 });
-
-ClaferModel.method("getInitContent", function()
-{
-	return $('<iframe id="model" src="/htmlwrapper" width="97%" height="90%"></iframe>');
-});
-
 

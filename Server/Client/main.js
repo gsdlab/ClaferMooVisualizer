@@ -25,7 +25,7 @@ SOFTWARE.
 //var mdConsole;
 //var mdInput;
 
-var host;
+var host = null;
 
 google.load("visualization", "1", {packages:["corechart"]});
 
@@ -69,6 +69,13 @@ function Host(modules)
         {
             resize = this.modules[i].resize;
         }
+
+        var windowType = "normal";
+        
+        if (this.modules[i].iframeType)
+        {
+            windowType = "iframe";
+        }
         
         var x = $.newWindow({
             id: this.modules[i].id,
@@ -78,6 +85,7 @@ function Host(modules)
             posx: this.modules[i].posx,
             posy: this.modules[i].posy,
             content: '',
+            type: windowType,
             onDragBegin : null,
             onDragEnd : null,
             onResizeBegin : null,
@@ -94,6 +102,11 @@ function Host(modules)
         if (this.modules[i].getInitContent)
             $.updateWindowContent(this.modules[i].id, this.modules[i].getInitContent());
 
+        if (this.modules[i].iframeType)
+        {
+            $.updateWindowContent(this.modules[i].id, '<iframe id="model" src="' + this.modules[i].ajaxUrl + '" frameborder="0" width="' + this.modules[i].width + '"></iframe>');
+        }
+            
         if (this.modules[i].onInitRendered)
             this.modules[i].onInitRendered();        
 
