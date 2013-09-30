@@ -25,7 +25,7 @@ SOFTWARE.
 //var mdConsole;
 //var mdInput;
 
-var host;
+var host = null;
 
 google.load("visualization", "1", {packages:["corechart"]});
 
@@ -41,6 +41,7 @@ $(document).ready(function()
 //    modules.push("UseCases");
     modules.push("Analysis");
     modules.push("ComparisonTable");
+    modules.push("ClaferModel");
     
     host = new Host(modules);
 });
@@ -51,7 +52,6 @@ function Host(modules)
     this.selector = new Selector(this);
     this.modules = new Array();
     this.helpGetter = new helpGetter(this);
-    this.examples = this.getExamples();
     
     for (var i = 0; i < modules.length; i++)
     {
@@ -69,6 +69,13 @@ function Host(modules)
         {
             resize = this.modules[i].resize;
         }
+
+        var windowType = "normal";
+        
+        if (this.modules[i].iframeType)
+        {
+            windowType = "iframe";
+        }
         
         var x = $.newWindow({
             id: this.modules[i].id,
@@ -78,6 +85,7 @@ function Host(modules)
             posx: this.modules[i].posx,
             posy: this.modules[i].posy,
             content: '',
+            type: windowType,
             onDragBegin : null,
             onDragEnd : null,
             onResizeBegin : null,
@@ -94,6 +102,11 @@ function Host(modules)
         if (this.modules[i].getInitContent)
             $.updateWindowContent(this.modules[i].id, this.modules[i].getInitContent());
 
+        if (this.modules[i].iframeType)
+        {
+            $.updateWindowContent(this.modules[i].id, '<iframe id="model" src="' + this.modules[i].ajaxUrl + '" frameborder="0" width="' + this.modules[i].width + '"></iframe>');
+        }
+            
         if (this.modules[i].onInitRendered)
             this.modules[i].onInitRendered();        
 
@@ -185,25 +198,4 @@ Host.method("getHelp", function(moduleName){
 
 Host.method("getHelpButton", function(moduleName){
     return this.helpGetter.getHelpButton(moduleName);
-});
-
-Host.method("getExamples", function()
-{
-    var result = new Array();
-    
-    result.push({url: "", label: "Or Choose Example..."}); 
-    // the first and default value must be ""
-    result.push({url: "AndroidSampleMoo_2.cfr", label: "Sample Mobile Phone Example (2 Objectives)"});    
-    result.push({url: "AndroidSampleMoo_3.cfr", label: "Sample Mobile Phone Example (3 Objectives)"});    
-    result.push({url: "AndroidSampleMoo_4.cfr", label: "Sample Mobile Phone Example (4 Objectives)"});    
-    result.push({url: "AndroidSampleMoo_5.cfr", label: "Sample Mobile Phone Example (5 Objectives)"});    
-
-    result.push({url: "Car4D.cfr", label: "Cruise Control Example (4 Objectives)"});    
-
-    result.push({url: "MOO_MobilePhone_From_Wiki.cfr", label: "Mobile Phone Example from Clafer Wiki (4 Objectives)"});
-    result.push({url: "MOO_Android4_From_Wiki.cfr", label: "Android Phone Example from Clafer Wiki (4 Objectives)"});    
-
-
-    
-    return result;
 });

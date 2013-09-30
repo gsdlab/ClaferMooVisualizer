@@ -227,7 +227,7 @@ Analysis.method("addShapes", function(){
 //saves all selected instances and downloads them to client
 Analysis.method("saveSelected", function(){
     var selection = this.host.selector.selection;
-    var instances = this.host.findModule('mdInput').previousData.Unparsed[1];
+    var instances = this.host.findModule('mdInput').previousData.Unparsed;
     var parser = new InstanceParser(instances);
     var data = "";
     for (var i=0; i < selection.length; i++){

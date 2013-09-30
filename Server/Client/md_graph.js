@@ -25,9 +25,9 @@ function Graph(host)
     this.title = "Bubble Front Graph";
 
     this.width = 500;
-    this.height = 505;
+    this.height = 405;
     this.posx = 500;
-    this.posy = 0;
+    this.posy = 100;
     
     this.instanceProcessor = null;
     this.axisArray = new Array();
