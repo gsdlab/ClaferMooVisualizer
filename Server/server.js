@@ -64,6 +64,10 @@ server.get('/', function(req, res) {
     res.sendfile("Client/app.html");
 });
 
+server.get('/htmlwrapper', function(req, res) {
+    res.sendfile("Client/compiler_html_wrapper.html");
+});
+
 /*
  * Handle Clientside save requests
  */
@@ -93,7 +97,7 @@ server.post('/poll', function(req, res, next)
             {                
                 clearTimeout(processes[i].pingTimeoutObject);
                 processes[i].pingTimeoutObject = setTimeout(function(process){
-                    process.result = 'Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).';
+                    process.result = '{"message": "' + escapeJSON('Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).') + '"}';
                     process.code = 9004;
                     process.completed = true;
                     process.pingTimeout = true;
@@ -105,11 +109,11 @@ server.post('/poll', function(req, res, next)
                     
                     if (processes[i].code == 0)
                     {
-                        res.writeHead(200, { "Content-Type": "text/html"});
+                        res.writeHead(200, { "Content-Type": "application/json"});
                     }
                     else
                     {
-                        res.writeHead(400, { "Content-Type": "text/html"});
+                        res.writeHead(400, { "Content-Type": "application/json"});
                     }
 
                     res.end(processes[i].result);
@@ -120,8 +124,8 @@ server.post('/poll', function(req, res, next)
                 }	
                 else // still working
                 {
-                    res.writeHead(200, { "Content-Type": "text/html"});
-                    res.end("Working");
+                    res.writeHead(200, { "Content-Type": "application/json"});
+                    res.end('{"message": "Working"}');
                     found = true;
                 }
             }
@@ -131,8 +135,8 @@ server.post('/poll', function(req, res, next)
                 clearTimeout(processes[i].pingTimeoutObject);                
                 clearTimeout(processes[i].executionTimeoutObject);
                 processes.splice(i, 1);
-                res.writeHead(200, { "Content-Type": "text/html"});
-                res.end("Cancelled");
+                res.writeHead(200, { "Content-Type": "application/json"});
+                res.end('{"message": "Cancelled"}');
                 found = true;
             }
         }
@@ -160,63 +164,52 @@ server.post('/poll', function(req, res, next)
 });
 
 /*
- * TODO: create a Cancel request
- */
-
-function downloadFile(url, uniqueID)
-{
-    var i = 0;
-    var uploadedFilePath = uniqueID;
-    uploadedFilePath = uploadedFilePath.replace(/[\/\\]/g, "");
-    uploadedFilePath = __dirname + "/uploads/" + uploadedFilePath;
-    while(fs.existsSync(uploadedFilePath + i.toString() + ".cfr")){
-        i = i+1;
-    }
-    uploadedFilePath = uploadedFilePath + i.toString() + ".cfr";
-    console.log('Downloading file at "' + url + '"...');
-    var file = fs.createWriteStream(uploadedFilePath);
-    http.get(url, function(res){
-        res.on('data', function (data) {
-            file.write(data);
-        }).on('end', function(){
-            file.end();
-            console.log("File downloaded to ./uploads");
-        });
-    });
-    
-    return uploadedFilePath;
-}
- 
-/*
  * Handle file upload
  */
-server.post('/upload', function(req, res, next) {
+server.post('/upload', function(req, res, next) 
+{
 	console.log("---------------------------");
 	console.log("/Upload request initiated.");
 
+    var key = req.body.windowKey;
+    var currentURL = "";
+    
+    var uploadedFilePath = "";
+    
 	//check if client has either a file directly uploaded or a url location of a file
-   	if (req.files.claferFile === undefined){
-            if (req.body.exampleURL !== undefined && req.body.exampleURL !== "") // if example submitted
-            {
-                console.log(req.headers.host);
-                var uploadedFilePath = downloadFile("http://" + req.headers.host + "/Examples/" + req.body.exampleURL, req.sessionID);                
-            }
-            else
-            {
-                for (var x=0; x <= URLs.length; x++){
-                    if (x === URLs.length){
-                        console.log("No Clafer file submitted. Returning...");
-                        res.writeHead(200, { "Content-Type": "text/html"});
-                        res.end("no clafer file submitted");
-                        return;
-                    } else if (URLs[x].session === req.sessionID && ("claferFileURL=" + URLs[x].url) === url.parse(req.body.claferFileURL).query){
-                        var uploadedFilePath = downloadFile(URLs[x].url, req.sessionID);
-                        URLs.splice(x,1);
-                        break;
-                    }
+   	if (req.body.exampleFlag == "1")
+    {
+        if (req.body.exampleURL !== undefined && req.body.exampleURL !== "") // if example submitted
+        {
+            console.log(req.headers.host);
+            currentURL = "http://" + req.headers.host + "/Examples/" + req.body.exampleURL;                
+        }
+        else
+        {
+            for (var x=0; x <= URLs.length; x++){
+                if (x === URLs.length){
+                    console.log("No Clafer file submitted. Returning...");
+                    res.writeHead(200, { "Content-Type": "text/html"});
+                    res.end("no clafer file submitted");
+                    return;
+                } else if (URLs[x].session === req.sessionID && ("claferFileURL=" + URLs[x].url) === url.parse(req.body.claferFileURL).query){
+                    currentURL = URLs[x].url;
+                    URLs.splice(x,1);
+                    break;
                 }
-   			}		
-	} else {
+            }
+        }		
+	} 
+    else 
+    {
+        if (!req.files.claferFile)
+        {
+            console.log("No Clafer file submitted. Returning...");
+            res.writeHead(200, { "Content-Type": "text/html"});
+            res.end("no clafer file submitted");
+            return;        
+        }
+    
 		var uploadedFilePath = req.files.claferFile.path;
         if (!fs.existsSync(uploadedFilePath))
         {
@@ -234,9 +227,38 @@ server.post('/upload', function(req, res, next) {
             return;
         }        
 	}
+    
+/* downloading the file, if required */ 
 
-//make temp folder for files and move file there
+    if (currentURL != "")
+    {
+
+        var i = 0;
+        var uploadedFilePath = req.sessionID;
+        uploadedFilePath = uploadedFilePath.replace(/[\/\\]/g, "");
+        uploadedFilePath = __dirname + "/uploads/" + uploadedFilePath;
+        while(fs.existsSync(uploadedFilePath + i.toString() + ".cfr")){
+            i = i+1;
+        }
+        uploadedFilePath = uploadedFilePath + i.toString() + ".cfr";
+        
+        console.log('Downloading file at "' + currentURL + '"...');
+        var file = fs.createWriteStream(uploadedFilePath);
+        http.get(currentURL, function(httpRes){
+            httpRes.on('data', function (data) {
+                file.write(data);
+            }).on('end', function(){
+                file.end();
+                console.log("File downloaded to ./uploads");
+//                fileReady(uploadedFilePath, key, res);
+            });
+        });
+    }
+//    else
+//        fileReady(uploadedFilePath, key, res);
+                
 	var i = 0;
+//    console.log(resp);
 	while(fs.existsSync("./uploads/" + i + "tempfolder/")){
 		i++;
 	}
@@ -244,8 +266,8 @@ server.post('/upload', function(req, res, next) {
 	var pathTokens = "." + uploadedFilePath.split("Server")[1];
 	console.log("Partial path: " + pathTokens);
 	
-    pathTokensLinux = pathTokens.split("/");
-    pathTokensWindows = pathTokens.split("\\");
+    var pathTokensLinux = pathTokens.split("/");
+    var pathTokensWindows = pathTokens.split("\\");
     
     if (pathTokensWindows.length > pathTokensLinux.length)
         pathTokens = pathTokensWindows;
@@ -253,7 +275,7 @@ server.post('/upload', function(req, res, next) {
         pathTokens = pathTokensLinux;
 	
 	console.log('Path tokens: "' + pathTokens.join('; ') + '"');
-    var oldPath = uploadedFilePath
+    var oldPath = uploadedFilePath;
 	uploadedFilePath = __dirname + "/" + pathTokens[1] + "/" + i + "tempfolder/"; // this slash will work anyways
 	fs.mkdir(uploadedFilePath, function (err){
 		if (err) throw err;
@@ -268,7 +290,7 @@ server.post('/upload', function(req, res, next) {
 			fs.readFile(uploadedFilePath, function (err, data) {
 
 				if(data)
-		    		file_contents = data.toString();
+                    file_contents = data.toString();
 		    	else
                 {
 		    		res.writeHead(500, { "Content-Type": "text/html"});
@@ -277,12 +299,12 @@ server.post('/upload', function(req, res, next) {
 					return;
 		    	}
 
-                var process = { windowKey: req.body.windowKey, tool: null, folder: dlDir, path: uploadedFilePath, completed: false, code: 0, killed:false};
+                var process = { windowKey: key, tool: null, folder: dlDir, path: uploadedFilePath, completed: false, code: 0, killed:false};
 
 				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data")
                 {
                     console.log("Instances have been submitted, returning them...");                
-                    process.result = file_contents;
+                    process.result = '{"instances": "' + escapeJSON(file_contents) + '"}';
                     process.code = 0;
                     process.completed = true;
                     processes.push(process);                    
@@ -293,121 +315,156 @@ server.post('/upload', function(req, res, next) {
 				}
 				console.log("Processing file with ClaferMoo...");
 
-                try
-                {
-                    var util  = require('util');
-                    var spawn = require('child_process').spawn;
-                    var tool  = spawn(pythonPath, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
-                    process.tool = tool;
-                    processes.push(process);                    
-                }                
-                catch(err)
-                {
-                    console.log("Error while creating a process: " + err);
-                    // TODO: handle this error properly
-                }
+                var util  = require('util');
+                var spawn = require('child_process').spawn;
 
-				process.executionTimeoutObject = setTimeout(function(process){
-					console.log("Request timed out.");
-                    process.result = 'Error: Execution Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.executionTimeout + ' millisecond(s).';
-                    process.code = 9003;
-                    process.completed = true;
-                    killProcessTree(process);
-				}, config.executionTimeout, process);
-                
-                process.pingTimeoutObject = setTimeout(function(process){
-                    process.result = 'Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).';
-                    process.code = 9004;
-                    process.completed = true;
-                    process.pingTimeout = true;
-                    killProcessTree(process);
-                }, config.pingTimeout, process);
-                
-                var error_result = "";
-				var data_result = "";
-
-				tool.stdout.on('data', function (data){	
-                    data_result += data;
-				});
-
-				tool.stderr.on('data', function (data) {
-                    error_result += data;
-				});
-                
-                tool.on('message', function(err) {
-                    console.log("Message: " + err);
+                var clafer_compiler  = spawn("clafer", ["--mode=HTML", "--self-contained", uploadedFilePath]);
+                clafer_compiler.on('error', function (err){
+                    console.log('ERROR: Cannot find Clafer Compiler (clafer). Please check whether it is installed and accessible.');
+                    res.writeHead(400, { "Content-Type": "text/html"});
+                    res.end("error");
                 });
-
-                tool.on('disconnect', function(err) {
-                    console.log("Disconnect: " + err);
-                });
-                
-                tool.on('error', function(err) {
-                    console.log("Error handler for process: " + err);
-                    if (typeof err === "object") 
+                clafer_compiler.on('exit', function (code){	
+                    if (code == 0)
                     {
-                        if (err.message && err.message == "spawn ENOENT") 
+                        // read the contents of the compiled file
+                        fs.readFile(changeFileExt(uploadedFilePath, '.cfr', '.html'), function (err, html) 
                         {
-                            console.log("Could not create a process.");
-                        }
-                    } 
-                    else 
-                    {
-                        console.log('Spawn error: unknown error');
-                    }                
-
-                    process.result = "Error: Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.";
-                    process.code = 9000;
-                    process.completed = true;
-                    clearTimeout(process.executionTimeoutObject);
-                });
-
-				tool.on('exit', function (code) 
-				{
-					var result = "";
-                    console.log("Process OnExit handler...");
+                            if (err)
+                            {
+                                console.log('ERROR: Cannot read the compiled HTML file.');
+                                res.writeHead(400, { "Content-Type": "text/html"});
+                                res.end("error");
+                                return;
+                            }
                     
-                    if (process.killed) // has been terminated
-                    {
-                        console.log("Finished cancellation");
-                        code = 9001; // just a non-zero value 
-                        cleanupOldFiles(uploadedFilePath, dlDir); 
-                        clearTimeout(process.timeoutObject);
+                            try
+                            {
+                                var tool  = spawn(pythonPath, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
+                                process.tool = tool;
+                                processes.push(process);                    
+                            }                
+                            catch(err)
+                            {
+                                console.log("Error while creating a process: " + err);
+                                // TODO: handle this error properly
+                            }
 
-                        return;
+                            process.executionTimeoutObject = setTimeout(function(process){
+                                console.log("Request timed out.");
+                                process.result = '{"message": "' + escapeJSON('Error: Execution Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.executionTimeout + ' millisecond(s).') + '"}';
+                                process.code = 9003;
+                                process.completed = true;
+                                killProcessTree(process);
+                            }, config.executionTimeout, process);
+                            
+                            process.pingTimeoutObject = setTimeout(function(process){
+                                process.result = '{"message": "' + escapeJSON('Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).') + '"}';
+                                process.code = 9004;
+                                process.completed = true;
+                                process.pingTimeout = true;
+                                killProcessTree(process);
+                            }, config.pingTimeout, process);
+                            
+                            var error_result = "";
+                            var data_result = "";
+
+                            tool.stdout.on('data', function (data){	
+                                data_result += data;
+                            });
+
+                            tool.stderr.on('data', function (data) {
+                                error_result += data;
+                            });
+                            
+                            tool.on('message', function(err) {
+                                console.log("Message: " + err);
+                            });
+
+                            tool.on('disconnect', function(err) {
+                                console.log("Disconnect: " + err);
+                            });
+                            
+                            tool.on('error', function(err) {
+                                console.log("Error handler for process: " + err);
+                                if (typeof err === "object") 
+                                {
+                                    if (err.message && err.message == "spawn ENOENT") 
+                                    {
+                                        console.log("Could not create a process.");
+                                    }
+                                } 
+                                else 
+                                {
+                                    console.log('Spawn error: unknown error');
+                                }                
+
+                                process.result = '{"message": "' + escapeJSON('Error: Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.') + '"}';
+                                process.code = 9000;
+                                process.completed = true;
+                                clearTimeout(process.executionTimeoutObject);
+                            });
+
+                            tool.on('exit', function (code) 
+                            {
+                                var result = "";
+                                console.log("Process OnExit handler...");
+                                
+                                if (process.killed) // has been terminated
+                                {
+                                    console.log("Finished cancellation");
+                                    code = 9001; // just a non-zero value 
+                                    cleanupOldFiles(uploadedFilePath, dlDir); 
+                                    clearTimeout(process.timeoutObject);
+
+                                    return;
+                                }
+
+                                console.log("Preparing to send the result...");
+                                
+                                if(error_result.indexOf('Exception in thread "main"') > -1){
+                                    code = 1;
+                                }
+                                if (code === 0) 
+                                {				
+                                    var parts = data_result.split("=====");
+                                    var message = parts[0]; //
+                                    var instances = parts[1]; // 
+                                    // todo : error handling
+                                    
+                                    var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
+                                    result = '{"message": "' + escapeJSON(message) + '",';
+                                    result += '"instances": "' + escapeJSON(instances) + '",';
+                                    result += '"claferXML":"' + escapeJSON(xml.toString()) + '"}';
+                                }
+                                else 
+                                {
+                                    result = '{"message": "' + escapeJSON('Error, return code: ' + code + '\n' + error_result) + '"}';
+                                    console.log(data_result);
+                                }
+                                
+                                process.result = result;
+                                process.code = code;
+                                process.completed = true;
+                                console.log("The result has been sent.");                    
+                                
+                                clearTimeout(process.timeoutObject);
+                                    
+                                cleanupOldFiles(uploadedFilePath, dlDir); 
+                                // we clean old files here, since the result is stored in the result variable
+                            });                    
+
+                            res.writeHead(200, { "Content-Type": "text/html"});
+                            res.end(html); // sending the HTML to the result 
+                        });
                     }
-
-                    console.log("Preparing to send the result...");
+                    else // an error occured
+                    {
+                        res.writeHead(400, { "Content-Type": "text/html"});
+                        res.end("error");
                     
-					if(error_result.indexOf('Exception in thread "main"') > -1){
-						code = 1;
-					}
-					if (code === 0) 
-					{				
-						result = "Return code = " + code + "\n" + data_result + "=====";
-						var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
-						result += xml.toString();
-						result = escapeHtml(result);
-					}
-					else 
-					{
-						result = 'Error, return code: ' + code + '\n' + error_result;
-						console.log(data_result);
-					}
-					
-                    process.result = result;
-                    process.code = code;
-                    process.completed = true;
-                    console.log("The result has been sent.");                    
-                    
-                    clearTimeout(process.timeoutObject);
-                        
-                    cleanupOldFiles(uploadedFilePath, dlDir); 
-                    // we clean old files here, since the result is stored in the result variable
-				});
-
-                res.writeHead(200, { "Content-Type": "text/html"});
-                res.end("OK"); // just means the file has been sent sucessfully and started to processing
+                    }
+                });
 				
 			});
 		});
@@ -454,13 +511,16 @@ function deleteOld(path){
 	}
 }
 
-function escapeHtml(unsafe) {
-  return unsafe
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+function escapeJSON(unsafe) 
+{
+    return unsafe.replace(/[\\]/g, '\\\\')
+        .replace(/[\"]/g, '\\\"')
+        .replace(/[\/]/g, '\\/')
+        .replace(/[\b]/g, '\\b')
+        .replace(/[\f]/g, '\\f')
+        .replace(/[\n]/g, '\\n')
+        .replace(/[\r]/g, '\\r')
+        .replace(/[\t]/g, '\\t');
 }
 
 function changeFileExt(name, ext, newExt)

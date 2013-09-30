@@ -1,0 +1,15 @@
+{
+    "examples": [
+        {"url": "", "label": "Or Choose Example..."}, 
+        {"url": "AndroidSampleMoo_2.cfr", "label": "Sample Mobile Phone Example (2 Objectives)"}, 
+        {"url": "AndroidSampleMoo_3.cfr", "label": "Sample Mobile Phone Example (3 Objectives)"},    
+        {"url": "AndroidSampleMoo_4.cfr", "label": "Sample Mobile Phone Example (4 Objectives)"},    
+        {"url": "AndroidSampleMoo_5.cfr", "label": "Sample Mobile Phone Example (5 Objectives)"},    
+
+        {"url": "Car4D.cfr", "label": "Cruise Control Example (4 Objectives)"},
+
+        {"url": "MOO_MobilePhone_From_Wiki.cfr", "label": "Mobile Phone Example from Clafer Wiki (4 Objectives)"},
+        {"url": "MOO_Android4_From_Wiki.cfr", "label": "Android Phone Example from Clafer Wiki (4 Objectives)"}    
+    ]
+        
+}
