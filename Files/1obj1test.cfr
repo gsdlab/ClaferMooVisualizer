@@ -1,0 +1,22 @@
+abstract IMeasurable
+	footprint : integer
+
+abstract LinkedList
+	xor Abstract1 : IMeasurable 
+		[ this.footprint = 0]
+		Option1 : IMeasurable 
+			[ this.footprint = 1]
+		Option2 : IMeasurable 
+			[ this.footprint = 1]
+		Option3 : IMeasurable 
+			[ this.footprint = 1]
+		Option4 : IMeasurable 
+			[ this.footprint = 1]
+	total_footprint : integer
+		[ total_footprint = sum IMeasurable.footprint]
+
+simpleConfig : LinkedList
+
+<< min simpleConfig.total_footprint >>
+
+//Mandatory Features all configurations will have: Base AbstractElement AbstractIterator 
