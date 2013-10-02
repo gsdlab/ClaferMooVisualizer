@@ -26,10 +26,11 @@ var fs = require("fs");
 var path = require('path');
 var express = require('express');
 var config = require('./config.json');
+var backendConfig = require('./Backends/backends.json');
 
-var tool_path = __dirname + "/ClaferMoo/spl_datagenerator/";
-var python_file_name = "IntegratedFeatureModelOptimizer.py";
-var pythonPath = config.pythonPath;
+//var tool_path = __dirname + "/ClaferMoo/spl_datagenerator/";
+//var python_file_name = "IntegratedFeatureModelOptimizer.py";
+//var pythonPath = config.pythonPath;
 
 
 var port = config.port;
@@ -49,6 +50,10 @@ var processes = [];
 
 server.get('/Examples/:file', function(req, res) {
     res.sendfile('Examples/' + req.params.file);
+});
+
+server.get('/Backends/:file', function(req, res) {
+    res.sendfile('Backends/' + req.params.file);
 });
 
 server.get('/', function(req, res) {
@@ -172,6 +177,8 @@ server.post('/upload', function(req, res, next)
 	console.log("/Upload request initiated.");
 
     var key = req.body.windowKey;
+    var backendId = req.body.backend;
+
     var currentURL = "";
     
     var uploadedFilePath = "";
@@ -313,7 +320,7 @@ server.post('/upload', function(req, res, next)
                     res.end("OK"); // just means the file has been sent sucessfully and started to processing
                     return;
 				}
-				console.log("Processing file with ClaferMoo...");
+				console.log("Processing file with the chosen backend...");
 
                 var util  = require('util');
                 var spawn = require('child_process').spawn;
@@ -340,14 +347,40 @@ server.post('/upload', function(req, res, next)
                     
                             try
                             {
-                                var tool  = spawn(pythonPath, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
+                                var backend = null;
+                            
+                                for (var i = 0; i < backendConfig.backends.length; i++)
+                                {
+                                    var found = false;
+                                    if (backendConfig.backends[i].id == backendId)
+                                    {
+                                        found = true;
+                                        backend = backendConfig.backends[i];
+                                        console.log('Backend Identified: "' + backendId + '".');
+                                        break;
+                                    }
+                                }
+                                
+                                if (!found)
+                                {
+                                    console.log('ERROR: Could not find a backend profile: "' + backendId + '".');
+                                    res.writeHead(400, { "Content-Type": "text/html"});
+                                    res.end("error");
+                                    return;
+                                }
+                            
+                            
+                                var filtered_args = filterArgs(backend.args, __dirname + "/Backends", uploadedFilePath);                            
+                                var tool  = spawn(backend.tool, filtered_args, { cwd: dlDir, env: process.env});
                                 process.tool = tool;
                                 processes.push(process);                    
                             }                
                             catch(err)
                             {
-                                console.log("Error while creating a process: " + err);
-                                // TODO: handle this error properly
+                                console.log('ERROR: Cannot create a process.' + err);
+                                res.writeHead(400, { "Content-Type": "text/html"});
+                                res.end("error");
+                                return;
                             }
 
                             process.executionTimeoutObject = setTimeout(function(process){
@@ -431,6 +464,9 @@ server.post('/upload', function(req, res, next)
                                     var message = parts[0]; //
                                     var instances = parts[1]; // 
                                     // todo : error handling
+                                    
+                                    console.log(message);
+                                    console.log(instances);
                                     
                                     var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
                                     result = '{"message": "' + escapeJSON(message) + '",';
@@ -572,7 +608,7 @@ server.use(function(req, res, next){
         res.send(404, "Sorry can't find that!");
 });
 
-var dependency_count = 4; // the number of tools to be checked before the Visualizer starts
+var dependency_count = 3; // the number of tools to be checked before the Visualizer starts
 console.log('=========================================');
 console.log('| ClaferMoo Visualizer v0.3.4.20-9-2013 |');
 console.log('=========================================');
@@ -624,9 +660,10 @@ java.on('exit', function (code){
     if (code == 0) dependency_ok();
 });
 
+/* uncommented this check, since we have many backends now 
 var claferMoo  = spawn(pythonPath, [tool_path + python_file_name, "--version"]);
 var claferMoo_version = "";
-/* 'error' would mean that there is no python, which has been checked already */
+// 'error' would mean that there is no python, which has been checked already
 claferMoo.on('error', function (err){
     console.log('ERROR: Cannot run ClaferMoo (' + tool_path + python_file_name + '). Please check whether it is installed and accessible.');
 });
@@ -643,7 +680,7 @@ claferMoo.on('exit', function (code){
     console.log(claferMoo_version.trim());
     if (code == 0) dependency_ok();
 });
-
+*/
 var node_version = process.version + ", " + JSON.stringify(process.versions);
 console.log("Node.JS: " + node_version);
 
@@ -658,3 +695,14 @@ function dependency_ok()
         console.log('Ready. Listening on port ' + port);        
     }
 }
+
+function filterArgs(original_args, dirName, uploadedFilePath)
+{
+    var args = new Array();
+    for (var i = 0; i < original_args.length; i++)
+    {
+        args.push(original_args[i].replace("$dirname$", dirName).replace("$filepath$", uploadedFilePath));
+    }
+    
+    return args;
+}                            

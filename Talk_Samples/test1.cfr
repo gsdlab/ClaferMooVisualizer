@@ -13,7 +13,7 @@ abstract LinkedList
 		Option4 : IMeasurable 
 			[ this.footprint = 1]
 	total_footprint : integer
-		[ total_footprint = sum IMeasurable.footprint]
+		[ total_footprint = Option1.footprint + Option2.footprint + Option3.footprint + Option4.footprint]
 
 simpleConfig : LinkedList
 
