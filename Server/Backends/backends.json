@@ -10,7 +10,7 @@
             "id": "choco_single", 
             "label": "Choco (single objective only)",
             "tool": "java",
-            "args": ["-jar", "$dirname$/ChocoSingle/ChocoBackend.jar", "$filepath$", "$dirname$/ChocoSingle/clafer_choco_branch/clafer.exe"]            
+            "args": ["-jar", "$dirname$/ChocoSingle/myartid-0.0.1-SNAPSHOT-jar-with-dependencies.jar", "$filepath$", "$dirname$/ChocoSingle/clafer_choco_branch/clafer.exe"]            
         }
     ]   
 }
