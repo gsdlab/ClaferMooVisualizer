@@ -30,7 +30,7 @@ function Input(host)
 
 
     this.width = 500;
-    this.height = 58;
+    this.height = 88;
     this.posx = 0;
     this.posy = 0;
     
@@ -467,6 +467,8 @@ Input.method("getInitContent", function()
     
     result += '</select>';
     result += '<input id="submitExample" type="submit" value="Optimize"></input>';
+    result += '<br>';       
+    result += '<input type="checkbox" name="cache"/>Use Cache';       
     result += '</form></div>';
     
     return result;
