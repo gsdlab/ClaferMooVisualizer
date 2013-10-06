@@ -26,6 +26,7 @@ var fs = require("fs");
 var path = require('path');
 var express = require('express');
 var config = require('./config.json');
+var crypto = require('crypto'); // for getting hashes
 
 var tool_path = __dirname + "/ClaferMoo/spl_datagenerator/";
 var python_file_name = "IntegratedFeatureModelOptimizer.py";
@@ -117,8 +118,11 @@ server.post('/poll', function(req, res, next)
                     }
 
                     res.end(processes[i].result);
-                    clearTimeout(processes[i].pingTimeoutObject);
-                    clearTimeout(processes[i].executionTimeoutObject);                    
+                    if (processes[i].pingTimeoutObject)
+                    {
+                        clearTimeout(processes[i].pingTimeoutObject);
+                        clearTimeout(processes[i].executionTimeoutObject);                    
+                    }
                     processes.splice(i, 1);
                     found = true;
                 }	
@@ -172,6 +176,7 @@ server.post('/upload', function(req, res, next)
 	console.log("/Upload request initiated.");
 
     var key = req.body.windowKey;
+    var cacheEnabled = req.body.cache;
     var currentURL = "";
     
     var uploadedFilePath = "";
@@ -283,12 +288,12 @@ server.post('/upload', function(req, res, next)
 		uploadedFilePath += pathTokens[2];
 		fs.rename(oldPath, uploadedFilePath, function (err){
 			if (err) throw err;
-			var file_contents;
 			console.log("Proceeding with " + uploadedFilePath);
             
 		    // read the contents of the uploaded file
 			fs.readFile(uploadedFilePath, function (err, data) {
 
+                var file_contents;
 				if(data)
                     file_contents = data.toString();
 		    	else
@@ -299,7 +304,7 @@ server.post('/upload', function(req, res, next)
 					return;
 		    	}
 
-                var process = { windowKey: key, tool: null, folder: dlDir, path: uploadedFilePath, completed: false, code: 0, killed:false};
+                var process = { windowKey: key, tool: null, folder: dlDir, path: uploadedFilePath, completed: false, code: 0, killed:false, contents: file_contents};
 
 				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data")
                 {
@@ -313,8 +318,7 @@ server.post('/upload', function(req, res, next)
                     res.end("OK"); // just means the file has been sent sucessfully and started to processing
                     return;
 				}
-				console.log("Processing file with ClaferMoo...");
-
+                
                 var util  = require('util');
                 var spawn = require('child_process').spawn;
 
@@ -324,6 +328,7 @@ server.post('/upload', function(req, res, next)
                     res.writeHead(400, { "Content-Type": "text/html"});
                     res.end("error");
                 });
+                
                 clafer_compiler.on('exit', function (code){	
                     if (code == 0)
                     {
@@ -337,125 +342,173 @@ server.post('/upload', function(req, res, next)
                                 res.end("error");
                                 return;
                             }
-                    
-                            try
+                            
+                            var cacheFound = false;
+                            
+                            if (cacheEnabled)
                             {
-                                var tool  = spawn(pythonPath, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
-                                process.tool = tool;
-                                processes.push(process);                    
-                            }                
-                            catch(err)
-                            {
-                                console.log("Error while creating a process: " + err);
-                                // TODO: handle this error properly
+                                console.log("Checking Cache...");
+                                var cache_folder = __dirname + "/cache/";
+                                var hash = crypto.createHash('md5').update(process.contents).digest("hex");
+                                var cache_file_name = cache_folder + hash + ".json";
+                                
+                                console.log("Cache file name: " + cache_file_name);
+                                
+                                if (fs.existsSync(cache_file_name))
+                                {
+                                    console.log("Found cached result, returning.");
+
+                                    process.result = fs.readFileSync(cache_file_name); 
+                                    process.code = 0;
+                                    process.completed = true;
+                                    process.tool = null;
+                                    processes.push(process);           
+                                    cacheFound = true;
+                                }
+                                else
+                                {
+                                    console.log("Cached result no found.");
+                                }
                             }
-
-                            process.executionTimeoutObject = setTimeout(function(process){
-                                console.log("Request timed out.");
-                                process.result = '{"message": "' + escapeJSON('Error: Execution Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.executionTimeout + ' millisecond(s).') + '"}';
-                                process.code = 9003;
-                                process.completed = true;
-                                killProcessTree(process);
-                            }, config.executionTimeout, process);
                             
-                            process.pingTimeoutObject = setTimeout(function(process){
-                                process.result = '{"message": "' + escapeJSON('Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).') + '"}';
-                                process.code = 9004;
-                                process.completed = true;
-                                process.pingTimeout = true;
-                                killProcessTree(process);
-                            }, config.pingTimeout, process);
-                            
-                            var error_result = "";
-                            var data_result = "";
-
-                            tool.stdout.on('data', function (data){	
-                                data_result += data;
-                            });
-
-                            tool.stderr.on('data', function (data) {
-                                error_result += data;
-                            });
-                            
-                            tool.on('message', function(err) {
-                                console.log("Message: " + err);
-                            });
-
-                            tool.on('disconnect', function(err) {
-                                console.log("Disconnect: " + err);
-                            });
-                            
-                            tool.on('error', function(err) {
-                                console.log("Error handler for process: " + err);
-                                if (typeof err === "object") 
-                                {
-                                    if (err.message && err.message == "spawn ENOENT") 
-                                    {
-                                        console.log("Could not create a process.");
-                                    }
-                                } 
-                                else 
-                                {
-                                    console.log('Spawn error: unknown error');
-                                }                
-
-                                process.result = '{"message": "' + escapeJSON('Error: Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.') + '"}';
-                                process.code = 9000;
-                                process.completed = true;
-                                clearTimeout(process.executionTimeoutObject);
-                            });
-
-                            tool.on('exit', function (code) 
+                            if (!cacheFound)
                             {
-                                var result = "";
-                                console.log("Process OnExit handler...");
-                                
-                                if (process.killed) // has been terminated
+                                console.log("Processing file with ClaferMoo...");
+
+                                try
                                 {
-                                    console.log("Finished cancellation");
-                                    code = 9001; // just a non-zero value 
-                                    cleanupOldFiles(uploadedFilePath, dlDir); 
+                                    var tool  = spawn(pythonPath, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
+                                    process.tool = tool;
+                                    processes.push(process);                    
+                                }                
+                                catch(err)
+                                {
+                                    console.log("Error while creating a process: " + err);
+                                    // TODO: handle this error properly
+                                }
+
+                                process.executionTimeoutObject = setTimeout(function(process){
+                                    console.log("Request timed out.");
+                                    process.result = '{"message": "' + escapeJSON('Error: Execution Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.executionTimeout + ' millisecond(s).') + '"}';
+                                    process.code = 9003;
+                                    process.completed = true;
+                                    killProcessTree(process);
+                                }, config.executionTimeout, process);
+                                
+                                process.pingTimeoutObject = setTimeout(function(process){
+                                    process.result = '{"message": "' + escapeJSON('Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).') + '"}';
+                                    process.code = 9004;
+                                    process.completed = true;
+                                    process.pingTimeout = true;
+                                    killProcessTree(process);
+                                }, config.pingTimeout, process);
+                                
+                                var error_result = "";
+                                var data_result = "";
+
+                                tool.stdout.on('data', function (data){	
+                                    data_result += data;
+                                });
+
+                                tool.stderr.on('data', function (data) {
+                                    error_result += data;
+                                });
+                                
+                                tool.on('message', function(err) {
+                                    console.log("Message: " + err);
+                                });
+
+                                tool.on('disconnect', function(err) {
+                                    console.log("Disconnect: " + err);
+                                });
+                                
+                                tool.on('error', function(err) {
+                                    console.log("Error handler for process: " + err);
+                                    if (typeof err === "object") 
+                                    {
+                                        if (err.message && err.message == "spawn ENOENT") 
+                                        {
+                                            console.log("Could not create a process.");
+                                        }
+                                    } 
+                                    else 
+                                    {
+                                        console.log('Spawn error: unknown error');
+                                    }                
+
+                                    process.result = '{"message": "' + escapeJSON('Error: Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.') + '"}';
+                                    process.code = 9000;
+                                    process.completed = true;
+                                    clearTimeout(process.executionTimeoutObject);
+                                });
+
+                                tool.on('exit', function (code) 
+                                {
+                                    var result = "";
+                                    console.log("Process OnExit handler...");
+                                    
+                                    if (process.killed) // has been terminated
+                                    {
+                                        console.log("Finished cancellation");
+                                        code = 9001; // just a non-zero value 
+                                        cleanupOldFiles(uploadedFilePath, dlDir); 
+                                        clearTimeout(process.timeoutObject);
+
+                                        return;
+                                    }
+
+                                    console.log("Preparing to send the result...");
+                                    
+                                    if(error_result.indexOf('Exception in thread "main"') > -1){
+                                        code = 1;
+                                    }
+                                    if (code === 0) 
+                                    {				
+                                        var parts = data_result.split("=====");
+                                        var message = parts[0]; //
+                                        var instances = parts[1]; // 
+                                        // todo : error handling
+                                        
+                                        var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
+                                        result = '{"message": "' + escapeJSON(message) + '",';
+                                        result += '"instances": "' + escapeJSON(instances) + '",';
+                                        result += '"claferXML":"' + escapeJSON(xml.toString()) + '"}';
+                                    }
+                                    else 
+                                    {
+                                        result = '{"message": "' + escapeJSON('Error, return code: ' + code + '\n' + error_result) + '"}';
+                                        console.log(data_result);
+                                    }
+                                    
+                                    process.result = result;
+                                    process.code = code;
+                                    process.completed = true;
+                                    
+//                                    if (cacheEnabled) // it can save the file to cache anyway, it does not cost much
+//                                    {
+                                        fs.writeFile(cache_file_name, process.result, function(err){
+                                        if (err)
+                                        {
+                                            console.log("Could not write cache: " + cache_file_name);                    
+                                        }
+                                        else
+                                        {
+                                            console.log("The cache file successfully saved: " + cache_file_name);                                                        
+                                        }
+                                        });
+//                                    }
+                                    
+                                    console.log("The result has been sent.");                    
+                                    
                                     clearTimeout(process.timeoutObject);
-
-                                    return;
-                                }
-
-                                console.log("Preparing to send the result...");
-                                
-                                if(error_result.indexOf('Exception in thread "main"') > -1){
-                                    code = 1;
-                                }
-                                if (code === 0) 
-                                {				
-                                    var parts = data_result.split("=====");
-                                    var message = parts[0]; //
-                                    var instances = parts[1]; // 
-                                    // todo : error handling
-                                    
-                                    var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
-                                    result = '{"message": "' + escapeJSON(message) + '",';
-                                    result += '"instances": "' + escapeJSON(instances) + '",';
-                                    result += '"claferXML":"' + escapeJSON(xml.toString()) + '"}';
-                                }
-                                else 
-                                {
-                                    result = '{"message": "' + escapeJSON('Error, return code: ' + code + '\n' + error_result) + '"}';
-                                    console.log(data_result);
-                                }
-                                
-                                process.result = result;
-                                process.code = code;
-                                process.completed = true;
-                                console.log("The result has been sent.");                    
-                                
-                                clearTimeout(process.timeoutObject);
-                                    
-                                cleanupOldFiles(uploadedFilePath, dlDir); 
-                                // we clean old files here, since the result is stored in the result variable
-                            });                    
-
+                                        
+                                    cleanupOldFiles(uploadedFilePath, dlDir); 
+                                    // we clean old files here, since the result is stored in the result variable
+                                });                    
+                            }
                             res.writeHead(200, { "Content-Type": "text/html"});
                             res.end(html); // sending the HTML to the result 
+
                         });
                     }
                     else // an error occured
