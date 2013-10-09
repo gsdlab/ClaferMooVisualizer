@@ -491,7 +491,6 @@ Input.method("getInitContent", function()
     
     result += '</select>';
     result += '<input type="checkbox" name="cache"/>Use Cache';   
-    
     result += '</form></div>';
     
     return result;
