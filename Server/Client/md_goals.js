@@ -28,7 +28,7 @@ function Goals(host)
     this.width = 500;
     this.height = 100;
     this.posx = 0;
-    this.posy = 100;
+    this.posy = 130;
     
     this.host = host;
     this.goals = null;
