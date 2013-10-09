@@ -312,6 +312,22 @@ server.post('/upload', function(req, res, next)
                         cleanupOldFiles(uploadedFilePath, dlDir);
                         return;
                     }
+//>>>>>>> develop
+
+//<<<<<<< HEAD
+				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data")
+                {
+                    console.log("Instances have been submitted, returning them...");                
+                    process.result = '{"instances": "' + escapeJSON(file_contents) + '"}';
+                    process.code = 0;
+                    process.completed = true;
+                    processes.push(process);                    
+					cleanupOldFiles(uploadedFilePath, dlDir);
+                    res.writeHead(200, { "Content-Type": "text/html"});
+                    res.end("OK"); // just means the file has been sent sucessfully and started to processing
+                    return;
+				}
+				console.log("Processing file with the chosen backend...");
 
                     var process = { windowKey: key, tool: null, folder: dlDir, path: uploadedFilePath, completed: false, code: 0, killed:false, contents: file_contents};
 
@@ -327,67 +343,6 @@ server.post('/upload', function(req, res, next)
                         res.end("OK"); // just means the file has been sent sucessfully and started to processing
                         return;
                     }
-                    
-                            try
-                            {
-                                var backend = null;
-                            
-                                for (var i = 0; i < backendConfig.backends.length; i++)
-                                {
-                                    var found = false;
-                                    if (backendConfig.backends[i].id == backendId)
-                                    {
-                                        found = true;
-                                        backend = backendConfig.backends[i];
-                                        console.log('Backend Identified: "' + backendId + '".');
-                                        break;
-                                    }
-                                }
-                                
-                                if (!found)
-                                {
-                                    console.log('ERROR: Could not find a backend profile: "' + backendId + '".');
-                                    res.writeHead(400, { "Content-Type": "text/html"});
-                                    res.end("error");
-                                    return;
-                                }
-                            
-                            
-                                var filtered_args = filterArgs(backend.args, __dirname + "/Backends", uploadedFilePath);                            
-                                var tool  = spawn(backend.tool, filtered_args, { cwd: dlDir, env: process.env});
-                                process.tool = tool;
-                                processes.push(process);                    
-                            }                
-                            catch(err)
-                            {
-                                console.log('ERROR: Cannot create a process.' + err);
-                                res.writeHead(400, { "Content-Type": "text/html"});
-                                res.end("error");
-                                return;
-                            }
-
-                            process.executionTimeoutObject = setTimeout(function(process){
-                                console.log("Request timed out.");
-                                process.result = '{"message": "' + escapeJSON('Error: Execution Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.executionTimeout + ' millisecond(s).') + '"}';
-                                process.code = 9003;
-                                process.completed = true;
-                                killProcessTree(process);
-                            }, config.executionTimeout, process);
-                            
-                            process.pingTimeoutObject = setTimeout(function(process){
-                                process.result = '{"message": "' + escapeJSON('Error: Ping Timeout. Please consider increasing timeout values in the "config.json" file. Currently it equals ' + config.pingTimeout + ' millisecond(s).') + '"}';
-                                process.code = 9004;
-                                process.completed = true;
-                                process.pingTimeout = true;
-                                killProcessTree(process);
-                            }, config.pingTimeout, process);
-                            
-                            var error_result = "";
-                            var data_result = "";
-
-                            tool.stdout.on('data', function (data){	
-                                data_result += data;
-                            });
 
                     var clafer_compiler  = spawn("clafer", ["--mode=HTML", "--self-contained", uploadedFilePath]);
                     clafer_compiler.on('error', function (err){
@@ -440,18 +395,44 @@ server.post('/upload', function(req, res, next)
                                 
                                 if (!cacheFound)
                                 {
-                                    console.log("Processing file with ClaferMoo...");
-
+                    
+        //<<<<<<< HEAD
                                     try
                                     {
-                                        var tool  = spawn(pythonPath, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
+                                        var backend = null;
+                                    
+                                        for (var i = 0; i < backendConfig.backends.length; i++)
+                                        {
+                                            var found = false;
+                                            if (backendConfig.backends[i].id == backendId)
+                                            {
+                                                found = true;
+                                                backend = backendConfig.backends[i];
+                                                console.log('Backend Identified: "' + backendId + '".');
+                                                break;
+                                            }
+                                        }
+                                        
+                                        if (!found)
+                                        {
+                                            console.log('ERROR: Could not find a backend profile: "' + backendId + '".');
+                                            res.writeHead(400, { "Content-Type": "text/html"});
+                                            res.end("error");
+                                            return;
+                                        }
+                                    
+                                    
+                                        var filtered_args = filterArgs(backend.args, __dirname + "/Backends", uploadedFilePath);                            
+                                        var tool  = spawn(backend.tool, filtered_args, { cwd: dlDir, env: process.env});
                                         process.tool = tool;
                                         processes.push(process);                    
                                     }                
                                     catch(err)
                                     {
-                                        console.log("Error while creating a process: " + err);
-                                        // TODO: handle this error properly
+                                        console.log('ERROR: Cannot create a process.' + err);
+                                        res.writeHead(400, { "Content-Type": "text/html"});
+                                        res.end("error");
+                                        return;
                                     }
 
                                     process.executionTimeoutObject = setTimeout(function(process){
@@ -469,7 +450,7 @@ server.post('/upload', function(req, res, next)
                                         process.pingTimeout = true;
                                         killProcessTree(process);
                                     }, config.pingTimeout, process);
-                                    
+                                        
                                     var error_result = "";
                                     var data_result = "";
 
@@ -479,55 +460,6 @@ server.post('/upload', function(req, res, next)
 
                                     tool.stderr.on('data', function (data) {
                                         error_result += data;
-                                    });
-                                    
-                                    tool.on('message', function(err) {
-                                        console.log("Message: " + err);
-                                    });
-
-                                    tool.on('disconnect', function(err) {
-                                        console.log("Disconnect: " + err);
-                                    });
-
-                                    console.log(message);
-                                    console.log(instances);
-                                    
-                                    var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
-                                    result = '{"message": "' + escapeJSON(message) + '",';
-                                    result += '"instances": "' + escapeJSON(instances) + '",';
-                                    result += '"claferXML":"' + escapeJSON(xml.toString()) + '"}';
-                                }
-                                else 
-                                {
-                                    result = '{"message": "' + escapeJSON('Error, return code: ' + code + '\n' + error_result) + '"}';
-                                    console.log(data_result);
-                                }
-                                
-                                process.result = result;
-                                process.code = code;
-                                process.completed = true;
-                                console.log("The result has been sent.");                    
-                                
-                                clearTimeout(process.timeoutObject);
-                                    
-                                    tool.on('error', function(err) {
-                                        console.log("Error handler for process: " + err);
-                                        if (typeof err === "object") 
-                                        {
-                                            if (err.message && err.message == "spawn ENOENT") 
-                                            {
-                                                console.log("Could not create a process.");
-                                            }
-                                        } 
-                                        else 
-                                        {
-                                            console.log('Spawn error: unknown error');
-                                        }                
-
-                                        process.result = '{"message": "' + escapeJSON('Error: Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.') + '"}';
-                                        process.code = 9000;
-                                        process.completed = true;
-                                        clearTimeout(process.executionTimeoutObject);
                                     });
 
                                     tool.on('exit', function (code) 
