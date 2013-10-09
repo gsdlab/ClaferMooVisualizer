@@ -26,11 +26,12 @@ var fs = require("fs");
 var path = require('path');
 var express = require('express');
 var config = require('./config.json');
+var backendConfig = require('./Backends/backends.json');
 var crypto = require('crypto'); // for getting hashes
 
-var tool_path = __dirname + "/ClaferMoo/spl_datagenerator/";
-var python_file_name = "IntegratedFeatureModelOptimizer.py";
-var pythonPath = config.pythonPath;
+//var tool_path = __dirname + "/ClaferMoo/spl_datagenerator/";
+//var python_file_name = "IntegratedFeatureModelOptimizer.py";
+//var pythonPath = config.pythonPath;
 
 
 var port = config.port;
@@ -50,6 +51,10 @@ var processes = [];
 
 server.get('/Examples/:file', function(req, res) {
     res.sendfile('Examples/' + req.params.file);
+});
+
+server.get('/Backends/:file', function(req, res) {
+    res.sendfile('Backends/' + req.params.file);
 });
 
 server.get('/', function(req, res) {
@@ -176,6 +181,7 @@ server.post('/upload', function(req, res, next)
 	console.log("/Upload request initiated.");
 
     var key = req.body.windowKey;
+    var backendId = req.body.backend;
     var cacheEnabled = req.body.cache;
     var currentURL = "";
     
@@ -306,6 +312,22 @@ server.post('/upload', function(req, res, next)
                         cleanupOldFiles(uploadedFilePath, dlDir);
                         return;
                     }
+//>>>>>>> develop
+
+//<<<<<<< HEAD
+				if (uploadedFilePath.substring(uploadedFilePath.length - 5) == ".data")
+                {
+                    console.log("Instances have been submitted, returning them...");                
+                    process.result = '{"instances": "' + escapeJSON(file_contents) + '"}';
+                    process.code = 0;
+                    process.completed = true;
+                    processes.push(process);                    
+					cleanupOldFiles(uploadedFilePath, dlDir);
+                    res.writeHead(200, { "Content-Type": "text/html"});
+                    res.end("OK"); // just means the file has been sent sucessfully and started to processing
+                    return;
+				}
+				console.log("Processing file with the chosen backend...");
 
                     var process = { windowKey: key, tool: null, folder: dlDir, path: uploadedFilePath, completed: false, code: 0, killed:false, contents: file_contents};
 
@@ -321,9 +343,6 @@ server.post('/upload', function(req, res, next)
                         res.end("OK"); // just means the file has been sent sucessfully and started to processing
                         return;
                     }
-                    
-                    var util  = require('util');
-                    var spawn = require('child_process').spawn;
 
                     var clafer_compiler  = spawn("clafer", ["--mode=HTML", "--self-contained", uploadedFilePath]);
                     clafer_compiler.on('error', function (err){
@@ -376,18 +395,44 @@ server.post('/upload', function(req, res, next)
                                 
                                 if (!cacheFound)
                                 {
-                                    console.log("Processing file with ClaferMoo...");
-
+                    
+        //<<<<<<< HEAD
                                     try
                                     {
-                                        var tool  = spawn(pythonPath, [tool_path + python_file_name, uploadedFilePath, "--preservenames"], { cwd: dlDir, env: process.env});
+                                        var backend = null;
+                                    
+                                        for (var i = 0; i < backendConfig.backends.length; i++)
+                                        {
+                                            var found = false;
+                                            if (backendConfig.backends[i].id == backendId)
+                                            {
+                                                found = true;
+                                                backend = backendConfig.backends[i];
+                                                console.log('Backend Identified: "' + backendId + '".');
+                                                break;
+                                            }
+                                        }
+                                        
+                                        if (!found)
+                                        {
+                                            console.log('ERROR: Could not find a backend profile: "' + backendId + '".');
+                                            res.writeHead(400, { "Content-Type": "text/html"});
+                                            res.end("error");
+                                            return;
+                                        }
+                                    
+                                    
+                                        var filtered_args = filterArgs(backend.args, __dirname + "/Backends", uploadedFilePath);                            
+                                        var tool  = spawn(backend.tool, filtered_args, { cwd: dlDir, env: process.env});
                                         process.tool = tool;
                                         processes.push(process);                    
                                     }                
                                     catch(err)
                                     {
-                                        console.log("Error while creating a process: " + err);
-                                        // TODO: handle this error properly
+                                        console.log('ERROR: Cannot create a process.' + err);
+                                        res.writeHead(400, { "Content-Type": "text/html"});
+                                        res.end("error");
+                                        return;
                                     }
 
                                     process.executionTimeoutObject = setTimeout(function(process){
@@ -405,7 +450,7 @@ server.post('/upload', function(req, res, next)
                                         process.pingTimeout = true;
                                         killProcessTree(process);
                                     }, config.pingTimeout, process);
-                                    
+                                        
                                     var error_result = "";
                                     var data_result = "";
 
@@ -415,34 +460,6 @@ server.post('/upload', function(req, res, next)
 
                                     tool.stderr.on('data', function (data) {
                                         error_result += data;
-                                    });
-                                    
-                                    tool.on('message', function(err) {
-                                        console.log("Message: " + err);
-                                    });
-
-                                    tool.on('disconnect', function(err) {
-                                        console.log("Disconnect: " + err);
-                                    });
-                                    
-                                    tool.on('error', function(err) {
-                                        console.log("Error handler for process: " + err);
-                                        if (typeof err === "object") 
-                                        {
-                                            if (err.message && err.message == "spawn ENOENT") 
-                                            {
-                                                console.log("Could not create a process.");
-                                            }
-                                        } 
-                                        else 
-                                        {
-                                            console.log('Spawn error: unknown error');
-                                        }                
-
-                                        process.result = '{"message": "' + escapeJSON('Error: Could not run ClaferMoo. Likely, Python or ClaferMoo have not been found. Please check whether Python is available from the command line, as well as whether ClaferMoo has been properly installed.') + '"}';
-                                        process.code = 9000;
-                                        process.completed = true;
-                                        clearTimeout(process.executionTimeoutObject);
                                     });
 
                                     tool.on('exit', function (code) 
@@ -629,7 +646,7 @@ server.use(function(req, res, next){
         res.send(404, "Sorry can't find that!");
 });
 
-var dependency_count = 4; // the number of tools to be checked before the Visualizer starts
+var dependency_count = 3; // the number of tools to be checked before the Visualizer starts
 console.log('=========================================');
 console.log('| ClaferMoo Visualizer v0.3.4.20-9-2013 |');
 console.log('=========================================');
@@ -681,9 +698,10 @@ java.on('exit', function (code){
     if (code == 0) dependency_ok();
 });
 
+/* uncommented this check, since we have many backends now 
 var claferMoo  = spawn(pythonPath, [tool_path + python_file_name, "--version"]);
 var claferMoo_version = "";
-/* 'error' would mean that there is no python, which has been checked already */
+// 'error' would mean that there is no python, which has been checked already
 claferMoo.on('error', function (err){
     console.log('ERROR: Cannot run ClaferMoo (' + tool_path + python_file_name + '). Please check whether it is installed and accessible.');
 });
@@ -700,7 +718,7 @@ claferMoo.on('exit', function (code){
     console.log(claferMoo_version.trim());
     if (code == 0) dependency_ok();
 });
-
+*/
 var node_version = process.version + ", " + JSON.stringify(process.versions);
 console.log("Node.JS: " + node_version);
 
@@ -715,3 +733,14 @@ function dependency_ok()
         console.log('Ready. Listening on port ' + port);        
     }
 }
+
+function filterArgs(original_args, dirName, uploadedFilePath)
+{
+    var args = new Array();
+    for (var i = 0; i < original_args.length; i++)
+    {
+        args.push(original_args[i].replace("$dirname$", dirName).replace("$filepath$", uploadedFilePath));
+    }
+    
+    return args;
+}                            

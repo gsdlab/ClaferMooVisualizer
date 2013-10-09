@@ -29,7 +29,7 @@ function ParetoFrontVisualizer (element)
 //        }
 }
 
-ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, labels) 
+ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, labels, instanceCounterArg) 
 {
 	if ((args.length < 2) || args.length != labels.length)
 	{
@@ -40,6 +40,10 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
     var hasThird = (args.length >= 3); // has third dimension
     var hasForth = (args.length >= 4); // has forth dimension
 
+    var instanceCounterId = args.indexOf(instanceCounterArg);
+    
+    var hasInstanceCounter = (instanceCounterId >= 0);
+    
     var sizeTLimit = 20; // bubbles cannot be bigger than this
     
 //    alert(args[3]);
@@ -87,9 +91,19 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
 
 	for (var i = 1; i <= instanceCount; i++)
 	{
+        var first;
+        var second;
+        
+        if (instanceCounterId == 0) // if the first dimension represents an instance ID
+            first = i;
+        else 
+            first = processor.getFeatureValue(i, args[0], true); // get only numeric
 
-		var first = processor.getFeatureValue(i, args[0], true); // get only numeric
-		var second = processor.getFeatureValue(i, args[1], true); // get only numeric
+            
+        if (instanceCounterId == 1) // if the second dimension represents an instance ID
+            second = i;
+        else 
+            second = processor.getFeatureValue(i, args[1], true); // get only numeric
 		
 		point = new Array();
 		point.push(getPID(i));

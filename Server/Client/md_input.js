@@ -28,7 +28,6 @@ function Input(host)
     this.pollingTimeout = 60000;  // what is the timeout when polling
     this.pollingDelay = 2000;    // how often to send requests (poll) for updates
 
-
     this.width = 500;
     this.height = 88;
     this.posx = 0;
@@ -428,6 +427,7 @@ Input.method("getInitContent", function()
 {
     result = '<div id = "load_area">';
     result += '<form id="myform" action="' + this.serverAction + '" method="post" enctype="multipart/form-data" style="display: block;">';
+    result += '<fieldset>';
     result += '<input type="file" size="25" name="claferFile" id="claferFile" style="width: 388px;">';
     result += '<input type="hidden" name="claferFileURL" value="' + window.location + '">';
     result += '<input type="hidden" name="exampleFlag" id="exampleFlag" value="0">';
@@ -435,10 +435,9 @@ Input.method("getInitContent", function()
 
     result += '<input type="hidden" id="windowKey" name="windowKey" value="' + this.host.key + '">';
     result += '<br>';
-    result += '<select id="exampleURL" name="exampleURL" style="width: 388px;">';
-   
+    result += '<select id="exampleURL" name="exampleURL" style="width: 388px;">';   
 
-   $.getJSON('/Examples/examples.json', 
+    $.getJSON('/Examples/examples.json', 
         function(data)
         {
             var examples = data.examples;
@@ -463,12 +462,35 @@ Input.method("getInitContent", function()
             var options = '<option class="' + optionClass + '" value="">Or Choose Example (Could not load examples)</option>';
             $("#exampleURL").html(options);
             
-        })
+        });
     
     result += '</select>';
     result += '<input id="submitExample" type="submit" value="Optimize"></input>';
-    result += '<br>';       
-    result += '<input type="checkbox" name="cache"/>Use Cache';       
+    result += '</fieldset><div style="height:8px">&nbsp;</div>';
+
+    result += '<span>Backend:</span><select id="backend" name="backend" style="width: 288px;">';   
+    
+    $.getJSON('/Backends/backends.json', 
+        function(data)
+        {
+            var backends = data.backends;
+            var options = "";
+        
+            for (var i = 0; i < backends.length; i++)
+            {
+                options += '<option value="' + backends[i].id + '">' + backends[i].label + '</option>';
+            }
+            
+            $("#backend").html(options);
+        }
+    ).error(function() 
+        { 
+            var options = '<option value="">(Could not load backends)</option>';
+            $("#backend").html(options);            
+        });
+    
+    result += '</select>';
+    result += '<input type="checkbox" name="cache"/>Use Cache';   
     result += '</form></div>';
     
     return result;

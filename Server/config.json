@@ -1,5 +1,4 @@
 {
-	"pythonPath": "python",
 	"port": "8092",
 	"executionTimeout": "1800000",
 	"pingTimeout": "10000"        
