@@ -1,0 +1,16 @@
+{
+    "backends": [
+        {
+            "id": "clafermoo_standard", 
+            "label": "ClaferMoo", 
+            "tool": "python", 
+            "args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "$filepath$", "--preservenames"]
+        }, 
+        {
+            "id": "choco_single", 
+            "label": "Choco (single objective only)",
+            "tool": "java",
+            "args": ["-jar", "$dirname$/ChocoSingle/myartid-0.0.1-SNAPSHOT-jar-with-dependencies.jar", "$filepath$", "$dirname$/ChocoSingle/clafer_choco_branch/clafer.exe"]            
+        }
+    ]   
+}

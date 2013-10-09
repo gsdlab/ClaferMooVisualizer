@@ -50,6 +50,8 @@ function Host(modules)
 {
     this.key = Math.floor(Math.random()*1000000000).toString(16);
     this.selector = new Selector(this);
+    this.instanceCounterArg = "?special_counter?"; 
+    this.instanceCounterLabel = "#instance"
     this.modules = new Array();
     this.helpGetter = new helpGetter(this);
     

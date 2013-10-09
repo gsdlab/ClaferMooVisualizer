@@ -51,8 +51,17 @@ Graph.method("onRendered", function()
         $(".axis_drop")[i].ondrop = this.drop.bind(this);
         $(".axis_drop")[i].ondragover = this.allowDrop.bind(this);
     }
-
-	if (this.goals.length >= 2)
+    
+	if (this.goals.length == 1) // single-objective    
+    {
+		$("#chart").show();
+		this.assignToAxis("dropPointX", this.goals[0].arg, this.goals[0].label);
+		this.assignToAxis("dropPointY", this.host.instanceCounterArg, this.host.instanceCounterLabel);
+        this.assignToAxis("dropPointZ", "", "");
+        this.assignToAxis("dropPointT", "", "");
+        this.redrawParetoFront();    
+    }
+	else if (this.goals.length >= 2)
 	{
 		$("#chart").show();
 		this.assignToAxis("dropPointX", this.goals[0].arg, this.goals[0].label);
@@ -79,7 +88,10 @@ Graph.method("onRendered", function()
         this.redrawParetoFront();
 	}
 	else
+    {
 		$("#chart").hide();
+    }
+    
     $("#mdGraph .window-titleBar-content").text("Bubble Front Graph: " + this.instanceProcessor.getInstanceSuperClafer().replace(/[^_]{1,}[_]/, ""));
     this.addIds();
 });
@@ -87,6 +99,25 @@ Graph.method("onRendered", function()
 Graph.method("allowDrop", function(ev)
 {
 	ev.preventDefault();
+});
+
+Graph.method("completeDrop", function(target, arg, label)
+// target is the drop destination
+// arg is the quality id
+// label is a label of the quality we drop
+{
+    var id = target.id;
+    var node = target;
+    
+    while (node.parentNode != null && (id == "" || id == "svgcontY"|| id == "svgcontT"))
+    {
+        node = node.parentNode;
+        id = node.id;
+    }
+    
+	this.assignToAxis(id, arg, label, true);
+    
+    return id;
 });
 
 Graph.method("drop", function(ev)
@@ -103,16 +134,21 @@ Graph.method("drop", function(ev)
 	var arg = parts[0];
 	var label = parts[1];
 
-    var id = ev.target.id;
-    var node = ev.target;
-    
-    while (node.parentNode != null && (id == "" || id == "svgcontY"|| id == "svgcontT"))
+    if (this.host.findModule("mdGoals").goals.length == 1) // case of 1 dimension
     {
-        node = node.parentNode;
-        id = node.id;
+        // we have to switch the instance dimension too
+        anotherTarget = "dropPointY";
+        
+        if (this.completeDrop(ev.target, arg, label) == anotherTarget)
+        {
+            anotherTarget = "dropPointX";
+        }        
+        
+        this.completeDrop($("#" + anotherTarget)[0], this.host.instanceCounterArg, this.host.instanceCounterLabel);
     }
+    else
+        this.completeDrop(ev.target, arg, label); 
     
-	this.assignToAxis(id, arg, label, true);
     this.redrawParetoFront();
     host.findModule("mdComparisonTable").addShapes();
     host.findModule("mdComparisonTable").filter.filterContent();
@@ -133,7 +169,7 @@ Graph.method("redrawParetoFront", function()
     if (this.instanceProcessor == null)
         return; // no data, so just resize
 
-	var arg1 = $("#dropPointXAxisConfig_arg").val();
+    var arg1 = $("#dropPointXAxisConfig_arg").val();
 	var label1 = $("#dropPointXAxisConfig_label").val();
 
 	var arg2 = $("#dropPointYAxisConfig_arg").val();
@@ -182,7 +218,7 @@ Graph.method("redrawParetoFront", function()
         labels.push(label4);
     }
     
-    this.PFVisualizer.draw(this.Processor, this.instanceProcessor, args, labels);
+    this.PFVisualizer.draw(this.Processor, this.instanceProcessor, args, labels, this.host.instanceCounterArg);
     this.makePointsSelected(this.host.selector.selection);
     this.makePointsReady();
     this.addFilters();
