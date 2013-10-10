@@ -105,7 +105,7 @@ Backend: ClaferMoo
 Backend: ClaferChocoSoo
 --------------------
 
-Refer to [this]{https://github.com/gsdlab/ClaferChocoSoo} project.
+Refer to [this](https://github.com/gsdlab/ClaferChocoSoo) project.
 
 ### Important: Branches must correspond
 
