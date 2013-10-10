@@ -369,7 +369,7 @@ server.post('/upload', function(req, res, next)
                                 
                                 var cache_folder = __dirname + "/cache/";
                                 var hash = crypto.createHash('md5').update(process.contents).digest("hex");
-                                var cache_file_name = cache_folder + hash + ".json";
+                                var cache_file_name = cache_folder + hash + "_" + backendId + ".json"; // made specific to the backend
                                 console.log("Cache file name: " + cache_file_name);
 
                                 if (cacheEnabled)
