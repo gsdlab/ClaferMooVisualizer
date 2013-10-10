@@ -70,7 +70,7 @@ Input.method("onInitRendered", function()
     options.timeout = this.requestTimeout;
 
     $('#myform').ajaxForm(options); 
-	$('#myform').submit();
+//	$('#myform').submit(); moved submit out of here, because the backend list is not loaded yet
 });
 
 /*
@@ -482,6 +482,7 @@ Input.method("getInitContent", function()
             }
             
             $("#backend").html(options);
+            $('#myform').submit(); // make the submit here            
         }
     ).error(function() 
         { 
