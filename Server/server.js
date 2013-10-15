@@ -394,6 +394,7 @@ server.post('/upload', function(req, res, next)
                                         process.tool = null;
                                         processes.push(process);           
                                         cacheFound = true;
+                                        cleanupOldFiles(uploadedFilePath, dlDir); // cleaning up when cached result is found
                                     }
                                     else
                                     {
