@@ -367,10 +367,18 @@ server.post('/upload', function(req, res, next)
                             {
                                 if (err)
                                 {
-                                    console.log('ERROR: Cannot read the compiled HTML file.');
-                                    res.writeHead(400, { "Content-Type": "text/html"});
-                                    res.end("error");
-                                    return;
+                                    console.log('ERROR: Cannot read the compiled HTML file. But continue anyways.');
+
+// not a fatal error in this case                                    
+//                                    res.writeHead(400, { "Content-Type": "text/html"});
+//                                    res.end("compile_error");
+//                                    process.result = '{"message": "' + escapeJSON("Error: Could not get HTML") + '"}';
+//                                    process.code = 0;
+//                                    process.completed = true;
+//                                    process.tool = null;
+//                                    processes.push(process);           
+//                                    cleanupOldFiles(uploadedFilePath, dlDir); // cleaning up when cached result is found
+//                                    return;
                                 }
                                 
                                 var cacheFound = false;
@@ -540,9 +548,34 @@ server.post('/upload', function(req, res, next)
                         }
                         else // an error occured
                         {
-                            res.writeHead(400, { "Content-Type": "text/html"});
-                            res.end("error");
-                        
+                            console.log('ERROR: Non-Zero Code of Clafer Compiler.');
+                            res.writeHead(200, { "Content-Type": "text/html"});
+
+                            fs.readFile(changeFileExt(uploadedFilePath, '.cfr', '.html'), function (err, html) 
+                            {
+                                if (err)
+                                {
+                                    res.end("compile_error");
+                                    process.result = '{"message": "' + escapeJSON("Error: Compilation Error") + '"}';
+                                    process.code = 0;
+                                    process.completed = true;
+                                    process.tool = null;
+                                    processes.push(process);           
+                                    cleanupOldFiles(uploadedFilePath, dlDir); // cleaning up when cached result is found
+                                    return;
+                                }
+                                else
+                                {
+                                    res.end(html);
+                                    process.result = '{"message": "' + escapeJSON("Error: Compilation Error") + '"}';
+                                    process.code = 0;
+                                    process.completed = true;
+                                    process.tool = null;
+                                    processes.push(process);           
+                                    cleanupOldFiles(uploadedFilePath, dlDir); // cleaning up when cached result is found
+                                    return;
+                                }
+                            });
                         }
                     });
                     

@@ -153,7 +153,7 @@ Input.method("setClaferModelHTML", function(html){
 Input.method("fileSent", function(responseText, statusText, xhr, $form)  { 
     this.toCancel = false;
 
-    if (responseText == "error")
+    if (responseText == "compile_error")
     {
         this.handleError(null, "compile_error", null);
         this.endQuery();
