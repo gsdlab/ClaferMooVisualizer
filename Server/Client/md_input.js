@@ -23,6 +23,7 @@ function Input(host)
 { 
     this.id = "mdInput";
     this.title = "Input File or Example";
+    this.host = host;
 
     this.requestTimeout = 60000; // what is the timeout for response after sending a file
     this.pollingTimeout = 60000;  // what is the timeout when polling
@@ -36,7 +37,6 @@ function Input(host)
     this.pollingTimeoutObject = null;
     this.toCancel = false;
     
-    this.host = host;
     this.serverAction = "/upload";
     
     this.dataFileChosen = false;

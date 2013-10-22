@@ -23,13 +23,13 @@ function Analysis(host)
 { 
     this.id = "mdAnalysis";
     this.title = "Variant Comparer";
-    
-    this.width = 500;
-    this.height = 233;
-    this.posx = 0;
-    this.posy = 272;
-    
     this.host = host;
+    
+    this.posy = 272;
+    this.width = 500;
+    this.height = (window.parent.innerHeight-50 - this.host.findModule("mdComparisonTable").height - 52) - this.posy;
+    this.posx = 0;
+    
     this.dataTable = null;
 }
 

@@ -34,13 +34,13 @@ $(document).ready(function()
 {
     var modules = Array();
     
-    modules.push("Goals");
-    modules.push("Graph");
-//    modules.push("Console");
     modules.push("Input");
+    modules.push("Goals");
+//    modules.push("Console");
 //    modules.push("UseCases");
-    modules.push("Analysis");
     modules.push("ComparisonTable");
+    modules.push("Graph");
+    modules.push("Analysis");
     modules.push("ClaferModel");
     
     host = new Host(modules);
