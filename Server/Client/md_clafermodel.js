@@ -24,15 +24,21 @@ function ClaferModel(host)
 { 
     this.id = "mdClaferModel";
     this.title = "Clafer Source Model";
+    this.host = host;
     
-    this.width = 500;
+//    this.width = 500;
+
+    this.width = (window.parent.innerWidth-30 - this.host.findModule("mdInput").width);
+    this.height = 100;
+    this.posx = (window.parent.innerWidth-30) * 3 / 4;
+
+
     this.height = 0;
     this.posx = 500;
     this.posy = 0;
     this.iframeType = true;
     this.ajaxUrl = "/htmlwrapper";
     
-    this.host = host;
     this.goals = null;
     this.model = "";
 }

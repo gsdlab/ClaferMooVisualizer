@@ -23,14 +23,13 @@ function ComparisonTable(host)
 { 
     this.id = "mdComparisonTable";
     this.title = "Feature and Quality Matrix";
+    this.host = host;
 
-    this.width = 1000;
+    this.width = window.parent.innerWidth-30;
     this.height = 130;
     this.posx = 0;
     this.posy = 545;
     
-    this.host = host;
-
 	this.fadeColor = "#777";
 	this.normalColor = "#000"
 
