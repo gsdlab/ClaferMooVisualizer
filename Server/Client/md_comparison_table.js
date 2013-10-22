@@ -28,7 +28,7 @@ function ComparisonTable(host)
     this.width = window.parent.innerWidth-30;
     this.height = 130;
     this.posx = 0;
-    this.posy = 545;
+    this.posy = window.parent.innerHeight-50 - this.height - 11;
     
 	this.fadeColor = "#777";
 	this.normalColor = "#000"

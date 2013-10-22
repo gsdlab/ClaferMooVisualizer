@@ -26,9 +26,9 @@ function Graph(host)
     this.host = host;
 
     this.width = (window.parent.innerWidth-30 - this.host.findModule("mdInput").width);
-    this.height = 463;
+    this.height = (window.parent.innerHeight-50 - this.host.findModule("mdComparisonTable").height - 52);
     this.posx = 500;
-    this.posy = 42;
+    this.posy = 0;
     
     this.instanceProcessor = null;
     this.axisArray = new Array();
@@ -373,7 +373,7 @@ Graph.method("getContent", function()
     var tdZ = $('<div id="dropPointZ" class="axis_drop" style="float:left;"></div>');
     var tdY = $('<div id="dropPointY" class="axis_drop" style="float:left;"></div>');
     var tdT = $('<div id="dropPointT" class="axis_drop" style="float:left;"></div>');
-    var tdChart = $('<div id="chart" style="float:left; display:none; width: 300px; height: 200px; overflow:hidden"></div>'); // need to keep width here since first time is not rendered good
+    var tdChart = $('<div id="chart" style="float:left; display:none; width: 300px; height: 200px;"></div>'); // need to keep width here since first time is not rendered good
     var tdX = $('<div id="dropPointX" class="axis_drop" style="float:left;"></div>');
 
     this.axisArray.splice(0, this.axisArray.length); // clear the array
@@ -418,7 +418,11 @@ function setDim(el, w, h)
       $(el).width(w + "px");
       $(el).height(h + "px");
 
-      el.style.display = "inline-block";
+      if (el)
+      {
+          el.style.display = "inline-block";
+      }
+
 //    el.style.height = h + "px";
     
 //    $(el).css("width", w + "px");
@@ -450,36 +454,16 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     var tdX = $('#dropPointX')[0];    
         
     var unit = 20;
-
-//    alert(w);
-//    alert(h);
-        
-//    table.setAttribute('height', w);
-//    table.setAttribute('width', h);
-//    setDim(table, 0, 0);
     
     setDim(table, w, h);
     setDim(tdZ, w, unit);
     setDim(tdY, unit, h - 2 * unit);
-    setDim(tdChart, w - 5 * unit, h - 2 * unit);
-    setDim(tdDiv, w - 5 * unit, h - 2 * unit);
-    setDim(tdT, 3 * unit, h - 2 * unit);
+    setDim(tdChart, w - 4 * unit, h - 2 * unit);
+    setDim(tdDiv, w - 4 * unit, h - 2 * unit);
+    setDim(tdT, 2 * unit, h - 2 * unit);
     setDim(tdX, w, unit);
-    
-//    tdChart.css("width", w - 2 * unit);
-//    tdChart.css("height", h - 2 * unit);
-
-    
-/*
-    var sw = $("#mdGraph").css("width"); // returns the string 400px
-    var sh = $("#mdGraph").css("height"); // returns the string 400px
-
-    sw = sw.replace("px", "");
-    sh = sh.replace("px", "");
-*/    
 
     $("#graph_table").css("table-layout", "auto"); //A fix for horizontal compression on non-chrome browsers (Jan 11th 2013)
-//    alert(w + " " + h);
     
     $("chart").empty(); // clear the old graph
     

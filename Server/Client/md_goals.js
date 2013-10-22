@@ -26,9 +26,9 @@ function Goals(host)
     this.title = "Objectives and Quality Ranges";
     
     this.width = 500;
-    this.height = 100;
+    this.height = 60;
     this.posx = 0;
-    this.posy = 130;
+    this.posy = 170;
     
     this.host = host;
     this.goals = null;

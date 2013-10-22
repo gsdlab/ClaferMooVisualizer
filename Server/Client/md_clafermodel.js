@@ -28,14 +28,11 @@ function ClaferModel(host)
     
 //    this.width = 500;
 
-    this.width = (window.parent.innerWidth-30 - this.host.findModule("mdInput").width);
-    this.height = 100;
-    this.posx = (window.parent.innerWidth-30) * 3 / 4;
-
-
+    this.width = 500;
     this.height = 0;
-    this.posx = 500;
-    this.posy = 0;
+    this.posx = 0;
+    this.posy = 130;
+
     this.iframeType = true;
     this.ajaxUrl = "/htmlwrapper";
     
