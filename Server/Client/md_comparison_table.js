@@ -59,6 +59,9 @@ ComparisonTable.method("onDataLoaded", function(data){
 ComparisonTable.method("onRendered", function()
 {
 // Add circles to table headers
+    
+    $.resizeWindow(this.id, this.width, $("#comparison").height() + 80); // resize the table to fit everything
+
     this.addShapes();
 
 // Add search bar 
