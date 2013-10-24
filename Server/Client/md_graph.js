@@ -26,7 +26,7 @@ function Graph(host)
     this.host = host;
 
     this.width = (window.parent.innerWidth-30 - this.host.findModule("mdInput").width);
-    this.height = (window.parent.innerHeight-50 - this.host.findModule("mdComparisonTable").height - 52);
+    this.height = (window.parent.innerHeight-50 - 52);
     this.posx = 500;
     this.posy = 0;
     

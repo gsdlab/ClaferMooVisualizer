@@ -501,6 +501,7 @@ server.post('/upload', function(req, res, next)
                                         {				
                                             var parts = data_result.split("=====");
                                             var message = parts[0]; //
+                                            console.log(message);
                                             var instances = parts[1]; // 
                                             // todo : error handling
                                             

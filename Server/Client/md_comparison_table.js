@@ -26,9 +26,9 @@ function ComparisonTable(host)
     this.host = host;
 
     this.width = window.parent.innerWidth-30;
-    this.height = 130;
+    this.height = 600;
     this.posx = 0;
-    this.posy = window.parent.innerHeight-50 - this.height - 11;
+    this.posy = this.host.findModule("mdAnalysis").posy + this.host.findModule("mdAnalysis").height + 42;
     
 	this.fadeColor = "#777";
 	this.normalColor = "#000"
@@ -59,6 +59,9 @@ ComparisonTable.method("onDataLoaded", function(data){
 ComparisonTable.method("onRendered", function()
 {
 // Add circles to table headers
+    
+    $.resizeWindow(this.id, this.width, $("#comparison").height() + 80); // resize the table to fit everything
+
     this.addShapes();
 
 // Add search bar 
