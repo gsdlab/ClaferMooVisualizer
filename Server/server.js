@@ -509,7 +509,7 @@ server.post('/upload', function(req, res, next)
                                                 
                                                 if (parts.length != 2)
                                                 {
-                                                    result = '{"message": "' + escapeJSON('Error, instances and normal text must be separated by "=====".'}';
+                                                    result = '{"message": "' + escapeJSON('Error, instances and normal text must be separated by "====="') + '}';
                                                     console.log(data_result);
                                                 }
                                                 else
