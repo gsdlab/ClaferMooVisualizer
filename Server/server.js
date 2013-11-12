@@ -385,7 +385,7 @@ server.post('/upload', function(req, res, next)
                                 var clafer_compiler_XML  = spawn("clafer", ["--mode=XML", uploadedFilePath]);
                                 // -----                                
 
-                                clafer_compiler_XML.on('exit', function (code)
+                                clafer_compiler_XML.on('exit', function (code2)
                                 {	                                
                                     var cacheFound = false;
                                     
@@ -506,18 +506,29 @@ server.post('/upload', function(req, res, next)
                                             if (code === 0) 
                                             {				
                                                 var parts = data_result.split("=====");
-                                                var message = parts[0]; //
-                                                console.log(message);
-                                                var instances = parts[1]; // 
-                                                // todo : error handling
                                                 
-                                                var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
-                                                // this code assumes the backend should produce an XML,
-                                                // which is not the correct way
+                                                if (parts.length != 2)
+                                                {
+                                                    result = '{"message": "' + escapeJSON('Error, instances and normal text must be separated by "=====".'}';
+                                                    console.log(data_result);
+                                                }
+                                                else
+                                                {
                                                 
-                                                result = '{"message": "' + escapeJSON(message) + '",';
-                                                result += '"instances": "' + escapeJSON(instances) + '",';
-                                                result += '"claferXML":"' + escapeJSON(xml.toString()) + '"}';
+                                                    var message = parts[0]; //
+                                                    console.log(message);
+                                                    var instances = parts[1]; // 
+                                                    // todo : error handling
+                                                    
+                                                    console.log(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
+                                                    var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
+                                                    // this code assumes the backend should produce an XML,
+                                                    // which is not the correct way
+                                                    
+                                                    result = '{"message": "' + escapeJSON(message) + '",';
+                                                    result += '"instances": "' + escapeJSON(instances) + '",';
+                                                    result += '"claferXML":"' + escapeJSON(xml.toString()) + '"}';
+                                                }
                                             }
                                             else 
                                             {
@@ -547,7 +558,7 @@ server.post('/upload', function(req, res, next)
                                             
                                             clearTimeout(process.timeoutObject);
                                                 
-                                            cleanupOldFiles(uploadedFilePath, dlDir); 
+                                            // cleanupOldFiles(uploadedFilePath, dlDir); 
                                             // we clean old files here, since the result is stored in the result variable
                                         });                    
                                     }
