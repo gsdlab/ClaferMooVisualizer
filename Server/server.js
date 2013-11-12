@@ -381,6 +381,10 @@ server.post('/upload', function(req, res, next)
 //                                    return;
                                 }
                                 
+                                // temporary, intil multiple options are implemented:
+                                var clafer_compiler_XML  = spawn("clafer", ["--mode=XML", uploadedFilePath]);
+                                // -----                                
+                                
                                 var cacheFound = false;
                                 
                                 var cache_folder = __dirname + "/cache/";
@@ -506,6 +510,9 @@ server.post('/upload', function(req, res, next)
                                             // todo : error handling
                                             
                                             var xml = fs.readFileSync(changeFileExt(uploadedFilePath, '.cfr', '.xml'));
+                                            // this code assumes the backend should produce an XML,
+                                            // which is not the correct way
+                                            
                                             result = '{"message": "' + escapeJSON(message) + '",';
                                             result += '"instances": "' + escapeJSON(instances) + '",';
                                             result += '"claferXML":"' + escapeJSON(xml.toString()) + '"}';
