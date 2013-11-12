@@ -553,7 +553,7 @@ server.post('/upload', function(req, res, next)
                                     }
                                     res.writeHead(200, { "Content-Type": "text/html"});
                                     res.end(html); // sending the HTML to the result 
-                                }
+                                });
                             });
                         }
                         else // an error occured
