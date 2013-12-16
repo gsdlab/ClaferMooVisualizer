@@ -69,7 +69,7 @@ server.get('/', fileMiddleware, function(req, res) {
             }
         ];
 
-    contents = core.replaceTemplate(contents, replacementMap);
+    contents = core.replaceTemplate(contents.toString(), replacementMap);
     res.writeHead(200, { "Content-Type": "text/html"});    
     res.end(contents);
 
