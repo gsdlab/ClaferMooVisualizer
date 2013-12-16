@@ -119,5 +119,10 @@ function getConfiguration()
 
     	}});
 
-    return modules;
+    var settings = {"onLoaded": function(host)
+    {
+    	alert("loaded!");
+    }};
+
+    return {"modules": modules, "settings": settings};
 }
