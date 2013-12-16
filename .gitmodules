@@ -1,0 +1,3 @@
+[submodule "Server/commons"]
+	path = Server/commons
+	url = https://github.com/gsdlab/ClaferToolsUICommonPlatform
