@@ -1,7 +1,9 @@
 {
     "scripts": [
-        "configuration.js",
-        "selection_controller.js"
+        "utils.js",
+        "selection_controller.js",
+        "instance_filter.js",        
+        "configuration.js"
     ],
 
     "styles": [
