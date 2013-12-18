@@ -156,15 +156,16 @@ server.get('/saveformat', fileMiddleware, function(req, res) {
 
 function runOptimization(process)
 {
-    var process = core.getProcess(process.key);
+    var key = process.windowKey;
+    var process = core.getProcess(key);
     var backendId = process.optimization_backend;
-    core.logSpecific("Backend: " + backendId, process.key);
+    core.logSpecific("Backend: " + backendId, key);
 
     // looking for a backend
     var backend = core.getBackend(backendId);
     if (!backend)
     {
-        core.logSpecific("Error: Backend was not found", process.key);
+        core.logSpecific("Error: Backend was not found", key);
         res.writeHead(400, { "Content-Type": "text/html"});
         res.end("Error: Could not find the backend by its submitted id.");
         return;
@@ -174,15 +175,13 @@ function runOptimization(process)
     var format = core.getFormat(backend.accepted_format);
     if (!format)
     {
-        core.logSpecific("Error: Required format was not found", process.key);
+        core.logSpecific("Error: Required format was not found", key);
         resultMessage = "Error: Could not find the required file format.";
         isError = true;
         return;
     }
 
-/*
-
-    core.logSpecific(backend.id + " ==> " + format.id, process.key);
+    core.logSpecific(backend.id + " ==> " + format.id, key);
     process.mode_completed = false;
 
     var fileAndPathReplacement = [
@@ -198,16 +197,16 @@ function runOptimization(process)
 
     var args = core.replaceTemplateList(backend.tool_args, fileAndPathReplacement);
 
-    core.logSpecific(args, process.key);
+    core.logSpecific(args, key);
 
-    process.tool = spawn(core.replaceTemplate(backend.tool, fileAndPathReplacement), args);
+    process.tool = spawn(core.replaceTemplate(backend.tool, fileAndPathReplacement), args, { cwd: process.folder });
 
     process.tool.on('error', function (err){
         core.logSpecific('ERROR: Cannot run the chosen backend. Please check whether it is installed and accessible.', req.body.windowKey);
-        var process = core.getProcess(req.body.windowKey);
+        var process = core.getProcess(key);
         if (process != null)
         {
-            process.result = '{"message": "' + lib.escapeJSON("Error: Cannot run claferIG") + '"}';
+            process.result = '{"message": "' + lib.escapeJSON("Error: Cannot run the chosen backend") + '"}';
             process.completed = true;
             process.tool = null;
         }
@@ -215,7 +214,8 @@ function runOptimization(process)
 
     process.tool.stdout.on("data", function (data)
     {
-        var process = core.getProcess(req.body.windowKey);
+        console.log(data.toString());
+        var process = core.getProcess(key);
         if (process != null)
         {
             if (!process.completed)
@@ -227,7 +227,8 @@ function runOptimization(process)
 
     process.tool.stderr.on("data", function (data)
     {
-        var process = core.getProcess(req.body.windowKey);
+        console.log(data.toString());
+        var process = core.getProcess(key);
         if (process != null)
         {
             if (!process.completed){
@@ -238,14 +239,16 @@ function runOptimization(process)
 
     process.tool.on("close", function (code)
     {
-        var process = core.getProcess(req.body.windowKey);
+        console.log("ERROR: " + code);
+
+        var process = core.getProcess(key);
         if (process != null)
         {
             process.mode_completed = true;
+            process.code = code;
             process.tool = null;
         }                
     });
-*/
 
 }
 
@@ -316,7 +319,7 @@ server.post('/upload', commandMiddleware, function(req, res, next)
             else
                 process.model = "";                                   
 
-            process.optimization_backend = req.body.backend;
+            process.optimization_backend = req.body.optimizationBackend;
 
             lib.runClaferCompiler(req.body.windowKey, specifiedArgs, genericArgs, function()
             {
@@ -363,16 +366,20 @@ server.post('/poll', pollingMiddleware, function(req, res, next)
         if (process.mode_completed) // the execution of the current mode is completed
         {
             if (process.mode == "compiler") // if the mode completed is compilation
-            {       
+            {      
+                // finished compilation. Start optimization right a way.
+//                console.log("COMPLETED COMPILER");
 
-                res.writeHead(200, { "Content-Type": "application/json"});
-                var jsonObj = JSON.parse(process.compiler_result);
+                core.timeoutProcessSetPing(process);
+
+                var jsonObj = new Object();
+                jsonObj.message = "Working";
                 jsonObj.compiled_formats = process.compiled_formats;
                 jsonObj.args = process.compiler_args;
-                process.compiler_args = "";
-                jsonObj.scopes = "";
-                jsonObj.model = process.model;
                 jsonObj.compiler_message = process.compiler_message;
+
+                process.compiler_args = "";
+                res.writeHead(200, { "Content-Type": "application/json"});
                 res.end(JSON.stringify(jsonObj));
 
                 process.mode = "ig";
@@ -381,95 +388,93 @@ server.post('/poll', pollingMiddleware, function(req, res, next)
             }
             else
             {
-                var currentResult = "";
+//                console.log("COMPLETED MOO");
+                var jsonObj = new Object();
+                var data_result = process.freshData;
+                process.freshData = "";
 
-                if (process.freshData != "")
+                var error_result = process.freshError;
+                process.freshError = "";
+
+                console.log("Preparing to send the result...");
+                
+                var code = process.code;
+
+                if (error_result.indexOf('Exception in thread "main"') > -1)
                 {
-                    currentResult += process.freshData;
-                    process.freshData = "";
+                    code = 1;
                 }
 
-                if (process.freshError != "")
+                if (code === 0) 
+                {               
+                    var parts = data_result.split("=====");
+                    
+                    if (parts.length != 2)
+                    {
+                        jsonObj.optimizer_message = 'Error, instances and normal text must be separated by "====="';
+                        console.log(data_result);
+                    }
+                    else
+                    {
+                    
+                        var message = parts[0]; //
+                        console.log(message);
+                        var instances = parts[1]; // 
+                        // todo : error handling
+                        
+                        console.log(process.file + '.xml');
+                        var xml = fs.readFileSync(process.file + '.xml');
+                        // this code assumes the backend should produce an XML,
+                        // which is not the correct way
+                        
+                        jsonObj.optimizer_message = message;
+                        jsonObj.optimizer_instances = instances
+                        jsonObj.optimizer_claferXML = xml.toString();
+                    }
+                }
+                else 
                 {
-                    currentResult += process.freshError;
-                    process.freshError = "";
-                }                    
+                    jsonObj.optimizer_message = 'Error, return code: ' + code + '\n' + error_result;
+                    console.log(data_result);
+                }
 
-                res.writeHead(200, { "Content-Type": "application/json"});
+                jsonObj.model = process.model;
 
-                var jsonObj = new Object();
-                jsonObj.message = currentResult;
-                jsonObj.scopes = "";
-                jsonObj.completed = true;
+                if (code == 0)
+                {
+                    res.writeHead(200, { "Content-Type": "application/json"});
+                }
+                else
+                {
+                    res.writeHead(400, { "Content-Type": "application/json"});
+                }                
+
+                jsonObj.message = jsonObj.optimizer_message;
+
                 res.end(JSON.stringify(jsonObj));
+
+                // if mode is completed, then the tool is not busy anymore, so now it's time to 
+                // set inactivity timeout
+
+                core.timeoutProcessClearInactivity(process);
+                core.timeoutProcessSetInactivity(process);
+
             }
 
-            // if mode is completed, then the tool is not busy anymore, so now it's time to 
-            // set inactivity timeout
-
-            core.timeoutProcessClearInactivity(process);
-            core.timeoutProcessSetInactivity(process);
         }   
         else // still working
         {
+//            console.log("WORKING");
             core.timeoutProcessSetPing(process);
 
-            if (process.mode == "compiler") // if the mode completed is compilation
-            {
-                var jsonObj = new Object();
-                jsonObj.message = "Working";
-                jsonObj.args = process.compiler_args;
-                process.compiler_args = "";
-                res.end(JSON.stringify(jsonObj));
-            }
-            else
-            {
-                if (!process.producedScopes)
-                {
-                    var scopesFileName = process.file + ".scopes.json";
-                    fs.readFile(scopesFileName, function (err, data) {
-                        if (!err)
-                        {
-                            var process = core.getProcess(req.body.windowKey);
-                            if (process != null)
-                            {
-                                process.scopes = data.toString();    
-                                process.producedScopes = true;                                    
-                            }
+            res.writeHead(200, { "Content-Type": "application/json"});
+            var jsonObj = new Object();
+            jsonObj.message = "Working";
+            jsonObj.args = process.compiler_args;
+            process.compiler_args = "";
+            res.end(JSON.stringify(jsonObj));
 
-                            // removing the file from the system. 
-                            fs.unlink(scopesFileName, function (err){
-                                // nothing
-                            });
-                        }
-                    });
-                }
-
-                var currentResult = "";
-
-                if (process.freshData != "")
-                {
-                    currentResult += process.freshData;
-                    process.freshData = "";
-                }
-
-                if (process.freshError != "")
-                {
-                    currentResult += process.freshError;
-                    process.freshError = "";
-                }                    
-
-                res.writeHead(200, { "Content-Type": "application/json"});
-
-                var jsonObj = new Object();
-                jsonObj.message = currentResult;
-                jsonObj.scopes = process.scopes;
-
-                process.scopes = "";
-
-                jsonObj.completed = false;
-                res.end(JSON.stringify(jsonObj));
-            }
+            console.log(jsonObj.message);
         }
     }
     else // if it is cancel

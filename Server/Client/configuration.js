@@ -20,7 +20,7 @@ function getConfiguration()
     		"button_example_tooltip": "Optimize",
     		"button_editor_tooltip": "Optimize",
 
-    		"onError": function(module, statusText, responseText){
+    		"onError": function(module, statusText, response, xhr){
 			    var caption = "";
 			    if (statusText == "compile_error")
 			        caption = "<b>Compile Error.</b><br>Please check whether Clafer Compiler is available, and the model is correct.";
@@ -38,10 +38,12 @@ function getConfiguration()
 			//        caption = "<b>No instances found in the specified file.";        
 			//    else if (statusText == "optimize_first")
 			//        caption = "<b>You have to run optimization first, and only then add instances.";        
-			    else if (statusText == "error" && responseText == "")
+			    else if (statusText == "error" && response.responseText == "")
 			        caption = "<b>Request Error.</b><br>Please check whether the server is available.";        
 			    else
-			        caption = '<b>' + xhr + '</b><br>' + responseText.replace("\n", "<br>");
+			        caption = '<b>' + xhr + '</b><br>' + response.responseText.replace("\n", "<br>");
+
+		        module.host.print("ClaferIDE> Error occured\n");
 
 			    return caption;
 
@@ -59,35 +61,25 @@ function getConfiguration()
 		        {
 		            module.host.print("ClaferIDE> clafer " + responseObject.args + "\n");
 		        }
-    		},
-    		"onCompleted" : function(module, responseObject){    			
-//		        if (responseObject.args)
-//		        {
-//		            module.host.print("ClaferIDE> clafer " + responseObject.args + "\n");
-//		        }
-
 		        if (responseObject.compiled_formats)
 		        {
 		            module.host.findModule("mdCompiledFormats").setResult(responseObject.compiled_formats);
 		        }
 
+		        if (responseObject.compiler_message)
+		        {
+		        	module.host.print("Compiler> " + responseObject.message + "\n");
+		        	module.host.print(responseObject.compiler_message + "\n");    
+		    	}
+
+    		},
+    		"onCompleted" : function(module, responseObject){    					        
 		        if (responseObject.model != "")
 		        {
 		            module.editor.getSession().setValue(responseObject.model);
 		        }
 
-		        module.host.print("Compiler> " + responseObject.message + "\n");
-		        module.host.print(responseObject.compiler_message + "\n");    
-
-		        if (responseObject.message == "Success")
-		        {
-//		            module.host.findModule("mdControl").resetControls();
-		        }
-		        else
-		        {
-//		            module.host.findModule("mdControl").disableAll(); // if exited IG, then disable controls
-		        }		          
-
+		        module.host.print("Optimizer> " + responseObject.optimizer_message + "\n");
 		        return true;  
     		}    		
     	}
@@ -121,7 +113,7 @@ function getConfiguration()
 
     var settings = {"onLoaded": function(host)
     {
-    	alert("loaded!");
+    	$("#myform").submit();
     }};
 
     return {"modules": modules, "settings": settings};

@@ -31,16 +31,6 @@
             "display_element": "textarea"
         },
         {
-            "id": "alloy", 
-            "label": "Alloy Model", 
-            "tooltip": "Alloy solver file format (ALS)", 
-            "file_suffix": ".als",             
-            "compiler_mode": "alloy",
-            "compiler_args": [],
-            "shows_compilation_errors" : "false",
-            "display_element": "textarea"
-        },
-        {
             "id": "xml", 
             "label": "XML IR", 
             "tooltip": "XML intermediate representation (XML)", 
