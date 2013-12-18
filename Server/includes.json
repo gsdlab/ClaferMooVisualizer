@@ -1,0 +1,10 @@
+{
+    "scripts": [
+        "configuration.js",
+        "selector.js"
+    ],
+
+    "styles": [
+        "styles.css"        
+    ]    
+}

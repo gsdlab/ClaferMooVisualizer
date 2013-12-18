@@ -60,18 +60,8 @@ server.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/u
 //-------------------------------------------------
 // Response: File contents
 server.get('/', fileMiddleware, function(req, res) {
-    var contents = fs.readFileSync("commons/Client/app.html");
-
-    var replacementMap = [
-            {
-                "needle": "$title$", 
-                "replacement": config.pageTitle
-            }
-        ];
-
-    contents = core.replaceTemplate(contents.toString(), replacementMap);
     res.writeHead(200, { "Content-Type": "text/html"});    
-    res.end(contents);
+    res.end(lib.getMainHTML());
 
 });
 

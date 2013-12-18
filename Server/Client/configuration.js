@@ -159,14 +159,17 @@ function getConfiguration()
 //    this.host.findModule("mdComparisonTable").filter.filterContent();    			
     		},
 
-    		"onSelected": function()
+    		"onSelected": function(module, pid)
     		{
 				//    			
     		},
-
-    		"onDeselected": function()
+    		"onDeselected": function(module, pid)
     		{
 				//    			
+    		},
+    		"getSelection" : function(module)
+    		{
+				return module.host.storage.selection;    			
     		}
 
     	}});
