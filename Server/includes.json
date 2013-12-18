@@ -1,7 +1,7 @@
 {
     "scripts": [
         "configuration.js",
-        "selector.js"
+        "selection_controller.js"
     ],
 
     "styles": [
