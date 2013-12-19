@@ -1,9 +1,12 @@
 {
     "scripts": [
         "utils.js",
+        "https://www.google.com/jsapi",
         "selection_controller.js",
         "instance_filter.js",        
-        "configuration.js"
+        "modules/md_graph.js",
+        "configuration.js",
+        "utils/pf_visualizer.js"
     ],
 
     "styles": [

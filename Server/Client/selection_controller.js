@@ -30,8 +30,8 @@ function Selector(host)
 Selector.method("onSelected", function(pid){
     this.selection.push(pid);
     host.findModule("mdGraph").makePointsSelected(pid);
-    host.findModule("mdComparisonTable").makePointsSelected(pid);
-    this.host.selectionChanged(this.selection);
+//    host.findModule("mdComparisonTable").makePointsSelected(pid);
+//    this.host.selectionChanged(this.selection);
 });
 
 Selector.method("onDeselected", function(pid)
@@ -45,10 +45,10 @@ Selector.method("onDeselected", function(pid)
     this.selection = this.selection.filter(function(e){return e}); // remove empty elements
 
     host.findModule("mdGraph").makePointsDeselected(pid);           // update graph and comparison table
-    host.findModule("mdComparisonTable").makePointsDeselected(pid);
+//    host.findModule("mdComparisonTable").makePointsDeselected(pid);
     $("." + pid.substring(1) + "HL").remove();
     
-    this.host.selectionChanged(this.selection);
+//    this.host.selectionChanged(this.selection);
 });
 
 Selector.method("isSelected", function(pid){

@@ -1,3 +1,5 @@
+google.load("visualization", "1",{'packages':['corechart']});
+
 function getConfiguration() 
 {
 	var modules = [];
@@ -82,16 +84,21 @@ function getConfiguration()
 		        var data = preprocessMOOResult(responseObject, module.host);
 
 		        var goalsModule = module.host.findModule("mdGoals");
+		        var graphModule = module.host.findModule("mdGraph");
 		        var matrixModule = module.host.findModule("mdFeatureQualityMatrix");
 
 				goalsModule.onDataLoaded(data);
+				data.goals = goalsModule.goals;
 				matrixModule.onDataLoaded(data);
+				graphModule.onDataLoaded(data);
 
 				$.updateWindowContent(goalsModule.id, goalsModule.getContent());
 				$.updateWindowContent(matrixModule.id, matrixModule.getContent());
+				$.updateWindowContent(graphModule.id, graphModule.getContent());
 
 				goalsModule.onRendered();
 				matrixModule.onRendered();
+				graphModule.onRendered();
 
 		        module.host.print("Optimizer> " + responseObject.optimizer_message + "\n");
 		        return true;  
@@ -194,6 +201,19 @@ function getConfiguration()
     		{
     			alert("Instance removal");
     		}
+    	}});
+
+    modules.push({"name": "Graph", "configuration": 
+    	{
+	    	"title": "Bubble Front Graph",
+
+    		"layout": {
+			    "width": (window.parent.innerWidth+65) * 0.38,
+			    "height": 500,
+			    "posx": (window.parent.innerWidth-40) * (1 - 0.38),
+			    "posy": 70
+    		}
+
     	}});
 
     var settings = {
