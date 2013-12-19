@@ -6,8 +6,8 @@ function getConfiguration()
     modules.push({"name": "Input", "configuration": 
     	{
     		"layout": {
-    			"width": (window.parent.innerWidth-40) * 0.38,
-    			"height": 160,
+    			"width": (window.parent.innerWidth-20) * 0.38,
+    			"height": 180,
     			"posx": 0,
     			"posy": 0
     		},
@@ -108,10 +108,10 @@ function getConfiguration()
     modules.push({"name": "CompiledFormats", "configuration": 
     	{
     		"layout": {
-    			"width": (window.parent.innerWidth-40) * (0.24),
-    			"height": window.parent.innerHeight - 60 - 245,
-    			"posx": (window.parent.innerWidth-40) * 0.38,
-    			"posy": 0
+                "width": (window.parent.innerWidth-20) * 0.38,
+                "height": window.parent.innerHeight - 40 - 50 - 355,
+                "posx": 0,
+                "posy": 215
     		},
 
 	    	"title": "Compiled Formats",
@@ -124,10 +124,10 @@ function getConfiguration()
 	    	"title": "Output",
 
     		"layout": {
-			    "width": (window.parent.innerWidth+65) * 0.38,
-			    "height": 70,
-			    "posx": (window.parent.innerWidth-40) * (1 - 0.38),
-			    "posy": 0
+                "width": (window.parent.innerWidth-20) * 0.38,
+                "height": (160),
+			    "posx": 0,
+			    "posy": window.parent.innerHeight - 40 - 50
     		}
 
     	}});
@@ -137,10 +137,10 @@ function getConfiguration()
 	    	"title": "Objectives and Quality Ranges",
 
     		"layout": {
-			    "width": 500,
-			    "height": 70,
-			    "posx": 0,
-			    "posy": 170
+                "width": (window.parent.innerWidth-20) * 0.38,
+                "height": 70,
+                "posx": 0,
+                "posy": window.parent.innerHeight - 40 - 50 - 70 - 35
     		},
 
     		"onFilterByGoals": function(module)
@@ -155,10 +155,10 @@ function getConfiguration()
 	    	"title": "Feature and Quality Matrix",
 
     		"layout": {
-			    "width": 500,
-			    "height": 300,
+			    "width": window.parent.innerWidth-20,
+			    "height": 500,
 			    "posx": 0,
-			    "posy": 400
+			    "posy": window.parent.innerHeight - 40 - 50 + 40
     		},
 
     		"buttonsForRemoval": true,
@@ -208,10 +208,10 @@ function getConfiguration()
 	    	"title": "Bubble Front Graph",
 
     		"layout": {
-			    "width": (window.parent.innerWidth+65) * 0.38,
-			    "height": 500,
-			    "posx": (window.parent.innerWidth-40) * (1 - 0.38),
-			    "posy": 70
+			    "width": (window.parent.innerWidth - 20) * 0.62,
+			    "height": window.parent.innerHeight - 40 - 50,
+			    "posx": (window.parent.innerWidth-20) * 0.38,
+			    "posy": 0
     		}
 
     	}});
@@ -225,6 +225,7 @@ function getConfiguration()
 	    },
     	"onLoaded": function(host)
 	    {
+            $.minimizeWindow("mdOutput");
 	    	$("#myform").submit();
 	    }	    
 	};
