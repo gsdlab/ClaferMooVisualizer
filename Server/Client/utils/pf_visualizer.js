@@ -28,7 +28,7 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
 {
 	if ((args.length < 2) || args.length != labels.length)
 	{
-		alert("Should have exactly 2 values in each argument");
+		alert("Should have matching number of args and labels, and at least two pairs");
 		return;
 	}
 
@@ -38,7 +38,7 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
     }
     catch (e)
     {
-        alert("Could not access visualization classes. Will not draw the graph.");
+//        alert("Could not access visualization classes. Will not draw the graph.");
         return;
     }
 
