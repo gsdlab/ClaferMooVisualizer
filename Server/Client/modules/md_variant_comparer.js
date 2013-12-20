@@ -65,7 +65,7 @@ VariantComparer.method("getInitContent", function()
 //rebuilds the table with the new selection data
 VariantComparer.method("onSelectionChanged", function(list){
     //pulls data from the comparison table
-    var originalData = this.host.findModule("mdComparisonTable").dataTable;
+    var originalData = this.host.findModule("mdFeatureQualityMatrix").dataTable;
     var newlist = [];
     for (var i = 0; i < list.length; i++){
         newlist.push(parsePID(list[i]));
@@ -95,7 +95,7 @@ VariantComparer.method("onSelectionChanged", function(list){
     
     // get the products that are missing to make up the complete set.
     var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), newlist);
-    var permaHidden = this.host.findModule("mdComparisonTable").filter.permaHidden;
+    var permaHidden = this.host.findModule("mdFeatureQualityMatrix").filter.permaHidden;
 
     if (missingProducts){
         for (var i = 0; i < missingProducts.length; i++){
@@ -125,7 +125,7 @@ VariantComparer.method("onSelectionChanged", function(list){
         }
         else
         {
-            label += '[Complete] - The set defines a complete class';
+            label += '[Complete]';
         }
     }
     else
@@ -180,7 +180,7 @@ VariantComparer.method("onSelectionChanged", function(list){
         $("#VariantComparer #unique").html("No Data");
 
 // Adds all the shapes to the table headers
-    this.addShapes();
+//    this.addShapes();
 
 // add buttons to remove products
     var i;
@@ -199,18 +199,19 @@ VariantComparer.method("onSelectionChanged", function(list){
         
         $(buttonId).hover(
         function () {
-            $(this).attr("src", "images/removeMouseOver.png");
+            $(this).attr("src", "commons/Client/images/removeMouseOver.png");
         }, 
         function () {
-            $(this).attr("src", "images/remove.png");
+            $(this).attr("src", "commons/Client/images/remove.png");
         });      
     }
 
 //    alert(missingProducts);
-    this.addHover();
+//    this.addHover();
     
 });
 
+/*
 //adds Shapes to the table headers
 VariantComparer.method("addShapes", function(){
     Arow = $("#VariantComparer #unique #r0 .td_instance");
@@ -226,7 +227,7 @@ VariantComparer.method("addShapes", function(){
         $(correspondingCell).find("polygon").clone().prependTo($(Arow[i]).find(".svghead"));
     }
 });
-
+*/
 //saves all selected instances and downloads them to client
 VariantComparer.method("saveSelected", function(){
     var selection = this.host.selector.selection;
@@ -240,6 +241,7 @@ VariantComparer.method("saveSelected", function(){
     $("#SaveForm").submit();
 });
 
+/*
 //adds hover effects and hottracking to table headers. Essentially the same as comparison table addHover function
 VariantComparer.method("addHover", function(){
     that = this;
@@ -251,27 +253,27 @@ VariantComparer.method("addHover", function(){
         var instance = $(this).find(".svghead :last-child").text();
 
         //get crosshairs 
-        var hairs = that.host.findModule("mdComparisonTable").getCrosshairs($("#" + getPID(instance) + "c").attr("cx"), $("#" + getPID(instance) + "c").attr("cy"));
+        var hairs = that.host.findModule("mdFeatureQualityMatrix").getCrosshairs($("#" + getPID(instance) + "c").attr("cx"), $("#" + getPID(instance) + "c").attr("cy"));
         $("#" + getPID(instance) + "c").before(hairs);
         $("#CHX").attr("class", instance + "HL");
         $("#CHY").attr("class", instance + "HL");
 
         var highlight = $("#" + getPID(instance) + "c").clone();
-        highlight = that.host.findModule("mdComparisonTable").highlight(highlight);
+        highlight = that.host.findModule("mdFeatureQualityMatrix").highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
         $("#" + getPID(instance) + "c").before(highlight);
 
         var highlight = $("#" + getPID(instance) + "r").clone();
-        highlight = that.host.findModule("mdComparisonTable").highlight(highlight);
+        highlight = that.host.findModule("mdFeatureQualityMatrix").highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
         $("#" + getPID(instance) + "r").before(highlight);
 
         var highlight = $("#" + getPID(instance) + "h").clone();
-        highlight = that.host.findModule("mdComparisonTable").highlight(highlight);
+        highlight = that.host.findModule("mdFeatureQualityMatrix").highlight(highlight);
         $(highlight).removeAttr("id");
         $(highlight).attr("class", instance + "HL");
         //add highlight element behind circle
@@ -299,3 +301,4 @@ VariantComparer.method("addHover", function(){
         clearTimeout(that.timeout);
     });
 });
+*/
