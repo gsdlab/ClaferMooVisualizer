@@ -159,7 +159,7 @@ Graph.method("drop", function(ev)
     
     this.redrawParetoFront();
 //    host.findModule("mdComparisonTable").addShapes();
-    host.findModule("mdComparisonTable").filter.filterContent();
+    host.findModule("mdFeatureQualityMatrix").filter.filterContent();
 });
 
 Graph.method("assignValue", function (id, value)
@@ -294,7 +294,7 @@ Graph.method("makePointsReady", function(){
             shape.setAttributeNS(null, "id", newID);
             $(originalCirclePairs[IdenticalId].circle).hide();
             $(originalCirclePairs[IdenticalId].text_data).hide();
-            host.findModule("mdComparisonTable").filter.permaHidden[getPID((IdenticalId+1))] = true;
+            host.findModule("mdFeatureQualityMatrix").filter.permaHidden[getPID((IdenticalId+1))] = true;
         } else {
             var shape = this.getSVGSquare(xpos, ypos, r)
             shape.setAttributeNS(null, "id", getPID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) + "r");

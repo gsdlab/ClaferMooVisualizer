@@ -81,6 +81,11 @@ function getConfiguration()
 		            module.editor.getSession().setValue(responseObject.model);
 		        }
 
+                if (!responseObject.optimizer_message)
+                {
+                    return false;
+                }
+
 		        var data = preprocessMOOResult(responseObject, module.host);
 
 		        var goalsModule = module.host.findModule("mdGoals");
