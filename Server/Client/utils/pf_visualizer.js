@@ -31,7 +31,17 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
 		alert("Should have exactly 2 values in each argument");
 		return;
 	}
-	
+
+    try
+    {	
+        var data = new google.visualization.DataTable();
+    }
+    catch (e)
+    {
+        alert("Could not access visualization classes. Will not draw the graph.");
+        return;
+    }
+
     var hasThird = (args.length >= 3); // has third dimension
     var hasForth = (args.length >= 4); // has forth dimension
 
@@ -45,7 +55,6 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
     
 	var instanceCount = processor.getInstanceCount();
 	
-    var data = new google.visualization.DataTable();
     data.addColumn({type:'string', label: 'PID'}); 
     data.addColumn({type:'number', label: labels[0], role:'domain'}); 
     data.addColumn({type:'number', label: labels[1], role:'data'});  

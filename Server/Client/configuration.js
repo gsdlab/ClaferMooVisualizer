@@ -1,4 +1,11 @@
-google.load("visualization", "1",{'packages':['corechart']});
+try
+{
+    google.load("visualization", "1",{'packages':['corechart']});
+}
+catch(e)
+{
+    alert("Could not find Google Visualization package. Please check the internet connection");
+}
 
 function getConfiguration() 
 {
@@ -63,10 +70,10 @@ function getConfiguration()
 		        {
 		            module.host.print("ClaferIDE> clafer " + responseObject.args + "\n");
 		        }
-		        if (responseObject.compiled_formats)
-		        {
-		            module.host.findModule("mdCompiledFormats").setResult(responseObject.compiled_formats);
-		        }
+//		        if (responseObject.compiled_formats)
+//		        {
+//		            module.host.findModule("mdCompiledFormats").setResult(responseObject.compiled_formats);
+//		        }
 
 		        if (responseObject.compiler_message)
 		        {

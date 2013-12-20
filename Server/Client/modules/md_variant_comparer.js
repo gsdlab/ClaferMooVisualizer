@@ -33,6 +33,7 @@ function VariantComparer(host, settings)
     this.host = host;
     
     this.dataTable = null;
+    this.host.loaded();
 }
 
 VariantComparer.method("onDataLoaded", function(data){
