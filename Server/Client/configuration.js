@@ -110,16 +110,35 @@ function getConfiguration()
     		}    		
     	}
 	});
-    modules.push({"name": "CompiledFormats", "configuration": 
+
+    modules.push({"name": "Goals", "configuration": 
+        {
+            "title": "Objectives and Quality Ranges",
+
+            "layout": {
+                "width": (window.parent.innerWidth-20) * 0.38,
+                "height": 70,
+                "posx": 0,
+                "posy": 215
+            },
+
+            "onFilterByGoals": function(module)
+            {
+//    this.host.findModule("mdComparisonTable").filter.filterContent();             
+            }
+
+        }});
+
+    modules.push({"name": "VariantComparer", "configuration": 
     	{
     		"layout": {
                 "width": (window.parent.innerWidth-20) * 0.38,
                 "height": window.parent.innerHeight - 40 - 50 - 355,
                 "posx": 0,
-                "posy": 215
+                "posy": 320
     		},
 
-	    	"title": "Compiled Formats",
+	    	"title": "Variant Comparer",
 	    	"allow_downloading": true
 
     	}});
@@ -133,24 +152,6 @@ function getConfiguration()
                 "height": (160),
 			    "posx": 0,
 			    "posy": window.parent.innerHeight - 40 - 50
-    		}
-
-    	}});
-
-    modules.push({"name": "Goals", "configuration": 
-    	{
-	    	"title": "Objectives and Quality Ranges",
-
-    		"layout": {
-                "width": (window.parent.innerWidth-20) * 0.38,
-                "height": 70,
-                "posx": 0,
-                "posy": window.parent.innerHeight - 40 - 50 - 70 - 35
-    		},
-
-    		"onFilterByGoals": function(module)
-    		{
-//    this.host.findModule("mdComparisonTable").filter.filterContent();    			
     		}
 
     	}});

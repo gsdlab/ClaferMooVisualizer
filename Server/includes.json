@@ -4,9 +4,10 @@
         "https://www.google.com/jsapi",
         "selection_controller.js",
         "instance_filter.js",        
+        "utils/pf_visualizer.js",
         "modules/md_graph.js",
-        "configuration.js",
-        "utils/pf_visualizer.js"
+        "modules/md_variant_comparer.js",
+        "configuration.js"
     ],
 
     "styles": [
