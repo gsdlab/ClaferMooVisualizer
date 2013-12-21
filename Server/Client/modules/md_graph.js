@@ -226,8 +226,16 @@ Graph.method("redrawParetoFront", function()
     }
     
     this.PFVisualizer.draw(this.Processor, this.instanceProcessor, args, labels, this.host.instanceCounterArg);
-    this.makePointsSelected(this.host.storage.selector.selection);
+
+    var selection = this.settings.getSelection(this);
+
     this.makePointsReady();
+
+    for (var i = 0; i < selection.length; i++)
+    {
+        this.makePointsSelected(selection[i]);
+    }
+
     this.addFilters();
 });
 

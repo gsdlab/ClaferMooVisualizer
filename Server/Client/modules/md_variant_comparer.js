@@ -83,12 +83,12 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         $("#VariantComparer #unique").html("No Data");    
     }
 
-    var allFeatures = data.toSetOfFeatures();
+    var allFeatures = data.features;
 
     var commonData = data.getCommon(true); // ALL COMMON DATA
-    var commonFeatures = commonData.toSetOfFeatures();
+    var commonFeatures = commonData.features;
     
-    var differentFeatures = commonFeatures;
+    var differentFeatures = allFeatures.diff(commonFeatures);
     var differentData = data.subsetByFeatures(differentFeatures); // ALL DIFFERENT DATA
     differentData.title = "Differences";
 
@@ -96,11 +96,14 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
     // get the products that are missing to make up the complete set.
     var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), newlist);
 
-    if (missingProducts){
-/* suspicious loop. Need to check whether the removal is right */
-        for (var i = 0; i < missingProducts.length; i++){
-            if (permaHidden.hasOwnProperty(getPID(missingProducts[i])));
+    if (missingProducts)
+    {
+        while (i < missingProducts.length)
+        {
+            if (permaHidden.hasOwnProperty(getPID(missingProducts[i])))
                 missingProducts.splice(i, 1);
+            else
+                i++;
         }
     }
 
@@ -132,7 +135,7 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
     else
         label += "Please select more products for VariantComparer";
 
-    var saveButton = ' <input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value="">' + '</form>';
+    var saveButton = ' <input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value="">' + '</form>';
     label += saveButton;
 
     $("#VariantComparer #completeness").html(label);
@@ -142,23 +145,24 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         $("#addMissing").click(function(){
             var i;
             for (i = 0; i<missingProducts.length; i++){
-                context.host.storage.selector.onSelected(getPID(missingProducts[i].replace(/[\u2B22\u25CF\u25A0]/g, "")));
+                context.settings.onSelected(context, getPID(missingProducts[i].replace(/[\u2B22\u25CF\u25A0]/g, "")));
             }
         }).css("cursor", "pointer");
     }
 
 // add function for clear button
     $("#clearVariantComparer").click(function(){
-        var selected = context.host.storage.selector.selection;
+        var selected = context.settings.getSelection(context);
         while (selected.length > 0){
-            context.host.storage.selector.onDeselected(selected[selected.length-1]);
+            context.settings.onDeselected(context, selected[selected.length-1]);
             selected.pop();
         };
     }).css("cursor", "pointer");
     
 // add function for save button
     $('#saveSelected').click(this.saveSelected.bind(this)).css("cursor", "pointer");
-    if (this.host.storage.selector.selection.length > 0)
+
+    if (context.settings.getSelection(context).length > 0)
         $("#saveSelected").removeAttr("disabled");
     else
         $("#saveSelected").attr("disabled", "disabled");
@@ -191,7 +195,7 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         var buttonId = "#rem" + $(differentProducts[i]).find(".svghead :last-child").text()
         $(buttonId).click(function(){
 //            console.log(getPID(String($(this).attr("id").substring(3))));
-            context.host.storage.selector.onDeselected(getPID(String($(this).attr("id").substring(3))));
+            context.onDeselected(context, getPID(String($(this).attr("id").substring(3))));
         });
         $(buttonId).css("float", "left");
         $(buttonId).css("vertical-align", "middle");
@@ -231,8 +235,8 @@ VariantComparer.method("addShapes", function(){
 */
 //saves all selected instances and downloads them to client
 VariantComparer.method("saveSelected", function(){
-    var selection = this.host.storage.selector.selection;
-    var instances = this.host.storage.previousData.Unparsed;
+    var selection = this.settings.getSelection(this);
+    var instances = this.settings.getPreviousData(this).Unparsed;
     var parser = new InstanceParser(instances);
     var data = "";
     for (var i=0; i < selection.length; i++){

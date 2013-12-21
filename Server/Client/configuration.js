@@ -152,8 +152,24 @@ function getConfiguration()
 	    	"title": "Variant Comparer",
 	    	"allow_downloading": true,
 
-// this.host.findModule("mdFeatureQualityMatrix").dataTable            
-// permahidden
+            "onSelected": function(module, pid)
+            {
+//                alert("Selected");
+                module.host.storage.selector.onSelected(pid);               
+            },
+            "onDeselected": function(module, pid)
+            {
+//                alert("Deselected");
+                module.host.storage.selector.onDeselected(pid);             
+            },
+            "getSelection" : function(module)
+            {
+                return module.host.storage.selector.selection;              
+            },
+
+            "getPreviousData" : function (module){
+                return host.storage.previousData;    
+            }
 
     	}});
 
@@ -189,12 +205,12 @@ function getConfiguration()
     		},
     		"onSelected": function(module, pid)
     		{
-    			alert("Selected");
+//    			alert("Selected");
 				module.host.storage.selector.onSelected(pid);    			
     		},
     		"onDeselected": function(module, pid)
     		{
-    			alert("Deselected");
+//    			alert("Deselected");
 				module.host.storage.selector.onDeselected(pid);    			
     		},
     		"getSelection" : function(module)
@@ -203,7 +219,7 @@ function getConfiguration()
     		},    		
     		"onReset": function(module)
     		{
-    			alert("Reset");
+//    			alert("Reset");
     		},
     		"onFeatureExpanded": function(module, feature)
     		{
@@ -243,7 +259,10 @@ function getConfiguration()
             "onIdenticalFound": function(module, IdenticalId){
                 host.findModule("mdFeatureQualityMatrix").filter.permaHidden[getPID((IdenticalId+1))] = true;                   
             },
-
+            "getSelection" : function(module)
+            {
+                return module.host.storage.selector.selection;              
+            },          
             "onBubbleClick": function(module, pid){
                 if (module.host.storage.selector.isSelected(pid))
                 {
@@ -254,7 +273,6 @@ function getConfiguration()
                     module.host.storage.selector.onSelected(pid);
                 }                
             }
-
     	}});
 
     var settings = {
