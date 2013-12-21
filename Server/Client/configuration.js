@@ -98,19 +98,23 @@ function getConfiguration()
 		        var goalsModule = module.host.findModule("mdGoals");
 		        var graphModule = module.host.findModule("mdGraph");
 		        var matrixModule = module.host.findModule("mdFeatureQualityMatrix");
+                var comparerModule = module.host.findModule("mdVariantComparer");
 
 				goalsModule.onDataLoaded(data);
 				data.goals = goalsModule.goals;
 				matrixModule.onDataLoaded(data);
 				graphModule.onDataLoaded(data);
+                comparerModule.onDataLoaded(data);
 
 				$.updateWindowContent(goalsModule.id, goalsModule.getContent());
 				$.updateWindowContent(matrixModule.id, matrixModule.getContent());
 				$.updateWindowContent(graphModule.id, graphModule.getContent());
+                $.updateWindowContent(comparerModule.id, comparerModule.getContent());
 
 				goalsModule.onRendered();
 				matrixModule.onRendered();
 				graphModule.onRendered();
+                comparerModule.onRendered();
 
 		        module.host.print("Optimizer> " + responseObject.optimizer_message + "\n");
 		        return true;  
@@ -146,7 +150,10 @@ function getConfiguration()
     		},
 
 	    	"title": "Variant Comparer",
-	    	"allow_downloading": true
+	    	"allow_downloading": true,
+
+// this.host.findModule("mdFeatureQualityMatrix").dataTable            
+// permahidden
 
     	}});
 
@@ -225,14 +232,35 @@ function getConfiguration()
 			    "height": window.parent.innerHeight - 40 - 50,
 			    "posx": (window.parent.innerWidth-20) * 0.38,
 			    "posy": 0
-    		}
+    		},
+
+            "onDrop" : function(module)
+            {
+//    host.findModule("mdComparisonTable").addShapes();
+//    host.findModule("mdFeatureQualityMatrix").filter.filterContent();                
+            },
+
+            "onIdenticalFound": function(module, IdenticalId){
+                host.findModule("mdFeatureQualityMatrix").filter.permaHidden[getPID((IdenticalId+1))] = true;                   
+            },
+
+            "onBubbleClick": function(module, pid){
+                if (module.host.storage.selector.isSelected(pid))
+                {
+                    module.host.storage.selector.onDeselected(pid);
+                }
+                else
+                {
+                    module.host.storage.selector.onSelected(pid);
+                }                
+            }
 
     	}});
 
     var settings = {
     	"onInitialize": function(host)
 	    {
- 			host.storage.selector = new Selector();
+ 			host.storage.selector = new Selector(host);
  			host.storage.previousData = null;
 			host.storage.originalPoints = null;
 	    },

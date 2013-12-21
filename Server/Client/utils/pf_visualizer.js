@@ -19,12 +19,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-function ParetoFrontVisualizer (element) 
+function ParetoFrontVisualizer (element, hostModule) 
 {
 	this.element = element;
+    this.hostModule = hostModule;
 }
 
-ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, labels, instanceCounterArg) 
+ParetoFrontVisualizer.method("draw", function(cprocessor, processor, args, labels, instanceCounterArg) 
 {
 	if ((args.length < 2) || args.length != labels.length)
 	{
@@ -235,7 +236,9 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
 
 	this.chart = new google.visualization.BubbleChart(document.getElementById(this.element));
 
-    google.visualization.events.addListener(this.chart, 'select', this.myClickHandler); 
+    var context = this;
+
+    google.visualization.events.addListener(this.chart, 'select', this.myClickHandler.bind(this)); 
     google.visualization.events.addListener(this.chart, 'onmouseover', function(data){
 
         $("#comparison #th0_" + (data.row+1)).css("background", "#ffffcc");
@@ -247,7 +250,7 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
                 $(this).css("background", "#ffffcc");
         });
 
-        var originalPoints = this.host.findModule("mdInput").originalPoints;
+        var originalPoints = context.hostModule.host.storage.originalPoints;
         $("#chart circle").each(function(){
             if (data.row >= originalPoints){
                 if ($(this).attr("id") == null){
@@ -276,28 +279,26 @@ ParetoFrontVisualizer.prototype.draw = function(cprocessor, processor, args, lab
             }
         });
 
-        var originalPoints = this.host.findModule("mdInput").originalPoints;
+        var originalPoints = context.hostModule.host.storage.originalPoints;
         for (var i = 1; i <= ($("#chart circle").length); i++){
             if (i > originalPoints){
                 $("#" + getPID(i) + "c").hide();
             }
         }
     }); 
-    host.chart = this.chart;
-    
+
+//    this.host.chart = this.chart;  
 	this.chart.draw(data, options);
 
-}
+});
 
-ParetoFrontVisualizer.prototype.myClickHandler = function()
+ParetoFrontVisualizer.method("myClickHandler", function()
 {
-  var selection = host.chart.getSelection();
-
-  
+    var selection = this.chart.getSelection();  
 //    alert(this);
-  host.chart.setSelection(null);
-  var originalPoints = this.host.findModule("mdInput").originalPoints;
-  var id = -1;
+    this.chart.setSelection(null);
+    var originalPoints = this.hostModule.host.storage.originalPoints;
+    var id = -1;
  
   for (var y = 0; y < selection.length; y++){
         $("#chart circle").each(function(){
@@ -323,19 +324,12 @@ ParetoFrontVisualizer.prototype.myClickHandler = function()
        
     var pid = getPID(id + 1);
        
-    if (host.storage.selector.isSelected(pid))
-    {
-        host.storage.selector.onDeselected(pid);
-    }
-    else
-    {
-        host.storage.selector.onSelected(pid);
-    }
+    this.hostModule.settings.onBubbleClick(this.hostModule, pid);
   }
   $($("#chart g:contains('" + getPID(selection[0].row+1) + "') text")[0]).text("Variant " + (selection[0].row+1));
-}
+});
 
-ParetoFrontVisualizer.prototype.showGoal = function(goal, min, max){
+ParetoFrontVisualizer.method("showGoal", function(goal, min, max){
     $("#"+goal+"min").attr("placeholder", min);
     $("#"+goal+"max").attr("placeholder", max);
-}
+});

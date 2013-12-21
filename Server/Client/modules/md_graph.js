@@ -36,7 +36,7 @@ function Graph(host, settings)
     this.instanceProcessor = null;
     this.axisArray = new Array();
 
-    this.PFVisualizer = new ParetoFrontVisualizer("chart");
+    this.PFVisualizer = new ParetoFrontVisualizer("chart", this);
 
     this.host.loaded();
 }
@@ -158,8 +158,7 @@ Graph.method("drop", function(ev)
         this.completeDrop(ev.target, arg, label); 
     
     this.redrawParetoFront();
-//    host.findModule("mdComparisonTable").addShapes();
-    host.findModule("mdFeatureQualityMatrix").filter.filterContent();
+    this.settings.onDrop(this);
 });
 
 Graph.method("assignValue", function (id, value)
@@ -267,7 +266,7 @@ Graph.method("addIds", function(){
 Graph.method("makePointsReady", function(){
     this.addIds();
     var goals = this.Processor.getGoals();
-    var originalPoints = this.host.findModule("mdInput").originalPoints
+    var originalPoints = this.host.storage.originalPoints;
 // Get graph bubble html locations
     originalCirclePairs = [];
     for (var i=1; i<=originalPoints; i++){
@@ -294,7 +293,7 @@ Graph.method("makePointsReady", function(){
             shape.setAttributeNS(null, "id", newID);
             $(originalCirclePairs[IdenticalId].circle).hide();
             $(originalCirclePairs[IdenticalId].text_data).hide();
-            host.findModule("mdFeatureQualityMatrix").filter.permaHidden[getPID((IdenticalId+1))] = true;
+            this.onIdenticalFound(this, IdenticalId);
         } else {
             var shape = this.getSVGSquare(xpos, ypos, r)
             shape.setAttributeNS(null, "id", getPID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) + "r");
