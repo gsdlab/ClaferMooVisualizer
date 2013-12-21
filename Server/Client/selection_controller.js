@@ -34,7 +34,7 @@ Selector.method("onSelected", function(pid){
     matrix.makePointsSelected(pid);
 
     this.host.findModule("mdVariantComparer").onSelectionChanged(this.selection, matrix.dataTable, matrix.permahidden);
-
+    this.host.findModule("mdVariantComparer").addHovering();
 });
 
 Selector.method("onDeselected", function(pid)
@@ -55,6 +55,7 @@ Selector.method("onDeselected", function(pid)
     $("." + pid.substring(1) + "HL").remove();
 
     this.host.findModule("mdVariantComparer").onSelectionChanged(this.selection, matrix.dataTable, matrix.permahidden);
+    this.host.findModule("mdVariantComparer").addHovering();
 });
 
 Selector.method("isSelected", function(pid){

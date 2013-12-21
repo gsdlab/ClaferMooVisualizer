@@ -102,19 +102,22 @@ function getConfiguration()
 
 				goalsModule.onDataLoaded(data);
 				data.goals = goalsModule.goals;
+                graphModule.onDataLoaded(data);
 				matrixModule.onDataLoaded(data);
-				graphModule.onDataLoaded(data);
                 comparerModule.onDataLoaded(data);
 
 				$.updateWindowContent(goalsModule.id, goalsModule.getContent());
+                $.updateWindowContent(graphModule.id, graphModule.getContent());
 				$.updateWindowContent(matrixModule.id, matrixModule.getContent());
-				$.updateWindowContent(graphModule.id, graphModule.getContent());
                 $.updateWindowContent(comparerModule.id, comparerModule.getContent());
 
 				goalsModule.onRendered();
+                graphModule.onRendered();
+                matrixModule.addShapes();
 				matrixModule.onRendered();
-				graphModule.onRendered();
                 comparerModule.onRendered();
+
+                matrixModule.addHovering();
 
 		        module.host.print("Optimizer> " + responseObject.optimizer_message + "\n");
 		        return true;  
@@ -169,6 +172,10 @@ function getConfiguration()
 
             "getPreviousData" : function (module){
                 return host.storage.previousData;    
+            },
+
+            "onHTMLChanged": function (module){
+                module.addShapes();                
             }
 
     	}});
@@ -197,7 +204,7 @@ function getConfiguration()
 			    "posy": window.parent.innerHeight - 40 - 50 + 40
     		},
 
-    		"buttonsForRemoval": true,
+    		"buttonsForRemoval": false,
 
     		"onFilterByFeatures": function(module)
     		{

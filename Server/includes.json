@@ -7,6 +7,7 @@
         "utils/pf_visualizer.js",
         "modules/md_graph.js",
         "modules/md_variant_comparer.js",
+        "modules/modules_extensions.js",
         "configuration.js"
     ],
 

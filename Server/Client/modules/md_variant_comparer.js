@@ -184,8 +184,7 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
     else
         $("#VariantComparer #unique").html("No Data");
 
-// Adds all the shapes to the table headers
-//    this.addShapes();
+    this.settings.onHTMLChanged(this);
 
 // add buttons to remove products
     var i;
@@ -195,7 +194,7 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         var buttonId = "#rem" + $(differentProducts[i]).find(".svghead :last-child").text()
         $(buttonId).click(function(){
 //            console.log(getPID(String($(this).attr("id").substring(3))));
-            context.onDeselected(context, getPID(String($(this).attr("id").substring(3))));
+            context.settings.onDeselected(context, getPID(String($(this).attr("id").substring(3))));
         });
         $(buttonId).css("float", "left");
         $(buttonId).css("vertical-align", "middle");
@@ -209,30 +208,9 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         function () {
             $(this).attr("src", "commons/Client/images/remove.png");
         });      
-    }
-
-//    alert(missingProducts);
-//    this.addHover();
-    
+    }    
 });
 
-/*
-//adds Shapes to the table headers
-VariantComparer.method("addShapes", function(){
-    Arow = $("#VariantComparer #unique #r0 .td_instance");
-    for (var i=0; i<Arow.length; i++){
-        if ($(Arow[i]).find(".svghead").length == 0)
-            var text = $(Arow[i]).text()
-        else 
-            var text  = $($(Arow[i]).find(".svghead text")[0]).text(); 
-        var correspondingCell = $("#comparison #th0_" + text);
-        $(Arow[i]).html('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svghead" height="22px" width="22px"><text text-anchor="middle" x="11px" y="16px" stroke="#ffffff" stroke-width="3px">' + text + '</text><text text-anchor="middle" x="11px" y="16px">' + text + '</text></svg>')
-        $(correspondingCell).find("circle").clone().prependTo($(Arow[i]).find(".svghead"));
-        $(correspondingCell).find("rect").clone().prependTo($(Arow[i]).find(".svghead"));
-        $(correspondingCell).find("polygon").clone().prependTo($(Arow[i]).find(".svghead"));
-    }
-});
-*/
 //saves all selected instances and downloads them to client
 VariantComparer.method("saveSelected", function(){
     var selection = this.settings.getSelection(this);
@@ -246,64 +224,3 @@ VariantComparer.method("saveSelected", function(){
     $("#SaveForm").submit();
 });
 
-/*
-//adds hover effects and hottracking to table headers. Essentially the same as comparison table addHover function
-VariantComparer.method("addHover", function(){
-    that = this;
-    this.interval = null;
-    this.timeout = null;
-    $("#unique #r0 .td_instance").hover( 
-        function () {
-        $(this).css("background", "#ffffcc");
-        var instance = $(this).find(".svghead :last-child").text();
-
-        //get crosshairs 
-        var hairs = that.host.findModule("mdFeatureQualityMatrix").getCrosshairs($("#" + getPID(instance) + "c").attr("cx"), $("#" + getPID(instance) + "c").attr("cy"));
-        $("#" + getPID(instance) + "c").before(hairs);
-        $("#CHX").attr("class", instance + "HL");
-        $("#CHY").attr("class", instance + "HL");
-
-        var highlight = $("#" + getPID(instance) + "c").clone();
-        highlight = that.host.findModule("mdFeatureQualityMatrix").highlight(highlight);
-        $(highlight).removeAttr("id");
-        $(highlight).attr("class", instance + "HL");
-        //add highlight element behind circle
-        $("#" + getPID(instance) + "c").before(highlight);
-
-        var highlight = $("#" + getPID(instance) + "r").clone();
-        highlight = that.host.findModule("mdFeatureQualityMatrix").highlight(highlight);
-        $(highlight).removeAttr("id");
-        $(highlight).attr("class", instance + "HL");
-        //add highlight element behind circle
-        $("#" + getPID(instance) + "r").before(highlight);
-
-        var highlight = $("#" + getPID(instance) + "h").clone();
-        highlight = that.host.findModule("mdFeatureQualityMatrix").highlight(highlight);
-        $(highlight).removeAttr("id");
-        $(highlight).attr("class", instance + "HL");
-        //add highlight element behind circle
-        $("#" + getPID(instance) + "h").before(highlight);
-
-        var myBool = true;
-        that.timeout = setTimeout(function(){
-            that.interval = setInterval(function(){
-                if (myBool){
-                    $("." + instance + "HL").hide(500);
-                    myBool = false;
-                } else {
-                    $("." + instance + "HL").show(500);
-                    myBool = true;
-                }
-            }, 500);
-        }, 1500);
-    }, 
-
-    function () {
-        $(this).css("background", "");
-        var instance = $(this).find(".svghead :last-child").text();
-        $("." + instance + "HL").remove();
-        clearInterval(that.interval);
-        clearTimeout(that.timeout);
-    });
-});
-*/
