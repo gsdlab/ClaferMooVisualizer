@@ -117,25 +117,25 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         {
             if (missingProducts.length <= 10) // reasonable to add products to make the set complete
             {
-                var addButton = '<button id="addMissing">add</button>';
-                label += "[Not Complete], " + addButton + " [" + missingProducts.toString() + "]";
+                var addButton = '<button id="addMissing">Include</button>';
+                label += "" + addButton + " variants [" + missingProducts.toString() + "]";
             }
             else
             {
-                var addButton = '<button id="addMissing">add</button>';
-                label += "[Not Complete], should " + addButton + " more than 10 products...";
+                var addButton = '<button id="addMissing">Include</button>';
+                label += "" + addButton + " " + missingProducts.length + " more variants";
             }
             
         }
         else
         {
-            label += '[Complete]';
+            label += '[No include suggestions]';
         }
     }
     else
-        label += "Please select more products for VariantComparer";
+        label += "Please select more variants";
 
-    var saveButton = ' <input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value="">' + '</form>';
+    var saveButton = ' <input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
     label += saveButton;
 
     $("#VariantComparer #completeness").html(label);

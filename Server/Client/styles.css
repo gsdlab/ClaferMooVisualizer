@@ -134,3 +134,15 @@ fieldset{
 .scopeInput {
     width:30px;
 }
+
+#input_scopes {
+    display:none;
+}
+
+#input_flags {
+    display:none;
+}
+
+#input_bottom_container{
+    background: white;
+}
