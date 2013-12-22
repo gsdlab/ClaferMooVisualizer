@@ -121,6 +121,9 @@ function getConfiguration()
 
                 matrixModule.addHovering();
 
+                module.host.storage.instanceFilter = new InstanceFilter(module.host);
+                module.host.storage.instanceFilter.filterContent();               
+
 		        module.host.print("Optimizer> " + responseObject.optimizer_message + "\n");
 		        return true;  
     		}    		
@@ -140,7 +143,7 @@ function getConfiguration()
 
             "onFilterByGoals": function(module)
             {
-//    this.host.findModule("mdComparisonTable").filter.filterContent();             
+                module.host.storage.instanceFilter.filterContent();                
             }
 
         }});
@@ -208,18 +211,16 @@ function getConfiguration()
 
     		"buttonsForRemoval": false,
 
-    		"onFilterByFeatures": function(module)
-    		{
-//    this.host.findModule("mdComparisonTable").filter.filterContent();    			
-    		},
+//    		"onFilterByFeatures": function(module)
+//    		{
+//                module.host.storage.instanceFilter.filterContent();                
+//    		},
     		"onSelected": function(module, pid)
     		{
-//    			alert("Selected");
 				module.host.storage.selector.onSelected(pid);    			
     		},
     		"onDeselected": function(module, pid)
     		{
-//    			alert("Deselected");
 				module.host.storage.selector.onDeselected(pid);    			
     		},
     		"getSelection" : function(module)
@@ -228,23 +229,24 @@ function getConfiguration()
     		},    		
     		"onReset": function(module)
     		{
-//    			alert("Reset");
+                module.host.storage.instanceFilter.filterContent();
     		},
     		"onFeatureExpanded": function(module, feature)
     		{
-    			alert("feature expanded");
+//    			alert("feature expanded");
     		},
     		"onFeatureCollapsed": function(module, feature)
     		{
-    			alert("feature collapsed");
+//    			alert("feature collapsed");
     		},    		
     		"onFeatureCheckedStateChange": function(module, feature, require)
     		{
-    			alert("Constraint change");
+                module.host.storage.instanceFilter.filterContent();                
+//    			alert("Constraint change");
     		},
     		"onInstanceRemove" : function(module, num)
     		{
-    			alert("Instance removal");
+                // unhandled currently, because removing is disabled in the matrix
     		}
     	}});
 
@@ -262,7 +264,7 @@ function getConfiguration()
             "onDrop" : function(module)
             {
 //    host.findModule("mdComparisonTable").addShapes();
-//    host.findModule("mdFeatureQualityMatrix").filter.filterContent();                
+                module.host.storage.instanceFilter.filterContent(); 
             },
 
             "onIdenticalFound": function(module, IdenticalId){
@@ -288,6 +290,7 @@ function getConfiguration()
     	"onInitialize": function(host)
 	    {
  			host.storage.selector = new Selector(host);
+            host.storage
  			host.storage.previousData = null;
 			host.storage.originalPoints = null;
 	    },

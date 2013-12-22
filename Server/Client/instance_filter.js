@@ -23,35 +23,32 @@ SOFTWARE.
 function InstanceFilter (host){
     this.host = host
     this.hidden = [];
-    this.permaHidden = {};
-    this.originalPoints = host.findModule("mdInput").originalPoints
+//    this.permaHidden = {};
+    this.originalPoints = host.storage.originalPoints;
     this.closedFeatures = [];
-    this.tableid = "#comparison"
 }
 
 //Clears then reapplies all active filters
 InstanceFilter.method("filterContent", function(){
     this.unFilter();
 
-
-
 // loop to go through each element
     this.host.findModule("mdGraph").addIds();
     var x;
     i=0;
-    row = $("#mdComparisonTable #r" + i);
+    row = $("#mdFeatureQualityMatrix #r" + i);
     row_length = row.find(".td_instance").length;
     while (row.length != 0){
 
         //filtering by features
         if (!row.find(".numeric").length){
-            var filter = $("#mdComparisonTable #r" + i + "box").attr("Class"); //pull filter type from checkbox
+            var filter = $("#mdFeatureQualityMatrix #r" + i + "box").attr("Class"); //pull filter type from checkbox
             for (var x = 1; x <= row_length; x++){
                 if (filter == "maybe") //filter nothing for this row
                     break;
-                else if (filter == "wanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("no")) { //filter out column and bubble
+                else if (filter == "wanted" && $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).hasClass("no")) { //filter out column and bubble
                     this.hideInstance(x);
-                } else if (filter == "unwanted" && $("#mdComparisonTable #td" + (i-1) + "_" + x).hasClass("tick")) { //filter out column and bubble
+                } else if (filter == "unwanted" && $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).hasClass("tick")) { //filter out column and bubble
                     this.hideInstance(x);
                 }
             }
@@ -60,7 +57,7 @@ InstanceFilter.method("filterContent", function(){
         //filtering by goals
         else {
             var filter;
-            var filterName = $("#mdComparisonTable #r" + i + " .td_abstract").text().replace(/\s+/g, '').replace(/[\u25B6\u25C0]/g, "");
+            var filterName = $("#mdFeatureQualityMatrix #r" + i + " .td_abstract").text().replace(/\s+/g, '').replace(/[\u25B6\u25C0]/g, "");
             for (var x = 0; x<=this.host.findModule("mdGoals").ranges.length; x++){;
                 if (x == this.host.findModule("mdGoals").ranges.length){
                     break;
@@ -70,7 +67,7 @@ InstanceFilter.method("filterContent", function(){
             }
 
             for (x=1; x<= row_length; x++){
-                var value = $("#mdComparisonTable #td" + (i-1) + "_" + x).text();
+                var value = $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).text();
                 var min = parseInt(filter.min);
                 var max = parseInt(filter.max)
                 if (min > value || max < value)
@@ -80,7 +77,7 @@ InstanceFilter.method("filterContent", function(){
 
         //increment row
         i++;
-        row = $("#mdComparisonTable #r" + i);
+        row = $("#mdFeatureQualityMatrix #r" + i);
     }
 
     //close features
@@ -89,13 +86,14 @@ InstanceFilter.method("filterContent", function(){
     }
 
     //filtering by permaHidden
+/*
     for (var instance in this.permaHidden){
         if (this.permaHidden.hasOwnProperty(instance))
             this.hideInstance(instance.substring(1));
     }
-
+*/
     //fire the scroll handler to align table
-    $('#mdComparisonTable .window-content').scroll();
+    $('#mdFeatureQualityMatrix .window-content').scroll();
 
 });
 
@@ -107,23 +105,34 @@ InstanceFilter.method("hideInstance", function(x){
     for (var i=1; i<=$("#chart circle").length; i++){
         circle_pairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
     }
+
     //hide table header (row 0)
-    $("#mdComparisonTable #th0_" + x).hide();
-    this.hidden.push("#mdComparisonTable #th0_" + x);
+//    $("#mdFeatureQualityMatrix #th0_" + x).hide();
+//    this.hidden.push("#mdFeatureQualityMatrix #th0_" + x);
+
     //hide graph bubble
     $(circle_pairs[x-1].circle).hide();
     $(circle_pairs[x-1].text_data).hide();
     this.hidden.push(circle_pairs[x-1].text_data);
     this.hidden.push(circle_pairs[x-1].circle);
     //hide whole column
+/*
     var y = 1;
-    var row_with_removal = $("#mdComparisonTable #r" + y);
+    var row_with_removal = $("#mdFeatureQualityMatrix #r" + y);
     while (row_with_removal.length != 0){
-        $("#mdComparisonTable #td"+ (y-1) +"_" + x).hide();
-        this.hidden.push("#mdComparisonTable #td"+ (y-1) +"_" + x);
+        $("#mdFeatureQualityMatrix #td"+ (y-1) +"_" + x).hide();
+        this.hidden.push("#mdFeatureQualityMatrix #td"+ (y-1) +"_" + x);
         y++;
-        row_with_removal = $("#mdComparisonTable #r" + y);
+        row_with_removal = $("#mdFeatureQualityMatrix #r" + y);
     }
+*/
+    var rows = $("#mdFeatureQualityMatrix tr");
+
+    for (var i=0; i < rows.length;i++){
+        $($(rows[i]).children()[x]).hide();
+        this.hidden.push($($(rows[i]).children()[x]));
+    }
+
 });
 
 //unhides everything in the hidden stack (all things that have been filtered out) (note! does not include permahidden elements)
@@ -138,78 +147,4 @@ InstanceFilter.method("unFilter", function(){
     for (i = this.originalPoints; i<circle_pairs.length;i++){
     	$(circle_pairs[i].circle).hide();
     }
-});
-
-/*Reset function that turns all checkboxes to maybe
-  then unfilters content.*/
-
-InstanceFilter.method("resetFilters", function(){
-
-    //reset all checkboxes to maybe
-    var i = 1;
-    row = $("#r" + i);
-    while (row.length != 0){
-        if (!(row.find(".numeric").length)){
-            current = document.getElementById("r" + i + "box");
-            if (current){
-                current.src = "images/checkbox_empty.bmp";
-                current.className = "maybe";
-            }
-        }
-        i++;
-        row = $("#r" + i);
-    }
-    //refresh filter
-    this.filterContent();
-});
-
-InstanceFilter.method("hideRowByName", function (name){
-    var rows = $(this.tableid + " tr");
-    for (var i=0;i<rows.length;i++){
-        var curRow = rows[i];
-        var hideThis = $($(curRow).find(':contains("' + name + '")')).parent();
-        if (hideThis.length != 0){
-            $(hideThis).hide();
-            this.hidden.push(hideThis);
-        }
-    }
-});
-
-InstanceFilter.method("closeFeature", function (feature){
-    var instanceSuperClafer = this.host.findModule("mdComparisonTable").instanceProcessor.getInstanceSuperClafer();
-    var root = this.host.findModule("mdComparisonTable").processor.getAbstractClaferTree("/module/declaration/uniqueid", instanceSuperClafer);
-    
-    root = this.findNodeInTree(root, feature)
-
-    this.hideChildren(root);
-    if (this.closedFeatures.indexOf(feature) == -1)
-        this.closedFeatures.push(feature)
-    this.host.findModule("mdComparisonTable").scrollToSearch($("#search").val());
-});
-
-InstanceFilter.method("hideChildren", function (node){;
-    for (var i=0;i<node.subclafers.length;i++){
-        this.hideChildren(node.subclafers[i]);
-        this.hideRowByName(node.subclafers[i].displayId);
-    }
-});
-
-InstanceFilter.method("findNodeInTree", function (root, feature){
-    if (root.displayId === feature)
-        return root;
-    else if (root.subclafers.length < 1)
-        return null;
-    else{
-        for (var i=0; i<root.subclafers.length; i++){
-            var ret = this.findNodeInTree(root.subclafers[i], feature);
-            if (ret != null)
-                return ret;
-        }
-    }
-}); 
-
-InstanceFilter.method("openFeature", function (feature){
-    var index = this.closedFeatures.indexOf(feature);
-    this.closedFeatures.splice(index, 1);
-    this.filterContent();
 });
