@@ -42,13 +42,13 @@ InstanceFilter.method("filterContent", function(){
 
         //filtering by features
         if (!row.find(".numeric").length){
-            var filter = $("#mdFeatureQualityMatrix #r" + i + "box").attr("Class"); //pull filter type from checkbox
+            var filter = $(row).attr("FilterStatus"); //pull filter type from the row attribute
             for (var x = 1; x <= row_length; x++){
-                if (filter == "maybe") //filter nothing for this row
+                if (filter == "none") //filter nothing for this row
                     break;
-                else if (filter == "wanted" && $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).hasClass("no")) { //filter out column and bubble
+                else if (filter == "require" && $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).hasClass("no")) { //filter out column and bubble
                     this.hideInstance(x);
-                } else if (filter == "unwanted" && $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).hasClass("tick")) { //filter out column and bubble
+                } else if (filter == "exclude" && $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).hasClass("tick")) { //filter out column and bubble
                     this.hideInstance(x);
                 }
             }
