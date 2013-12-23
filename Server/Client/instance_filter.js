@@ -23,8 +23,8 @@ SOFTWARE.
 function InstanceFilter (host){
     this.host = host
     this.hidden = [];
-//    this.permaHidden = {};
-    this.originalPoints = host.storage.originalPoints;
+    this.permaHidden = {};
+//    this.originalPoints = host.storage.originalPoints;
     this.closedFeatures = [];
 }
 
@@ -86,12 +86,12 @@ InstanceFilter.method("filterContent", function(){
     }
 
     //filtering by permaHidden
-/*
+
     for (var instance in this.permaHidden){
         if (this.permaHidden.hasOwnProperty(instance))
             this.hideInstance(instance.substring(1));
     }
-*/
+
     //fire the scroll handler to align table
     $('#mdFeatureQualityMatrix .window-content').scroll();
 
@@ -144,7 +144,7 @@ InstanceFilter.method("unFilter", function(){
     while(this.hidden.length){
         $(this.hidden.pop()).show();
     }
-    for (i = this.originalPoints; i<circle_pairs.length;i++){
-    	$(circle_pairs[i].circle).hide();
-    }
+//    for (i = this.originalPoints; i<circle_pairs.length;i++){
+//    	$(circle_pairs[i].circle).hide();
+//    }
 });

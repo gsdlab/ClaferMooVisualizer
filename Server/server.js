@@ -348,6 +348,7 @@ server.post('/upload', commandMiddleware, function(req, res, next)
                 folder: dlDir, 
                 clafer_compiler: null,
                 file: uploadedFilePath, 
+                instancesOnly: false,
                 mode : "compiler",
                 cacheEnabled: req.body.useCache, // save the caching setting here 
                 freshError: ""});    
@@ -486,6 +487,7 @@ server.post('/poll', pollingMiddleware, function(req, res, next)
                         // which is not the correct way
                         
                         jsonObj.optimizer_message = message;
+                        jsonObj.optimizer_instances_only = process.instancesOnly;
                         jsonObj.optimizer_instances = instances;
                         jsonObj.optimizer_claferXML = xml.toString();
                         jsonObj.optimizer_from_cache = process.loadedFromCache;

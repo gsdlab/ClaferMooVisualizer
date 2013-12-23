@@ -76,3 +76,11 @@ Selector.method("clearSelection", function()
 Selector.method("asString", function(){
     return this.selection.join(",");
 });
+
+Selector.method("ReselectGraphPoints", function(){
+    for (var i = 0; i < this.selection.length; i++)
+    {
+        this.host.findModule("mdGraph").makePointsSelected(this.selection[i]);
+    }
+});
+

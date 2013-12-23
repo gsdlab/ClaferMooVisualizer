@@ -33,10 +33,12 @@ function VariantComparer(host, settings)
     this.host = host;
     
     this.dataTable = null;
+    this.unparsedInstances = null;
     this.host.loaded();
 }
 
 VariantComparer.method("onDataLoaded", function(data){
+    this.unparsedInstances = data.unparsedInstances;
     this.instanceProcessor = new InstanceProcessor(data.instancesXML);
     this.Processor = new ClaferProcessor(data.claferXML);
 });
@@ -214,7 +216,7 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
 //saves all selected instances and downloads them to client
 VariantComparer.method("saveSelected", function(){
     var selection = this.settings.getSelection(this);
-    var instances = this.settings.getPreviousData(this).Unparsed;
+    var instances = this.unparsedInstances;
     var parser = new InstanceParser(instances);
     var data = "";
     for (var i=0; i < selection.length; i++){

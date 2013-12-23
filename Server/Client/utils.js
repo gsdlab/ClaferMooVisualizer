@@ -4,7 +4,39 @@ function preprocessMOOResult(result, host)
 	var instances = result.optimizer_instances;
 	var abstractXMLText = result.optimizer_claferXML;
 
-	// todo: error handling
+	if (!result.optimizer_instances_only) // the user submitted a clafer file to optimize
+	{
+        host.storage.evolutionController.existingData = null; // free the existing data
+        host.storage.instanceFilter.permaHidden = {}; // reset the hidden instances
+
+    	if (!result.optimizer_instances)
+		{
+            host.findModule("mdInput").handleError(null, "malformed_output", null);
+       		return;
+   		}
+    } 
+    else  // the user submitted instances file
+    {
+        if (host.storage.evolutionController.existingData)
+        {
+            instances = host.storage.evolutionController.existingData.unparsedInstances;
+
+            if (!result.optimizer_instances)            
+            {
+                host.findModule("mdInput").handleError(null, "empty_instance_file", null);
+                return;
+            }
+            
+            var parser = new InstanceConverter(result.optimizer_instances);
+            instances += parser.convertFromClaferIGOutputToClaferMoo(host.storage.evolutionController.existingData.abstractXML);            
+            abstractXMLText = host.storage.evolutionController.existingData.abstractXML;
+        }
+        else
+		{
+            host.findModule("mdInput").handleError(null, "optimize_first", null);
+       		return;
+   		}
+	}
 
 	var instancesXMLText = (new InstanceConverter(instances)).convertFromClaferMooOutputToXML();
 
@@ -12,17 +44,16 @@ function preprocessMOOResult(result, host)
 
     if (instancesXMLText.length == 0 || instancesXMLText == "<instances></instances>")
     {
-        this.handleError(null, "empty_instances", null);
+        host.findModule("mdInput").handleError(null, "empty_instances", null);
         return;
     }
 
     if (instancesXMLText.indexOf("<instance></instance>") >= 0)
 	{
-        this.handleError(null, "malformed_instance", null);
+        host.findModule("mdInput").handleError(null, "malformed_instance", null);
         return;
     }
 
-    
 //	abstractXMLText = abstractXMLText.replaceAll("&quot;", "\"");
 //	abstractXMLText = abstractXMLText.replaceAll("&gt;", ">");
 //	abstractXMLText = abstractXMLText.replaceAll("&lt;", "<");
@@ -40,15 +71,17 @@ function preprocessMOOResult(result, host)
     data.error = false;
     data.output = result.message;
     data.instancesXML = instancesXMLText;
-    data.claferXML = abstractXMLText;	
+    data.claferXML = abstractXMLText;
+    data.unparsedInstances = instances;	
 
-    if (!host.storage.previousData){
-    	var lines = result.optimizer_instances.match(/^.*([\n\r]+|$)/gm);
-    	lines = result.optimizer_instances.split(lines[1]);
-    	host.storage.originalPoints = lines.length - 1;
+    /* counting the number of lines */
+    if (!host.storage.evolutionController.existingData){
+        var lines = data.unparsedInstances.match(/^.*([\n\r]+|$)/gm);
+        lines = data.unparsedInstances.split(lines[1]);
+        host.storage.evolutionController.existingInstancesCount = lines.length - 1;
     }
-    data.originalPoints = this.originalPoints;
-    host.storage.previousData = { Unparsed: instances, abstractXML: data.claferXML };
+
+    host.storage.evolutionController.existingData = data;
 
     return data;
 }

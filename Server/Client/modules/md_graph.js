@@ -226,15 +226,8 @@ Graph.method("redrawParetoFront", function()
     }
     
     this.PFVisualizer.draw(this.Processor, this.instanceProcessor, args, labels, this.host.instanceCounterArg);
-
-    var selection = this.settings.getSelection(this);
-
-    this.makePointsReady();
-
-    for (var i = 0; i < selection.length; i++)
-    {
-        this.makePointsSelected(selection[i]);
-    }
+    this.addIds();
+    this.settings.onDrawComplete(this);
 
     this.addFilters();
 });
@@ -268,83 +261,6 @@ Graph.method("addIds", function(){
         $(child2).text(parsePID($(child1).text()));
     }
 
-});
-
-// Make instances squares or octagons
-Graph.method("makePointsReady", function(){
-    this.addIds();
-    var goals = this.Processor.getGoals();
-    var originalPoints = this.host.storage.originalPoints;
-// Get graph bubble html locations
-    originalCirclePairs = [];
-    for (var i=1; i<=originalPoints; i++){
-        originalCirclePairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
-    }
-
-    var circle_pairs = [];
-    for (var i=(originalPoints + 1); i<=$("#chart circle").length; i++){
-        circle_pairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
-    }
-    //hide table header (row 0)
-    while (circle_pairs.length != 0){
-        circlePair = circle_pairs.pop();
-        var r = $(circlePair.circle).attr("r");
-        var xpos = $(circlePair.circle).attr("cx");
-        var ypos = $(circlePair.circle).attr("cy");
-        var fill = $(circlePair.circle).attr("fill");
-        var id = getPID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) + "r"
-        var NS="http://www.w3.org/2000/svg";
-        var IdenticalId = this.instanceProcessor.getIdenticalID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, ""), goals, originalPoints) - 1;
-        if (IdenticalId != -1){
-            var shape = this.getSVGOctagon(xpos, ypos, r);
-            var newID = getPID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) + "h";
-            shape.setAttributeNS(null, "id", newID);
-            $(originalCirclePairs[IdenticalId].circle).hide();
-            $(originalCirclePairs[IdenticalId].text_data).hide();
-            this.onIdenticalFound(this, IdenticalId);
-        } else {
-            var shape = this.getSVGSquare(xpos, ypos, r)
-            shape.setAttributeNS(null, "id", getPID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) + "r");
-        }
-        shape.setAttributeNS(null, "stroke","#000000");
-        shape.setAttributeNS(null, "stroke-width","1");
-        shape.setAttributeNS(null, "fill-opacity","0.8");
-        shape.style.fill=fill;
-        $(circlePair.text_data).prepend(shape);
-        $(circlePair.circle).hide();
-    }
-});
-
-//return an svg octagon of 2r diameter centered at (x,y)
-Graph.method("getSVGOctagon", function(x, y, r){
-    var NS="http://www.w3.org/2000/svg";
-    var oct= document.createElementNS(NS,"polygon");
-    x = Number(x);
-    y = Number(y);
-    r = Number(r);
-    var xcoords = [x-(r/3), x+(r/3), x+r, x-r]
-    var ycoords = [y-(r/3), y+(r/3), y+r, y-r];
-    var points = (xcoords[0])+","+(ycoords[3])+" ";
-    points += (xcoords[1])+","+(ycoords[3]) + " ";
-    points += (xcoords[2])+","+(ycoords[0]) + " ";
-    points += (xcoords[2])+","+(ycoords[1]) + " ";
-    points += (xcoords[1])+","+(ycoords[2]) + " ";
-    points += (xcoords[0])+","+(ycoords[2]) + " ";
-    points += (xcoords[3])+","+(ycoords[1]) + " ";
-    points += (xcoords[3])+","+(ycoords[0]);
-    oct.setAttributeNS(null, "points", points);
-    return oct;
-});
-
-//returns an svg square of width 2r centered at (x,y)
-Graph.method("getSVGSquare", function(cx, cy, r){
-    var NS="http://www.w3.org/2000/svg";
-    var rect= document.createElementNS(NS,"rect");
-    rect.setAttributeNS(null, "height",r*2);
-    rect.setAttributeNS(null, "width",r*2);
-    rect.setAttributeNS(null, "x",cx-r);
-    rect.setAttributeNS(null, "y",cy-r);
-    return rect;
 });
 
 //formats object as selected

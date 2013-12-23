@@ -3,11 +3,12 @@
         "utils.js",
         "https://www.google.com/jsapi",
         "selection_controller.js",
+        "evolution_controller.js",
         "instance_filter.js",        
         "utils/pf_visualizer.js",
         "modules/md_graph.js",
         "modules/md_variant_comparer.js",
-        "modules/modules_extensions.js",
+        "modules/hovering_extensions.js",
         "configuration.js"
     ],
 

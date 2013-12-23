@@ -115,13 +115,14 @@ function getConfiguration()
 
 				goalsModule.onRendered();
                 graphModule.onRendered();
-                matrixModule.addShapes();
+
+                module.host.storage.evolutionController.assignProperShapesToMatrix();
+
 				matrixModule.onRendered();
                 comparerModule.onRendered();
 
                 matrixModule.addHovering();
 
-                module.host.storage.instanceFilter = new InstanceFilter(module.host);
                 module.host.storage.instanceFilter.filterContent();               
 
 		        module.host.print("Optimizer> " + responseObject.optimizer_message + "\n");
@@ -162,25 +163,18 @@ function getConfiguration()
 
             "onSelected": function(module, pid)
             {
-//                alert("Selected");
                 module.host.storage.selector.onSelected(pid);               
             },
             "onDeselected": function(module, pid)
             {
-//                alert("Deselected");
                 module.host.storage.selector.onDeselected(pid);             
             },
             "getSelection" : function(module)
             {
                 return module.host.storage.selector.selection;              
             },
-
-            "getPreviousData" : function (module){
-                return host.storage.previousData;    
-            },
-
             "onHTMLChanged": function (module){
-                module.addShapes();                
+                module.host.storage.evolutionController.assignProperShapesToVariantComparer();
             }
 
     	}});
@@ -211,10 +205,6 @@ function getConfiguration()
 
     		"buttonsForRemoval": false,
 
-//    		"onFilterByFeatures": function(module)
-//    		{
-//                module.host.storage.instanceFilter.filterContent();                
-//    		},
     		"onSelected": function(module, pid)
     		{
 				module.host.storage.selector.onSelected(pid);    			
@@ -233,20 +223,16 @@ function getConfiguration()
     		},
     		"onFeatureExpanded": function(module, feature)
     		{
-//    			alert("feature expanded");
     		},
     		"onFeatureCollapsed": function(module, feature)
     		{
-//    			alert("feature collapsed");
     		},    		
     		"onFeatureCheckedStateChange": function(module, feature, require)
     		{
                 module.host.storage.instanceFilter.filterContent();                
-//    			alert("Constraint change");
     		},
     		"onInstanceRemove" : function(module, num)
     		{
-                // unhandled currently, because removing is disabled in the matrix
     		}
     	}});
 
@@ -263,17 +249,8 @@ function getConfiguration()
 
             "onDrop" : function(module)
             {
-//    host.findModule("mdComparisonTable").addShapes();
-                module.host.storage.instanceFilter.filterContent(); 
+//                module.host.storage.instanceFilter.filterContent(); 
             },
-
-            "onIdenticalFound": function(module, IdenticalId){
-                host.findModule("mdFeatureQualityMatrix").filter.permaHidden[getPID((IdenticalId+1))] = true;                   
-            },
-            "getSelection" : function(module)
-            {
-                return module.host.storage.selector.selection;              
-            },          
             "onBubbleClick": function(module, pid){
                 if (module.host.storage.selector.isSelected(pid))
                 {
@@ -283,6 +260,10 @@ function getConfiguration()
                 {
                     module.host.storage.selector.onSelected(pid);
                 }                
+            },
+            "onDrawComplete" : function(module){
+                module.host.storage.evolutionController.assignProperShapesToGraph();
+                module.host.storage.selector.ReselectGraphPoints();
             }
     	}});
 
@@ -290,9 +271,8 @@ function getConfiguration()
     	"onInitialize": function(host)
 	    {
  			host.storage.selector = new Selector(host);
-            host.storage
- 			host.storage.previousData = null;
-			host.storage.originalPoints = null;
+            host.storage.instanceFilter = new InstanceFilter(host);
+            host.storage.evolutionController = new EvolutionController(host);
 	    },
     	"onLoaded": function(host)
 	    {
