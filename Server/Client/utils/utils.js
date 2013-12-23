@@ -11,8 +11,8 @@ function preprocessMOOResult(result, host)
         host.storage.selector.clearSelection(); // reset the selection
 
     	if (!result.optimizer_instances)
-		{
-            host.findModule("mdInput").handleError(null, "malformed_output", null);
+		  {
+          host.findModule("mdInput").handleError(null, "malformed_output", null);
        		return;
    		}
     } 
@@ -29,8 +29,8 @@ function preprocessMOOResult(result, host)
             }
             
             var parser = new InstanceConverter(result.optimizer_instances);
-            instances += parser.convertFromClaferIGOutputToClaferMoo(host.storage.evolutionController.existingData.abstractXML);            
-            abstractXMLText = host.storage.evolutionController.existingData.abstractXML;
+            instances += parser.convertFromClaferIGOutputToClaferMoo(host.storage.evolutionController.existingData.claferXML);            
+            abstractXMLText = host.storage.evolutionController.existingData.claferXML;
         }
         else
 		{

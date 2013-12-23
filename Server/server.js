@@ -326,7 +326,7 @@ server.post('/upload', commandMiddleware, function(req, res, next)
         core.logSpecific("FILE EXTENSION: " + req.body.fileExt, req.body.windowKey);
 
         // read the contents of the uploaded file
-        fs.readFile(uploadedFilePath + ".cfr", function (err, data) {
+        fs.readFile(uploadedFilePath + req.body.fileExt, function (err, data) {
 
             var file_contents;
             if(data)
@@ -338,8 +338,6 @@ server.post('/upload', commandMiddleware, function(req, res, next)
                 lib.cleanupOldFiles(dlDir);
                 return;
             }
-            
-            core.logSpecific("Compiling...", req.body.windowKey);
 
             core.addProcess({ 
                 windowKey: req.body.windowKey, 
@@ -351,9 +349,36 @@ server.post('/upload', commandMiddleware, function(req, res, next)
                 clafer_compiler: null,
                 file: uploadedFilePath, 
                 instancesOnly: false,
+                completed: false,
+                model: "",
                 mode : "compiler",
-                cacheEnabled: req.body.useCache, // save the caching setting here 
+                cacheEnabled: req.body.useCache, // save the caching setting here
+                loadedFromCache : false, 
                 freshError: ""});    
+
+            var process = core.getProcess(req.body.windowKey);
+            
+            // if instance data is submitted
+            if (req.body.fileExt == ".data")
+            {
+                core.logSpecific("Instances have been submitted, returning them...", req.body.windowKey);                
+
+                process.instances = file_contents;
+                process.code = 0;
+                process.completed = true;
+                process.instancesOnly = true;
+                process.mode_completed = true;
+                process.mode = "ig";
+                core.timeoutProcessSetPing(process);
+
+                res.writeHead(200, { "Content-Type": "text/html"});
+                res.end("OK"); // just means the file has been sent sucessfully and started to processing
+                return;
+            }
+
+            // else: Clafer file submitted 
+
+            core.logSpecific("Compiling...", req.body.windowKey);
 
             var ss = "--ss=none";
 
@@ -371,16 +396,10 @@ server.post('/upload', commandMiddleware, function(req, res, next)
             var specifiedArgs = core.filterArgs(req.body.args);
             var genericArgs = [ss, uploadedFilePath + ".cfr"];
 
-            var process = core.getProcess(req.body.windowKey);
-
             if (loadExampleInEditor)
                 process.model = file_contents;
-            else
-                process.model = "";                                   
 
             process.optimization_backend = req.body.optimizationBackend;
-            process.completed = false;
-            process.loadedFromCache = false;
 
             lib.runClaferCompiler(req.body.windowKey, specifiedArgs, genericArgs, function()
             {
@@ -451,92 +470,105 @@ server.post('/poll', pollingMiddleware, function(req, res, next)
             {
 //                console.log("COMPLETED MOO");
                 var jsonObj = new Object();
-                var data_result = process.freshData;
-                process.freshData = "";
 
-                var error_result = process.freshError;
-                process.freshError = "";
-
-                console.log("Preparing to send the result...");
-                
-                var code = process.code;
-
-                if (error_result.indexOf('Exception in thread "main"') > -1)
+                if (process.instancesOnly)
                 {
-                    code = 1;
-                }
-
-                if (code === 0) 
-                {               
-                    var parts = data_result.split("=====");
-                    
-                    if (parts.length != 2)
-                    {
-                        jsonObj.optimizer_message = 'Error, instances and normal text must be separated by "====="';
-                        console.log(data_result);
-                    }
-                    else
-                    {
-                    
-                        var message = parts[0]; //
-                        console.log(message);
-                        var instances = parts[1]; // 
-                        // todo : error handling
-                        
-                        console.log(process.file + '.xml');
-                        var xml = fs.readFileSync(process.file + '.xml');
-                        // this code assumes the backend should produce an XML,
-                        // which is not the correct way
-                        
-                        jsonObj.optimizer_message = message;
-                        jsonObj.optimizer_instances_only = process.instancesOnly;
-                        jsonObj.optimizer_instances = instances;
-                        jsonObj.optimizer_claferXML = xml.toString();
-                        jsonObj.optimizer_from_cache = process.loadedFromCache;
-
-                        if (process.cacheEnabled && !process.loadedFromCache) // caching the results
-                        {
-                            fs.writeFile(process.cache_file_name, data_result, function(err)
-                            {
-                                if (err)
-                                {
-                                    core.logSpecific("Could not write cache: " + process.cache_file_name, process.windowKey);                    
-                                }
-                                else
-                                {
-                                    core.logSpecific("The cache file successfully saved: " + process.cache_file_name, process.windowKey);
-                                }
-                            });
-                        }
-                    }
-                }
-                else 
-                {
-                    jsonObj.optimizer_message = 'Error, return code: ' + code + '\n' + error_result;
-                    console.log(data_result);
-                }
-
-                jsonObj.model = process.model;
-
-                if (code == 0)
-                {
+                    console.log("returning instances...");
                     res.writeHead(200, { "Content-Type": "application/json"});
+                    jsonObj.optimizer_message = "Instances successfully returned";
+                    jsonObj.optimizer_instances = process.instances;
+                    jsonObj.optimizer_instances_only = true;
+                    res.end(JSON.stringify(jsonObj));
                 }
                 else
                 {
-                    res.writeHead(400, { "Content-Type": "application/json"});
-                }                
 
-                jsonObj.message = jsonObj.optimizer_message;
+                    var data_result = process.freshData;
+                    process.freshData = "";
 
-                res.end(JSON.stringify(jsonObj));
+                    var error_result = process.freshError;
+                    process.freshError = "";
 
-                // if mode is completed, then the tool is not busy anymore, so now it's time to 
-                // set inactivity timeout
+                    console.log("Preparing to send the result...");
+                    
+                    var code = process.code;
+
+                    if (error_result.indexOf('Exception in thread "main"') > -1)
+                    {
+                        code = 1;
+                    }
+
+                    if (code === 0) 
+                    {               
+                        var parts = data_result.split("=====");
+                        
+                        if (parts.length != 2)
+                        {
+                            jsonObj.optimizer_message = 'Error, instances and normal text must be separated by "====="';
+                            console.log(data_result);
+                        }
+                        else
+                        {
+                        
+                            var message = parts[0]; //
+                            console.log(message);
+                            var instances = parts[1]; // 
+                            // todo : error handling
+                            
+                            console.log(process.file + '.xml');
+                            var xml = fs.readFileSync(process.file + '.xml');
+                            // this code assumes the backend should produce an XML,
+                            // which is not the correct way
+                            
+                            jsonObj.optimizer_message = message;
+                            jsonObj.optimizer_instances_only = false;
+                            jsonObj.optimizer_instances = instances;
+                            jsonObj.optimizer_claferXML = xml.toString();
+                            jsonObj.optimizer_from_cache = process.loadedFromCache;
+
+                            if (process.cacheEnabled && !process.loadedFromCache) // caching the results
+                            {
+                                fs.writeFile(process.cache_file_name, data_result, function(err)
+                                {
+                                    if (err)
+                                    {
+                                        core.logSpecific("Could not write cache: " + process.cache_file_name, process.windowKey);                    
+                                    }
+                                    else
+                                    {
+                                        core.logSpecific("The cache file successfully saved: " + process.cache_file_name, process.windowKey);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                    else 
+                    {
+                        jsonObj.optimizer_message = 'Error, return code: ' + code + '\n' + error_result;
+                        console.log(data_result);
+                    }
+
+                    jsonObj.model = process.model;
+
+                    if (code == 0)
+                    {
+                        res.writeHead(200, { "Content-Type": "application/json"});
+                    }
+                    else
+                    {
+                        res.writeHead(400, { "Content-Type": "application/json"});
+                    }                
+
+                    jsonObj.message = jsonObj.optimizer_message;
+
+                    res.end(JSON.stringify(jsonObj));
+
+                    // if mode is completed, then the tool is not busy anymore, so now it's time to 
+                    // set inactivity timeout
+                }
 
                 core.timeoutProcessClearInactivity(process);
                 core.timeoutProcessSetInactivity(process);
-
             }
 
         }   

@@ -276,6 +276,9 @@ function getConfiguration()
                     module.host.storage.selector.onSelected(pid);
                 }                
             },
+            "getExistingInstancesCount" : function(module){
+                return module.host.storage.evolutionController.existingInstancesCount;
+            },
             "onDrawComplete" : function(module){
                 module.host.storage.evolutionController.assignProperShapesToGraph();
                 module.host.storage.selector.ReselectGraphPoints();

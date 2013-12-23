@@ -29,7 +29,6 @@ function EvolutionController(host)
 
 // Make instances squares or octagons
 EvolutionController.method("assignProperShapesToGraph", function(){
-    var goals = this.host.findModule("mdGoals").goals;
     var originalPoints = this.existingInstancesCount;
 // Get graph bubble html locations
     originalCirclePairs = [];
@@ -50,7 +49,7 @@ EvolutionController.method("assignProperShapesToGraph", function(){
         var fill = $(circlePair.circle).attr("fill");
         var id = getPID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) + "r"
         var NS="http://www.w3.org/2000/svg";
-        var IdenticalId = this.getIdenticalID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, ""), goals, originalPoints) - 1;
+        var IdenticalId = this.getIdenticalID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, ""), originalPoints) - 1;
         if (IdenticalId != -1){
             var shape = this.getSVGOctagon(xpos, ypos, r);
             var newID = getPID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) + "h";
@@ -77,6 +76,7 @@ EvolutionController.method("assignProperShapesToGraph", function(){
 EvolutionController.method("getSVGOctagon", function(x, y, r){
     var NS="http://www.w3.org/2000/svg";
     var oct= document.createElementNS(NS,"polygon");
+    oct.setAttributeNS(null, "class", "octagon");    
     x = Number(x);
     y = Number(y);
     r = Number(r);
@@ -98,6 +98,7 @@ EvolutionController.method("getSVGOctagon", function(x, y, r){
 EvolutionController.method("getSVGSquare", function(cx, cy, r){
     var NS="http://www.w3.org/2000/svg";
     var rect= document.createElementNS(NS,"rect");
+    rect.setAttributeNS(null, "class", "square");    
     rect.setAttributeNS(null, "height",r*2);
     rect.setAttributeNS(null, "width",r*2);
     rect.setAttributeNS(null, "x",cx-r);

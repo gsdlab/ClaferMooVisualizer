@@ -425,3 +425,9 @@ Graph.method("addFilters", function(){
     $(filter).append(gaussian);
     $(defs).append(filter);
 });
+
+Graph.method("getExistingInstancesCount", function(){
+    return this.settings.getExistingInstancesCount(this);
+});
+
+

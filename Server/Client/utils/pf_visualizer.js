@@ -250,14 +250,14 @@ ParetoFrontVisualizer.method("draw", function(cprocessor, processor, args, label
                 $(this).css("background", "#ffffcc");
         });
 
-//        var originalPoints = context.hostModule.host.storage.originalPoints;
-//        $("#chart circle").each(function(){
-//            if (data.row >= originalPoints){
-//                if ($(this).attr("id") == null){
-//                    $(this).hide();
-//                }
-//            }
-//        });
+        var originalPoints = context.hostModule.getExistingInstancesCount();
+        $("#chart circle").each(function(){
+            if (data.row >= originalPoints){
+                if ($(this).attr("id") == null){
+                    $(this).hide();
+                }
+            }
+        });
         $($("#chart g:contains('" + getPID(data.row+1) + "') text")[0]).text("Variant " + (data.row+1));
     }); 
     google.visualization.events.addListener(this.chart, 'onmouseout', function(data){
@@ -279,12 +279,12 @@ ParetoFrontVisualizer.method("draw", function(cprocessor, processor, args, label
             }
         });
 
-//        var originalPoints = context.hostModule.host.storage.originalPoints;
-//        for (var i = 1; i <= ($("#chart circle").length); i++){
-//            if (i > originalPoints){
-//                $("#" + getPID(i) + "c").hide();
-//            }
-//        }
+        var originalPoints = context.hostModule.getExistingInstancesCount();
+        for (var i = 1; i <= ($("#chart circle").length); i++){
+            if (i > originalPoints){
+                $("#" + getPID(i) + "c").hide();
+            }
+        }
     }); 
 
 //    this.host.chart = this.chart;  
@@ -297,17 +297,17 @@ ParetoFrontVisualizer.method("myClickHandler", function()
     var selection = this.chart.getSelection();  
 //    alert(this);
     this.chart.setSelection(null);
-//    var originalPoints = this.hostModule.host.storage.originalPoints;
+    var originalPoints = this.hostModule.getExistingInstancesCount();
     var id = -1;
  
   for (var y = 0; y < selection.length; y++){
         $("#chart circle").each(function(){
 
-//            if (selection[y].row >= originalPoints){
-//                if ($(this).attr("id") == null){
-//                    $(this).hide()
-//                }
-//            }
+            if (selection[y].row >= originalPoints){
+                if ($(this).attr("id") == null){
+                    $(this).hide()
+                }
+            }
         });
   }
   
