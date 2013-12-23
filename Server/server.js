@@ -323,6 +323,8 @@ server.post('/upload', commandMiddleware, function(req, res, next)
 
         var key = req.body.windowKey;
 
+        core.logSpecific("FILE EXTENSION: " + req.body.fileExt, req.body.windowKey);
+
         // read the contents of the uploaded file
         fs.readFile(uploadedFilePath + ".cfr", function (err, data) {
 

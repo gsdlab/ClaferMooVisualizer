@@ -23,13 +23,28 @@ function getConfiguration()
     		"optimization_backend": true, 
             "input_default_cache": "checked",
             "input_default_flags": "",
-    		"button_file_caption": "Optimize",
-    		"button_example_caption": "Optimize",
-    		"button_editor_caption": "Optimize",
+            "file_extensions": [
+                {
+                    "ext": ".cfr", 
+                    "button_file_caption": "Optimize",
+                    "button_example_caption": "Optimize",
+                    "button_editor_caption": "Optimize",
 
-    		"button_file_tooltip": "Optimize",
-    		"button_example_tooltip": "Optimize",
-    		"button_editor_tooltip": "Optimize",
+                    "button_file_tooltip": "Optimize tooltip",
+                    "button_example_tooltip": "Optimize tooltip",
+                    "button_editor_tooltip": "Optimize tooltip"
+                },
+                {
+                    "ext": ".data", 
+                    "button_file_caption": "Add Instances",
+                    "button_example_caption": "Add Instances",
+                    "button_editor_caption": "Add Instances",
+
+                    "button_file_tooltip": "Add Instances tooltip",
+                    "button_example_tooltip": "Add Instances tooltip",
+                    "button_editor_tooltip": "Add Instances tooltip"
+                }
+            ],
 
     		"onError": function(module, statusText, response, xhr){
 			    var caption = "";

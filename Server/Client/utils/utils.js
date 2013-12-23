@@ -8,6 +8,7 @@ function preprocessMOOResult(result, host)
 	{
         host.storage.evolutionController.existingData = null; // free the existing data
         host.storage.instanceFilter.permaHidden = {}; // reset the hidden instances
+        host.storage.selector.clearSelection(); // reset the selection
 
     	if (!result.optimizer_instances)
 		{

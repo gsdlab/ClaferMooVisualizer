@@ -1,10 +1,10 @@
 {
     "scripts": [
-        "utils.js",
+        "utils/utils.js",
         "https://www.google.com/jsapi",
-        "selection_controller.js",
-        "evolution_controller.js",
-        "instance_filter.js",        
+        "utils/selection_controller.js",
+        "utils/evolution_controller.js",
+        "utils/instance_filter.js",        
         "utils/pf_visualizer.js",
         "modules/md_graph.js",
         "modules/md_variant_comparer.js",
