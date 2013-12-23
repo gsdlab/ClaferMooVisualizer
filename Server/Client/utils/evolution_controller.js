@@ -57,7 +57,7 @@ EvolutionController.method("assignProperShapesToGraph", function(){
             $(originalCirclePairs[IdenticalId].circle).hide();
             $(originalCirclePairs[IdenticalId].text_data).hide();
 
-            host.storage.instanceFilter.permaHidden[getPID((IdenticalId+1))] = true;                   
+            this.host.storage.instanceFilter.permaHidden[getPID((IdenticalId+1))] = true;                   
         } else {
             var shape = this.getSVGSquare(xpos, ypos, r)
             shape.setAttributeNS(null, "id", getPID($(circlePair.circle).attr("id").replace(/[A-Za-z]/g, "")) + "r");

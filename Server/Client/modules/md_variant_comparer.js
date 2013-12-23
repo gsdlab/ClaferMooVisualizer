@@ -98,6 +98,7 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
     // get the products that are missing to make up the complete set.
     var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), newlist);
 
+    var i = 0;
     if (missingProducts)
     {
         while (i < missingProducts.length)

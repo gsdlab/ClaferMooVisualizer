@@ -144,7 +144,7 @@ InstanceFilter.method("unFilter", function(){
     while(this.hidden.length){
         $(this.hidden.pop()).show();
     }
-//    for (i = this.originalPoints; i<circle_pairs.length;i++){
-//    	$(circle_pairs[i].circle).hide();
-//    }
+    for (i = this.host.storage.evolutionController.existingInstancesCount; i<circle_pairs.length;i++){
+    	$(circle_pairs[i].circle).hide();
+    }
 });
