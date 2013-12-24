@@ -48,22 +48,25 @@ function getConfiguration()
 
     		"onError": function(module, statusText, response, xhr){
 			    var caption = "";
+                console.log(statusText);
+                console.log(response);
+
 			    if (statusText == "compile_error")
 			        caption = "<b>Compile Error.</b><br>Please check whether Clafer Compiler is available, and the model is correct.";
 			    else if (statusText == "timeout")
 			        caption = "<b>Request Timeout.</b><br>Please check whether the server is available.";
-			//    else if (statusText == "malformed_output")
-			//        caption = "<b>Malformed output received from ClaferMoo.</b><br>Please check whether you are using the correct version of ClaferMoo. Also, an unhandled exception is possible.  Please verify your input file: check syntax and integer ranges.";        
-			//    else if (statusText == "malformed_instance")
-			//        caption = "<b>Malformed instance data received from ClaferMoo.</b><br>An unhandled exception may have occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.";        
-			//    else if (statusText == "empty_instances")
-			//        caption = "<b>No instances returned.</b>Possible reasons:<br><ul><li>No optimal instances, all variants are non-optimal.</li><li>An unhandled exception occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.</li></ul>.";        
-			//    else if (statusText == "empty_argument")
-			//        caption = "<b>Empty argument given to processToolResult.</b><br>Please report this error.";        
-			//    else if (statusText == "empty_instance_file")
-			//        caption = "<b>No instances found in the specified file.";        
-			//    else if (statusText == "optimize_first")
-			//        caption = "<b>You have to run optimization first, and only then add instances.";        
+			    else if (statusText == "malformed_output")
+			        caption = "<b>Malformed output received from ClaferMoo.</b><br>Please check whether you are using the correct version of ClaferMoo. Also, an unhandled exception is possible.  Please verify your input file: check syntax and integer ranges.";        
+			    else if (statusText == "malformed_instance")
+			        caption = "<b>Malformed instance data received from ClaferMoo.</b><br>An unhandled exception may have occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.";        
+			    else if (statusText == "empty_instances")
+			        caption = "<b>No instances returned.</b>Possible reasons:<br><ul><li>No optimal instances, all variants are non-optimal.</li><li>An unhandled exception occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.</li></ul>.";        
+			    else if (statusText == "empty_argument")
+			        caption = "<b>Empty argument given to processToolResult.</b><br>Please report this error.";        
+			    else if (statusText == "empty_instance_file")
+			        caption = "<b>No instances found in the specified file.";        
+			    else if (statusText == "optimize_first")
+			        caption = "<b>You have to run optimization first, and only then add instances.";        
 			    else if (statusText == "error" && response.responseText == "")
 			        caption = "<b>Request Error.</b><br>Please check whether the server is available.";        
 			    else
@@ -111,6 +114,8 @@ function getConfiguration()
                 }
 
 		        var data = preprocessMOOResult(responseObject, module.host);
+                if (!data)
+                    return false;
 
 		        var goalsModule = module.host.findModule("mdGoals");
 		        var graphModule = module.host.findModule("mdGraph");

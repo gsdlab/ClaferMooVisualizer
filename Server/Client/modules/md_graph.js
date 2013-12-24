@@ -38,6 +38,9 @@ function Graph(host, settings)
 
     this.PFVisualizer = new ParetoFrontVisualizer("chart", this);
 
+    this.instanceCounterArg = "?special_counter?"; 
+    this.instanceCounterLabel = "#instance";
+
     this.host.loaded();
 }
 
@@ -62,7 +65,7 @@ Graph.method("onRendered", function()
     {
 		$("#chart").show();
 		this.assignToAxis("dropPointX", this.goals[0].arg, this.goals[0].label);
-		this.assignToAxis("dropPointY", this.host.instanceCounterArg, this.host.instanceCounterLabel);
+		this.assignToAxis("dropPointY", this.instanceCounterArg, this.instanceCounterLabel);
         this.assignToAxis("dropPointZ", "", "");
         this.assignToAxis("dropPointT", "", "");
         this.redrawParetoFront();    
@@ -152,7 +155,7 @@ Graph.method("drop", function(ev)
             anotherTarget = "dropPointX";
         }        
         
-        this.completeDrop($("#" + anotherTarget)[0], this.host.instanceCounterArg, this.host.instanceCounterLabel);
+        this.completeDrop($("#" + anotherTarget)[0], this.instanceCounterArg, this.instanceCounterLabel);
     }
     else
         this.completeDrop(ev.target, arg, label); 
@@ -225,7 +228,7 @@ Graph.method("redrawParetoFront", function()
         labels.push(label4);
     }
     
-    this.PFVisualizer.draw(this.Processor, this.instanceProcessor, args, labels, this.host.instanceCounterArg);
+    this.PFVisualizer.draw(this.Processor, this.instanceProcessor, args, labels, this.instanceCounterArg);
     this.addIds();
     this.settings.onDrawComplete(this);
 
