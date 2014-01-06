@@ -1,9 +1,11 @@
 {
-  "name": "ClaferMooViz",
-  "description": "A web-based GUI for visualization and exploration of a set of non-dominated optimal variants.",
-  "version": "0.3.3",
+  "name": "ClaferMooVisualizer",
+  "description": "A web-based GUI for visualization and optimization of optimal variants",
+  "version": "0.3.5",
   "private": true,
   "dependencies": {
-    "express": "3.0.4"
+    "express": "3.0.4",
+    "redis": ">=0.0.1",
+    "express-rate": "0.0.1"
   }
 }
