@@ -633,6 +633,19 @@ core.logNormal('===============================');
 
 core.addDependency("clafer", ["-V"], "Clafer Compiler");
 core.addDependency("java", ["-version"], "Java");
+
+var dirReplacementMap = [
+        {
+            "needle": "$dirname$", 
+            "replacement": __dirname + "/Backends"
+        }
+    ];
+
+for (var i = 0; i < backendConfig.backends.length; i++)
+{
+    core.addDependency(backendConfig.backends[i].tool, core.replaceTemplateList(backendConfig.backends[i].tool_version_args, dirReplacementMap), backendConfig.backends[i].label);
+}
+
 core.runWithDependencyCheck(function(){
     server.listen(port);
     core.logNormal('======================================');
