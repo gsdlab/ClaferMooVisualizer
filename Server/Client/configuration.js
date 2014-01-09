@@ -224,6 +224,7 @@ function getConfiguration()
     		},
 
     		"buttonsForRemoval": false,
+            "instancesSelectable": true,
 
     		"onSelected": function(module, pid)
     		{
