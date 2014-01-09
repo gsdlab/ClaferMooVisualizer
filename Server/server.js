@@ -614,6 +614,17 @@ server.post('/poll', pollingMiddleware, function(req, res, next)
     
 });
 
+server.get('/initdata', commandMiddleware, function(req, res)
+{
+    core.logSpecific("Initialization data request", req.body.windowKey);
+
+    res.writeHead(200, { "Content-Type": "application/json"});
+
+    var jsonObj = new Object();
+    jsonObj.versions = core.getDependencyVersionsText();
+    res.end(JSON.stringify(jsonObj));
+});
+
 /*
  * Catch all the rest. Error reporting for unknown routes
  */
