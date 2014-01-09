@@ -622,6 +622,8 @@ server.get('/initdata', commandMiddleware, function(req, res)
 
     var jsonObj = new Object();
     jsonObj.versions = core.getDependencyVersionsText();
+    jsonObj.version = core.getVersion();
+    jsonObj.title = core.getTitle();
     res.end(JSON.stringify(jsonObj));
 });
 
