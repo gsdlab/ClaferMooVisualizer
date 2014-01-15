@@ -393,7 +393,7 @@ server.post('/upload', commandMiddleware, function(req, res, next)
                 ss = "--ss=full";
             }
 
-            var specifiedArgs = core.filterArgs(req.body.args);
+            var specifiedArgs = [];
             var genericArgs = [ss, uploadedFilePath + ".cfr"];
 
             if (loadExampleInEditor)
