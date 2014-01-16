@@ -1,4 +1,4 @@
-// Example of a Mobile Phone with a single quality attribute (cost) and a single optimization objective
+// Example of a Mobile Phone with a single quality attribute (cost) and a single optimization objective (minimize)
 
 abstract Feature 
     cost -> integer  //# QUALITY_ATTRIBUTE
@@ -31,8 +31,8 @@ abstract MobilePhone
         browser ?
             [ extra_cpu ]
         mediaplayer ?
-    totalCost : integer = sum Feature.cost
+    total_cost -> integer = sum Feature.cost
 
 aPhone : MobilePhone
 
-<< min aPhone.totalCost >>
+<< min aPhone.total_cost >>
