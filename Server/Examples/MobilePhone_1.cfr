@@ -1,15 +1,15 @@
 // Example of a Mobile Phone with a single quality attribute (cost) and a single optimization objective (minimize)
 
 abstract Feature 
-    cost -> integer  //# QUALITY_ATTRIBUTE
-    [ cost >= 0 ]
+    cost -> integer //# QUALITY_ATTRIBUTE
+        [ this >= 0 ]
 
 abstract MobilePhone
-    hardware
+    hardware : Feature
         [ cost = 0 ]
-        screen
+        screen : Feature
             [ cost = 0 ]
-            xor material
+            xor material : Feature
                 [ cost = 0 ]
                 oled : Feature
                     [ cost = 10 ]
@@ -17,29 +17,60 @@ abstract MobilePhone
                     [ cost = 14 ]
                 lcd : Feature
                     [ cost = 8 ]
-        keyboard  : Feature ?
-            [ cost = 5 ]
+        keyboard : Feature ?
+            [ cost = 8 ]
+            [ no amoled ]
             keyboardLight : Feature ? 
                 [ cost = 2 ]
         cpu : Feature
             [ cost = 12 ]
         extra_cpu : Feature ?
             [ cost = 10 ]
-        or location ?
+        WiFi : Feature ?
+            [ cost = 12 ]
+        or location : Feature ?
             [ cost = 0 ]
             gps : Feature
                 [ cost = 6 ]
-            wifitriangulation : Feature
-                [ cost = 1 ]
-    software
+            WiFiTriangulation : Feature
+                [ cost = 2 ]
+                [ WiFi ]
+    software : Feature
         [ cost = 0 ]
-        browser ?
+        browser : Feature ?
+            [ cost = 0 ]
+            [ WiFi ]
+        mediaplayer : Feature ?
             [ cost = 0 ]
             [ extra_cpu ]
-        mediaplayer ?
-            [ cost = 0 ]
-    total_cost -> integer = sum Feature.cost
+        map : Feature ?
+            [ cost = 6 ]
+            [ gps ]
+    total_cost ->> integer = sum Feature.cost
 
 aPhone : MobilePhone
+    [ amoled || keyboard ]
+    [ browser || map || mediaplayer ]
 
 << min aPhone.total_cost >>
+
+/* 
+TouchPhone : MobilePhone  // cost=38 (cpu), cost=48 (extra_cpu)
+    [ amoled ]
+    [ no WiFi ]
+    [ map ]
+
+
+
+FancyKeyboardPhone : MobilePhone // cost = 66
+    [ oled ]
+    [ keyboardLight ]
+    [ browser ]
+    [ map ]
+    [ mediaplayer ]
+
+
+*/
+
+// need this so that IG can infer the right bitwidth
+maxInt -> integer = 127

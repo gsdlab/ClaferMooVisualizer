@@ -4,7 +4,7 @@ abstract Component
 abstract ComponentWithEnergy : Component
     energy -> integer
 
-abstract androidPhone
+abstract MobilePhone
     hardware : Component
         [ performance = 0 ]
         screen : Component
@@ -51,7 +51,7 @@ abstract androidPhone
     total_performance -> integer = sum Component.performance
     total_energy -> integer = sum ComponentWithEnergy.energy
 
-aPhone : androidPhone
+aPhone : MobilePhone
 
 
 << min aPhone.total_energy >>
