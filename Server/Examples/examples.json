@@ -1,14 +1,12 @@
 {
     "examples": [
         {"url": "", "label": "Or Choose Example..."}, 
+        {"url": "MobilePhone_1.cfr", "label": "Mobile Phone Example (1 objective)"},
         {"url": "MobilePhone_2.cfr", "label": "Mobile Phone Example (2 objectives)"}, 
         {"url": "MobilePhone_3.cfr", "label": "Mobile Phone Example (3 objectives)"},    
         {"url": "MobilePhone_4.cfr", "label": "Mobile Phone Example (4 objectives)"},    
         {"url": "MobilePhone_5.cfr", "label": "Mobile Phone Example (5 objectives)"},    
 
-        {"url": "Car4D.cfr", "label": "Cruise Control Example (4 objectives)"},
-
-        {"url": "Phone(minimize-cost).cfr", "label": "A mobile phone with a quality attribute example (1 objective)"}
+        {"url": "Car4D.cfr", "label": "Cruise Control Example (4 objectives)"}
     ]
-        
 }

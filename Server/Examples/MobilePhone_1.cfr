@@ -6,8 +6,11 @@ abstract Feature
 
 abstract MobilePhone
     hardware
+        [ cost = 0 ]
         screen
+            [ cost = 0 ]
             xor material
+                [ cost = 0 ]
                 oled : Feature
                     [ cost = 10 ]
                 amoled : Feature
@@ -23,14 +26,18 @@ abstract MobilePhone
         extra_cpu : Feature ?
             [ cost = 10 ]
         or location ?
+            [ cost = 0 ]
             gps : Feature
                 [ cost = 6 ]
             wifitriangulation : Feature
                 [ cost = 1 ]
     software
+        [ cost = 0 ]
         browser ?
+            [ cost = 0 ]
             [ extra_cpu ]
         mediaplayer ?
+            [ cost = 0 ]
     total_cost -> integer = sum Feature.cost
 
 aPhone : MobilePhone
