@@ -72,7 +72,7 @@ function getConfiguration()
 			    else
 			        caption = '<b>' + xhr + '</b><br>' + response.responseText.replace("\n", "<br>");
 
-		        module.host.print("ClaferIDE> Error occured\n");
+		        module.host.print("ClaferMooVisualizer> Error occured\n");
 
 			    return caption;
 
@@ -82,13 +82,13 @@ function getConfiguration()
     		},
 
     		"onFileSent": function(module){
-		        module.host.print("ClaferIDE> Processing the submitted model. Compiling...\n");
+		        module.host.print("ClaferMooVisualizer> Processing the submitted model. Compiling...\n");
     		},
 
     		"onPoll" : function(module, responseObject){
 		        if (responseObject.args)
 		        {
-		            module.host.print("ClaferIDE> clafer " + responseObject.args + "\n");
+		            module.host.print("ClaferMooVisualizer> clafer " + responseObject.args + "\n");
 		        }
 //		        if (responseObject.compiled_formats)
 //		        {
