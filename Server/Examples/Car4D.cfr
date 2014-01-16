@@ -1,12 +1,12 @@
 abstract Feature
-    cost: integer
-    mass: integer
+    cost -> integer
+    mass -> integer
 
 abstract ComfortFeature : Feature
-    comfort: integer
+    comfort -> integer
 
 abstract FuelFeature : ComfortFeature
-    fuel: integer
+    fuel -> integer
     
 abstract Car
     ABS : ComfortFeature ?
@@ -63,10 +63,10 @@ abstract Car
             [cost = 3]
     [ ACC => FCA]
     
-    total_cost : integer = sum Feature.cost
-    total_comfort : integer = sum ComfortFeature.cost
-    total_fuel : integer = sum FuelFeature.cost
-    total_mass : integer = sum FuelFeature.mass
+    total_cost -> integer = sum Feature.cost
+    total_comfort -> integer = sum ComfortFeature.cost
+    total_fuel -> integer = sum FuelFeature.cost
+    total_mass -> integer = sum FuelFeature.mass
     
 aCar : Car
 
