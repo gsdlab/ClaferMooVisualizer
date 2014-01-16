@@ -35,14 +35,14 @@ var core = require("./commons/core_lib");
 var crypto = require('crypto'); // for getting hashes
 
 /*  Rate Limiter */
-var rate            = require('express-rate/lib/rate'),
-  redis     = require('redis'),
-  client      = redis.createClient();
+//var rate            = require('express-rate/lib/rate'),
+//  redis     = require('redis'),
+//  client      = redis.createClient();
 
-var redisHandler = new rate.Redis.RedisRateHandler({client: client});
-var commandMiddleware = rate.middleware({handler: redisHandler, interval: config.commandLimitingRate.interval, limit: config.commandLimitingRate.limit}); // limiting command sending
-var pollingMiddleware = rate.middleware({handler: redisHandler, interval: config.pollingLimitingRate.interval, limit: config.pollingLimitingRate.limit}); // limiting polling
-var fileMiddleware = rate.middleware({handler: redisHandler, interval: config.fileRequestLimitingRate.interval, limit: config.fileRequestLimitingRate.limit}); // limiting requesting files
+//var redisHandler = new rate.Redis.RedisRateHandler({client: client});
+//var commandMiddleware = rate.middleware({handler: redisHandler, interval: config.commandLimitingRate.interval, limit: config.commandLimitingRate.limit}); // limiting command sending
+//var pollingMiddleware = rate.middleware({handler: redisHandler, interval: config.pollingLimitingRate.interval, limit: config.pollingLimitingRate.limit}); // limiting polling
+//var fileMiddleware = rate.middleware({handler: redisHandler, interval: config.fileRequestLimitingRate.interval, limit: config.fileRequestLimitingRate.limit}); // limiting requesting files
 
 /* ----- */
 
@@ -60,7 +60,7 @@ server.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/u
 // Standard GET request
 //-------------------------------------------------
 // Response: File contents
-server.get('/', fileMiddleware, function(req, res) {
+server.get('/', /*fileMiddleware, */function(req, res) {
     res.writeHead(200, { "Content-Type": "text/html"});    
     res.end(lib.getMainHTML());
 
@@ -78,24 +78,24 @@ server.get('/', fileMiddleware, function(req, res) {
 // File requests
 //-------------------------------------------------
 
-server.get('/Examples/:file', fileMiddleware, function(req, res) {
+server.get('/Examples/:file', /*fileMiddleware,*/ function(req, res) {
     res.sendfile('Examples/' + req.params.file);
 });
 
-server.get('/Backends/:file', fileMiddleware, function(req, res) {
+server.get('/Backends/:file', /*fileMiddleware,*/ function(req, res) {
     res.sendfile('Backends/' + req.params.file);
 });
 
-server.get('/Formats/:file', fileMiddleware, function(req, res) {
+server.get('/Formats/:file', /*fileMiddleware,*/ function(req, res) {
     res.sendfile('Formats/' + req.params.file);
 });
 
-server.get('/htmlwrapper', fileMiddleware, function(req, res) {
+server.get('/htmlwrapper', /*fileMiddleware,*/ function(req, res) {
     res.sendfile("commons/Client/compiler_html_wrapper.html");
 });
 
 //------------------- save format request --------------------------
-server.get('/saveformat', fileMiddleware, function(req, res) {
+server.get('/saveformat', /*fileMiddleware,*/ function(req, res) {
     
     if (!req.query.windowKey)
         return;
@@ -141,7 +141,7 @@ server.get('/saveformat', fileMiddleware, function(req, res) {
 });
 
 //------------------- save instances request --------------------------
-server.post('/saveinstances', commandMiddleware, function(req, res, next) {
+server.post('/saveinstances', /*commandMiddleware,*/ function(req, res, next) {
     var process = core.getProcess(req.body.windowKey);
     if (process != null)
     {
@@ -309,7 +309,7 @@ function runOptimization(process)
     });
 }
 
-server.post('/upload', commandMiddleware, function(req, res, next) 
+server.post('/upload', /*commandMiddleware,*/ function(req, res, next) 
 {
     lib.handleUploads(req, res, next, fileReady);
 
@@ -426,7 +426,7 @@ server.post('/upload', commandMiddleware, function(req, res, next)
  * An alternative way might be to create a web socket
  */
 
-server.post('/poll', pollingMiddleware, function(req, res, next)
+server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
 {
     var process = core.getProcess(req.body.windowKey);
     if (process == null)
@@ -614,7 +614,7 @@ server.post('/poll', pollingMiddleware, function(req, res, next)
     
 });
 
-server.get('/initdata', commandMiddleware, function(req, res)
+server.get('/initdata', /*commandMiddleware, */function(req, res)
 {
     core.logSpecific("Initialization data request", req.body.windowKey);
 
