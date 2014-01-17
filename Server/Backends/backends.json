@@ -15,8 +15,8 @@
             "tooltip": "A new Choco solver, for single objective optimization only",
             "accepted_format": "choco",               
             "tool": "java",
-            "tool_args": ["-jar", "$dirname$/claferchocosoo-0.3.5-jar-with-dependencies.jar", "$filepath$"],
-            "tool_version_args": ["-jar", "$dirname$/claferchocosoo-0.3.5-jar-with-dependencies.jar", "--version"]            
+            "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.5-jar-with-dependencies.jar", "$filepath$"],
+            "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.5-jar-with-dependencies.jar", "--version"]            
         }
     ]   
 }
