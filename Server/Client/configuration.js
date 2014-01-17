@@ -225,6 +225,7 @@ function getConfiguration()
 
     		"buttonsForRemoval": false,
             "instancesSelectable": true,
+            "useInstanceName": false,
 
     		"onSelected": function(module, pid)
     		{
