@@ -13,7 +13,7 @@
             "id": "choco_single", 
             "label": "Choco (single objective only)",
             "tooltip": "A new Choco solver, for single objective optimization only",
-            "accepted_format": "clafer_source",               
+            "accepted_format": "choco",               
             "tool": "java",
             "tool_args": ["-jar", "$dirname$/claferchocosoo-0.3.5-jar-with-dependencies.jar", "$filepath$"],
             "tool_version_args": ["-jar", "$dirname$/claferchocosoo-0.3.5-jar-with-dependencies.jar", "--version"]            
