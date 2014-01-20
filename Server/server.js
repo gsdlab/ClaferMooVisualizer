@@ -259,9 +259,26 @@ function runOptimization(process)
 
     var args = core.replaceTemplateList(backend.tool_args, fileAndPathReplacement);
 
-    core.logSpecific(args, key);
+    if (backend.scope_options && backend.scope_options.set_int_scope && backend.scope_options.set_int_scope.argument) 
+    {
+        var replacement = [
+            {
+                "needle": "$value$", 
+                "replacement": req.body.optimizationIntHighScopeValue
+            }
+        ];
 
-    process.tool = spawn(core.replaceTemplate(backend.tool, fileAndPathReplacement), args, { cwd: process.folder });
+        var intArg = core.replaceTemplate(backend.scope_options.set_int_scope.argument, replacement);
+
+        args.push(intArg);
+    }
+
+    var toolPath = core.replaceTemplate(backend.tool, fileAndPathReplacement);
+
+    core.logSpecific(args, key);
+    process.ig_args = toolPath.replace(ROOT, "") + " " + args.join(" ").replace(process.file, "file").replace(ROOT, "");
+
+    process.tool = spawn(toolPath, args, { cwd: process.folder });
 
     process.tool.on('error', function (err){
         core.logSpecific('ERROR: Cannot run the chosen backend. Please check whether it is installed and accessible.', req.body.windowKey);
@@ -561,6 +578,9 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
 
                     jsonObj.message = jsonObj.optimizer_message;
 
+                    jsonObj.ig_args = process.ig_args;
+                    process.ig_args = "";  
+
                     res.end(JSON.stringify(jsonObj));
 
                     // if mode is completed, then the tool is not busy anymore, so now it's time to 
@@ -582,6 +602,10 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
             jsonObj.message = "Working";
             jsonObj.args = process.compiler_args;
             process.compiler_args = "";
+
+            jsonObj.ig_args = process.ig_args;
+            process.ig_args = "";  
+
             res.end(JSON.stringify(jsonObj));
 
             console.log(jsonObj.message);
