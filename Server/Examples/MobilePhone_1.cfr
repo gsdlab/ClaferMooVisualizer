@@ -1,7 +1,7 @@
 // Example of a Mobile Phone with a single quality attribute (cost) and a single optimization objective (minimize)
 
 abstract Feature 
-    cost -> integer //# QUALITY_ATTRIBUTE
+    cost ->> integer //# QUALITY_ATTRIBUTE
         [ this >= 0 ]
 
 abstract MobilePhone
@@ -12,28 +12,28 @@ abstract MobilePhone
             xor material : Feature
                 [ cost = 0 ]
                 oled : Feature
-                    [ cost = 10 ]
+                    [ cost = 4 ]
                 amoled : Feature
-                    [ cost = 14 ]
+                    [ cost = 6 ]
                 lcd : Feature
-                    [ cost = 8 ]
+                    [ cost = 3 ]
         keyboard : Feature ?
-            [ cost = 8 ]
+            [ cost = 3 ]
             [ no amoled ]
             keyboardLight : Feature ? 
-                [ cost = 2 ]
+                [ cost = 1 ]
         cpu : Feature
-            [ cost = 12 ]
+            [ cost = 5 ]
         extra_cpu : Feature ?
-            [ cost = 10 ]
+            [ cost = 4 ]
         WiFi : Feature ?
-            [ cost = 12 ]
+            [ cost = 5 ]
         or location : Feature ?
             [ cost = 0 ]
             gps : Feature
-                [ cost = 6 ]
-            WiFiTriangulation : Feature
                 [ cost = 2 ]
+            WiFiTriangulation : Feature
+                [ cost = 1 ]
                 [ WiFi ]
     software : Feature
         [ cost = 0 ]
@@ -44,7 +44,7 @@ abstract MobilePhone
             [ cost = 0 ]
             [ extra_cpu ]
         map : Feature ?
-            [ cost = 6 ]
+            [ cost = 2 ]
             [ gps ]
     total_cost ->> integer = sum Feature.cost
 
@@ -53,24 +53,3 @@ aPhone : MobilePhone
     [ browser || map || mediaplayer ]
 
 << min aPhone.total_cost >>
-
-/* 
-TouchPhone : MobilePhone  // cost=38 (cpu), cost=48 (extra_cpu)
-    [ amoled ]
-    [ no WiFi ]
-    [ map ]
-
-
-
-FancyKeyboardPhone : MobilePhone // cost = 66
-    [ oled ]
-    [ keyboardLight ]
-    [ browser ]
-    [ map ]
-    [ mediaplayer ]
-
-
-*/
-
-// need this so that IG can infer the right bitwidth
-maxInt -> integer = 127
