@@ -7,7 +7,10 @@
             "accepted_format": "clafer_source",                           
             "tool": "python", 
             "tool_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "$filepath$", "--preservenames", "--donotexecutecompiler"],
-            "tool_version_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "--version"]
+            "tool_version_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "--version"],
+            "scope_options": {
+                "set_int_scope" : {"argument": "--maxint=$value$", "default_value": 31}                 
+            }
         }, 
         {
             "id": "choco_single", 
@@ -16,7 +19,9 @@
             "accepted_format": "choco",               
             "tool": "java",
             "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.5-jar-with-dependencies.jar", "$filepath$"],
-            "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.5-jar-with-dependencies.jar", "--version"]            
+            "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.5-jar-with-dependencies.jar", "--version"],
+            "scope_options": {
+            }                        
         }
     ]   
 }
