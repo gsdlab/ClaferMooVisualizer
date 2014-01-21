@@ -264,7 +264,7 @@ function runOptimization(process)
         var replacement = [
             {
                 "needle": "$value$", 
-                "replacement": req.body.optimizationIntHighScopeValue
+                "replacement": process.intScopeValue
             }
         ];
 
@@ -276,7 +276,7 @@ function runOptimization(process)
     var toolPath = core.replaceTemplate(backend.tool, fileAndPathReplacement);
 
     core.logSpecific(args, key);
-    process.ig_args = toolPath.replace(ROOT, "") + " " + args.join(" ").replace(process.file, "file").replace(ROOT, "");
+    process.ig_args = toolPath.replace(__dirname, "") + " " + args.join(" ").replace(process.file, "file").replace(__dirname, "");
 
     process.tool = spawn(toolPath, args, { cwd: process.folder });
 
@@ -409,6 +409,8 @@ server.post('/upload', /*commandMiddleware,*/ function(req, res, next)
             {
                 ss = "--ss=full";
             }
+
+            process.intScopeValue = req.body.optimizationIntHighScopeValue;
 
             var specifiedArgs = [];
             var genericArgs = [ss, uploadedFilePath + ".cfr"];
