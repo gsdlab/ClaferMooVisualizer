@@ -1,0 +1,55 @@
+// Example of a Mobile Phone with a single quality attribute (cost) and a single optimization objective (minimize)
+
+abstract Feature 
+    cost ->> integer //# QUALITY_ATTRIBUTE
+        [ this >= 0 ]
+
+abstract MobilePhone
+    hardware : Feature
+        [ cost = 0 ]
+        screen : Feature
+            [ cost = 0 ]
+            xor material : Feature
+                [ cost = 0 ]
+                oled : Feature
+                    [ cost = 4 ]
+                amoled : Feature
+                    [ cost = 6 ]
+                lcd : Feature
+                    [ cost = 3 ]
+        keyboard : Feature ?
+            [ cost = 3 ]
+            [ no amoled ]
+            keyboardLight : Feature ? 
+                [ cost = 1 ]
+        cpu : Feature
+            [ cost = 5 ]
+        extra_cpu : Feature ?
+            [ cost = 4 ]
+        WiFi : Feature ?
+            [ cost = 5 ]
+        or location : Feature ?
+            [ cost = 0 ]
+            gps : Feature
+                [ cost = 2 ]
+            WiFiTriangulation : Feature
+                [ cost = 1 ]
+                [ WiFi ]
+    software : Feature
+        [ cost = 0 ]
+        browser : Feature ?
+            [ cost = 0 ]
+            [ WiFi ]
+        mediaplayer : Feature ?
+            [ cost = 0 ]
+            [ extra_cpu ]
+        map : Feature ?
+            [ cost = 2 ]
+            [ gps ]
+    total_cost ->> integer = sum Feature.cost
+
+aPhone : MobilePhone
+    [ amoled || keyboard ]
+    [ browser || map || mediaplayer ]
+
+<< min aPhone.total_cost >>

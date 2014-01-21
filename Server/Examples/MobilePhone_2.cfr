@@ -1,0 +1,58 @@
+abstract Component
+    performance -> integer
+
+abstract ComponentWithEnergy : Component
+    energy -> integer
+
+abstract MobilePhone
+    hardware : Component
+        [ performance = 0 ]
+        screen : Component
+            [ performance = 0 ]
+            xor material : Component
+                [ performance = 0 ]
+                oled : ComponentWithEnergy
+                    [ energy = 3]
+                    [ performance = -3 ]
+                amoled : ComponentWithEnergy
+                    [ energy = 2 ]
+                    [ performance = -5 ] 
+                lcd : ComponentWithEnergy
+                    [ energy = 4 ]
+                    [ performance = -2 ]
+        keyboard : ComponentWithEnergy ?
+            [ energy = 1 ]
+            [ performance = 3 ]
+        keyboardLight : ComponentWithEnergy ?
+            [ energy = 2 ]
+            [ performance = -1 ]
+            [ keyboard ]
+        cpu : ComponentWithEnergy
+            [ energy = 10 ]
+            [ performance = 15 ]
+        extra_cpu : ComponentWithEnergy ?
+            [ energy = 2 ]
+            [ performance = 20 ]
+    or location : Component ?
+        [ performance = 0 ]
+        gps : ComponentWithEnergy
+            [ energy = 5 ]
+            [ performance = -1 ]
+        wifitriangulation : ComponentWithEnergy
+            [ energy = 10 ]
+            [ performance = -2 ]
+    software : Component
+        [ performance = 0 ]
+        browser : Component ?
+            [ performance = -1 ]
+            [ extra_cpu ]
+        mediaplayer : Component ?
+            [ performance = -2 ]
+    total_performance -> integer = sum Component.performance
+    total_energy -> integer = sum ComponentWithEnergy.energy
+
+aPhone : MobilePhone
+
+
+<< min aPhone.total_energy >>
+<< max aPhone.total_performance >>

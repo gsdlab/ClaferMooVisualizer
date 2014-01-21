@@ -35,14 +35,14 @@ var core = require("./commons/core_lib");
 var crypto = require('crypto'); // for getting hashes
 
 /*  Rate Limiter */
-var rate            = require('express-rate/lib/rate'),
-  redis     = require('redis'),
-  client      = redis.createClient();
+//var rate            = require('express-rate/lib/rate'),
+//  redis     = require('redis'),
+//  client      = redis.createClient();
 
-var redisHandler = new rate.Redis.RedisRateHandler({client: client});
-var commandMiddleware = rate.middleware({handler: redisHandler, interval: config.commandLimitingRate.interval, limit: config.commandLimitingRate.limit}); // limiting command sending
-var pollingMiddleware = rate.middleware({handler: redisHandler, interval: config.pollingLimitingRate.interval, limit: config.pollingLimitingRate.limit}); // limiting polling
-var fileMiddleware = rate.middleware({handler: redisHandler, interval: config.fileRequestLimitingRate.interval, limit: config.fileRequestLimitingRate.limit}); // limiting requesting files
+//var redisHandler = new rate.Redis.RedisRateHandler({client: client});
+//var commandMiddleware = rate.middleware({handler: redisHandler, interval: config.commandLimitingRate.interval, limit: config.commandLimitingRate.limit}); // limiting command sending
+//var pollingMiddleware = rate.middleware({handler: redisHandler, interval: config.pollingLimitingRate.interval, limit: config.pollingLimitingRate.limit}); // limiting polling
+//var fileMiddleware = rate.middleware({handler: redisHandler, interval: config.fileRequestLimitingRate.interval, limit: config.fileRequestLimitingRate.limit}); // limiting requesting files
 
 /* ----- */
 
@@ -60,7 +60,7 @@ server.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/u
 // Standard GET request
 //-------------------------------------------------
 // Response: File contents
-server.get('/', fileMiddleware, function(req, res) {
+server.get('/', /*fileMiddleware, */function(req, res) {
     res.writeHead(200, { "Content-Type": "text/html"});    
     res.end(lib.getMainHTML());
 
@@ -78,24 +78,24 @@ server.get('/', fileMiddleware, function(req, res) {
 // File requests
 //-------------------------------------------------
 
-server.get('/Examples/:file', fileMiddleware, function(req, res) {
+server.get('/Examples/:file', /*fileMiddleware,*/ function(req, res) {
     res.sendfile('Examples/' + req.params.file);
 });
 
-server.get('/Backends/:file', fileMiddleware, function(req, res) {
+server.get('/Backends/:file', /*fileMiddleware,*/ function(req, res) {
     res.sendfile('Backends/' + req.params.file);
 });
 
-server.get('/Formats/:file', fileMiddleware, function(req, res) {
+server.get('/Formats/:file', /*fileMiddleware,*/ function(req, res) {
     res.sendfile('Formats/' + req.params.file);
 });
 
-server.get('/htmlwrapper', fileMiddleware, function(req, res) {
+server.get('/htmlwrapper', /*fileMiddleware,*/ function(req, res) {
     res.sendfile("commons/Client/compiler_html_wrapper.html");
 });
 
 //------------------- save format request --------------------------
-server.get('/saveformat', fileMiddleware, function(req, res) {
+server.get('/saveformat', /*fileMiddleware,*/ function(req, res) {
     
     if (!req.query.windowKey)
         return;
@@ -141,7 +141,7 @@ server.get('/saveformat', fileMiddleware, function(req, res) {
 });
 
 //------------------- save instances request --------------------------
-server.post('/saveinstances', commandMiddleware, function(req, res, next) {
+server.post('/saveinstances', /*commandMiddleware,*/ function(req, res, next) {
     var process = core.getProcess(req.body.windowKey);
     if (process != null)
     {
@@ -259,9 +259,26 @@ function runOptimization(process)
 
     var args = core.replaceTemplateList(backend.tool_args, fileAndPathReplacement);
 
-    core.logSpecific(args, key);
+    if (backend.scope_options && backend.scope_options.set_int_scope && backend.scope_options.set_int_scope.argument) 
+    {
+        var replacement = [
+            {
+                "needle": "$value$", 
+                "replacement": process.intScopeValue
+            }
+        ];
 
-    process.tool = spawn(core.replaceTemplate(backend.tool, fileAndPathReplacement), args, { cwd: process.folder });
+        var intArg = core.replaceTemplate(backend.scope_options.set_int_scope.argument, replacement);
+
+        args.push(intArg);
+    }
+
+    var toolPath = core.replaceTemplate(backend.tool, fileAndPathReplacement);
+
+    core.logSpecific(args, key);
+    process.ig_args = toolPath.replace(__dirname, "") + " " + args.join(" ").replace(process.file, "file").replace(__dirname, "");
+
+    process.tool = spawn(toolPath, args, { cwd: process.folder });
 
     process.tool.on('error', function (err){
         core.logSpecific('ERROR: Cannot run the chosen backend. Please check whether it is installed and accessible.', req.body.windowKey);
@@ -309,7 +326,7 @@ function runOptimization(process)
     });
 }
 
-server.post('/upload', commandMiddleware, function(req, res, next) 
+server.post('/upload', /*commandMiddleware,*/ function(req, res, next) 
 {
     lib.handleUploads(req, res, next, fileReady);
 
@@ -393,7 +410,9 @@ server.post('/upload', commandMiddleware, function(req, res, next)
                 ss = "--ss=full";
             }
 
-            var specifiedArgs = core.filterArgs(req.body.args);
+            process.intScopeValue = req.body.optimizationIntHighScopeValue;
+
+            var specifiedArgs = [];
             var genericArgs = [ss, uploadedFilePath + ".cfr"];
 
             if (loadExampleInEditor)
@@ -426,7 +445,7 @@ server.post('/upload', commandMiddleware, function(req, res, next)
  * An alternative way might be to create a web socket
  */
 
-server.post('/poll', pollingMiddleware, function(req, res, next)
+server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
 {
     var process = core.getProcess(req.body.windowKey);
     if (process == null)
@@ -561,6 +580,9 @@ server.post('/poll', pollingMiddleware, function(req, res, next)
 
                     jsonObj.message = jsonObj.optimizer_message;
 
+                    jsonObj.ig_args = process.ig_args;
+                    process.ig_args = "";  
+
                     res.end(JSON.stringify(jsonObj));
 
                     // if mode is completed, then the tool is not busy anymore, so now it's time to 
@@ -582,6 +604,10 @@ server.post('/poll', pollingMiddleware, function(req, res, next)
             jsonObj.message = "Working";
             jsonObj.args = process.compiler_args;
             process.compiler_args = "";
+
+            jsonObj.ig_args = process.ig_args;
+            process.ig_args = "";  
+
             res.end(JSON.stringify(jsonObj));
 
             console.log(jsonObj.message);
@@ -614,6 +640,19 @@ server.post('/poll', pollingMiddleware, function(req, res, next)
     
 });
 
+server.get('/initdata', /*commandMiddleware, */function(req, res)
+{
+    core.logSpecific("Initialization data request", req.body.windowKey);
+
+    res.writeHead(200, { "Content-Type": "application/json"});
+
+    var jsonObj = new Object();
+    jsonObj.versions = core.getDependencyVersionsText();
+    jsonObj.version = core.getVersion();
+    jsonObj.title = core.getTitle();
+    res.end(JSON.stringify(jsonObj));
+});
+
 /*
  * Catch all the rest. Error reporting for unknown routes
  */
@@ -628,11 +667,24 @@ server.use(function(req, res, next)
 //================================================================
 
 core.logNormal('===============================');
-core.logNormal('| Clafer Moo Visualizer v0.3.5.??-??-???? |');
+core.logNormal('| ' + core.getTitle() + ' ' + core.getVersion() + ' |');
 core.logNormal('===============================');
 
 core.addDependency("clafer", ["-V"], "Clafer Compiler");
 core.addDependency("java", ["-version"], "Java");
+
+var dirReplacementMap = [
+        {
+            "needle": "$dirname$", 
+            "replacement": __dirname + "/Backends"
+        }
+    ];
+
+for (var i = 0; i < backendConfig.backends.length; i++)
+{
+    core.addDependency(backendConfig.backends[i].tool, core.replaceTemplateList(backendConfig.backends[i].tool_version_args, dirReplacementMap), backendConfig.backends[i].label);
+}
+
 core.runWithDependencyCheck(function(){
     server.listen(port);
     core.logNormal('======================================');

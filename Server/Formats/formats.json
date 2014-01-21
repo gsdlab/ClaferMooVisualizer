@@ -21,6 +21,16 @@
             "display_element": "iframe"
         },
         {
+            "id": "alloy", 
+            "label": "Alloy ALS", 
+            "tooltip": "Alloy file format", 
+            "file_suffix": ".als",             
+            "compiler_mode": "alloy",
+            "compiler_args": ["--nr"],
+            "shows_compilation_errors" : "false",
+            "display_element": "textarea"
+        },
+        {
             "id": "choco", 
             "label": "Choco JS", 
             "tooltip": "Choco solver file format (Javascript)", 
@@ -36,7 +46,7 @@
             "tooltip": "XML intermediate representation (XML)", 
             "file_suffix": ".xml",             
             "compiler_mode": "xml",
-            "compiler_args": [],
+            "compiler_args": ["--nr"],
             "shows_compilation_errors" : "false",
             "display_element": "xml"
         },

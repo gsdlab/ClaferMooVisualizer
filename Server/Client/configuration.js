@@ -48,8 +48,8 @@ function getConfiguration()
 
     		"onError": function(module, statusText, response, xhr){
 			    var caption = "";
-                console.log(statusText);
-                console.log(response);
+//                console.log(statusText);
+//                console.log(response);
 
 			    if (statusText == "compile_error")
 			        caption = "<b>Compile Error.</b><br>Please check whether Clafer Compiler is available, and the model is correct.";
@@ -72,7 +72,7 @@ function getConfiguration()
 			    else
 			        caption = '<b>' + xhr + '</b><br>' + response.responseText.replace("\n", "<br>");
 
-		        module.host.print("ClaferIDE> Error occured\n");
+		        module.host.print("ClaferMooVisualizer> Error occured\n");
 
 			    return caption;
 
@@ -82,18 +82,19 @@ function getConfiguration()
     		},
 
     		"onFileSent": function(module){
-		        module.host.print("ClaferIDE> Processing the submitted model. Compiling...\n");
+		        module.host.print("ClaferMooVisualizer> Processing the submitted model. Compiling...\n");
     		},
 
     		"onPoll" : function(module, responseObject){
 		        if (responseObject.args)
 		        {
-		            module.host.print("ClaferIDE> clafer " + responseObject.args + "\n");
+		            module.host.print("ClaferMooVisualizer> clafer " + responseObject.args + "\n");
 		        }
-//		        if (responseObject.compiled_formats)
-//		        {
-//		            module.host.findModule("mdCompiledFormats").setResult(responseObject.compiled_formats);
-//		        }
+
+                if (responseObject.ig_args)
+                {
+                    module.host.print("ClaferMooVisualizer> " + responseObject.ig_args + "\n");
+                }
 
 		        if (responseObject.compiler_message)
 		        {
@@ -145,7 +146,7 @@ function getConfiguration()
 
                 module.host.storage.instanceFilter.filterContent();               
 
-		        module.host.print("Optimizer> " + responseObject.optimizer_message + "\n");
+		        module.host.print(responseObject.optimizer_message + "\n");
 		        return true;  
     		}    		
     	}
@@ -224,6 +225,8 @@ function getConfiguration()
     		},
 
     		"buttonsForRemoval": false,
+            "instancesSelectable": true,
+            "useInstanceName": false,
 
     		"onSelected": function(module, pid)
     		{
