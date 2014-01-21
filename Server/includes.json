@@ -1,0 +1,18 @@
+{
+    "scripts": [
+        "utils/utils.js",
+        "https://www.google.com/jsapi",
+        "utils/selection_controller.js",
+        "utils/evolution_controller.js",
+        "utils/instance_filter.js",        
+        "utils/pf_visualizer.js",
+        "modules/md_graph.js",
+        "modules/md_variant_comparer.js",
+        "modules/hovering_extensions.js",
+        "configuration.js"
+    ],
+
+    "styles": [
+        "styles.css"        
+    ]    
+}

@@ -1,21 +1,16 @@
+html, body{
+    height:95%;
+}
+
 th{
 	text-align: left;
-}
-
-.axis_drop{
-}
-
-#dropPointX{
-}
-
-#dropPointY{
 }
 
 textarea.child {
       height:100%;
 }
   
-circle, text{
+circle, text, rect.square, polygon.octagon{
     cursor:pointer;
 }
   
@@ -28,69 +23,16 @@ textarea.child {height:100%;}
 	height: 22px;
 }
 
-.comparison table td, .comparison table th{
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	padding:0px 0px 0px 0px;
-}
-
-.comparison table #r0{
-	background: #eee;
-	padding:2px;
-}
-
-.comparison table td{
-	border-bottom: 1px solid #ccc;
-}
-
-img.tick{
-	width:18px;
-	height:18px;
-}
-
-#graph_table{
-  table-layout:fixed;
-  border-spacing:0px;
-}
-
-img.no{
-	width:18px;
-	height:18px;
-}
-
 th{
     text-align:center;
-}
-
-th.td_abstract{
-    text-align:left;
-    width:50%;
-}
-
-.axis_drop div{
-    text-align: center;
 }
 
 #wGraph *{
     overflow: hidden;
 }
 
-#dropPointY  div{
-    overflow:visible;
-}
-
-td.numeric
-{
-/*	color: #222;*/
-}
-
-td.tick, td.no
-{
-	text-align:center;
-}
-
 #error_overlay {
-     visibility: hidden;
+     display: none;
      position: absolute;
      left: 0px;
      top: 0px;
@@ -126,47 +68,6 @@ td.tick, td.no
      height: 12px;
 }
 
-#comparison .EffectMan {
-    border-left: 1px solid #CCCCCC;
-    border-right: 1px solid #CCCCCC;
-}
-
-.help{
-    z-index: 10000;
-    position: absolute;
-    background: white;
-    width: 700px;
-    height: 450px;
-    color: #000000;
-    border: 1px solid #777;
-}
-
-.fadeOverlay{
-    z-index: 9000;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background: #FFFFFF;
-    opacity: 0.5;
-    top: 0;
-    left: 0;
-}
-
-.window-helpButton.active{
-    background: url("/images/help_hover.png");
-}
-
-
-.window-helpButton {
-    background: url("/images/help.png");
-    cursor: pointer;
-    height: 16px;
-    right: 25px;
-    position: absolute;
-    top: 4px;
-    width: 17px;
-}
-
 pre {
     white-space: pre-wrap;       /* css-3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
@@ -184,4 +85,60 @@ iframe {
 
 .first_option{
     color: gray;
+}
+
+fieldset{
+    padding:0px;
+    margin:0px;
+}
+
+#clafer_editor { 
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#ClaferListCont .chosen-with-drop .chosen-drop {
+    visibility: visible;
+}
+
+#ClaferListCont .chosen-drop {
+    border-bottom: 0;
+    border-top: 1px solid #aaa;
+    z-index: 3000;
+    position: fixed;
+    visibility: hidden;
+}
+
+#clafer_editor .ace_search, #console_editor .ace_search {
+    z-index: 1000;
+}
+
+.save_button{    
+    display: inline-block; 
+    border: 1px solid #ccc;
+    width:21px;
+    height:18px;
+    padding:0;
+    margin:0;
+    cursor:pointer;
+    background: url('images/save.png');
+} 
+
+.save_button:hover{    
+    border: 1px solid white;
+}
+
+.scopeInput {
+    width:30px;
+}
+
+#input_flags {
+    display:none;
+}
+
+#input_bottom_container{
+    background: white;
 }

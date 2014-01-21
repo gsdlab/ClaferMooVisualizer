@@ -1,6 +1,10 @@
 {
-	"pythonPath": "python",
-	"port": "8092",
-	"executionTimeout": "1800000",
-	"pingTimeout": "10000"        
+	"pageTitle": "ClaferMooVisualizer",
+	"port": "8192",
+	"inactivityTimeout": "600000",
+	"pingTimeout": "10000",
+	"cleaningTimeout": "5000",
+	"commandLimitingRate": {"interval": "1", "limit":"2"},
+	"pollingLimitingRate": {"interval": "1", "limit":"4"},
+	"fileRequestLimitingRate": {"interval": "1", "limit":"10"}
 }
