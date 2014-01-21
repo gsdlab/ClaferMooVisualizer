@@ -9,7 +9,6 @@
             "tool_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "$filepath$", "--preservenames", "--donotexecutecompiler"],
             "tool_version_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "--version"],
             "scope_options": {
-                "set_int_scope" : {"argument": "--maxint=$value$", "default_value": 31}                 
             }
         }, 
         {

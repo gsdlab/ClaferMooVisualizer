@@ -48,8 +48,8 @@ function getConfiguration()
 
     		"onError": function(module, statusText, response, xhr){
 			    var caption = "";
-                console.log(statusText);
-                console.log(response);
+//                console.log(statusText);
+//                console.log(response);
 
 			    if (statusText == "compile_error")
 			        caption = "<b>Compile Error.</b><br>Please check whether Clafer Compiler is available, and the model is correct.";
