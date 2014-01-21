@@ -1,7 +1,7 @@
 ClaferMooVisualizer
 ===================
 
-v0.3.5.17-01-2014
+v0.3.5.20-01-2014
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528).
@@ -119,7 +119,7 @@ Running the following commands should produce the following results or later ver
 
 `clafer -V` 
 
-> `Clafer v0.3.5.17-01-2014`
+> `Clafer v0.3.5.20-01-2014`
 
 `python -V`
 

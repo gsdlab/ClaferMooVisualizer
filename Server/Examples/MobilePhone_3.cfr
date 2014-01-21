@@ -1,39 +1,39 @@
 abstract Feature
-    performance -> integer
-    energy -> integer
+    performance ->> integer
+    energy ->> integer
     
 abstract SecurityFeature : Feature
-    security -> integer
+    security ->> integer
         
 abstract MobilePhone
     or Connectivity : Feature
-        [ this.performance = 0]
-        [ this.energy = 0]
+        [ performance = 0]
+        [ energy = 0]
         Bluetooth : Feature
-            [ this.performance = 9]
-            [ this.energy = 10 ]        
+            [ performance = 9]
+            [ energy = 10 ]        
         USB : Feature
-            [ this.performance = 15]
-            [ this.energy = 7 ]        
+            [ performance = 15]
+            [ energy = 7 ]        
         Wifi : Feature    
-            [ this.performance = 22]
-            [ this.energy = 17 ]
+            [ performance = 22]
+            [ energy = 17 ]
     PasswordProtection : SecurityFeature ?
-        [ this.security = 5]
-        [ this.performance = 1]
-        [ this.energy = 2 ]
+        [ security = 5]
+        [ performance = 1]
+        [ energy = 2 ]
     FingerprintProtection : SecurityFeature ?
-        [ this.security = 5]
-        [ this.performance = 2]
-        [ this.energy = 4 ]
-    total_performance -> integer = sum Feature.performance ]
-    total_energy -> integer = sum Feature.energy ]
-    total_security -> integer = sum SecurityFeature.security ]
+        [ security = 5]
+        [ performance = 2]
+        [ energy = 4 ]
+    total_performance ->> integer = sum Feature.performance
+    total_energy ->> integer = sum Feature.energy
+    total_security ->> integer = sum SecurityFeature.security
 
 MyPhone : MobilePhone
-    [ Connectivity.Bluetooth && no USB  ]
+    [ Connectivity.Bluetooth ]
+    [ no USB  ]
     
 << min MyPhone.total_energy >>
 << max MyPhone.total_performance >>
 << max MyPhone.total_security >>
-    

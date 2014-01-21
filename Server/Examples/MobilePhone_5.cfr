@@ -1,13 +1,13 @@
 abstract Feature
-    performance -> integer
-    energy -> integer
-    mass: integer
+    performance ->> integer
+    energy ->> integer
+    mass ->> integer
     [ mass >= 0 ]
-    cost: integer
+    cost ->> integer
     [ cost >= 0 ]
     
 abstract SecurityFeature : Feature
-    security -> integer
+    security ->> integer
         
 abstract MobilePhone
     or Connectivity : Feature
@@ -42,11 +42,11 @@ abstract MobilePhone
         [ this.performance = 3]
         [ this.energy = 1 ]
         [ this.cost = 13]
-    total_performance -> integer = sum Feature.performance
-    total_energy -> integer = sum Feature.energy
-    total_security -> integer = sum SecurityFeature.security
-    total_mass -> integer = sum Feature.mass
-    total_cost -> integer = sum Feature.cost
+    total_performance ->> integer = sum Feature.performance
+    total_energy ->> integer = sum Feature.energy
+    total_security ->> integer = sum SecurityFeature.security
+    total_mass ->> integer = sum Feature.mass
+    total_cost ->> integer = sum Feature.cost
 
 MyPhone : MobilePhone
     

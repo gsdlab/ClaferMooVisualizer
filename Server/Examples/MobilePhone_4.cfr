@@ -1,8 +1,9 @@
 abstract Feature
-    productivity : integer //# QUALITY_ATTRIBUTE
-    cost : integer //# QUALITY_ATTRIBUTE
-    batterylife : integer //# QUALITY_ATTRIBUTE
-    security : integer //# QUALITY_ATTRIBUTE
+    productivity ->> integer    //# QUALITY_ATTRIBUTE
+    cost ->> integer            //# QUALITY_ATTRIBUTE
+        [ this >= 0 ]
+    batterylife ->> integer     //# QUALITY_ATTRIBUTE
+    security ->> integer        //# QUALITY_ATTRIBUTE
 
 abstract MobilePhone
     Connectivity : Feature
@@ -66,20 +67,15 @@ abstract MobilePhone
             [ productivity = 0]
             [ security = 0]
             [ cost = 15]
-   
-    total_productivity : integer = sum Feature.productivity
-    total_batterylife : integer = sum Feature.batterylife 
-    total_security : integer = sum Feature.security
-    total_cost : integer = sum Feature.cost
-
-abstract HighEndPhone : MobilePhone
-   [ WiFi ]
-   [ Bluetooth40 ]
-   QuadCore : Feature ?
+    QuadCore : Feature ?
        [ batterylife = -10]
        [ productivity = 30]
        [ security = 0 ]
-       [ cost = 25 ] 
+       [ cost = 25 ]
+    total_productivity ->> integer = sum Feature.productivity
+    total_batterylife ->> integer = sum Feature.batterylife 
+    total_security ->> integer = sum Feature.security
+    total_cost ->> integer = sum Feature.cost
 
 OptimalPhone : MobilePhone
 

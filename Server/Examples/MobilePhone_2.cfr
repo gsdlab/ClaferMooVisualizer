@@ -1,8 +1,8 @@
 abstract Component
-    performance -> integer
+    performance ->> integer
 
 abstract ComponentWithEnergy : Component
-    energy -> integer
+    energy ->> integer
 
 abstract MobilePhone
     hardware : Component
@@ -48,11 +48,10 @@ abstract MobilePhone
             [ extra_cpu ]
         mediaplayer : Component ?
             [ performance = -2 ]
-    total_performance -> integer = sum Component.performance
-    total_energy -> integer = sum ComponentWithEnergy.energy
+    total_performance ->> integer = sum Component.performance
+    total_energy ->> integer = sum ComponentWithEnergy.energy
 
 aPhone : MobilePhone
-
 
 << min aPhone.total_energy >>
 << max aPhone.total_performance >>
