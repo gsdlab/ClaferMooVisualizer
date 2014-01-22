@@ -86,15 +86,15 @@ function getConfiguration()
     		},
 
     		"onPoll" : function(module, responseObject){
-		        if (responseObject.args)
-		        {
-		            module.host.print("ClaferMooVisualizer> clafer " + responseObject.args + "\n");
-		        }
+//		        if (responseObject.args)
+//		        {
+//		            module.host.print("ClaferMooVisualizer> clafer " + responseObject.args + "\n");
+//		        }
 
-                if (responseObject.ig_args)
-                {
-                    module.host.print("ClaferMooVisualizer> " + responseObject.ig_args + "\n");
-                }
+//                if (responseObject.ig_args)
+//                {
+//                    module.host.print("ClaferMooVisualizer> " + responseObject.ig_args + "\n");
+//                }
 
 		        if (responseObject.compiler_message)
 		        {
