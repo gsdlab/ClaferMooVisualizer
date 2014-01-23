@@ -218,7 +218,7 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
 VariantComparer.method("saveSelected", function(){
     var selection = this.settings.getSelection(this);
     var instances = this.unparsedInstances;
-    var parser = new InstanceParser(instances);
+    var parser = new InstanceConverter(instances);
     var data = "";
     for (var i=0; i < selection.length; i++){
         data += parser.getInstanceData(selection[i]);
