@@ -1,6 +1,17 @@
 {
     "backends": [
         {
+            "id": "choco_aadl", 
+            "label": "Choco (AADL model)",
+            "tooltip": "Choco solver customized for AADL example",
+            "accepted_format": "choco",               
+            "tool": "java",
+            "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.5-jar-with-dependencies.jar", "$filepath$", "--aadl"],
+            "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.5-jar-with-dependencies.jar", "--version"],
+            "scope_options": {
+            }                        
+        },
+        {
             "id": "clafermoo_standard", 
             "label": "ClaferMoo", 
             "tooltip": "Classic Moo based on Alloy solver",
