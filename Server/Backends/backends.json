@@ -2,12 +2,12 @@
     "backends": [
         {
             "id": "choco_aadl", 
-            "label": "Choco (AADL model)",
-            "tooltip": "Choco solver customized for AADL example",
+            "label": "Choco (custom)",
+            "tooltip": "Choco solver customized for current examples",
             "accepted_format": "choco",               
             "tool": "java",
-            "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.5-jar-with-dependencies.jar", "$filepath$", "--aadl"],
-            "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.5-jar-with-dependencies.jar", "--version"],
+            "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.6-jar-with-dependencies.jar", "$filepath$"],
+            "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.6-jar-with-dependencies.jar", "--version"],
             "scope_options": {
             }                        
         },

@@ -1,6 +1,7 @@
 {
     "examples": [
         {"url": "", "label": "Or Choose Example..."}, 
+        {"url": "allocation.cfr", "label": "Service Allocation Example"},
         {"url": "AADL_Complete.cfr", "label": "AADL To Clafer Example"},
         {"url": "MobilePhone_1.cfr", "label": "Mobile Phone Example (1 objective)"},
         {"url": "MobilePhone_2.cfr", "label": "Mobile Phone Example (2 objectives)"}, 
