@@ -142,8 +142,8 @@ Graph.method("drop", function(ev)
 	if (parts.length < 2)
 		return;
 	
-	var arg = parts[0];
-	var label = parts[1];
+	var arg = parts[0].replaceAll("-", ".");
+	var label = parts[1].replaceAll("-", ".");
 
     if (this.goals.length == 1) // case of 1 dimension
     {

@@ -56,7 +56,8 @@ InstanceFilter.method("filterContent", function(){
 
         //filtering by goals
         else {
-            var filter;
+            var filter = null;
+            // todo: update this filter!!!
             var filterName = $("#mdFeatureQualityMatrix #r" + i + " .td_abstract").text().replace(/\s+/g, '').replace(/[\u25B6\u25C0]/g, "");
             for (var x = 0; x<=this.host.findModule("mdGoals").ranges.length; x++){;
                 if (x == this.host.findModule("mdGoals").ranges.length){
@@ -66,12 +67,15 @@ InstanceFilter.method("filterContent", function(){
                 }
             }
 
-            for (x=1; x<= row_length; x++){
-                var value = $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).text();
-                var min = parseInt(filter.min);
-                var max = parseInt(filter.max)
-                if (min > value || max < value)
-                    this.hideInstance(x);
+            if (filter != null)
+            {
+                for (x=1; x<= row_length; x++){
+                    var value = $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).text();
+                    var min = parseInt(filter.min);
+                    var max = parseInt(filter.max);
+                    if (min > value || max < value)
+                        this.hideInstance(x);
+                }
             }
         }
 

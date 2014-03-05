@@ -25,6 +25,10 @@ function ParetoFrontVisualizer (element, hostModule)
     this.hostModule = hostModule;
 }
 
+ParetoFrontVisualizer.method("argsToArray", function(argString){
+    return argString.split("-");
+});
+
 ParetoFrontVisualizer.method("draw", function(cprocessor, processor, args, labels, instanceCounterArg) 
 {
 	if ((args.length < 2) || args.length != labels.length)
@@ -102,13 +106,15 @@ ParetoFrontVisualizer.method("draw", function(cprocessor, processor, args, label
         if (instanceCounterId == 0) // if the first dimension represents an instance ID
             first = i;
         else 
-            first = processor.getFeatureValue(i, args[0], true); // get only numeric
-
+        {
+//            alert(this.argsToArray(args[0]));
+            first = processor.getFeatureValue(i, this.argsToArray(args[0]), true); // get only numeric
+        }
             
         if (instanceCounterId == 1) // if the second dimension represents an instance ID
             second = i;
         else 
-            second = processor.getFeatureValue(i, args[1], true); // get only numeric
+            second = processor.getFeatureValue(i, this.argsToArray(args[1]), true); // get only numeric
 		
 		point = new Array();
 		point.push(getPID(i));
@@ -132,13 +138,13 @@ ParetoFrontVisualizer.method("draw", function(cprocessor, processor, args, label
             
         if (hasThird)
         {
-            var third = processor.getFeatureValue(i, args[2], true); // get only numeric
+            var third = processor.getFeatureValue(i, this.argsToArray(args[2]), true); // get only numeric
             point.push(third);
         }
 
         if (hasForth)
         {
-            var forth = processor.getFeatureValue(i, args[3], true); // get only numeric
+            var forth = processor.getFeatureValue(i, this.argsToArray(args[3]), true); // get only numeric
             
             if (forth < minT)
                 minT = forth;
@@ -168,7 +174,7 @@ ParetoFrontVisualizer.method("draw", function(cprocessor, processor, args, label
         var maxG = 0;
         var minG = 10000000000;
         for (var i = 1; i <= instanceCount; i++){
-            var test = processor.getFeatureValue(i, numgoals[y].arg, true);
+            var test = processor.getFeatureValue(i, this.argsToArray(numgoals[y].arg), true);
             if (test < minG)
                 minG = test;
             
