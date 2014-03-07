@@ -21,7 +21,7 @@ function getConfiguration()
 
     		"title": "Input Clafer Model and Options",
     		"optimization_backend": true, 
-            "input_default_cache": "checked",
+            "input_default_cache": false,
             "input_default_flags": "",
             "file_extensions": [
                 {

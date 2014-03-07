@@ -39,7 +39,7 @@ function preprocessMOOResult(result, host)
    		}
 	}
 
-	var instancesXMLText = (new InstanceConverter(instances)).convertFromClaferMooOutputToXML();
+	var instancesXMLText = (new InstanceConverter(instances)).convertFromClaferMooOutputToXML(null);
 
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
 
@@ -77,9 +77,11 @@ function preprocessMOOResult(result, host)
 
     /* counting the number of lines */
     if (!host.storage.evolutionController.existingData){
-        var lines = data.unparsedInstances.match(/^.*([\n\r]+|$)/gm);
-        lines = data.unparsedInstances.split(lines[1]);
-        host.storage.evolutionController.existingInstancesCount = lines.length - 1;
+        var instanceProcessor = new InstanceProcessor(data.instancesXML);
+
+        //var lines = data.unparsedInstances.match(/^.*([\n\r]+|$)/gm);
+        //lines = data.unparsedInstances.split(lines[1]);
+        host.storage.evolutionController.existingInstancesCount = instanceProcessor.getInstanceCount();
     }
 
     host.storage.evolutionController.existingData = data;
