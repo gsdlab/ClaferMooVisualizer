@@ -101,7 +101,6 @@ Graph.method("onRendered", function()
 		$("#chart").hide();
     }
     
-    $("#mdGraph .window-titleBar-content").text("Bubble Front Graph: " + this.instanceProcessor.getInstanceName().replace(/[^_]{1,}[_]/, ""));
     this.addIds();
 
     this.resize();

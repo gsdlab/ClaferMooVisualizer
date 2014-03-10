@@ -108,13 +108,13 @@ ParetoFrontVisualizer.method("draw", function(cprocessor, processor, args, label
         else 
         {
 //            alert(this.argsToArray(args[0]));
-            first = processor.getFeatureValue(i, this.argsToArray(args[0]), true); // get only numeric
+            first = processor.getFeatureValue(i, this.argsToArray(args[0]), 'int'); // get only numeric
         }
             
         if (instanceCounterId == 1) // if the second dimension represents an instance ID
             second = i;
         else 
-            second = processor.getFeatureValue(i, this.argsToArray(args[1]), true); // get only numeric
+            second = processor.getFeatureValue(i, this.argsToArray(args[1]), 'int'); // get only numeric
 		
 		point = new Array();
 		point.push(getPID(i));
@@ -138,13 +138,13 @@ ParetoFrontVisualizer.method("draw", function(cprocessor, processor, args, label
             
         if (hasThird)
         {
-            var third = processor.getFeatureValue(i, this.argsToArray(args[2]), true); // get only numeric
+            var third = processor.getFeatureValue(i, this.argsToArray(args[2]), 'int'); // get only numeric
             point.push(third);
         }
 
         if (hasForth)
         {
-            var forth = processor.getFeatureValue(i, this.argsToArray(args[3]), true); // get only numeric
+            var forth = processor.getFeatureValue(i, this.argsToArray(args[3]), 'int'); // get only numeric
             
             if (forth < minT)
                 minT = forth;
@@ -174,7 +174,7 @@ ParetoFrontVisualizer.method("draw", function(cprocessor, processor, args, label
         var maxG = 0;
         var minG = 10000000000;
         for (var i = 1; i <= instanceCount; i++){
-            var test = processor.getFeatureValue(i, this.argsToArray(numgoals[y].arg), true);
+            var test = processor.getFeatureValue(i, this.argsToArray(numgoals[y].arg), 'int');
             if (test < minG)
                 minG = test;
             
