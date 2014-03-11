@@ -181,7 +181,7 @@ ParetoFrontVisualizer.method("draw", function(cprocessor, processor, args, label
             if (test >= maxG)
                 maxG = test;
         }
-        this.showGoal(numgoals[y].label, minG, maxG);
+        this.showGoal(numgoals[y].arg, minG, maxG);
     }
         
 

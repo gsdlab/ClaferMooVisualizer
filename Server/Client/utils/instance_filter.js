@@ -58,11 +58,11 @@ InstanceFilter.method("filterContent", function(){
         else {
             var filter = null;
             // todo: update this filter!!!
-            var filterName = $("#mdFeatureQualityMatrix #r" + i + " .td_abstract").text().replace(/\s+/g, '').replace(/[\u25B6\u25C0]/g, "");
-            for (var x = 0; x<=this.host.findModule("mdGoals").ranges.length; x++){;
-                if (x == this.host.findModule("mdGoals").ranges.length){
-                    break;
-                } else if (filterName == this.host.findModule("mdGoals").ranges[x].goal){
+            var filterName = $("#mdFeatureQualityMatrix #r" + i + " .td_abstract").find(".path").text().replaceAll(".", "-");
+            for (var x = 0; x < this.host.findModule("mdGoals").ranges.length; x++)
+            {
+                if (filterName == this.host.findModule("mdGoals").ranges[x].goal)
+                {
                     filter = this.host.findModule("mdGoals").ranges[x];
                 }
             }
