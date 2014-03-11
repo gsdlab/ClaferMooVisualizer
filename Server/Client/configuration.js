@@ -96,6 +96,8 @@ function getConfiguration()
 //                    module.host.print("ClaferMooVisualizer> " + responseObject.ig_args + "\n");
 //                }
 
+                console.log(responseObject);
+
 		        if (responseObject.compiler_message)
 		        {
 		        	module.host.print("Compiler> " + responseObject.message + "\n");
