@@ -8,7 +8,7 @@
             "tooltip": "A new instance generator based on Z3 solver library",
             "accepted_format": "python",             
             "tool": "sh",
-            "tool_args": ["$dirname$/../../../../runClaferZ3", "$filepath$", "-n", "-1", "--showinheritance", "-u", "-g", "3", "--indentation", "tab"],            
+            "tool_args": ["$dirname$/../../../../runClaferZ3", "$filepath$", "-n", "-1", "--showinheritance", "-u", "-g", "5", "--indentation=tab"],            
             "tool_version_args": ["$dirname$/../../../../runClaferZ3", "-v"],
             "scope_options": {
                 "set_default_scope" : {"label": "Scope:", "argument": "-g $value$\n", "default_value": 3}
