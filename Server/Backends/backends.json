@@ -25,8 +25,18 @@
             "scope_options": {
                 "set_int_scope" : {"label": "MaxInt:", "argument": "--maxint=$value$", "default_value": 127},
                 "set_default_scope" : {"label": "Scope:", "argument": "--scope=$value$\n", "default_value": 25}
-            }                        
-                 
-        }
+            }
+        },
+        {
+            "id": "clafermoo_standard", 
+            "label": "ClaferMoo", 
+            "tooltip": "Classic Moo based on Alloy solver",
+            "accepted_format": "clafer_source",                           
+            "tool": "python", 
+            "tool_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "$filepath$", "--preservenames", "--donotexecutecompiler"],
+            "tool_version_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "--version"],
+            "scope_options": {
+            }
+        }        
     ]   
 }
