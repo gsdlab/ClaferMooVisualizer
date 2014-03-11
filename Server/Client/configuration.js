@@ -104,6 +104,8 @@ function getConfiguration()
 
     		},
     		"onCompleted" : function(module, responseObject){    					        
+                console.log(responseObject);
+
 		        if (responseObject.model != "")
 		        {
 		            module.editor.getSession().setValue(responseObject.model);
@@ -113,8 +115,6 @@ function getConfiguration()
                 {
                     return false;
                 }
-
-                console.log(responseObject);
 
 		        var data = preprocessMOOResult(responseObject, module.host);
                 if (!data)
