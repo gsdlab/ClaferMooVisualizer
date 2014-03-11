@@ -114,6 +114,8 @@ function getConfiguration()
                     return false;
                 }
 
+                console.log(responseObject);
+
 		        var data = preprocessMOOResult(responseObject, module.host);
                 if (!data)
                     return false;
