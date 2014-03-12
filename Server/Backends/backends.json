@@ -1,6 +1,19 @@
 {
     "backends": [
         {
+            "id": "choco_single", 
+            "label": "Choco-based (single-obj)",
+            "tooltip": "A new Choco-based solver, for single objective optimization only",
+            "accepted_format": "choco",               
+            "tool": "java",
+            "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.6-jar-with-dependencies.jar", "--file=$filepath$"],
+            "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.6-jar-with-dependencies.jar", "--version"],
+            "scope_options": {
+                "set_int_scope" : {"label": "MaxInt:", "argument": "--maxint=$value$", "default_value": 127},
+                "set_default_scope" : {"label": "Scope:", "argument": "--scope=$value$", "default_value": 25}
+            }
+        },
+        {
             "id": "clafermoo_standard", 
             "label": "ClaferMoo", 
             "tooltip": "Classic Moo based on Alloy solver",
@@ -10,17 +23,6 @@
             "tool_version_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "--version"],
             "scope_options": {
             }
-        }, 
-        {
-            "id": "choco_single", 
-            "label": "Choco (single objective only)",
-            "tooltip": "A new Choco solver, for single objective optimization only",
-            "accepted_format": "choco",               
-            "tool": "java",
-            "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.5-jar-with-dependencies.jar", "$filepath$"],
-            "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.5-jar-with-dependencies.jar", "--version"],
-            "scope_options": {
-            }                        
-        }
+        }        
     ]   
 }

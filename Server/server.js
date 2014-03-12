@@ -259,18 +259,32 @@ function runOptimization(process)
 
     var args = core.replaceTemplateList(backend.tool_args, fileAndPathReplacement);
 
-    if (backend.scope_options && backend.scope_options.set_int_scope && backend.scope_options.set_int_scope.argument) 
+    if (process.optimizerMaxInt && backend.scope_options && backend.scope_options.set_int_scope && backend.scope_options.set_int_scope.argument) 
     {
         var replacement = [
             {
                 "needle": "$value$", 
-                "replacement": process.intScopeValue
+                "replacement": process.optimizerMaxInt
             }
         ];
 
         var intArg = core.replaceTemplate(backend.scope_options.set_int_scope.argument, replacement);
 
         args.push(intArg);
+    }
+
+    if (process.optimizerScope && backend.scope_options && backend.scope_options.set_default_scope && backend.scope_options.set_default_scope.argument) 
+    {
+        var replacement = [
+            {
+                "needle": "$value$", 
+                "replacement": process.optimizerScope
+            }
+        ];
+
+        var scopeArg = core.replaceTemplate(backend.scope_options.set_default_scope.argument, replacement);
+
+        args.push(scopeArg);
     }
 
     var toolPath = core.replaceTemplate(backend.tool, fileAndPathReplacement);
@@ -410,7 +424,8 @@ server.post('/upload', /*commandMiddleware,*/ function(req, res, next)
                 ss = "--ss=full";
             }
 
-            process.intScopeValue = req.body.optimizationIntHighScopeValue;
+            process.optimizerMaxInt = req.body.optimizerMaxInt;
+            process.optimizerScope = req.body.optimizerScope;
 
             var specifiedArgs = [];
             var genericArgs = [ss, uploadedFilePath + ".cfr"];
@@ -519,46 +534,34 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
 
                     if (code === 0) 
                     {               
-                        var parts = data_result.split("=====");
+                        console.log(data_result);
+                        var instances = data_result; // data_result this may include extra text at the beginning
+                                                     // which will be trimmed at conversion stage
                         
-                        if (parts.length != 2)
-                        {
-                            jsonObj.optimizer_message = 'Error, instances and normal text must be separated by "====="';
-                            console.log(data_result);
-                        }
-                        else
-                        {
+                        console.log(process.file + '.xml');
+                        var xml = fs.readFileSync(process.file + '.xml');
+                        // this code assumes the backend should produce an XML,
+                        // which is not the correct way
                         
-                            var message = parts[0]; //
-                            console.log(message);
-                            var instances = parts[1]; // 
-                            // todo : error handling
-                            
-                            console.log(process.file + '.xml');
-                            var xml = fs.readFileSync(process.file + '.xml');
-                            // this code assumes the backend should produce an XML,
-                            // which is not the correct way
-                            
-                            jsonObj.optimizer_message = message;
-                            jsonObj.optimizer_instances_only = false;
-                            jsonObj.optimizer_instances = instances;
-                            jsonObj.optimizer_claferXML = xml.toString();
-                            jsonObj.optimizer_from_cache = process.loadedFromCache;
+                        jsonObj.optimizer_message = "Instances have been generated";
+                        jsonObj.optimizer_instances_only = false;
+                        jsonObj.optimizer_instances = instances;
+                        jsonObj.optimizer_claferXML = xml.toString();
+                        jsonObj.optimizer_from_cache = process.loadedFromCache;
 
-                            if (process.cacheEnabled && !process.loadedFromCache) // caching the results
+                        if (process.cacheEnabled && !process.loadedFromCache) // caching the results
+                        {
+                            fs.writeFile(process.cache_file_name, data_result, function(err)
                             {
-                                fs.writeFile(process.cache_file_name, data_result, function(err)
+                                if (err)
                                 {
-                                    if (err)
-                                    {
-                                        core.logSpecific("Could not write cache: " + process.cache_file_name, process.windowKey);                    
-                                    }
-                                    else
-                                    {
-                                        core.logSpecific("The cache file successfully saved: " + process.cache_file_name, process.windowKey);
-                                    }
-                                });
-                            }
+                                    core.logSpecific("Could not write cache: " + process.cache_file_name, process.windowKey);                    
+                                }
+                                else
+                                {
+                                    core.logSpecific("The cache file successfully saved: " + process.cache_file_name, process.windowKey);
+                                }
+                            });
                         }
                     }
                     else 

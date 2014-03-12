@@ -1,0 +1,797 @@
+//===============================================
+//===============================================
+// METAMODEL
+//===============================================
+//===============================================
+
+//---------------- Core: Components and Systems -------------------------
+
+// base class for everything
+abstract AADLMember
+
+// Component
+abstract Component: AADLMember
+    Cflows -> Flow*
+    Cfeatures -> Feature*
+    Cproperties -> Property*
+
+// Component Implementation
+abstract ComponentImpl: AADLMember
+    Iflows -> Flow*
+    Ifeatures -> Feature*
+    Iproperties -> Property*
+    interface -> Component
+    
+// Device
+abstract Device : Component
+
+// System
+abstract System : Component
+
+// System Implementation
+abstract SystemImpl : ComponentImpl
+    Iconnections -> Connection*
+    Isubcomponents -> AADLMember*
+    system_latency : integer // quality attribute
+    
+//---------------- Properties and Data Types -------------------------
+    
+abstract PropertySet
+    PropSetProperties : Property 0..*
+    
+abstract Property
+    PropType : DataType ?
+
+abstract DataType
+    properties -> ValueUnit
+
+enum Unit = Bits | V | mV | Ms
+
+abstract ValueUnit
+    value: integer
+    unit -> Unit
+    
+//---------------- Features -------------------------
+
+// Metamodel of Feature
+abstract Feature : AADLMember
+    Fproperties -> Property 0..*
+
+//---------------- Ports -------------------------
+
+enum PortDirection = In | Out
+
+// Port    
+abstract Port : Feature
+    Pdirection -> PortDirection
+    
+// Data Port
+abstract DataPort : Port
+    Ptype -> DataType?
+//    properties -> Property*
+
+// Event Port
+abstract EventPort : Port
+
+// Event Data Port 
+abstract EventDataPort: EventPort 
+
+//---------------- Flows and Flow Elements -------------------------
+
+enum FlowType = Path | Source | Sink | EndToEnd
+
+abstract Connection : AADLMember
+    start -> DataPort
+    end -> DataPort
+
+abstract Flow : AADLMember
+    flowType -> FlowType
+    flowElements -> FlowElement 1..*
+    latency -> ValueUnit?
+
+abstract FlowElement
+    member -> AADLMember    
+    xor type
+        FET_Connection
+        FET_Flow
+        FET_DataPort
+
+//[ no PropertySet ]
+        
+//===============================================
+//===============================================
+// CONCRETE MODEL
+//===============================================
+//===============================================
+
+//---------------- Data types -------------------------
+
+abstract bool_type : DataType
+    Source_Data_Size_Bool : ValueUnit
+        [value = 1]    
+        [unit = Bits]
+    [properties = Source_Data_Size_Bool]
+
+BOOL : bool_type
+    
+abstract float_type : DataType
+    Source_Data_Size_Float : ValueUnit
+        [value = 2]    
+        [unit = Bits]
+    [properties = Source_Data_Size_Float]
+
+FLOAT : float_type
+
+//---------------- Devices -------------------------
+ 
+// Cruise control button 
+abstract cruise_control_button : Device
+    cc_system_on_off_cruise_control_button : DataPort
+        [no Ptype]
+        [no Fproperties]
+        [Pdirection = Out]        
+
+    [ Cfeatures = cc_system_on_off_cruise_control_button]
+    [ no Cflows ]
+    [ no Cproperties ]
+
+// Wheel rotation sensor
+abstract wheel_rotation_sensor : Device
+    wheel_pulse_wheel_rotation_sensor : DataPort
+        [Pdirection = Out]
+        [no Ptype]
+        [no Fproperties]
+
+    [ Cfeatures = wheel_pulse_wheel_rotation_sensor ]    
+    [ no Cflows ]
+    [ no Cproperties ]
+
+// Radar sensor
+abstract radar_sensor : Device
+    lead_distance_radar : DataPort
+        [Pdirection = Out]
+        [Ptype = FLOAT]
+        [no Fproperties]
+
+    [ Cfeatures = lead_distance_radar ]    
+    [ no Cflows ]
+    [ no Cproperties ]
+
+// Lidar sensor
+abstract lidar_sensor : Device
+    lead_distance_lidar : DataPort
+        [Pdirection = Out]
+        [Ptype = FLOAT]
+        [no Fproperties]
+
+    [ Cfeatures = lead_distance_lidar ]    
+    [ no Cflows ]
+    [ no Cproperties ]
+
+// Throttle actuator
+abstract throttle_actuator : Device
+    throttle_setting_throttle_actuator : DataPort
+        [Pdirection = In]
+        [no Ptype]
+        [no Fproperties] // Binds to property set. Look into it
+    [ Cfeatures = throttle_setting_throttle_actuator]
+    
+    throttle_actuator_flow: Flow
+        throttle_actuator_flow_fel1 : FlowElement
+            [ FET_DataPort ]
+            [ member = throttle_setting_throttle_actuator]
+            
+        [flowType = Sink]
+        throttle_actuator_flow_lat: ValueUnit
+            [value = 1]
+            [unit = Ms]
+        [latency = throttle_actuator_flow_lat]        
+        [flowElements = throttle_actuator_flow_fel1]    
+    [ Cflows = throttle_actuator_flow ]
+    [ no Cproperties ]
+
+// Brake pedal
+abstract brake_pedal : Device
+    brake_status_brake_pedal : DataPort
+        [Pdirection = Out]
+        [Ptype = BOOL]
+        [no Fproperties]
+    [ Cfeatures = brake_status_brake_pedal ]
+    
+    brake_pedal_flow: Flow
+        brake_pedal_flow_fel1 : FlowElement
+            [ FET_DataPort ]
+            [ member = brake_status_brake_pedal]
+            
+        [flowType = Source]
+        brake_pedal_flow_lat: ValueUnit
+            [value = 1]
+            [unit = Ms]
+        [latency = brake_pedal_flow_lat]        
+        [flowElements = brake_pedal_flow_fel1]    
+    [ Cflows = brake_pedal_flow ]
+    [ no Cproperties ]
+    
+// Engine
+abstract engine : Device
+    engine_status_engine: DataPort
+        [Pdirection = Out]
+        [no Ptype]
+        [no Fproperties]
+        
+    [no Cflows]
+    [no Cproperties]
+    [Cfeatures = engine_status_engine]
+
+//---------------- Systems -------------------------
+
+// Compute velocity System
+abstract compute_velocity : System
+    wheel_pulse_compute_velocity : DataPort
+        [Pdirection = In]
+        [no Ptype]
+        [no Fproperties]
+    instantaneous_velocity_compute_velocity : DataPort
+        [Pdirection = Out]
+        [no Ptype]
+        [no Fproperties]
+    [ Cfeatures = wheel_pulse_compute_velocity, instantaneous_velocity_compute_velocity]
+
+    compute_velocity_flow: Flow
+        compute_velocity_flow_fel1 : FlowElement
+            [ FET_DataPort ]
+            [ member = parent.parent.wheel_pulse_compute_velocity ]
+
+        compute_velocity_flow_fel2 : FlowElement
+            [ FET_DataPort ]
+            [ member = parent.parent.instantaneous_velocity_compute_velocity ]
+        
+        [flowType = Path] // just [Path] does not work
+        [no latency]
+        [flowElements = compute_velocity_flow_fel1, compute_velocity_flow_fel2]
+    [ Cflows = compute_velocity_flow ]
+    [ no Cproperties ]
+
+// Compute velocity System implementation
+abstract compute_velocity_impl : SystemImpl
+    [this.interface in compute_velocity]
+    default_interface_cv : compute_velocity ?
+        [parent.interface = this] 
+    
+    // zubair
+    [no Iflows]
+    [no Ifeatures]
+    [no Iproperties]
+    [no Iconnections]
+    [no Isubcomponents]
+    [this.system_latency = 0]
+        
+// Compute throttle setting System
+abstract compute_throttle_setting : System
+    desired_speed_compute_throttle_setting : DataPort
+        [Pdirection = In]
+        [no Ptype]
+        [no Fproperties]
+    throttle_setting_compute_throttle_setting : DataPort
+        [Pdirection = Out]
+        [no Ptype]
+        [no Fproperties]
+    [Cfeatures = desired_speed_compute_throttle_setting, throttle_setting_compute_throttle_setting]
+
+    compute_throttle_setting_flow : Flow
+        compute_throttle_setting_flow_fel1 : FlowElement
+            [ FET_DataPort ]
+            [ member = parent.parent.desired_speed_compute_throttle_setting ]
+
+        compute_throttle_setting_flow_fel2 : FlowElement
+            [ FET_DataPort ]
+            [ member = parent.parent.throttle_setting_compute_throttle_setting ]
+
+        compute_throttle_setting_flow_lat: ValueUnit
+            [value = 2]
+            [unit = Ms]
+        [latency = compute_throttle_setting_flow_lat]        
+        [flowType = Path]
+        [flowElements = compute_throttle_setting_flow_fel1,compute_throttle_setting_flow_fel2]    
+    [ Cflows = compute_throttle_setting_flow]
+    [ no Cproperties ]
+
+// Compute throttle setting System Implementation
+abstract compute_throttle_setting_impl : SystemImpl
+    [interface in compute_throttle_setting]
+    default_interface_cts : compute_throttle_setting ?
+        [interface = this]    
+    
+    // zubair
+    [no Iflows]
+    [no Ifeatures]
+    [no Iproperties]
+    [no Iconnections]
+    [no Isubcomponents]
+    [this.system_latency = 0]
+
+
+    
+// Compute desired speed System
+abstract compute_desired_speed : System
+    ok_to_run_compute_desired_speed : DataPort
+        [Pdirection = In]
+        [no Ptype]
+        [no Fproperties]
+    desired_speed_compute_desired_speed : DataPort
+        [Pdirection = Out]
+        [no Ptype]
+        [no Fproperties]
+    instantaneous_velocity_compute_desired_speed : DataPort
+        [Pdirection = In]
+        [no Ptype]
+        [no Fproperties]    
+    
+    cds_features -> Feature *
+    [ok_to_run_compute_desired_speed in cds_features]
+    [instantaneous_velocity_compute_desired_speed in cds_features]
+    [desired_speed_compute_desired_speed in cds_features]
+    [#cds_features = 3]
+    
+    default_cds_features ?
+    [default_cds_features => Cfeatures = cds_features]    
+
+    compute_desired_speed_flow -> Flow
+    
+    default_compute_desired_speed_flow : Flow ?
+        [compute_desired_speed_flow = this]
+        compute_desired_speed_flow_fel1 : FlowElement
+            [ FET_DataPort ]
+            [ member = instantaneous_velocity_compute_desired_speed ]
+
+        compute_desired_speed_flow_fel2 : FlowElement
+            [ FET_DataPort ]
+            [ member = desired_speed_compute_desired_speed ]
+        
+        [flowType = Path]
+        compute_desired_speed_flow_lat : ValueUnit
+            [value = 4]
+            [unit = Ms]
+        [latency = compute_desired_speed_flow_lat]
+        [flowElements = compute_desired_speed_flow_fel1, compute_desired_speed_flow_fel2]
+    
+    cds_flows -> Flow *
+    [cds_flows = compute_desired_speed_flow]        
+    default_cds_flows ?
+    [default_cds_flows => Cflows = cds_flows]
+    
+    [no Cproperties]
+    
+// Compute desired speed System Implementation
+abstract compute_desired_speed_impl : SystemImpl
+    [interface in compute_desired_speed]
+    default_interface_cds : compute_desired_speed ?
+        [interface = this]
+        [default_cds_features]
+        [default_cds_flows]
+    
+    // Zubair
+    [no Iflows]
+    [no Ifeatures]
+    [no Iproperties]
+    [no Iconnections]
+    [no Isubcomponents]
+    [this.system_latency = 0]
+    
+// Core part for cruise control: Cruise control main System
+    
+abstract ccmain : System
+    cc_system_on_off_ccmain : DataPort
+        [Pdirection = In]
+        [no Ptype]
+        [no Fproperties]
+    brake_status_ccmain: DataPort
+        [Pdirection = In]
+        [Ptype = BOOL]
+        [no Fproperties]
+    engine_status_ccmain: DataPort
+        [Pdirection = In]
+        [no Ptype]
+        [no Fproperties]
+    ok_to_run_ccmain: DataPort
+        [Pdirection = Out]
+        [no Ptype]
+        [no Fproperties]
+
+    [Cfeatures = cc_system_on_off_ccmain,brake_status_ccmain,engine_status_ccmain,ok_to_run_ccmain]
+
+    ccmain_flow: Flow
+        ccmain_flow_fel1 : FlowElement
+            [ FET_DataPort ]
+            [ member = parent.parent.brake_status_ccmain ]
+
+        ccmain_flow_fel2 : FlowElement
+            [ FET_DataPort ]
+            [ member = parent.parent.ok_to_run_ccmain ]
+        
+        [flowType = Path]
+        ccmain_flow_lat : ValueUnit
+            [value = 3]
+            [unit = Ms]
+        [latency = ccmain_flow_lat]
+        [flowElements = ccmain_flow_fel1,ccmain_flow_fel2]
+    
+    [Cflows = ccmain_flow]
+    [no Cproperties]
+
+// Core part for cruise control: Cruise control main System Implementation
+abstract ccmain_impl : SystemImpl
+    [this.interface in ccmain]
+    default_interface_ccmain : ccmain ?
+        [parent.interface = this]    
+        
+    [no Iflows]
+    [no Ifeatures]
+    [no Iproperties]
+    [no Iconnections]
+    [no Isubcomponents]
+    [this.system_latency = 0]
+
+    
+//-----------------------------------------
+
+//-----------------------------------------
+// Usual Cruise Control
+//-----------------------------------------
+
+// Entire cruise control System
+abstract cruise_control : System
+
+    cc_system_on_off : DataPort
+        [Pdirection = In]
+        [no Ptype]
+        [no Fproperties]
+    brake_status: DataPort
+        [Pdirection = In]
+        [Ptype = BOOL]
+        [no Fproperties]
+    engine_status: DataPort
+        [Pdirection = In]
+        [no Ptype]
+        [no Fproperties]
+    throttle_setting : DataPort
+        [Pdirection = Out]
+        [no Ptype]
+        [no Fproperties]
+    wheel_pulse : DataPort
+        [Pdirection = In]
+        [no Ptype]
+        [no Fproperties]
+  
+    cc_features -> Feature *
+    [cc_features = cc_system_on_off, engine_status, brake_status, wheel_pulse, throttle_setting]
+        
+    default_cc_features ?
+    [default_cc_features => Cfeatures = cc_features]
+
+    cruise_control_flow : Flow
+        cruise_control_flow_fel1 : FlowElement
+            [ FET_DataPort ]
+            [ member = parent.parent.brake_status ]
+
+        cruise_control_flow_fel2 : FlowElement
+            [ FET_DataPort ]
+            [ member = parent.parent.throttle_setting ]
+        
+        [flowType = Path]
+        [no latency]
+        [flowElements = cruise_control_flow_fel1,cruise_control_flow_fel2]
+    
+    [Cflows = cruise_control_flow]
+    [no Cproperties]
+
+// Entire cruise control System Implementation
+abstract cruise_control_impl : SystemImpl
+    
+    [interface in cruise_control]
+    default_interface_cc : cruise_control ?
+        [parent.interface = this]
+
+    CC_M -> ccmain_impl
+        [this.interface in ccmain]
+                
+    C_V -> compute_velocity_impl
+        [this.interface in compute_velocity]    
+
+    C_D_S -> compute_desired_speed_impl
+        [this.interface in compute_desired_speed]
+
+    C_T_S -> compute_throttle_setting_impl
+        [this.interface in compute_throttle_setting]
+            
+    default_CC_M : ccmain_impl ?
+        [CC_M = this]
+        default_CC_M_Int : ccmain
+            [CC_M.interface = this]
+
+    default_C_V : compute_velocity_impl ?
+        [C_V = this]
+        default_C_V_Int : compute_velocity
+            [C_V.interface = this]            
+
+    default_C_D_S : compute_desired_speed_impl ?
+        [C_D_S = this]
+        [default_interface_cds]
+
+    default_C_T_S : compute_throttle_setting_impl ?
+        [C_T_S = this]
+        default_C_T_S_Int : compute_throttle_setting
+            [C_T_S.interface = this]                        
+            
+    ccsubcomponents -> AADLMember *
+    [CC_M in ccsubcomponents]
+    [C_V in ccsubcomponents]
+    [C_D_S in ccsubcomponents]
+    [C_T_S in ccsubcomponents]
+    [#ccsubcomponents = 4]
+
+    default_cc_subcomponents ?
+    [default_cc_subcomponents => Isubcomponents = ccsubcomponents]        
+
+    typecasted_interface -> cruise_control
+    [typecasted_interface = this.interface]    
+
+    typecasted_CC_M_interface -> ccmain
+    [typecasted_CC_M_interface = CC_M.interface]
+
+    typecasted_C_V_interface -> compute_velocity
+    [typecasted_C_V_interface = C_V.interface]    
+
+    typecasted_C_D_S_interface -> compute_desired_speed
+    [typecasted_C_D_S_interface = C_D_S.interface]    
+
+    typecasted_C_T_S_interface -> compute_throttle_setting
+    [typecasted_C_T_S_interface = C_T_S.interface]    
+    // Connections
+
+    cruise_control_impl_C1 : Connection
+        [start = typecasted_interface.cc_system_on_off]
+        [end = typecasted_CC_M_interface.cc_system_on_off_ccmain]
+     
+    cruise_control_impl_C2 : Connection
+        [start = typecasted_interface.brake_status]
+        [end = typecasted_CC_M_interface.brake_status_ccmain] 
+    
+    cruise_control_impl_C3 : Connection
+        [start = typecasted_interface.engine_status]
+        [end = typecasted_CC_M_interface.engine_status_ccmain]
+         
+    cruise_control_impl_C4 : Connection
+        [start = typecasted_interface.wheel_pulse]
+        [end = typecasted_C_V_interface.wheel_pulse_compute_velocity]
+        
+    cruise_control_impl_C5 : Connection
+        [start = typecasted_CC_M_interface.ok_to_run_ccmain]
+        [end = typecasted_C_D_S_interface.ok_to_run_compute_desired_speed]
+     
+    cruise_control_impl_C6 : Connection
+        [start = typecasted_C_V_interface.instantaneous_velocity_compute_velocity]
+        [end = typecasted_C_D_S_interface.instantaneous_velocity_compute_desired_speed]
+     
+    cruise_control_impl_C7 : Connection
+        [start = typecasted_C_D_S_interface.desired_speed_compute_desired_speed]
+        [end = typecasted_C_T_S_interface.desired_speed_compute_throttle_setting]
+     
+    cruise_control_impl_C8 : Connection
+        [start = typecasted_C_T_S_interface.throttle_setting_compute_throttle_setting]
+        [end = typecasted_interface.throttle_setting]
+
+    cc_connections -> Connection *
+    [cc_connections = cruise_control_impl_C1,cruise_control_impl_C2,cruise_control_impl_C3,cruise_control_impl_C4,cruise_control_impl_C5,cruise_control_impl_C6,cruise_control_impl_C7,cruise_control_impl_C8]
+        
+    default_cc_connections ?
+    [default_cc_connections => Iconnections = cc_connections]
+    
+    // flows
+    
+    cruise_control_impl_flow: Flow
+        cruise_control_impl_flow_fel1 : FlowElement
+            [ FET_DataPort ]
+            [ member = typecasted_interface.brake_status ] // typeof()? Does clafer have that?
+
+        cruise_control_impl_flow_fel2 : FlowElement
+            [ FET_Connection ]
+            [ member = cruise_control_impl_C2 ]
+            
+        cruise_control_impl_flow_fel3 : FlowElement
+            [ FET_Flow ]
+            [ member = typecasted_CC_M_interface.ccmain_flow ]
+        
+        cruise_control_impl_flow_fel4 : FlowElement
+            [ FET_Connection ]
+            [ member = cruise_control_impl_C5 ]
+  
+        cruise_control_impl_flow_fel5 : FlowElement
+            [ FET_Flow ]
+            [ member = typecasted_C_D_S_interface.compute_desired_speed_flow ]
+            
+        cruise_control_impl_flow_fel6 : FlowElement
+            [ FET_Connection ]
+            [ member = cruise_control_impl_C7 ]
+            
+        cruise_control_impl_flow_fel7 : FlowElement
+            [ FET_Flow ]
+            [ member = typecasted_C_T_S_interface.compute_throttle_setting_flow ]
+            
+        cruise_control_impl_flow_fel8 : FlowElement
+            [ FET_Connection ]
+            [ member = cruise_control_impl_C8 ]
+            
+        cruise_control_impl_flow_fel9 : FlowElement
+            [ FET_DataPort ]
+            [ member = typecasted_interface.throttle_setting ]
+        
+        [flowType = Path]
+        [no latency]
+        [flowElements = cruise_control_impl_flow_fel1,cruise_control_impl_flow_fel2,cruise_control_impl_flow_fel3,cruise_control_impl_flow_fel4,cruise_control_impl_flow_fel5,cruise_control_impl_flow_fel6,cruise_control_impl_flow_fel7,cruise_control_impl_flow_fel8,cruise_control_impl_flow_fel9]
+    
+    [Iflows = cruise_control_impl_flow]
+
+    [no Ifeatures]
+    [no Iproperties]
+
+    
+   
+//-----------------------------------------
+// Adaptive Cruise Control
+//-----------------------------------------
+    
+// Compute desired speed System for Adaptive cruise control
+abstract compute_desired_speed_acc: compute_desired_speed
+    lead_value_compute_desired_speed_acc : DataPort
+        [Pdirection = In]    
+        [Ptype = FLOAT]
+        [no Fproperties]
+		
+    cds_acc_features -> Feature *
+    [lead_value_compute_desired_speed_acc in cds_acc_features]
+    [#cds_acc_features = 1]
+    
+    [Cfeatures = cds_acc_features.ref ++ cds_features.ref]    
+    
+    [no default_compute_desired_speed_flow]
+    default_compute_desired_speed_flow_acc : Flow
+        [compute_desired_speed_flow = this]
+        fel1 : FlowElement
+            [ FET_DataPort ]
+            [ member = instantaneous_velocity_compute_desired_speed ]
+
+        fel2 : FlowElement
+            [ FET_DataPort ]
+            [ member = desired_speed_compute_desired_speed ]
+        
+        [flowType = Path]
+        lat : ValueUnit
+            [value = 3]
+            [unit = Ms]
+        [latency = lat]
+        [flowElements = fel1, fel2]
+	
+    [default_cds_flows]
+
+    [no Cproperties]
+
+// Compute desired speed System Implementation for Adaptive cruise control
+abstract compute_desired_speed_acc_impl : compute_desired_speed_impl
+    [interface in compute_desired_speed_acc]
+    default_interface_cds_acc : compute_desired_speed_acc ?
+        [interface = this]        
+    
+	[no Iflows]
+	[no Ifeatures]
+	[no Iproperties]
+	[no Iconnections]
+	[no Isubcomponents]
+
+    
+// Entire adaptive cruise control System
+
+abstract adaptive_cruise_control : cruise_control
+    lead_value_adaptive_cruise_control : DataPort
+        [Pdirection = In]
+        [no Ptype]
+        [no Fproperties]
+    
+    acc_features -> Feature *
+    [lead_value_adaptive_cruise_control in acc_features]
+    [#acc_features = 1]
+    
+    [no default_cc_features]    
+    [Cfeatures = cc_features.ref ++ acc_features.ref]
+    
+// Entire adaptive cruise control System Implementation
+abstract adaptive_cruise_control_impl : cruise_control_impl
+    [interface in adaptive_cruise_control]
+    default_interface_acc : adaptive_cruise_control ?
+        [parent.interface = this]
+    
+    [C_D_S in compute_desired_speed_acc_impl]
+    default_C_D_S_acc : compute_desired_speed_acc_impl ?
+        [ C_D_S = this]
+        [ no default_C_D_S ]
+        default_C_D_S_acc_Int : compute_desired_speed_acc
+            [C_D_S.interface = this]
+        
+    typecasted_acc_interface -> adaptive_cruise_control
+    [typecasted_acc_interface = this.interface]                
+            
+    typecasted_C_D_S_acc_interface -> compute_desired_speed_acc
+    [typecasted_C_D_S_acc_interface = C_D_S.interface]    
+            
+    C9 : Connection
+        [start = typecasted_acc_interface.lead_value_adaptive_cruise_control]
+        [end = typecasted_C_D_S_acc_interface.lead_value_compute_desired_speed_acc]
+
+    acc_connections -> Connection *
+    [C9 in acc_connections]
+    [#acc_connections = 1]
+
+    [no default_cc_connections]    
+    [Iconnections = cc_connections.ref ++ acc_connections.ref]    
+    
+//////////////////////////////////////////////////////////////////////
+// Complete systems
+//////////////////////////////////////////////////////////////////////
+
+//===============================================
+//===============================================
+// INSTANCES
+//===============================================
+//===============================================
+
+INTERFACE_CC: cruise_control
+    [default_cc_features]    
+
+INTERFACE_ACC: adaptive_cruise_control
+    
+abstract IMPLEMENTATION_CC: cruise_control_impl
+    [ interface = INTERFACE_CC]
+    [ no default_interface_cc ]        
+    [ default_CC_M ]
+    [ default_C_V ]
+    [ default_C_D_S ]
+    [ default_C_T_S ]        
+    [ default_cc_subcomponents ]
+    [ default_cc_connections ]    
+   
+abstract IMPLEMENTATION_ACC: adaptive_cruise_control_impl
+    [ interface = INTERFACE_ACC]
+    [ no default_interface_acc ]
+    [ no default_interface_cc ]        
+    [ default_CC_M ]
+    [ default_C_V ]
+    [ default_C_D_S_acc ]
+    [ default_C_T_S ]        
+    [ default_cc_subcomponents ]
+    
+abstract Car    
+    xor Controller
+        cc: IMPLEMENTATION_CC
+            [ system_latency = 10]
+        acc: IMPLEMENTATION_ACC
+            [ system_latency = 15]
+            
+    total_latency: integer = sum SystemImpl.system_latency
+
+MyCar : Car
+
+<< min MyCar.total_latency >>
+        
+//===============================================
+//===============================================
+// Scopes
+//===============================================
+//===============================================
+// set global scope to 26
+// set PDirection 38
+// set CFeatures 38
+// set flowElement 40
+// set flowElements 40
+// set type 40
+// set member 40
+// set intScope -16 to 16
