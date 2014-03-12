@@ -10,11 +10,11 @@ function preprocessMOOResult(result, host)
         host.storage.instanceFilter.permaHidden = {}; // reset the hidden instances
         host.storage.selector.clearSelection(); // reset the selection
 
-    	if (!result.optimizer_instances)
-		  {
-          host.findModule("mdInput").handleError(null, "malformed_output", null);
-       		return false;
-   		}
+      	if (!result.optimizer_instances)
+  		  {
+            host.findModule("mdInput").handleError(null, "empty_instances", null);
+         		return false;
+     		}
     } 
     else  // the user submitted instances file
     {
@@ -40,7 +40,6 @@ function preprocessMOOResult(result, host)
 	}
 
 	var instancesXMLText = (new InstanceConverter(instances)).convertFromClaferMooOutputToXML(null);
-  alert(instancesXMLText);
 
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
 
@@ -51,7 +50,7 @@ function preprocessMOOResult(result, host)
     }
 
     if (instancesXMLText.indexOf("<instance></instance>") >= 0)
-	{
+	  {
         host.findModule("mdInput").handleError(null, "malformed_instance", null);
         return false;
     }

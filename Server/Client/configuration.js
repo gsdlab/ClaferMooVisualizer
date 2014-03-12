@@ -4,7 +4,7 @@ try
 }
 catch(e)
 {
-    alert("Could not find Google Visualization package. Please check the internet connection");
+    alert("Could not find Google Visualization package. Please check Internet connection");
 }
 
 function getConfiguration() 
@@ -62,7 +62,7 @@ function getConfiguration()
 			    else if (statusText == "malformed_instance")
 			        caption = "<b>Malformed instance data received from the optimizer.</b><br>An unhandled exception may have occured during the optimizer execution. Please verify your input file: check syntax and integer ranges.";        
 			    else if (statusText == "empty_instances")
-			        caption = "<b>No instances returned.</b>Possible reasons:<br><ul><li>No optimal instances, all variants are non-optimal.</li><li>An unhandled exception occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.</li></ul>.";        
+			        caption = "<b>No instances returned.</b>Possible reasons:<br><ul><li>No instances found at all: the model is not satisfiable within the given scopes and integer range</li><li>An unhandled exception occured in the chosen backend</li></ul>. Please verify your input model, increase scopes and integer ranges.";        
 			    else if (statusText == "empty_argument")
 			        caption = "<b>Empty argument given to processToolResult.</b><br>Please report this error.";        
 			    else if (statusText == "empty_instance_file")
