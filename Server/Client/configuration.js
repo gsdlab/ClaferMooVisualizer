@@ -72,7 +72,7 @@ function getConfiguration()
 			    else if (statusText == "error" && response.responseText == "")
 			        caption = "<b>Request Error.</b><br>Please check whether the server is available.";        
 			    else
-			        caption = '<b>' + xhr + '</b><br>' + response.responseText.replace("\n", "<br>");
+			        caption = '<b>' + xhr + '</b><br>' + JSON.stringify(response.responseText);
 
 		        module.host.print("ClaferMooVisualizer> Error occured\n");
 
