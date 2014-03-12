@@ -40,6 +40,7 @@ function preprocessMOOResult(result, host)
 	}
 
 	var instancesXMLText = (new InstanceConverter(instances)).convertFromClaferMooOutputToXML(null);
+  alert(instancesXMLText);
 
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
 

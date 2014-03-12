@@ -58,9 +58,9 @@ function getConfiguration()
 			    else if (statusText == "timeout")
 			        caption = "<b>Request Timeout.</b><br>Please check whether the server is available.";
 			    else if (statusText == "malformed_output")
-			        caption = "<b>Malformed output received from ClaferMoo.</b><br>Please check whether you are using the correct version of ClaferMoo. Also, an unhandled exception is possible.  Please verify your input file: check syntax and integer ranges.";        
+			        caption = "<b>Malformed output received from the optimizer.</b><br>Please check whether you are using the correct version of the chosen optimizer. Also, an unhandled exception is possible.  Please verify your input file: check syntax and integer ranges.";        
 			    else if (statusText == "malformed_instance")
-			        caption = "<b>Malformed instance data received from ClaferMoo.</b><br>An unhandled exception may have occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.";        
+			        caption = "<b>Malformed instance data received from the optimizer.</b><br>An unhandled exception may have occured during the optimizer execution. Please verify your input file: check syntax and integer ranges.";        
 			    else if (statusText == "empty_instances")
 			        caption = "<b>No instances returned.</b>Possible reasons:<br><ul><li>No optimal instances, all variants are non-optimal.</li><li>An unhandled exception occured during ClaferMoo execution. Please verify your input file: check syntax and integer ranges.</li></ul>.";        
 			    else if (statusText == "empty_argument")
