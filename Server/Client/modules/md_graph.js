@@ -143,8 +143,8 @@ Graph.method("drop", function(ev)
 	if (parts.length < 2)
 		return;
 	
-	var arg = parts[0].replaceAll("-", ".");
-	var label = parts[1].replaceAll("-", ".");
+	var arg = parts[0];//.replaceAll("-", ".");
+	var label = parts[1];//.replaceAll("-", ".");
     console.log("arg:" + arg);
     console.log("label:" + label);
 
