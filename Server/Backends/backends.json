@@ -1,11 +1,9 @@
 {
     "backends": [
-
-
         {
             "id": "pythonZ3", 
-            "label": "Z3-based IG",
-            "tooltip": "A new instance generator based on Z3 solver library",
+            "label": "Z3-based (multi-obj)",
+            "tooltip": "A new multi-objective optimizer based on Z3 solver library",
             "accepted_format": "python",             
             "tool": "sh",
             "tool_args": ["$dirname$/../../../../runClaferZ3", "$filepath$", "-n=-1", "--showinheritance", "-u", "-g", "5", "--indentation=tab"],            
@@ -16,8 +14,8 @@
         },
         {
             "id": "choco_single", 
-            "label": "Choco (single objective)",
-            "tooltip": "A new Choco solver, for single objective optimization only",
+            "label": "Choco-based (single-obj)",
+            "tooltip": "A new Choco-based solver, for single objective optimization only",
             "accepted_format": "choco",               
             "tool": "java",
             "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.6-jar-with-dependencies.jar", "$filepath$"],
