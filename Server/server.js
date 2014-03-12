@@ -259,18 +259,32 @@ function runOptimization(process)
 
     var args = core.replaceTemplateList(backend.tool_args, fileAndPathReplacement);
 
-    if (backend.scope_options && backend.scope_options.set_int_scope && backend.scope_options.set_int_scope.argument) 
+    if (process.optimizerMaxInt && backend.scope_options && backend.scope_options.set_int_scope && backend.scope_options.set_int_scope.argument) 
     {
         var replacement = [
             {
                 "needle": "$value$", 
-                "replacement": process.intScopeValue
+                "replacement": process.optimizerMaxInt
             }
         ];
 
         var intArg = core.replaceTemplate(backend.scope_options.set_int_scope.argument, replacement);
 
         args.push(intArg);
+    }
+
+    if (process.optimizerScope && backend.scope_options && backend.scope_options.set_default_scope && backend.scope_options.set_default_scope.argument) 
+    {
+        var replacement = [
+            {
+                "needle": "$value$", 
+                "replacement": process.optimizerScope
+            }
+        ];
+
+        var scopeArg = core.replaceTemplate(backend.scope_options.set_default_scope.argument, replacement);
+
+        args.push(scopeArg);
     }
 
     var toolPath = core.replaceTemplate(backend.tool, fileAndPathReplacement);
@@ -410,7 +424,8 @@ server.post('/upload', /*commandMiddleware,*/ function(req, res, next)
                 ss = "--ss=full";
             }
 
-            process.intScopeValue = req.body.optimizationIntHighScopeValue;
+            process.optimizerMaxInt = req.body.optimizerMaxInt;
+            process.optimizerScope = req.body.optimizerScope;
 
             var specifiedArgs = [];
             var genericArgs = [ss, uploadedFilePath + ".cfr"];

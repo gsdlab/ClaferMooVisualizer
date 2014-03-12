@@ -22,6 +22,8 @@ function getConfiguration()
     		"title": "Input Clafer Model and Options",
     		"optimization_backend": true, 
             "input_default_cache": false,
+            "input_default_optimizer_scope": true,            
+            "input_default_optimizer_maxint": true,            
             "input_default_flags": "",
             "file_extensions": [
                 {
@@ -86,15 +88,15 @@ function getConfiguration()
     		},
 
     		"onPoll" : function(module, responseObject){
-//		        if (responseObject.args)
-//		        {
-//		            module.host.print("ClaferMooVisualizer> clafer " + responseObject.args + "\n");
-//		        }
+		        if (responseObject.args)
+		        {
+		            module.host.print("ClaferMooVisualizer> clafer " + responseObject.args + "\n");
+		        }
 
-//                if (responseObject.ig_args)
-//                {
-//                    module.host.print("ClaferMooVisualizer> " + responseObject.ig_args + "\n");
-//                }
+                if (responseObject.ig_args)
+                {
+                    module.host.print("ClaferMooVisualizer> " + responseObject.ig_args + "\n");
+                }
 
                 console.log(responseObject);
 
