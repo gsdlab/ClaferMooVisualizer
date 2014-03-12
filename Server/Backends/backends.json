@@ -2,7 +2,7 @@
     "backends": [
         {
             "id": "pythonZ3", 
-            "label": "Z3-based (multi-obj)",
+            "label": "Z3-based (multi-objective)",
             "tooltip": "A new multi-objective optimizer based on Z3 solver library",
             "accepted_format": "python",             
             "tool": "sh",
