@@ -39,6 +39,11 @@ function preprocessMOOResult(result, host)
    		}
 	}
 
+  var extraText = getExtraText(instances);
+  host.print("ClaferMooVisualizer> Backend output:\n");
+  host.print(extraText);
+  host.print("ClaferMooVisualizer> Backend output ends\n");
+
 	var instancesXMLText = (new InstanceConverter(instances)).convertFromClaferMooOutputToXML(null);
 
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
@@ -136,4 +141,21 @@ function convertHtmlTags (input) {
     }
 
   return output;
+}
+
+
+function getExtraText(text)
+{ 
+  var instanceRegExp = /^=== Instance ([0-9]*) ===$/gm;  
+  var match = instanceRegExp.exec(text);
+
+  if (match == null) // meaning no instances
+  {
+    return text;    
+  }
+
+  var mPos1 = 0;
+  var mPos2 = match.index;
+
+  return text.substring(mPos1, mPos2);
 }

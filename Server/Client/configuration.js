@@ -152,7 +152,7 @@ function getConfiguration()
 
                 module.host.storage.instanceFilter.filterContent();               
 
-		        module.host.print(responseObject.optimizer_message + "\n");
+		        module.host.print("ClaferMooVisualizer> " + responseObject.optimizer_message + "\n");
 		        return true;  
     		}    		
     	}
@@ -180,7 +180,7 @@ function getConfiguration()
     	{
     		"layout": {
                 "width": (window.parent.innerWidth-20) * 0.38,
-                "height": window.parent.innerHeight - 40 - 50 - 355,
+                "height": 190,
                 "posx": 0,
                 "posy": 350
     		},
@@ -212,9 +212,9 @@ function getConfiguration()
 
     		"layout": {
                 "width": (window.parent.innerWidth-20) * 0.38,
-                "height": (160),
+                "height": window.parent.innerHeight - 40 - 50 - 580,
 			    "posx": 0,
-			    "posy": window.parent.innerHeight - 40 - 50
+			    "posy": 580
     		}
 
     	}});
@@ -308,7 +308,6 @@ function getConfiguration()
 	    },
     	"onLoaded": function(host)
 	    {
-            $.minimizeWindow("mdOutput");
 	    	$("#myform").submit();
 	    }	    
 	};

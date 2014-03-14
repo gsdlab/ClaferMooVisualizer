@@ -543,7 +543,7 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
                         // this code assumes the backend should produce an XML,
                         // which is not the correct way
                         
-                        jsonObj.optimizer_message = "Instances have been generated";
+                        jsonObj.optimizer_message = "Backend successfully executed";
                         jsonObj.optimizer_instances_only = false;
                         jsonObj.optimizer_instances = instances;
                         jsonObj.optimizer_claferXML = xml.toString();
