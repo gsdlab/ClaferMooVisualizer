@@ -259,32 +259,12 @@ function runOptimization(process)
 
     var args = core.replaceTemplateList(backend.tool_args, fileAndPathReplacement);
 
-    if (process.optimizerMaxInt && backend.scope_options && backend.scope_options.set_int_scope && backend.scope_options.set_int_scope.argument) 
+    if (backend.optimization_options)
     {
-        var replacement = [
-            {
-                "needle": "$value$", 
-                "replacement": process.optimizerMaxInt
-            }
-        ];
-
-        var intArg = core.replaceTemplate(backend.scope_options.set_int_scope.argument, replacement);
-
-        args.push(intArg);
-    }
-
-    if (process.optimizerScope && backend.scope_options && backend.scope_options.set_default_scope && backend.scope_options.set_default_scope.argument) 
-    {
-        var replacement = [
-            {
-                "needle": "$value$", 
-                "replacement": process.optimizerScope
-            }
-        ];
-
-        var scopeArg = core.replaceTemplate(backend.scope_options.set_default_scope.argument, replacement);
-
-        args.push(scopeArg);
+        args = core.buildArg(args, backend.optimization_options.set_int_scope, process.optimizerMaxInt);
+        args = core.buildArg(args, backend.optimization_options.set_default_scope, process.optimizerScope);
+        args = core.buildArg(args, backend.optimization_options.cores, process.optimizerCores);
+        args = core.buildArg(args, backend.optimization_options.limit, process.optimizerLimit);
     }
 
     var toolPath = core.replaceTemplate(backend.tool, fileAndPathReplacement);
@@ -426,6 +406,8 @@ server.post('/upload', /*commandMiddleware,*/ function(req, res, next)
 
             process.optimizerMaxInt = req.body.optimizerMaxInt;
             process.optimizerScope = req.body.optimizerScope;
+            process.optimizerCores = req.body.optimizerCores;
+            process.optimizerLimit = req.body.optimizerLimit;
 
             var specifiedArgs = [];
             var genericArgs = [ss, uploadedFilePath + ".cfr"];

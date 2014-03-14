@@ -8,7 +8,7 @@
             "tool": "java",
             "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.6-jar-with-dependencies.jar", "--file=$filepath$"],
             "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.6-jar-with-dependencies.jar", "--version"],
-            "scope_options": {
+            "optimization_options": {
                 "set_int_scope" : {"label": "Max. integer:", "argument": "--maxint=$value$", "default_value": 127},
                 "set_default_scope" : {"label": "Default scopes:", "argument": "--scope=$value$", "default_value": 25}
             }
@@ -21,7 +21,7 @@
             "tool": "python", 
             "tool_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "$filepath$", "--preservenames", "--donotexecutecompiler"],
             "tool_version_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "--version"],
-            "scope_options": {
+            "optimization_options": {
             }
         }        
     ]   
