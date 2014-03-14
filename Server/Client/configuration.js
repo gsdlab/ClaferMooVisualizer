@@ -14,7 +14,7 @@ function getConfiguration()
     	{
     		"layout": {
     			"width": (window.parent.innerWidth-20) * 0.38,
-    			"height": 180,
+    			"height": 210,
     			"posx": 0,
     			"posy": 0
     		},
@@ -166,7 +166,7 @@ function getConfiguration()
                 "width": (window.parent.innerWidth-20) * 0.38,
                 "height": 70,
                 "posx": 0,
-                "posy": 215
+                "posy": 245
             },
 
             "onFilterByGoals": function(module)
@@ -182,7 +182,7 @@ function getConfiguration()
                 "width": (window.parent.innerWidth-20) * 0.38,
                 "height": window.parent.innerHeight - 40 - 50 - 355,
                 "posx": 0,
-                "posy": 320
+                "posy": 350
     		},
 
 	    	"title": "Variant Comparer",
