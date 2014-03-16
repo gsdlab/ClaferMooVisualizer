@@ -32,9 +32,9 @@ function getConfiguration()
                     "button_example_caption": "Optimize",
                     "button_editor_caption": "Optimize",
 
-                    "button_file_tooltip": "Optimize tooltip",
-                    "button_example_tooltip": "Optimize tooltip",
-                    "button_editor_tooltip": "Optimize tooltip"
+                    "button_file_tooltip": "Optimize the selected file",
+                    "button_example_tooltip": "Optimize the selected example",
+                    "button_editor_tooltip": "Optimize the model specified in the editor"
                 },
                 {
                     "ext": ".data", 
@@ -42,9 +42,9 @@ function getConfiguration()
                     "button_example_caption": "Add Instances",
                     "button_editor_caption": "Add Instances",
 
-                    "button_file_tooltip": "Add Instances tooltip",
-                    "button_example_tooltip": "Add Instances tooltip",
-                    "button_editor_tooltip": "Add Instances tooltip"
+                    "button_file_tooltip": "Add instances to already computed Pareto front",
+                    "button_example_tooltip": "Add instances to already computed Pareto front",
+                    "button_editor_tooltip": "Add instances to already computed Pareto front"
                 }
             ],
 

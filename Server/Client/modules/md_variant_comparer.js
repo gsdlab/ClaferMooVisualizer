@@ -213,6 +213,11 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
             $(this).attr("src", "commons/Client/images/remove.png");
         });      
     }    
+
+//  adding tooltips
+
+    $("#VariantComparer [title]").tipsy({fade: true, gravity: 'w', html: true});
+
 });
 
 //saves all selected instances and downloads them to client
