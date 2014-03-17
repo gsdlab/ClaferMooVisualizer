@@ -6,8 +6,8 @@
             "tooltip": "A new Choco-based solver, for single objective optimization only",
             "accepted_format": "choco",               
             "tool": "java",
-            "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.6-jar-with-dependencies.jar", "--file=$filepath$"],
-            "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocosoo-0.3.6-jar-with-dependencies.jar", "--version"],
+            "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocoig-0.3.6-jar-with-dependencies.jar", "--file=$filepath$", "--soo"],
+            "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocoig-0.3.6-jar-with-dependencies.jar", "--version"],
             "optimization_options": {
                 "set_int_scope" : {"label": "Max. integer:", "argument": "--maxint=$value$", "default_value": 127},
                 "set_default_scope" : {"label": "Default scopes:", "argument": "--scope=$value$", "default_value": 25}
