@@ -1,27 +1,16 @@
 {
     "backends": [
         {
-            "id": "choco_single", 
-            "label": "Choco-based (single-objective only)",
-            "tooltip": "A new Choco-based solver, for single objective optimization only",
+            "id": "choco_moo", 
+            "label": "Choco-based Optimizer",
+            "tooltip": "A new Choco-based solver, for multi-objective optimization",
             "accepted_format": "choco",               
             "tool": "java",
-            "tool_args": ["-jar", "$dirname$/ChocoSoo/claferchocoig-0.3.6-jar-with-dependencies.jar", "--file=$filepath$", "--soo"],
-            "tool_version_args": ["-jar", "$dirname$/ChocoSoo/claferchocoig-0.3.6-jar-with-dependencies.jar", "--version"],
+            "tool_args": ["-jar", "$dirname$/ChocoIG/claferchocoig-0.3.6-jar-with-dependencies.jar", "--file=$filepath$", "--moo"],
+            "tool_version_args": ["-jar", "$dirname$/ChocoIG/claferchocoig-0.3.6-jar-with-dependencies.jar", "--version"],
             "optimization_options": {
                 "set_int_scope" : {"label": "Max. integer:", "argument": "--maxint=$value$", "default_value": 127},
                 "set_default_scope" : {"label": "Default scopes:", "argument": "--scope=$value$", "default_value": 25}
-            }
-        },
-        {
-            "id": "clafermoo_standard", 
-            "label": "ClaferMoo", 
-            "tooltip": "Classic Moo based on Alloy solver",
-            "accepted_format": "clafer_source",                           
-            "tool": "python", 
-            "tool_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "$filepath$", "--preservenames", "--donotexecutecompiler"],
-            "tool_version_args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "--version"],
-            "optimization_options": {
             }
         }        
     ]   

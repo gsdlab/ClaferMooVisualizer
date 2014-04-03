@@ -39,12 +39,14 @@ function preprocessMOOResult(result, host)
    		}
 	}
 
-  var extraText = getExtraText(instances);
+  var converter = new InstanceConverter(instances);
+  var instancesXMLText = converter.convertFromClaferMooOutputToXML(null);
+
+  var extraText = converter.residualExtraText;
   host.print("ClaferMooVisualizer> Backend output:\n");
   host.print(extraText);
   host.print("ClaferMooVisualizer> Backend output ends\n");
 
-	var instancesXMLText = (new InstanceConverter(instances)).convertFromClaferMooOutputToXML(null);
 
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
 
