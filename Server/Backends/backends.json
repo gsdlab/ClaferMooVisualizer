@@ -6,12 +6,40 @@
             "tooltip": "A new Choco-based solver, for multi-objective optimization",
             "accepted_format": "choco",               
             "tool": "java",
-            "tool_args": ["-jar", "$dirname$/ChocoIG/claferchocoig-0.3.6-jar-with-dependencies.jar", "--file=$filepath$", "--moo"],
-            "tool_version_args": ["-jar", "$dirname$/ChocoIG/claferchocoig-0.3.6-jar-with-dependencies.jar", "--version"],
+            "tool_args": ["-jar", "$dirname$/../../../ChocoIG/claferchocoig-0.3.6-jar-with-dependencies.jar", "--file=$filepath$", "--moo"],
+            "tool_version_args": ["-jar", "$dirname$/../../../ChocoIG/claferchocoig-0.3.6-jar-with-dependencies.jar", "--version"],
             "optimization_options": {
                 "set_int_scope" : {"label": "Max. integer:", "argument": "--maxint=$value$", "default_value": 127},
                 "set_default_scope" : {"label": "Default scopes:", "argument": "--scope=$value$", "default_value": 25}
             }
-        }        
+        },
+        {
+            "id": "pythonZ3", 
+            "label": "Z3-based (multi-objective)",
+            "tooltip": "A new multi-objective optimizer based on Z3 solver library",
+            "accepted_format": "python",             
+            "tool": "sh",
+            "tool_args": ["$dirname$/../../../ClaferZ3/runClaferZ3", "$filepath$", "--showinheritance", "-u", "--indentation=tab", "-p"],            
+            "tool_version_args": ["$dirname$/../../../ClaferZ3/runClaferZ3", "-v"],
+            "optimization_options": {
+                "set_default_scope" : {"label": "Scope:", "argument": "-g=$value$\n", "default_value": 5},
+                "limit" : {"label": "Limit instances:", "argument": "-n=$value$", "off_value": -1, "default_value": 100},
+                "cores" : {"label": "Number of cores:", "argument": "-c=$value$"}
+            }            
+        },
+        {
+            "id": "pythonZ3mg", 
+            "label": "Z3-based (+ magnif.glass)",
+            "tooltip": "ClaferZ3 backend with magnifying glass option",
+            "accepted_format": "python",             
+            "tool": "sh",
+            "tool_args": ["$dirname$/../../../ClaferZ3/runClaferZ3", "$filepath$", "--showinheritance", "-u", "--indentation=tab", "--magnifyingglass", "-p"],            
+            "tool_version_args": ["$dirname$/../../../ClaferZ3/runClaferZ3", "-v"],
+            "optimization_options": {
+                "set_default_scope" : {"label": "Scope:", "argument": "-g=$value$\n", "default_value": 5},
+                "limit" : {"label": "Limit instances:", "argument": "-n=$value$", "off_value": -1, "default_value": 100},
+                "cores" : {"label": "Number of cores:", "argument": "-c=$value$"}
+             }            
+        }                
     ]   
 }
