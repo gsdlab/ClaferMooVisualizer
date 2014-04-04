@@ -2,7 +2,7 @@
     "backends": [
         {
             "id": "choco_moo", 
-            "label": "Choco-based Optimizer",
+            "label": "Choco-based (MOO with magnifier)",
             "tooltip": "A new Choco-based solver, for multi-objective optimization",
             "accepted_format": "choco",               
             "tool": "java",
@@ -15,7 +15,7 @@
         },
         {
             "id": "pythonZ3", 
-            "label": "Z3-based (multi-objective)",
+            "label": "Z3-based (MOO, no magnifier)",
             "tooltip": "A new multi-objective optimizer based on Z3 solver library",
             "accepted_format": "python",             
             "tool": "sh",
@@ -29,7 +29,7 @@
         },
         {
             "id": "pythonZ3mg", 
-            "label": "Z3-based (+ magnif.glass)",
+            "label": "Z3-based (MOO with magnifier)",
             "tooltip": "ClaferZ3 backend with magnifying glass option",
             "accepted_format": "python",             
             "tool": "sh",
