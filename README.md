@@ -4,7 +4,7 @@ ClaferMooVisualizer
 v0.3.6.15-04-2014
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
-Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528).
+Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528). The current version can be used outside the product line domain: various design optimization problems, architecture exploration, packaging problems are supported.
 
 ClaferMooVisualizer is part of Clafer Tools. 
 Read more in the paper [Clafer Tools for Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/519).
@@ -19,14 +19,14 @@ If the demo is down or you encounter a bug, please email [Michal Antkiewicz](mai
 ### Background
 
 [Clafer](http://clafer.org) is a general-purpose lightweight structural modeling language developed at [GSD Lab](http://gsd.uwaterloo.ca/), [University of Waterloo](http://uwaterloo.ca). 
-Clafer can be used for *product-line modeling* and *multi-objective optimization*, whereby a the model of a product line can be used to find optimal products given a set of optimization goals. 
+Clafer can be used for *domain modeling*, *product-line modeling* and *multi-objective optimization* with respect to various one or more optimization goals. 
 
 ### Functions
 
 1. Displays all the non-dominated optimal product configurations as a *Bubble Front Graph* (up to 4 dimensions) and as a *Feature and Quality Matrix*.
 2. Allows to compare and analyze product configurations.
 3. Allows for filtering by feature and by quality range.  
-4. Supports multiple  backends.
+4. Supports multiple solver backends.
 
 ### Nature
 
@@ -125,10 +125,13 @@ This assumes you use the default configuration `<target directory>/ClaferMooVisu
 * To run the server in a standard mode, execute
 	
 `cd <target directory>/ClaferMooVisualizer/Server/`
+
 `node ClaferMooVisualizer.js`
 
 * If you use `Node Supervisor` under Linux, you can execute
+
 `cd <target directory>/ClaferMooVisualizer/Server/commons`
+
 `sh start.sh`
 
 Then you can go to any browser and type `http://localhost:[port]/` and open any Clafer file with objectives in it.
