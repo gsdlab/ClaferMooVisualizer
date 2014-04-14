@@ -62,7 +62,7 @@ Installation and running
 
 **Core**
 
-1. Download (`git clone`) [ClaferMooVisualizer](https://github.com/gsdlab/claferMooVisualizer) to some directory `<target directory>`
+1. Download (`git clone`) [ClaferMooVisualizer](https://github.com/gsdlab/ClaferMooVisualizer) to some directory `<target directory>`
 2. Go to `<target directory>/ClaferMooVisualizer` and execute
 	
  `git submodule init`
