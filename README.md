@@ -1,7 +1,7 @@
 ClaferMooVisualizer
 ===================
 
-v0.3.5.20-01-2014
+v0.3.6.15-04-2014
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528).
@@ -11,7 +11,8 @@ Read more in the paper [Clafer Tools for Product Line Engineering](http://gsd.uw
 
 ### Live demo
 
-[Try me!](http://t3-necsis.cs.uwaterloo.ca:8092/)
+* Master branch (stable and released): [Try me!](http://t3-necsis.cs.uwaterloo.ca:8092/)
+* Develop branch (with newest features, but not guaranteed to be stable): [Try me!](http://t3-necsis.cs.uwaterloo.ca:8192/)
 
 If the demo is down or you encounter a bug, please email [Michal Antkiewicz](mailto:mantkiew@gsd.uwaterloo.ca).
 
@@ -25,12 +26,12 @@ Clafer can be used for *product-line modeling* and *multi-objective optimization
 1. Displays all the non-dominated optimal product configurations as a *Bubble Front Graph* (up to 4 dimensions) and as a *Feature and Quality Matrix*.
 2. Allows to compare and analyze product configurations.
 3. Allows for filtering by feature and by quality range.  
-4. Allows to choose a back-end: a universal [ClaferMoo](https://github.com/gsdlab/claferMooStandalone) or [ClaferChocoSoo](https://github.com/gsdlab/ClaferChocoSoo) for single-objective optimization problems.
+4. Supports multiple  backends.
 
 ### Nature
 
 ClaferMoo Visualizer is a web-based application. 
-Its server side (implemented with Node.JS) processes requests, runs the chosen back-end and passes back its output.
+Its server side (implemented with `Node.JS`) processes requests, runs the chosen back-end and passes back its output.
 The client-side is implemented using Javascript/HTML and handles all the visualization and exploration functionality.
 
 Contributors
@@ -43,21 +44,22 @@ Contributors
 Getting Clafer Tools
 --------------------
 
-Binary distributions of the release 0.3.5 of Clafer Tools for Windows, Mac, and Linux, 
+Binary distributions of the release 0.3.6 of Clafer Tools for Windows, Mac, and Linux, 
 can be downloaded from [Clafer Tools - Binary Distributions](http://http://gsd.uwaterloo.ca/clafer-tools-binary-distributions). 
 Clafer Wiki requires Haskell Platform and MinGW to run on Windows. 
 
 In case these binaries do not work on your particular machine configuration, the tools can be built from source code, as described below.
 
+Installation and running
+--------------------
+
 ### Dependencies for running
 
-* [Java Platform (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) v6+, 32bit
-* [Python](http://www.python.org/download/) v2.7.*
-  * Needed by ClaferMOO
-* [Clafer](https://github.com/gsdlab/clafer) v0.3.4
+* [Java Platform (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) v7+, 32bit
+* [Clafer](https://github.com/gsdlab/clafer) v0.3.6
   * can be from the binary distribution
-* [ClaferMoo](https://github.com/gsdlab/claferMooStandalone) v0.3.4
-* [Node.JS Framework](http://nodejs.org/download/), v0.10.18
+* [Node.JS Framework](http://nodejs.org/download/), v0.10.20
+* Backends' dependencies must be satisfied. See the backend installation steps below
 
 ### Installation
 
@@ -65,53 +67,51 @@ Core
 --------------------
 
 1. Download [ClaferMooVisualizer](https://github.com/gsdlab/claferMooVisualizer) to some directory `<target directory>`
+2. Go to `<target directory>/ClaferMooVisualizer` and execute
+	
+ `git submodule init`
+ `git submodule update`
+
+to install the platform
+
 2. Go to `<target directory>/ClaferMooVisualizer/Server` and execute
 	
  `npm install`
 
 3. Install the necessary backends using the steps below.
 
-Backend: ClaferMoo
+4. If you use Shell scipts (`.sh`) for running, make sure the scripts have `Execute` permissions. 
+
+Backend: ClaferChocoIG
 --------------------
 
-1. Install [ClaferMooStandalone](https://github.com/gsdlab/claferMooStandalone) to some directory `<ClaferMooStandalone>`
-  * Clafer is installed as part of this procedure
-2. Go to `<target directory>/ClaferMooVisualizer/Server/Backends/` and create a folder called `ClaferMoo`
-3. Copy folders `spl_datagenerator` and `tools` from `<ClaferMooStandalone>/2012-models-clafermultiobjective-data-generator/` into `<target directory>/ClaferMooVisualizer/Server/Backends/ClaferMoo`
-4. Put (or check if it is there) the following code to `<target directory>/ClaferMooVisualizer/Server/Backends/backends.json`:
+This assumes you use the default configuration `<target directory>/ClaferMooVisualizer/Server/Backends/backends.json` file.
 
-```javascript
+1. Install [Java 7+](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
-{
-    "backends": [
-        {
-            "id": "clafermoo_standard", 
-            "label": "ClaferMoo", 
-            "tool": "python", 
-            "args": ["$dirname$/ClaferMoo/spl_datagenerator/IntegratedFeatureModelOptimizer.py", "$filepath$", "--preservenames"]
-        }, 
-        ....
-    ]   
-}
-```
+2. Copy the binary of `ClaferChocoIG` (`claferchocoig-0.3.6-jar-with-dependencies.jar`) into the folder `<target directory>/ChocoIG`.
 
-Backend: ClaferChocoSoo
+Backend: ClaferZ3
 --------------------
 
-Refer to [this](https://github.com/gsdlab/ClaferChocoSoo) project.
+This assumes you use the default configuration `<target directory>/ClaferMooVisualizer/Server/Backends/backends.json` file.
+
+1. Refer to the [ClaferZ3](https://github.com/gsdlab/ClaferZ3/) installation requirements. This should install `Python 3`, `PIP` and `Z3`.
+
+2. Install `ClaferZ3` into the folder `<target directory>/ClaferZ3`.
 
 ### Important: Branches must correspond
 
 All related projects are following the *simultaneous release model*. 
 The branch `master` contains releases, whereas the branch `develop` contains code under development. 
 When building the tools, the branches should match.
-Releases from branches 'master` are guaranteed to work well together.
+Releases from branches `master` are guaranteed to work well together.
 Development versions from branches `develop` should work well together but this might not always be the case.
 
 ### Settings
 
-1. Make sure the port `8092` is free, or change the value of the key `port` in `Server/config.json`:
-`"port" = "8092"` to any free one. 
+1. Make sure the port `8192` is free, or change the value of the key `port` in `Server/config.json`:
+`"port" = "8192"` to any free one. 
 
 2. Make sure `clafer`, `node`, `python`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
 
@@ -121,29 +121,26 @@ Running the following commands should produce the following results or later ver
 
 > `Clafer v0.3.5.20-01-2014`
 
-`python -V`
-
-> `Python 2.7.5`
-
 `java -version`
 
 > `java version 1.7.0_25`
 
 `node -v`
 
->v0.10.20
+> `v0.10.20`
 
 3. Make sure `uploads` folder is accessible for writing, since temporary files will be stored there.
 
-4. Alloy solutions XML files are stored in the root, it is not fixed yet, so make sure the root folder is also writeable.
-
 ### Running
 
-To run the server execute
+* To run the server in a standard mode, execute
 	
-`node server.js`
- 
-from `<target directory>/ClaferMooVisualizer/Server/`
+`cd <target directory>/ClaferMooVisualizer/Server/`
+`node ClaferMooVisualizer.js`
+
+* If you use `Node Supervisor` under Linux, you can execute
+`cd <target directory>/ClaferMooVisualizer/Server/commons`
+`sh start.sh`
 
 Then you can go to any browser and type `http://localhost:[port]/` and open any Clafer file with objectives in it.
 
