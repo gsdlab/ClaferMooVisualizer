@@ -63,8 +63,7 @@ Installation and running
 
 ### Installation
 
-Core
---------------------
+**Core**
 
 1. Download [ClaferMooVisualizer](https://github.com/gsdlab/claferMooVisualizer) to some directory `<target directory>`
 2. Go to `<target directory>/ClaferMooVisualizer` and execute
@@ -82,8 +81,7 @@ to install the platform
 
 4. If you use Shell scipts (`.sh`) for running, make sure the scripts have `Execute` permissions. 
 
-Backend: ClaferChocoIG
---------------------
+**Backend: ClaferChocoIG**
 
 This assumes you use the default configuration `<target directory>/ClaferMooVisualizer/Server/Backends/backends.json` file.
 
@@ -91,22 +89,13 @@ This assumes you use the default configuration `<target directory>/ClaferMooVisu
 
 2. Copy the binary of `ClaferChocoIG` (`claferchocoig-0.3.6-jar-with-dependencies.jar`) into the folder `<target directory>/ChocoIG`.
 
-Backend: ClaferZ3
---------------------
+**Backend: ClaferZ3**
 
 This assumes you use the default configuration `<target directory>/ClaferMooVisualizer/Server/Backends/backends.json` file.
 
 1. Refer to the [ClaferZ3](https://github.com/gsdlab/ClaferZ3/) installation requirements. This should install `Python 3`, `PIP` and `Z3`.
 
 2. Install `ClaferZ3` into the folder `<target directory>/ClaferZ3`.
-
-### Important: Branches must correspond
-
-All related projects are following the *simultaneous release model*. 
-The branch `master` contains releases, whereas the branch `develop` contains code under development. 
-When building the tools, the branches should match.
-Releases from branches `master` are guaranteed to work well together.
-Development versions from branches `develop` should work well together but this might not always be the case.
 
 ### Settings
 
@@ -143,6 +132,14 @@ Running the following commands should produce the following results or later ver
 `sh start.sh`
 
 Then you can go to any browser and type `http://localhost:[port]/` and open any Clafer file with objectives in it.
+
+### Important: Branches must correspond
+
+All related projects are following the *simultaneous release model*. 
+The branch `master` contains releases, whereas the branch `develop` contains code under development. 
+When building the tools, the branches should match.
+Releases from branches `master` are guaranteed to work well together.
+Development versions from branches `develop` should work well together but this might not always be the case.
 
 Need help?
 ==========
