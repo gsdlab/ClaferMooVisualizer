@@ -65,21 +65,22 @@ Installation and running
 
 **Core**
 
-1. Download [ClaferMooVisualizer](https://github.com/gsdlab/claferMooVisualizer) to some directory `<target directory>`
+1. Download (`git clone`) [ClaferMooVisualizer](https://github.com/gsdlab/claferMooVisualizer) to some directory `<target directory>`
 2. Go to `<target directory>/ClaferMooVisualizer` and execute
 	
  `git submodule init`
+
  `git submodule update`
 
-to install the platform
+  This will install the platform
 
-2. Go to `<target directory>/ClaferMooVisualizer/Server` and execute
+3. Go to `<target directory>/ClaferMooVisualizer/Server` and execute
 	
  `npm install`
 
-3. Install the necessary backends using the steps below.
+  This will download all the required `Node.JS` modules.
 
-4. If you use Shell scipts (`.sh`) for running, make sure the scripts have `Execute` permissions. 
+4. Install the necessary backends using the steps below.
 
 **Backend: ClaferChocoIG**
 
@@ -104,7 +105,7 @@ This assumes you use the default configuration `<target directory>/ClaferMooVisu
 
 2. Make sure `clafer`, `node`, `python`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
 
-Running the following commands should produce the following results or later version:
+3. Running the following commands should produce the following results or later version:
 
 `clafer -V` 
 
@@ -118,7 +119,9 @@ Running the following commands should produce the following results or later ver
 
 > `v0.10.20`
 
-3. Make sure `uploads` folder is accessible for writing, since temporary files will be stored there.
+4. Make sure `uploads` folder is accessible for writing, since temporary files will be stored there.
+
+5. If you use Shell scipts (`.sh`) for running, make sure the scripts have `Execute` permissions. 
 
 ### Running
 
@@ -133,7 +136,7 @@ Running the following commands should produce the following results or later ver
 
 Then you can go to any browser and type `http://localhost:[port]/` and open any Clafer file with objectives in it.
 
-### Running Example
+### Trying an Example
 
 * Choose `Simple model of a Person` example in the dropdown box in the upper-left corner of the tool window
 * Press `Compile` button right in the front of the drop down list.
