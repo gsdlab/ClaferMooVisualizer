@@ -41,14 +41,11 @@ Contributors
 * [Michał Antkiewicz](http://gsd.uwaterloo.ca/mantkiew), Research Engineer. Requirements, development, architecture, testing, technology transfer.
 * Neil Vincent Redman, co-op student Jan-Apr 2013. Many improvements.
 
-Getting Clafer Tools
+Getting Binaries
 --------------------
 
 Binary distributions of the release 0.3.6 of Clafer Tools for Windows, Mac, and Linux, 
-can be downloaded from [Clafer Tools - Binary Distributions](http://http://gsd.uwaterloo.ca/clafer-tools-binary-distributions). 
-Clafer Wiki requires Haskell Platform and MinGW to run on Windows. 
-
-In case these binaries do not work on your particular machine configuration, the tools can be built from source code, as described below.
+can be downloaded from [Clafer Tools - Binary Distributions](http://http://gsd.uwaterloo.ca/clafer-tools-binary-distributions). There you can get binaries for `Clafer Compiler` and the `ClaferChocoIG` backend.
 
 Installation and running
 --------------------
