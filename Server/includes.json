@@ -1,14 +1,17 @@
 {
     "scripts": [
         "utils/utils.js",
+        "http://d3js.org/d3.v3.min.js",
         "https://www.google.com/jsapi",
         "utils/selection_controller.js",
         "utils/evolution_controller.js",
         "utils/instance_filter.js",        
         "utils/pf_visualizer.js",
+        "utils/radarchart_visualizer.js",
         "modules/md_graph.js",
         "modules/md_variant_comparer.js",
         "modules/hovering_extensions.js",
+        "modules/md_spider_chart.js",        
         "configuration.js"
     ],
 

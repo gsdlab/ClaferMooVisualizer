@@ -128,17 +128,20 @@ function getConfiguration()
 		        var graphModule = module.host.findModule("mdGraph");
 		        var matrixModule = module.host.findModule("mdFeatureQualityMatrix");
                 var comparerModule = module.host.findModule("mdVariantComparer");
+                var spiderChartModule = module.host.findModule("mdSpiderChart");
 
 				goalsModule.onDataLoaded(data);
 				data.goals = goalsModule.goals;
                 graphModule.onDataLoaded(data);
 				matrixModule.onDataLoaded(data);
                 comparerModule.onDataLoaded(data);
+                spiderChartModule.onDataLoaded(data);
 
 				$.updateWindowContent(goalsModule.id, goalsModule.getContent());
                 $.updateWindowContent(graphModule.id, graphModule.getContent());
 				$.updateWindowContent(matrixModule.id, matrixModule.getContent());
                 $.updateWindowContent(comparerModule.id, comparerModule.getContent());
+                $.updateWindowContent(spiderChartModule.id, spiderChartModule.getContent());
 
 				goalsModule.onRendered();
                 graphModule.onRendered();
@@ -151,6 +154,7 @@ function getConfiguration()
                 matrixModule.addHovering();
 
                 module.host.storage.instanceFilter.filterContent();               
+                spiderChartModule.onRendered();
 
 		        module.host.print("ClaferMooVisualizer> " + responseObject.optimizer_message + "\n");
 		        return true;  
@@ -298,6 +302,19 @@ function getConfiguration()
                 module.host.storage.selector.ReselectGraphPoints();
             }
     	}});
+
+    modules.push({"name": "SpiderChart", "configuration": 
+        {
+            "title": "Spider Chart",
+
+            "layout": {
+                "width": (window.parent.innerWidth - 20) * 0.62,
+                "height": window.parent.innerHeight - 40 - 50,
+                "posx": (window.parent.innerWidth-20) * 0.38,
+                "posy": 0
+            }
+
+        }});
 
     var settings = {
     	"onInitialize": function(host)
