@@ -38,15 +38,28 @@ function SpiderChart(host, settings)
 }
 
 SpiderChart.method("onDataLoaded", function(data){
-//    this.instanceProcessor = new InstanceProcessor(data.instancesXML);
-//    this.goals = data.goals;
-//    this.Processor = new ClaferProcessor(data.claferXML);
+    this.instanceProcessor = new InstanceProcessor(data.instancesXML);
+    this.claferProcessor = new ClaferProcessor(data.claferXML);
+    this.goals = data.goals;
+});
 
+SpiderChart.method("resize", function() // not attached to the window anymore, so need to call the method
+{
+    this.redrawChart();
+    return true;
 });
 
 SpiderChart.method("onRendered", function()
 {
+    this.redrawChart();
+});
 
+SpiderChart.method("argsToArray", function(argString){
+    return argString.split("-");
+});
+
+SpiderChart.method("redrawChart", function()
+{
     var e = $('#mdSpiderChart div.window-content')[0];
 
     var sw = document.defaultView.getComputedStyle(e,null).getPropertyValue("width");
@@ -55,13 +68,38 @@ SpiderChart.method("onRendered", function()
     var w = parseInt(sw) - 250;
     var h = parseInt(sh) - 100;
 
-var colorscale = d3.scale.category10();
+    var colorscale = d3.scale.category10();
 
-//Legend titles
-var LegendOptions = ['V1','V2'];
+    //Legend titles
 
-//Data
-var d = [
+    var instanceCount = this.instanceProcessor.getInstanceCount();
+
+    var d = new Array();
+    var LegendOptions = new Array();
+
+    for (var i = 1; i <= instanceCount; i++)
+    {
+        var first;
+        var second;
+
+        var current = new Array();
+        LegendOptions.push(getPID(i));
+        
+        for (var j = 0; j < this.goals.length; j++)
+        {
+            var value = this.instanceProcessor.getFeatureValue(i, this.argsToArray(this.goals[j].arg), 'int'); // get only numeric
+            var axis = this.goals[j].label;
+            var obj = new Object();
+            obj.axis = axis;
+            obj.value = value;
+            current.push(obj);
+        }
+        
+        d.push(current);
+    }
+/*
+    //Data
+    var d = [
           [
             {axis:"Email",value:3},
             {axis:"Social Networks",value:2},
@@ -110,7 +148,7 @@ var d = [
             {axis:"Use less Once week",value:0.17}
           ]
         ];
-
+*/
 //Options for the Radar chart, other than default
 var mycfg = {
   w: w,
@@ -123,6 +161,8 @@ var mycfg = {
 
 //Call function to draw the Radar chart
 //Will expect that data is in %'s
+
+$("#chartNode").html(""); // clear the contents
 RadarChart.draw("#chartNode", d, mycfg);
 
 ////////////////////////////////////////////
@@ -175,16 +215,14 @@ var legend = svg.append("g")
       .text(function(d) { return d; })
       ; 
    
-});
 
+});
 
 //gets containers and placeholders
 SpiderChart.method("getContent", function()
 {
     var content = '<div id="chartNode" style="width: 550px; height: 550px;"></div>';
-		
 	return content;	
-    
 });
 
 SpiderChart.method("getInitContent", function()
