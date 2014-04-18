@@ -197,7 +197,7 @@ SpiderChart.method("onSelectionChanged", function(newSelection){
 //gets containers and placeholders
 SpiderChart.method("getContent", function()
 {
-    var content = '<div id="chartNode" style="width: 550px; height: 550px;"></div>';
+    var content = '<div id="chartNode" style="width:100%;height:100%"></div>';
 	return content;	
 });
 

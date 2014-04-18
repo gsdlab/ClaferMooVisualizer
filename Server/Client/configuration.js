@@ -129,6 +129,7 @@ function getConfiguration()
 		        var matrixModule = module.host.findModule("mdFeatureQualityMatrix");
                 var comparerModule = module.host.findModule("mdVariantComparer");
                 var spiderChartModule = module.host.findModule("mdSpiderChart");
+                var parallelCoordinatesChartModule = module.host.findModule("mdParallelCoordinates");
 
 				goalsModule.onDataLoaded(data);
 				data.goals = goalsModule.goals;
@@ -136,12 +137,14 @@ function getConfiguration()
 				matrixModule.onDataLoaded(data);
                 comparerModule.onDataLoaded(data);
                 spiderChartModule.onDataLoaded(data);
+                parallelCoordinatesChartModule.onDataLoaded(data);
 
 				$.updateWindowContent(goalsModule.id, goalsModule.getContent());
                 $.updateWindowContent(graphModule.id, graphModule.getContent());
 				$.updateWindowContent(matrixModule.id, matrixModule.getContent());
                 $.updateWindowContent(comparerModule.id, comparerModule.getContent());
                 $.updateWindowContent(spiderChartModule.id, spiderChartModule.getContent());
+                $.updateWindowContent(parallelCoordinatesChartModule.id, parallelCoordinatesChartModule.getContent());
 
 				goalsModule.onRendered();
                 graphModule.onRendered();
@@ -150,6 +153,7 @@ function getConfiguration()
 
 				matrixModule.onRendered();
                 comparerModule.onRendered();
+                parallelCoordinatesChartModule.onRendered();
 
                 matrixModule.addHovering();
 
@@ -306,6 +310,19 @@ function getConfiguration()
     modules.push({"name": "SpiderChart", "configuration": 
         {
             "title": "Spider Chart",
+
+            "layout": {
+                "width": 750,
+                "height": 550,
+                "posx": (window.parent.innerWidth-20) * 0.38 + 50,
+                "posy": 50
+            }
+
+        }});
+
+    modules.push({"name": "ParallelCoordinates", "configuration": 
+        {
+            "title": "Parallel Coordinates Chart",
 
             "layout": {
                 "width": 750,

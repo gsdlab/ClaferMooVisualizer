@@ -2,6 +2,7 @@
     "scripts": [
         "utils/utils.js",
         "http://d3js.org/d3.v3.min.js",
+        "parallel_coordinates/d3.parcoords.js",
         "https://www.google.com/jsapi",
         "utils/selection_controller.js",
         "utils/evolution_controller.js",
@@ -10,12 +11,14 @@
         "utils/radarchart_visualizer.js",
         "modules/md_graph.js",
         "modules/md_variant_comparer.js",
+        "modules/md_parallel_coordinates.js",
         "modules/hovering_extensions.js",
         "modules/md_spider_chart.js",        
         "configuration.js"
     ],
 
     "styles": [
+        "parallel_coordinates/d3.parcoords.css",
         "styles.css"        
     ]    
 }
