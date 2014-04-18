@@ -308,10 +308,10 @@ function getConfiguration()
             "title": "Spider Chart",
 
             "layout": {
-                "width": (window.parent.innerWidth - 20) * 0.62,
-                "height": window.parent.innerHeight - 40 - 50,
-                "posx": (window.parent.innerWidth-20) * 0.38,
-                "posy": 0
+                "width": 750,
+                "height": 550,
+                "posx": (window.parent.innerWidth-20) * 0.38 + 50,
+                "posy": 50
             }
 
         }});

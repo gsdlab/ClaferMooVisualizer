@@ -9,7 +9,7 @@
 //http://nbremer.blogspot.nl/2013/09/making-d3-radar-chart-look-bit-better.html
 
 var RadarChart = {
-  draw: function(id, d, options){
+  draw: function(id, d, options, instanceIDs){
   var cfg = {
 	 radius: 5,
 	 w: 600,
@@ -51,6 +51,10 @@ var RadarChart = {
 			;
 
 	var tooltip;
+
+	var indexFromClassName = function(className){
+		return className.substring("radar-chart-serie".length);		
+	}
 	
 	//Circular segments
 	for(var j=0; j<cfg.levels-1; j++){
@@ -150,11 +154,23 @@ var RadarChart = {
 										g.selectAll(z)
 										 .transition(200)
 										 .style("fill-opacity", .7);
-									  })
+
+					tooltip
+						.text("Variant " + instanceIDs[indexFromClassName(d3.select(this).attr("class"))])
+						.attr('x', 0)
+						.attr('y', 0)
+						.transition(200)
+						.style('opacity', 1);
+
+
+						})
 					 .on('mouseout', function(){
 										g.selectAll("polygon")
 										 .transition(200)
 										 .style("fill-opacity", cfg.opacityArea);
+							tooltip
+								.transition(200)
+								.style('opacity', 0);
 					 });
 	  series++;
 	});
@@ -187,7 +203,7 @@ var RadarChart = {
 					tooltip
 						.attr('x', newX)
 						.attr('y', newY)
-						.text(d.value)
+						.text(d.axis + " = " + d.value + " [Variant " + instanceIDs[indexFromClassName(d3.select(this).attr("class"))] + "]")
 						.transition(200)
 						.style('opacity', 1);
 						

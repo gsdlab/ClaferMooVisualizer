@@ -34,10 +34,12 @@ function SpiderChart(host, settings)
     this.host = host;
 
     this.instanceProcessor = null;
+    this.selection = new Array();
     this.host.loaded();
 }
 
 SpiderChart.method("onDataLoaded", function(data){
+    this.clearSelection();
     this.instanceProcessor = new InstanceProcessor(data.instancesXML);
     this.claferProcessor = new ClaferProcessor(data.claferXML);
     this.goals = data.goals;
@@ -51,6 +53,12 @@ SpiderChart.method("resize", function() // not attached to the window anymore, s
 
 SpiderChart.method("onRendered", function()
 {
+    this.redrawChart();
+});
+
+SpiderChart.method("clearSelection", function()
+{
+    this.selection = [];
     this.redrawChart();
 });
 
@@ -72,22 +80,33 @@ SpiderChart.method("redrawChart", function()
 
     //Legend titles
 
-    var instanceCount = this.instanceProcessor.getInstanceCount();
+//    var instanceCount = this.instanceProcessor.getInstanceCount();    
+
+
+    $("#chartNode").html(""); // clear the contents
+    if (this.selection.length == 0)
+    {
+        $("#chartNode").html("Select variants for comparison");
+        return;
+    }
 
     var d = new Array();
     var LegendOptions = new Array();
 
-    for (var i = 1; i <= instanceCount; i++)
-    {
+
+    for (var i = 0; i < this.selection.length; i++){
+
+        var instance = parsePID(this.selection[i]);
+
         var first;
         var second;
 
         var current = new Array();
-        LegendOptions.push(getPID(i));
+        LegendOptions.push(instance);
         
         for (var j = 0; j < this.goals.length; j++)
         {
-            var value = this.instanceProcessor.getFeatureValue(i, this.argsToArray(this.goals[j].arg), 'int'); // get only numeric
+            var value = this.instanceProcessor.getFeatureValue(instance, this.argsToArray(this.goals[j].arg), 'int'); // get only numeric
             var axis = this.goals[j].label;
             var obj = new Object();
             obj.axis = axis;
@@ -97,58 +116,7 @@ SpiderChart.method("redrawChart", function()
         
         d.push(current);
     }
-/*
-    //Data
-    var d = [
-          [
-            {axis:"Email",value:3},
-            {axis:"Social Networks",value:2},
-            {axis:"Internet Banking",value:0.42},
-            {axis:"News Sportsites",value:0.34},
-            {axis:"Search Engine",value:0.48},
-            {axis:"View Shopping sites",value:0.14},
-            {axis:"Paying Online",value:0.11},
-            {axis:"Buy Online",value:0.05},
-            {axis:"Stream Music",value:0.07},
-            {axis:"Online Gaming",value:0.12},
-            {axis:"Navigation",value:0.27},
-            {axis:"App connected to TV program",value:0.03},
-            {axis:"Offline Gaming",value:0.12},
-            {axis:"Photo Video",value:0.4},
-            {axis:"Reading",value:0.03},
-            {axis:"Listen Music",value:0.22},
-            {axis:"Watch TV",value:0.03},
-            {axis:"TV Movies Streaming",value:0.03},
-            {axis:"Listen Radio",value:0.07},
-            {axis:"Sending Money",value:0.18},
-            {axis:"Other",value:0.07},
-            {axis:"Use less Once week",value:0.08}
-          ],[
-            {axis:"Email",value:0.48},
-            {axis:"Social Networks",value:0.41},
-            {axis:"Internet Banking",value:0.27},
-            {axis:"News Sportsites",value:0.28},
-            {axis:"Search Engine",value:0.46},
-            {axis:"View Shopping sites",value:0.29},
-            {axis:"Paying Online",value:0.11},
-            {axis:"Buy Online",value:0.14},
-            {axis:"Stream Music",value:0.05},
-            {axis:"Online Gaming",value:0.19},
-            {axis:"Navigation",value:0.14},
-            {axis:"App connected to TV program",value:0.06},
-            {axis:"Offline Gaming",value:0.24},
-            {axis:"Photo Video",value:0.17},
-            {axis:"Reading",value:0.15},
-            {axis:"Listen Music",value:0.12},
-            {axis:"Watch TV",value:0.1},
-            {axis:"TV Movies Streaming",value:0.14},
-            {axis:"Listen Radio",value:0.06},
-            {axis:"Sending Money",value:0.16},
-            {axis:"Other",value:0.07},
-            {axis:"Use less Once week",value:0.17}
-          ]
-        ];
-*/
+
 //Options for the Radar chart, other than default
 var mycfg = {
   w: w,
@@ -162,8 +130,7 @@ var mycfg = {
 //Call function to draw the Radar chart
 //Will expect that data is in %'s
 
-$("#chartNode").html(""); // clear the contents
-RadarChart.draw("#chartNode", d, mycfg);
+RadarChart.draw("#chartNode", d, mycfg, LegendOptions);
 
 ////////////////////////////////////////////
 /////////// Initiate legend ////////////////
@@ -217,6 +184,15 @@ var legend = svg.append("g")
    
 
 });
+
+//rebuilds the table with the new selection data
+SpiderChart.method("onSelectionChanged", function(newSelection){
+    //pulls data from the comparison table
+    this.selection = newSelection;
+
+    this.redrawChart();
+});
+
 
 //gets containers and placeholders
 SpiderChart.method("getContent", function()
