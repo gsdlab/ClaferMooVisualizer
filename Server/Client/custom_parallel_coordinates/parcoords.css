@@ -3,6 +3,7 @@
   stroke: #ccc;
   stroke-opacity: .4;
   shape-rendering: crispEdges;
+  cursor: pointer;
 }
 
 .foreground path {
@@ -10,6 +11,7 @@
   stroke: steelblue;
   stroke-opacity: .7;
   stroke-width: 1.5px;
+  cursor: pointer;
 }
 
 .brush .extent {
@@ -48,11 +50,10 @@
 .foreground path.active {
   stroke: #0b0;
   stroke-opacity: .9;
-  stroke-width: 4.0px;
+  stroke-width: 3.0px;
 }
 
-.background path.active {
-  stroke: #0b0;
-  stroke-opacity: .9;
+.foreground path.selected {
+  stroke-opacity: 1.0;
   stroke-width: 4.0px;
 }

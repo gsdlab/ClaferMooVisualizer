@@ -1,9 +1,13 @@
 // taken from http://bl.ocks.org/mbostock/raw/7586334/
 
-function CustomParCoords(nodeId, data, labels, margins, width, height)
+function CustomParCoords(nodeId, data, labels, margins, width, height, chartListeners)
 {
     var context = this;
+    this.selected = [];
+    for (var i = 0; i < data.length; i++)
+        this.selected.push(false);
 
+    this.chartListeners = chartListeners;
     this.m = margins,
     this.w = width - margins[1] - margins[3],
     this.h = height - margins[0] - margins[2];
@@ -104,7 +108,12 @@ function CustomParCoords(nodeId, data, labels, margins, width, height)
   // Add and store a brush for each axis.
   context.g.append("g")
       .attr("class", "brush")
-      .each(function(d) { d3.select(this).call(context.y[d].brush = d3.svg.brush().y(context.y[d]).on("brushstart", brushstart).on("brush", brush).on("brushend", brushend)); })
+      .each(function(d) {
+            d3.select(this).attr("id", "brush-" + d); 
+            d3.select(this).call(
+            context.y[d].brush = d3.svg.brush().y(context.y[d]).on("brushstart", brushstart).on("brush", brush).on("brushend", brushend)
+          ); 
+      })
     .selectAll("rect")
       .attr("x", -8)
       .attr("width", 16);
@@ -117,27 +126,37 @@ function CustomParCoords(nodeId, data, labels, margins, width, height)
       .data(data, function(d) { return d.name || d; });
 
 
-  context.projection = context.svg.selectAll(".axis text,.background path,.foreground path")
+  context.projection = context.svg.selectAll(".axis text,.foreground path")
       .on("mouseover", mouseover)
-      .on("mouseout", mouseout);
+      .on("mouseout", mouseout)
+      .on("click", mouseclick);
 
   function mouseover(d) {
-    context.svg.classed("active", true);
-    context.projection.classed("inactive", function(p) { return p !== d; });
-    context.projection.classed("active", function(p) { return p === d; });
-    context.projection.filter(function(p) { return p === d; }).each(moveToFront);
+      context.makeActive(d.id);
+      if (context.chartListeners.onMouseOver)
+          context.chartListeners.onMouseOver(d.id);
   }
 
   function mouseout(d) {
-    context.svg.classed("active", false);
-    context.projection.classed("inactive", false);
-    context.projection.classed("active", false);
+      context.makeInactive();
+      if (context.chartListeners.onMouseOut)
+          context.chartListeners.onMouseOut();
   }
 
-  function moveToFront() {
-    this.parentNode.appendChild(this);
-  }      
-
+  function mouseclick(d) {
+      if (!context.selected[d.id])
+      {
+          context.makeSelected(d.id);
+          if (context.chartListeners.onSelected)
+              context.chartListeners.onSelected(d.id);          
+      }
+      else
+      {
+          context.makeDeselected(d.id);
+          if (context.chartListeners.onDeselected)
+              context.chartListeners.onDeselected(d.id);          
+      }
+  }
 /* // MOUSE OVER BEHAVIOR ends */
 
 
@@ -167,6 +186,7 @@ function CustomParCoords(nodeId, data, labels, margins, width, height)
   // Handles a brush event, toggling the display of foreground lines.
   function brush() {
       var ctx1 = this;
+
     var actives = dimensions.filter(function(p) { return !context.y[p].brush.empty(); }),
         extents = actives.map(function(p) { return context.y[p].brush.extent(); });
     
@@ -189,11 +209,12 @@ function CustomParCoords(nodeId, data, labels, margins, width, height)
           newExtent.push(newStart);
           newExtent.push(newEnd);
 
-//          alert(context.g);
+          console.log("-----------");
+          console.log(p + " " + i);
 
           if (newStart != start || newEnd != end)
-          {
-              d3.select(ctx1).call(context.y[p].brush.extent(newExtent));
+          {              
+              d3.select("#brush-" + p).call(context.y[p].brush.extent(newExtent));
           }
 
           return newStart <= d[p] && d[p] <= newEnd;
@@ -217,5 +238,40 @@ function CustomParCoords(nodeId, data, labels, margins, width, height)
 CustomParCoords.method("onBrushEnd", function(p, start, end)
 {
     alert(p + ":" + start + ".." + end);
+
+});
+
+CustomParCoords.method("makeActive", function(id)
+{
+    this.svg.classed("active", true);
+    this.projection.classed("inactive", function(p) { return p.id !== id; });
+    this.projection.classed("active", function(p) { return p.id === id; });
+    this.projection.filter(function(p) { return p.id === id; }).each(moveToFront);
+
+    function moveToFront() {
+      this.parentNode.appendChild(this);
+    }      
+
+});
+
+CustomParCoords.method("makeInactive", function()
+{
+    this.svg.classed("active", false);
+    this.projection.classed("inactive", false);
+    this.projection.classed("active", false);
+});
+
+CustomParCoords.method("makeSelected", function(id)
+{
+    this.selected[id] = true;
+    var context = this;
+    this.projection.classed("selected", function(p) { return context.selected[p.id]; });
+});
+
+CustomParCoords.method("makeDeselected", function(id)
+{
+    this.selected[id] = false;
+    var context = this;
+    this.projection.classed("selected", function(p) { return context.selected[p.id]; });
 
 });

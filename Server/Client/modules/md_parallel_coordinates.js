@@ -72,7 +72,7 @@ ParallelCoordinates.method("redrawChart", function()
     }
 
     var labels = new Object();
-    labels["variant"] = "#variant";
+    labels["id"] = "#variant";
 
     for (var j = 0; j < this.goals.length; j++)
     {
@@ -83,7 +83,7 @@ ParallelCoordinates.method("redrawChart", function()
     for (var i = 1; i <= instanceCount; i++)
     {            
         var current = new Object();
-        current["variant"] = i;
+        current["id"] = i;
         for (var j = 0; j < this.goals.length; j++)
         {
             var value = this.instanceProcessor.getFeatureValue(i, this.argsToArray(this.goals[j].arg), 'int'); // get only numeric
@@ -129,7 +129,22 @@ ParallelCoordinates.method("redrawChart", function()
     var w = parseInt(sw) - 30;
     var h = parseInt(sh) - 30;
 
-    this.chart = new CustomParCoords("#pcChart", data, labels, [30, 10, 10, 10], w, h);
+    var chartListeners = {
+        "onMouseOver": function(id){
+//            alert("over: " + id);
+        },
+        "onMouseOut": function(){
+//            alert("out: ");
+        },
+        "onSelected": function(id){
+//            alert("select: " + id);
+        },
+        "onDeselected": function(id){
+//            alert("unselect: " + id);
+        }
+    }
+
+    this.chart = new CustomParCoords("#pcChart", data, labels, [30, 10, 10, 10], w, h, chartListeners);
 
       // update data on brush event
 //      parcoords.on("brush", function(d) 
