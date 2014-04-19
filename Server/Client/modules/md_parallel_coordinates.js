@@ -93,6 +93,8 @@ ParallelCoordinates.method("redrawChart", function()
     $('#mdParallelCoordinates div.window-content').html("");
     $('#mdParallelCoordinates div.window-content').html(this.getContent());
 
+/* if using the module
+
     // quantitative color scale
     var blue_to_brown = d3.scale.linear()
       .domain([9, 50])
@@ -109,6 +111,17 @@ ParallelCoordinates.method("redrawChart", function()
         .reorderable()
         .brushable()
         .interactive();
+*/
+
+    var e = $('#mdParallelCoordinates div.window-content')[0];
+
+    var sw = document.defaultView.getComputedStyle(e,null).getPropertyValue("width");
+    var sh = document.defaultView.getComputedStyle(e,null).getPropertyValue("height");
+
+    var w = parseInt(sw) - 30;
+    var h = parseInt(sh) - 30;
+
+    DrawParCoords("#pcChart", data, [30, 10, 10, 10], w, h);
 
       // update data on brush event
 //      parcoords.on("brush", function(d) 
@@ -125,7 +138,7 @@ ParallelCoordinates.method("redrawChart", function()
 //      });
 
 
-      this.chart = parcoords;
+//      this.chart = parcoords;
 
 });
 

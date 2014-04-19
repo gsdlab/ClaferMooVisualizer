@@ -2,7 +2,7 @@
     "scripts": [
         "utils/utils.js",
         "http://d3js.org/d3.v3.min.js",
-        "parallel_coordinates/d3.parcoords.js",
+        "custom_parallel_coordinates/parcoords.js",
         "https://www.google.com/jsapi",
         "utils/selection_controller.js",
         "utils/evolution_controller.js",
@@ -18,7 +18,7 @@
     ],
 
     "styles": [
-        "parallel_coordinates/d3.parcoords.css",
+        "custom_parallel_coordinates/parcoords.css",
         "styles.css"        
     ]    
 }

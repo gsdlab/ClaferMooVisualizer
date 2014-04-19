@@ -1,0 +1,58 @@
+.background path {
+  fill: none;
+  stroke: #ccc;
+  stroke-opacity: .4;
+  shape-rendering: crispEdges;
+}
+
+.foreground path {
+  fill: none;
+  stroke: steelblue;
+  stroke-opacity: .7;
+  stroke-width: 1.5px;
+}
+
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  text-shadow: 0 1px 0 #fff;
+  cursor: move;
+}
+
+
+.active .label:not(.inactive) {
+  font-weight: bold;
+}
+
+.label.inactive {
+  fill: #ccc;
+}
+
+.foreground path.inactive {
+  stroke: #ccc;
+  stroke-opacity: .5;
+  stroke-width: 1px;
+}
+
+.foreground path.active {
+  stroke: #0b0;
+  stroke-opacity: .9;
+  stroke-width: 4.0px;
+}
+
+.background path.active {
+  stroke: #0b0;
+  stroke-opacity: .9;
+  stroke-width: 4.0px;
+}
