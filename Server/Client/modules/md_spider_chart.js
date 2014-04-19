@@ -98,9 +98,6 @@ SpiderChart.method("redrawChart", function()
 
         var instance = parsePID(this.selection[i]);
 
-        var first;
-        var second;
-
         var current = new Array();
         LegendOptions.push(instance);
         

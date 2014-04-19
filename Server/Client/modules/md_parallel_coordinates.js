@@ -33,14 +33,13 @@ function ParallelCoordinates(host, settings)
     this.posy = this.settings.layout.posy;
 
     this.host = host;
+    this.chart = null;
 
     this.instanceProcessor = null;
-    this.selection = new Array();
     this.host.loaded();
 }
 
 ParallelCoordinates.method("onDataLoaded", function(data){
-    this.clearSelection();
     this.instanceProcessor = new InstanceProcessor(data.instancesXML);
     this.claferProcessor = new ClaferProcessor(data.claferXML);
     this.goals = data.goals;
@@ -57,26 +56,44 @@ ParallelCoordinates.method("onRendered", function()
     this.redrawChart();
 });
 
-ParallelCoordinates.method("clearSelection", function()
-{
-    this.selection = [];
-    this.redrawChart();
-});
-
 ParallelCoordinates.method("argsToArray", function(argString){
     return argString.split("-");
 });
 
 ParallelCoordinates.method("redrawChart", function()
 {
-    var e = $('#mdSpiderChart div.window-content')[0];
+    /* calculating data */
 
-    var sw = document.defaultView.getComputedStyle(e,null).getPropertyValue("width");
-    var sh = document.defaultView.getComputedStyle(e,null).getPropertyValue("height");
+    var instanceCount = this.instanceProcessor.getInstanceCount();    
 
-    var w = parseInt(sw);
-    var h = parseInt(sh);
+    if (instanceCount == 0)
+    {
+        return;
+    }
 
+    var data = [];
+
+    for (var i = 1; i <= instanceCount; i++)
+    {            
+        var current = new Object();
+        current["#variant"] = i;
+        for (var j = 0; j < this.goals.length; j++)
+        {
+            var value = this.instanceProcessor.getFeatureValue(i, this.argsToArray(this.goals[j].arg), 'int'); // get only numeric
+            current[this.goals[j].label] = value;
+        }
+
+        data.push(current);
+    }          
+
+    console.log(data);
+
+    /* Rendering */
+
+    $('#mdParallelCoordinates div.window-content').html("");
+    $('#mdParallelCoordinates div.window-content').html(this.getContent());
+
+    // quantitative color scale
     var blue_to_brown = d3.scale.linear()
       .domain([9, 50])
       .range(["steelblue", "brown"])
@@ -85,79 +102,30 @@ ParallelCoordinates.method("redrawChart", function()
     var color = function(d) { return blue_to_brown(d['economy (mpg)']); };
 
     var parcoords = d3.parcoords()("#pcChart")
-      .color(color)
-      .alpha(0.4);
-
-    // load csv file and create the chart
-    d3.csv('/Client/parallel_coordinates/sample.csv', function(data) {
-      parcoords
+        .color(color)
+        .alpha(0.4)
         .data(data)
         .render()
-        .brushable();
-/*
-          .interactive()  // command line mode
+        .reorderable()
+        .brushable()
+        .interactive();
 
-          var explore_count = 0;
-          var exploring = {};
-          var explore_start = false;
-          pc1.svg
-            .selectAll(".dimension")
-            .style("cursor", "pointer")
-            .on("click", function(d) {
-              exploring[d] = d in exploring ? false : true;
-              event.preventDefault();
-              if (exploring[d]) d3.timer(explore(d,explore_count));
-            });
+      // update data on brush event
+//      parcoords.on("brush", function(d) 
+//      {
+    //          alert("brushed");
+    //        d3.select("#grid")
+    //          .datum(d.slice(0,10))
+    //          .call(grid)
+    //          .selectAll(".row")
+    //          .on({
+    //            "mouseover": function(d) { parcoords.highlight([d]) },
+    //            "mouseout": parcoords.unhighlight
+    //          });
+//      });
 
-          function explore(dimension,count) {
-            if (!explore_start) {
-              explore_start = true;
-              d3.timer(pc1.brush);
-            }
-            var speed = (Math.round(Math.random()) ? 1 : -1) * (Math.random()+0.5);
-            return function(t) {
-              if (!exploring[dimension]) return true;
-              var domain = pc1.yscale[dimension].domain();
-              var width = (domain[1] - domain[0])/4;
 
-              var center = width*1.5*(1+Math.sin(speed*t/1200)) + domain[0];
-
-              pc1.yscale[dimension].brush.extent([
-                d3.max([center-width*0.01, domain[0]-width/400]),  
-                d3.min([center+width*1.01, domain[1]+width/100])  
-              ])(pc1.g()
-                  .filter(function(d) {
-                    return d == dimension;
-                  })
-              );
-            };
-          };        
-*/
-/*
-      // create data table, row hover highlighting
-      var grid = d3.divgrid();
-      d3.select("#grid")
-        .datum(data.slice(0,10))
-        .call(grid)
-        .selectAll(".row")
-        .on({
-          "mouseover": function(d) { parcoords.highlight([d]) },
-          "mouseout": parcoords.unhighlight
-        });
-
-      // update data table on brush event
-      parcoords.on("brush", function(d) {
-        d3.select("#grid")
-          .datum(d.slice(0,10))
-          .call(grid)
-          .selectAll(".row")
-          .on({
-            "mouseover": function(d) { parcoords.highlight([d]) },
- s           "mouseout": parcoords.unhighlight
-          });
-      });
-*/
-    });
+      this.chart = parcoords;
 
 });
 
