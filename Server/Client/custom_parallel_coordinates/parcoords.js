@@ -205,16 +205,9 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
           if (!isInt(newEnd))
             newEnd = Math.floor(end);
 
-          newExtent = new Array();
-          newExtent.push(newStart);
-          newExtent.push(newEnd);
-
-          console.log("-----------");
-          console.log(p + " " + i);
-
           if (newStart != start || newEnd != end)
           {              
-              d3.select("#brush-" + p).call(context.y[p].brush.extent(newExtent));
+              context.setRange(p, newStart, newEnd);
           }
 
           return newStart <= d[p] && d[p] <= newEnd;
@@ -274,4 +267,12 @@ CustomParCoords.method("makeDeselected", function(id)
     var context = this;
     this.projection.classed("selected", function(p) { return context.selected[p.id]; });
 
+});
+
+CustomParCoords.method("setRange", function(dim, start, end)
+{
+    newExtent = new Array();
+    newExtent.push(start);
+    newExtent.push(end);
+    d3.select("#brush-" + dim).call(this.y[dim].brush.extent(newExtent));
 });
