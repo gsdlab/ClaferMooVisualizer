@@ -71,22 +71,30 @@ ParallelCoordinates.method("redrawChart", function()
         return;
     }
 
-    var data = [];
+    var labels = new Object();
+    labels["variant"] = "#variant";
 
+    for (var j = 0; j < this.goals.length; j++)
+    {
+        labels[this.goals[j].arg] = this.goals[j].label;
+    }
+
+    var data = [];
     for (var i = 1; i <= instanceCount; i++)
     {            
         var current = new Object();
-        current["#variant"] = i;
+        current["variant"] = i;
         for (var j = 0; j < this.goals.length; j++)
         {
             var value = this.instanceProcessor.getFeatureValue(i, this.argsToArray(this.goals[j].arg), 'int'); // get only numeric
-            current[this.goals[j].label] = value;
+            current[this.goals[j].arg] = value;
         }
 
         data.push(current);
     }          
 
     console.log(data);
+    console.log(labels);
 
     /* Rendering */
 
@@ -121,7 +129,7 @@ ParallelCoordinates.method("redrawChart", function()
     var w = parseInt(sw) - 30;
     var h = parseInt(sh) - 30;
 
-    DrawParCoords("#pcChart", data, [30, 10, 10, 10], w, h);
+    this.chart = new CustomParCoords("#pcChart", data, labels, [30, 10, 10, 10], w, h);
 
       // update data on brush event
 //      parcoords.on("brush", function(d) 
@@ -141,15 +149,6 @@ ParallelCoordinates.method("redrawChart", function()
 //      this.chart = parcoords;
 
 });
-
-//rebuilds the table with the new selection data
-ParallelCoordinates.method("onSelectionChanged", function(newSelection){
-    //pulls data from the comparison table
-    this.selection = newSelection;
-
-    this.redrawChart();
-});
-
 
 //gets containers and placeholders
 ParallelCoordinates.method("getContent", function()
