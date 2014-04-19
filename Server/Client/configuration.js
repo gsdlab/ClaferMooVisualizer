@@ -329,7 +329,23 @@ function getConfiguration()
                 "height": 550,
                 "posx": (window.parent.innerWidth-20) * 0.38 + 50,
                 "posy": 50
-            }
+            },
+
+            "onSelected": function(module, pid)
+            {
+                module.host.storage.selector.onSelected(pid);               
+            },
+            "onDeselected": function(module, pid)
+            {
+                module.host.storage.selector.onDeselected(pid);             
+            },
+            "onMouseOver" : function(module, pid)
+            {
+            },            
+
+            "onMouseOut" : function(module, pid)
+            {
+            },            
 
         }});
 

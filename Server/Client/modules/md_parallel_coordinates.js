@@ -129,39 +129,28 @@ ParallelCoordinates.method("redrawChart", function()
     var w = parseInt(sw) - 30;
     var h = parseInt(sh) - 30;
 
+    var context = this;
+
     var chartListeners = {
         "onMouseOver": function(id){
+            context.settings.onMouseOver(context, getPID(id));
 //            alert("over: " + id);
         },
         "onMouseOut": function(){
+            context.settings.onMouseOut(context);
 //            alert("out: ");
         },
         "onSelected": function(id){
+            context.settings.onSelected(context, getPID(id));
 //            alert("select: " + id);
         },
         "onDeselected": function(id){
+            context.settings.onDeselected(context, getPID(id));
 //            alert("unselect: " + id);
         }
     }
 
     this.chart = new CustomParCoords("#pcChart", data, labels, [30, 10, 10, 10], w, h, chartListeners);
-
-      // update data on brush event
-//      parcoords.on("brush", function(d) 
-//      {
-    //          alert("brushed");
-    //        d3.select("#grid")
-    //          .datum(d.slice(0,10))
-    //          .call(grid)
-    //          .selectAll(".row")
-    //          .on({
-    //            "mouseover": function(d) { parcoords.highlight([d]) },
-    //            "mouseout": parcoords.unhighlight
-    //          });
-//      });
-
-
-//      this.chart = parcoords;
 
 });
 
@@ -180,5 +169,15 @@ ParallelCoordinates.method("getInitContent", function()
 ParallelCoordinates.method("onInitRendered", function()
 {
 
+});
+
+ParallelCoordinates.method("makePointsSelected", function(pid)
+{
+    this.chart.makeSelected(parsePID(pid));
+});
+
+ParallelCoordinates.method("makePointsDeselected", function(pid)
+{
+    this.chart.makeDeselected(parsePID(pid));
 });
 

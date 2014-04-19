@@ -126,7 +126,7 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
       .data(data, function(d) { return d.name || d; });
 
 
-  context.projection = context.svg.selectAll(".axis text,.foreground path")
+  context.projection = context.svg.selectAll(".foreground path")
       .on("mouseover", mouseover)
       .on("mouseout", mouseout)
       .on("click", mouseclick);
