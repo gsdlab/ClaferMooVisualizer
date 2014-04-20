@@ -136,8 +136,8 @@ ParallelCoordinates.method("redrawChart", function()
             context.settings.onMouseOver(context, getPID(id));
 //            alert("over: " + id);
         },
-        "onMouseOut": function(){
-            context.settings.onMouseOut(context);
+        "onMouseOut": function(id){
+            context.settings.onMouseOut(context, getPID(id));
 //            alert("out: ");
         },
         "onSelected": function(id){
@@ -181,3 +181,12 @@ ParallelCoordinates.method("makePointsDeselected", function(pid)
     this.chart.makeDeselected(parsePID(pid));
 });
 
+ParallelCoordinates.method("makeActive", function(pid)
+{
+    this.chart.makeActive(parsePID(pid));
+});
+
+ParallelCoordinates.method("makeInactive", function(pid)
+{
+    this.chart.makeInactive();
+});

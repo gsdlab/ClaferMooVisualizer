@@ -132,15 +132,15 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
       .on("click", mouseclick);
 
   function mouseover(d) {
-      context.makeActive(d.id);
+//      context.makeActive(d.id);
       if (context.chartListeners.onMouseOver)
           context.chartListeners.onMouseOver(d.id);
   }
 
   function mouseout(d) {
-      context.makeInactive();
+//      context.makeInactive();
       if (context.chartListeners.onMouseOut)
-          context.chartListeners.onMouseOut();
+          context.chartListeners.onMouseOut(d.id);
   }
 
   function mouseclick(d) {
@@ -236,6 +236,7 @@ CustomParCoords.method("onBrushEnd", function(p, start, end)
 
 CustomParCoords.method("makeActive", function(id)
 {
+    console.log(id);
     this.svg.classed("active", true);
     this.projection.classed("inactive", function(p) { return p.id !== id; });
     this.projection.classed("active", function(p) { return p.id === id; });

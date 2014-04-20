@@ -210,7 +210,15 @@ function getConfiguration()
             },
             "onHTMLChanged": function (module){
                 module.host.storage.evolutionController.assignProperShapesToVariantComparer();
-            }
+            },
+            "onMouseOver": function(module, pid)
+            {
+                module.host.storage.highlighter.onMouseOver(pid);               
+            },
+            "onMouseOut": function(module, pid)
+            {
+                module.host.storage.highlighter.onMouseOut(pid);               
+            }            
 
     	}});
 
@@ -270,7 +278,15 @@ function getConfiguration()
     		},
     		"onInstanceRemove" : function(module, num)
     		{
-    		}
+    		},
+            "onMouseOver": function(module, pid)
+            {
+                module.host.storage.highlighter.onMouseOver(pid);               
+            },
+            "onMouseOut": function(module, pid)
+            {
+                module.host.storage.highlighter.onMouseOut(pid);               
+            }
     	}});
 
     modules.push({"name": "Graph", "configuration": 
@@ -341,10 +357,11 @@ function getConfiguration()
             },
             "onMouseOver" : function(module, pid)
             {
+                module.host.storage.highlighter.onMouseOver(pid);                               
             },            
-
             "onMouseOut" : function(module, pid)
             {
+                module.host.storage.highlighter.onMouseOut(pid);               
             },            
 
         }});
@@ -355,6 +372,7 @@ function getConfiguration()
  			host.storage.selector = new Selector(host);
             host.storage.instanceFilter = new InstanceFilter(host);
             host.storage.evolutionController = new EvolutionController(host);
+            host.storage.highlighter = new Highlighter(host);
 	    },
     	"onLoaded": function(host)
 	    {
