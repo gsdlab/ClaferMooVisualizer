@@ -12,7 +12,7 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
     this.w = width - margins[1] - margins[3],
     this.h = height - margins[0] - margins[2];
 
-    this.x = d3.scale.ordinal().rangePoints([0, context.w], 1),
+    this.x = d3.scale.ordinal().rangePoints([0, context.w], 0.6),
     this.y = {},
     this.dragging = {};
 

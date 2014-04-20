@@ -1,4 +1,9 @@
-.background path {
+#pcChart text 
+{
+  font-size: 12px;
+}
+
+#pcChart .background path {
   fill: none;
   stroke: #ccc;
   stroke-opacity: .4;
@@ -6,7 +11,7 @@
   cursor: pointer;
 }
 
-.foreground path {
+#pcChart .foreground path {
   fill: none;
   stroke: steelblue;
   stroke-opacity: .7;
@@ -14,46 +19,46 @@
   cursor: pointer;
 }
 
-.brush .extent {
+#pcChart .brush .extent {
   fill-opacity: .3;
   stroke: #fff;
   shape-rendering: crispEdges;
 }
 
-.axis line,
-.axis path {
+#pcChart .axis line,
+#pcChart .axis path {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
 }
 
-.axis text {
+#pcChart .axis text {
   text-shadow: 0 1px 0 #fff;
   cursor: move;
 }
 
 
-.active .label:not(.inactive) {
+#pcChart .active .label:not(.inactive) {
 /*  font-weight: bold; */
 }
 
-.label.inactive {
+#pcChart .label.inactive {
   fill: #ccc;
 }
 
-.foreground path.inactive {
+#pcChart .foreground path.inactive {
   stroke: #ccc;
   stroke-opacity: .5;
   stroke-width: 1px;
 }
 
-.foreground path.active {
+#pcChart .foreground path.active {
   stroke: #0b0;
   stroke-opacity: .9;
   stroke-width: 3.0px;
 }
 
-.foreground path.selected {
+#pcChart .foreground path.selected {
   stroke-opacity: 1.0;
   stroke-width: 4.0px;
 }

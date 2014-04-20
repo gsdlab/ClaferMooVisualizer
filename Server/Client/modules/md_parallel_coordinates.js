@@ -126,8 +126,8 @@ ParallelCoordinates.method("redrawChart", function()
     var sw = document.defaultView.getComputedStyle(e,null).getPropertyValue("width");
     var sh = document.defaultView.getComputedStyle(e,null).getPropertyValue("height");
 
-    var w = parseInt(sw) - 30;
-    var h = parseInt(sh) - 30;
+    var w = parseInt(sw) - 10;
+    var h = parseInt(sh) - 10;
 
     var context = this;
 
