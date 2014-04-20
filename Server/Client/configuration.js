@@ -177,9 +177,9 @@ function getConfiguration()
                 "posy": 245
             },
 
-            "onFilterByGoals": function(module)
+            "onFilterByGoals": function(module, dim, start, end)
             {
-                module.host.storage.instanceFilter.filterContent();                
+                module.host.storage.instanceFilter.onFilteredByRange(dim, start, end);
             }
 
         }});
@@ -363,7 +363,10 @@ function getConfiguration()
             {
                 module.host.storage.highlighter.onMouseOut(pid);               
             },            
-
+            "onRangeFiltered" : function(module, dim, start, end)
+            {
+                module.host.storage.instanceFilter.onFilteredByRange(dim, start, end);
+            }
         }});
 
     var settings = {

@@ -152,3 +152,33 @@ InstanceFilter.method("unFilter", function(){
     	$(circle_pairs[i].circle).hide();
     }
 });
+
+
+InstanceFilter.method("onFilteredByRange", function(dim, start, end){
+    var module = this.host.findModule("mdGoals");
+    for (var x = 0; x < module.ranges.length; x++)
+    {
+        if (dim == module.ranges[x].goal)
+        {
+            module.ranges[x].min = start;
+            module.ranges[x].max = end;
+
+
+            if (start == parseInt($("#" + dim + "min").attr("placeholder")))
+                $("#" + dim + "min").val("");
+            else
+                $("#" + dim + "min").val(start);
+
+            if (end == parseInt($("#" + dim + "max").attr("placeholder")))
+                $("#" + dim + "max").val("");
+            else
+                $("#" + dim + "max").val(end);
+
+        }
+    }
+
+    this.filterContent();
+
+});
+
+

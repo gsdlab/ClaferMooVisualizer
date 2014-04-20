@@ -219,10 +219,11 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
   function brushend() {
     var actives = dimensions.filter(function(p) { return !context.y[p].brush.empty(); }),
         extents = actives.map(function(p) { return context.y[p].brush.extent(); });
-    
+
         actives.every(function(p, i) 
         {
             context.onBrushEnd(p, extents[i][0], extents[i][1]);
+            return true;
         });
 
   }
@@ -230,7 +231,11 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
 
 CustomParCoords.method("onBrushEnd", function(p, start, end)
 {
-    alert(p + ":" + start + ".." + end);
+
+    if (this.chartListeners.onRangeFilter)
+        this.chartListeners.onRangeFilter(p, start, end);
+
+    console.log("brush end");
 
 });
 

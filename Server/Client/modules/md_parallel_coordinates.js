@@ -147,7 +147,10 @@ ParallelCoordinates.method("redrawChart", function()
         "onDeselected": function(id){
             context.settings.onDeselected(context, getPID(id));
 //            alert("unselect: " + id);
-        }
+        },
+        "onRangeFilter": function(dim, start, end){
+            context.settings.onRangeFiltered(context, dim, start, end);
+        }        
     }
 
     this.chart = new CustomParCoords("#pcChart", data, labels, [30, 10, 10, 10], w, h, chartListeners);
