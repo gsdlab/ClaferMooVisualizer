@@ -119,7 +119,7 @@ var mycfg = {
   w: w,
   h: h,
 //  maxValue: 0.6,
-//  levels: 6,
+  levels: 4,
   ExtraWidthX: 220,
   ExtraWidthY: 80
 }

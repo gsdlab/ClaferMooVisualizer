@@ -232,6 +232,7 @@ var RadarChart = {
 	tooltip = g.append('text')
 			   .style('opacity', 0)
 			   .style('font-family', 'sans-serif')
+			   .style('background', 'white')
 			   .style('font-size', '13px');
   }
 };
