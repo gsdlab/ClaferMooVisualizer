@@ -345,8 +345,8 @@ function getConfiguration()
             "layout": {
                 "width": 750,
                 "height": 550,
-                "posx": (window.parent.innerWidth-20) * 0.38 + 50,
-                "posy": 50
+                "posx": (window.parent.innerWidth-20) * 0.38 + 100,
+                "posy": 100
             },
 
             "onSelected": function(module, pid)
