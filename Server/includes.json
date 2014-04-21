@@ -10,6 +10,7 @@
         "utils/pf_visualizer.js",
         "utils/radarchart_visualizer.js",
         "modules/md_graph.js",
+        "modules/md_goals.js",
         "modules/md_variant_comparer.js",
         "modules/md_parallel_coordinates.js",
         "modules/hovering_extensions.js",
