@@ -176,17 +176,17 @@ ParallelCoordinates.method("onInitRendered", function()
 
 ParallelCoordinates.method("makePointsSelected", function(pid)
 {
-    this.chart.makeSelected(parsePID(pid));
+    this.chart.makeSelected(parseInt(parsePID(pid)));
 });
 
 ParallelCoordinates.method("makePointsDeselected", function(pid)
 {
-    this.chart.makeDeselected(parsePID(pid));
+    this.chart.makeDeselected(parseInt(parsePID(pid)));
 });
 
 ParallelCoordinates.method("makeActive", function(pid)
 {
-    this.chart.makeActive(parsePID(pid));
+    this.chart.makeActive(parseInt(parsePID(pid)));
 });
 
 ParallelCoordinates.method("makeInactive", function(pid)

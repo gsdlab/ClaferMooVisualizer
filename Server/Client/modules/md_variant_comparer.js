@@ -74,10 +74,6 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         newlist.push(parsePID(list[i]));
     }   
 
-    for (var i = 0; i < newlist.length; i++){
-        newlist[i] = newlist[i];
-    }
-
     data = originalData.subsetByProducts(newlist);
     
     if (data.products.length <= 1)
