@@ -277,8 +277,15 @@ CustomParCoords.method("makeDeselected", function(id)
 
 CustomParCoords.method("setRange", function(dim, start, end)
 {
-    newExtent = new Array();
-    newExtent.push(start);
-    newExtent.push(end);
-    d3.select("#brush-" + dim).call(this.y[dim].brush.extent(newExtent));
+    if (this.y[dim].domain()[0] == start && this.y[dim].domain()[1] == end)
+    {
+      d3.select("#brush-" + dim).call(this.y[dim].brush.clear());
+    }
+    else
+    {
+      newExtent = new Array();
+      newExtent.push(start);
+      newExtent.push(end);
+      d3.select("#brush-" + dim).call(this.y[dim].brush.extent(newExtent));
+    }
 });
