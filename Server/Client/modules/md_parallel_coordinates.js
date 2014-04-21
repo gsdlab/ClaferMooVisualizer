@@ -76,7 +76,7 @@ ParallelCoordinates.method("redrawChart", function()
 
     for (var j = 0; j < this.goals.length; j++)
     {
-        labels[this.goals[j].arg] = this.goals[j].label;
+        labels[this.goals[j].arg] = this.goals[j].label + " [" + this.goals[j].operation + "]";
     }
 
     var data = [];

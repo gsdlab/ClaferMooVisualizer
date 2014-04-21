@@ -69,6 +69,7 @@ InstanceFilter.method("filterContent", function(){
 
             if (filter != null)
             {
+                this.host.findModule("mdParallelCoordinates").chart.setRange(filter.goal, filter.min, filter.max);
                 for (x=1; x<= row_length; x++){
                     var value = $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).text();
                     var min = parseInt(filter.min);

@@ -157,6 +157,8 @@ function getConfiguration()
 
                 matrixModule.addHovering();
 
+                goalsModule.calculateRanges();
+
                 module.host.storage.instanceFilter.filterContent();               
                 spiderChartModule.onRendered();
 
