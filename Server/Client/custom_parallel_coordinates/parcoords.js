@@ -20,9 +20,7 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
     this.labels = labels;
 
     var line = d3.svg.line(),
-        axis = d3.svg.axis().orient("left"),
-        background,
-        foreground;
+        axis = d3.svg.axis().orient("left");
 
     this.svg = d3.select(nodeId).append("svg")
       .attr("width", context.w + context.m[1] + context.m[3])
@@ -32,7 +30,7 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
 
     // Extract the list of dimensions and create a scale for each.
     this.x.domain(
-        dimensions = d3.keys(this.data[0]).filter(
+        context.dimensions = d3.keys(this.data[0]).filter(
           function(d) 
           {
             return d != "name" && (context.y[d] = d3.scale.linear()
@@ -42,7 +40,7 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
     );
 
     // Add grey background lines for context.
-    background = context.svg.append("g")
+    context.background = context.svg.append("g")
         .attr("class", "background")
       .selectAll("path")
         .data(data)
@@ -50,7 +48,7 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
         .attr("d", path);
 
     // Add blue foreground lines for focus.
-    foreground = context.svg.append("g")
+    context.foreground = context.svg.append("g")
         .attr("class", "foreground")
       .selectAll("path")
         .data(data)
@@ -59,29 +57,29 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
 
   // Add a group element for each dimension.
     context.g = context.svg.selectAll(".dimension")
-      .data(dimensions)
+      .data(context.dimensions)
     .enter().append("g")
       .attr("class", "dimension")
       .attr("transform", function(d) { return "translate(" + context.x(d) + ")"; })
       .call(d3.behavior.drag()
         .on("dragstart", function(d) {
           context.dragging[d] = this.__origin__ = context.x(d);
-          background.attr("visibility", "hidden");
+          context.background.attr("visibility", "hidden");
         })
         .on("drag", function(d) {
           context.dragging[d] = Math.min(context.w, Math.max(0, this.__origin__ += d3.event.dx));
-          foreground.attr("d", path);
-          dimensions.sort(function(a, b) { return position(a) - position(b); });
-          context.x.domain(dimensions);
+          context.foreground.attr("d", path);
+          context.dimensions.sort(function(a, b) { return position(a) - position(b); });
+          context.x.domain(context.dimensions);
           context.g.attr("transform", function(d) { return "translate(" + position(d) + ")"; })
         })
         .on("dragend", function(d) {
           delete this.__origin__;
           delete context.dragging[d];
           transition(d3.select(this)).attr("transform", "translate(" + context.x(d) + ")");
-          transition(foreground)
+          transition(context.foreground)
               .attr("d", path);
-          background
+          context.background
               .attr("d", path)
               .transition()
               .delay(500)
@@ -171,7 +169,7 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
 
   // Returns the path for a given data point.
   function path(d) {
-    return line(dimensions.map(function(p) { return [position(p), context.y[p](d[p])]; }));
+    return line(context.dimensions.map(function(p) { return [position(p), context.y[p](d[p])]; }));
   }
 
   // When brushing, don’t trigger axis dragging.
@@ -179,18 +177,34 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
     d3.event.sourceEvent.stopPropagation();
   }
 
+  // Handles a brush event, toggling the display of foreground lines.
+  function brush() {
+      context.filter();
+  }
+
+  function brushend() {
+    var actives = context.dimensions.filter(function(p) { return !context.y[p].brush.empty(); }),
+        extents = actives.map(function(p) { return context.y[p].brush.extent(); });
+
+        actives.every(function(p, i) 
+        {
+            context.onBrushEnd(p, extents[i][0], extents[i][1]);
+            return true;
+        });
+
+  }
+}
+
   function isInt(n) {
      return n % 1 === 0;
   }
 
-  // Handles a brush event, toggling the display of foreground lines.
-  function brush() {
-      var ctx1 = this;
-
-    var actives = dimensions.filter(function(p) { return !context.y[p].brush.empty(); }),
+CustomParCoords.method("filter", function(){
+    var context = this;
+    var actives = this.dimensions.filter(function(p) { return !context.y[p].brush.empty(); }),
         extents = actives.map(function(p) { return context.y[p].brush.extent(); });
     
-    foreground.style("display", function(d) {
+    this.foreground.style("display", function(d) {
       return actives.every(function(p, i) 
       {
           var start = extents[i][0];
@@ -213,21 +227,7 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
           return newStart <= d[p] && d[p] <= newEnd;
       }) ? null : "none";
     });
-
-  }
-
-  function brushend() {
-    var actives = dimensions.filter(function(p) { return !context.y[p].brush.empty(); }),
-        extents = actives.map(function(p) { return context.y[p].brush.extent(); });
-
-        actives.every(function(p, i) 
-        {
-            context.onBrushEnd(p, extents[i][0], extents[i][1]);
-            return true;
-        });
-
-  }
-}
+});
 
 CustomParCoords.method("onBrushEnd", function(p, start, end)
 {
@@ -277,15 +277,16 @@ CustomParCoords.method("makeDeselected", function(id)
 
 CustomParCoords.method("setRange", function(dim, start, end)
 {
+    var newExtent = new Array();
+    newExtent.push(start);
+    newExtent.push(end);
+    d3.select("#brush-" + dim).call(this.y[dim].brush.extent(newExtent));
+
     if (this.y[dim].domain()[0] == start && this.y[dim].domain()[1] == end)
     {
       d3.select("#brush-" + dim).call(this.y[dim].brush.clear());
     }
-    else
-    {
-      newExtent = new Array();
-      newExtent.push(start);
-      newExtent.push(end);
-      d3.select("#brush-" + dim).call(this.y[dim].brush.extent(newExtent));
-    }
+
+    this.filter();
+
 });
