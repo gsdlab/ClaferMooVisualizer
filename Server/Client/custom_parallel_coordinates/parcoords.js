@@ -286,7 +286,4 @@ CustomParCoords.method("setRange", function(dim, start, end)
     {
       d3.select("#brush-" + dim).call(this.y[dim].brush.clear());
     }
-
-    this.filter();
-
 });

@@ -99,6 +99,7 @@ InstanceFilter.method("filterContent", function(){
 
     //fire the scroll handler to align table
     $('#mdFeatureQualityMatrix .window-content').scroll();
+    this.host.findModule("mdParallelCoordinates").chart.filter();
 
 });
 

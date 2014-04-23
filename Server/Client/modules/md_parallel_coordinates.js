@@ -43,6 +43,7 @@ ParallelCoordinates.method("onDataLoaded", function(data){
     this.instanceProcessor = new InstanceProcessor(data.instancesXML);
     this.claferProcessor = new ClaferProcessor(data.claferXML);
     this.goals = data.goals;
+    this.chart = null;
 });
 
 ParallelCoordinates.method("resize", function() // not attached to the window anymore, so need to call the method
@@ -156,8 +157,29 @@ ParallelCoordinates.method("redrawChart", function()
         }        
     }
 
+    backupChart = this.chart;
     this.chart = new CustomParCoords("#pcChart", data, labels, [30, 10, 10, 10], w, h, chartListeners);
 
+    if (backupChart)
+    {
+        this.chart.selected = backupChart.selected;
+
+        for (var i = 0; i < this.chart.selected.length; i++)
+        {
+            if (this.chart.selected[i])
+                this.chart.makeSelected(i);
+        }
+
+        var actives = backupChart.dimensions.filter(function(p) { return !backupChart.y[p].brush.empty(); }),
+        extents = actives.map(function(p) { return backupChart.y[p].brush.extent(); });
+
+        var context = this;
+        actives.every(function(p, i) 
+        {
+            context.chart.setRange(p, extents[i][0], extents[i][1]);
+            return true;
+        });
+    }
 });
 
 //gets containers and placeholders
