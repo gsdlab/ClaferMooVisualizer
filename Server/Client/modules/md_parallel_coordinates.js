@@ -64,6 +64,9 @@ ParallelCoordinates.method("redrawChart", function()
 {
     /* calculating data */
 
+    if (!this.instanceProcessor)
+        return;
+
     var instanceCount = this.instanceProcessor.getInstanceCount();    
 
     if (instanceCount == 0)

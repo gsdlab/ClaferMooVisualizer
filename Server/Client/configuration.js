@@ -10,10 +10,11 @@ catch(e)
 function getConfiguration() 
 {
 	var modules = [];
+    var rightMargin = 25;
     modules.push({"name": "Input", "configuration": 
     	{
     		"layout": {
-    			"width": (window.parent.innerWidth-20) * 0.38,
+    			"width": (window.parent.innerWidth-rightMargin) * 0.38,
     			"height": 210,
     			"posx": 0,
     			"posy": 0
@@ -173,10 +174,11 @@ function getConfiguration()
             "title": "Objectives and Quality Ranges",
 
             "layout": {
-                "width": (window.parent.innerWidth-20) * 0.38,
-                "height": 70,
-                "posx": 0,
-                "posy": 245
+
+                "width": (window.parent.innerWidth - 20) * 0.33,
+                "height": 90,
+                "posx": (window.parent.innerWidth-rightMargin) * 0.67,
+                "posy": 0
             },
 
             "onFilterByGoals": function(module, dim, start, end)
@@ -186,13 +188,28 @@ function getConfiguration()
 
         }});
 
+
+    modules.push({"name": "SpiderChart", "configuration": 
+        {
+            "title": "Spider Chart",
+
+            "layout": {
+                "width": (window.parent.innerWidth - 20) * 0.33,
+                "height": 225,
+                "posx": (window.parent.innerWidth-rightMargin) * 0.67,
+                "posy": 120
+            }
+
+        }});
+
     modules.push({"name": "VariantComparer", "configuration": 
     	{
     		"layout": {
-                "width": (window.parent.innerWidth-20) * 0.38,
-                "height": 190,
-                "posx": 0,
-                "posy": 350
+
+                "width": (window.parent.innerWidth-rightMargin) * 0.33,
+                "height": window.parent.innerHeight - 470,
+                "posx": (window.parent.innerWidth-rightMargin) * 0.67,
+                "posy": 382
     		},
 
 	    	"title": "Variant Comparer",
@@ -228,21 +245,88 @@ function getConfiguration()
     	{
 	    	"title": "Output",
 
-    		"layout": {
-                "width": (window.parent.innerWidth-20) * 0.38,
-                "height": window.parent.innerHeight - 40 - 50 - 580,
-			    "posx": 0,
-			    "posy": 580
-    		}
+            "layout": {
+                "width": (window.parent.innerWidth-rightMargin) * 0.38,
+                "height": 100,
+                "posx": 0,
+                "posy": 245
+            }
 
     	}});
+
+    modules.push({"name": "Graph", "configuration": 
+        {
+            "title": "Bubble Front Graph",
+
+            "layout": {
+                "width": (window.parent.innerWidth - 20) * 0.29,
+                "height": 345,
+                "posx": (window.parent.innerWidth-rightMargin) * 0.38,
+                "posy": 0
+            },
+
+            "onDrop" : function(module)
+            {
+//                module.host.storage.instanceFilter.filterContent(); 
+            },
+            "onBubbleClick": function(module, pid){
+                if (module.host.storage.selector.isSelected(pid))
+                {
+                    module.host.storage.selector.onDeselected(pid);
+                }
+                else
+                {
+                    module.host.storage.selector.onSelected(pid);
+                }                
+            },
+            "getExistingInstancesCount" : function(module){
+                return module.host.storage.evolutionController.existingInstancesCount;
+            },
+            "onDrawComplete" : function(module){
+                module.host.storage.evolutionController.assignProperShapesToGraph();
+                module.host.storage.selector.ReselectGraphPoints();
+            }
+        }});
+
+    modules.push({"name": "ParallelCoordinates", "configuration": 
+        {
+            "title": "Parallel Coordinates Chart",
+
+            "layout": {
+                "width": (window.parent.innerWidth-rightMargin) * 0.67,
+                "height": window.parent.innerHeight - 470,
+                "posx": 0,
+                "posy": 382
+            },
+
+            "onSelected": function(module, pid)
+            {
+                module.host.storage.selector.onSelected(pid);               
+            },
+            "onDeselected": function(module, pid)
+            {
+                module.host.storage.selector.onDeselected(pid);             
+            },
+            "onMouseOver" : function(module, pid)
+            {
+                module.host.storage.highlighter.onMouseOver(pid);                               
+            },            
+            "onMouseOut" : function(module, pid)
+            {
+                module.host.storage.highlighter.onMouseOut(pid);               
+            },            
+            "onRangeFiltered" : function(module, dim, start, end)
+            {
+                module.host.storage.instanceFilter.onFilteredByRange(dim, start, end);
+            }
+        }});
 
     modules.push({"name": "FeatureQualityMatrix", "configuration": 
     	{
 	    	"title": "Feature and Quality Matrix",
 
     		"layout": {
-			    "width": window.parent.innerWidth-20,
+			    "width": window.parent.innerWidth-rightMargin,
 			    "height": 500,
 			    "posx": 0,
 			    "posy": window.parent.innerHeight - 40 - 50 + 40
@@ -290,86 +374,6 @@ function getConfiguration()
                 module.host.storage.highlighter.onMouseOut(pid);               
             }
     	}});
-
-    modules.push({"name": "Graph", "configuration": 
-    	{
-	    	"title": "Bubble Front Graph",
-
-    		"layout": {
-			    "width": (window.parent.innerWidth - 20) * 0.62,
-			    "height": window.parent.innerHeight - 40 - 50,
-			    "posx": (window.parent.innerWidth-20) * 0.38,
-			    "posy": 0
-    		},
-
-            "onDrop" : function(module)
-            {
-//                module.host.storage.instanceFilter.filterContent(); 
-            },
-            "onBubbleClick": function(module, pid){
-                if (module.host.storage.selector.isSelected(pid))
-                {
-                    module.host.storage.selector.onDeselected(pid);
-                }
-                else
-                {
-                    module.host.storage.selector.onSelected(pid);
-                }                
-            },
-            "getExistingInstancesCount" : function(module){
-                return module.host.storage.evolutionController.existingInstancesCount;
-            },
-            "onDrawComplete" : function(module){
-                module.host.storage.evolutionController.assignProperShapesToGraph();
-                module.host.storage.selector.ReselectGraphPoints();
-            }
-    	}});
-
-    modules.push({"name": "SpiderChart", "configuration": 
-        {
-            "title": "Spider Chart",
-
-            "layout": {
-                "width": 750,
-                "height": 550,
-                "posx": (window.parent.innerWidth-20) * 0.38 + 50,
-                "posy": 50
-            }
-
-        }});
-
-    modules.push({"name": "ParallelCoordinates", "configuration": 
-        {
-            "title": "Parallel Coordinates Chart",
-
-            "layout": {
-                "width": 750,
-                "height": 550,
-                "posx": (window.parent.innerWidth-20) * 0.38 + 100,
-                "posy": 100
-            },
-
-            "onSelected": function(module, pid)
-            {
-                module.host.storage.selector.onSelected(pid);               
-            },
-            "onDeselected": function(module, pid)
-            {
-                module.host.storage.selector.onDeselected(pid);             
-            },
-            "onMouseOver" : function(module, pid)
-            {
-                module.host.storage.highlighter.onMouseOver(pid);                               
-            },            
-            "onMouseOut" : function(module, pid)
-            {
-                module.host.storage.highlighter.onMouseOut(pid);               
-            },            
-            "onRangeFiltered" : function(module, dim, start, end)
-            {
-                module.host.storage.instanceFilter.onFilteredByRange(dim, start, end);
-            }
-        }});
 
     var settings = {
     	"onInitialize": function(host)

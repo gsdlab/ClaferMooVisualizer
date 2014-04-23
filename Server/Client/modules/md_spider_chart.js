@@ -74,7 +74,7 @@ SpiderChart.method("redrawChart", function()
     var sh = document.defaultView.getComputedStyle(e,null).getPropertyValue("height");
 
     var w = parseInt(sw) - 250;
-    var h = parseInt(sh) - 100;
+    var h = parseInt(sh) - 70;
 
     var colorscale = d3.scale.category10();
 
@@ -121,7 +121,7 @@ var mycfg = {
 //  maxValue: 0.6,
   levels: 4,
   ExtraWidthX: 220,
-  ExtraWidthY: 80
+  ExtraWidthY: 60
 }
 
 //Call function to draw the Radar chart
