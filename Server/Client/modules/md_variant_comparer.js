@@ -53,7 +53,7 @@ VariantComparer.method("getContent", function()
     var content = '<div id="VariantComparer">';
     
     content += '<div id="completeness"></div><br/>';
-    content += '<div id="common" class="comparison"></div><br/><div id="unique" class="comparison"></div>';
+    content += '<div id="common" class="comparison">Select variants for comparison</div><br/><div id="unique" class="comparison"></div>';
     
     content += '</div>';
     
@@ -78,8 +78,8 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
     
     if (data.products.length <= 1)
     {
-        $("#VariantComparer #common").html("No Data");
-        $("#VariantComparer #unique").html("No Data");    
+        $("#VariantComparer #common").html("Select variants for comparison");
+        $("#VariantComparer #unique").html("Select variants for comparison");    
     }
 
     var allFeatures = data.features;
@@ -133,7 +133,7 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         }
     }
     else
-        label += "Please select more variants";
+        label += "[No include suggestions]";
 
     var saveButton = ' <input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
     label += saveButton;
@@ -174,7 +174,7 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         $("#VariantComparer #common").html(new TableVisualizer().getHTML(commonData, this.colWidth));
     }
     else
-        $("#VariantComparer #common").html("No Data");
+        $("#VariantComparer #common").html("Select more variants to see commonalities");
 
         
     if (differentFeatures.length > 0)
@@ -182,7 +182,7 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         $("#VariantComparer #unique").html(new TableVisualizer().getHTML(differentData, this.colWidth));
     }
     else
-        $("#VariantComparer #unique").html("No Data");
+        $("#VariantComparer #unique").html("Select more variants for comparison");
 
     this.settings.onHTMLChanged(this);
 
