@@ -223,7 +223,7 @@ VariantComparer.method("saveSelected", function(){
     var parser = new InstanceConverter(instances);
     var data = "";
     for (var i=0; i < selection.length; i++){
-        data += parser.getInstanceData(selection[i]);
+        data += parser.getInstanceData(parsePID(selection[i])) + "\n";
     }
     $("#saveData").val(data);
     $("#SaveForm").submit();
