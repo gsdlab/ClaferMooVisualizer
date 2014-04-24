@@ -15,7 +15,7 @@
         "modules/md_parallel_coordinates.js",
         "modules/hovering_extensions.js",
         "modules/md_spider_chart.js",        
-        "configuration.js"
+        "client.js"
     ],
 
     "styles": [
