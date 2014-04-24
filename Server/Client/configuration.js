@@ -99,8 +99,6 @@ function getConfiguration()
                     module.host.print("ClaferMooVisualizer> " + responseObject.ig_args + "\n");
                 }
 
-                console.log(responseObject);
-
 		        if (responseObject.compiler_message)
 		        {
 		        	module.host.print("Compiler> " + responseObject.message + "\n");
@@ -109,8 +107,6 @@ function getConfiguration()
 
     		},
     		"onCompleted" : function(module, responseObject){    					        
-                console.log(responseObject);
-
 		        if (responseObject.model != "")
 		        {
 		            module.editor.getSession().setValue(responseObject.model);
@@ -327,6 +323,7 @@ function getConfiguration()
             },            
             "onRangeFiltered" : function(module, dim, start, end)
             {
+//                console.log("parCoords > onFilteredByRange");
                 module.host.storage.instanceFilter.onFilteredByRange(dim, start, end);
             }
         }});

@@ -30,6 +30,8 @@ function InstanceFilter (host){
 
 //Clears then reapplies all active filters
 InstanceFilter.method("filterContent", function(){
+
+//    console.log("filter");
     this.unFilter();
 
 // loop to go through each element
@@ -98,8 +100,8 @@ InstanceFilter.method("filterContent", function(){
 
     //fire the scroll handler to align table
     $('#mdFeatureQualityMatrix .window-content').scroll();
-    this.host.findModule("mdParallelCoordinates").chart.filter();
-    this.host.findModule("mdFeatureQualityMatrix").synchronizeWidths();
+//    this.host.findModule("mdParallelCoordinates").chart.filter();
+    this.host.findModule("mdFeatureQualityMatrix").resize();
 
 });
 
@@ -158,6 +160,7 @@ InstanceFilter.method("unFilter", function(){
 
 InstanceFilter.method("onFilteredByRange", function(dim, start, end)
 {
+//    console.log("onFilteredByRange");
     var module = this.host.findModule("mdGoals");
     for (var x = 0; x < module.ranges.length; x++)
     {

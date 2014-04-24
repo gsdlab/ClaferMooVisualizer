@@ -183,15 +183,16 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
   }
 
   function brushend() {
-    var actives = context.dimensions.filter(function(p) { return !context.y[p].brush.empty(); }),
-        extents = actives.map(function(p) { return context.y[p].brush.extent(); });
+        var dim = $(this).attr("id").substring("brush-".length);
+        var extent = context.y[dim].brush.extent();
 
-        actives.every(function(p, i) 
+        if (extent[0] == extent[1]) // actually means brush removal
         {
-            context.onBrushEnd(p, extents[i][0], extents[i][1]);
-            return true;
-        });
+            extent[0] = context.y[dim].domain()[0]; // set the highest ranges
+            extent[1] = context.y[dim].domain()[1]; // set the highest ranges
+        }
 
+        context.onBrushEnd(dim, extent[0], extent[1]); // call the callback
   }
 }
 
@@ -231,7 +232,7 @@ CustomParCoords.method("filter", function(){
 
 CustomParCoords.method("onBrushEnd", function(p, start, end)
 {
-
+//    console.log("onBrushEnd");
     if (this.chartListeners.onRangeFilter)
         this.chartListeners.onRangeFilter(p, start, end);
 
@@ -274,7 +275,6 @@ CustomParCoords.method("makeDeselected", function(id)
 
 CustomParCoords.method("setRange", function(dim, start, end)
 {
-    console.log("setRange");
     var newExtent = new Array();
     newExtent.push(start);
     newExtent.push(end);
