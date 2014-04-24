@@ -277,6 +277,7 @@ CustomParCoords.method("makeDeselected", function(id)
 
 CustomParCoords.method("setRange", function(dim, start, end)
 {
+    console.log("setRange");
     var newExtent = new Array();
     newExtent.push(start);
     newExtent.push(end);

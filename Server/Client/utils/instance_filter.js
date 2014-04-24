@@ -69,7 +69,6 @@ InstanceFilter.method("filterContent", function(){
 
             if (filter != null)
             {
-                this.host.findModule("mdParallelCoordinates").chart.setRange(filter.goal, filter.min, filter.max);
                 for (x=1; x<= row_length; x++){
                     var value = $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).text();
                     var min = parseInt(filter.min);
@@ -157,7 +156,8 @@ InstanceFilter.method("unFilter", function(){
 });
 
 
-InstanceFilter.method("onFilteredByRange", function(dim, start, end){
+InstanceFilter.method("onFilteredByRange", function(dim, start, end)
+{
     var module = this.host.findModule("mdGoals");
     for (var x = 0; x < module.ranges.length; x++)
     {
@@ -176,6 +176,8 @@ InstanceFilter.method("onFilteredByRange", function(dim, start, end){
                 $("#" + dim + "max").val("");
             else
                 $("#" + dim + "max").val(end);
+
+            this.host.findModule("mdParallelCoordinates").chart.setRange(dim, start, end);
 
         }
     }
