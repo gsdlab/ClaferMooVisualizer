@@ -8,9 +8,16 @@
 //For a bit of extra information check the blog about it:
 //http://nbremer.blogspot.nl/2013/09/making-d3-radar-chart-look-bit-better.html
 
-var RadarChart = {
-  draw: function(id, d, options, instanceIDs){
-  var cfg = {
+
+function RadarChart(settings)
+{
+	this.settings = settings;
+}
+
+RadarChart.method("draw", function(id, d, options, instanceIDs)
+{
+	var context = this;
+  	var cfg = {
 	 radius: 5,
 	 w: 600,
 	 h: 600,
@@ -53,7 +60,7 @@ var RadarChart = {
 	var tooltip;
 
 	var indexFromClassName = function(className){
-		return className.substring("radar-chart-serie".length);		
+		return parseInt(className.substring("radar-chart-serie".length));		
 	}
 	
 	//Circular segments
@@ -162,8 +169,12 @@ var RadarChart = {
 						.transition(200)
 						.style('opacity', 1);
 
+						if (context.settings.onMouseOver)
+						{
+							context.settings.onMouseOver(instanceIDs[indexFromClassName(d3.select(this).attr("class"))]);	
+						}
 
-						})
+					})
 					 .on('mouseout', function(){
 										g.selectAll("polygon")
 										 .transition(200)
@@ -171,6 +182,12 @@ var RadarChart = {
 							tooltip
 								.transition(200)
 								.style('opacity', 0);
+
+						if (context.settings.onMouseOut)
+						{
+							context.settings.onMouseOut(instanceIDs[indexFromClassName(d3.select(this).attr("class"))]);	
+						}
+
 					 });
 	  series++;
 	});
@@ -214,6 +231,12 @@ var RadarChart = {
 					g.selectAll(z)
 						.transition(200)
 						.style("fill-opacity", .7);
+
+					if (context.settings.onMouseOver)
+					{
+						context.settings.onMouseOver(instanceIDs[indexFromClassName(d3.select(this).attr("class"))]);	
+					}
+
 				  })
 		.on('mouseout', function(){
 					tooltip
@@ -222,6 +245,12 @@ var RadarChart = {
 					g.selectAll("polygon")
 						.transition(200)
 						.style("fill-opacity", cfg.opacityArea);
+
+					if (context.settings.onMouseOut)
+					{
+						context.settings.onMouseOut(instanceIDs[indexFromClassName(d3.select(this).attr("class"))]);	
+					}
+
 				  })
 		.append("svg:title")
 		.text(function(j){return Math.max(j.value, 0)});
@@ -234,5 +263,5 @@ var RadarChart = {
 			   .style('font-family', 'sans-serif')
 			   .style('background', 'white')
 			   .style('font-size', '13px');
-  }
-};
+
+});

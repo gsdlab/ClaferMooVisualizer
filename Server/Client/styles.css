@@ -13,7 +13,7 @@ textarea.child {
 circle, text, rect.square, polygon.octagon{
     cursor:pointer;
 }
-  
+
 div.parent {height:60px;}
 textarea.child {height:100%;}
 
@@ -141,4 +141,8 @@ fieldset{
 
 #input_bottom_container{
     background: white;
+}
+
+#chartNode polygon{
+    cursor:pointer;    
 }

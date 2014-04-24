@@ -200,6 +200,14 @@ function getConfiguration()
                 "height": 225,
                 "posx": (window.parent.innerWidth-rightMargin) * 0.67,
                 "posy": 120
+            },
+            "onMouseOver": function(module, pid)
+            {
+                module.host.storage.highlighter.onMouseOver(pid);               
+            },
+            "onMouseOut": function(module, pid)
+            {
+                module.host.storage.highlighter.onMouseOut(pid);               
             }
 
         }});

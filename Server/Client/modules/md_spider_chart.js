@@ -127,7 +127,20 @@ var mycfg = {
 //Call function to draw the Radar chart
 //Will expect that data is in %'s
 
-RadarChart.draw("#chartNode", d, mycfg, LegendOptions);
+var context = this;
+
+var chart = new RadarChart({
+  "onMouseOver": function(instanceID)
+    {
+        context.settings.onMouseOver(context, getPID(instanceID));
+    },
+  "onMouseOut": function(instanceID)
+    {
+        context.settings.onMouseOut(context, getPID(instanceID));
+    }
+});
+
+chart.draw("#chartNode", d, mycfg, LegendOptions);
 
 ////////////////////////////////////////////
 /////////// Initiate legend ////////////////

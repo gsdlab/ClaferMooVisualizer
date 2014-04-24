@@ -235,13 +235,10 @@ CustomParCoords.method("onBrushEnd", function(p, start, end)
     if (this.chartListeners.onRangeFilter)
         this.chartListeners.onRangeFilter(p, start, end);
 
-    console.log("brush end");
-
 });
 
 CustomParCoords.method("makeActive", function(id)
 {
-    console.log(id);
     this.svg.classed("active", true);
     this.projection.classed("inactive", function(p) { return p.id !== id; });
     this.projection.classed("active", function(p) { return p.id === id; });
