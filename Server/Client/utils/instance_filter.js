@@ -28,6 +28,10 @@ function InstanceFilter (host){
     this.closedFeatures = [];
 }
 
+InstanceFilter.method("argsToArray", function(argString){
+    return argString.split("-");
+});
+
 //Clears then reapplies all active filters
 InstanceFilter.method("filterContent", function(){
 
@@ -47,7 +51,7 @@ InstanceFilter.method("filterContent", function(){
         if (!row.find(".numeric").length){
             var filter = $(row).attr("FilterStatus"); //pull filter type from the row attribute
             for (var x = 1; x <= row_length; x++){
-                var cell = $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x);
+                var cell = $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x); // potentially optimize this
 
                 if (filter == "none") //filter nothing for this row
                     break;
@@ -59,35 +63,28 @@ InstanceFilter.method("filterContent", function(){
             }
         }
 
-        //filtering by goals
-        else {
-            var filter = null;
-            var filterName = $("#mdFeatureQualityMatrix #r" + i + " .td_abstract").find(".path").text();
-            for (var x = 0; x < goalsModule.ranges.length; x++)
-            {
-                if (filterName == goalsModule.ranges[x].goal)
-                {
-                    filter = goalsModule.ranges[x];
-                    break;
-                }
-            }
-
-            if (filter != null)
-            {
-                for (x=1; x<= row_length; x++){
-                    var cell = $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x);
-                    var value = $(cell).text();
-                    var min = parseInt(filter.min);
-                    var max = parseInt(filter.max);
-                    if (min > value || max < value)
-                        this.hideInstance(x);
-                }
-            }
-        }
+        //filtering by goals is done separately, because typically there are more quality attributes than goals
 
         //increment row
         i++;
         row = $("#mdFeatureQualityMatrix #r" + i);
+    }
+
+    // filtering by goals
+
+    var matrixModule = this.host.findModule("mdFeatureQualityMatrix");
+
+    for (var i = 0; i < goalsModule.ranges.length; i++)
+    {
+        var filter = goalsModule.ranges[i];
+        for (x=1; x<= row_length; x++)
+        {
+            var value = matrixModule.instanceProcessor.getFeatureValue(x, this.argsToArray(filter.goal), "int");
+            var min = parseInt(filter.min);
+            var max = parseInt(filter.max);
+            if (min > value || max < value)
+                this.hideInstance(x);
+        }
     }
 
     //close features
@@ -185,6 +182,8 @@ InstanceFilter.method("onFilteredByRange", function(dim, start, end)
                 $("#" + dim + "max").val(end);
 
             this.host.findModule("mdParallelCoordinates").chart.setRange(dim, start, end);
+
+            break;
 
         }
     }
