@@ -489,7 +489,7 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
 
                 if (process.instancesOnly)
                 {
-                    console.log("returning instances...");
+//                    console.log("returning instances...");
                     res.writeHead(200, { "Content-Type": "application/json"});
                     jsonObj.optimizer_message = "Instances successfully returned";
                     jsonObj.optimizer_instances = process.instances;
@@ -505,7 +505,7 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
                     var error_result = process.freshError;
                     process.freshError = "";
 
-                    console.log("Preparing to send the result...");
+                    core.logSpecific("Preparing to send the result...", process.windowKey);
                     
                     var code = process.code;
 
@@ -516,11 +516,11 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
 
                     if (code === 0) 
                     {               
-                        console.log(data_result);
+//                        console.log(data_result);
                         var instances = data_result; // data_result this may include extra text at the beginning
                                                      // which will be trimmed at conversion stage
                         
-                        console.log(process.file + '.xml');
+                        core.logSpecific(process.file + '.xml', process.windowKey);
                         var xml = fs.readFileSync(process.file + '.xml');
                         // this code assumes the backend should produce an XML,
                         // which is not the correct way
@@ -549,7 +549,7 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
                     else 
                     {
                         jsonObj.optimizer_message = 'Error, return code: ' + code + '\n' + error_result;
-                        console.log(data_result);
+                        core.logSpecific(data_result, process.windowKey);
                     }
 
                     jsonObj.model = process.model;
@@ -595,7 +595,7 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
 
             res.end(JSON.stringify(jsonObj));
 
-            console.log(jsonObj.message);
+//            console.log(jsonObj.message);
         }
     }
     else // if it is cancel
