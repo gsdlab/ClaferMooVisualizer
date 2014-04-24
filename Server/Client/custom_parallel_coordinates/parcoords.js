@@ -20,7 +20,7 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
     this.labels = labels;
 
     var line = d3.svg.line(),
-        axis = d3.svg.axis().orient("left");
+        axis = d3.svg.axis().orient("left").tickFormat(d3.format("d"));
 
     this.svg = d3.select(nodeId).append("svg")
       .attr("width", context.w + context.m[1] + context.m[3])
