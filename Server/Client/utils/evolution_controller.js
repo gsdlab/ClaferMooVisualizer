@@ -107,18 +107,22 @@ EvolutionController.method("getSVGSquare", function(cx, cy, r){
 });
 
 
+EvolutionController.method("argsToArray", function(argString){
+    return argString.split("-");
+});
+
 //returns the id of the first identical point that is a circle.
 EvolutionController.method("getIdenticalID", function(id, upperBound){
     var goals = this.host.findModule("mdGoals").goals;
     if (id>upperBound){
         var values={};
         for (var i=0; i<goals.length; i++){
-            values[goals[i].arg] = this.host.findModule("mdGraph").instanceProcessor.getFeatureValue(id, goals[i].arg, true);
+            values[goals[i].arg] = this.host.findModule("mdGraph").instanceProcessor.getFeatureValue(id, this.argsToArray(goals[i].arg), 'int');
         }
         for (i=1; i<=upperBound; i++){
             var isOptimal = true;
             for (j=0; j<goals.length; j++){
-                var check =  this.host.findModule("mdGraph").instanceProcessor.getFeatureValue(i, goals[j].arg, true);
+                var check =  this.host.findModule("mdGraph").instanceProcessor.getFeatureValue(i, this.argsToArray(goals[j].arg), 'int');
                 if (check != values[goals[j].arg]){
                     isOptimal = false;
                     break;

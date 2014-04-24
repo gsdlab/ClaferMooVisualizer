@@ -28,8 +28,8 @@ function preprocessMOOResult(result, host)
                 return false;
             }
             
-            var parser = new InstanceConverter(result.optimizer_instances);
-            instances += parser.convertFromClaferIGOutputToClaferMoo(host.storage.evolutionController.existingData.claferXML);            
+//            var parser = new InstanceConverter(result.optimizer_instances);
+            instances += result.optimizer_instances;//parser.convertFromClaferIGOutputToClaferMoo(host.storage.evolutionController.existingData.claferXML);            
             abstractXMLText = host.storage.evolutionController.existingData.claferXML;
         }
         else

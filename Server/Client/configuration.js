@@ -125,6 +125,8 @@ function getConfiguration()
                 if (!data)
                     return false;
 
+                module.host.storage.selector.clearSelection();
+
 		        var goalsModule = module.host.findModule("mdGoals");
 		        var graphModule = module.host.findModule("mdGraph");
 		        var matrixModule = module.host.findModule("mdFeatureQualityMatrix");
