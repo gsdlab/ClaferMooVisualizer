@@ -155,7 +155,6 @@ ParallelCoordinates.method("redrawChart", function()
     }
 
     backupChart = this.chart;
-    console.log("RedrawChart");
     this.chart = new CustomParCoords("#pcChart", data, labels, [30, 10, 10, 10], w, h, chartListeners);
 
     if (backupChart)

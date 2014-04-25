@@ -159,16 +159,18 @@ InstanceFilter.method("unFilter", function(){
 });
 
 
-InstanceFilter.method("onFilteredByRange", function(dim, start, end)
+InstanceFilter.method("onFilteredByRange", function(caller, dim, start, end)
 {
 //    console.log("onFilteredByRange");
-    var module = this.host.findModule("mdGoals");
-    for (var x = 0; x < module.ranges.length; x++)
+    var goalsModule = this.host.findModule("mdGoals");
+    var parCoordsModule = this.host.findModule("mdParallelCoordinates");
+
+    for (var x = 0; x < goalsModule.ranges.length; x++)
     {
-        if (dim == module.ranges[x].goal)
+        if (dim == goalsModule.ranges[x].goal)
         {
-            module.ranges[x].min = start;
-            module.ranges[x].max = end;
+            goalsModule.ranges[x].min = start;
+            goalsModule.ranges[x].max = end;
 
 
             if (start == parseInt($("#" + dim + "min").attr("placeholder")))
@@ -189,6 +191,10 @@ InstanceFilter.method("onFilteredByRange", function(dim, start, end)
     }
 
     this.filterContent();
+    if (caller != parCoordsModule)
+    {
+        parCoordsModule.chart.filter();
+    }
 
 });
 

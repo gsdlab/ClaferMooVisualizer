@@ -181,7 +181,7 @@ function getConfiguration()
 
             "onFilterByGoals": function(module, dim, start, end)
             {
-                module.host.storage.instanceFilter.onFilteredByRange(dim, start, end);
+                module.host.storage.instanceFilter.onFilteredByRange(module, dim, start, end);
             }
 
         }});
@@ -324,7 +324,7 @@ function getConfiguration()
             "onRangeFiltered" : function(module, dim, start, end)
             {
 //                console.log("parCoords > onFilteredByRange");
-                module.host.storage.instanceFilter.onFilteredByRange(dim, start, end);
+                module.host.storage.instanceFilter.onFilteredByRange(module, dim, start, end);
             }
         }});
 

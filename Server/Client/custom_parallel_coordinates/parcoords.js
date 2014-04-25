@@ -218,9 +218,10 @@ CustomParCoords.method("filter", function(){
     var context = this;
     var actives = this.dimensions.filter(function(p) { return !context.y[p].brush.empty(); }),
         extents = actives.map(function(p) { return context.y[p].brush.extent(); });
-    
-    this.foreground.style("display", function(d) {
-      return actives.every(function(p, i) 
+
+
+    // snap the brush first
+    actives.every(function(p, i) 
       {
           var start = extents[i][0];
           var end = extents[i][1];
@@ -239,7 +240,14 @@ CustomParCoords.method("filter", function(){
               context.setRange(p, newStart, newEnd);
           }
 
-          return newStart <= d[p] && d[p] <= newEnd;
+          return true;
+      });
+
+    // show/hide instances    
+    this.foreground.style("display", function(d) {
+      return actives.every(function(p, i) 
+      {
+          return extents[i][0] <= d[p] && d[p] <= extents[i][1];
       }) ? null : "none";
     });
 });
