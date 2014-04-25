@@ -303,8 +303,8 @@ CustomParCoords.method("setRange", function(dim, start, end)
 
     if (start == end)
     {
-        newExtent[0] = start - 0.5;
-        newExtent[1] = start + 0.5;
+        newExtent[0] = parseFloat(start) - 0.5;
+        newExtent[1] = parseFloat(start) + 0.5;
     }
 
     d3.select("#brush-" + dim).call(this.y[dim].brush.extent(newExtent));
