@@ -311,6 +311,6 @@ CustomParCoords.method("setRange", function(dim, start, end)
 
     if (this.y[dim].domain()[0] == start && this.y[dim].domain()[1] == end)
     {
-      d3.select("#brush-" + dim).call(this.y[dim].brush.clear());
+      d3.select("#brush-" + dim).transition().duration(250).call(this.y[dim].brush.clear());
     }
 });

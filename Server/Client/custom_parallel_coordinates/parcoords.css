@@ -21,9 +21,14 @@
 }
 
 #pcChart .brush .extent {
+  fill: green;
   fill-opacity: .3;
-  stroke: #fff;
+  stroke: #007700;
   shape-rendering: crispEdges;
+}
+
+#pcChart .brush#brush-id .extent {
+  fill: white;
 }
 
 #pcChart .axis line,
