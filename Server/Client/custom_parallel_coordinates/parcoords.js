@@ -196,8 +196,22 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
   }
 }
 
-  function isInt(n) {
-     return n % 1 === 0;
+  function isRound(n) {
+     return (n * 2) % 1 === 0;
+  }
+
+  function roundToClosestRound(n){
+      var x = n * 2;
+      var choice1 = Math.ceil(x);
+      var choice2 = Math.floor(x);
+
+      var dist1 = Math.abs(choice1 - x);
+      var dist2 = Math.abs(choice2 - x);
+
+      if (dist1 <= dist2)
+          return choice1 / 2;
+
+      return choice2 / 2;
   }
 
 CustomParCoords.method("filter", function(){
@@ -214,11 +228,11 @@ CustomParCoords.method("filter", function(){
           var newStart = start;
           var newEnd = end;
 
-          if (!isInt(newStart))
-            newStart = Math.floor(start);
+          if (!isRound(newStart))
+            newStart = roundToClosestRound(newStart);
 
-          if (!isInt(newEnd))
-            newEnd = Math.floor(end);
+          if (!isRound(newEnd))
+            newEnd = roundToClosestRound(newEnd);
 
           if (newStart != start || newEnd != end)
           {              
@@ -278,6 +292,13 @@ CustomParCoords.method("setRange", function(dim, start, end)
     var newExtent = new Array();
     newExtent.push(start);
     newExtent.push(end);
+
+    if (start == end)
+    {
+        newExtent[0] = start - 0.5;
+        newExtent[1] = start + 0.5;
+    }
+
     d3.select("#brush-" + dim).call(this.y[dim].brush.extent(newExtent));
 
     if (this.y[dim].domain()[0] == start && this.y[dim].domain()[1] == end)

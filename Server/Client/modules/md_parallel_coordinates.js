@@ -177,6 +177,8 @@ ParallelCoordinates.method("redrawChart", function()
             context.chart.setRange(p, extents[i][0], extents[i][1]);
             return true;
         });
+
+        this.chart.filter();
     }
 });
 
