@@ -409,10 +409,7 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     
     $("chart").empty(); // clear the old graph
     
-    if (host.findModule("mdGraph"))
-    {    
-        host.findModule("mdGraph").redrawParetoFront();
-    }
+    this.redrawParetoFront();
 
 	return true;
 });

@@ -1,18 +1,25 @@
 {
     "scripts": [
         "utils/utils.js",
+        "http://d3js.org/d3.v3.min.js",
+        "custom_parallel_coordinates/parcoords.js",
         "https://www.google.com/jsapi",
         "utils/selection_controller.js",
         "utils/evolution_controller.js",
         "utils/instance_filter.js",        
         "utils/pf_visualizer.js",
+        "utils/radarchart_visualizer.js",
         "modules/md_graph.js",
+        "modules/md_goals.js",
         "modules/md_variant_comparer.js",
+        "modules/md_parallel_coordinates.js",
         "modules/hovering_extensions.js",
-        "configuration.js"
+        "modules/md_spider_chart.js",        
+        "client.js"
     ],
 
     "styles": [
+        "custom_parallel_coordinates/parcoords.css",
         "styles.css"        
     ]    
 }

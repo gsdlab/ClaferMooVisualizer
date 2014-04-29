@@ -28,60 +28,63 @@ function InstanceFilter (host){
     this.closedFeatures = [];
 }
 
+InstanceFilter.method("argsToArray", function(argString){
+    return argString.split("-");
+});
+
 //Clears then reapplies all active filters
 InstanceFilter.method("filterContent", function(){
+
+//    console.log("filter");
     this.unFilter();
 
 // loop to go through each element
     this.host.findModule("mdGraph").addIds();
+    var goalsModule = this.host.findModule("mdGoals");
     var x;
     i=0;
     row = $("#mdFeatureQualityMatrix #r" + i);
     row_length = row.find(".td_instance").length;
-    while (row.length != 0){
-
+    while (row.length != 0)
+    {
         //filtering by features
         if (!row.find(".numeric").length){
             var filter = $(row).attr("FilterStatus"); //pull filter type from the row attribute
             for (var x = 1; x <= row_length; x++){
+                var cell = $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x); // potentially optimize this
+
                 if (filter == "none") //filter nothing for this row
                     break;
-                else if (filter == "require" && $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).hasClass("no")) { //filter out column and bubble
+                else if (filter == "require" && $(cell).hasClass("no")) { //filter out column and bubble
                     this.hideInstance(x);
-                } else if (filter == "exclude" && $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).hasClass("tick")) { //filter out column and bubble
+                } else if (filter == "exclude" && $(cell).hasClass("tick")) { //filter out column and bubble
                     this.hideInstance(x);
                 }
             }
         }
 
-        //filtering by goals
-        else {
-            var filter = null;
-            // todo: update this filter!!!
-            var filterName = $("#mdFeatureQualityMatrix #r" + i + " .td_abstract").find(".path").text().replaceAll(".", "-");
-            for (var x = 0; x < this.host.findModule("mdGoals").ranges.length; x++)
-            {
-                if (filterName == this.host.findModule("mdGoals").ranges[x].goal)
-                {
-                    filter = this.host.findModule("mdGoals").ranges[x];
-                }
-            }
-
-            if (filter != null)
-            {
-                for (x=1; x<= row_length; x++){
-                    var value = $("#mdFeatureQualityMatrix #td" + (i-1) + "_" + x).text();
-                    var min = parseInt(filter.min);
-                    var max = parseInt(filter.max);
-                    if (min > value || max < value)
-                        this.hideInstance(x);
-                }
-            }
-        }
+        //filtering by goals is done separately, because typically there are more quality attributes than goals
 
         //increment row
         i++;
         row = $("#mdFeatureQualityMatrix #r" + i);
+    }
+
+    // filtering by goals
+
+    var matrixModule = this.host.findModule("mdFeatureQualityMatrix");
+
+    for (var i = 0; i < goalsModule.ranges.length; i++)
+    {
+        var filter = goalsModule.ranges[i];
+        for (x=1; x<= row_length; x++)
+        {
+            var value = matrixModule.instanceProcessor.getFeatureValue(x, this.argsToArray(filter.goal), "int");
+            var min = parseInt(filter.min);
+            var max = parseInt(filter.max);
+            if (min > value || max < value)
+                this.hideInstance(x);
+        }
     }
 
     //close features
@@ -98,6 +101,8 @@ InstanceFilter.method("filterContent", function(){
 
     //fire the scroll handler to align table
     $('#mdFeatureQualityMatrix .window-content').scroll();
+//    this.host.findModule("mdParallelCoordinates").chart.filter();
+    this.host.findModule("mdFeatureQualityMatrix").resize();
 
 });
 
@@ -152,3 +157,45 @@ InstanceFilter.method("unFilter", function(){
     	$(circle_pairs[i].circle).hide();
     }
 });
+
+
+InstanceFilter.method("onFilteredByRange", function(caller, dim, start, end)
+{
+//    console.log("onFilteredByRange");
+    var goalsModule = this.host.findModule("mdGoals");
+    var parCoordsModule = this.host.findModule("mdParallelCoordinates");
+
+    for (var x = 0; x < goalsModule.ranges.length; x++)
+    {
+        if (dim == goalsModule.ranges[x].goal)
+        {
+            goalsModule.ranges[x].min = start;
+            goalsModule.ranges[x].max = end;
+
+
+            if (start == parseInt($("#" + dim + "min").attr("placeholder")))
+                $("#" + dim + "min").val("");
+            else
+                $("#" + dim + "min").val(start);
+
+            if (end == parseInt($("#" + dim + "max").attr("placeholder")))
+                $("#" + dim + "max").val("");
+            else
+                $("#" + dim + "max").val(end);
+
+            this.host.findModule("mdParallelCoordinates").chart.setRange(dim, start, end);
+
+            break;
+
+        }
+    }
+
+    this.filterContent();
+    if (caller != parCoordsModule)
+    {
+        parCoordsModule.chart.filter();
+    }
+
+});
+
+

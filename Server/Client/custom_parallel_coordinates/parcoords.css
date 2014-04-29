@@ -1,0 +1,70 @@
+#pcChart text 
+{
+  font-family: "sans-serif";
+  font-size: 12px;
+}
+
+#pcChart .background path {
+  fill: none;
+  stroke: #ccc;
+  stroke-opacity: .4;
+  shape-rendering: crispEdges;
+  cursor: pointer;
+}
+
+#pcChart .foreground path {
+  fill: none;
+  stroke: steelblue;
+  stroke-opacity: .7;
+  stroke-width: 1.5px;
+  cursor: pointer;
+}
+
+#pcChart .brush .extent {
+  fill: green;
+  fill-opacity: .3;
+  stroke: #007700;
+  shape-rendering: crispEdges;
+}
+
+#pcChart .brush#brush-id .extent {
+  fill: white;
+}
+
+#pcChart .axis line,
+#pcChart .axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+#pcChart .axis text {
+  text-shadow: 0 1px 0 #fff;
+  cursor: move;
+}
+
+
+#pcChart .active .label:not(.inactive) {
+/*  font-weight: bold; */
+}
+
+#pcChart .label.inactive {
+  fill: #ccc;
+}
+
+#pcChart .foreground path.inactive {
+  stroke: #ccc;
+  stroke-opacity: .5;
+  stroke-width: 1px;
+}
+
+#pcChart .foreground path.active {
+  stroke: #0b0;
+  stroke-opacity: .9;
+  stroke-width: 3.0px;
+}
+
+#pcChart .foreground path.selected {
+  stroke-opacity: 1.0;
+  stroke-width: 4.0px;
+}

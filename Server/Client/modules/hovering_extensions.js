@@ -1,92 +1,65 @@
+/* Graph */
 
+Graph.method("makeHighlighted", function(pid)
+{
+    var instance = parsePID(pid);
+    var context = this;
 
-//  Adds hot-tracking and highlighting for table and graph
-FeatureQualityMatrix.method("addHovering", function()
-{   
-    var that = this;
     this.interval = null;
     this.timeout = null;
-    $("#comparison #tBody tr").hover(
-      function () {
-        $('#comparison table tr:gt(0)').css("color", this.fadeColor);
-        $('#comparison table tr:gt(0) img').css("opacity", this.fadeOpacity);
-        
-        $(this).css("color", this.normalColor);
-        $(this).find("img").css("opacity", this.normalOpacity);
 
-        $(this).css("background", "#ffffcc");
-      }, 
-      function () {
-        $('#comparison table tr:gt(0)').css("color", this.normalColor);
-        $('#comparison table tr:gt(0) img').css("opacity", this.normalOpacity);
-        $(this).css("background", "");
-      }
-    );
+    //get crosshairs 
+    var hairs = this.getCrosshairs($("#" + getPID(instance) + "c").attr("cx"), $("#" + getPID(instance) + "c").attr("cy"));
+    $("#" + getPID(instance) + "c").before(hairs);
+    $("#CHX").attr("class", instance + "HL");
+    $("#CHY").attr("class", instance + "HL");
 
-    $("#comparison #r0 .td_instance").hover(
-      function () {
-        $(this).css("background", "#ffffcc");
-        var instance = $(this).attr("id").substring(4);
+    var highlight = $("#" + getPID(instance) + "c").clone();
+    highlight = this.highlight(highlight);
+    $(highlight).removeAttr("id");
+    $(highlight).attr("class", instance + "HL");
+    //add highlight element behind circle
+    $("#" + getPID(instance) + "c").before(highlight);
 
-        //get crosshairs 
-        var hairs = that.getCrosshairs($("#" + getPID(instance) + "c").attr("cx"), $("#" + getPID(instance) + "c").attr("cy"));
-        $("#" + getPID(instance) + "c").before(hairs);
-        $("#CHX").attr("class", instance + "HL");
-        $("#CHY").attr("class", instance + "HL");
+    var highlight = $("#" + getPID(instance) + "r").clone();
+    highlight = this.highlight(highlight);
+    $(highlight).removeAttr("id");
+    $(highlight).attr("class", instance + "HL");
+    //add highlight element behind circle
+    $("#" + getPID(instance) + "r").before(highlight);
 
-        //create circle highlight
-        var highlight = $("#" + getPID(instance) + "c").clone();
-        highlight = that.highlight(highlight);
-        $(highlight).removeAttr("id");
-        $(highlight).attr("class", instance + "HL");
-        //add highlight element behind circle
-        $("#" + getPID(instance) + "c").before(highlight);
+    var highlight = $("#" + getPID(instance) + "h").clone();
+    highlight = this.highlight(highlight);
+    $(highlight).removeAttr("id");
+    $(highlight).attr("class", instance + "HL");
+    //add highlight element behind circle
+    $("#" + getPID(instance) + "h").before(highlight);
 
-        //check and create square highlight if needed (note: if rectangle does not exist this does nothing)
-        var highlight = $("#" + getPID(instance) + "r").clone();
-        highlight = that.highlight(highlight);
-        $(highlight).removeAttr("id");
-        $(highlight).attr("class", instance + "HL");
-        //add highlight element behind circle
-        $("#" + getPID(instance) + "r").before(highlight);
+    var myBool = true;
+    context.timeout = setTimeout(function(){
+        context.interval = setInterval(function(){
+            if (myBool){
+                $("." + instance + "HL").hide(500);
+                myBool = false;
+            } else {
+                $("." + instance + "HL").show(500);
+                myBool = true;
+            }
+        }, 500);
+    }, 1500);
+});
 
-        //check and create octagonal highlight if needed (note: if Octagon does not exist this does nothing)
-        var highlight = $("#" + getPID(instance) + "h").clone();
-        highlight = that.highlight(highlight);
-        $(highlight).removeAttr("id");
-        $(highlight).attr("class", instance + "HL");
-        //add highlight element behind circle
-        $("#" + getPID(instance) + "h").before(highlight);
-
-        //Add strobing of highlights and crosshairs (starts after 1.5 seconds)
-        var myBool = true;
-        that.timeout = setTimeout(function(){
-            that.interval = setInterval(function(){
-                if (myBool){
-                    $("." + instance + "HL").hide(500);
-                    myBool = false;
-                } else {
-                    $("." + instance + "HL").show(500);
-                    myBool = true;
-                }
-            }, 500);
-        }, 1500);
-      }, 
-      //mouseour function removes all highlights/crosshairs and ends all relevant timers
-      //note: includes timeout function in case user mouses out before the 1.5 seconds is up
-      function () {
-        $(this).css("background", "");
-        var instance = $(this).attr("id").substring(4);
-        $("." + instance + "HL").remove();
-        that.interval = clearInterval(that.interval);
-        that.timeout = clearTimeout(that.timeout);
-      }
-    );
-
+Graph.method("makeDehighlighted", function(pid)
+{
+    var instance = parsePID(pid);
+    $("." + instance + "HL").remove();
+    clearInterval(this.interval);
+    clearTimeout(this.timeout);
 });
 
 //sets a shape to be rendered as a highlight
-FeatureQualityMatrix.method("highlight", function(obj){
+Graph.method("highlight", function(obj)
+{
     $(obj).attr("filter", "url(#blur)");
     $(obj).attr("stroke-width", "6");
     $(obj).attr("stroke", "yellow");
@@ -94,7 +67,7 @@ FeatureQualityMatrix.method("highlight", function(obj){
 });
 
 //returns crosshairs for the graph that intersect at coordinates (x,y)
-FeatureQualityMatrix.method("getCrosshairs", function(x, y){
+Graph.method("getCrosshairs", function(x, y){
     var NS="http://www.w3.org/2000/svg";
     var crossX = document.createElementNS(NS,"line");
     crossX.setAttribute("x1", "0");
@@ -118,62 +91,99 @@ FeatureQualityMatrix.method("getCrosshairs", function(x, y){
     return [crossX, crossY];
 });
 
-//adds hover effects and hottracking to table headers. Essentially the same as comparison table addHover function
-VariantComparer.method("addHovering", function(){
-    that = this;
-    this.interval = null;
-    this.timeout = null;
-    $("#unique #r0 .td_instance").hover( 
-        function () {
-        $(this).css("background", "#ffffcc");
+//////////////////////////////////
+/* For tables */
+//////////////////////////////////
+
+function TableHovering(id, context)
+{
+    this.id = id;
+    this.context = context;
+}
+
+TableHovering.method("addHovering", function()
+{
+    var context = this;
+    var prefix = this.id + " ";
+    $(prefix + "#r0 .td_instance").hover(function () 
+    {
         var instance = $(this).find(".svghead :last-child").text();
-
-        //get crosshairs 
-        var hairs = that.host.findModule("mdFeatureQualityMatrix").getCrosshairs($("#" + getPID(instance) + "c").attr("cx"), $("#" + getPID(instance) + "c").attr("cy"));
-        $("#" + getPID(instance) + "c").before(hairs);
-        $("#CHX").attr("class", instance + "HL");
-        $("#CHY").attr("class", instance + "HL");
-
-        var highlight = $("#" + getPID(instance) + "c").clone();
-        highlight = that.host.findModule("mdFeatureQualityMatrix").highlight(highlight);
-        $(highlight).removeAttr("id");
-        $(highlight).attr("class", instance + "HL");
-        //add highlight element behind circle
-        $("#" + getPID(instance) + "c").before(highlight);
-
-        var highlight = $("#" + getPID(instance) + "r").clone();
-        highlight = that.host.findModule("mdFeatureQualityMatrix").highlight(highlight);
-        $(highlight).removeAttr("id");
-        $(highlight).attr("class", instance + "HL");
-        //add highlight element behind circle
-        $("#" + getPID(instance) + "r").before(highlight);
-
-        var highlight = $("#" + getPID(instance) + "h").clone();
-        highlight = that.host.findModule("mdFeatureQualityMatrix").highlight(highlight);
-        $(highlight).removeAttr("id");
-        $(highlight).attr("class", instance + "HL");
-        //add highlight element behind circle
-        $("#" + getPID(instance) + "h").before(highlight);
-
-        var myBool = true;
-        that.timeout = setTimeout(function(){
-            that.interval = setInterval(function(){
-                if (myBool){
-                    $("." + instance + "HL").hide(500);
-                    myBool = false;
-                } else {
-                    $("." + instance + "HL").show(500);
-                    myBool = true;
-                }
-            }, 500);
-        }, 1500);
+        context.context.settings.onMouseOver(context.context, getPID(instance));
     }, 
 
     function () {
-        $(this).css("background", "");
         var instance = $(this).find(".svghead :last-child").text();
-        $("." + instance + "HL").remove();
-        clearInterval(that.interval);
-        clearTimeout(that.timeout);
+        context.context.settings.onMouseOut(context.context, getPID(instance));
     });
+
+});
+
+TableHovering.method("highlight", function(instance){
+    var prefix = this.id + " ";
+    $(prefix + "#th0_" + instance).css("background", "#ffffcc");
+});
+
+TableHovering.method("dehighlight", function(instance){
+    var prefix = this.id + " ";
+    $(prefix + "#th0_" + instance).css("background", "");
+});
+
+///////////////////////////////
+
+FeatureQualityMatrix.method("addHovering", function()
+{   
+    var hovering = new TableHovering("#comparison", this);
+    hovering.addHovering();
+});
+
+FeatureQualityMatrix.method("makeHighlighted", function(pid)
+{   
+    var hovering = new TableHovering("#comparison", this);
+    hovering.highlight(parsePID(pid));
+});
+
+FeatureQualityMatrix.method("makeDehighlighted", function(pid)
+{   
+    var hovering = new TableHovering("#comparison", this);
+    hovering.dehighlight(parsePID(pid));
+});
+
+////////////////////////////////
+VariantComparer.method("addHovering", function(){
+    var hovering = new TableHovering("#unique", this);
+    hovering.addHovering();
+});
+
+VariantComparer.method("makeHighlighted", function(pid)
+{   
+    var hovering = new TableHovering("#unique", this);
+    hovering.highlight(parsePID(pid));
+});
+
+VariantComparer.method("makeDehighlighted", function(pid)
+{   
+    var hovering = new TableHovering("#unique", this);
+    hovering.dehighlight(parsePID(pid));
+});
+
+
+////////////////////////////
+/* Highlighter */
+
+function Highlighter(host){
+    this.host = host;
+}
+
+Highlighter.method("onMouseOver", function(pid){
+    this.host.findModule("mdGraph").makeHighlighted(pid);
+    this.host.findModule("mdFeatureQualityMatrix").makeHighlighted(pid);
+    this.host.findModule("mdParallelCoordinates").makeActive(pid);
+//    this.host.findModule("mdVariantComparer").makeHighlighted(pid);
+});
+
+Highlighter.method("onMouseOut", function(pid){
+    this.host.findModule("mdGraph").makeDehighlighted(pid);
+    this.host.findModule("mdFeatureQualityMatrix").makeDehighlighted(pid);
+    this.host.findModule("mdParallelCoordinates").makeInactive(pid);
+//    this.host.findModule("mdVariantComparer").makeDehighlighted(pid);
 });
