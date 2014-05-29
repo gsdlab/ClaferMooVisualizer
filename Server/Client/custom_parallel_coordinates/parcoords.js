@@ -1,4 +1,4 @@
-// taken from http://bl.ocks.org/mbostock/raw/7586334/
+// modified from http://bl.ocks.org/mbostock/raw/7586334/
 
 function CustomParCoords(nodeId, data, labels, margins, width, height, chartListeners)
 {

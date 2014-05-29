@@ -1,3 +1,4 @@
+// oriiginal comment:
 //Practically all this code comes from https://github.com/alangrafu/radar-chart-d3
 //I only made some additions and aesthetic adjustments to make the chart look better 
 //(of course, that is only my point of view)
