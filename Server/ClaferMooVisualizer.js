@@ -363,6 +363,7 @@ server.post('/upload', /*commandMiddleware,*/ function(req, res, next)
                 completed: false,
                 model: "",
                 mode : "compiler",
+                optimize: req.body.optimize, // if false, returns after the compilation
                 cacheEnabled: req.body.useCache, // save the caching setting here
                 loadedFromCache : false, 
                 freshError: ""});    
@@ -466,26 +467,45 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
                 // finished compilation. Start optimization right a way.
 //                console.log("COMPLETED COMPILER");
 
-                core.timeoutProcessSetPing(process);
-
                 var jsonObj = new Object();
-                jsonObj.message = "Working";
+
+                if (process.optimize)
+                {
+                    jsonObj.message = "Working";
+                }
+                else
+                {
+                    jsonObj.model = process.model; // we return the model at this stage
+                    jsonObj.message = "Compiled";
+                }
+
                 jsonObj.compiled_formats = process.compiled_formats;
                 jsonObj.args = process.compiler_args;
+                jsonObj.optimize = process.optimize;
                 jsonObj.compiler_message = process.compiler_message;
+
+                // transferring the XML file
+                core.logSpecific(process.file + '.xml', process.windowKey);
+                var xml = fs.readFileSync(process.file + '.xml');
+                jsonObj.compiler_claferXML = xml.toString();
 
                 process.compiler_args = "";
                 res.writeHead(200, { "Content-Type": "application/json"});
                 res.end(JSON.stringify(jsonObj));
 
-                process.mode = "ig";
-                process.mode_completed = false;
-                runOptimization(process);
+                if (process.optimize)
+                {
+                    core.timeoutProcessSetPing(process);
+                    process.mode = "ig";
+                    process.mode_completed = false;
+                    runOptimization(process);
+                }
             }
             else
             {
 //                console.log("COMPLETED MOO");
                 var jsonObj = new Object();
+                jsonObj.optimize = process.optimize;
 
                 if (process.instancesOnly)
                 {
@@ -517,18 +537,12 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
                     if (code === 0) 
                     {               
 //                        console.log(data_result);
-                        var instances = data_result; // data_result this may include extra text at the beginning
-                                                     // which will be trimmed at conversion stage
-                        
-                        core.logSpecific(process.file + '.xml', process.windowKey);
-                        var xml = fs.readFileSync(process.file + '.xml');
-                        // this code assumes the backend should produce an XML,
-                        // which is not the correct way
+                        var instances = data_result; // data_result this may include extra text at the beginning or the end
+                                                     // which should be trimmed on the client-side
                         
                         jsonObj.optimizer_message = "Backend successfully executed";
                         jsonObj.optimizer_instances_only = false;
                         jsonObj.optimizer_instances = instances;
-                        jsonObj.optimizer_claferXML = xml.toString();
                         jsonObj.optimizer_from_cache = process.loadedFromCache;
 
                         if (process.cacheEnabled && !process.loadedFromCache) // caching the results
@@ -612,7 +626,7 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
         var jsonObj = new Object();
         jsonObj.message = "Cancelled";
         jsonObj.scopes = "";
-        jsonObj.compiler_message = "Cancelled compilation";
+        jsonObj.compiler_message = "Cancelled";
         jsonObj.completed = true;
         res.end(JSON.stringify(jsonObj));
 

@@ -50,6 +50,7 @@ function getConfiguration()
             "file_extensions": [
                 {
                     "ext": ".cfr", 
+                    "flag": "normal", 
                     "button_file_caption": "Optimize",
                     "button_example_caption": "Optimize",
                     "button_editor_caption": "Optimize",
@@ -59,7 +60,19 @@ function getConfiguration()
                     "button_editor_tooltip": "Optimize the model specified in the editor"
                 },
                 {
+                    "ext": ".cfr",
+                    "flag": "no-optimize", 
+                    "button_file_caption": "Upload",
+                    "button_example_caption": "Upload",
+                    "button_editor_caption": "Upload",
+
+                    "button_file_tooltip": "Upload the selected file",
+                    "button_example_tooltip": "Upload the selected example",
+                    "button_editor_tooltip": "Upload the model specified in the editor"
+                },                
+                {
                     "ext": ".data", 
+                    "flag": "normal", 
                     "button_file_caption": "Add Instances",
                     "button_example_caption": "Add Instances",
                     "button_editor_caption": "Add Instances",
@@ -102,6 +115,7 @@ function getConfiguration()
 
     		},
     		"onBeginQuery": function(module){
+                module.host.storage.claferXML = null; // we must erase old temporary data
     			return true;
     		},
 
@@ -126,6 +140,12 @@ function getConfiguration()
 		        	module.host.print(responseObject.compiler_message + "\n");    
 		    	}
 
+                if (responseObject.compiler_claferXML)
+                {
+                    module.host.print("Compiler> " + "Model's XML got successfully" + "\n");
+                    module.host.storage.claferXML = responseObject.compiler_claferXML;
+                }
+
     		},
     		"onCompleted" : function(module, responseObject){    					        
 		        if (responseObject.model != "")
@@ -133,56 +153,69 @@ function getConfiguration()
 		            module.editor.getSession().setValue(responseObject.model);
 		        }
 
-                if (!responseObject.optimizer_message)
+                console.log(responseObject);
+
+                if (responseObject.optimize || responseObject.instancesOnly)
                 {
-                    return false;
+
+                    if (!responseObject.optimizer_message)
+                    {
+                        return false;
+                    }
+
+    		        var data = preprocessMOOResult(responseObject, module.host);
+                    if (!data)
+                        return false;
+
+                    module.host.storage.selector.clearSelection();
+
+    		        var goalsModule = module.host.findModule("mdGoals");
+    		        var graphModule = module.host.findModule("mdGraph");
+    		        var matrixModule = module.host.findModule("mdFeatureQualityMatrix");
+                    var comparerModule = module.host.findModule("mdVariantComparer");
+                    var spiderChartModule = module.host.findModule("mdSpiderChart");
+                    var parallelCoordinatesChartModule = module.host.findModule("mdParallelCoordinates");
+
+    				goalsModule.onDataLoaded(data);
+    				data.goals = goalsModule.goals;
+                    graphModule.onDataLoaded(data);
+    				matrixModule.onDataLoaded(data);
+                    comparerModule.onDataLoaded(data);
+                    spiderChartModule.onDataLoaded(data);
+                    parallelCoordinatesChartModule.onDataLoaded(data);
+
+    				$.updateWindowContent(goalsModule.id, goalsModule.getContent());
+                    $.updateWindowContent(graphModule.id, graphModule.getContent());
+    				$.updateWindowContent(matrixModule.id, matrixModule.getContent());
+                    $.updateWindowContent(comparerModule.id, comparerModule.getContent());
+                    $.updateWindowContent(spiderChartModule.id, spiderChartModule.getContent());
+                    $.updateWindowContent(parallelCoordinatesChartModule.id, parallelCoordinatesChartModule.getContent());
+
+    				goalsModule.onRendered();
+                    graphModule.onRendered();
+
+                    module.host.storage.evolutionController.assignProperShapesToMatrix();
+
+    				matrixModule.onRendered();
+                    comparerModule.onRendered();
+                    parallelCoordinatesChartModule.onRendered();
+
+                    matrixModule.addHovering();
+
+                    goalsModule.calculateRanges();
+
+                    module.host.storage.instanceFilter.filterContent();               
+                    spiderChartModule.onRendered();
+
+                    if (responseObject.optimize)
+        		        module.host.print("ClaferMooVisualizer> " + responseObject.optimizer_message + "\n");
+                }
+                else
+                { 
+                    module.host.print("ClaferMooVisualizer> " + "Model has been uploaded." + "\n");
+                    module.host.print("ClaferMooVisualizer> " + "Now add instances by uploading .data files." + "\n");
                 }
 
-		        var data = preprocessMOOResult(responseObject, module.host);
-                if (!data)
-                    return false;
-
-                module.host.storage.selector.clearSelection();
-
-		        var goalsModule = module.host.findModule("mdGoals");
-		        var graphModule = module.host.findModule("mdGraph");
-		        var matrixModule = module.host.findModule("mdFeatureQualityMatrix");
-                var comparerModule = module.host.findModule("mdVariantComparer");
-                var spiderChartModule = module.host.findModule("mdSpiderChart");
-                var parallelCoordinatesChartModule = module.host.findModule("mdParallelCoordinates");
-
-				goalsModule.onDataLoaded(data);
-				data.goals = goalsModule.goals;
-                graphModule.onDataLoaded(data);
-				matrixModule.onDataLoaded(data);
-                comparerModule.onDataLoaded(data);
-                spiderChartModule.onDataLoaded(data);
-                parallelCoordinatesChartModule.onDataLoaded(data);
-
-				$.updateWindowContent(goalsModule.id, goalsModule.getContent());
-                $.updateWindowContent(graphModule.id, graphModule.getContent());
-				$.updateWindowContent(matrixModule.id, matrixModule.getContent());
-                $.updateWindowContent(comparerModule.id, comparerModule.getContent());
-                $.updateWindowContent(spiderChartModule.id, spiderChartModule.getContent());
-                $.updateWindowContent(parallelCoordinatesChartModule.id, parallelCoordinatesChartModule.getContent());
-
-				goalsModule.onRendered();
-                graphModule.onRendered();
-
-                module.host.storage.evolutionController.assignProperShapesToMatrix();
-
-				matrixModule.onRendered();
-                comparerModule.onRendered();
-                parallelCoordinatesChartModule.onRendered();
-
-                matrixModule.addHovering();
-
-                goalsModule.calculateRanges();
-
-                module.host.storage.instanceFilter.filterContent();               
-                spiderChartModule.onRendered();
-
-		        module.host.print("ClaferMooVisualizer> " + responseObject.optimizer_message + "\n");
 		        return true;  
     		}    		
     	}

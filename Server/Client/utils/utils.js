@@ -23,7 +23,7 @@ SOFTWARE.
 function preprocessMOOResult(result, host)
 {
 	var instances = result.optimizer_instances;
-	var abstractXMLText = result.optimizer_claferXML;
+	var abstractXMLText = host.storage.claferXML; // now getting it from a previously saved XML
 
 	if (!result.optimizer_instances_only) // the user submitted a clafer file to optimize
 	{
@@ -103,12 +103,9 @@ function preprocessMOOResult(result, host)
     data.claferXML = abstractXMLText;
     data.unparsedInstances = instances;	
 
-    /* counting the number of lines */
-    if (!host.storage.evolutionController.existingData){
+    if (!host.storage.evolutionController.existingData)
+    {
         var instanceProcessor = new InstanceProcessor(data.instancesXML);
-
-        //var lines = data.unparsedInstances.match(/^.*([\n\r]+|$)/gm);
-        //lines = data.unparsedInstances.split(lines[1]);
         host.storage.evolutionController.existingInstancesCount = instanceProcessor.getInstanceCount();
     }
 
