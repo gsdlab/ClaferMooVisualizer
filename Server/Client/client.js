@@ -72,7 +72,6 @@ function getConfiguration()
                 },                
                 {
                     "ext": ".data", 
-                    "flag": "normal", 
                     "button_file_caption": "Add Instances",
                     "button_example_caption": "Add Instances",
                     "button_editor_caption": "Add Instances",
@@ -155,7 +154,7 @@ function getConfiguration()
 
                 console.log(responseObject);
 
-                if (responseObject.optimize || responseObject.instancesOnly)
+                if (responseObject.optimize || responseObject.optimizer_instances_only)
                 {
 
                     if (!responseObject.optimizer_message)
@@ -207,11 +206,21 @@ function getConfiguration()
                     module.host.storage.instanceFilter.filterContent();               
                     spiderChartModule.onRendered();
 
-                    if (responseObject.optimize)
-        		        module.host.print("ClaferMooVisualizer> " + responseObject.optimizer_message + "\n");
+                    module.host.print("ClaferMooVisualizer> " + responseObject.optimizer_message + "\n");
                 }
                 else
                 { 
+                    var data = new Object();
+                    data.error = false;
+                    data.output = responseObject.message;
+                    data.instancesXML = "";
+                    data.claferXML = module.host.storage.claferXML;
+                    data.unparsedInstances = ""; 
+
+                    var instanceProcessor = new InstanceProcessor(data.instancesXML);
+                    module.host.storage.evolutionController.existingInstancesCount = instanceProcessor.getInstanceCount();
+                    module.host.storage.evolutionController.existingData = data;
+
                     module.host.print("ClaferMooVisualizer> " + "Model has been uploaded." + "\n");
                     module.host.print("ClaferMooVisualizer> " + "Now add instances by uploading .data files." + "\n");
                 }
