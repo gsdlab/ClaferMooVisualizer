@@ -322,22 +322,25 @@ function runOptimization(process)
 
 server.post('/upload', /*commandMiddleware,*/ function(req, res, next) 
 {
-    lib.handleUploads(req, res, next, fileReady);
+    lib.handleUploads(req, res, next, fileReady, false);
 
-    function fileReady(uploadedFilePath, dlDir, loadedViaURL)
+    function fileReady(process)
     {        
         var loadExampleInEditor = req.body.loadExampleInEditor;
-        if (loadedViaURL)
+        if (process.loadedViaURL)
         {
             loadExampleInEditor = true;
         }
 
-        var key = req.body.windowKey;
-
-        core.logSpecific("FILE EXTENSION: " + req.body.fileExt, req.body.windowKey);
-
         // read the contents of the uploaded file
-        fs.readFile(uploadedFilePath + req.body.fileExt, function (err, data) {
+        fs.readFile(process.file + req.body.fileExt, function (err, data) {
+
+            if (err)
+            {
+                res.writeHead(500, { "Content-Type": "text/html"});
+                res.end("Error while reading the file: " + err);
+                return;
+            }
 
             var file_contents;
             if(data)
@@ -345,30 +348,13 @@ server.post('/upload', /*commandMiddleware,*/ function(req, res, next)
             else
             {
                 res.writeHead(500, { "Content-Type": "text/html"});
-                res.end("No data has been read");
-                lib.cleanupOldFiles(dlDir);
+                res.end("Could not read the target file contents");
                 return;
             }
 
-            core.addProcess({ 
-                windowKey: req.body.windowKey, 
-                toRemoveCompletely: false, 
-                tool: null, 
-                freshData: "", 
-                scopes: "",
-                folder: dlDir, 
-                clafer_compiler: null,
-                file: uploadedFilePath, 
-                instancesOnly: false,
-                completed: false,
-                model: "",
-                mode : "compiler",
-                optimize: req.body.optimize, // if false, returns after the compilation
-                cacheEnabled: req.body.useCache, // save the caching setting here
-                loadedFromCache : false, 
-                freshError: ""});    
-
-            var process = core.getProcess(req.body.windowKey);
+            process.optimize = req.body.optimize; // if false, returns after the compilation
+            process.cacheEnabled = req.body.useCache; // save the caching setting here
+            process.loadedFromCache = false; 
             
             // if instance data is submitted
             if (req.body.fileExt == ".data")
@@ -411,7 +397,7 @@ server.post('/upload', /*commandMiddleware,*/ function(req, res, next)
             process.optimizerLimit = req.body.optimizerLimit;
 
             var specifiedArgs = [];
-            var genericArgs = [ss, uploadedFilePath + ".cfr"];
+            var genericArgs = [ss, process.file + ".cfr"];
 
             if (loadExampleInEditor)
                 process.model = file_contents;
