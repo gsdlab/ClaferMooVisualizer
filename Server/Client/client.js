@@ -82,37 +82,11 @@ function getConfiguration()
                 }
             ],
 
-    		"onError": function(module, statusText, response, xhr){
-			    var caption = "";
-//                console.log(statusText);
-//                console.log(response);
 
-			    if (statusText == "compile_error")
-			        caption = "<b>Compile Error.</b><br>Please check whether Clafer Compiler is available, and the model is correct.";
-			    else if (statusText == "timeout")
-			        caption = "<b>Request Timeout.</b><br>Please check whether the server is available.";
-			    else if (statusText == "malformed_output")
-			        caption = "<b>Malformed output received from the optimizer.</b><br>Please check whether you are using the correct version of the chosen optimizer. Also, an unhandled exception is possible.  Please verify your input file: check syntax and integer ranges.";        
-			    else if (statusText == "malformed_instance")
-			        caption = "<b>Malformed instance data received from the optimizer.</b><br>An unhandled exception may have occured during the optimizer execution. Please verify your input file: check syntax and integer ranges.";        
-			    else if (statusText == "empty_instances")
-			        caption = "<b>No instances returned.</b> Possible reasons:<br><ul><li>No instances found at all: the model is not satisfiable within the given scopes and integer range</li><li>An unhandled exception occured in the chosen backend</li></ul>Please verify your input model, increase scopes and integer ranges.";        
-			    else if (statusText == "empty_argument")
-			        caption = "<b>Empty argument given to processToolResult.</b><br>Please report this error.";        
-			    else if (statusText == "empty_instance_file")
-			        caption = "<b>No instances found in the specified file.";        
-			    else if (statusText == "optimize_first")
-			        caption = "<b>You have to run optimization first, and only then add instances.";        
-			    else if (statusText == "error" && response.responseText == "")
-			        caption = "<b>Request Error.</b><br>Please check whether the server is available.";        
-			    else
-			        caption = '<b>' + xhr + '</b><br>' + response.responseText.replaceAll("\\n", "<br>").replaceAll("\\t", "&nbsp;&nbsp;").replaceAll("\\r", "").replaceAll("\\\"", "\"");
-
-		        module.host.print("ClaferMooVisualizer> Error occured\n");
-
-			    return caption;
-
-    		},
+            "onError": function(module, statusText, response, xhr)
+            {
+                return onError(module, statusText, response, xhr);
+            },
     		"onBeginQuery": function(module){
                 module.host.storage.claferXML = null; // we must erase old temporary data
     			return true;
@@ -460,4 +434,71 @@ function getConfiguration()
 	};
 
     return {"modules": modules, "settings": settings};
+}
+
+
+
+function onError(module, statusText, response, xhr) 
+{
+    var currentDate = new Date();
+    var errorRecord = {};
+
+    if (statusText == "compile_error")
+        errorRecord = {
+            "caption": "Compilation Error", 
+            "body": "Please check whether Clafer Compiler is available, and the model is syntactically correct."
+        };
+    else if (statusText == "timeout")
+        errorRecord = {
+            "caption": "Request Timeout", 
+            "body": "Please check whether the server is available. You may want to reload the browser page."
+        };
+    else if (statusText == "malformed_output")
+        errorRecord = {
+            "caption": "Malformed output received from the optimizer", 
+            "body": "Please check whether you are using the correct version of the chosen optimizer. Also, an unhandled exception is possible.  Please verify your input file: check syntax and integer ranges."
+        };
+    else if (statusText == "malformed_instance")
+        errorRecord = {
+            "caption": "Malformed instance data received from the optimizer", 
+            "body": "An unhandled exception may have occured during the optimizer execution. Please verify your input file: check syntax and integer ranges."
+        };
+    else if (statusText == "empty_instances")
+        errorRecord = {
+            "caption": "No instances returned", 
+            "body": "Could not get any instance. Possible reasons:\n1) No instances found at all: the model is not satisfiable within the given scopes and integer ranges.\n2) An unhandled exception occured in the chosen backend.\nPlease verify your input model, increase scopes and integer ranges"
+        };
+    else if (statusText == "empty_instance_file")
+        errorRecord = {
+            "caption": "No instances found in the file", 
+            "body": "No instances found in the specified file. Please verify its format and check instance data"
+        };
+    else if (statusText == "optimize_first")
+        errorRecord = {
+            "caption": "Load the model first", 
+            "body": "You can add instances only after you loaded the model or ran optimization. Please provide a Clafer model first, and then add instances"
+        };
+      else if (response && response.responseText == "process_not_found")
+        errorRecord = {
+            "caption": "Session not found", 
+            "body": "Looks like your session has been closed due to inactivity. Just recompile your model to start a new session."
+        };
+    else if (statusText == "error" && response.responseText == "")
+        errorRecord = {
+            "caption": "Request Error", 
+            "body": "Please check whether the server is available. Try to recompile the model or to reload the browser page."
+        };
+    else
+        errorRecord = {
+            "caption": xhr, 
+            "body": response.responseText
+        };
+
+    errorRecord.datetime = currentDate.today() + " @ " + currentDate.timeNow();
+    errorRecord.contact = "If the error persists, please contact Alexandr Murashkin (http://gsd.uwaterloo.ca/amurashk) or Michal Antkiewicz (http://gsd.uwaterloo.ca/mantkiew)";
+
+    module.host.print("ClaferMooVisualizer> " + errorRecord.caption + ": " + errorRecord.datetime + "\n" + errorRecord.body + "\n");
+    module.host.errorWindow(errorRecord);
+
+    return true;
 }
