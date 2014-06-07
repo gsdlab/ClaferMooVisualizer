@@ -1,7 +1,6 @@
 {
     "scripts": [
         "utils/utils.js",
-        "http://d3js.org/d3.v3.min.js",
         "custom_parallel_coordinates/parcoords.js",
         "utils/selection_controller.js",
         "utils/evolution_controller.js",
