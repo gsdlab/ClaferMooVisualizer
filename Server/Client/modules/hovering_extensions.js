@@ -24,6 +24,7 @@ SOFTWARE.
 
 Graph.method("makeHighlighted", function(pid)
 {
+/*
     var instance = parsePID(pid);
     var context = this;
 
@@ -69,23 +70,28 @@ Graph.method("makeHighlighted", function(pid)
             }
         }, 500);
     }, 1500);
+*/    
 });
 
 Graph.method("makeDehighlighted", function(pid)
 {
+/*
     var instance = parsePID(pid);
     $("." + instance + "HL").remove();
     clearInterval(this.interval);
     clearTimeout(this.timeout);
+*/
 });
 
 //sets a shape to be rendered as a highlight
 Graph.method("highlight", function(obj)
 {
+/*
     $(obj).attr("filter", "url(#blur)");
     $(obj).attr("stroke-width", "6");
     $(obj).attr("stroke", "yellow");
     return obj;
+*/
 });
 
 //returns crosshairs for the graph that intersect at coordinates (x,y)

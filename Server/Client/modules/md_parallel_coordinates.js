@@ -95,7 +95,7 @@ ParallelCoordinates.method("redrawChart", function()
         }
 
         data.push(current);
-    }          
+    }              
 
     /* Rendering */
 
@@ -151,7 +151,10 @@ ParallelCoordinates.method("redrawChart", function()
         },
         "onRangeFilter": function(dim, start, end){
             context.settings.onRangeFiltered(context, dim, start, end);
-        }        
+        },
+        "saveDomains": function(domains){
+            context.settings.saveDomains(context, domains);
+        },        
     }
 
     backupChart = this.chart;

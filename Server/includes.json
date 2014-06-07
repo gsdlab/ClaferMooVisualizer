@@ -3,7 +3,6 @@
         "utils/utils.js",
         "http://d3js.org/d3.v3.min.js",
         "custom_parallel_coordinates/parcoords.js",
-        "https://www.google.com/jsapi",
         "utils/selection_controller.js",
         "utils/evolution_controller.js",
         "utils/instance_filter.js",        

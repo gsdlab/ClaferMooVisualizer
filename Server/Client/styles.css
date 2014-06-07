@@ -138,3 +138,37 @@ fieldset{
 #chartNode polygon{
     cursor:pointer;    
 }
+
+/* New d3.js-based Bubble Front Graph  */
+
+#chart .axis path {
+  fill: none;
+  stroke: #ccc;
+  shape-rendering: crispEdges;
+}
+
+#chart .axis line {
+  stroke: #ccc;
+  shape-rendering: crispEdges;
+}
+
+#chart .shape {
+  fill-opacity: 0.8;
+  stroke-width: 1px;
+  stroke: #000;
+}
+
+#chart .label {
+  fill: black;
+/*  stroke: white;
+  stroke-width: 1px; */
+}
+
+#chart .hidden .shape{
+  fill-opacity: 0.2;
+  stroke-width: 0px;
+}
+
+#chart .hidden .label{
+    display: none;
+}

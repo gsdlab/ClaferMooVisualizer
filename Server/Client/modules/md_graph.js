@@ -36,8 +36,6 @@ function Graph(host, settings)
     this.instanceProcessor = null;
     this.axisArray = new Array();
 
-    this.PFVisualizer = new ParetoFrontVisualizer("chart", this);
-
     this.instanceCounterArg = "?special_counter?"; 
     this.instanceCounterLabel = "#instance";
 
@@ -101,7 +99,7 @@ Graph.method("onRendered", function()
 		$("#chart").hide();
     }
     
-    this.addIds();
+//    this.addIds();
 
     this.resize();
 });
@@ -176,11 +174,24 @@ Graph.method("assignValue", function (id, value)
 	
 });
 
+
+Graph.method("argsToArray", function(argString){
+    return argString.split("-");
+});
+
 //redraws the graph
 Graph.method("redrawParetoFront", function()
 {
     if (this.instanceProcessor == null)
         return; // no data, so just resize
+
+    var e = $('#chart')[0];
+
+    var sw = document.defaultView.getComputedStyle(e,null).getPropertyValue("width");
+    var sh = document.defaultView.getComputedStyle(e,null).getPropertyValue("height");
+
+    var w = parseInt(sw) - 10;
+    var h = parseInt(sh) - 10;    
 
     var arg1 = $("#dropPointXAxisConfig_arg").val();
 	var label1 = $("#dropPointXAxisConfig_label").val();
@@ -194,14 +205,23 @@ Graph.method("redrawParetoFront", function()
 	var arg4 = $("#dropPointTAxisConfig_arg").val();
 	var label4 = $("#dropPointTAxisConfig_label").val();
     
-    var sLabel2 = '<g style="z-index: 110; "><text text-anchor="middle" x="15" y="320.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 320.5)" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">' + label2 + '</text><image xlink:href="Client/images/verticalAxis.png" alt="yaxis" x="5" y="90" width="12" height="155"></g>';
+    var y = h / 2;
+
+    var sLabel2 = '<g style="z-index: 110; "><text text-anchor="middle" x="15" y="' + y + '" font-family="Arial" font-size="12" transform="rotate(-90 15 ' + y + ')" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">' + label2 + '</text></g>';
     sLabel2 = '<div id="svgcontY" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="450" width="18">' + sLabel2 + '</svg></div>';
     
-    var sLabel4 = '<g style="z-index: 110; "><text text-anchor="middle" x="14.2" y="210.5" font-family="Arial" font-size="12" transform="rotate(-90 14.2 210.5)" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">' + label4;
-    sLabel4 = sLabel4 + '</text><circle cx="40" cy="240" r="12" stroke="black" stroke-width="1" fill="#efe6dc" style="cursor: default;"/><circle cx="40" cy="185" r="20" stroke="black" stroke-width="1" fill="#efe6dc" style="cursor: default;"/><text id="MaxCircleLegend" text-anchor="middle" x="40" y="190" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">X1</text><text id="MinCircleLegend" text-anchor="middle" x="40" y="245" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">X2</text></g>';
+    y += 30;
+
+    var sLabel4 = '<g style="z-index: 110; ">';
+    sLabel4 += '<text text-anchor="middle" x="14.2" y="' + y + '" font-family="Arial" font-size="12" transform="rotate(-90 14.2 ' + y + ')" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">' + label4 + '</text>';
+    sLabel4 += '<circle id="MinCircle" cx="20" cy="85" r="12" stroke="#ccc" stroke-width="1" fill="#efe6dc" style="cursor: default;"/>';
+    sLabel4 += '<circle id="MaxCircle" cx="20" cy="50" r="20" stroke="#ccc" stroke-width="1" fill="#efe6dc" style="cursor: default;"/>';
+    sLabel4 += '<text id="MinCircleLegend" text-anchor="middle" x="20" y="90" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">X1</text>';
+    sLabel4 += '<text id="MaxCircleLegend" text-anchor="middle" x="20" y="55" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">X2</text>';
+    sLabel4 += '</g>';    
     sLabel4 = '<div id="svgcontT" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350" width="60">' + sLabel4 + '</svg></div>';
 
-    $("#dropPointX").html('<div>' + label1 + '<image src="Client/images/horizontalAxis.png" alt="x-axis"></div>');
+    $("#dropPointX").html('<div>' + label1 + '</div>');
     $("#dropPointY").html(sLabel2);
     $("#dropPointZ").html("<div>" + label3 + "</div>");
     $("#dropPointT").html(sLabel4);
@@ -231,13 +251,49 @@ Graph.method("redrawParetoFront", function()
         labels.push(label4);
     }
     
-    this.PFVisualizer.draw(this.Processor, this.instanceProcessor, args, labels, this.instanceCounterArg);
-    this.addIds();
+    var e = $('#mdGraph div.window-content')[0];
+
+    var instanceCount = this.instanceProcessor.getInstanceCount();
+
+    var labelObjects = new Object();
+    labelObjects["id"] = "#variant";
+
+    for (var j = 0; j < args.length; j++)
+    {
+        labelObjects[args[j]] = labels[j];
+    }
+
+    var data = [];
+    for (var i = 1; i <= instanceCount; i++)
+    {            
+        var current = new Object();
+        current["id"] = i;
+        for (var j = 0; j < args.length; j++)
+        {
+            if (args[j] == this.instanceCounterArg)
+            {
+                current[args[j]] = i;                
+            }
+            else
+            {
+                var value = this.instanceProcessor.getFeatureValue(i, this.argsToArray(args[j]), 'int'); // get only numeric
+                current[args[j]] = value;
+            }
+        }
+
+        data.push(current);
+    }          
+
+    $('#chart').html("");    
+    this.chart = new ParetoFrontVisualizer("chart", data, labelObjects, [30, 30, 30, 30], w, h, {
+
+        });
+//    this.addIds();
     this.settings.onDrawComplete(this);
 
-    this.addFilters();
+//    this.addFilters();
 });
-
+/*
 //adds ids to the circles and text on the graph for the other functions to use
 Graph.method("addIds", function(){
     var i = 1;
@@ -268,7 +324,7 @@ Graph.method("addIds", function(){
     }
 
 });
-
+*/
 //formats object as selected
 Graph.method("selectObject", function(o)
 {
@@ -285,14 +341,14 @@ Graph.method("deselectObject", function(o)
 Graph.method("makePointsSelected", function(points)
 {
     var module = this;
-    this.selectObject($("#" + points + "t text")[1]);
+//    this.selectObject($("#" + points + "t text")[1]);
 });
 
 //runs deselectObject on points
 Graph.method("makePointsDeselected", function(points)
 {
     var module = this;
-    this.deselectObject($("#" + points + "t text")[1]);
+//    this.deselectObject($("#" + points + "t text")[1]);
 });
 
 //assigns a goal to an axis
@@ -407,12 +463,12 @@ Graph.method("resize", function() // not attached to the window anymore, so need
 
     $("#graph_table").css("table-layout", "auto"); //A fix for horizontal compression on non-chrome browsers (Jan 11th 2013)
     
-    $("chart").empty(); // clear the old graph
-    
     this.redrawParetoFront();
 
 	return true;
 });
+
+/*
 
 //This adds a visual filter that is used by the hottracking higlights
 Graph.method("addFilters", function(){
@@ -428,9 +484,6 @@ Graph.method("addFilters", function(){
     $(filter).append(gaussian);
     $(defs).append(filter);
 });
-
-Graph.method("getExistingInstancesCount", function(){
-    return this.settings.getExistingInstancesCount(this);
-});
+*/
 
 

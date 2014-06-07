@@ -21,8 +21,9 @@ SOFTWARE.
 */
 //filtering functions for table and graph
 function InstanceFilter (host){
-    this.host = host
+    this.host = host;
     this.hidden = [];
+    this.hiddenBubbles = [];
     this.permaHidden = {};
 //    this.originalPoints = host.storage.originalPoints;
     this.closedFeatures = [];
@@ -39,7 +40,7 @@ InstanceFilter.method("filterContent", function(){
     this.unFilter();
 
 // loop to go through each element
-    this.host.findModule("mdGraph").addIds();
+//    this.host.findModule("mdGraph").addIds();
     var goalsModule = this.host.findModule("mdGoals");
     var x;
     i=0;
@@ -110,30 +111,21 @@ InstanceFilter.method("filterContent", function(){
 InstanceFilter.method("hideInstance", function(x){
 
 // Get graph bubble html locations
-    var circle_pairs = [];
-    for (var i=1; i<=$("#chart circle").length; i++){
-        circle_pairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
-    }
+//    var circle_pairs = [];
+//    for (var i=1; i<=$("#chart circle").length; i++){
+//        circle_pairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
+//    }
 
     //hide table header (row 0)
 //    $("#mdFeatureQualityMatrix #th0_" + x).hide();
 //    this.hidden.push("#mdFeatureQualityMatrix #th0_" + x);
 
     //hide graph bubble
-    $(circle_pairs[x-1].circle).hide();
-    $(circle_pairs[x-1].text_data).hide();
-    this.hidden.push(circle_pairs[x-1].text_data);
-    this.hidden.push(circle_pairs[x-1].circle);
-    //hide whole column
 /*
-    var y = 1;
-    var row_with_removal = $("#mdFeatureQualityMatrix #r" + y);
-    while (row_with_removal.length != 0){
-        $("#mdFeatureQualityMatrix #td"+ (y-1) +"_" + x).hide();
-        this.hidden.push("#mdFeatureQualityMatrix #td"+ (y-1) +"_" + x);
-        y++;
-        row_with_removal = $("#mdFeatureQualityMatrix #r" + y);
-    }
+    var bubble = $("#V" + x);
+    var classes = bubble.attr("class");
+    bubble.attr("class", classes + " hidden");    
+    this.hiddenBubbles.push(bubble);
 */
     var rows = $("#mdFeatureQualityMatrix tr");
 
@@ -146,24 +138,35 @@ InstanceFilter.method("hideInstance", function(x){
 
 //unhides everything in the hidden stack (all things that have been filtered out) (note! does not include permahidden elements)
 InstanceFilter.method("unFilter", function(){
-	var circle_pairs = [];
-    for (var i=1; i<=$("#chart circle").length; i++){
-        circle_pairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
+//	var circle_pairs = [];
+//    for (var i=1; i<=$("#chart circle").length; i++){
+//        circle_pairs.push({circle: $("#" + getPID(i) + "c"), text_data: $("#" + getPID(i) + "t"), ident: i});
+//    }
+    while(this.hiddenBubbles.length)
+    {
+        var bubble = this.hiddenBubbles.pop();
+        var classes = bubble.attr("class");
+        var index = classes.indexOf("hidden");
+        if (index >= 0)
+            classes = classes.substring(0, index) + classes.substring(index + " hidden".length);
+        bubble.attr("class", classes);    
     }
+
     while(this.hidden.length){
         $(this.hidden.pop()).show();
     }
-    for (i = this.host.storage.evolutionController.existingInstancesCount; i<circle_pairs.length;i++){
-    	$(circle_pairs[i].circle).hide();
-    }
+
+//    for (i = this.host.storage.evolutionController.existingInstancesCount; i<circle_pairs.length;i++){
+//    	$(circle_pairs[i].circle).hide();
+//    }
 });
 
 
 InstanceFilter.method("onFilteredByRange", function(caller, dim, start, end)
 {
-//    console.log("onFilteredByRange");
     var goalsModule = this.host.findModule("mdGoals");
     var parCoordsModule = this.host.findModule("mdParallelCoordinates");
+    var graphModule = this.host.findModule("mdGraph");
 
     for (var x = 0; x < goalsModule.ranges.length; x++)
     {
@@ -183,7 +186,8 @@ InstanceFilter.method("onFilteredByRange", function(caller, dim, start, end)
             else
                 $("#" + dim + "max").val(end);
 
-            this.host.findModule("mdParallelCoordinates").chart.setRange(dim, start, end);
+            parCoordsModule.chart.setRange(dim, start, end);
+            graphModule.chart.setRange(dim, start, end);
 
             break;
 
@@ -191,10 +195,8 @@ InstanceFilter.method("onFilteredByRange", function(caller, dim, start, end)
     }
 
     this.filterContent();
-    if (caller != parCoordsModule)
-    {
-        parCoordsModule.chart.filter();
-    }
+    parCoordsModule.chart.filter();
+    graphModule.chart.filter();
 
 });
 

@@ -27,6 +27,7 @@ function EvolutionController(host)
     this.existingData = null;
 }
 
+/*
 // Make instances squares or octagons
 EvolutionController.method("assignProperShapesToGraph", function(){
     var originalPoints = this.existingInstancesCount;
@@ -70,7 +71,7 @@ EvolutionController.method("assignProperShapesToGraph", function(){
         $(circlePair.circle).hide();
     }
 });
-
+*/
 
 //return an svg octagon of 2r diameter centered at (x,y)
 EvolutionController.method("getSVGOctagon", function(x, y, r){
@@ -110,6 +111,8 @@ EvolutionController.method("getSVGSquare", function(cx, cy, r){
 EvolutionController.method("argsToArray", function(argString){
     return argString.split("-");
 });
+
+/*
 
 //returns the id of the first identical point that is a circle.
 EvolutionController.method("getIdenticalID", function(id, upperBound){
@@ -207,3 +210,4 @@ EvolutionController.method("assignProperShapesToVariantComparer", function(){
         $(correspondingCell).find("polygon").clone().prependTo($(Arow[i]).find(".svghead"));
     }
 });
+*/

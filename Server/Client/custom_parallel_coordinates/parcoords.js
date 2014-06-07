@@ -87,6 +87,16 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
               .attr("visibility", null);
         }));
 
+
+  var domains = context.dimensions.map(function(p) { 
+      var ar = new Array();
+      ar.push(p);
+      ar.push(context.y[p].domain()[0]);
+      ar.push(context.y[p].domain()[1]);
+      return ar;
+  });
+
+  chartListeners.saveDomains(domains);
   // Add an axis and title.
 
   context.g.append("g")
