@@ -22,8 +22,8 @@ SOFTWARE.
 
 function ParetoFrontVisualizer(nodeId, data, labels, m, w, h, chartListeners) 
 {
-    var tLimitMin = 10; // bubbles cannot be smaller than this
-    var tLimitMax = 15; // bubbles cannot be bigger  than this
+    var tLimitMin = 8; // bubbles cannot be smaller than this
+    var tLimitMax = 16; // bubbles cannot be bigger  than this
 
     this.data = data;
     
@@ -44,6 +44,8 @@ this.svg = d3.select("#" + nodeId).append("svg")
     .attr("transform", "translate(" + margin[1] + "," + margin[0] + ")");
 
   var keys = d3.keys(data[0]);
+  console.log("Keys:");
+  console.log(keys);
 
   var hasThird = keys[3] ? true : false;
   var hasForth = keys[4] ? true : false;
@@ -92,7 +94,6 @@ this.svg = d3.select("#" + nodeId).append("svg")
     var tMin = d3.min(data, function(d) { return d.t;} );
     var tMax = d3.max(data, function(d) { return d.t;} );
 
-
     this.ranges = new Array();
     this.ranges.push({"dim": keys[1], "min": x.domain()[0], "max": x.domain()[1]});
     this.ranges.push({"dim": keys[2], "min": y.domain()[0], "max": y.domain()[1]});
@@ -102,6 +103,11 @@ this.svg = d3.select("#" + nodeId).append("svg")
 
     if (hasForth) 
         this.ranges.push({"dim": keys[4], "min": tMin, "max": tMax});
+
+    for (var i = 5; i < keys.length; i++)
+    {
+        this.ranges.push({"dim": keys[i], "min": Number.NEGATIVE_INFINITY, "max": Number.POSITIVE_INFINITY });
+    }
 
     console.log(this.ranges);
 
@@ -117,11 +123,19 @@ this.svg = d3.select("#" + nodeId).append("svg")
         tMin = 0;
     }
 
+    if (hasThird){
+        $("#MaxZLegend").text(zMax);
+        $("#MinZLegend").text(zMin);
+        $("#svgcontZ").show();
+    } else {
+        $("#svgcontZ").hide();
+    }
+
     if (hasForth){
-        $("#MaxCircleLegend").text("=" + tMax);
-        $("#MaxCircle").attr("r", tLimitMax);
-        $("#MinCircleLegend").text("=" + tMin);
-        $("#MinCircle").text("r", tLimitMin);
+        $("#MaxTLegend").text(tMax);
+        $("#MaxTCircle").attr("r", tLimitMax);
+        $("#MinTLegend").text(tMin);
+        $("#MinTCircle").attr("r", tLimitMin);
         $("#svgcontT").show();
     } else {
         $("#svgcontT").hide();

@@ -172,3 +172,8 @@ fieldset{
 #chart .hidden .label{
     display: none;
 }
+
+#graph_table, #graph_table div{
+    margin:0;
+    padding:0;
+}

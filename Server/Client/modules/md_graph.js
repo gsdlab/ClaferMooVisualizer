@@ -206,24 +206,47 @@ Graph.method("redrawParetoFront", function()
 	var label4 = $("#dropPointTAxisConfig_label").val();
     
     var y = h / 2;
+    var x = w / 2;
 
-    var sLabel2 = '<g style="z-index: 110; "><text text-anchor="middle" x="15" y="' + y + '" font-family="Arial" font-size="12" transform="rotate(-90 15 ' + y + ')" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">' + label2 + '</text></g>';
+    var sLabel2 = '<g style="z-index: 110; "><text text-anchor="middle" x="' + 15 + '" y="' + y + '" font-family="Arial" font-size="12" transform="rotate(-90 15 ' + y + ')" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">' + label2 + '</text></g>';
     sLabel2 = '<div id="svgcontY" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="450" width="18">' + sLabel2 + '</svg></div>';
     
+    $("#dropPointX").html('<div>' + label1 + '</div>');
+    $("#dropPointY").html(sLabel2);
+
+    var sLabel3 = '<div id="svgcontZ">' + '<g style="z-index: 110; "><text text-anchor="middle" x="' + x + '" y="' + 0 + '" font-family="Arial" font-size="12" transform="rotate(-90 15 ' + y + ')" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">' + label3 + '</text></g>' + [
+'<svg width="' + w + '">',
+    '<defs>',
+        '<linearGradient id="Gradient-1"',
+            'x1="0" y1="0" x2="100%" y2="0">',
+            '<stop offset="0%" stop-color="red" />',
+            '<stop offset="50%" stop-color="yellow" />',
+            '<stop offset="100%" stop-color="green" />',
+        '</linearGradient>',
+    '</defs>',
+    '<rect y="0" x="' + (x - 100) + '" width="200" height="15" fill= "url(#Gradient-1)" stroke="#ccc" stroke-width="1px" />',
+    '<text id="MinZLegend" text-anchor="middle" x="' + (x - 100 - 10) + '" y="10" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">Z1</text>',
+    '<text id="MaxZLegend" text-anchor="middle" x="' + (x + 100 + 10) + '" y="10" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">Z2</text>',
+
+'</svg>'].join("");
+
+    sLabel3 += '</div>';
+
+    $("#dropPointZ").html(sLabel3);
+
     y += 30;
 
     var sLabel4 = '<g style="z-index: 110; ">';
-    sLabel4 += '<text text-anchor="middle" x="14.2" y="' + y + '" font-family="Arial" font-size="12" transform="rotate(-90 14.2 ' + y + ')" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">' + label4 + '</text>';
-    sLabel4 += '<circle id="MinCircle" cx="20" cy="85" r="12" stroke="#ccc" stroke-width="1" fill="#efe6dc" style="cursor: default;"/>';
-    sLabel4 += '<circle id="MaxCircle" cx="20" cy="50" r="20" stroke="#ccc" stroke-width="1" fill="#efe6dc" style="cursor: default;"/>';
-    sLabel4 += '<text id="MinCircleLegend" text-anchor="middle" x="20" y="90" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">X1</text>';
-    sLabel4 += '<text id="MaxCircleLegend" text-anchor="middle" x="20" y="55" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">X2</text>';
+    sLabel4 += '<text text-anchor="middle" x="15" y="' + y + '" font-family="Arial" font-size="12" transform="rotate(-90 15 ' + y + ')" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">' + label4 + '</text>';
+    sLabel4 += '<line x1="20" y1="35" x2="15" y2="25" style="stroke:#ccc;stroke-width:1" />'; // for outer circle
+    sLabel4 += '<circle id="MaxTCircle" cx="20" cy="50" r="20" stroke="#ccc" stroke-width="1" fill="#efe6dc" fill-opacity="1.0" style="cursor: default;"/>';
+    sLabel4 += '<line x1="20" y1="50" x2="15" y2="75" style="stroke:#ccc;stroke-width:1" />'; // for inner circle
+    sLabel4 += '<circle id="MinTCircle" cx="20" cy="50" r="12" stroke="#ccc" stroke-width="1" fill="#efe6dc" fill-opacity="1.0" style="cursor: default;"/>';
+    sLabel4 += '<text id="MinTLegend" text-anchor="middle" x="15" y="85" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">X1</text>';
+    sLabel4 += '<text id="MaxTLegend" text-anchor="middle" x="15" y="25" font-family="Arial" font-size="12" stroke="none" stroke-width="0" fill="#222222" style="cursor: default;">X2</text>';
     sLabel4 += '</g>';    
-    sLabel4 = '<div id="svgcontT" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350" width="60">' + sLabel4 + '</svg></div>';
+    sLabel4 = '<div id="svgcontT" style="position:relative; left:0;top:0; z-index:100; width:100%; height:100%;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="z-index:101;" height="350" width="40">' + sLabel4 + '</svg></div>';
 
-    $("#dropPointX").html('<div>' + label1 + '</div>');
-    $("#dropPointY").html(sLabel2);
-    $("#dropPointZ").html("<div>" + label3 + "</div>");
     $("#dropPointT").html(sLabel4);
 
     var args = new Array();
@@ -250,6 +273,20 @@ Graph.method("redrawParetoFront", function()
         args.push(arg4);
         labels.push(label4);
     }
+
+    // adding the rest metrics, even though they are not visualized, they take part in filtering
+    var allArgs = this.goals.reduce(function (prev, cur, index, array){
+        prev.push(cur.arg);
+        return prev;
+    },[]);
+
+    var missingArgs = allArgs.filter(function(element){
+        return (args.indexOf(element) < 0); 
+    });
+
+    var args = args.concat(missingArgs);
+
+    //-------------
     
     var e = $('#mdGraph div.window-content')[0];
 
@@ -285,7 +322,7 @@ Graph.method("redrawParetoFront", function()
     }          
 
     $('#chart').html("");    
-    this.chart = new ParetoFrontVisualizer("chart", data, labelObjects, [30, 30, 30, 30], w, h, {
+    this.chart = new ParetoFrontVisualizer("chart", data, null, [30, 30, 30, 30], w, h, {
 
         });
 //    this.addIds();
@@ -361,12 +398,12 @@ Graph.method("assignToAxis", function(axis, arg, label)
 //gets containers and placeholders
 Graph.method("getContent", function()
 {
-	var table = $('<div border="0" id="graph_table" style="float:left"></div>');
+	var table = $('<div border="0" id="graph_table" style="float:left;"></div>');
 	
     var tdZ = $('<div id="dropPointZ" class="axis_drop" style="float:left;"></div>');
     var tdY = $('<div id="dropPointY" class="axis_drop" style="float:left;"></div>');
     var tdT = $('<div id="dropPointT" class="axis_drop" style="float:left;"></div>');
-    var tdChart = $('<div id="chart" style="float:left; display:none; width: 300px; height: 200px;"></div>'); // need to keep width here since first time is not rendered good
+    var tdChart = $('<div id="chart" style="float:left; display:none; width: 200px; height: 200px;"></div>'); // need to keep width here since first time is not rendered good
     var tdX = $('<div id="dropPointX" class="axis_drop" style="float:left;"></div>');
 
     this.axisArray.splice(0, this.axisArray.length); // clear the array
@@ -432,11 +469,13 @@ Graph.method("resize", function() // not attached to the window anymore, so need
 
     // need to resize dynamically, since it does not do this automatically
 
-    var e = $('#mdGraph div.window-content')[0];
+    var e = $('#mdGraph div.window-content');
 //    alert(e);
     
-    var sw = document.defaultView.getComputedStyle(e,null).getPropertyValue("width");
-    var sh = document.defaultView.getComputedStyle(e,null).getPropertyValue("height");
+    e.css("overflow", "hidden");
+
+    var sw = e.outerWidth();
+    var sh = e.outerHeight();
 
     var w = parseInt(sw);
     var h = parseInt(sh);
@@ -456,8 +495,8 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     setDim(table, w, h);
     setDim(tdZ, w, unit);
     setDim(tdY, unit, h - 2 * unit);
-    setDim(tdChart, w - 4 * unit, h - 2 * unit);
-    setDim(tdDiv, w - 4 * unit, h - 2 * unit);
+    setDim(tdChart, w - 3 * unit, h - 2 * unit);
+    setDim(tdDiv, w - 3 * unit, h - 2 * unit);
     setDim(tdT, 2 * unit, h - 2 * unit);
     setDim(tdX, w, unit);
 
