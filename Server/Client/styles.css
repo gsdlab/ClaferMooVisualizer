@@ -177,3 +177,21 @@ fieldset{
     margin:0;
     padding:0;
 }
+
+#chart .active .shape{
+  fill-opacity: 0.8;
+  stroke-width: 2px;
+  fill: #00ff00;
+}
+
+#chart .active .label{
+}
+
+#chart .selected .shape{
+  fill-opacity: 1.0;
+  stroke-width: 3px;
+  stroke: #0000ff;
+}
+
+#chart .selected .label{
+}

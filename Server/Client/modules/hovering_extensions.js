@@ -22,8 +22,9 @@ SOFTWARE.
 
 /* Graph */
 
-Graph.method("makeHighlighted", function(pid)
+Graph.method("makeActive", function(pid)
 {
+    d3.select("#V" + parsePID(pid)).classed("active", true).moveToFront();    
 /*
     var instance = parsePID(pid);
     var context = this;
@@ -73,24 +74,14 @@ Graph.method("makeHighlighted", function(pid)
 */    
 });
 
-Graph.method("makeDehighlighted", function(pid)
+Graph.method("makeInactive", function(pid)
 {
+    d3.select("#V" + parsePID(pid)).classed("active", false);
 /*
     var instance = parsePID(pid);
     $("." + instance + "HL").remove();
     clearInterval(this.interval);
     clearTimeout(this.timeout);
-*/
-});
-
-//sets a shape to be rendered as a highlight
-Graph.method("highlight", function(obj)
-{
-/*
-    $(obj).attr("filter", "url(#blur)");
-    $(obj).attr("stroke-width", "6");
-    $(obj).attr("stroke", "yellow");
-    return obj;
 */
 });
 
@@ -203,14 +194,14 @@ function Highlighter(host){
 }
 
 Highlighter.method("onMouseOver", function(pid){
-    this.host.findModule("mdGraph").makeHighlighted(pid);
+    this.host.findModule("mdGraph").makeActive(pid);
     this.host.findModule("mdFeatureQualityMatrix").makeHighlighted(pid);
     this.host.findModule("mdParallelCoordinates").makeActive(pid);
 //    this.host.findModule("mdVariantComparer").makeHighlighted(pid);
 });
 
 Highlighter.method("onMouseOut", function(pid){
-    this.host.findModule("mdGraph").makeDehighlighted(pid);
+    this.host.findModule("mdGraph").makeInactive(pid);
     this.host.findModule("mdFeatureQualityMatrix").makeDehighlighted(pid);
     this.host.findModule("mdParallelCoordinates").makeInactive(pid);
 //    this.host.findModule("mdVariantComparer").makeDehighlighted(pid);

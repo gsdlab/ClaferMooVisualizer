@@ -26,6 +26,9 @@ function ParetoFrontVisualizer(nodeId, data, labels, m, w, h, chartListeners)
     var tLimitMax = 16; // bubbles cannot be bigger  than this
 
     this.data = data;
+
+    var context = this;
+    context.chartListeners = chartListeners;
     
 var margin = m,
     width = w - margin[1] - margin[3],
@@ -171,6 +174,36 @@ this.g = this.svg.append("g").attr("id", "foreground").selectAll().data(data).en
           .attr("y", 3)
         .text(function(d) { return d.id;});
 
+
+  this.svg.selectAll(".bubble")
+      .on("mouseover", mouseover)
+      .on("mouseout", mouseout)
+      .on("click", mouseclick);
+
+  function mouseover(d) {
+      if (context.chartListeners.onMouseOver)
+          context.chartListeners.onMouseOver(d.id);
+  }
+
+  function mouseout(d) {
+      if (context.chartListeners.onMouseOut)
+          context.chartListeners.onMouseOut(d.id);
+  }
+
+  function mouseclick(d) {
+      if (!d3.select("#V" + d.id).classed("selected"))
+      {
+          context.select(d.id);
+          if (context.chartListeners.onSelected)
+              context.chartListeners.onSelected(d.id);          
+      }
+      else
+      {
+          context.unselect(d.id);
+          if (context.chartListeners.onDeselected)
+              context.chartListeners.onDeselected(d.id);          
+      }
+  }
 
 /*
 	
@@ -483,4 +516,27 @@ ParetoFrontVisualizer.method("filter", function(){
           });
 
     });
+});
+
+
+ParetoFrontVisualizer.method("select", function(i)
+{
+    d3.select("#V" + i).classed("selected", true);    
+});
+
+//formats object as not selected
+ParetoFrontVisualizer.method("unselect", function(i)
+{
+    d3.select("#V" + i).classed("selected", false);    
+});
+
+ParetoFrontVisualizer.method("select", function(i)
+{
+    d3.select("#V" + i).classed("selected", true);    
+});
+
+//formats object as not selected
+ParetoFrontVisualizer.method("unselect", function(i)
+{
+    d3.select("#V" + i).classed("selected", false);    
 });

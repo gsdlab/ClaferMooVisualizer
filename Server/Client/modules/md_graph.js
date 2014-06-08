@@ -322,70 +322,42 @@ Graph.method("redrawParetoFront", function()
     }          
 
     $('#chart').html("");    
-    this.chart = new ParetoFrontVisualizer("chart", data, null, [30, 30, 30, 30], w, h, {
+    var context = this;
+    this.chart = new ParetoFrontVisualizer("chart", data, null, [30, 50, 30, 30], w, h, {
 
-        });
+        "onMouseOver": function(id){
+            context.settings.onMouseOver(context, getPID(id));
+//            alert("over: " + id);
+        },
+        "onMouseOut": function(id){
+            context.settings.onMouseOut(context, getPID(id));
+//            alert("out: ");
+        },
+        "onSelected": function(id){
+            context.settings.onSelected(context, getPID(id));
+//            alert("select: " + id);
+        },
+        "onDeselected": function(id){
+            context.settings.onDeselected(context, getPID(id));
+//            alert("unselect: " + id);
+        }
+    });
 //    this.addIds();
     this.settings.onDrawComplete(this);
 
 //    this.addFilters();
 });
-/*
-//adds ids to the circles and text on the graph for the other functions to use
-Graph.method("addIds", function(){
-    var i = 1;
-    var graph_data = $("#chart g:contains('" + getPID(1) + "')")[2];
-    var circle_pairs = [];
-    for (i=0; i<$(graph_data).children().length;i+=2){
-        circle_pairs.push({ circle: $(graph_data).children()[i], text_data: $(graph_data).children()[i+1], ident: ""});
-    }
-
-    for (i=0; i<circle_pairs.length; i++){
-        circle_pairs[i].ident = $(circle_pairs[i].text_data).text().replace(/[A-Za-z]/g, "");
-    }
-
-    
-
-    circle_pairs.sort(function(a,b){
-        return a.ident - b.ident;
-    });
-
-
-    for(i=0; i<circle_pairs.length; i++){
-        $(circle_pairs[i].circle).attr("id", getPID(i+1) + "c");
-        $(circle_pairs[i].text_data).attr("id", getPID(i+1) + "t");
-        var child1 = $(circle_pairs[i].text_data).children()[0]
-        var child2 = $(circle_pairs[i].text_data).children()[1]
-        $(child1).text(parsePID($(child1).text()));
-        $(child2).text(parsePID($(child1).text()));
-    }
-
-});
-*/
-//formats object as selected
-Graph.method("selectObject", function(o)
-{
-    $(o).attr("fill", "#ff0000");    
-});
-
-//formats object as not selected
-Graph.method("deselectObject", function(o)
-{
-    $(o).attr("fill", "#000000");    
-});
 
 //runs selectObject on points
 Graph.method("makePointsSelected", function(points)
 {
-    var module = this;
-//    this.selectObject($("#" + points + "t text")[1]);
+    this.chart.select(parsePID(points));
 });
 
 //runs deselectObject on points
 Graph.method("makePointsDeselected", function(points)
 {
-    var module = this;
-//    this.deselectObject($("#" + points + "t text")[1]);
+    this.chart.unselect(parsePID(points));
 });
 
 //assigns a goal to an axis

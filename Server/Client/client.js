@@ -20,6 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
+
 function getConfiguration() 
 {
 	var modules = [];
@@ -321,16 +327,23 @@ function getConfiguration()
             {
 //                module.host.storage.instanceFilter.filterContent(); 
             },
-            "onBubbleClick": function(module, pid){
-                if (module.host.storage.selector.isSelected(pid))
-                {
-                    module.host.storage.selector.onDeselected(pid);
-                }
-                else
-                {
-                    module.host.storage.selector.onSelected(pid);
-                }                
+
+            "onSelected": function(module, pid)
+            {
+                module.host.storage.selector.onSelected(pid);               
             },
+            "onDeselected": function(module, pid)
+            {
+                module.host.storage.selector.onDeselected(pid);             
+            },
+            "onMouseOver" : function(module, pid)
+            {
+                module.host.storage.highlighter.onMouseOver(pid);                               
+            },            
+            "onMouseOut" : function(module, pid)
+            {
+                module.host.storage.highlighter.onMouseOut(pid);               
+            },            
 //            "getExistingInstancesCount" : function(module){
 //                return module.host.storage.evolutionController.existingInstancesCount;
 //            },
