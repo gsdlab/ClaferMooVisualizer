@@ -39,6 +39,7 @@ function Graph(host, settings)
     this.instanceCounterArg = "?special_counter?"; 
     this.instanceCounterLabel = "#instance";
 
+    this.chart = null;
     this.host.loaded();
 }
 
@@ -321,28 +322,40 @@ Graph.method("redrawParetoFront", function()
         data.push(current);
     }          
 
-    $('#chart').html("");    
+//    $('#chart').html("");    
     var context = this;
-    this.chart = new ParetoFrontVisualizer("chart", data, null, [30, 50, 30, 30], w, h, {
-
-        "onMouseOver": function(id){
-            context.settings.onMouseOver(context, getPID(id));
-//            alert("over: " + id);
-        },
-        "onMouseOut": function(id){
-            context.settings.onMouseOut(context, getPID(id));
-//            alert("out: ");
-        },
-        "onSelected": function(id){
-            context.settings.onSelected(context, getPID(id));
-//            alert("select: " + id);
-        },
-        "onDeselected": function(id){
-            context.settings.onDeselected(context, getPID(id));
-//            alert("unselect: " + id);
-        }
-    });
 //    this.addIds();
+
+    var m = [30, 50, 30, 30];
+
+    if (!this.chart)
+    {
+        this.chart = new ParetoFrontVisualizer("chart", data, null, w, h, m, {
+
+            "onMouseOver": function(id){
+                context.settings.onMouseOver(context, getPID(id));
+    //            alert("over: " + id);
+            },
+            "onMouseOut": function(id){
+                context.settings.onMouseOut(context, getPID(id));
+    //            alert("out: ");
+            },
+            "onSelected": function(id){
+                context.settings.onSelected(context, getPID(id));
+    //            alert("select: " + id);
+            },
+            "onDeselected": function(id){
+                context.settings.onDeselected(context, getPID(id));
+    //            alert("unselect: " + id);
+            }
+        });
+    }  
+    else
+    {
+        this.chart.resize(w, h, m);
+        this.chart.refresh(data);
+    }
+
     this.settings.onDrawComplete(this);
 
 //    this.addFilters();
