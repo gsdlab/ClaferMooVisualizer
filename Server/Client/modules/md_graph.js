@@ -32,8 +32,6 @@ function Graph(host, settings)
     this.posy = this.settings.layout.posy;
 
     this.host = host;
-
-    this.instanceProcessor = null;
     this.axisArray = new Array();
 
     this.instanceCounterArg = "?special_counter?"; 
@@ -44,9 +42,8 @@ function Graph(host, settings)
 }
 
 Graph.method("onDataLoaded", function(data){
-    this.instanceProcessor = new InstanceProcessor(data.instancesXML);
-    this.goals = data.goals;
-    this.Processor = new ClaferProcessor(data.claferXML);
+    this.data = data;
+    this.goals = data.objectives;
 });
 
 Graph.method("onRendered", function()
@@ -204,9 +201,6 @@ Graph.method("argsToArray", function(argString){
 //redraws the graph
 Graph.method("redrawParetoFront", function()
 {
-    if (this.instanceProcessor == null)
-        return; // no data, so just resize
-
     var e = $('#chart')[0];
 
     var sw = document.defaultView.getComputedStyle(e,null).getPropertyValue("width");
@@ -280,15 +274,11 @@ Graph.method("redrawParetoFront", function()
     args.push(arg2);
     labels.push(label2);
     
-//    alert(arg3);
-    
     if (arg3 && arg3 != "")
     {
         args.push(arg3);
         labels.push(label3);
     }
-    
-//    alert(arg4);
 
     if (arg4 && arg4 != "")
     {
@@ -311,50 +301,15 @@ Graph.method("redrawParetoFront", function()
     //-------------
     
     var e = $('#mdGraph div.window-content')[0];
-
-    var instanceCount = this.instanceProcessor.getInstanceCount();
-
-    var labelObjects = new Object();
-    labelObjects["id"] = "#variant";
-
-    for (var j = 0; j < args.length; j++)
-    {
-        labelObjects[args[j]] = labels[j];
-    }
-
-    var data = [];
-    for (var i = 1; i <= instanceCount; i++)
-    {            
-        var current = new Object();
-        current["id"] = i;
-        for (var j = 0; j < args.length; j++)
-        {
-            if (args[j] == this.instanceCounterArg)
-            {
-                current[args[j]] = i;                
-            }
-            else
-            {
-                var value = this.instanceProcessor.getFeatureValue(i, this.argsToArray(args[j]), 'int'); // get only numeric
-                current[args[j]] = value;
-            }
-        }
-
-        data.push(current);
-    }          
-
-//    $('#chart').html("");    
     var context = this;
-//    this.addIds();
 
     var m = [30, 50, 30, 30];
 
     this.chart.resize(w, h, m);
-    this.chart.refresh(data);
+    console.log(this.data.matrix);
+    this.chart.refresh(this.data.matrix, args); // args will show which dimensions to visualize
 
     this.settings.onDrawComplete(this);
-
-//    this.addFilters();
 });
 
 //runs selectObject on points

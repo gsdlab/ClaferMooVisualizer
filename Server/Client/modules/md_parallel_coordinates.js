@@ -40,9 +40,8 @@ function ParallelCoordinates(host, settings)
 }
 
 ParallelCoordinates.method("onDataLoaded", function(data){
-    this.instanceProcessor = new InstanceProcessor(data.instancesXML);
-    this.claferProcessor = new ClaferProcessor(data.claferXML);
-    this.goals = data.goals;
+    this.data = data;
+    this.goals = data.objectives;
     this.chart = null;
 });
 
@@ -96,24 +95,24 @@ ParallelCoordinates.method("redrawChart", function()
 {
     /* calculating data */
 
-    if (!this.instanceProcessor)
-        return;
-
-    var instanceCount = this.instanceProcessor.getInstanceCount();    
-
-    if (instanceCount == 0)
+    if (this.data.instanceCount == 0)
     {
         return;
     }
 
     var labels = new Object();
+    var args = new Array();
+    args.push("id");
+
     labels["id"] = "#variant";
 
     for (var j = 0; j < this.goals.length; j++)
     {
         labels[this.goals[j].arg] = this.goals[j].label + " [" + this.goals[j].operation + "]";
+        args.push(this.goals[j].arg);
     }
 
+/*
     var data = [];
     for (var i = 1; i <= instanceCount; i++)
     {            
@@ -127,7 +126,7 @@ ParallelCoordinates.method("redrawChart", function()
 
         data.push(current);
     }              
-
+*/
     /* Rendering */
 
 /* if using the module
@@ -162,7 +161,7 @@ ParallelCoordinates.method("redrawChart", function()
     var m = [30, 50, 30, 30];
 
     this.chart.resize(w, h, m);
-    this.chart.refresh(data, labels);
+    this.chart.refresh(this.data.matrix, args, labels);
 
 /*
     if (backupChart)

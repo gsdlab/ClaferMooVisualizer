@@ -24,7 +24,7 @@ CustomParCoords.method("resize", function(width, height, margins)
 
 });
 
-CustomParCoords.method("refresh", function (data, labels)
+CustomParCoords.method("refresh", function (data, args, labels)
 {
     var context = this;
     this.data = data;
@@ -41,7 +41,7 @@ CustomParCoords.method("refresh", function (data, labels)
 
     // Extract the list of dimensions and create a scale for each.
     context.x.domain(
-        context.dimensions = d3.keys(this.data[0]).filter(
+        context.dimensions = args.filter(
           function(d) 
           {
             return d != "name" && (context.y[d] = d3.scale.linear()

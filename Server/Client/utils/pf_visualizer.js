@@ -25,26 +25,26 @@ ParetoFrontVisualizer.method("getValue", function(d, dim)
     var context = this;
 
     if (dim == "x")
-        return d[context.keys[1]];
-    if (dim == "y")
-        return d[context.keys[2]];
-    if (dim == "id")
         return d[context.keys[0]];
+    if (dim == "y")
+        return d[context.keys[1]];
+    if (dim == "id")
+        return d["id"];
     if (dim == "z")
-        return context.hasThird ? d[context.keys[3]] : 1;
+        return context.hasThird ? d[context.keys[2]] : 1;
     if (dim == "t")
-        return context.hasForth ? d[context.keys[4]] : 1;
+        return context.hasForth ? d[context.keys[3]] : 1;
 });
 
-ParetoFrontVisualizer.method("refresh", function(data)
+ParetoFrontVisualizer.method("refresh", function(data, args)
 {
   this.data = data;
   var context = this;
 
-  context.keys = d3.keys(data[0]);
+  context.keys = args;
 
-  context.hasThird = context.keys[3] ? true : false;
-  context.hasForth = context.keys[4] ? true : false;
+  context.hasThird = context.keys[2] ? true : false;
+  context.hasForth = context.keys[3] ? true : false;
 
 
   // Compute the scales’ domains.
@@ -344,17 +344,6 @@ ParetoFrontVisualizer.method("filter", function(){
     });
 });
 
-
-ParetoFrontVisualizer.method("select", function(i)
-{
-    d3.select("#V" + i).classed("selected", true);    
-});
-
-//formats object as not selected
-ParetoFrontVisualizer.method("unselect", function(i)
-{
-    d3.select("#V" + i).classed("selected", false);    
-});
 
 ParetoFrontVisualizer.method("select", function(i)
 {

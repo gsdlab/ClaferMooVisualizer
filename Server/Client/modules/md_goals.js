@@ -39,9 +39,7 @@ function Goals(host, settings)
 }
 
 Goals.method("onDataLoaded", function(data){
-//    alert(data.claferXML);
-    this.processor = new ClaferProcessor(data.claferXML);
-    this.goals = this.processor.getGoals();
+    this.goals = data.objectives;
     this.ranges = [];
 });
 

@@ -96,22 +96,24 @@ function preprocessMOOResult(result, host)
 	abstractXMLText = abstractXMLText.replaceAll('cl:', '');
 	abstractXMLText = abstractXMLText.replaceAll('xsi:', '');
 
-    var data = new Object();
-    data.error = false;
-    data.output = result.message;
-    data.instancesXML = instancesXMLText;
-    data.claferXML = abstractXMLText;
-    data.unparsedInstances = instances;	
+    var dataSource = new Object();
+    dataSource.error = false;
+    dataSource.output = result.message;
+    dataSource.instancesXML = instancesXMLText;
+    dataSource.claferXML = abstractXMLText;
+    dataSource.unparsedInstances = instances;	
 
     if (!host.storage.evolutionController.existingData)
     {
-        var instanceProcessor = new InstanceProcessor(data.instancesXML);
+        var instanceProcessor = new InstanceProcessor(dataSource.instancesXML);
         host.storage.evolutionController.existingInstancesCount = instanceProcessor.getInstanceCount();
     }
 
-    host.storage.evolutionController.existingData = data;
+    host.storage.evolutionController.existingData = dataSource;
 
-    return data;
+    var dataTable = new DataTable(dataSource); // now we are creating a unified data source that has all the data processed
+
+    return dataTable;
 }
 
 function convertHtmlTags (input) {
