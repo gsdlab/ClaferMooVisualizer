@@ -52,6 +52,7 @@ Graph.method("onDataLoaded", function(data){
 Graph.method("onRendered", function()
 {
     $("#graph_table").css("overflow", "hidden");
+    var context = this;
 
 // onRendered is called once per every clafer model, so we create the chart here
     this.chart = new ParetoFrontVisualizer("chart", {
