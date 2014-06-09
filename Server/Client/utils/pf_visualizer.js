@@ -41,6 +41,12 @@ ParetoFrontVisualizer.method("refresh", function(data)
   this.data = data;
   var context = this;
 
+  context.keys = d3.keys(data[0]);
+
+  context.hasThird = context.keys[3] ? true : false;
+  context.hasForth = context.keys[4] ? true : false;
+
+
   // Compute the scales’ domains.
   context.x.domain(d3.extent(data, function(d) { return context.getValue(d, "x"); }));
   context.y.domain(d3.extent(data, function(d) { return context.getValue(d, "y"); }));
@@ -201,7 +207,7 @@ ParetoFrontVisualizer.method("resize", function (w, h, m)
 
 });
 
-function ParetoFrontVisualizer(nodeId, data, labels, width, height, margin, chartListeners) 
+function ParetoFrontVisualizer(nodeId, chartListeners) 
 {
     this.tLimitMin = 8; // bubbles cannot be smaller than this
     this.tLimitMax = 16; // bubbles cannot be bigger  than this
@@ -212,11 +218,6 @@ function ParetoFrontVisualizer(nodeId, data, labels, width, height, margin, char
 
     this.x = null;
     this.y = null;
-
-    this.keys = d3.keys(data[0]);
-
-    this.hasThird = this.keys[3] ? true : false;
-    this.hasForth = this.keys[4] ? true : false;
 
    /* appending a "canvas" */
 
@@ -282,8 +283,8 @@ function ParetoFrontVisualizer(nodeId, data, labels, width, height, margin, char
   this.size_scale = d3.scale.linear() 
     .range([this.tLimitMin, this.tLimitMax]); 
 
-  this.resize(width, height, margin);
-  this.refresh(data);
+//  this.resize(width, height, margin);
+//  this.refresh(data);
 
   /* Test functions */
 /*

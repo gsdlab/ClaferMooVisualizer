@@ -52,7 +52,28 @@ Graph.method("onDataLoaded", function(data){
 Graph.method("onRendered", function()
 {
     $("#graph_table").css("overflow", "hidden");
-    
+
+// onRendered is called once per every clafer model, so we create the chart here
+    this.chart = new ParetoFrontVisualizer("chart", {
+
+        "onMouseOver": function(id){
+            context.settings.onMouseOver(context, getPID(id));
+//            alert("over: " + id);
+        },
+        "onMouseOut": function(id){
+            context.settings.onMouseOut(context, getPID(id));
+//            alert("out: ");
+        },
+        "onSelected": function(id){
+            context.settings.onSelected(context, getPID(id));
+//            alert("select: " + id);
+        },
+        "onDeselected": function(id){
+            context.settings.onDeselected(context, getPID(id));
+//            alert("unselect: " + id);
+        }
+    }); 
+
     var dropPlaces = $(".axis_drop");
     for (var i = 0; i < dropPlaces.length; i++)
     {
@@ -99,7 +120,7 @@ Graph.method("onRendered", function()
     {
 		$("#chart").hide();
     }
-    
+   
 //    this.addIds();
 
     this.resize();
@@ -174,7 +195,6 @@ Graph.method("assignValue", function (id, value)
 	$('#' + id).val(value);
 	
 });
-
 
 Graph.method("argsToArray", function(argString){
     return argString.split("-");
@@ -328,33 +348,8 @@ Graph.method("redrawParetoFront", function()
 
     var m = [30, 50, 30, 30];
 
-    if (!this.chart)
-    {
-        this.chart = new ParetoFrontVisualizer("chart", data, null, w, h, m, {
-
-            "onMouseOver": function(id){
-                context.settings.onMouseOver(context, getPID(id));
-    //            alert("over: " + id);
-            },
-            "onMouseOut": function(id){
-                context.settings.onMouseOut(context, getPID(id));
-    //            alert("out: ");
-            },
-            "onSelected": function(id){
-                context.settings.onSelected(context, getPID(id));
-    //            alert("select: " + id);
-            },
-            "onDeselected": function(id){
-                context.settings.onDeselected(context, getPID(id));
-    //            alert("unselect: " + id);
-            }
-        });
-    }  
-    else
-    {
-        this.chart.resize(w, h, m);
-        this.chart.refresh(data);
-    }
+    this.chart.resize(w, h, m);
+    this.chart.refresh(data);
 
     this.settings.onDrawComplete(this);
 
