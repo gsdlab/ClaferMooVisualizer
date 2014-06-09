@@ -1,35 +1,46 @@
 // modified from http://bl.ocks.org/mbostock/raw/7586334/
 
-function CustomParCoords(nodeId, data, labels, margins, width, height, chartListeners)
+
+CustomParCoords.method("resize", function(width, height, margins)
 {
     var context = this;
-    this.selected = [];
-    for (var i = 0; i < data.length; i++)
-        this.selected.push(false);
-
-    this.chartListeners = chartListeners;
-    this.m = margins,
-    this.w = width - margins[1] - margins[3],
+    this.m = margins;
+    this.w = width - margins[1] - margins[3];
     this.h = height - margins[0] - margins[2];
 
-    this.x = d3.scale.ordinal().rangePoints([0, context.w], 0.6),
-    this.y = {},
-    this.dragging = {};
+    this.x.rangePoints([0, context.w], 0.6);
 
+    if (!this.root)
+        this.root = d3.select(context.nodeId).append("svg");
+
+    this.root
+      .attr("width", context.w + context.m[1] + context.m[3])
+      .attr("height", context.h + context.m[0] + context.m[2]);
+
+    if (!this.svg)
+        this.svg = this.root.append("g");
+
+    this.svg.attr("transform", "translate(" + context.m[3] + "," + context.m[0] + ")");
+
+});
+
+CustomParCoords.method("refresh", function (data, labels)
+{
+    var context = this;
     this.data = data;
     this.labels = labels;
 
-    var line = d3.svg.line(),
-        axis = d3.svg.axis().orient("left").tickFormat(d3.format("d"));
+    this.backupData = null;
 
-    this.svg = d3.select(nodeId).append("svg")
-      .attr("width", context.w + context.m[1] + context.m[3])
-      .attr("height", context.h + context.m[0] + context.m[2])
-      .append("g")
-      .attr("transform", "translate(" + context.m[3] + "," + context.m[0] + ")");
+    if (context.brushes)
+    {
+        context.backupData = {};
+        context.backupData.actives = context.dimensions.filter(function(p) { return !context.y[p].brush.empty(); }),
+        context.backupData.extents = context.backupData.actives.map(function(p) { return context.y[p].brush.extent(); });
+    }
 
     // Extract the list of dimensions and create a scale for each.
-    this.x.domain(
+    context.x.domain(
         context.dimensions = d3.keys(this.data[0]).filter(
           function(d) 
           {
@@ -40,27 +51,36 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
     );
 
     // Add grey background lines for context.
-    context.background = context.svg.append("g")
-        .attr("class", "background")
-      .selectAll("path")
-        .data(data)
-      .enter().append("path")
-        .attr("d", path);
+
+    if (!context.background)
+    {
+      context.background = context.svg.append("g")
+          .attr("class", "background")
+        .selectAll("path")
+          .data(data)
+        .enter().append("path");      
+    }
+
+    context.background.attr("d", path);
 
     // Add blue foreground lines for focus.
-    context.foreground = context.svg.append("g")
-        .attr("class", "foreground")
-      .selectAll("path")
-        .data(data)
-      .enter().append("path")
-        .attr("d", path);
+    if (!context.foreground)
+    {
+      context.foreground = context.svg.append("g")
+          .attr("class", "foreground")
+        .selectAll("path")
+          .data(data)
+        .enter().append("path")
+          .attr("id", function(d){return "P" + d.id;})
+    }
+
+    context.foreground.transition().attr("d", path);
 
   // Add a group element for each dimension.
-    context.g = context.svg.selectAll(".dimension")
+    context.svg.selectAll(".dimension")
       .data(context.dimensions)
     .enter().append("g")
       .attr("class", "dimension")
-      .attr("transform", function(d) { return "translate(" + context.x(d) + ")"; })
       .call(d3.behavior.drag()
         .on("dragstart", function(d) {
           context.dragging[d] = this.__origin__ = context.x(d);
@@ -87,6 +107,9 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
               .attr("visibility", null);
         }));
 
+  context.g = context.svg.selectAll(".dimension");
+
+  context.g.transition().attr("transform", function(d) { return "translate(" + context.x(d) + ")"; });
 
   var domains = context.dimensions.map(function(p) { 
       var ar = new Array();
@@ -96,17 +119,34 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
       return ar;
   });
 
-  chartListeners.saveDomains(domains);
-  // Add an axis and title.
+  this.chartListeners.saveDomains(domains);
 
-  context.g.append("g")
-      .attr("class", "axis")
-      .each(function(d) { d3.select(this).call(axis.scale(context.y[d])); })
+
+  // Add axes and titles.
+  var axis = d3.svg.axis().orient("left").tickFormat(d3.format("d"));
+
+  if (context.axes)
+  {
+      context.svg.selectAll(".axis").remove();
+      context.axes = null;
+  }
+
+  context.axes = context.g.append("g")
+    .attr("class", "axis")
+    .each(function(d) { d3.select(this).call(axis.scale(context.y[d])); });
+
+  if (context.texts)
+  {
+      context.svg.selectAll(".label").remove();
+      context.texts = null;
+  }
+
+  context.texts = context.axes
     .append("text")
-      .attr("text-anchor", "middle")
-      .attr("class", "label")      
-      .attr("y", -9)
-      .text(String);
+    .attr("text-anchor", "middle")
+    .attr("class", "label")      
+    .attr("y", -9)
+    .text(String)
 
   context.svg.selectAll(".label").each(function(el){
     var text = d3.select(this).text();
@@ -114,17 +154,39 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
   });
 
   // Add and store a brush for each axis.
-  context.g.append("g")
-      .attr("class", "brush")
-      .each(function(d) {
-            d3.select(this).attr("id", "brush-" + d); 
-            d3.select(this).call(
-            context.y[d].brush = d3.svg.brush().y(context.y[d]).on("brushstart", brushstart).on("brush", brush).on("brushend", brushend)
-          ); 
-      })
+  
+  if (context.brushes)
+  {
+      context.g.selectAll(".brush").remove();
+      context.brushes = null;    
+  }
+
+  context.brushes = 
+    context.g.append("g")
+        .attr("class", "brush")
+        .each(function(d) {
+              d3.select(this).attr("id", "brush-" + d); 
+              d3.select(this).call(
+              context.y[d].brush = d3.svg.brush().y(context.y[d]).on("brushstart", brushstart).on("brush", brush).on("brushend", brushend)
+            ); 
+        });
+
+  context.brushes
     .selectAll("rect")
       .attr("x", -8)
       .attr("width", 16);
+
+  if (context.backupData)
+  {
+      context.backupData.actives.every(function(p, i) 
+      {
+          context.setRange(p, context.backupData.extents[i][0], context.backupData.extents[i][1]);
+          return true;
+      });
+  }
+
+//  context.brushes.each(function(d){ context.y[d].brush.y(context.y[d]); }); 
+
 
 /* MOUSE OVER BEHAVIOR */
 
@@ -133,40 +195,14 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
       .attr("class", "label")
       .data(data, function(d) { return d.name || d; });
 
-
-  context.projection = context.svg.selectAll(".foreground path")
-      .on("mouseover", mouseover)
-      .on("mouseout", mouseout)
-      .on("click", mouseclick);
-
-  function mouseover(d) {
-//      context.makeActive(d.id);
-      if (context.chartListeners.onMouseOver)
-          context.chartListeners.onMouseOver(d.id);
-  }
-
-  function mouseout(d) {
-//      context.makeInactive();
-      if (context.chartListeners.onMouseOut)
-          context.chartListeners.onMouseOut(d.id);
-  }
-
-  function mouseclick(d) {
-      if (!context.selected[d.id])
-      {
-          context.makeSelected(d.id);
-          if (context.chartListeners.onSelected)
-              context.chartListeners.onSelected(d.id);          
-      }
-      else
-      {
-          context.makeDeselected(d.id);
-          if (context.chartListeners.onDeselected)
-              context.chartListeners.onDeselected(d.id);          
-      }
+  if (!context.projection)
+  {
+    context.projection = context.svg.selectAll(".foreground path")
+        .on("mouseover", mouseover)
+        .on("mouseout", mouseout)
+        .on("click", mouseclick);
   }
 /* // MOUSE OVER BEHAVIOR ends */
-
 
   function position(d) {
     var v = context.dragging[d];
@@ -179,7 +215,7 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
 
   // Returns the path for a given data point.
   function path(d) {
-    return line(context.dimensions.map(function(p) { return [position(p), context.y[p](d[p])]; }));
+    return d3.svg.line()(context.dimensions.map(function(p) { return [position(p), context.y[p](d[p])]; }));
   }
 
   // When brushing, don’t trigger axis dragging.
@@ -204,25 +240,67 @@ function CustomParCoords(nodeId, data, labels, margins, width, height, chartList
 
         context.onBrushEnd(dim, extent[0], extent[1]); // call the callback
   }
+
+
+  function mouseover(d) {
+//      context.makeActive(d.id);
+      if (context.chartListeners.onMouseOver)
+          context.chartListeners.onMouseOver(d.id);
+  }
+
+  function mouseout(d) {
+//      context.makeInactive();
+      if (context.chartListeners.onMouseOut)
+          context.chartListeners.onMouseOut(d.id);
+  }
+
+  function mouseclick(d) {
+      if (!d3.select("#P" + d.id).classed("selected"))
+      {
+          context.makeSelected(d.id);
+          if (context.chartListeners.onSelected)
+              context.chartListeners.onSelected(d.id);          
+      }
+      else
+      {
+          context.makeDeselected(d.id);
+          if (context.chartListeners.onDeselected)
+              context.chartListeners.onDeselected(d.id);          
+      }
+  }
+
+});
+
+
+function isRound(n) {
+   return (n * 2) % 1 === 0;
 }
 
-  function isRound(n) {
-     return (n * 2) % 1 === 0;
-  }
+function roundToClosestRound(n){
+    var x = n * 2;
+    var choice1 = Math.ceil(x);
+    var choice2 = Math.floor(x);
 
-  function roundToClosestRound(n){
-      var x = n * 2;
-      var choice1 = Math.ceil(x);
-      var choice2 = Math.floor(x);
+    var dist1 = Math.abs(choice1 - x);
+    var dist2 = Math.abs(choice2 - x);
 
-      var dist1 = Math.abs(choice1 - x);
-      var dist2 = Math.abs(choice2 - x);
+    if (dist1 <= dist2)
+        return choice1 / 2;
 
-      if (dist1 <= dist2)
-          return choice1 / 2;
+    return choice2 / 2;
+}
 
-      return choice2 / 2;
-  }
+
+function CustomParCoords(nodeId, chartListeners)
+{
+    var context = this;
+    this.chartListeners = chartListeners;
+
+    this.nodeId = nodeId;
+    this.x = d3.scale.ordinal();
+    this.y = {};
+    this.dragging = {};
+}
 
 CustomParCoords.method("filter", function(){
     var context = this;
@@ -292,16 +370,18 @@ CustomParCoords.method("makeInactive", function()
 
 CustomParCoords.method("makeSelected", function(id)
 {
-    this.selected[id] = true;
-    var context = this;
-    this.projection.classed("selected", function(p) { return context.selected[p.id]; });
+    d3.select("#P" + id).classed("selected", true);
+//    this.selected[id] = true;
+//    var context = this;
+//    this.projection.classed("selected", function(p) { return context.selected[p.id]; });
 });
 
 CustomParCoords.method("makeDeselected", function(id)
 {
-    this.selected[id] = false;
-    var context = this;
-    this.projection.classed("selected", function(p) { return context.selected[p.id]; });
+    d3.select("#P" + id).classed("selected", false);
+//    this.selected[id] = false;
+//    var context = this;
+//    this.projection.classed("selected", function(p) { return context.selected[p.id]; });
 
 });
 

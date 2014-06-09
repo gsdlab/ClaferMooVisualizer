@@ -54,7 +54,38 @@ ParallelCoordinates.method("resize", function() // not attached to the window an
 
 ParallelCoordinates.method("onRendered", function()
 {
+
+
+    var context = this;
+
+    var chartListeners = {
+        "onMouseOver": function(id){
+            context.settings.onMouseOver(context, getPID(id));
+//            alert("over: " + id);
+        },
+        "onMouseOut": function(id){
+            context.settings.onMouseOut(context, getPID(id));
+//            alert("out: ");
+        },
+        "onSelected": function(id){
+            context.settings.onSelected(context, getPID(id));
+//            alert("select: " + id);
+        },
+        "onDeselected": function(id){
+            context.settings.onDeselected(context, getPID(id));
+//            alert("unselect: " + id);
+        },
+        "onRangeFilter": function(dim, start, end){
+            context.settings.onRangeFiltered(context, dim, start, end);
+        },
+        "saveDomains": function(domains){
+            context.settings.saveDomains(context, domains);
+        },        
+    }
+
+    this.chart = new CustomParCoords("#pcChart", chartListeners);
     this.redrawChart();
+
 });
 
 ParallelCoordinates.method("argsToArray", function(argString){
@@ -99,9 +130,6 @@ ParallelCoordinates.method("redrawChart", function()
 
     /* Rendering */
 
-    $('#mdParallelCoordinates div.window-content').html("");
-    $('#mdParallelCoordinates div.window-content').html(this.getContent());
-
 /* if using the module
 
     // quantitative color scale
@@ -130,36 +158,13 @@ ParallelCoordinates.method("redrawChart", function()
     var w = parseInt(sw) - 10;
     var h = parseInt(sh) - 10;
 
-    var context = this;
 
-    var chartListeners = {
-        "onMouseOver": function(id){
-            context.settings.onMouseOver(context, getPID(id));
-//            alert("over: " + id);
-        },
-        "onMouseOut": function(id){
-            context.settings.onMouseOut(context, getPID(id));
-//            alert("out: ");
-        },
-        "onSelected": function(id){
-            context.settings.onSelected(context, getPID(id));
-//            alert("select: " + id);
-        },
-        "onDeselected": function(id){
-            context.settings.onDeselected(context, getPID(id));
-//            alert("unselect: " + id);
-        },
-        "onRangeFilter": function(dim, start, end){
-            context.settings.onRangeFiltered(context, dim, start, end);
-        },
-        "saveDomains": function(domains){
-            context.settings.saveDomains(context, domains);
-        },        
-    }
+    var m = [30, 50, 30, 30];
 
-    backupChart = this.chart;
-    this.chart = new CustomParCoords("#pcChart", data, labels, [30, 10, 10, 10], w, h, chartListeners);
+    this.chart.resize(w, h, m);
+    this.chart.refresh(data, labels);
 
+/*
     if (backupChart)
     {
         this.chart.selected = backupChart.selected;
@@ -182,6 +187,7 @@ ParallelCoordinates.method("redrawChart", function()
 
         this.chart.filter();
     }
+*/
 });
 
 //gets containers and placeholders
