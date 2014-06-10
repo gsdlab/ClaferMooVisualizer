@@ -40,9 +40,8 @@ function SpiderChart(host, settings)
 
 SpiderChart.method("onDataLoaded", function(data){
     this.clearSelection();
-    this.instanceProcessor = new InstanceProcessor(data.instancesXML);
-    this.claferProcessor = new ClaferProcessor(data.claferXML);
-    this.goals = data.goals;
+    this.data = data;
+    this.goals = data.objectives;
 });
 
 SpiderChart.method("resize", function() // not attached to the window anymore, so need to call the method
@@ -60,10 +59,6 @@ SpiderChart.method("clearSelection", function()
 {
     this.selection = [];
     this.redrawChart();
-});
-
-SpiderChart.method("argsToArray", function(argString){
-    return argString.split("-");
 });
 
 SpiderChart.method("redrawChart", function()
@@ -90,107 +85,109 @@ SpiderChart.method("redrawChart", function()
         return;
     }
 
-    var d = new Array();
+    //pulls data from the comparison table
+    //Options for the Radar chart, other than default
+    var mycfg = {
+      w: w,
+      h: h,
+    //  maxValue: 0.6,
+      levels: 4,
+      ExtraWidthX: 220,
+      ExtraWidthY: 60
+    }
+
+    //Call function to draw the Radar chart
+    //Will expect that data is in %'s
+
+    var context = this;
+
+    var chart = new RadarChart({
+      "onMouseOver": function(instanceID)
+        {
+            context.settings.onMouseOver(context, getPID(instanceID));
+        },
+      "onMouseOut": function(instanceID)
+        {
+            context.settings.onMouseOut(context, getPID(instanceID));
+        }
+    });
+
+    var ids = [];
+    for (var i = 0; i < this.selection.length; i++){
+        ids.push(+parsePID(this.selection[i]));
+    }   
+
+    var selectedData = this.data.subsetByInstanceIds(ids);
+    var adaptedData = new Array();
+
     var LegendOptions = new Array();
 
-
-    for (var i = 0; i < this.selection.length; i++){
-
-        var instance = parsePID(this.selection[i]);
-
+    for (var i = 0; i < selectedData.instanceCount; i++){
+        LegendOptions.push(selectedData.instanceIds[i]);
         var current = new Array();
-        LegendOptions.push(instance);
         
         for (var j = 0; j < this.goals.length; j++)
         {
-            var value = this.instanceProcessor.getFeatureValue(instance, this.argsToArray(this.goals[j].arg), 'int'); // get only numeric
-            var axis = this.goals[j].label;
             var obj = new Object();
-            obj.axis = axis;
-            obj.value = value;
+            obj.axis = this.goals[j].label;
+            obj.value = selectedData.matrix[i][this.goals[j].arg];
             current.push(obj);
         }
         
-        d.push(current);
+        adaptedData.push(current);
     }
 
-//Options for the Radar chart, other than default
-var mycfg = {
-  w: w,
-  h: h,
-//  maxValue: 0.6,
-  levels: 4,
-  ExtraWidthX: 220,
-  ExtraWidthY: 60
-}
+    chart.draw("#chartNode", adaptedData, mycfg, LegendOptions);
 
-//Call function to draw the Radar chart
-//Will expect that data is in %'s
+    ////////////////////////////////////////////
+    /////////// Initiate legend ////////////////
+    ////////////////////////////////////////////
 
-var context = this;
+    var svg = d3.select('#chartNode')
+        .selectAll('svg')
+        .append('svg')
+        .attr("width", w+250)
+        .attr("height", h)
 
-var chart = new RadarChart({
-  "onMouseOver": function(instanceID)
-    {
-        context.settings.onMouseOver(context, getPID(instanceID));
-    },
-  "onMouseOut": function(instanceID)
-    {
-        context.settings.onMouseOut(context, getPID(instanceID));
-    }
-});
-
-chart.draw("#chartNode", d, mycfg, LegendOptions);
-
-////////////////////////////////////////////
-/////////// Initiate legend ////////////////
-////////////////////////////////////////////
-
-var svg = d3.select('#chartNode')
-    .selectAll('svg')
-    .append('svg')
-    .attr("width", w+250)
-    .attr("height", h)
-
-//Create the title for the legend
-var text = svg.append("text")
-    .attr("class", "title")
-    .attr('transform', 'translate(90,0)') 
-    .attr("x", w - 70 + 132)
-    .attr("y", 10)
-    .attr("font-size", "12px")
-    .attr("fill", "#404040")
-    .text("Variants:");
-        
-//Initiate Legend   
-var legend = svg.append("g")
-    .attr("class", "legend")
-    .attr("height", 100)
-    .attr("width", 200)
-    .attr('transform', 'translate(90,20)') 
-    ;
-    //Create colour squares
-    legend.selectAll('rect')
-      .data(LegendOptions)
-      .enter()
-      .append("rect")
-      .attr("x", w - 65 + 152)
-      .attr("y", function(d, i){ return i * 20;})
-      .attr("width", 10)
-      .attr("height", 10)
-      .style("fill", function(d, i){ return colorscale(i);})
-      ;
-    //Create text next to squares
-    legend.selectAll('text')
-      .data(LegendOptions)
-      .enter()
-      .append("text")
-      .attr("x", w - 52 + 152)
-      .attr("y", function(d, i){ return i * 20 + 9;})
-      .attr("font-size", "11px")
-      .attr("fill", "#737373")
-      .text(function(d) { return d; })
-      ; 
+    //Create the title for the legend
+    var text = svg.append("text")
+        .attr("class", "title")
+        .attr('transform', 'translate(90,0)') 
+        .attr("x", w - 70 + 132)
+        .attr("y", 10)
+        .attr("font-size", "12px")
+        .attr("fill", "#404040")
+        .text("Variants:");
+            
+    //Initiate Legend   
+    var legend = svg.append("g")
+        .attr("class", "legend")
+        .attr("height", 100)
+        .attr("width", 200)
+        .attr('transform', 'translate(90,20)') 
+        ;
+        //Create colour squares
+        legend.selectAll('rect')
+          .data(LegendOptions)
+          .enter()
+          .append("rect")
+          .attr("x", w - 65 + 152)
+          .attr("y", function(d, i){ return i * 20;})
+          .attr("width", 10)
+          .attr("height", 10)
+          .style("fill", function(d, i){ return colorscale(i);})
+          ;
+        //Create text next to squares
+        legend.selectAll('text')
+          .data(LegendOptions)
+          .enter()
+          .append("text")
+          .attr("x", w - 52 + 152)
+          .attr("y", function(d, i){ return i * 20 + 9;})
+          .attr("font-size", "11px")
+          .attr("fill", "#737373")
+          .text(function(d) { return d; })
+          ; 
    
 
 });

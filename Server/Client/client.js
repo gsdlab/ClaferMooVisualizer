@@ -151,50 +151,35 @@ function getConfiguration()
                     var spiderChartModule = module.host.findModule("mdSpiderChart");
                     var parallelCoordinatesChartModule = module.host.findModule("mdParallelCoordinates");
 
-                    module.host.print("ClaferMooVisualizer> Calling onDataLoaded(): ...\n");
-                    module.host.print("ClaferMooVisualizer> Objectives and Ranges... ");
     				goalsModule.onDataLoaded(data);
-                    module.host.print("done!\n");
-
-                    data.goals = goalsModule.goals;
-                    module.host.print("ClaferMooVisualizer> Bubble Front Graph... ");
                     graphModule.onDataLoaded(data);
-                    module.host.print("done!\n");
-                    module.host.print("ClaferMooVisualizer> Feature and Quality Matrix... ");
                     matrixModule.onDataLoaded(data);
-                    module.host.print("done!\n");
 //                    setTimeout(function()
 //                    {
-                    module.host.print("ClaferMooVisualizer> Variant Comparer... ");
                     comparerModule.onDataLoaded(data);
-                    module.host.print("done!\n");
-                    module.host.print("ClaferMooVisualizer> Spider Chart... ");
                     spiderChartModule.onDataLoaded(data);
-                    module.host.print("done!\n");
-                    module.host.print("ClaferMooVisualizer> Parallel Coordinates... ");
                     parallelCoordinatesChartModule.onDataLoaded(data);
-                    module.host.print("done!\n");
 
-                        $.updateWindowContent(goalsModule.id, goalsModule.getContent());
-                        $.updateWindowContent(graphModule.id, graphModule.getContent());
-                        $.updateWindowContent(matrixModule.id, matrixModule.getContent());
-                        $.updateWindowContent(comparerModule.id, comparerModule.getContent());
-                        $.updateWindowContent(spiderChartModule.id, spiderChartModule.getContent());
-                        $.updateWindowContent(parallelCoordinatesChartModule.id, parallelCoordinatesChartModule.getContent());
+                    $.updateWindowContent(goalsModule.id, goalsModule.getContent());
+                    $.updateWindowContent(graphModule.id, graphModule.getContent());
+                    $.updateWindowContent(matrixModule.id, matrixModule.getContent());
+                    $.updateWindowContent(comparerModule.id, comparerModule.getContent());
+                    $.updateWindowContent(spiderChartModule.id, spiderChartModule.getContent());
+                    $.updateWindowContent(parallelCoordinatesChartModule.id, parallelCoordinatesChartModule.getContent());
 
-                        goalsModule.onRendered();
-                        graphModule.onRendered();
+                    goalsModule.onRendered();
+                    graphModule.onRendered();
 
 //                        module.host.storage.evolutionController.assignProperShapesToMatrix();
 
-                        matrixModule.onRendered();
-                        comparerModule.onRendered();
-                        parallelCoordinatesChartModule.onRendered();
+                    matrixModule.onRendered();
+                    comparerModule.onRendered();
+                    parallelCoordinatesChartModule.onRendered();
 
-                        matrixModule.addHovering();
+                    matrixModule.addHovering();
 
-                        module.host.storage.instanceFilter.filterContent();               
-                        spiderChartModule.onRendered();
+                    module.host.storage.instanceFilter.filterContent();               
+                    spiderChartModule.onRendered();
 //                    }, 1000);
                 }
                 else

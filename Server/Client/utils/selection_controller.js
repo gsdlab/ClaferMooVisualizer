@@ -33,8 +33,8 @@ Selector.method("onSelected", function(pid){
     var matrix = this.host.findModule("mdFeatureQualityMatrix");
     matrix.makePointsSelected(pid);
 
-    this.host.findModule("mdVariantComparer").onSelectionChanged(this.selection, matrix.dataTable, this.host.storage.instanceFilter.permaHidden);
-    this.host.findModule("mdVariantComparer").addHovering();
+    this.host.findModule("mdVariantComparer").onSelectionChanged(this.selection, this.host.storage.instanceFilter.permaHidden);
+//    this.host.findModule("mdVariantComparer").addHovering();
 
     this.host.findModule("mdSpiderChart").onSelectionChanged(this.selection);
     this.host.findModule("mdParallelCoordinates").makePointsSelected(pid);

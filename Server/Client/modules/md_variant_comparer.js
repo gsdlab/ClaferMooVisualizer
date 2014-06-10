@@ -40,22 +40,23 @@ function VariantComparer(host, settings)
 
 VariantComparer.method("onDataLoaded", function(data){
     this.unparsedInstances = data.unparsedInstances;
-    this.instanceProcessor = new InstanceProcessor(data.instancesXML);
-    this.Processor = new ClaferProcessor(data.claferXML);
+    this.data = data;
 });
 
 VariantComparer.method("onRendered", function()
 {
+
 });
 
 VariantComparer.method("getContent", function()
 {
-    var content = '<div id="VariantComparer">';
+//    var content = '<div id="VariantComparer">';
     
-    content += '<div id="completeness"></div><br/>';
-    content += '<div id="common" class="comparison">Select variants for comparison</div><br/><div id="unique" class="comparison"></div>';
+//    content += '<div id="completeness"></div><br/>';
+    content = '<div id="common" class="comparison">Select variants for comparison</div><br/>';
+    content += '<div id="diff" class="comparison"></div>';
     
-    content += '</div>';
+//    content += '</div>';
     
     return content;
 });
@@ -66,32 +67,25 @@ VariantComparer.method("getInitContent", function()
 });
 
 //rebuilds the table with the new selection data
-VariantComparer.method("onSelectionChanged", function(list, originalTable, permaHidden){
+VariantComparer.method("onSelectionChanged", function(list, permaHidden){
     //pulls data from the comparison table
-    var originalData = originalTable;
-    var newlist = [];
+    var ids = [];
     for (var i = 0; i < list.length; i++){
-        newlist.push(parsePID(list[i]));
+        ids.push(+parsePID(list[i]));
     }   
 
-    data = originalData.subsetByProducts(newlist);
-    
-    if (data.products.length <= 1)
+    var selectedData = this.data.subsetByInstanceIds(ids);
+
+    if (selectedData.instanceCount <= 1)
     {
-        $("#VariantComparer #common").html("Select variants for comparison");
-        $("#VariantComparer #unique").html("Select variants for comparison");    
+        $("#mdVariantComparer #common").html("Select more than one variant for comparison");
+        $("#mdVariantComparer #diff").html("Select more than one variant for comparison");    
+        return;
     }
 
-    var allFeatures = data.features;
+//    var allFeatures = data.features;
 
-    var commonData = data.getCommon(true); // ALL COMMON DATA
-    var commonFeatures = commonData.features;
-    
-    var differentFeatures = allFeatures.diff(commonFeatures);
-    var differentData = data.subsetByFeatures(differentFeatures); // ALL DIFFERENT DATA
-    differentData.title = "Differences";
-
-    
+/*    
     // get the products that are missing to make up the complete set.
     var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), newlist);
 
@@ -166,26 +160,66 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         $("#saveSelected").removeAttr("disabled");
     else
         $("#saveSelected").attr("disabled", "disabled");
-
+*/
 //    commonData.products[0] = label;
     
-    if (commonFeatures.length > 0)
-    {            
-        $("#VariantComparer #common").html(new TableVisualizer().getHTML(commonData, this.colWidth));
-    }
-    else
-        $("#VariantComparer #common").html("Select more variants to see commonalities");
+    $("#mdVariantComparer #common").html("");
+    $("#mdVariantComparer #diff").html("");    
+    var dataSets = selectedData.getCommonAndDifferent();
+    console.log(dataSets);
 
-        
-    if (differentFeatures.length > 0)
-    {    
-        $("#VariantComparer #unique").html(new TableVisualizer().getHTML(differentData, this.colWidth));
-    }
-    else
-        $("#VariantComparer #unique").html("Select more variants for comparison");
+    this.commonVisualizer = new TableVisualizer("common", {
+        sorting: true,
+        collapsing: true
+    }, {
+        "onFeatureChecked": function(){
+            alert("checked!");
+        },
+        "onSorted": function()
+        {
+            alert("sorted!");
+        },
+        "onExpanded": function(){
+            alert("expanded!");
+        },
+        "onCollapsed": function(){
+            alert("collapsed!");
+        }
+    });
 
-    this.settings.onHTMLChanged(this);
+    this.diffVisualizer = new TableVisualizer("diff", {
+        sorting: true,
+        buttonsForRemoval: true,
+        collapsing: true
+    }, {
+        "onFeatureChecked": function(){
+            alert("checked!");
+        },
+        "onSorted": function()
+        {
+            alert("sorted!");
+        },
+        "onExpanded": function(){
+            alert("expanded!");
+        },
+        "onCollapsed": function(){
+            alert("collapsed!");
+        },
+        "onSelected": function(){
+            alert("selected!");
+        },
+        "onDeselected": function(){
+            alert("deselected!");
+        },
 
+    });
+
+    this.commonVisualizer.refresh(dataSets["common"]);
+    this.diffVisualizer.refresh(dataSets["diff"]);
+
+//    this.settings.onHTMLChanged(this);
+
+/*
 // add buttons to remove products
     var i;
     var differentProducts = $("#unique #r0").find(".td_instance");
@@ -209,10 +243,10 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
             $(this).attr("src", "commons/Client/images/remove.png");
         });      
     }    
-
+*/
 //  adding tooltips
 
-    $("#VariantComparer [title]").tipsy({fade: true, gravity: 'w', html: true});
+    $("#mdVariantComparer [title]").tipsy({fade: true, gravity: 'w', html: true});
 
 });
 
