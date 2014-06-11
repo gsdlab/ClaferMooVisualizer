@@ -20,12 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-d3.selection.prototype.moveToFront = function() {
-  return this.each(function(){
-    this.parentNode.appendChild(this);
-  });
-};
-
 function getConfiguration() 
 {
 	var modules = [];
@@ -124,8 +118,6 @@ function getConfiguration()
 		            module.editor.getSession().setValue(responseObject.model);
 		        }
 
-                console.log(responseObject);
-
                 if (responseObject.optimize || responseObject.optimizer_instances_only)
                 {
 
@@ -141,7 +133,7 @@ function getConfiguration()
 
                     module.host.print("ClaferMooVisualizer> " + responseObject.optimizer_message + "\n");
 
-                    module.host.print("ClaferMooVisualizer> Updating the views...\n");
+                    module.host.print("ClaferMooVisualizer> Updating the views... ");
                     module.host.storage.selector.clearSelection();
                     module.host.storage.instanceFilter.onDataLoaded(data);
 
@@ -170,17 +162,13 @@ function getConfiguration()
 
                     goalsModule.onRendered();
                     graphModule.onRendered();
-
-//                        module.host.storage.evolutionController.assignProperShapesToMatrix();
-
                     matrixModule.onRendered();
                     comparerModule.onRendered();
                     parallelCoordinatesChartModule.onRendered();
-
-                    matrixModule.addHovering();
-
-//                    module.host.storage.instanceFilter.filterContent();               
                     spiderChartModule.onRendered();
+
+                    module.host.print("ClaferMooVisualizer> done!\n");
+
 //                    }, 1000);
                 }
                 else
@@ -272,9 +260,9 @@ function getConfiguration()
             {
                 return module.host.storage.selector.selection;              
             },
-            "onHTMLChanged": function (module){
+//            "onHTMLChanged": function (module){
 //                module.host.storage.evolutionController.assignProperShapesToVariantComparer();
-            },
+//            },
             "onMouseOver": function(module, pid)
             {
                 module.host.storage.highlighter.onMouseOver(pid);               

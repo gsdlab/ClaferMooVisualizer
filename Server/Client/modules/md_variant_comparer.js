@@ -34,12 +34,10 @@ function VariantComparer(host, settings)
     this.colWidth = "200";
     
     this.dataTable = null;
-    this.unparsedInstances = null;
     this.host.loaded();
 }
 
 VariantComparer.method("onDataLoaded", function(data){
-    this.unparsedInstances = data.unparsedInstances;
     this.data = data;
 });
 
@@ -52,8 +50,8 @@ VariantComparer.method("getContent", function()
 {
 //    var content = '<div id="VariantComparer">';
     
-//    content += '<div id="completeness"></div><br/>';
-    content = '<div id="common" class="comparison">Select variants for comparison</div><br/>';
+    content = '<div id="variant-comparer-control-panel"></div>';
+    content += '<div id="common" class="comparison">Select variants for comparison</div><br/>';
     content += '<div id="diff" class="comparison"></div>';
     
 //    content += '</div>';
@@ -154,13 +152,20 @@ VariantComparer.method("onSelectionChanged", function(list, permaHidden){
     }).css("cursor", "pointer");
     
 // add function for save button
+*/
+    var context = this;
+
+    var content = '<input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
+
+    $("#variant-comparer-control-panel").html(content);
+
     $('#saveSelected').click(this.saveSelected.bind(this)).css("cursor", "pointer");
 
     if (context.settings.getSelection(context).length > 0)
         $("#saveSelected").removeAttr("disabled");
     else
         $("#saveSelected").attr("disabled", "disabled");
-*/
+
 //    commonData.products[0] = label;
     
     $("#mdVariantComparer #common").html("");
@@ -221,7 +226,7 @@ VariantComparer.method("onSelectionChanged", function(list, permaHidden){
 //saves all selected instances and downloads them to client
 VariantComparer.method("saveSelected", function(){
     var selection = this.settings.getSelection(this);
-    var instances = this.unparsedInstances;
+    var instances = this.data.unparsedInstances;
     var parser = new InstanceConverter(instances);
     var data = "";
     for (var i=0; i < selection.length; i++){

@@ -54,6 +54,7 @@ InstanceFilter.method("isNegativeValue", function(v){
 
 InstanceFilter.method("filterAllInstances", function(){
 
+    this.instanceShown = this.data.instanceCount;
     for (var i = 0; i < this.data.instanceCount; i++)
     {
         var found = false;
@@ -66,6 +67,7 @@ InstanceFilter.method("filterAllInstances", function(){
                 {
                     found = true;
                     this.data.matrix[i]["_hidden"] = true;
+                    this.instanceShown--;
                     break;
                 }
             }
@@ -79,6 +81,7 @@ InstanceFilter.method("filterAllInstances", function(){
                 {
                     found = true;
                     this.data.matrix[i]["_hidden"] = true;
+                    this.instanceShown--;
                     break;
                 }
             }
@@ -106,6 +109,7 @@ InstanceFilter.method("notify", function()
 {
     this.data._qualityRanges = this.qualityRanges;
     this.data._triggeredDecisions = this.triggeredDecisions;
+    this.data._instanceShown = this.instanceShown;
 
     this.host.findModule("mdGoals").onFiltered(this.data);
     this.host.findModule("mdGraph").onFiltered(this.data);

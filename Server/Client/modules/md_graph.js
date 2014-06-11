@@ -467,3 +467,94 @@ Graph.method("onFiltered", function(data)
     this.data = data;
     this.redrawParetoFront();
 });
+
+
+/* Graph */
+
+Graph.method("makeActive", function(pid)
+{
+    d3.select("#V" + parsePID(pid)).classed("active", true).moveToFront();    
+/*
+    var instance = parsePID(pid);
+    var context = this;
+
+    this.interval = null;
+    this.timeout = null;
+
+    //get crosshairs 
+    var hairs = this.getCrosshairs($("#" + getPID(instance) + "c").attr("cx"), $("#" + getPID(instance) + "c").attr("cy"));
+    $("#" + getPID(instance) + "c").before(hairs);
+    $("#CHX").attr("class", instance + "HL");
+    $("#CHY").attr("class", instance + "HL");
+
+    var highlight = $("#" + getPID(instance) + "c").clone();
+    highlight = this.highlight(highlight);
+    $(highlight).removeAttr("id");
+    $(highlight).attr("class", instance + "HL");
+    //add highlight element behind circle
+    $("#" + getPID(instance) + "c").before(highlight);
+
+    var highlight = $("#" + getPID(instance) + "r").clone();
+    highlight = this.highlight(highlight);
+    $(highlight).removeAttr("id");
+    $(highlight).attr("class", instance + "HL");
+    //add highlight element behind circle
+    $("#" + getPID(instance) + "r").before(highlight);
+
+    var highlight = $("#" + getPID(instance) + "h").clone();
+    highlight = this.highlight(highlight);
+    $(highlight).removeAttr("id");
+    $(highlight).attr("class", instance + "HL");
+    //add highlight element behind circle
+    $("#" + getPID(instance) + "h").before(highlight);
+
+    var myBool = true;
+    context.timeout = setTimeout(function(){
+        context.interval = setInterval(function(){
+            if (myBool){
+                $("." + instance + "HL").hide(500);
+                myBool = false;
+            } else {
+                $("." + instance + "HL").show(500);
+                myBool = true;
+            }
+        }, 500);
+    }, 1500);
+*/    
+});
+
+Graph.method("makeInactive", function(pid)
+{
+    d3.select("#V" + parsePID(pid)).classed("active", false);
+/*
+    var instance = parsePID(pid);
+    $("." + instance + "HL").remove();
+    clearInterval(this.interval);
+    clearTimeout(this.timeout);
+*/
+});
+
+//returns crosshairs for the graph that intersect at coordinates (x,y)
+Graph.method("getCrosshairs", function(x, y){
+    var NS="http://www.w3.org/2000/svg";
+    var crossX = document.createElementNS(NS,"line");
+    crossX.setAttribute("x1", "0");
+    crossX.setAttribute("x2", "1000");
+    crossX.setAttribute("y1", y);
+    crossX.setAttribute("y2", y);
+    crossX.setAttribute("id", "CHX")
+    //crossX.setAttribute("filter", "url(#blur)");
+    crossX.setAttribute("stroke", "yellow");
+    crossX.setAttribute("stroke-width", "2");
+
+    var crossY = document.createElementNS(NS,"line");
+    crossY.setAttribute("y1", "0");
+    crossY.setAttribute("y2", "1000");
+    crossY.setAttribute("x1", x);
+    crossY.setAttribute("x2", x);
+    crossY.setAttribute("id", "CHY")
+    crossY.setAttribute("stroke", "yellow");
+    crossY.setAttribute("stroke-width", "2");
+
+    return [crossX, crossY];
+});
