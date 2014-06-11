@@ -40,7 +40,6 @@ function Goals(host, settings)
 
 Goals.method("onDataLoaded", function(data){
     this.goals = data.objectives;
-    this.ranges = [];
 });
 
 Goals.method("drag", function(ev)
@@ -49,29 +48,63 @@ Goals.method("drag", function(ev)
 	ev.dataTransfer.setData("Text", data);
 });
 
+Goals.method("onChange", function(goal)
+{
+    var min = $('#' + goal + 'min').val();
+    var max = $('#' + goal + 'max').val();
+
+    if (!isNumeric(min))
+        min = this.goals[goal].minValue;
+
+    if (!isNumeric(max))
+        max = this.goals[goal].maxValue;
+
+    this.settings.onRangeFiltered(this, goal, min, max);
+});
 
 Goals.method("onRendered", function()
 {
-    if (this.goals && this.goals.length > 0)
+    var context = this;
+
+    var sid = "#goals a[draggable=true]";
+    var dragElements = $(sid);
+    
+    for (var i = 0; i < dragElements.length; i++)
     {
-        var sid = "#goals a[draggable=true]";
-        var dragElements = $(sid);
-        
-        for (var i = 0; i < dragElements.length; i++)
+        $(sid)[i].ondragstart = this.drag.bind(this);
+        var goal = $($(sid)[i]).attr("id");
+
+        $('#' + goal + 'min').keyup(function()
         {
-            $(sid)[i].ondragstart = this.drag.bind(this);
-            
-            //add handler for range box 
-            var that = this;
-            $('#' + this.goals[i].arg + 'max').keyup(function(){
-                that.filterByGoals($(this).attr("id").substring(0, $(this).attr("id").length - 3));
-            });  
-            $('#' + this.goals[i].arg + 'min').keyup(function(){
-                that.filterByGoals($(this).attr("id").substring(0, $(this).attr("id").length - 3));
-            });
-        }
-                     
+            var id = $(this).attr("id");
+            context.onChange(id.substring(0, id.length - 3));
+        });
+
+        $('#' + goal + 'max').keyup(function()
+        {
+            var id = $(this).attr("id");
+            context.onChange(id.substring(0, id.length - 3));
+        });
+    }                     
+
+    this.updateValues({});
+});
+
+Goals.method("updateValues", function(ranges)
+{
+    for (var goal in this.goals)
+    {
+        if (!ranges[goal] || ranges[goal].min == this.goals[goal].minValue)
+            $('#' + goal + 'min').val("");
+        else
+            $('#' + goal + 'min').val(ranges[goal].min);
+
+        if (!ranges[goal] || ranges[goal].max == this.goals[goal].maxValue)
+            $('#' + goal + 'max').val("");
+        else
+            $('#' + goal + 'max').val(ranges[goal].max);
     }
+
 });
 
 Goals.method("getContent", function()
@@ -80,77 +113,36 @@ Goals.method("getContent", function()
 	
 	var table = $('<table width="100%"></table>').addClass('goals');
 	
-	for (var i = 0; i < this.goals.length; i++)
+	for (var goal in this.goals)
 	{
-        var filteredTitle = this.goals[i].label.replaceAll(".", "-");
+        var filteredTitle = this.goals[goal].label.replaceAll(".", "-");
         //optimization direction
 		var row = $('<tr></tr>').addClass('bar');
-		td = $('<td id="operation_' + this.goals[i].operation + '" name="' + filteredTitle + '"></td>').addClass('td_operation');
-		td.html(this.goals[i].operation);
+		td = $('<td id="operation_' + this.goals[goal].operation + '" name="' + filteredTitle + '"></td>').addClass('td_operation');
+		td.html(this.goals[goal].operation);
 		row.append(td);
 		
         //goal title/draggable
 		td = $('<td></td>').addClass('td_argument');
-		var span = $('<a href="#" draggable="true" id="' + this.goals[i].arg + '" class="' + filteredTitle + '"></a>');
-        span.html(this.goals[i].label);
+		var span = $('<a href="#" draggable="true" id="' + goal + '" class="' + filteredTitle + '"></a>');
+        span.html(this.goals[goal].label);
 		td.append(span);
         row.append(td);
 
         //range input
         td = $('<td></td>').addClass('td_argument');
         //(2nd input added to keep form from submitting on hitting enter)
-        var input = $('<input type="text" class="text_input" id="' + this.goals[i].arg + 'min" placeholder="min" style="width: 40px">..<input type="text" class="text_input" id="' + this.goals[i].arg + 'max" placeholder="max" style="width: 40px">');
-		td.append(input);
+        var inputMin = '<input type="text" class="text_input" id="' + goal + 'min" placeholder="' + this.goals[goal].minValue + '" style="width: 40px" value="">';
+        var inputMax = '<input type="text" class="text_input" id="' + goal + 'max" placeholder="' + this.goals[goal].maxValue + '" style="width: 40px" value="">';
+
+		td.append(inputMin + ".." + inputMax);
         row.append(td);
 
         //place row
 		$(table).append(row);
-
-        this.ranges.push({
-            goal: this.goals[i].arg,
-            //placeholder values
-            min: -10000000,
-            max: 10000000
-        });
 	}
     
     return $('<div id="goals"></div>').append(table);
-});
-
-//get ranges to set landing zone else get minimum/maximum values for the ranges. After that filter
-Goals.method("filterByGoals", function(input)
-{
-    for (var x = 0; x<=this.ranges.length; x++){
-        if (input == this.ranges[x].goal){
-            break;
-        } else if (x == this.ranges.length){
-            return;
-        }
-    }  
-
-    var min = $("#" + input + "min").val();
-    var max = $("#" + input + "max").val();
-    if (jQuery.isNumeric( min ))
-        this.ranges[x].min = min;
-    else
-        this.ranges[x].min = parseInt($("#" + input + "min").attr("placeholder"));
-    
-    if (jQuery.isNumeric( max ))
-        this.ranges[x].max = max;
-    else
-        this.ranges[x].max = parseInt($("#" + input + "max").attr("placeholder"));
-
-    this.settings.onFilterByGoals(this, this.ranges[x].goal, this.ranges[x].min, this.ranges[x].max);
-});
-
-
-Goals.method("calculateRanges", function()
-{
-    for (var x = 0; x < this.ranges.length; x++)
-    {
-        this.ranges[x].min = parseInt($("#" + this.ranges[x].goal + "min").attr("placeholder"));
-        this.ranges[x].max = parseInt($("#" + this.ranges[x].goal + "max").attr("placeholder"));
-    }  
 });
 
 Goals.method("getInitContent", function()
@@ -158,4 +150,8 @@ Goals.method("getInitContent", function()
 	return '';  
 });
 
+Goals.method("onFiltered", function(data)
+{
+    this.updateValues(data._qualityRanges);
+});
 

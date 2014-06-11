@@ -79,28 +79,30 @@ Graph.method("onRendered", function()
         $(".axis_drop")[i].ondragover = this.allowDrop.bind(this);
     }
     
-	if (this.goals.length == 1) // single-objective    
+    var keys = Object.keys(this.goals);
+
+	if (keys.length == 1) // single-objective    
     {
 		$("#chart").show();
-		this.assignToAxis("dropPointX", this.goals[0].arg, this.goals[0].label);
+		this.assignToAxis("dropPointX", keys[0], this.goals[keys[0]].label);
 		this.assignToAxis("dropPointY", this.instanceCounterArg, this.instanceCounterLabel);
         this.assignToAxis("dropPointZ", "", "");
         this.assignToAxis("dropPointT", "", "");
         this.redrawParetoFront();    
     }
-	else if (this.goals.length >= 2)
+	else if (keys.length >= 2)
 	{
 		$("#chart").show();
-		this.assignToAxis("dropPointX", this.goals[0].arg, this.goals[0].label);
-		this.assignToAxis("dropPointY", this.goals[1].arg, this.goals[1].label);
+		this.assignToAxis("dropPointX", keys[0], this.goals[keys[0]].label);
+		this.assignToAxis("dropPointY", keys[1], this.goals[keys[1]].label);
         
-        if (this.goals.length >= 3)
+        if (keys.length >= 3)
         {
-            this.assignToAxis("dropPointZ", this.goals[2].arg, this.goals[2].label);
+            this.assignToAxis("dropPointZ", keys[2], this.goals[keys[2]].label);
 
-            if (this.goals.length >= 4)
+            if (keys.length >= 4)
             {
-                this.assignToAxis("dropPointT", this.goals[3].arg, this.goals[3].label);
+                this.assignToAxis("dropPointT", keys[3], this.goals[keys[3]].label);
             }
             else 
                 this.assignToAxis("dropPointT", "", "");
@@ -166,7 +168,9 @@ Graph.method("drop", function(ev)
     console.log("arg:" + arg);
     console.log("label:" + label);
 
-    if (this.goals.length == 1) // case of 1 dimension
+    var keys = Object.keys(this.goals);
+
+    if (keys.length == 1) // case of 1 dimension
     {
         // we have to switch the instance dimension too
         anotherTarget = "dropPointY";
@@ -287,10 +291,7 @@ Graph.method("redrawParetoFront", function()
     }
 
     // adding the rest metrics, even though they are not visualized, they take part in filtering
-    var allArgs = this.goals.reduce(function (prev, cur, index, array){
-        prev.push(cur.arg);
-        return prev;
-    },[]);
+    var allArgs = Object.keys(this.goals);
 
     var missingArgs = allArgs.filter(function(element){
         return (args.indexOf(element) < 0); 
@@ -462,3 +463,10 @@ Graph.method("addFilters", function(){
 */
 
 
+Graph.method("onFiltered", function(data)
+{
+//    console.log("----------");    
+//    console.log(data);
+    this.data = data;
+    this.redrawParetoFront();
+});

@@ -106,27 +106,12 @@ ParallelCoordinates.method("redrawChart", function()
 
     labels["id"] = "#variant";
 
-    for (var j = 0; j < this.goals.length; j++)
+    for (var key in this.goals)
     {
-        labels[this.goals[j].arg] = this.goals[j].label + " [" + this.goals[j].operation + "]";
-        args.push(this.goals[j].arg);
+        labels[key] = this.goals[key].label + " [" + this.goals[key].operation + "]";
+        args.push(key);
     }
 
-/*
-    var data = [];
-    for (var i = 1; i <= instanceCount; i++)
-    {            
-        var current = new Object();
-        current["id"] = i;
-        for (var j = 0; j < this.goals.length; j++)
-        {
-            var value = this.instanceProcessor.getFeatureValue(i, this.argsToArray(this.goals[j].arg), 'int'); // get only numeric
-            current[this.goals[j].arg] = value;
-        }
-
-        data.push(current);
-    }              
-*/
     /* Rendering */
 
 /* if using the module
@@ -163,30 +148,6 @@ ParallelCoordinates.method("redrawChart", function()
     this.chart.resize(w, h, m);
     this.chart.refresh(this.data.matrix, args, labels);
 
-/*
-    if (backupChart)
-    {
-        this.chart.selected = backupChart.selected;
-
-        for (var i = 0; i < this.chart.selected.length; i++)
-        {
-            if (this.chart.selected[i])
-                this.chart.makeSelected(i);
-        }
-
-        var actives = backupChart.dimensions.filter(function(p) { return !backupChart.y[p].brush.empty(); }),
-        extents = actives.map(function(p) { return backupChart.y[p].brush.extent(); });
-
-        var context = this;
-        actives.every(function(p, i) 
-        {
-            context.chart.setRange(p, extents[i][0], extents[i][1]);
-            return true;
-        });
-
-        this.chart.filter();
-    }
-*/
 });
 
 //gets containers and placeholders
@@ -224,4 +185,11 @@ ParallelCoordinates.method("makeActive", function(pid)
 ParallelCoordinates.method("makeInactive", function(pid)
 {
     this.chart.makeInactive();
+});
+
+// this function is called every time a user filters by features or quality values
+ParallelCoordinates.method("onFiltered", function(data)
+{
+    this.data = data;
+    this.redrawChart();
 });

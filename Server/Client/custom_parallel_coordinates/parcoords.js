@@ -111,17 +111,6 @@ CustomParCoords.method("refresh", function (data, args, labels)
 
   context.g.transition().attr("transform", function(d) { return "translate(" + context.x(d) + ")"; });
 
-  var domains = context.dimensions.map(function(p) { 
-      var ar = new Array();
-      ar.push(p);
-      ar.push(context.y[p].domain()[0]);
-      ar.push(context.y[p].domain()[1]);
-      return ar;
-  });
-
-  this.chartListeners.saveDomains(domains);
-
-
   // Add axes and titles.
   var axis = d3.svg.axis().orient("left").tickFormat(d3.format("d"));
 
@@ -202,6 +191,8 @@ CustomParCoords.method("refresh", function (data, args, labels)
         .on("mouseout", mouseout)
         .on("click", mouseclick);
   }
+
+  context.filter();
 /* // MOUSE OVER BEHAVIOR ends */
 
   function position(d) {
@@ -225,7 +216,7 @@ CustomParCoords.method("refresh", function (data, args, labels)
 
   // Handles a brush event, toggling the display of foreground lines.
   function brush() {
-      context.filter();
+//      context.filter();
   }
 
   function brushend() {
@@ -303,6 +294,7 @@ function CustomParCoords(nodeId, chartListeners)
 }
 
 CustomParCoords.method("filter", function(){
+/*
     var context = this;
     var actives = this.dimensions.filter(function(p) { return !context.y[p].brush.empty(); }),
         extents = actives.map(function(p) { return context.y[p].brush.extent(); });
@@ -338,11 +330,17 @@ CustomParCoords.method("filter", function(){
           return extents[i][0] <= d[p] && d[p] <= extents[i][1];
       }) ? null : "none";
     });
+*/
+
+    console.log("=============");
+    console.log(this.data);
+    this.foreground.style("display", function(d) {
+      return (d["_hidden"] === true ? "none" : null);
+    });
 });
 
 CustomParCoords.method("onBrushEnd", function(p, start, end)
 {
-//    console.log("onBrushEnd");
     if (this.chartListeners.onRangeFilter)
         this.chartListeners.onRangeFilter(p, start, end);
 

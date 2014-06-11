@@ -134,6 +134,7 @@ ParetoFrontVisualizer.method("refresh", function(data, args)
       $("#svgcontT").hide();
   }
 
+  context.filter();
 
   function mouseover(d) {
       if (context.chartListeners.onMouseOver)
@@ -311,21 +312,6 @@ function ParetoFrontVisualizer(nodeId, chartListeners)
   setTimeout(addRandom, 2000);
 */
 }
-  // Add the points!
-
-ParetoFrontVisualizer.method("setRange", function(dim, min, max) 
-{
-    for (var i = 0; i < this.ranges.length; i++)
-    {
-        if (this.ranges[i].dim == dim)
-        {
-            this.ranges[i].min = +min;   
-            this.ranges[i].max = +max;   
-        }
-    }
-
-    console.log(this.ranges);
-});
 
 ParetoFrontVisualizer.method("filter", function(){
 
@@ -336,11 +322,7 @@ ParetoFrontVisualizer.method("filter", function(){
 
     foreground.classed("hidden", function(d){
         // adding a hidden class, if the data value is outside at least one (some) range
-        return context.ranges.some(function(p, i) 
-          {
-              return p.min > d[p.dim] || d[p.dim] > p.max;
-          });
-
+        return (d["_hidden"] === true);
     });
 });
 

@@ -143,6 +143,7 @@ function getConfiguration()
 
                     module.host.print("ClaferMooVisualizer> Updating the views...\n");
                     module.host.storage.selector.clearSelection();
+                    module.host.storage.instanceFilter.onDataLoaded(data);
 
     		        var goalsModule = module.host.findModule("mdGoals");
     		        var graphModule = module.host.findModule("mdGraph");
@@ -178,7 +179,7 @@ function getConfiguration()
 
                     matrixModule.addHovering();
 
-                    module.host.storage.instanceFilter.filterContent();               
+//                    module.host.storage.instanceFilter.filterContent();               
                     spiderChartModule.onRendered();
 //                    }, 1000);
                 }
@@ -216,9 +217,10 @@ function getConfiguration()
                 "posy": 0
             },
 
-            "onFilterByGoals": function(module, dim, start, end)
+            "onRangeFiltered" : function(module, dim, start, end)
             {
-                module.host.storage.instanceFilter.onFilteredByRange(module, dim, start, end);
+//                console.log("parCoords > onFilteredByRange");
+                module.host.storage.instanceFilter.filterByQuality(module, dim, start, end);
             }
 
         }});
@@ -368,21 +370,7 @@ function getConfiguration()
             "onRangeFiltered" : function(module, dim, start, end)
             {
 //                console.log("parCoords > onFilteredByRange");
-                module.host.storage.instanceFilter.onFilteredByRange(module, dim, start, end);
-            },
-            "saveDomains" : function(module, domains){
-                
-                for (var i = 0; i < domains.length; i++)
-                {
-                    var goal = domains[i][0];
-                    var min = domains[i][1];
-                    var max = domains[i][2];
-                    $("#"+goal+"min").attr("placeholder", min);
-                    $("#"+goal+"max").attr("placeholder", max);
-                }
-
-                module.host.findModule("mdGoals").calculateRanges();
-
+                module.host.storage.instanceFilter.filterByQuality(module, dim, start, end);
             }
         }});
 
