@@ -308,8 +308,6 @@ Graph.method("redrawParetoFront", function()
 
     this.chart.resize(w, h, m);
     this.chart.refresh(this.data.matrix, args); // args will show which dimensions to visualize
-
-    this.settings.onDrawComplete(this);
 });
 
 //runs selectObject on points

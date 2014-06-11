@@ -65,7 +65,7 @@ VariantComparer.method("getInitContent", function()
 });
 
 //rebuilds the table with the new selection data
-VariantComparer.method("onSelectionChanged", function(list, permaHidden){
+VariantComparer.method("onSelectionChanged", function(list){
     //pulls data from the comparison table
     var ids = [];
     for (var i = 0; i < list.length; i++){
@@ -155,11 +155,22 @@ VariantComparer.method("onSelectionChanged", function(list, permaHidden){
 */
     var context = this;
 
-    var content = '<input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
+    var content = '<input type="button" id="saveSelected" value="Save selected" disabled="disabled">';
+    content += '<button id="clearSelection">Clear selection</button>';
+    content += '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
 
     $("#variant-comparer-control-panel").html(content);
 
     $('#saveSelected').click(this.saveSelected.bind(this)).css("cursor", "pointer");
+
+    $("#clearSelection").click(function(){
+        var selected = context.settings.getSelection(context);
+        while (selected.length > 0)
+        {
+            context.settings.onDeselected(context, selected[selected.length - 1]);
+            selected.pop();
+        };
+    }).css("cursor", "pointer");
 
     if (context.settings.getSelection(context).length > 0)
         $("#saveSelected").removeAttr("disabled");

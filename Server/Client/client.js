@@ -300,7 +300,6 @@ function getConfiguration()
 
             "onDrop" : function(module)
             {
-//                module.host.storage.instanceFilter.filterContent(); 
             },
 
             "onSelected": function(module, pid)
@@ -318,13 +317,6 @@ function getConfiguration()
             "onMouseOut" : function(module, pid)
             {
                 module.host.storage.highlighter.onMouseOut(pid);               
-            },            
-//            "getExistingInstancesCount" : function(module){
-//                return module.host.storage.evolutionController.existingInstancesCount;
-//            },
-            "onDrawComplete" : function(module){
-//                module.host.storage.evolutionController.assignProperShapesToGraph();
-                module.host.storage.selector.ReselectGraphPoints();
             }
         }});
 

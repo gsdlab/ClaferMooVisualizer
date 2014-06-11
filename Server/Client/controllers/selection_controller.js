@@ -30,12 +30,8 @@ function Selector(host)
 Selector.method("onSelected", function(pid){
     this.selection.push(pid);
     this.host.findModule("mdGraph").makePointsSelected(pid);
-    var matrix = this.host.findModule("mdFeatureQualityMatrix");
-    matrix.makePointsSelected(pid);
-
-    this.host.findModule("mdVariantComparer").onSelectionChanged(this.selection, this.host.storage.instanceFilter.permaHidden);
-//    this.host.findModule("mdVariantComparer").addHovering();
-
+    this.host.findModule("mdFeatureQualityMatrix").makePointsSelected(pid);
+    this.host.findModule("mdVariantComparer").onSelectionChanged(this.selection);
     this.host.findModule("mdSpiderChart").onSelectionChanged(this.selection);
     this.host.findModule("mdParallelCoordinates").makePointsSelected(pid);
 
@@ -52,14 +48,8 @@ Selector.method("onDeselected", function(pid)
     this.selection = this.selection.filter(function(e){return e}); // remove empty elements
 
     this.host.findModule("mdGraph").makePointsDeselected(pid);           // update graph and comparison table
-
-    var matrix = this.host.findModule("mdFeatureQualityMatrix");
-    matrix.makePointsDeselected(pid);
-
-    $("." + pid.substring(1) + "HL").remove();
-
-    this.host.findModule("mdVariantComparer").onSelectionChanged(this.selection, matrix.dataTable, this.host.storage.instanceFilter.permaHidden);
-    this.host.findModule("mdVariantComparer").addHovering();
+    this.host.findModule("mdFeatureQualityMatrix").makePointsDeselected(pid);
+    this.host.findModule("mdVariantComparer").onSelectionChanged(this.selection);
     this.host.findModule("mdSpiderChart").onSelectionChanged(this.selection);
     this.host.findModule("mdParallelCoordinates").makePointsDeselected(pid);
 });
@@ -82,11 +72,3 @@ Selector.method("clearSelection", function()
 Selector.method("asString", function(){
     return this.selection.join(",");
 });
-
-Selector.method("ReselectGraphPoints", function(){
-    for (var i = 0; i < this.selection.length; i++)
-    {
-        this.host.findModule("mdGraph").makePointsSelected(this.selection[i]);
-    }
-});
-
