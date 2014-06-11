@@ -332,8 +332,6 @@ CustomParCoords.method("filter", function(){
     });
 */
 
-    console.log("=============");
-    console.log(this.data);
     this.foreground.style("display", function(d) {
       return (d["_hidden"] === true ? "none" : null);
     });

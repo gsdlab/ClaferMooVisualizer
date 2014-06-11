@@ -307,7 +307,6 @@ Graph.method("redrawParetoFront", function()
     var m = [30, 50, 30, 30];
 
     this.chart.resize(w, h, m);
-    console.log(this.data.matrix);
     this.chart.refresh(this.data.matrix, args); // args will show which dimensions to visualize
 
     this.settings.onDrawComplete(this);
@@ -465,8 +464,6 @@ Graph.method("addFilters", function(){
 
 Graph.method("onFiltered", function(data)
 {
-//    console.log("----------");    
-//    console.log(data);
     this.data = data;
     this.redrawParetoFront();
 });

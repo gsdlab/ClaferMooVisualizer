@@ -69,7 +69,7 @@ InstanceFilter.method("filterAllInstances", function(){
                     break;
                 }
             }
-            else if (this.triggeredDecisions[f.path]) // else, if a decision on it is made
+            else if (this.triggeredDecisions[f.path] !== null && this.triggeredDecisions[f.path] !== undefined) // else, if a decision on it is made
             {
                 if (
                     (this.triggeredDecisions[f.path] === true && this.isNegativeValue(this.data.matrix[i][f.path]))
@@ -91,13 +91,19 @@ InstanceFilter.method("filterAllInstances", function(){
 
 });
 
-InstanceFilter.method("filterByQuality", function(caller, dim, start, end)
+InstanceFilter.method("filterByFeature", function(caller, f, value)
 {
-    this.qualityRanges[dim].min = +start;
-    this.qualityRanges[dim].max = +end;
+    if (value == 0)
+        this.triggeredDecisions[f] = null;
+    else
+        this.triggeredDecisions[f] = (value > 0) ? true : false;
 
     this.filterAllInstances();
+    this.notify();
+});
 
+InstanceFilter.method("notify", function()
+{
     this.data._qualityRanges = this.qualityRanges;
     this.data._triggeredDecisions = this.triggeredDecisions;
 
@@ -105,7 +111,15 @@ InstanceFilter.method("filterByQuality", function(caller, dim, start, end)
     this.host.findModule("mdGraph").onFiltered(this.data);
     this.host.findModule("mdParallelCoordinates").onFiltered(this.data);
     this.host.findModule("mdFeatureQualityMatrix").onFiltered(this.data);
+});
 
+InstanceFilter.method("filterByQuality", function(caller, dim, start, end)
+{
+    this.qualityRanges[dim].min = +start;
+    this.qualityRanges[dim].max = +end;
+
+    this.filterAllInstances();
+    this.notify();
 });
 
 

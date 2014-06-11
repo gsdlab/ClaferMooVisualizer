@@ -143,7 +143,7 @@ ParallelCoordinates.method("redrawChart", function()
     var h = parseInt(sh) - 10;
 
 
-    var m = [30, 50, 30, 30];
+    var m = [30, 10, 10, 10];
 
     this.chart.resize(w, h, m);
     this.chart.refresh(this.data.matrix, args, labels);

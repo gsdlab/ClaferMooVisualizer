@@ -172,19 +172,6 @@ VariantComparer.method("onSelectionChanged", function(list, permaHidden){
         sorting: true,
         collapsing: true
     }, {
-        "onFeatureChecked": function(){
-            alert("checked!");
-        },
-        "onSorted": function()
-        {
-            alert("sorted!");
-        },
-        "onExpanded": function(){
-            alert("expanded!");
-        },
-        "onCollapsed": function(){
-            alert("collapsed!");
-        }
     });
 
     this.diffVisualizer = new TableVisualizer("diff", {
@@ -192,25 +179,6 @@ VariantComparer.method("onSelectionChanged", function(list, permaHidden){
         buttonsForRemoval: true,
         collapsing: true
     }, {
-        "onFeatureChecked": function(){
-            alert("checked!");
-        },
-        "onSorted": function()
-        {
-            alert("sorted!");
-        },
-        "onExpanded": function(){
-            alert("expanded!");
-        },
-        "onCollapsed": function(){
-            alert("collapsed!");
-        },
-        "onSelected": function(){
-            alert("selected!");
-        },
-        "onDeselected": function(){
-            alert("deselected!");
-        },
 
     });
 
@@ -246,7 +214,7 @@ VariantComparer.method("onSelectionChanged", function(list, permaHidden){
 */
 //  adding tooltips
 
-    $("#mdVariantComparer [title]").tipsy({fade: true, gravity: 'w', html: true});
+    $("#mdVariantComparer [title]").tipsy({delayIn: 2000, delayOut: 500, fade: true, gravity: 'e', html: true});
 
 });
 

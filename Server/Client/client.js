@@ -403,7 +403,7 @@ function getConfiguration()
     		},    		
     		"onReset": function(module)
     		{
-                module.host.storage.instanceFilter.filterContent();
+//                module.host.storage.instanceFilter.filterContent();
     		},
     		"onFeatureExpanded": function(module, feature)
     		{
@@ -413,7 +413,7 @@ function getConfiguration()
     		},    		
     		"onFeatureCheckedStateChange": function(module, feature, require)
     		{
-                module.host.storage.instanceFilter.filterContent();                
+                module.host.storage.instanceFilter.filterByFeature(module, feature, require);                
     		},
     		"onInstanceRemove" : function(module, num)
     		{

@@ -126,11 +126,11 @@ SpiderChart.method("redrawChart", function()
         LegendOptions.push(selectedData.instanceIds[i]);
         var current = new Array();
         
-        for (var j = 0; j < this.goals.length; j++)
+        for (var goal in this.goals)
         {
             var obj = new Object();
-            obj.axis = this.goals[j].label;
-            obj.value = selectedData.matrix[i][this.goals[j].arg];
+            obj.axis = this.goals[goal].label;
+            obj.value = selectedData.matrix[i][goal];
             current.push(obj);
         }
         
