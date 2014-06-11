@@ -34,7 +34,7 @@ function Graph(host, settings)
     this.host = host;
     this.axisArray = new Array();
 
-    this.instanceCounterArg = "?special_counter?"; 
+    this.instanceCounterArg = "id"; 
     this.instanceCounterLabel = "#instance";
 
     this.chart = null;
@@ -139,7 +139,7 @@ Graph.method("completeDrop", function(target, arg, label)
     var id = target.id;
     var node = target;
     
-    while (node.parentNode != null && (id == "" || id == "svgcontY"|| id == "svgcontT"))
+    while (node.parentNode != null && (id == "" || id == "svgcontY" || id == "svgcontT" || id == "svgcontZ"))
     {
         node = node.parentNode;
         id = node.id;
@@ -205,6 +205,8 @@ Graph.method("argsToArray", function(argString){
 //redraws the graph
 Graph.method("redrawParetoFront", function()
 {
+    console.log("redraw");
+
     var e = $('#chart')[0];
 
     var sw = document.defaultView.getComputedStyle(e,null).getPropertyValue("width");
