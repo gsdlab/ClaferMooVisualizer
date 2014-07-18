@@ -5,9 +5,9 @@
             "label": "Choco-based (MOO & magnifier)",
             "tooltip": "A new Choco-based solver, for multi-objective optimization",
             "accepted_format": "choco",               
-            "tool": "java",
-            "tool_args": ["-jar", "$dirname$/../../../ClaferChocoIG/target/claferchocoig-0.3.6-jar-with-dependencies.jar", "--file=$filepath$", "--moo"],
-            "tool_version_args": ["-jar", "$dirname$/../../../ClaferChocoIG/target/claferchocoig-0.3.6-jar-with-dependencies.jar", "--version"],
+            "tool": "bash",
+            "tool_args": ["claferChocoIG.sh", "--file=$filepath$", "--moo"],
+            "tool_version_args": ["claferChocoIG.sh", "--version"],
             "optimization_options": {
                 "set_int_scope" : {"label": "Max. int.:", "argument": "--maxint=$value$", "default_value": 127},
                 "set_default_scope" : {"label": "Def. scopes:", "argument": "--scope=$value$", "default_value": 25}
@@ -18,9 +18,9 @@
            "label": "Z3-based (MOO, no magnifier)",
            "tooltip": "A new multi-objective optimizer based on Z3 solver library",
            "accepted_format": "python",             
-           "tool": "sh",
-           "tool_args": ["$dirname$/../../../ClaferZ3/runClaferZ3", "$filepath$", "--showinheritance", "-u", "--indentation=tab", "-p"],            
-           "tool_version_args": ["$dirname$/../../../ClaferZ3/runClaferZ3", "-v"],
+           "tool": "bash",
+           "tool_args": ["claferSMT.sh", "$filepath$", "--showinheritance", "-u", "--indentation=tab", "-p"],            
+           "tool_version_args": ["claferSMT.sh", "-v"],
            "optimization_options": {
                "set_default_scope" : {"label": "Scope:", "argument": "-g=$value$\n", "default_value": 5},
                "limit" : {"label": "Limit:", "argument": "-n=$value$", "off_value": -1, "default_value": 100},
@@ -32,9 +32,9 @@
            "label": "Z3-based (MOO & magnifier)",
            "tooltip": "ClaferZ3 backend with magnifying glass option",
            "accepted_format": "python",             
-           "tool": "sh",
-           "tool_args": ["$dirname$/../../../ClaferZ3/runClaferZ3", "$filepath$", "--showinheritance", "-u", "--indentation=tab", "--magnifyingglass", "-p"],            
-           "tool_version_args": ["$dirname$/../../../ClaferZ3/runClaferZ3", "-v"],
+           "tool": "bash",
+           "tool_args": ["claferSMT.sh", "$filepath$", "--showinheritance", "-u", "--indentation=tab", "--magnifyingglass", "-p"],            
+           "tool_version_args": ["claferSMT.sh", "-v"],
            "optimization_options": {
                "set_default_scope" : {"label": "Scope:", "argument": "-g=$value$\n", "default_value": 5},
                "limit" : {"label": "Limit:", "argument": "-n=$value$", "off_value": -1, "default_value": 100},
