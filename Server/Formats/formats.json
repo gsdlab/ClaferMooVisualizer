@@ -31,6 +31,16 @@
             "display_element": "textarea"
         },
         {
+            "id": "python", 
+            "label": "Python Z3", 
+            "tooltip": "Python Z3 file format (Python)", 
+            "file_suffix": ".py",             
+            "compiler_mode": "python",
+            "compiler_args": [],
+            "shows_compilation_errors" : "false",
+            "display_element": "textarea"
+        },        
+        {
             "id": "choco", 
             "label": "Choco JS", 
             "tooltip": "Choco solver file format (Javascript)", 

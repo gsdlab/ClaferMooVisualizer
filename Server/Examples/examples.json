@@ -1,6 +1,12 @@
 {
     "examples": [
         {"url": "", "label": "Or Choose Example..."}, 
+        {"url": "pt.cfr", "label": "Performance Test 1 (PT1)"},
+        {"url": "pt2000.data", "label": "PT1 2000 Instances"},
+        {"url": "pt5000.data", "label": "PT1 5000 Instances"},
+        {"url": "pt7000.data", "label": "PT1 7000 Instances"},
+        {"url": "pt10000.data", "label": "PT1 10000 Instances"},
+        {"url": "allocation.cfr", "label": "Service Allocation Example"},
         {"url": "MobilePhone_1.cfr", "label": "Mobile Phone Example (1 objective)"},
         {"url": "MobilePhone_2.cfr", "label": "Mobile Phone Example (2 objectives)"}, 
         {"url": "MobilePhone_3.cfr", "label": "Mobile Phone Example (3 objectives)"},    

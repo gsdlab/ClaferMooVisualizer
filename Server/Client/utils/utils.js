@@ -1,8 +1,29 @@
+/*
+Copyright (C) 2012 - 2014 Alexander Murashkin, Neil Redman <http://gsd.uwaterloo.ca>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
 
 function preprocessMOOResult(result, host)
 {
 	var instances = result.optimizer_instances;
-	var abstractXMLText = result.optimizer_claferXML;
+	var abstractXMLText = host.storage.claferXML; // now getting it from a previously saved XML
 
 	if (!result.optimizer_instances_only) // the user submitted a clafer file to optimize
 	{
@@ -10,11 +31,11 @@ function preprocessMOOResult(result, host)
         host.storage.instanceFilter.permaHidden = {}; // reset the hidden instances
         host.storage.selector.clearSelection(); // reset the selection
 
-    	if (!result.optimizer_instances)
-		  {
-          host.findModule("mdInput").handleError(null, "malformed_output", null);
-       		return false;
-   		}
+      	if (!result.optimizer_instances)
+  		  {
+            host.findModule("mdInput").handleError(null, "empty_instances", null);
+         		return false;
+     		}
     } 
     else  // the user submitted instances file
     {
@@ -28,8 +49,8 @@ function preprocessMOOResult(result, host)
                 return false;
             }
             
-            var parser = new InstanceConverter(result.optimizer_instances);
-            instances += parser.convertFromClaferIGOutputToClaferMoo(host.storage.evolutionController.existingData.claferXML);            
+//            var parser = new InstanceConverter(result.optimizer_instances);
+            instances += result.optimizer_instances;//parser.convertFromClaferIGOutputToClaferMoo(host.storage.evolutionController.existingData.claferXML);            
             abstractXMLText = host.storage.evolutionController.existingData.claferXML;
         }
         else
@@ -39,7 +60,14 @@ function preprocessMOOResult(result, host)
    		}
 	}
 
-	var instancesXMLText = (new InstanceConverter(instances)).convertFromClaferMooOutputToXML();
+  var converter = new InstanceConverter(instances);
+  var instancesXMLText = converter.convertFromClaferMooOutputToXML(null);
+
+  var extraText = converter.residualExtraText;
+  host.print("ClaferMooVisualizer> Backend output:\n");
+  host.print(extraText);
+  host.print("ClaferMooVisualizer> Backend output ends\n");
+
 
 	instancesXMLText = instancesXMLText.replaceAll('<?xml version="1.0"?>', '');
 
@@ -50,7 +78,7 @@ function preprocessMOOResult(result, host)
     }
 
     if (instancesXMLText.indexOf("<instance></instance>") >= 0)
-	{
+	  {
         host.findModule("mdInput").handleError(null, "malformed_instance", null);
         return false;
     }
@@ -68,23 +96,24 @@ function preprocessMOOResult(result, host)
 	abstractXMLText = abstractXMLText.replaceAll('cl:', '');
 	abstractXMLText = abstractXMLText.replaceAll('xsi:', '');
 
-    var data = new Object();
-    data.error = false;
-    data.output = result.message;
-    data.instancesXML = instancesXMLText;
-    data.claferXML = abstractXMLText;
-    data.unparsedInstances = instances;	
+    var dataSource = new Object();
+    dataSource.error = false;
+    dataSource.output = result.message;
+    dataSource.instancesXML = instancesXMLText;
+    dataSource.claferXML = abstractXMLText;
+    dataSource.unparsedInstances = instances;	
 
-    /* counting the number of lines */
-    if (!host.storage.evolutionController.existingData){
-        var lines = data.unparsedInstances.match(/^.*([\n\r]+|$)/gm);
-        lines = data.unparsedInstances.split(lines[1]);
-        host.storage.evolutionController.existingInstancesCount = lines.length - 1;
+    if (!host.storage.evolutionController.existingData)
+    {
+        var instanceProcessor = new InstanceProcessor(dataSource.instancesXML);
+        host.storage.evolutionController.existingInstancesCount = instanceProcessor.getInstanceCount();
     }
 
-    host.storage.evolutionController.existingData = data;
+    host.storage.evolutionController.existingData = dataSource;
 
-    return data;
+    var dataTable = new DataTable(dataSource); // now we are creating a unified data source that has all the data processed
+
+    return dataTable;
 }
 
 function convertHtmlTags (input) {
@@ -134,4 +163,21 @@ function convertHtmlTags (input) {
     }
 
   return output;
+}
+
+
+function getExtraText(text)
+{ 
+  var instanceRegExp = /^=== Instance ([0-9]*) ===$/gm;  
+  var match = instanceRegExp.exec(text);
+
+  if (match == null) // meaning no instances
+  {
+    return text;    
+  }
+
+  var mPos1 = 0;
+  var mPos2 = match.index;
+
+  return text.substring(mPos1, mPos2);
 }

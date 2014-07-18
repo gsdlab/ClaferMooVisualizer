@@ -13,7 +13,7 @@ textarea.child {
 circle, text, rect.square, polygon.octagon{
     cursor:pointer;
 }
-  
+
 div.parent {height:60px;}
 textarea.child {height:100%;}
 
@@ -29,43 +29,6 @@ th{
 
 #wGraph *{
     overflow: hidden;
-}
-
-#error_overlay {
-     display: none;
-     position: absolute;
-     left: 0px;
-     top: 0px;
-     width:100%;
-     height:100%;
-     text-align:center;
-     z-index: 1000;
-     background-color: rgba(0,0,0,0.3);
-}
-
-#error_report {
-     width:800px;
-     height: 450px;
-     margin: 100px auto;
-     background-color: #fff;
-     border:1px solid #000;
-     padding:15px;
-     text-align:left;
-     overflow-x:scroll;
-     overflow-y:scroll;
-}
-
-#close_error{
-    cursor: pointer; 
-    border: 1px solid #ccc; 
-}
-
-.searchOmitted {
-    display: none;
-}
-
-.text_input {
-     height: 12px;
 }
 
 pre {
@@ -141,4 +104,65 @@ fieldset{
 
 #input_bottom_container{
     background: white;
+}
+
+#chartNode polygon{
+    cursor:pointer;    
+}
+
+/* New d3.js-based Bubble Front Graph  */
+
+#chart .axis path {
+  fill: none;
+  stroke: #ccc;
+  shape-rendering: crispEdges;
+}
+
+#chart .axis line {
+  stroke: #ccc;
+  shape-rendering: crispEdges;
+}
+
+#chart .shape {
+  fill-opacity: 0.8;
+  stroke-width: 1px;
+  stroke: #000;
+}
+
+#chart .label {
+  fill: black;
+/*  stroke: white;
+  stroke-width: 1px; */
+}
+
+#chart .hidden .shape{
+  fill-opacity: 0.2;
+  stroke-width: 0px;
+}
+
+#chart .hidden .label{
+    display: none;
+}
+
+#graph_table, #graph_table div{
+    margin:0;
+    padding:0;
+}
+
+#chart .active .shape{
+  fill-opacity: 0.8;
+  stroke-width: 2px;
+  fill: #00ff00;
+}
+
+#chart .active .label{
+}
+
+#chart .selected .shape{
+  fill-opacity: 1.0;
+  stroke-width: 3px;
+  stroke: #0000ff;
+}
+
+#chart .selected .label{
 }

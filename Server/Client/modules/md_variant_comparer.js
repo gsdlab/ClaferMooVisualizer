@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2012, 2013 Neil Redman, Alexander Murashkin <http://gsd.uwaterloo.ca>
+Copyright (C) 2012 - 2014 Alexander Murashkin, Neil Redman <http://gsd.uwaterloo.ca>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -31,30 +31,30 @@ function VariantComparer(host, settings)
     this.posy = this.settings.layout.posy;
 
     this.host = host;
+    this.colWidth = "200";
     
     this.dataTable = null;
-    this.unparsedInstances = null;
     this.host.loaded();
 }
 
 VariantComparer.method("onDataLoaded", function(data){
-    this.unparsedInstances = data.unparsedInstances;
-    this.instanceProcessor = new InstanceProcessor(data.instancesXML);
-    this.Processor = new ClaferProcessor(data.claferXML);
+    this.data = data;
 });
 
 VariantComparer.method("onRendered", function()
 {
+
 });
 
 VariantComparer.method("getContent", function()
 {
-    var content = '<div id="VariantComparer">';
+//    var content = '<div id="VariantComparer">';
     
-    content += '<div id="completeness"></div><br/>';
-    content += '<div id="common" class="comparison"></div><br/><div id="unique" class="comparison"></div>';
+    content = '<div id="variant-comparer-control-panel"></div>';
+    content += '<div id="common" class="comparison">Select variants for comparison</div><br/>';
+    content += '<div id="diff" class="comparison"></div>';
     
-    content += '</div>';
+//    content += '</div>';
     
     return content;
 });
@@ -65,36 +65,25 @@ VariantComparer.method("getInitContent", function()
 });
 
 //rebuilds the table with the new selection data
-VariantComparer.method("onSelectionChanged", function(list, originalTable, permaHidden){
+VariantComparer.method("onSelectionChanged", function(list){
     //pulls data from the comparison table
-    var originalData = originalTable;
-    var newlist = [];
+    var ids = [];
     for (var i = 0; i < list.length; i++){
-        newlist.push(parsePID(list[i]));
+        ids.push(+parsePID(list[i]));
     }   
 
-    for (var i = 0; i < newlist.length; i++){
-        newlist[i] = newlist[i];
-    }
+    var selectedData = this.data.subsetByInstanceIds(ids);
 
-    data = originalData.subsetByProducts(newlist);
-    
-    if (data.products.length <= 1)
+    if (selectedData.instanceCount <= 1)
     {
-        $("#VariantComparer #common").html("No Data");
-        $("#VariantComparer #unique").html("No Data");    
+        $("#mdVariantComparer #common").html("Select more than one variant for comparison");
+        $("#mdVariantComparer #diff").html("Select more than one variant for comparison");    
+        return;
     }
 
-    var allFeatures = data.features;
+//    var allFeatures = data.features;
 
-    var commonData = data.getCommon(true); // ALL COMMON DATA
-    var commonFeatures = commonData.features;
-    
-    var differentFeatures = allFeatures.diff(commonFeatures);
-    var differentData = data.subsetByFeatures(differentFeatures); // ALL DIFFERENT DATA
-    differentData.title = "Differences";
-
-    
+/*    
     // get the products that are missing to make up the complete set.
     var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), newlist);
 
@@ -136,7 +125,7 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
         }
     }
     else
-        label += "Please select more variants";
+        label += "[No include suggestions]";
 
     var saveButton = ' <input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
     label += saveButton;
@@ -163,7 +152,25 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
     }).css("cursor", "pointer");
     
 // add function for save button
+*/
+    var context = this;
+
+    var content = '<input type="button" id="saveSelected" value="Save selected" disabled="disabled">';
+    content += '<button id="clearSelection">Clear selection</button>';
+    content += '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
+
+    $("#variant-comparer-control-panel").html(content);
+
     $('#saveSelected').click(this.saveSelected.bind(this)).css("cursor", "pointer");
+
+    $("#clearSelection").click(function(){
+        var selected = context.settings.getSelection(context);
+        while (selected.length > 0)
+        {
+            context.settings.onDeselected(context, selected[selected.length - 1]);
+            selected.pop();
+        };
+    }).css("cursor", "pointer");
 
     if (context.settings.getSelection(context).length > 0)
         $("#saveSelected").removeAttr("disabled");
@@ -172,23 +179,31 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
 
 //    commonData.products[0] = label;
     
-    if (commonFeatures.length > 0)
-    {            
-        $("#VariantComparer #common").html(new TableVisualizer().getHTML(commonData));
-    }
-    else
-        $("#VariantComparer #common").html("No Data");
+    $("#mdVariantComparer #common").html("");
+    $("#mdVariantComparer #diff").html("");    
+    var dataSets = selectedData.getCommonAndDifferent();
+    console.log(dataSets);
 
-        
-    if (differentFeatures.length > 0)
-    {    
-        $("#VariantComparer #unique").html(new TableVisualizer().getHTML(differentData));
-    }
-    else
-        $("#VariantComparer #unique").html("No Data");
+    this.commonVisualizer = new TableVisualizer("common", {
+        sorting: true,
+        collapsing: true
+    }, {
+    });
 
-    this.settings.onHTMLChanged(this);
+    this.diffVisualizer = new TableVisualizer("diff", {
+        sorting: true,
+        buttonsForRemoval: true,
+        collapsing: true
+    }, {
 
+    });
+
+    this.commonVisualizer.refresh(dataSets["common"]);
+    this.diffVisualizer.refresh(dataSets["diff"]);
+
+//    this.settings.onHTMLChanged(this);
+
+/*
 // add buttons to remove products
     var i;
     var differentProducts = $("#unique #r0").find(".td_instance");
@@ -212,16 +227,21 @@ VariantComparer.method("onSelectionChanged", function(list, originalTable, perma
             $(this).attr("src", "commons/Client/images/remove.png");
         });      
     }    
+*/
+//  adding tooltips
+
+    $("#mdVariantComparer [title]").tipsy({delayIn: 2000, delayOut: 500, fade: true, gravity: 'e', html: true});
+
 });
 
 //saves all selected instances and downloads them to client
 VariantComparer.method("saveSelected", function(){
     var selection = this.settings.getSelection(this);
-    var instances = this.unparsedInstances;
+    var instances = this.data.unparsedInstances;
     var parser = new InstanceConverter(instances);
     var data = "";
     for (var i=0; i < selection.length; i++){
-        data += parser.getInstanceData(selection[i]);
+        data += parser.getInstanceData(parsePID(selection[i])) + "\n";
     }
     $("#saveData").val(data);
     $("#SaveForm").submit();

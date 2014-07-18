@@ -1,18 +1,23 @@
 {
     "scripts": [
         "utils/utils.js",
-        "https://www.google.com/jsapi",
-        "utils/selection_controller.js",
-        "utils/evolution_controller.js",
-        "utils/instance_filter.js",        
-        "utils/pf_visualizer.js",
+        "custom_parallel_coordinates/parcoords.js",
+        "controllers/selection_controller.js",
+        "controllers/evolution_controller.js",
+        "controllers/filtering_controller.js",        
+        "controllers/hovering_controller.js",
+        "visualizers/graph_visualizer.js",
+        "visualizers/spiderchart_visualizer.js",
         "modules/md_graph.js",
+        "modules/md_goals.js",
         "modules/md_variant_comparer.js",
-        "modules/hovering_extensions.js",
-        "configuration.js"
+        "modules/md_parallel_coordinates.js",
+        "modules/md_spider_chart.js",        
+        "client.js"
     ],
 
     "styles": [
+        "custom_parallel_coordinates/parcoords.css",
         "styles.css"        
     ]    
 }

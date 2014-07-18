@@ -1,0 +1,53 @@
+// Performance Test Example
+
+abstract Feature 
+    cost -> integer
+    [ cost >= 0 ]
+
+abstract Entity
+    f1 : Feature ?
+        [cost = 1]
+    f2 : Feature ?
+        [cost = 2]
+    f3 : Feature ?
+        [cost = 3]
+    f4 : Feature ?
+        [cost = 4]
+    f5 : Feature ?
+        [cost = 5]
+    f6 : Feature ?
+        [cost = 6]
+    f7 : Feature ?
+        [cost = 7]
+    f8 : Feature ?
+        [cost = 8]
+    f9 : Feature ?
+        [cost = 9]
+    f10 : Feature ?
+        [cost = 10]
+    f11 : Feature ?
+        [cost = 11]
+    f12 : Feature ?
+        [cost = 12]
+    f13 : Feature ?
+        [cost = 13]
+    f14 : Feature ?
+        [cost = 14]
+    f15 : Feature ?
+        [cost = 15]
+    f16 : Feature ?
+        [cost = 16]
+    f17 : Feature ?
+        [cost = 17]
+    f18 : Feature ?
+        [cost = 18]
+    f19 : Feature ?
+        [cost = 19]
+    f20 : Feature ?
+        [cost = 20]
+        
+    totalCost : integer = sum Feature.cost
+
+myEntity : Entity
+
+<<min myEntity.totalCost >>
