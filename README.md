@@ -1,7 +1,7 @@
 ClaferMooVisualizer
 ===================
 
-v0.3.6.15-04-2014
+v0.3.6.1
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528). The current version can be used outside the product line domain: various design optimization problems, architecture exploration, packaging problems are supported.
@@ -44,7 +44,7 @@ Contributors
 Getting Binaries
 --------------------
 
-Binary distributions of the release 0.3.6 of Clafer Tools for Windows, Mac, and Linux, 
+Binary distributions of the release 0.3.6.1 of Clafer Tools for Windows, Mac, and Linux, 
 can be downloaded from [Clafer Tools - Binary Distributions](http://http://gsd.uwaterloo.ca/clafer-tools-binary-distributions). There you can get binaries for `Clafer Compiler` and the `ClaferChocoIG` backend.
 
 Installation and running
@@ -53,7 +53,7 @@ Installation and running
 ### Dependencies for running
 
 * [Java Platform (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) v7+, 32bit
-* [Clafer](https://github.com/gsdlab/clafer) v0.3.6
+* [Clafer](https://github.com/gsdlab/clafer) v0.3.6.1
   * can be from the binary distribution
 * [Node.JS Framework](http://nodejs.org/download/), v0.10.20
 * Backends' dependencies must be satisfied. See the backend installation steps below
@@ -85,7 +85,7 @@ This assumes you use the default configuration `<target directory>/ClaferMooVisu
 
 1. Install [Java 7+](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
-2. Copy the binary of `ClaferChocoIG` (`claferchocoig-0.3.6-jar-with-dependencies.jar`) into the folder `<target directory>/ChocoIG`.
+2. Copy the binary of `ClaferChocoIG` (`claferchocoig-0.3.6.1-jar-with-dependencies.jar`) into the folder `<target directory>/ChocoIG`.
 
 **Backend: ClaferZ3**
 
