@@ -186,6 +186,7 @@ VariantComparer.method("onSelectionChanged", function(list){
 
     this.commonVisualizer = new TableVisualizer("common", {
         sorting: true,
+        useFullyQualified: true,
         collapsing: true
     }, {
     });
@@ -193,6 +194,7 @@ VariantComparer.method("onSelectionChanged", function(list){
     this.diffVisualizer = new TableVisualizer("diff", {
         sorting: true,
         buttonsForRemoval: true,
+        useFullyQualified: true,
         collapsing: true
     }, {
 
