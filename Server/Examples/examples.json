@@ -13,6 +13,14 @@
         {"url": "MobilePhone_4.cfr", "label": "Mobile Phone Example (4 objectives)"},    
         {"url": "MobilePhone_5.cfr", "label": "Mobile Phone Example (5 objectives)"},    
 
-        {"url": "Car4D.cfr", "label": "Cruise Control Example (4 objectives)"}
+        {"url": "Car4D.cfr", "label": "Cruise Control Example (4 objectives)"},
+
+        {"url": "problem.cfr", "label": "Civil Eng Problem"},
+        {"url": "instances.data", "label": "Civil Eng Instances"},
+        {"url": "instances_truncated.data", "label": "Civil Eng Instances (1/5)"},
+        {"url": "instances_data_1.data", "label": "Civil Eng Instances (Part 1)"},
+        {"url": "instances_data_2.data", "label": "Civil Eng Instances (Part 2)"},
+        {"url": "instances_few.data", "label": "Civil Eng Few Instances"},
+        {"url": "instances_proj_C1_C2_C4.data", "label": "Test"}
     ]
 }

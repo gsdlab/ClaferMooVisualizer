@@ -29,6 +29,7 @@ InstanceFilter.method("clear", function(){
     this.data = null;
     this.qualityRanges = {};
     this.triggeredDecisions = {};
+    this.filteredValues = {};
 });
 
 InstanceFilter.method("onDataLoaded", function(data){
@@ -84,7 +85,16 @@ InstanceFilter.method("filterAllInstances", function(){
                     this.instanceMatch = this.instanceMatch - 1;
                     break;
                 }
+            } else if (this.filteredValues[f.path] !== null && this.filteredValues[f.path] !== undefined && this.filteredValues[f.path] !== "" && !this.data.matrix[i][f.path].match(this.filteredValues[f.path]) ){
+                found = true;
+                this.data.matrix[i]["_hidden"] = true;
+                this.instanceMatch = this.instanceMatch - 1;
+                 console.log(this.filteredValues[f.path]);
+            console.log(this.data.matrix[i][f.path]);
+                break;
             }
+
+
         }
         if (!found)
         {
@@ -100,6 +110,14 @@ InstanceFilter.method("filterByFeature", function(caller, f, value)
         this.triggeredDecisions[f] = null;
     else
         this.triggeredDecisions[f] = (value > 0) ? true : false;
+
+    this.filterAllInstances();
+    this.notify();
+});
+
+InstanceFilter.method("filterByValue", function(caller, field, value)
+{
+    this.filteredValues[field] = value;
 
     this.filterAllInstances();
     this.notify();

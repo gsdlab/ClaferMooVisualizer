@@ -405,6 +405,10 @@ function getConfiguration()
             "onMouseOut": function(module, pid)
             {
                 module.host.storage.highlighter.onMouseOut(pid);               
+            },
+            "onFilterChanged": function(module, path, value)
+            {
+                module.host.storage.instanceFilter.filterByValue(module, path, value);                
             }
     	}});
 

@@ -5,9 +5,9 @@
             "label": "Choco-based (MOO & magnifier)",
             "tooltip": "A new Choco-based solver, for multi-objective optimization",
             "accepted_format": "choco",               
-            "tool": "bash",
-            "tool_args": ["claferChocoIG.sh", "--file=$filepath$", "--moo"],
-            "tool_version_args": ["claferChocoIG.sh", "--version"],
+            "tool": "java",
+            "tool_args": ["-jar", "$dirname$/claferchocoig-0.3.6.1-jar-with-dependencies.jar", "--file=$filepath$", "--moo"],
+            "tool_version_args": ["-jar", "$dirname$/claferchocoig-0.3.6.1-jar-with-dependencies.jar", "--version"],
             "optimization_options": {
                 "set_int_scope" : {"label": "Max. int.:", "argument": "--maxint=$value$", "default_value": 127},
                 "set_default_scope" : {"label": "Def. scopes:", "argument": "--scope=$value$", "default_value": 25}
