@@ -85,12 +85,25 @@ InstanceFilter.method("filterAllInstances", function(){
                     this.instanceMatch = this.instanceMatch - 1;
                     break;
                 }
-            } else if (this.filteredValues[f.path] !== null && this.filteredValues[f.path] !== undefined && this.filteredValues[f.path] !== "" && !this.data.matrix[i][f.path].match(this.filteredValues[f.path]) ){
-                found = true;
-                this.data.matrix[i]["_hidden"] = true;
-                this.instanceMatch = this.instanceMatch - 1;
-                 console.log(this.filteredValues[f.path]);
-            console.log(this.data.matrix[i][f.path]);
+            } else if (this.filteredValues[f.path] !== null && this.filteredValues[f.path] !== undefined && this.filteredValues[f.path] !== ""){
+
+                    var query = this.filteredValues[f.path].split(';'), 
+                        isFound = false; // if any concurrence is found;
+
+                    for (var qid = 0; qid < query.length; qid++) {
+                       isFound = isFound || (this.data.matrix[i][f.path].search(query[qid].trim()) !== -1);                   
+                };
+                
+
+                if(!isFound){
+                   found = true;
+                   this.data.matrix[i]["_hidden"] = true;
+                   this.instanceMatch = this.instanceMatch - 1; 
+                }
+
+                
+                
+
                 break;
             }
 
