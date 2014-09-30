@@ -83,6 +83,11 @@ ParallelCoordinates.method("onRendered", function()
     }
 
     this.chart = new CustomParCoords("#pcChart", chartListeners);
+
+    $('#pcScale input[name="pcScale"]').change(function(){
+        context.redrawChart();
+    });
+
     this.redrawChart();
 
 });
@@ -154,6 +159,19 @@ ParallelCoordinates.method("redrawChart", function()
 ParallelCoordinates.method("getContent", function()
 {
     var content = '<div id="pcChart" class="parcoords" style="width:100%;height:100%"></div>';
+
+    var scaleInputs =   '<div class="sidemenu cf">'+
+                            '<div class="sm-content cf">'+
+                                '<a href="#" class="sm-open"></a>'+
+                                '<div id="pcScale">'+
+                                    '<div class="pcScale-item"><input type="radio" checked name = "pcScale"  value = "default"/> Min - Max </div>'+
+                                    '<div class="pcScale-item"><input type="radio" name = "pcScale" value = "0ToMax"/> 0 - Max</div>'+
+                                    
+                                '</div>'+
+                            '</div>'+
+                        '</div>';
+    content += scaleInputs;
+
 	return content;	
 });
 
