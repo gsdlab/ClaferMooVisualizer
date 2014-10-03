@@ -46,15 +46,23 @@ ParetoFrontVisualizer.method("refresh", function(data, args)
   context.hasThird = context.keys[2] ? true : false;
   context.hasForth = context.keys[3] ? true : false;
 
+  //if(!context.isZoomed) { // If event is not zoom => define axis
+    // Compute the scales’ domains.
 
-  // Compute the scales’ domains.
-  context.x.domain(d3.extent(data, function(d) { return context.getValue(d, "x"); }));
-  context.y.domain(d3.extent(data, function(d) { return context.getValue(d, "y"); }));
+    context.x.domain(d3.extent(data, function(d) { return context.getValue(d, "x"); }));
+    context.y.domain(d3.extent(data, function(d) { return context.getValue(d, "y"); }));
+
+    this.d3xAxis = d3.svg.axis().scale(context.x).orient("bottom").tickFormat(d3.format("d"));
+    this.d3yAxis = d3.svg.axis().scale(context.y).orient("left").tickFormat(d3.format("d"));
+
+
+ // }
+  
 
   context.xAxis.attr("transform", "translate(0," + context.height + ")")
-      .call(d3.svg.axis().scale(context.x).orient("bottom").tickFormat(d3.format("d")));
+      .call(this.d3xAxis);
 
-  context.yAxis.call(d3.svg.axis().scale(context.y).orient("left").tickFormat(d3.format("d")));
+  context.yAxis.call(this.d3yAxis);
 
   var zMin = d3.min(data, function(d) { return context.getValue(d, "z");} );
   var zMax = d3.max(data, function(d) { return context.getValue(d, "z");} );
@@ -77,8 +85,8 @@ ParetoFrontVisualizer.method("refresh", function(data, args)
   context.col_inner_scale = context.col_inner_scale.domain([zMin, zMax]);
   context.size_scale = context.size_scale.domain([tMin, tMax]);
   
-//  if (d3.select("#foreground").empty())
-//    context.foreground = context.container.append("g").attr("id", "foreground");
+  //  if (d3.select("#foreground").empty())
+  //    context.foreground = context.container.append("g").attr("id", "foreground");
 
   /* Enter selection */
 
@@ -100,21 +108,21 @@ ParetoFrontVisualizer.method("refresh", function(data, args)
 
   /* Exit selection */
 
-//  cat.exit()
-//    .remove();
+  //  cat.exit()
+  //    .remove();
 
-  /* Update selection */
+  
+    /* Update selection */
 
-  context.svg.selectAll(".bubble").transition().
-    select("circle")
-      .attr("fill", function(d) { return context.col_outer_scale(context.col_inner_scale(context.getValue(d, "z"))); })
-      .attr("r", function(d) { return context.size_scale(context.getValue(d, "t")); })
-//      .attr("d", d3.svg.symbol().type("triangle-up"))
-      .attr("transform", function(d) { return "translate(" + context.x(context.getValue(d, "x")) + "," + context.y(context.getValue(d, "y")) + ")"; });
+  context.svg.selectAll(".bubble").transition()
+      .attr("transform", function(d) { 
+                return "translate(" + context.x(context.getValue(d, "x")) + "," + context.y(context.getValue(d, "y")) + ")"; }) // Set bubbles position
+      .select("circle")
+        .attr("fill", function(d) { return context.col_outer_scale(context.col_inner_scale(context.getValue(d, "z"))); }) // Set bubbles color
+        .attr("r", function(d) { return context.size_scale(context.getValue(d, "t")); })// Set bubbles radius
+        .each("end", function(){context.zoom.event(context.svg)}); 
 
-  context.svg.selectAll(".bubble").transition().
-    select("text")
-        .attr("transform", function(d) { return "translate(" + context.x(context.getValue(d, "x")) + "," + context.y(context.getValue(d, "y")) + ")"; })
+
 
   if (context.hasThird){
       $("#MaxZLegend").text(zMax);
@@ -170,19 +178,23 @@ ParetoFrontVisualizer.method("resize", function (w, h, m)
     this.width = w - m[1] - m[3],
     this.height = h - m[0] - m[2];
 
-    if (!this.x)
+   
+
+    if (!this.x){
       this.x = d3.scale.linear();
+    }
 
     this.x.range([0, context.width]);
 
-    if (!this.y)
+    if (!this.y){
       this.y = d3.scale.linear();
+    }
 
     this.y.range([context.height, 0]);
 
     var sizeData = [{"width": context.width, "height": context.height, "margin": context.margin}];
 
-  /* updating a canvas */
+    /* updating a canvas */
 
     context.svg.data(sizeData)
         .attr("width", function(d){return d.width + d.margin[1] + d.margin[3]; })
@@ -195,16 +207,52 @@ ParetoFrontVisualizer.method("resize", function (w, h, m)
 
     context.foreground.attr("transform", function(d){ return "translate(" + d.margin[1] + "," + d.margin[0] + ")"});
 
-  // Add the x-axis.
+    // Add the x-axis.
 
     if (!context.xAxis)
       context.xAxis = context.foreground.append("g")
         .attr("class", "bubble-front-graph-x axis");
 
-  // Add the y-axis.
+    // Add the y-axis.
     if (!context.yAxis)
       context.yAxis = context.foreground.append("g")
       .attr("class", "bubble-front-graph-y axis");
+
+    // ZOOM
+
+
+      context.zoom = d3.behavior.zoom();
+
+      context.zoom.x(context.x)
+          .y(context.y)
+          //.scaleExtent([1, 10]) TODO: scale range on window resize
+          .on("zoom", context.onZoom);
+
+      if(!context.onZoom){
+        context.onZoom = function() {
+
+          //context.isZoomed = true;
+          context.xAxis.call(context.d3xAxis);
+          context.yAxis.call(context.d3yAxis);
+         
+          context.svg.selectAll(".bubble")
+            .attr("transform", function(d) { 
+              return "translate(" + context.x(context.getValue(d, "x")) + "," + context.y(context.getValue(d, "y")) + ")"; 
+            });
+          //context.isZoomed = false;
+
+          
+
+        }
+      }
+
+      context.svg.call(context.zoom);
+
+    // END ZOOM
+
+
+        
+        
 
 });
 
@@ -226,91 +274,92 @@ function ParetoFrontVisualizer(nodeId, chartListeners)
     context.svg = root.append("svg");
 
 
-/*
-    this.ranges = new Array();
-    this.ranges.push({"dim": keys[1], "min": x.domain()[0], "max": x.domain()[1]});
-    this.ranges.push({"dim": keys[2], "min": y.domain()[0], "max": y.domain()[1]});
+    /*
+      this.ranges = new Array();
+      this.ranges.push({"dim": keys[1], "min": x.domain()[0], "max": x.domain()[1]});
+      this.ranges.push({"dim": keys[2], "min": y.domain()[0], "max": y.domain()[1]});
 
-    if (hasThird) 
-        this.ranges.push({"dim": keys[3], "min": zMin, "max": zMax});
+      if (hasThird) 
+          this.ranges.push({"dim": keys[3], "min": zMin, "max": zMax});
 
-    if (hasForth) 
-        this.ranges.push({"dim": keys[4], "min": tMin, "max": tMax});
+      if (hasForth) 
+          this.ranges.push({"dim": keys[4], "min": tMin, "max": tMax});
 
-    for (var i = 5; i < keys.length; i++)
-    {
-        this.ranges.push({"dim": keys[i], "min": Number.NEGATIVE_INFINITY, "max": Number.POSITIVE_INFINITY });
+      for (var i = 5; i < keys.length; i++)
+      {
+          this.ranges.push({"dim": keys[i], "min": Number.NEGATIVE_INFINITY, "max": Number.POSITIVE_INFINITY });
+      }
+
+      console.log(this.ranges);
+
+      if (zMin == zMax) // in order not to make the domain to be one value
+      {
+          zMax = 1;
+          zMin = 0;
+      }
+
+      if (tMin == tMax) // in order not to make the domain to be one value
+      {
+          tMax = 1;
+          tMin = 0;
+      }
+
+      if (hasThird){
+          $("#MaxZLegend").text(zMax);
+          $("#MinZLegend").text(zMin);
+          $("#svgcontZ").show();
+      } else {
+          $("#svgcontZ").hide();
+      }
+
+      if (hasForth){
+          $("#MaxTLegend").text(tMax);
+          $("#MaxTCircle").attr("r", tLimitMax);
+          $("#MinTLegend").text(tMin);
+          $("#MinTCircle").attr("r", tLimitMin);
+          $("#svgcontT").show();
+      } else {
+          $("#svgcontT").hide();
+      }
+    */
+    this.col_inner_scale = d3.scale.linear() 
+      .range([0, 1]); 
+
+    this.col_outer_scale = d3.scale.linear() 
+      .domain([0, 0.5, 1]) 
+      .interpolate(d3.interpolateRgb) 
+      .range(["red", "yellow", "green"]); 
+  
+    this.size_scale = d3.scale.linear() 
+      .range([this.tLimitMin, this.tLimitMax]); 
+
+    //  this.resize(width, height, margin);
+    //  this.refresh(data);
+
+    /* Test functions */
+    /*
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    console.log(this.ranges);
+    context.i = 100;
 
-    if (zMin == zMax) // in order not to make the domain to be one value
-    {
-        zMax = 1;
-        zMin = 0;
+    function addRandom(){
+        var newObj = {};
+        newObj.id = 200;
+        newObj[context.keys[0]] = context.i++;
+        newObj[context.keys[1]] = getRandomInt(0, 100);
+        newObj[context.keys[2]] = getRandomInt(0, 100);
+        newObj[context.keys[3]] = getRandomInt(0, 100);
+        newObj[context.keys[4]] = getRandomInt(0, 100);
+
+        context.data.push(newObj);
+        context.refresh(context.data);          
+        setTimeout(addRandom, 2000);
     }
 
-    if (tMin == tMax) // in order not to make the domain to be one value
-    {
-        tMax = 1;
-        tMin = 0;
-    }
-
-    if (hasThird){
-        $("#MaxZLegend").text(zMax);
-        $("#MinZLegend").text(zMin);
-        $("#svgcontZ").show();
-    } else {
-        $("#svgcontZ").hide();
-    }
-
-    if (hasForth){
-        $("#MaxTLegend").text(tMax);
-        $("#MaxTCircle").attr("r", tLimitMax);
-        $("#MinTLegend").text(tMin);
-        $("#MinTCircle").attr("r", tLimitMin);
-        $("#svgcontT").show();
-    } else {
-        $("#svgcontT").hide();
-    }
-*/
-  this.col_inner_scale = d3.scale.linear() 
-    .range([0, 1]); 
-  this.col_outer_scale = d3.scale.linear() 
-    .domain([0, 0.5, 1]) 
-    .interpolate(d3.interpolateRgb) 
-    .range(["red", "yellow", "green"]); 
-
-  this.size_scale = d3.scale.linear() 
-    .range([this.tLimitMin, this.tLimitMax]); 
-
-//  this.resize(width, height, margin);
-//  this.refresh(data);
-
-  /* Test functions */
-/*
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  context.i = 100;
-
-  function addRandom(){
-      var newObj = {};
-      newObj.id = 200;
-      newObj[context.keys[0]] = context.i++;
-      newObj[context.keys[1]] = getRandomInt(0, 100);
-      newObj[context.keys[2]] = getRandomInt(0, 100);
-      newObj[context.keys[3]] = getRandomInt(0, 100);
-      newObj[context.keys[4]] = getRandomInt(0, 100);
-
-      context.data.push(newObj);
-      context.refresh(context.data);          
-      setTimeout(addRandom, 2000);
-  }
-
-  setTimeout(addRandom, 2000);
-*/
+    setTimeout(addRandom, 2000);
+    */
 }
 
 ParetoFrontVisualizer.method("filter", function(){
