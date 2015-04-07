@@ -18,7 +18,7 @@ If the demo is down or you encounter a bug, please email [Michal Antkiewicz](mai
 
 ### Background
 
-See [Clafer](http://clafer.org).
+See [clafer.org](http://clafer.org).
 
 ### Functions
 
@@ -49,6 +49,8 @@ Installation and running
 * [Clafer](https://github.com/gsdlab/clafer) v0.3.9
   * can be from the binary distribution
 * [Node.js Framework](http://nodejs.org/download/), v0.12.0
+* [Redis Server](https://launchpad.net/~chris-lea/+archive/ubuntu/redis-server), v2:2.*
+  * On Ubuntu, execute `sudo add-apt-repository ppa:chris-lea/redis-server && apt-get install redis-server`
 * Backends' dependencies must be satisfied. See the backend installation steps below.
 
 ### Installation
