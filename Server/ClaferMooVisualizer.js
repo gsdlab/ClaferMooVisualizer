@@ -475,6 +475,11 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
                 var xml = fs.readFileSync(process.file + '.xml');
                 jsonObj.compiler_claferXML = xml.toString();
 
+                // transferring the JSON file
+                core.logSpecific(process.file + '.json', process.windowKey);
+                var json = fs.readFileSync(process.file + '.json');
+                jsonObj.compiler_claferJSON = json.toString();
+
                 process.compiler_args = "";
                 res.writeHead(200, { "Content-Type": "application/json"});
                 res.end(JSON.stringify(jsonObj));

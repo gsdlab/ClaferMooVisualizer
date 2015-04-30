@@ -61,6 +61,17 @@
             "display_element": "xml"
         },
         {
+            "id": "json", 
+            "label": "JSON", 
+            "tooltip": "JSON intermediate representation", 
+            "file_suffix": ".json",             
+            "compiler_mode": "json",
+            "compiler_args": [],
+            "shows_compilation_errors" : "false",
+            "display_element": "json"
+        },
+
+        {
             "id": "graph", 
             "label": "Graph", 
             "tooltip": "Graphical representation written in DOT language", 

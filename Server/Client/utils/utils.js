@@ -22,6 +22,7 @@ SOFTWARE.
 
 function preprocessMOOResult(result, host)
 {
+
 	var instances = result.optimizer_instances;
 	var abstractXMLText = host.storage.claferXML; // now getting it from a previously saved XML
 
@@ -101,6 +102,8 @@ function preprocessMOOResult(result, host)
     dataSource.output = result.message;
     dataSource.instancesXML = instancesXMLText;
     dataSource.claferXML = abstractXMLText;
+
+    dataSource.claferJSON = JSON.parse(host.storage.claferJSON);
     dataSource.unparsedInstances = instances;	
 
     if (!host.storage.evolutionController.existingData)
