@@ -336,7 +336,7 @@ Graph.method("getContent", function()
 {
 	var table = $('<div border="0" id="graph_table" style="float:left;"></div>');
 	
-    var tdZ = $('<div id="dropPointZ" class="axis_drop" style="float:left; position:relative; z-index:10;"></div>');
+    var tdZ = $('<div id="dropPointZ" class="axis_drop" style="float:left; position:relative; z-index:10; overflow: hidden;"></div>');
     var tdY = $('<div id="dropPointY" class="axis_drop" style="float:left; position:relative; z-index:10;"></div>');
     var tdT = $('<div id="dropPointT" class="axis_drop" style="float:left; position:relative; z-index:10;"></div>');
     var tdChart = $('<div id="chart" style="float:left; display:none; width: 200px; height: 200px; position:relative; z-index:1;"></div>'); // need to keep width here since first time is not rendered good
