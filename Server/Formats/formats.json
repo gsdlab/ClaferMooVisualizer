@@ -26,20 +26,11 @@
             "tooltip": "Alloy file format", 
             "file_suffix": ".als",             
             "compiler_mode": "alloy",
-            "compiler_args": ["--nr"],
-            "shows_compilation_errors" : "false",
-            "display_element": "textarea"
-        },
-        {
-            "id": "python", 
-            "label": "Python Z3", 
-            "tooltip": "Python Z3 file format (Python)", 
-            "file_suffix": ".py",             
-            "compiler_mode": "python",
             "compiler_args": [],
             "shows_compilation_errors" : "false",
             "display_element": "textarea"
-        },        
+        },
+       
         {
             "id": "choco", 
             "label": "Choco JS", 
@@ -50,16 +41,7 @@
             "shows_compilation_errors" : "false",
             "display_element": "textarea"
         },
-        {
-            "id": "xml", 
-            "label": "XML IR", 
-            "tooltip": "XML intermediate representation (XML)", 
-            "file_suffix": ".xml",             
-            "compiler_mode": "xml",
-            "compiler_args": ["--nr"],
-            "shows_compilation_errors" : "false",
-            "display_element": "xml"
-        },
+    
         {
             "id": "json", 
             "label": "JSON", 

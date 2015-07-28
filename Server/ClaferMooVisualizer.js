@@ -386,10 +386,10 @@ server.post('/upload', /*commandMiddleware,*/ function(req, res, next)
             {
                 ss = "--ss=simple";
             }
-            else if (req.body.ss == "full")
-            {
-                ss = "--ss=full";
-            }
+            // else if (req.body.ss == "full")
+            // {
+            //     ss = "--ss=full";
+            // }
 
             process.optimizerMaxInt = req.body.optimizerMaxInt;
             process.optimizerScope = req.body.optimizerScope;
@@ -471,11 +471,13 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
                 jsonObj.compiler_message = process.compiler_message;
 
                 // transferring the XML file
-                core.logSpecific(process.file + '.xml', process.windowKey);
-                var xml = fs.readFileSync(process.file + '.xml');
-                jsonObj.compiler_claferXML = xml.toString();
+                // core.logSpecific(process.file + '.xml', process.windowKey);
+                // var xml = fs.readFileSync(process.file + '.xml');
+                // jsonObj.compiler_claferXML = xml.toString();
 
                 // transferring the JSON file
+
+                
                 core.logSpecific(process.file + '.json', process.windowKey);
                 var json = fs.readFileSync(process.file + '.json');
                 jsonObj.compiler_claferJSON = json.toString();
