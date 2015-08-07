@@ -19,7 +19,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 ParetoFrontVisualizer.method("getValue", function(d, dim)
 {
     var context = this;
@@ -49,11 +48,12 @@ ParetoFrontVisualizer.method("refresh", function(data, args)
   //if(!context.isZoomed) { // If event is not zoom => define axis
     // Compute the scales’ domains.
 
-    context.x.domain(d3.extent(data, function(d) { return context.getValue(d, "x"); }));
-    context.y.domain(d3.extent(data, function(d) { return context.getValue(d, "y"); }));
+    context.x.domain(d3.extent(data, function(d) { return parseFloat(context.getValue(d, "x")); }));
+    context.y.domain(d3.extent(data, function(d) { return parseFloat(context.getValue(d, "y")); }));
 
     this.d3xAxis = d3.svg.axis().scale(context.x).orient("bottom").tickFormat(d3.format("d"));
     this.d3yAxis = d3.svg.axis().scale(context.y).orient("left").tickFormat(d3.format("d"));
+
 
 
  // }
@@ -64,11 +64,12 @@ ParetoFrontVisualizer.method("refresh", function(data, args)
 
   context.yAxis.call(this.d3yAxis);
 
-  var zMin = d3.min(data, function(d) { return context.getValue(d, "z");} );
-  var zMax = d3.max(data, function(d) { return context.getValue(d, "z");} );
+  var zMin = d3.min(data, function(d) { return parseFloat(context.getValue(d, "z"));} );
+  var zMax = d3.max(data, function(d) { return parseFloat(context.getValue(d, "z"));} );
 
-  var tMin = d3.min(data, function(d) { return context.getValue(d, "t");} );
-  var tMax = d3.max(data, function(d) { return context.getValue(d, "t");} );
+  var tMin = d3.min(data, function(d) { return parseFloat(context.getValue(d, "t"));} );
+  var tMax = d3.max(data, function(d) { return parseFloat(context.getValue(d, "t"));} );
+
 
   if (zMin == zMax) // in order not to make the domain to be one value
   {

@@ -108,11 +108,11 @@ function getConfiguration()
 
                 
 
-                if (responseObject.compiler_claferXML)
-                {
-                    module.host.print("Compiler> " + "Model's XML got successfully" + "\n");
-                    module.host.storage.claferXML = responseObject.compiler_claferXML;
-                }
+                // if (responseObject.compiler_claferXML)
+                // {
+                //     module.host.print("Compiler> " + "Model's XML got successfully" + "\n");
+                //     module.host.storage.claferXML = responseObject.compiler_claferXML;
+                // }
 
 
 
@@ -188,7 +188,7 @@ function getConfiguration()
                     data.error = false;
                     data.output = responseObject.message;
                     data.instancesXML = "";
-                    data.claferXML = module.host.storage.claferXML;
+                   // data.claferXML = module.host.storage.claferXML;
                     data.claferJSON = module.host.storage.claferJSON;
                     data.unparsedInstances = ""; 
 
