@@ -7,7 +7,7 @@ abstract ComponentWithEnergy : Component
 abstract MobilePhone
     hardware
         screen
-            xor
+            xor material
                 oled : ComponentWithEnergy
                     [ energy = 3]
                     [ performance = -3 ]
