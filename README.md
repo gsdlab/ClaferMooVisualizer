@@ -1,7 +1,7 @@
 ClaferMooVisualizer
 ===================
 
-v0.3.10
+v0.4.1
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528). The current version can be used outside the product line domain: various design optimization problems, architecture exploration, packaging problems are supported.
@@ -11,10 +11,10 @@ Read more in the paper [Clafer Tools for Product Line Engineering](http://gsd.uw
 
 ### Live demo
 
-* Master branch (stable and released): [Try me!](http://t3-necsis.cs.uwaterloo.ca:8092/)
-* Develop branch (with newest features, but not guaranteed to be stable): [Try me!](http://t3-necsis.cs.uwaterloo.ca:8192/)
+* Master branch (stable and released): [ClaferMooVisualizer release](http://t3-necsis.cs.uwaterloo.ca:8092/)
+* Develop branch (with newest features, but not guaranteed to be stable): [ClaferMooVisualizer testing](http://t3-necsis.cs.uwaterloo.ca:8192/)
 
-If the demo is down or you encounter a bug, please email [Michal Antkiewicz](mailto:mantkiew@gsd.uwaterloo.ca).
+If the demo is down or you encounter a bug, please email [Michał Antkiewicz](mailto:mantkiew@gsd.uwaterloo.ca).
 
 ### Background
 
@@ -22,14 +22,14 @@ See [clafer.org](http://clafer.org).
 
 ### Functions
 
-1. Displays all the non-dominated optimal product configurations as a *Bubble Front Graph* (up to 4 dimensions) and as a *Feature and Quality Matrix*.
+1. Displays all the non-dominated optimal product configurations as a *Bubble Front Graph* (up to 4 dimensions), a *Feature and Quality Matrix*, a *Spider Chart*, and as *Parallel Coordinates Chart*.
 2. Allows to compare and analyze product configurations.
 3. Allows for filtering by feature and by quality range.
 4. Supports multiple solver backends.
 
 ### Nature
 
-ClaferMoo Visualizer is a web-based application.
+ClaferMooVisualizer is a web-based application.
 Its server side (implemented with `Node.js`) processes requests, runs the chosen back-end, and passes back its output.
 The client-side is implemented using `Javascript/HTML` and handles the visualization and exploration functionality.
 
@@ -38,7 +38,7 @@ Contributors
 
 * [Alexandr Murashkin](http://gsd.uwaterloo.ca/amurashk). Main developer.
 * [Michał Antkiewicz](http://gsd.uwaterloo.ca/mantkiew). Research Engineer. Requirements, development, architecture, testing, technology transfer.
-* [Eldar Khalilov](http://gsd.uwaterloo.ca/ekhalilov). Developer. Upgrade to 0.3.10 (replace XML with JSON, test suites).
+* [Eldar Khalilov](http://gsd.uwaterloo.ca/ekhalilov). Developer. Upgrade to 0.4.1 (replace XML with JSON, test suites).
 * Neil Vincent Redman. co-op student Jan-Apr 2013. Many improvements.
 
 Installation and running
@@ -47,7 +47,7 @@ Installation and running
 ### Dependencies for running
 
 * [Java Platform (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) v8+
-* [Clafer](https://github.com/gsdlab/clafer) v0.3.10
+* [Clafer](https://github.com/gsdlab/clafer) v0.4.1
   * can be from the binary distribution
 * [Node.js Framework](http://nodejs.org/download/), v0.12.0
 * [Redis Server](https://launchpad.net/~chris-lea/+archive/ubuntu/redis-server), v2:2.*
@@ -91,11 +91,11 @@ See [Installing Backends](https://github.com/gsdlab/ClaferToolsUICommonPlatform#
 
 `clafer -V`
 
-> `Clafer v0.3.10`
+> `Clafer v0.4.1`
 
 `java -version`
 
-> `java version 1.8.0_40`
+> `java version 1.8.0_45`
 
 `node -v`
 

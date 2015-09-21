@@ -1,21 +1,17 @@
 abstract Feature
-    productivity ->> integer    //# QUALITY_ATTRIBUTE
-    cost ->> integer            //# QUALITY_ATTRIBUTE
+    productivity ->> integer
+    cost ->> integer
         [ this >= 0 ]
-    batterylife ->> integer     //# QUALITY_ATTRIBUTE
-    security ->> integer        //# QUALITY_ATTRIBUTE
+    batterylife ->> integer
+    security ->> integer
 
 abstract MobilePhone
     Connectivity : Feature
         [ batterylife = -12]
         [ productivity = 14]
         [ security = 43]
-        [ cost = 101]        
-        xor Bluetooth : Feature        
-            [ batterylife = 0]
-            [ productivity = 0]
-            [ security = 0]
-            [ cost = 0]
+        [ cost = 101]
+        xor Bluetooth
             Bluetooth20EDR : Feature
                 [ batterylife = -4]
                 [ productivity = 1]
@@ -52,11 +48,7 @@ abstract MobilePhone
             [ productivity = 20]
             [ security = 0]
             [ cost = 3]
-    xor Battery : Feature
-        [ batterylife = 0]
-        [ productivity = 0]
-        [ security = 0]
-        [ cost = 0]
+    xor Battery
         LiBattery1150 : Feature
             [ batterylife = 60]
             [ productivity = 0]
@@ -72,10 +64,10 @@ abstract MobilePhone
        [ productivity = 30]
        [ security = 0 ]
        [ cost = 25 ]
-    total_productivity ->> integer = sum Feature.productivity
-    total_batterylife ->> integer = sum Feature.batterylife 
-    total_security ->> integer = sum Feature.security
-    total_cost ->> integer = sum Feature.cost
+    total_productivity -> integer = sum Feature.productivity
+    total_batterylife  -> integer = sum Feature.batterylife
+    total_security     -> integer = sum Feature.security
+    total_cost         -> integer = sum Feature.cost
 
 OptimalPhone : MobilePhone
 
