@@ -11,8 +11,8 @@ Read more in the paper [Clafer Tools for Product Line Engineering](http://gsd.uw
 
 ### Live demo
 
-* Master branch (stable and released): [ClaferMooVisualizer release](http://t3-necsis.cs.uwaterloo.ca:8092/)
-* Develop branch (with newest features, but not guaranteed to be stable): [ClaferMooVisualizer testing](http://t3-necsis.cs.uwaterloo.ca:8192/)
+* Master branch (stable and released): [ClaferMooVisualizer](http://t3-necsis.cs.uwaterloo.ca:8092/)
+* Develop branch (with newest features, but not guaranteed to be stable): [ClaferMooVisualizer (development)](http://t3-necsis.cs.uwaterloo.ca:8192/)
 
 If the demo is down or you encounter a bug, please email [Michał Antkiewicz](mailto:mantkiew@gsd.uwaterloo.ca).
 
@@ -31,7 +31,7 @@ See [clafer.org](http://clafer.org).
 
 ClaferMooVisualizer is a web-based application.
 Its server side (implemented with `Node.js`) processes requests, runs the chosen back-end, and passes back its output.
-The client-side is implemented using `Javascript/HTML` and handles the visualization and exploration functionality.
+The client-side is implemented using `JavaScript/HTML` and handles the visualization and exploration functionality.
 
 Contributors
 ------------
@@ -68,13 +68,20 @@ git submodule update
 
 This will install the platform.
 
+When working with a branch other then `master`, you need to additionally checkout that branch (e.g., `develop`):
+
+```
+git submodule foreach git checkout develop
+```
+
+
 3. Go to `<target directory>/ClaferMooVisualizer/Server` and execute
 
 `npm install`
 
 This will download all the required `Node.js` modules.
 
-4. Install the necessary backends into some location `<bin>` found on `PATH`. The default configuration in `<target directory>/ClaferIDE/Server/Backends/backends.json` assumes `~/bin`.
+4. Install the necessary backends into some location `<bin>` found on `PATH`. The default configuration in `<target directory>/ClaferIDE/Server/Backends/backends.json` assumes `/home/clafertools040/bin`.
 
 The fastest way is to unzip a binary distribution into the folder `<bin>`.
 
@@ -82,20 +89,20 @@ See [Installing Backends](https://github.com/gsdlab/ClaferToolsUICommonPlatform#
 
 ### Settings
 
-1. Make sure the port `8192` is free, or change the value of the key `port` in `Server/config.json`:
-`"port" = "8192"` to any free one.
+1. Make sure the port `8092` is free, or change the value of the key `port` in `Server/config.json`:
+`"port" = "8092"` to any free one.
 
-2. Make sure `clafer`, `node`, `python`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
+2. Make sure `clafer`, `node`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
 
 3. Running the following commands should produce the following results or later version:
 
-`clafer -V`
+`clafer --version`
 
 > `Clafer v0.4.1`
 
 `java -version`
 
-> `java version 1.8.0_45`
+> `java version 1.8.0_60`
 
 `node -v`
 
@@ -115,9 +122,11 @@ See [Installing Backends](https://github.com/gsdlab/ClaferToolsUICommonPlatform#
 
 * If you use `Node Supervisor` under Linux, you can execute
 
-`cd <target directory>/ClaferMooVisualizer/Server/commons`
-
-`sh start.sh`
+```sh
+cd <target directory>/ClaferMooVisualizer/Server/commons
+chmod +x start.sh
+./start.sh
+```
 
 Then you can go to any browser and type `http://localhost:[port]/` and open any Clafer file with objectives in it.
 

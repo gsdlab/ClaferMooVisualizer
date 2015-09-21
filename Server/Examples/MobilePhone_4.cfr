@@ -1,9 +1,9 @@
 abstract Feature
-    productivity ->> integer
-    cost ->> integer
+    productivity -> integer
+    cost -> integer
         [ this >= 0 ]
-    batterylife ->> integer
-    security ->> integer
+    batterylife -> integer
+    security -> integer
 
 abstract MobilePhone
     Connectivity : Feature

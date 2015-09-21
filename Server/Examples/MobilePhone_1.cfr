@@ -1,7 +1,7 @@
 // Example of a Mobile Phone with a single quality attribute (cost) and a single optimization objective (minimize)
 
 abstract Feature
-    cost ->> integer
+    cost -> integer
         [ this >= 0 ]
 
 abstract MobilePhone

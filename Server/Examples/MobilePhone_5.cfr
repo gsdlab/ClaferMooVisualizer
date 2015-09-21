@@ -1,13 +1,13 @@
 abstract Feature
-    performance ->> integer
-    energy ->> integer
-    mass ->> integer
+    performance -> integer
+    energy -> integer
+    mass -> integer
     [ mass >= 0 ]
-    cost ->> integer
+    cost -> integer
     [ cost >= 0 ]
 
 abstract SecurityFeature : Feature
-    security ->> integer
+    security -> integer
 
 abstract MobilePhone
     or Connectivity : Feature

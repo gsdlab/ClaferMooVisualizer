@@ -1,8 +1,8 @@
 abstract Component
-    performance ->> integer
+    performance -> integer
 
 abstract ComponentWithEnergy : Component
-    energy ->> integer
+    energy -> integer
 
 abstract MobilePhone
     hardware

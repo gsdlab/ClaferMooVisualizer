@@ -1,9 +1,9 @@
 abstract Feature
-    performance ->> integer
-    energy ->> integer
+    performance -> integer
+    energy -> integer
 
 abstract SecurityFeature : Feature
-    security ->> integer
+    security -> integer
 
 abstract MobilePhone
     or Connectivity
