@@ -15,7 +15,7 @@
             "label": "HTML",
             "tooltip": "Rendering of the model (html)",
             "file_suffix": ".html",
-            "compiler_mode": "HTML",
+            "compiler_mode": "html",
             "compiler_args": ["--self-contained" ],
             "shows_compilation_errors" : "true",
             "display_element": "iframe"
@@ -50,7 +50,7 @@
             "compiler_mode": "json",
             "compiler_args": [],
             "shows_compilation_errors" : "false",
-            "display_element": "iframe"
+            "display_element": "textarea"
         },
 
         {
