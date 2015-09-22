@@ -90,7 +90,7 @@ SpiderChart.method("redrawChart", function()
     var mycfg = {
       w: w,
       h: h,
-    //  maxValue: 0.6,
+      maxValue: 10,
       levels: 4,
       ExtraWidthX: 220,
       ExtraWidthY: 60
@@ -130,13 +130,14 @@ SpiderChart.method("redrawChart", function()
         {
             var obj = new Object();
             obj.axis = this.goals[goal].label;
-            obj.value = selectedData.matrix[i][goal];
+            obj.value = _.find(selectedData.matrix, function(el){return el.id === selectedData.instanceIds[i]})[goal];
             current.push(obj);
         }
         
         adaptedData.push(current);
     }
 
+    mycfg.maxValue = Math.max(mycfg.maxValue, d3.max(adaptedData, function(i){return d3.max(i.map(function(o){ return parseFloat(o.value);}))}));
     chart.draw("#chartNode", adaptedData, mycfg, LegendOptions);
 
     ////////////////////////////////////////////
