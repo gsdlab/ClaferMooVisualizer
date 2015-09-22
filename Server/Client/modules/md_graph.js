@@ -306,7 +306,7 @@ Graph.method("redrawParetoFront", function()
     var e = $('#mdGraph div.window-content')[0];
     var context = this;
 
-    var m = [30, 50, 30, 30];
+    var m = [30, 50, 30, 30]; // [top,left,bottom,right]
 
     this.chart.resize(w, h, m);
     this.chart.refresh(this.data.matrix, args); // args will show which dimensions to visualize
@@ -336,10 +336,10 @@ Graph.method("getContent", function()
 {
 	var table = $('<div border="0" id="graph_table" style="float:left;"></div>');
 	
-    var tdZ = $('<div id="dropPointZ" class="axis_drop" style="float:left;"></div>');
-    var tdY = $('<div id="dropPointY" class="axis_drop" style="float:left;"></div>');
-    var tdT = $('<div id="dropPointT" class="axis_drop" style="float:left;"></div>');
-    var tdChart = $('<div id="chart" style="float:left; display:none; width: 200px; height: 200px;"></div>'); // need to keep width here since first time is not rendered good
+    var tdZ = $('<div id="dropPointZ" class="axis_drop" style="float:left; position:relative; z-index:10; overflow: hidden;"></div>');
+    var tdY = $('<div id="dropPointY" class="axis_drop" style="float:left; position:relative; z-index:10;"></div>');
+    var tdT = $('<div id="dropPointT" class="axis_drop" style="float:left; position:relative; z-index:10;"></div>');
+    var tdChart = $('<div id="chart" style="float:left; display:none; width: 200px; height: 200px; position:relative; z-index:1;"></div>'); // need to keep width here since first time is not rendered good
     var tdX = $('<div id="dropPointX" class="axis_drop" style="float:left;"></div>');
 
     this.axisArray.splice(0, this.axisArray.length); // clear the array
@@ -429,11 +429,11 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     var unit = 20;
     
     setDim(table, w, h);
-    setDim(tdZ, w, unit);
-    setDim(tdY, unit, h - 2 * unit);
-    setDim(tdChart, w - 3 * unit, h - 2 * unit);
-    setDim(tdDiv, w - 3 * unit, h - 2 * unit);
-    setDim(tdT, 2 * unit, h - 2 * unit);
+    setDim(tdZ, w, 2*unit);
+    setDim(tdY, unit, h - 3 * unit);
+    setDim(tdChart, w - 3 * unit, h - 3 * unit);
+    setDim(tdDiv, w - 3 * unit, h - 3 * unit);
+    setDim(tdT, 2 * unit, h - 3 * unit);
     setDim(tdX, w, unit);
 
     $("#graph_table").css("table-layout", "auto"); //A fix for horizontal compression on non-chrome browsers (Jan 11th 2013)

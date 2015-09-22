@@ -29,6 +29,7 @@ InstanceFilter.method("clear", function(){
     this.data = null;
     this.qualityRanges = {};
     this.triggeredDecisions = {};
+    this.filteredValues = {};
 });
 
 InstanceFilter.method("onDataLoaded", function(data){
@@ -54,7 +55,7 @@ InstanceFilter.method("isNegativeValue", function(v){
 
 InstanceFilter.method("filterAllInstances", function(){
 
-    this.instanceShown = this.data.instanceCount;
+    this.instanceMatch = this.data.instanceCount;
     for (var i = 0; i < this.data.instanceCount; i++)
     {
         var found = false;
@@ -67,7 +68,7 @@ InstanceFilter.method("filterAllInstances", function(){
                 {
                     found = true;
                     this.data.matrix[i]["_hidden"] = true;
-                    this.instanceShown--;
+                    this.instanceMatch = this.instanceMatch - 1;
                     break;
                 }
             }
@@ -81,10 +82,32 @@ InstanceFilter.method("filterAllInstances", function(){
                 {
                     found = true;
                     this.data.matrix[i]["_hidden"] = true;
-                    this.instanceShown--;
+                    this.instanceMatch = this.instanceMatch - 1;
                     break;
                 }
+            } else if (this.filteredValues[f.path] !== null && this.filteredValues[f.path] !== undefined && this.filteredValues[f.path] !== ""){
+
+                    var query = this.filteredValues[f.path].split(';'), 
+                        isFound = false; // if any concurrence is found;
+
+                    for (var qid = 0; qid < query.length; qid++) {
+                       isFound = isFound || (this.data.matrix[i][f.path].search(query[qid].trim()) !== -1);                   
+                };
+                
+
+                if(!isFound){
+                   found = true;
+                   this.data.matrix[i]["_hidden"] = true;
+                   this.instanceMatch = this.instanceMatch - 1; 
+                }
+
+                
+                
+
+                break;
             }
+
+
         }
         if (!found)
         {
@@ -105,11 +128,19 @@ InstanceFilter.method("filterByFeature", function(caller, f, value)
     this.notify();
 });
 
+InstanceFilter.method("filterByValue", function(caller, field, value)
+{
+    this.filteredValues[field] = value;
+
+    this.filterAllInstances();
+    this.notify();
+});
+
 InstanceFilter.method("notify", function()
 {
     this.data._qualityRanges = this.qualityRanges;
     this.data._triggeredDecisions = this.triggeredDecisions;
-    this.data._instanceShown = this.instanceShown;
+    this.data.instanceMatch = this.instanceMatch;
 
     this.host.findModule("mdGoals").onFiltered(this.data);
     this.host.findModule("mdGraph").onFiltered(this.data);

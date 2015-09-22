@@ -1,21 +1,19 @@
 abstract Feature
-    performance ->> integer
-    energy ->> integer
-    
+    performance -> integer
+    energy -> integer
+
 abstract SecurityFeature : Feature
-    security ->> integer
-        
+    security -> integer
+
 abstract MobilePhone
-    or Connectivity : Feature
-        [ performance = 0]
-        [ energy = 0]
+    or Connectivity
         Bluetooth : Feature
             [ performance = 9]
-            [ energy = 10 ]        
+            [ energy = 10 ]
         USB : Feature
             [ performance = 15]
-            [ energy = 7 ]        
-        Wifi : Feature    
+            [ energy = 7 ]
+        Wifi : Feature
             [ performance = 22]
             [ energy = 17 ]
     PasswordProtection : SecurityFeature ?
@@ -26,14 +24,14 @@ abstract MobilePhone
         [ security = 5]
         [ performance = 2]
         [ energy = 4 ]
-    total_performance ->> integer = sum Feature.performance
-    total_energy ->> integer = sum Feature.energy
-    total_security ->> integer = sum SecurityFeature.security
+    total_performance -> integer = sum Feature.performance
+    total_energy -> integer = sum Feature.energy
+    total_security -> integer = sum SecurityFeature.security
 
 MyPhone : MobilePhone
     [ Connectivity.Bluetooth ]
     [ no USB  ]
-    
+
 << min MyPhone.total_energy >>
 << max MyPhone.total_performance >>
 << max MyPhone.total_security >>

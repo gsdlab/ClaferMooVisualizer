@@ -81,6 +81,7 @@ function getConfiguration()
             },
     		"onBeginQuery": function(module){
                 module.host.storage.claferXML = null; // we must erase old temporary data
+                module.host.storage.claferJSON = null; // we must erase old temporary data
     			return true;
     		},
 
@@ -105,10 +106,20 @@ function getConfiguration()
 		        	module.host.print(responseObject.compiler_message + "\n");    
 		    	}
 
-                if (responseObject.compiler_claferXML)
+                
+
+                // if (responseObject.compiler_claferXML)
+                // {
+                //     module.host.print("Compiler> " + "Model's XML got successfully" + "\n");
+                //     module.host.storage.claferXML = responseObject.compiler_claferXML;
+                // }
+
+
+
+                if (responseObject.compiler_claferJSON)
                 {
-                    module.host.print("Compiler> " + "Model's XML got successfully" + "\n");
-                    module.host.storage.claferXML = responseObject.compiler_claferXML;
+                    module.host.print("Compiler> " + "Model's JSON got successfully" + "\n");
+                    module.host.storage.claferJSON = responseObject.compiler_claferJSON;
                 }
 
     		},
@@ -177,7 +188,8 @@ function getConfiguration()
                     data.error = false;
                     data.output = responseObject.message;
                     data.instancesXML = "";
-                    data.claferXML = module.host.storage.claferXML;
+                   // data.claferXML = module.host.storage.claferXML;
+                    data.claferJSON = module.host.storage.claferJSON;
                     data.unparsedInstances = ""; 
 
                     var instanceProcessor = new InstanceProcessor(data.instancesXML);
@@ -405,6 +417,10 @@ function getConfiguration()
             "onMouseOut": function(module, pid)
             {
                 module.host.storage.highlighter.onMouseOut(pid);               
+            },
+            "onFilterChanged": function(module, path, value)
+            {
+                module.host.storage.instanceFilter.filterByValue(module, path, value);                
             }
     	}});
 

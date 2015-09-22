@@ -22,8 +22,12 @@ SOFTWARE.
 
 function preprocessMOOResult(result, host)
 {
+
 	var instances = result.optimizer_instances;
-	var abstractXMLText = host.storage.claferXML; // now getting it from a previously saved XML
+  //var abstractXMLText = host.storage.claferXML; // now getting it from a previously saved XML
+	var abstractJSONText = host.storage.claferJSON; // now getting it from a previously saved XML
+
+
 
 	if (!result.optimizer_instances_only) // the user submitted a clafer file to optimize
 	{
@@ -51,7 +55,9 @@ function preprocessMOOResult(result, host)
             
 //            var parser = new InstanceConverter(result.optimizer_instances);
             instances += result.optimizer_instances;//parser.convertFromClaferIGOutputToClaferMoo(host.storage.evolutionController.existingData.claferXML);            
-            abstractXMLText = host.storage.evolutionController.existingData.claferXML;
+           // abstractXMLText = host.storage.evolutionController.existingData.claferXML;
+            abstractJSONText = host.storage.evolutionController.existingData.claferJSON;
+            
         }
         else
 		    {
@@ -88,19 +94,21 @@ function preprocessMOOResult(result, host)
 //	abstractXMLText = abstractXMLText.replaceAll("&lt;", "<");
 //	abstractXMLText = abstractXMLText.replaceAll("&amp;", "&");
 	
-	abstractXMLText = convertHtmlTags(abstractXMLText);
+	//abstractXMLText = convertHtmlTags(abstractXMLText);
 		
 	// clean namespaces
-	abstractXMLText = abstractXMLText.replaceAll('<?xml version="1.0"?>', '');
-	abstractXMLText = abstractXMLText.replaceAll(' xmlns="http://clafer.org/ir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cl="http://clafer.org/ir" xsi:schemalocation="http://clafer.org/ir https://github.com/gsdlab/clafer/blob/master/src/ClaferIR.xsd"', '');
-	abstractXMLText = abstractXMLText.replaceAll('cl:', '');
-	abstractXMLText = abstractXMLText.replaceAll('xsi:', '');
+	// abstractXMLText = abstractXMLText.replaceAll('<?xml version="1.0"?>', '');
+	// abstractXMLText = abstractXMLText.replaceAll(' xmlns="http://clafer.org/ir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cl="http://clafer.org/ir" xsi:schemalocation="http://clafer.org/ir https://github.com/gsdlab/clafer/blob/master/src/ClaferIR.xsd"', '');
+	// abstractXMLText = abstractXMLText.replaceAll('cl:', '');
+	// abstractXMLText = abstractXMLText.replaceAll('xsi:', '');
 
     var dataSource = new Object();
     dataSource.error = false;
     dataSource.output = result.message;
     dataSource.instancesXML = instancesXMLText;
-    dataSource.claferXML = abstractXMLText;
+    //dataSource.claferXML = abstractXMLText;
+
+    dataSource.claferJSON = JSON.parse(host.storage.claferJSON);
     dataSource.unparsedInstances = instances;	
 
     if (!host.storage.evolutionController.existingData)

@@ -40,12 +40,21 @@ CustomParCoords.method("refresh", function (data, args, labels)
     }
 
     // Extract the list of dimensions and create a scale for each.
+
+   var pcScale = $('#pcScale input[name="pcScale"]:checked').val();
+
     context.x.domain(
         context.dimensions = args.filter(
           function(d) 
           {
+            var range = d3.extent(data, function(p) { return +p[d]; });
+
+            if (d!=='id' && pcScale == "0ToMax") {
+              range[0] = 0;
+            }
+
             return d != "name" && (context.y[d] = d3.scale.linear()
-              .domain(d3.extent(data, function(p) { return +p[d]; }))
+              .domain(range)
               .range([context.h, 0]));
           })
     );

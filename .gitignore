@@ -18,3 +18,27 @@ logs
 results
 
 npm-debug.log
+Server/Examples/examples.json
+Server/Examples/instances.data
+Server/Examples/instances_12.data
+Server/Examples/instances_34.data
+Server/Examples/instances_data_1.data
+Server/Examples/instances_data_2.data
+Server/Examples/instances_data_2_first_few.data
+Server/Examples/instances_proj_C1_C2_C4.data
+Server/Examples/instances_truncated.data
+Server/Examples/problem.cfr
+Server/Examples_old/AADL_Complete.cfr
+Server/Examples_old/Car4D.cfr
+Server/Examples_old/MobilePhone_1.cfr
+Server/Examples_old/MobilePhone_2.cfr
+Server/Examples_old/MobilePhone_3.cfr
+Server/Examples_old/MobilePhone_4.cfr
+Server/Examples_old/MobilePhone_5.cfr
+Server/Examples_old/allocation.cfr
+Server/Examples_old/examples.json
+Server/Examples_old/pt.cfr
+Server/Examples_old/pt10000.data
+Server/Examples_old/pt2000.data
+Server/Examples_old/pt5000.data
+Server/Examples_old/pt7000.data
