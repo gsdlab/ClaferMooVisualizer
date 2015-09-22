@@ -1,7 +1,11 @@
 ClaferMooVisualizer
 ===================
 
+<<<<<<< HEAD
 v0.4.1
+=======
+v0.3.6.1
+>>>>>>> master
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528). The current version can be used outside the product line domain: various design optimization problems, architecture exploration, packaging problems are supported.
