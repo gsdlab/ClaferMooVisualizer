@@ -6,8 +6,8 @@
             "tooltip": "A multi-objective optimizer based on Choco3 CSP solver",
             "accepted_format": "choco",
             "tool": "java",
-            "tool_args": ["-jar", "/home/clafertools040/bin/claferchocoig.jar", "--file=$filepath$", "--moo"],
-            "tool_version_args": ["-jar", "/home/clafertools040/bin/claferchocoig.jar", "--version"],
+            "tool_args": ["-jar", "/home/clafertools040/bin/chocosolver.jar", "--file=$filepath$", "--moo"],
+            "tool_version_args": ["-jar", "/home/clafertools040/bin/chocosolver.jar", "--version"],
             "optimization_options": {
                 "set_int_scope" : {"label": "Max. int.:", "argument": "--maxint=$value$", "default_value": 127},
                 "set_default_scope" : {"label": "Def. scopes:", "argument": "--scope=$value$", "default_value": 25}
