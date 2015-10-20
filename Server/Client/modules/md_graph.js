@@ -309,6 +309,7 @@ Graph.method("redrawParetoFront", function()
     var m = [30, 50, 30, 30]; // [top,left,bottom,right]
 
     this.chart.resize(w, h, m);
+    //console.log(this.data.matrix)
     this.chart.refresh(this.data.matrix, args); // args will show which dimensions to visualize
 });
 
@@ -379,12 +380,12 @@ Graph.method("onInitRendered", function()
 
 function setDim(el, w, h)
 {
-//    alert(el);
-//    alert(w + "px");
-//    alert(h + "px");
+    //    alert(el);
+    //    alert(w + "px");
+    //    alert(h + "px");
 
-//    el.setAttribute('height', w + "px");
-//    el.setAttribute('width', h + "px");
+    //    el.setAttribute('height', w + "px");
+    //    el.setAttribute('width', h + "px");
 
       $(el).width(w + "px");
       $(el).height(h + "px");
@@ -394,10 +395,10 @@ function setDim(el, w, h)
           el.style.display = "inline-block";
       }
 
-//    el.style.height = h + "px";
-    
-//    $(el).css("width", w + "px");
-//    $(el).css("height", h + "px");
+    //    el.style.height = h + "px";
+        
+    //    $(el).css("width", w + "px");
+    //    $(el).css("height", h + "px");
 }
 
 Graph.method("resize", function() // not attached to the window anymore, so need to call the method
@@ -406,7 +407,7 @@ Graph.method("resize", function() // not attached to the window anymore, so need
     // need to resize dynamically, since it does not do this automatically
 
     var e = $('#mdGraph div.window-content');
-//    alert(e);
+    //    alert(e);
     
     e.css("overflow", "hidden");
 
@@ -474,53 +475,68 @@ Graph.method("onFiltered", function(data)
 Graph.method("makeActive", function(pid)
 {
     d3.select("#V" + parsePID(pid)).classed("active", true).moveToFront();    
-/*
-    var instance = parsePID(pid);
-    var context = this;
+    /*
+        var instance = parsePID(pid);
+        var context = this;
 
-    this.interval = null;
-    this.timeout = null;
+        this.interval = null;
+        this.timeout = null;
 
-    //get crosshairs 
-    var hairs = this.getCrosshairs($("#" + getPID(instance) + "c").attr("cx"), $("#" + getPID(instance) + "c").attr("cy"));
-    $("#" + getPID(instance) + "c").before(hairs);
-    $("#CHX").attr("class", instance + "HL");
-    $("#CHY").attr("class", instance + "HL");
+        //get crosshairs 
+        var hairs = this.getCrosshairs($("#" + getPID(instance) + "c").attr("cx"), $("#" + getPID(instance) + "c").attr("cy"));
+        $("#" + getPID(instance) + "c").before(hairs);
+        $("#CHX").attr("class", instance + "HL");
+        $("#CHY").attr("class", instance + "HL");
 
-    var highlight = $("#" + getPID(instance) + "c").clone();
-    highlight = this.highlight(highlight);
-    $(highlight).removeAttr("id");
-    $(highlight).attr("class", instance + "HL");
-    //add highlight element behind circle
-    $("#" + getPID(instance) + "c").before(highlight);
+        var highlight = $("#" + getPID(instance) + "c").clone();
+        highlight = this.highlight(highlight);
+        $(highlight).removeAttr("id");
+        $(highlight).attr("class", instance + "HL");
+        //add highlight element behind circle
+        $("#" + getPID(instance) + "c").before(highlight);
 
-    var highlight = $("#" + getPID(instance) + "r").clone();
-    highlight = this.highlight(highlight);
-    $(highlight).removeAttr("id");
-    $(highlight).attr("class", instance + "HL");
-    //add highlight element behind circle
-    $("#" + getPID(instance) + "r").before(highlight);
+        var highlight = $("#" + getPID(instance) + "r").clone();
+        highlight = this.highlight(highlight);
+        $(highlight).removeAttr("id");
+        $(highlight).attr("class", instance + "HL");
+        //add highlight element behind circle
+        $("#" + getPID(instance) + "r").before(highlight);
 
-    var highlight = $("#" + getPID(instance) + "h").clone();
-    highlight = this.highlight(highlight);
-    $(highlight).removeAttr("id");
-    $(highlight).attr("class", instance + "HL");
-    //add highlight element behind circle
-    $("#" + getPID(instance) + "h").before(highlight);
+        var highlight = $("#" + getPID(instance) + "h").clone();
+        highlight = this.highlight(highlight);
+        $(highlight).removeAttr("id");
+        $(highlight).attr("class", instance + "HL");
+        //add highlight element behind circle
+        $("#" + getPID(instance) + "h").before(highlight);
 
-    var myBool = true;
-    context.timeout = setTimeout(function(){
-        context.interval = setInterval(function(){
-            if (myBool){
-                $("." + instance + "HL").hide(500);
-                myBool = false;
-            } else {
-                $("." + instance + "HL").show(500);
-                myBool = true;
-            }
-        }, 500);
-    }, 1500);
-*/    
+        var myBool = true;
+        context.timeout = setTimeout(function(){
+            context.interval = setInterval(function(){
+                if (myBool){
+                    $("." + instance + "HL").hide(500);
+                    myBool = false;
+                } else {
+                    $("." + instance + "HL").show(500);
+                    myBool = true;
+                }
+            }, 500);
+        }, 1500);
+    */    
+});
+
+Graph.method("removeInstance", function(id){
+    var context = this,
+        pid = getPID(id);
+
+    context.makeInactive(pid);
+
+    context.data.matrix =  _.without(context.data.matrix, _.findWhere(context.data.matrix, {id: parseInt(id)}));
+           
+    context.data.instanceIds =  _.without(context.data.instanceIds, id);
+    context.data.instanceCount =  context.data.instanceIds.length;
+    context.data.instanceMatch =  context.data.instanceIds.length;
+
+    context.onFiltered(context.data);
 });
 
 Graph.method("makeInactive", function(pid)

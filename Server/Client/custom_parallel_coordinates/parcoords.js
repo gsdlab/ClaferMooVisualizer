@@ -24,6 +24,13 @@ CustomParCoords.method("resize", function(width, height, margins)
 
 });
 
+CustomParCoords.method("remove", function (id) {
+
+  d3.select("#P" + id).remove();
+  d3.select("#GP" + id).remove();
+
+});
+
 CustomParCoords.method("refresh", function (data, args, labels)
 {
     var context = this;
@@ -59,6 +66,7 @@ CustomParCoords.method("refresh", function (data, args, labels)
           })
     );
 
+    //console.log(context.svg.selectAll('path').data(data, function(d){ return "P"+d.id;}).exit())
     // Add grey background lines for context.
 
     if (!context.background)
@@ -67,7 +75,7 @@ CustomParCoords.method("refresh", function (data, args, labels)
           .attr("class", "background")
         .selectAll("path")
           .data(data)
-        .enter().append("path");      
+        .enter().append("path").attr("id", function(d){return "GP" + d.id;});      
     }
 
     context.background.attr("d", path);

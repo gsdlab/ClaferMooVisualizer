@@ -37,7 +37,9 @@ ParetoFrontVisualizer.method("getValue", function(d, dim)
 
 ParetoFrontVisualizer.method("refresh", function(data, args)
 {
+
   this.data = data;
+
   var context = this;
 
   context.keys = args;
@@ -91,7 +93,8 @@ ParetoFrontVisualizer.method("refresh", function(data, args)
 
   /* Enter selection */
 
-  var cat = context.foreground.selectAll("g.bubble").data(data, function(d){return d.id;});
+  var cat = context.foreground.selectAll("g.bubble").data(data, function(d){ return d.id;});
+
 
   context.g = cat.enter()
     .append("g").attr("class", "bubble").attr("id", function (d) {return "V" + d.id; }).on("mouseover", mouseover)
@@ -106,6 +109,8 @@ ParetoFrontVisualizer.method("refresh", function(data, args)
           .attr("text-anchor", "middle")
           .attr("y", 3)
         .text(function(d) { return context.getValue(d, "id");});
+
+  context.foreground.selectAll("g.bubble").data(data, function(d){ return d.id;}).exit().remove();
 
   /* Exit selection */
 
@@ -371,6 +376,7 @@ ParetoFrontVisualizer.method("filter", function(){
     var foreground = this.svg.select("#foreground").selectAll("g.bubble");
 
     foreground.classed("hidden", function(d){
+
         // adding a hidden class, if the data value is outside at least one (some) range
         return (d["_hidden"] === true);
     });
