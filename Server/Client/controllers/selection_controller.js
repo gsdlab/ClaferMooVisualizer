@@ -40,6 +40,7 @@ Selector.method("onSelected", function(pid){
 Selector.method("onDeselected", function(pid)
 {
     var selectedIndex = this.isSelected(pid);
+    //console.log(selectedIndex, pid)
     if (selectedIndex == false)
         return;
      

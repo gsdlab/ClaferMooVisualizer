@@ -66,6 +66,7 @@ VariantComparer.method("getInitContent", function()
 
 //rebuilds the table with the new selection data
 VariantComparer.method("onSelectionChanged", function(list){
+    
     //pulls data from the comparison table
     var ids = [];
     for (var i = 0; i < list.length; i++){
@@ -81,78 +82,78 @@ VariantComparer.method("onSelectionChanged", function(list){
         return;
     }
 
-//    var allFeatures = data.features;
+    //    var allFeatures = data.features;
 
-/*    
-    // get the products that are missing to make up the complete set.
-    var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), newlist);
+    /*    
+        // get the products that are missing to make up the complete set.
+        var missingProducts = originalData.getMissingProductsInCommonData(data.getCommon(false), newlist);
 
-    var i = 0;
-    if (missingProducts)
-    {
-        while (i < missingProducts.length)
+        var i = 0;
+        if (missingProducts)
         {
-            if (permaHidden.hasOwnProperty(getPID(missingProducts[i])))
-                missingProducts.splice(i, 1);
-            else
-                i++;
+            while (i < missingProducts.length)
+            {
+                if (permaHidden.hasOwnProperty(getPID(missingProducts[i])))
+                    missingProducts.splice(i, 1);
+                else
+                    i++;
+            }
         }
-    }
 
-    var clearButton = '<button id="clearVariantComparer">Clear</button> ';
-    var label = clearButton;
-    var context = this;
+        var clearButton = '<button id="clearVariantComparer">Clear</button> ';
+        var label = clearButton;
+        var context = this;
 
-    if (commonFeatures.length > 0)
-    {    
-        if (missingProducts.length > 0)
-        {
-            if (missingProducts.length <= 10) // reasonable to add products to make the set complete
+        if (commonFeatures.length > 0)
+        {    
+            if (missingProducts.length > 0)
             {
-                var addButton = '<button id="addMissing">Include</button>';
-                label += "" + addButton + " variants [" + missingProducts.toString() + "]";
+                if (missingProducts.length <= 10) // reasonable to add products to make the set complete
+                {
+                    var addButton = '<button id="addMissing">Include</button>';
+                    label += "" + addButton + " variants [" + missingProducts.toString() + "]";
+                }
+                else
+                {
+                    var addButton = '<button id="addMissing">Include</button>';
+                    label += "" + addButton + " " + missingProducts.length + " more variants";
+                }
+                
             }
             else
             {
-                var addButton = '<button id="addMissing">Include</button>';
-                label += "" + addButton + " " + missingProducts.length + " more variants";
+                label += '[No include suggestions]';
             }
-            
         }
         else
-        {
-            label += '[No include suggestions]';
+            label += "[No include suggestions]";
+
+        var saveButton = ' <input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
+        label += saveButton;
+
+        $("#VariantComparer #completeness").html(label);
+
+    // add function to addMissing button
+        if($("#addMissing")){
+            $("#addMissing").click(function(){
+                var i;
+                for (i = 0; i<missingProducts.length; i++){
+                    context.settings.onSelected(context, getPID(missingProducts[i].replace(/[\u2B22\u25CF\u25A0]/g, "")));
+                }
+            }).css("cursor", "pointer");
         }
-    }
-    else
-        label += "[No include suggestions]";
 
-    var saveButton = ' <input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
-    label += saveButton;
-
-    $("#VariantComparer #completeness").html(label);
-
-// add function to addMissing button
-    if($("#addMissing")){
-        $("#addMissing").click(function(){
-            var i;
-            for (i = 0; i<missingProducts.length; i++){
-                context.settings.onSelected(context, getPID(missingProducts[i].replace(/[\u2B22\u25CF\u25A0]/g, "")));
-            }
+    // add function for clear button
+        $("#clearVariantComparer").click(function(){
+            var selected = context.settings.getSelection(context);
+            while (selected.length > 0){
+                context.settings.onDeselected(context, selected[selected.length-1]);
+                selected.pop();
+            };
         }).css("cursor", "pointer");
-    }
-
-// add function for clear button
-    $("#clearVariantComparer").click(function(){
-        var selected = context.settings.getSelection(context);
-        while (selected.length > 0){
-            context.settings.onDeselected(context, selected[selected.length-1]);
-            selected.pop();
-        };
-    }).css("cursor", "pointer");
-    
-// add function for save button
-*/
+        
+    // add function for save button
+    */
     var context = this;
 
     var content = '<input type="button" id="saveSelected" value="Save selected" disabled="disabled">';
@@ -165,6 +166,7 @@ VariantComparer.method("onSelectionChanged", function(list){
 
     $("#clearSelection").click(function(){
         var selected = context.settings.getSelection(context);
+
         while (selected.length > 0)
         {
             context.settings.onDeselected(context, selected[selected.length - 1]);
@@ -177,12 +179,13 @@ VariantComparer.method("onSelectionChanged", function(list){
     else
         $("#saveSelected").attr("disabled", "disabled");
 
-//    commonData.products[0] = label;
+    //    commonData.products[0] = label;
     
     $("#mdVariantComparer #common").html("");
     $("#mdVariantComparer #diff").html("");    
     var dataSets = selectedData.getCommonAndDifferent();
-    console.log(dataSets);
+    
+    var host = context.host;
 
     this.commonVisualizer = new TableVisualizer("common", {
         sorting: true,
@@ -191,13 +194,29 @@ VariantComparer.method("onSelectionChanged", function(list){
     }, {
     });
 
+
     this.diffVisualizer = new TableVisualizer("diff", {
         sorting: true,
         buttonsForRemoval: true,
         useFullyQualified: true,
         collapsing: true
     }, {
+        removeInstance: function(id, visualizer){
 
+            console.log(context);
+            context.data.matrix =  _.without(context.data.matrix, _.findWhere(context.data.matrix, {id: parseInt(id)}));
+            context.data.instanceIds =  _.without(context.data.instanceIds, id);
+            context.data.instanceCount =  context.data.instanceIds.length;
+            context.data.instanceMatch =  context.data.instanceIds.length;
+
+            // console.log(dataSets)
+            // console.log(selectedData)
+
+            context.clearSelectionByID(id);
+            context.settings.onInstanceRemove(context, id);
+            
+
+        }
     });
 
     this.commonVisualizer.refresh(dataSets["common"]);
@@ -233,6 +252,23 @@ VariantComparer.method("onSelectionChanged", function(list){
 //  adding tooltips
 
     $("#mdVariantComparer [title]").tipsy({delayIn: 2000, delayOut: 500, fade: true, gravity: 'e', html: true});
+
+});
+
+VariantComparer.method('clearSelectionByID', function(id){
+    var context = this;
+    var selected = context.settings.getSelection(context);
+
+
+   
+
+    context.settings.onDeselected(context, getPID(id));
+    selected = _.without(selected, null);
+    selected = _.without(selected, getPID(id));
+    // console.log(selected);
+    // context.onSelectionChanged(selected);
+
+
 
 });
 

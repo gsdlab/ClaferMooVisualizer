@@ -60,19 +60,19 @@ ParallelCoordinates.method("onRendered", function()
     var chartListeners = {
         "onMouseOver": function(id){
             context.settings.onMouseOver(context, getPID(id));
-//            alert("over: " + id);
+    //            alert("over: " + id);
         },
         "onMouseOut": function(id){
             context.settings.onMouseOut(context, getPID(id));
-//            alert("out: ");
+    //            alert("out: ");
         },
         "onSelected": function(id){
             context.settings.onSelected(context, getPID(id));
-//            alert("select: " + id);
+    //            alert("select: " + id);
         },
         "onDeselected": function(id){
             context.settings.onDeselected(context, getPID(id));
-//            alert("unselect: " + id);
+    //            alert("unselect: " + id);
         },
         "onRangeFilter": function(dim, start, end){
             context.settings.onRangeFiltered(context, dim, start, end);
@@ -119,7 +119,7 @@ ParallelCoordinates.method("redrawChart", function()
 
     /* Rendering */
 
-/* if using the module
+    /* if using the module
 
     // quantitative color scale
     var blue_to_brown = d3.scale.linear()
@@ -137,7 +137,7 @@ ParallelCoordinates.method("redrawChart", function()
         .reorderable()
         .brushable()
         .interactive();
-*/
+    */
 
     var e = $('#mdParallelCoordinates div.window-content')[0];
 
@@ -203,6 +203,22 @@ ParallelCoordinates.method("makeActive", function(pid)
 ParallelCoordinates.method("makeInactive", function(pid)
 {
     this.chart.makeInactive();
+});
+
+ParallelCoordinates.method("removeInstance", function(id){
+    var context = this,
+        pid = getPID(id);
+
+    context.makeInactive(pid);
+
+    context.data.matrix =  _.without(context.data.matrix, _.findWhere(context.data.matrix, {id: parseInt(id)}));
+           
+    context.data.instanceIds =  _.without(context.data.instanceIds, id);
+    context.data.instanceCount =  context.data.instanceIds.length;
+    context.data.instanceMatch =  context.data.instanceIds.length;
+
+    context.chart.remove(parseInt(id));
+    context.onFiltered(context.data);
 });
 
 // this function is called every time a user filters by features or quality values

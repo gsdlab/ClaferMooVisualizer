@@ -282,7 +282,17 @@ function getConfiguration()
             "onMouseOut": function(module, pid)
             {
                 module.host.storage.highlighter.onMouseOut(pid);               
-            }            
+            },
+            "onInstanceRemove" : function(module, num)
+            {
+                var matrixModule = module.host.findModule("mdFeatureQualityMatrix");
+                var graphModule = module.host.findModule("mdGraph");
+                var parallelCoordinatesChartModule = module.host.findModule("mdParallelCoordinates");
+
+               matrixModule.removeInstance(num);
+               graphModule.removeInstance(num);
+               parallelCoordinatesChartModule.removeInstance(num);
+            }
 
     	}});
 
