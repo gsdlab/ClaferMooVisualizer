@@ -1,8 +1,8 @@
 {
   "name": "ClaferMooVisualizer",
   "description": "A web-based GUI for visualization and exploration of optimal variants",
-  "version": "0.4.2",
-  "release_date": "2015-10-20",
+  "version": "0.4.3",
+  "release_date": "2015-12-22",
   "private": true,
   "dependencies": {
     "express": "3.20.1",
