@@ -1,7 +1,7 @@
 ClaferMooVisualizer
 ===================
 
-v0.4.1
+##### v0.4.3
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528). The current version can be used outside the product line domain: various design optimization problems, architecture exploration, packaging problems are supported.
@@ -38,7 +38,7 @@ Contributors
 
 * [Alexandr Murashkin](http://gsd.uwaterloo.ca/amurashk). Main developer.
 * [Michał Antkiewicz](http://gsd.uwaterloo.ca/mantkiew). Research Engineer. Requirements, development, architecture, testing, technology transfer.
-* [Eldar Khalilov](http://gsd.uwaterloo.ca/ekhalilov). Developer. Upgrade to 0.4.1 (replace XML with JSON, test suites).
+* [Eldar Khalilov](http://gsd.uwaterloo.ca/ekhalilov). Developer. Upgrade to 0.4.2 (replace XML with JSON, test suites).
 * Neil Vincent Redman. co-op student Jan-Apr 2013. Many improvements.
 
 Installation and running
@@ -47,9 +47,9 @@ Installation and running
 ### Dependencies for running
 
 * [Java Platform (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) v8+
-* [Clafer](https://github.com/gsdlab/clafer) v0.4.1
+* [Clafer](https://github.com/gsdlab/clafer) v0.4.3
   * can be from the binary distribution
-* [Node.js Framework](http://nodejs.org/download/), v0.12.0
+* [Node.js Framework](http://nodejs.org/download/), v4.2.3 LTS
 * [Redis Server](https://launchpad.net/~chris-lea/+archive/ubuntu/redis-server), v2:2.*
   * On Ubuntu, execute `sudo add-apt-repository ppa:chris-lea/redis-server && apt-get install redis-server`
 * Backends' dependencies must be satisfied. See the backend installation steps below.
@@ -98,15 +98,15 @@ See [Installing Backends](https://github.com/gsdlab/ClaferToolsUICommonPlatform#
 
 `clafer --version`
 
-> `Clafer v0.4.1`
+> `Clafer v0.4.3`
 
 `java -version`
 
-> `java version 1.8.0_60`
+> `java version 1.8.0_66`
 
 `node -v`
 
-> `v0.12.0`
+> `v4.2.3 LTS`
 
 4. Make sure `uploads` folder is accessible for writing, since temporary files will be stored there.
 
