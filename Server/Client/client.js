@@ -419,6 +419,13 @@ function getConfiguration()
     		},
     		"onInstanceRemove" : function(module, num)
     		{
+                var graphModule = module.host.findModule("mdGraph");
+                var parallelCoordinatesChartModule = module.host.findModule("mdParallelCoordinates");
+                var comparerModule = module.host.findModule("mdVariantComparer");
+               
+               graphModule.removeInstance(num);
+               parallelCoordinatesChartModule.removeInstance(num);
+               comparerModule.removeInstance(num);
     		},
             "onMouseOver": function(module, pid)
             {
