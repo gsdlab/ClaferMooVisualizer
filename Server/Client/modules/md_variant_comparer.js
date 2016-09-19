@@ -203,7 +203,16 @@ VariantComparer.method("onSelectionChanged", function(list){
     }, {
         removeInstance: function(id, visualizer){
 
-            context.removeInstance(id);
+            console.log(context);
+            context.data.matrix =  _.without(context.data.matrix, _.findWhere(context.data.matrix, {id: parseInt(id)}));
+            context.data.instanceIds =  _.without(context.data.instanceIds, id);
+            context.data.instanceCount =  context.data.instanceIds.length;
+            context.data.instanceMatch =  context.data.instanceIds.length;
+
+            // console.log(dataSets)
+            // console.log(selectedData)
+
+            context.clearSelectionByID(id);
             context.settings.onInstanceRemove(context, id);
             
 
@@ -245,24 +254,6 @@ VariantComparer.method("onSelectionChanged", function(list){
     $("#mdVariantComparer [title]").tipsy({delayIn: 2000, delayOut: 500, fade: true, gravity: 'e', html: true});
 
 });
-
-
-
-VariantComparer.method('removeInstance', function(id){
-    var context = this;
-    context.data.matrix =  _.without(context.data.matrix, _.findWhere(context.data.matrix, {id: parseInt(id)}));
-    context.data.instanceIds =  _.without(context.data.instanceIds, id);
-    context.data.instanceCount =  context.data.instanceIds.length;
-    context.data.instanceMatch =  context.data.instanceIds.length;
-
-    // console.log(dataSets)
-    // console.log(selectedData)
-
-    context.clearSelectionByID(id);
-
-            
-});
-
 
 VariantComparer.method('clearSelectionByID', function(id){
     var context = this;
