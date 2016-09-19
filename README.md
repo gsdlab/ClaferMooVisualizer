@@ -1,7 +1,7 @@
 ClaferMooVisualizer
 ===================
 
-##### v0.4.3
+##### v0.4.4
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528). The current version can be used outside the product line domain: various design optimization problems, architecture exploration, packaging problems are supported.
@@ -36,9 +36,9 @@ The client-side is implemented using `JavaScript/HTML` and handles the visualiza
 Contributors
 ------------
 
-* [Alexandr Murashkin](http://gsd.uwaterloo.ca/amurashk). Main developer.
-* [Michał Antkiewicz](http://gsd.uwaterloo.ca/mantkiew). Research Engineer. Requirements, development, architecture, testing, technology transfer.
+* [Alexandr Murashkin](http://gsd.uwaterloo.ca/amurashk). Original developer.
 * [Eldar Khalilov](http://gsd.uwaterloo.ca/ekhalilov). Developer. Upgrade to 0.4.2 (replace XML with JSON, test suites).
+* [Michał Antkiewicz](http://gsd.uwaterloo.ca/mantkiew). Research Engineer. Requirements, development, architecture, testing, technology transfer.
 * Neil Vincent Redman. co-op student Jan-Apr 2013. Many improvements.
 
 Installation and running
@@ -47,7 +47,7 @@ Installation and running
 ### Dependencies for running
 
 * [Java Platform (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) v8+
-* [Clafer](https://github.com/gsdlab/clafer) v0.4.3
+* [Clafer](https://github.com/gsdlab/clafer) v0.4.4
   * can be from the binary distribution
 * [Node.js Framework](http://nodejs.org/download/), v4.2.3 LTS
 * [Redis Server](https://launchpad.net/~chris-lea/+archive/ubuntu/redis-server), v2:2.*
@@ -98,11 +98,11 @@ See [Installing Backends](https://github.com/gsdlab/ClaferToolsUICommonPlatform#
 
 `clafer --version`
 
-> `Clafer v0.4.3`
+> `Clafer v0.4.4`
 
 `java -version`
 
-> `java version 1.8.0_66`
+> `java version 1.8.0_102`
 
 `node -v`
 
