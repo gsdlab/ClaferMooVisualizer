@@ -92,6 +92,14 @@ See [Installing Backends](https://github.com/gsdlab/ClaferToolsUICommonPlatform#
 1. Make sure the port `8092` is free, or change the value of the key `port` in `Server/config.json`:
 `"port" = "8092"` to any free one.
 
+Optional limits and settings in `Server/config.json`:
+
+* `allowedModelURLs`: prefixes of the URLs from which models can be opened with `?claferFileURL=...`, for example the ClaferWiki URL `http://<wiki host>:<wiki port>/clafer/`; opening models from URLs is disabled when the list is empty
+* `maxSessions` (default 50): the maximum number of concurrent sessions
+* `maxUploadSize` (default 16 MB): the maximum size of a submitted model or instance data
+* `uploadsPerMinute` (30), `commandsPerMinute` (300), `pollsPerMinute` (600): rate limits per client IP address
+* `trustProxy`: Express's `trust proxy` setting when running behind a reverse proxy (e.g., `"loopback"` or `1`), so that the rate limits apply per client
+
 2. Make sure `clafer`, `chocosolver`, `node`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
 
 3. Running the following commands should produce the following results or later version:

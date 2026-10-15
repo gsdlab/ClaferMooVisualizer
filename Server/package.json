@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "express": "4.22.3",
-    "multer": "2.4.0"
+    "multer": "2.4.0",
+    "express-rate-limit": "8.7.0"
   }
 }

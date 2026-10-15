@@ -6,5 +6,6 @@
 	"cleaningTimeout": "5000",
 	"commandLimitingRate": {"interval": "1", "limit":"2"},
 	"pollingLimitingRate": {"interval": "1", "limit":"4"},
-	"fileRequestLimitingRate": {"interval": "1", "limit":"10"}
+	"fileRequestLimitingRate": {"interval": "1", "limit":"10"},
+	"allowedModelURLs": ["http://t3-necsis.cs.uwaterloo.ca:8091/clafer/"]
 }
