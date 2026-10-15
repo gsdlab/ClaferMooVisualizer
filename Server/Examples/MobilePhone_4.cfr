@@ -1,3 +1,4 @@
+//# OPTIONS --minint=-1000 --maxint=1000
 abstract Feature
     productivity -> integer
     cost -> integer
