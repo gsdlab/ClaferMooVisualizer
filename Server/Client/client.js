@@ -129,6 +129,12 @@ function getConfiguration()
 		            module.editor.getSession().setValue(responseObject.model);
 		        }
 
+                if (responseObject.temporal)
+                {
+                    module.host.storage.claferJSON = null;
+                    return onError(module, "temporal_model", null, null);
+                }
+
                 if (responseObject.optimize || responseObject.optimizer_instances_only)
                 {
 
@@ -494,6 +500,11 @@ function onError(module, statusText, response, xhr)
         errorRecord = {
             "caption": "No instances found in the file", 
             "body": "No instances found in the specified file. Please verify its format and check instance data"
+        };
+    else if (statusText == "temporal_model")
+        errorRecord = {
+            "caption": "Temporal model not supported",
+            "body": "ClaferMooVisualizer works only with static Clafer models: optimization does not support temporal constructs. You can edit temporal models in ClaferIDE."
         };
     else if (statusText == "optimize_first")
         errorRecord = {

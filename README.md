@@ -1,7 +1,7 @@
 ClaferMooVisualizer
 ===================
 
-##### v0.4.4
+##### v0.5.3
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528). The current version can be used outside the product line domain: various design optimization problems, architecture exploration, packaging problems are supported.
@@ -27,6 +27,8 @@ See [clafer.org](http://clafer.org).
 3. Allows for filtering by feature and by quality range.
 4. Supports multiple solver backends.
 
+Only static Clafer models are supported: optimization reports temporal (behavioral) models as not supported. Use ClaferIDE to edit them.
+
 ### Nature
 
 ClaferMooVisualizer is a web-based application.
@@ -46,12 +48,10 @@ Installation and running
 
 ### Dependencies for running
 
-* [Java Platform (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) v8+
-* [Clafer](https://github.com/gsdlab/clafer) v0.4.4
+* [Java Platform (JDK)](https://adoptium.net/) v17+
+* [Clafer](https://github.com/gsdlab/clafer) v0.5.3
   * can be from the binary distribution
-* [Node.js Framework](http://nodejs.org/download/), v4.2.3 LTS
-* [Redis Server](https://launchpad.net/~chris-lea/+archive/ubuntu/redis-server), v2:2.*
-  * On Ubuntu, execute `sudo add-apt-repository ppa:chris-lea/redis-server && apt-get install redis-server`
+* [Node.js](https://nodejs.org/), tested with v26
 * Backends' dependencies must be satisfied. See the backend installation steps below.
 
 ### Installation
@@ -81,7 +81,7 @@ git submodule foreach git checkout develop
 
 This will download all the required `Node.js` modules.
 
-4. Install the necessary backends into some location `<bin>` found on `PATH`. The default configuration in `<target directory>/ClaferIDE/Server/Backends/backends.json` assumes `/home/clafertools040/bin`.
+4. Install the backends `clafer`, `chocosolver` into some location `<bin>` found on `PATH`. The backends in `Server/Backends/backends.json` run them from `PATH`.
 
 The fastest way is to unzip a binary distribution into the folder `<bin>`.
 
@@ -92,21 +92,25 @@ See [Installing Backends](https://github.com/gsdlab/ClaferToolsUICommonPlatform#
 1. Make sure the port `8092` is free, or change the value of the key `port` in `Server/config.json`:
 `"port" = "8092"` to any free one.
 
-2. Make sure `clafer`, `node`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
+2. Make sure `clafer`, `chocosolver`, `node`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
 
 3. Running the following commands should produce the following results or later version:
 
 `clafer --version`
 
-> `Clafer v0.4.4`
+> `Clafer 0.5.3`
+
+`chocosolver --version`
+
+> `chocosolver v0.5.3.2026-10-15`
 
 `java -version`
 
-> `java version 1.8.0_102`
+> `openjdk version "17"`
 
 `node -v`
 
-> `v4.2.3 LTS`
+> `v26.11.1`
 
 4. Make sure `uploads` folder is accessible for writing, since temporary files will be stored there.
 
