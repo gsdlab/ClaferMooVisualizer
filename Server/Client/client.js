@@ -20,11 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-function getConfiguration() 
+function getConfiguration()
 {
 	var modules = [];
     var rightMargin = 25;
-    modules.push({"name": "Input", "configuration": 
+    modules.push({"name": "Input", "configuration":
     	{
     		"layout": {
     			"width": (window.parent.innerWidth-rightMargin) * 0.38,
@@ -34,15 +34,15 @@ function getConfiguration()
     		},
 
     		"title": "Input Clafer Model and Options",
-    		"optimization_backend": true, 
+    		"optimization_backend": true,
             "input_default_cache": false,
-            "input_default_optimizer_scope": true,            
-            "input_default_optimizer_maxint": true,            
+            "input_default_optimizer_scope": true,
+            "input_default_optimizer_maxint": true,
             "input_default_flags": "",
             "file_extensions": [
                 {
-                    "ext": ".cfr", 
-                    "flag": "normal", 
+                    "ext": ".cfr",
+                    "flag": "normal",
                     "button_file_caption": "Optimize",
                     "button_example_caption": "Optimize",
                     "button_editor_caption": "Optimize",
@@ -53,7 +53,7 @@ function getConfiguration()
                 },
                 {
                     "ext": ".cfr",
-                    "flag": "no-optimize", 
+                    "flag": "no-optimize",
                     "button_file_caption": "Upload",
                     "button_example_caption": "Upload",
                     "button_editor_caption": "Upload",
@@ -61,9 +61,9 @@ function getConfiguration()
                     "button_file_tooltip": "Upload the selected file",
                     "button_example_tooltip": "Upload the selected example",
                     "button_editor_tooltip": "Upload the model specified in the editor"
-                },                
+                },
                 {
-                    "ext": ".data", 
+                    "ext": ".data",
                     "button_file_caption": "Add Instances",
                     "button_example_caption": "Add Instances",
                     "button_editor_caption": "Add Instances",
@@ -103,10 +103,10 @@ function getConfiguration()
 		        if (responseObject.compiler_message)
 		        {
 		        	module.host.print("Compiler> " + responseObject.message + "\n");
-		        	module.host.print(responseObject.compiler_message + "\n");    
+		        	module.host.print(responseObject.compiler_message + "\n");
 		    	}
 
-                
+
 
                 // if (responseObject.compiler_claferXML)
                 // {
@@ -123,7 +123,7 @@ function getConfiguration()
                 }
 
     		},
-    		"onCompleted" : function(module, responseObject){    					        
+    		"onCompleted" : function(module, responseObject){
 		        if (responseObject.model != "")
 		        {
 		            module.editor.getSession().setValue(responseObject.model);
@@ -189,14 +189,14 @@ function getConfiguration()
 //                    }, 1000);
                 }
                 else
-                { 
+                {
                     var data = new Object();
                     data.error = false;
                     data.output = responseObject.message;
                     data.instancesXML = "";
                    // data.claferXML = module.host.storage.claferXML;
                     data.claferJSON = module.host.storage.claferJSON;
-                    data.unparsedInstances = ""; 
+                    data.unparsedInstances = "";
 
                     var instanceProcessor = new InstanceProcessor(data.instancesXML);
                     module.host.storage.evolutionController.existingInstancesCount = instanceProcessor.getInstanceCount();
@@ -206,12 +206,12 @@ function getConfiguration()
                     module.host.print("ClaferMooVisualizer> " + "Now add instances by uploading .data files." + "\n");
                 }
 
-		        return true;  
-    		}    		
+		        return true;
+    		}
     	}
 	});
 
-    modules.push({"name": "Goals", "configuration": 
+    modules.push({"name": "Goals", "configuration":
         {
             "title": "Objectives and Quality Ranges",
 
@@ -232,7 +232,7 @@ function getConfiguration()
         }});
 
 
-    modules.push({"name": "SpiderChart", "configuration": 
+    modules.push({"name": "SpiderChart", "configuration":
         {
             "title": "Spider Chart",
 
@@ -244,16 +244,16 @@ function getConfiguration()
             },
             "onMouseOver": function(module, pid)
             {
-                module.host.storage.highlighter.onMouseOver(pid);               
+                module.host.storage.highlighter.onMouseOver(pid);
             },
             "onMouseOut": function(module, pid)
             {
-                module.host.storage.highlighter.onMouseOut(pid);               
+                module.host.storage.highlighter.onMouseOut(pid);
             }
 
         }});
 
-    modules.push({"name": "VariantComparer", "configuration": 
+    modules.push({"name": "VariantComparer", "configuration":
     	{
     		"layout": {
 
@@ -268,26 +268,26 @@ function getConfiguration()
 
             "onSelected": function(module, pid)
             {
-                module.host.storage.selector.onSelected(pid);               
+                module.host.storage.selector.onSelected(pid);
             },
             "onDeselected": function(module, pid)
             {
-                module.host.storage.selector.onDeselected(pid);             
+                module.host.storage.selector.onDeselected(pid);
             },
             "getSelection" : function(module)
             {
-                return module.host.storage.selector.selection;              
+                return module.host.storage.selector.selection;
             },
 //            "onHTMLChanged": function (module){
 //                module.host.storage.evolutionController.assignProperShapesToVariantComparer();
 //            },
             "onMouseOver": function(module, pid)
             {
-                module.host.storage.highlighter.onMouseOver(pid);               
+                module.host.storage.highlighter.onMouseOver(pid);
             },
             "onMouseOut": function(module, pid)
             {
-                module.host.storage.highlighter.onMouseOut(pid);               
+                module.host.storage.highlighter.onMouseOut(pid);
             },
             "onInstanceRemove" : function(module, num)
             {
@@ -302,7 +302,7 @@ function getConfiguration()
 
     	}});
 
-    modules.push({"name": "Output", "configuration": 
+    modules.push({"name": "Output", "configuration":
     	{
 	    	"title": "Output",
 
@@ -315,7 +315,7 @@ function getConfiguration()
 
     	}});
 
-    modules.push({"name": "Graph", "configuration": 
+    modules.push({"name": "Graph", "configuration":
         {
             "title": "Bubble Front Graph",
 
@@ -332,23 +332,23 @@ function getConfiguration()
 
             "onSelected": function(module, pid)
             {
-                module.host.storage.selector.onSelected(pid);               
+                module.host.storage.selector.onSelected(pid);
             },
             "onDeselected": function(module, pid)
             {
-                module.host.storage.selector.onDeselected(pid);             
+                module.host.storage.selector.onDeselected(pid);
             },
             "onMouseOver" : function(module, pid)
             {
-                module.host.storage.highlighter.onMouseOver(pid);                               
-            },            
+                module.host.storage.highlighter.onMouseOver(pid);
+            },
             "onMouseOut" : function(module, pid)
             {
-                module.host.storage.highlighter.onMouseOut(pid);               
+                module.host.storage.highlighter.onMouseOut(pid);
             }
         }});
 
-    modules.push({"name": "ParallelCoordinates", "configuration": 
+    modules.push({"name": "ParallelCoordinates", "configuration":
         {
             "title": "Parallel Coordinates Chart",
 
@@ -361,20 +361,20 @@ function getConfiguration()
 
             "onSelected": function(module, pid)
             {
-                module.host.storage.selector.onSelected(pid);               
+                module.host.storage.selector.onSelected(pid);
             },
             "onDeselected": function(module, pid)
             {
-                module.host.storage.selector.onDeselected(pid);             
+                module.host.storage.selector.onDeselected(pid);
             },
             "onMouseOver" : function(module, pid)
             {
-                module.host.storage.highlighter.onMouseOver(pid);                               
-            },            
+                module.host.storage.highlighter.onMouseOver(pid);
+            },
             "onMouseOut" : function(module, pid)
             {
-                module.host.storage.highlighter.onMouseOut(pid);               
-            },            
+                module.host.storage.highlighter.onMouseOut(pid);
+            },
             "onRangeFiltered" : function(module, dim, start, end)
             {
 //                console.log("parCoords > onFilteredByRange");
@@ -382,7 +382,7 @@ function getConfiguration()
             }
         }});
 
-    modules.push({"name": "FeatureQualityMatrix", "configuration": 
+    modules.push({"name": "FeatureQualityMatrix", "configuration":
     	{
 	    	"title": "Feature and Quality Matrix",
 
@@ -399,16 +399,16 @@ function getConfiguration()
 
     		"onSelected": function(module, pid)
     		{
-				module.host.storage.selector.onSelected(pid);    			
+				module.host.storage.selector.onSelected(pid);
     		},
     		"onDeselected": function(module, pid)
     		{
-				module.host.storage.selector.onDeselected(pid);    			
+				module.host.storage.selector.onDeselected(pid);
     		},
     		"getSelection" : function(module)
     		{
-				return module.host.storage.selector.selection;    			
-    		},    		
+				return module.host.storage.selector.selection;
+    		},
     		"onReset": function(module)
     		{
 //                module.host.storage.instanceFilter.filterContent();
@@ -418,32 +418,32 @@ function getConfiguration()
     		},
     		"onFeatureCollapsed": function(module, feature)
     		{
-    		},    		
+    		},
     		"onFeatureCheckedStateChange": function(module, feature, require)
     		{
-                module.host.storage.instanceFilter.filterByFeature(module, feature, require);                
+                module.host.storage.instanceFilter.filterByFeature(module, feature, require);
     		},
     		"onInstanceRemove" : function(module, num)
     		{
                 var graphModule = module.host.findModule("mdGraph");
                 var parallelCoordinatesChartModule = module.host.findModule("mdParallelCoordinates");
                 var comparerModule = module.host.findModule("mdVariantComparer");
-               
+
                graphModule.removeInstance(num);
                parallelCoordinatesChartModule.removeInstance(num);
                comparerModule.removeInstance(num);
     		},
             "onMouseOver": function(module, pid)
             {
-                module.host.storage.highlighter.onMouseOver(pid);               
+                module.host.storage.highlighter.onMouseOver(pid);
             },
             "onMouseOut": function(module, pid)
             {
-                module.host.storage.highlighter.onMouseOut(pid);               
+                module.host.storage.highlighter.onMouseOut(pid);
             },
             "onFilterChanged": function(module, path, value)
             {
-                module.host.storage.instanceFilter.filterByValue(module, path, value);                
+                module.host.storage.instanceFilter.filterByValue(module, path, value);
             }
     	}});
 
@@ -458,7 +458,7 @@ function getConfiguration()
     	"onLoaded": function(host)
 	    {
 	    	$("#myform").submit();
-	    }	    
+	    }
 	};
 
     return {"modules": modules, "settings": settings};
@@ -466,39 +466,39 @@ function getConfiguration()
 
 
 
-function onError(module, statusText, response, xhr) 
+function onError(module, statusText, response, xhr)
 {
     var currentDate = new Date();
     var errorRecord = {};
 
     if (statusText == "compile_error")
         errorRecord = {
-            "caption": "Compilation Error", 
+            "caption": "Compilation Error",
             "body": "Please check whether Clafer Compiler is available, and the model is syntactically correct."
         };
     else if (statusText == "timeout")
         errorRecord = {
-            "caption": "Request Timeout", 
+            "caption": "Request Timeout",
             "body": "Please check whether the server is available. You may want to reload the browser page."
         };
     else if (statusText == "malformed_output")
         errorRecord = {
-            "caption": "Malformed output received from the optimizer", 
+            "caption": "Malformed output received from the optimizer",
             "body": "Please check whether you are using the correct version of the chosen optimizer. Also, an unhandled exception is possible.  Please verify your input file: check syntax and integer ranges."
         };
     else if (statusText == "malformed_instance")
         errorRecord = {
-            "caption": "Malformed instance data received from the optimizer", 
+            "caption": "Malformed instance data received from the optimizer",
             "body": "An unhandled exception may have occured during the optimizer execution. Please verify your input file: check syntax and integer ranges."
         };
     else if (statusText == "empty_instances")
         errorRecord = {
-            "caption": "No instances returned", 
+            "caption": "No instances returned",
             "body": "Could not get any instance. Possible reasons:\n1) No instances found at all: the model is not satisfiable within the given scopes and integer ranges.\n2) An unhandled exception occured in the chosen backend.\nPlease verify your input model, increase scopes and integer ranges"
         };
     else if (statusText == "empty_instance_file")
         errorRecord = {
-            "caption": "No instances found in the file", 
+            "caption": "No instances found in the file",
             "body": "No instances found in the specified file. Please verify its format and check instance data"
         };
     else if (statusText == "temporal_model")
@@ -508,27 +508,27 @@ function onError(module, statusText, response, xhr)
         };
     else if (statusText == "optimize_first")
         errorRecord = {
-            "caption": "Load the model first", 
+            "caption": "Load the model first",
             "body": "You can add instances only after you loaded the model or ran optimization. Please provide a Clafer model first, and then add instances"
         };
       else if (response && response.responseText == "process_not_found")
         errorRecord = {
-            "caption": "Session not found", 
+            "caption": "Session not found",
             "body": "Looks like your session has been closed due to inactivity. Just recompile your model to start a new session."
         };
     else if (statusText == "error" && response.responseText == "")
         errorRecord = {
-            "caption": "Request Error", 
+            "caption": "Request Error",
             "body": "Please check whether the server is available. Try to recompile the model or to reload the browser page."
         };
     else
         errorRecord = {
-            "caption": xhr, 
+            "caption": xhr,
             "body": response.responseText
         };
 
     errorRecord.datetime = currentDate.today() + " @ " + currentDate.timeNow();
-    errorRecord.contact = "If the error persists, please contact Alexandr Murashkin (http://gsd.uwaterloo.ca/amurashk) or Michal Antkiewicz (http://gsd.uwaterloo.ca/mantkiew)";
+    errorRecord.contact = "If the error persists, please contact Alexandr Murashkin (http://gsd.uwaterloo.ca/amurashk) or Michal Antkiewicz (https://uwaterloo.ca/waterloo-intelligent-systems-engineering-lab/profiles/michal-antkiewicz)";
 
     module.host.print("ClaferMooVisualizer> " + errorRecord.caption + ": " + errorRecord.datetime + "\n" + errorRecord.body + "\n");
     module.host.errorWindow(errorRecord);

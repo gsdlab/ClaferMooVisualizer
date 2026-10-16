@@ -7,5 +7,5 @@
 	"commandLimitingRate": {"interval": "1", "limit":"2"},
 	"pollingLimitingRate": {"interval": "1", "limit":"4"},
 	"fileRequestLimitingRate": {"interval": "1", "limit":"10"},
-	"allowedModelURLs": ["http://t3-necsis.cs.uwaterloo.ca:8091/clafer/"]
+	"allowedModelURLs": ["http://wiselab.uwaterloo.ca:8091/clafer/", "http://wiselab.uwaterloo.ca:8099/clafer/", "http://wiselab.uwaterloo.ca:8098/clafer/"]
 }
