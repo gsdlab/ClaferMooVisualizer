@@ -1,3 +1,4 @@
+//# OPTIONS --minint=-100 --maxint=100
 // Example of a Mobile Phone with a single quality attribute (cost) and a single optimization objective (minimize)
 
 abstract Feature

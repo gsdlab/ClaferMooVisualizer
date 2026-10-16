@@ -23,7 +23,7 @@
         {
             "id": "alloy",
             "label": "Alloy",
-            "tooltip": "Alloy4.2 file format (als)",
+            "tooltip": "Alloy 6 file format (als)",
             "file_suffix": ".als",
             "compiler_mode": "alloy",
             "compiler_args": [],

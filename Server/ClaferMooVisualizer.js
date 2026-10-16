@@ -20,7 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 var url = require("url");
-var sys = require("sys");
 var fs = require("fs");
 var path = require('path');
 var express = require('express');
@@ -50,11 +49,7 @@ var port = config.port;
 
 var server = express();
 
-server.use("/commons/Client", express.static(__dirname + '/commons/Client'));
-server.use("/Client", express.static(__dirname + '/Client'));
-//server.use(express.static(__dirname + '/commons/Client'));
-//server.use(express.static(__dirname + '/Client/'));
-server.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/uploads' }));
+lib.configureServer(server);
 
 //-------------------------------------------------
 // Standard GET request
@@ -79,26 +74,30 @@ server.get('/', /*fileMiddleware, */function(req, res) {
 //-------------------------------------------------
 
 server.get('/Examples/:file', /*fileMiddleware,*/ function(req, res) {
-    res.sendfile('Examples/' + req.params.file);
+    res.sendFile('Examples/' + req.params.file, { root: __dirname });
 });
 
 server.get('/Backends/:file', /*fileMiddleware,*/ function(req, res) {
-    res.sendfile('Backends/' + req.params.file);
+    res.sendFile('Backends/' + req.params.file, { root: __dirname });
 });
 
 server.get('/Formats/:file', /*fileMiddleware,*/ function(req, res) {
-    res.sendfile('Formats/' + req.params.file);
+    res.sendFile('Formats/' + req.params.file, { root: __dirname });
 });
 
 server.get('/htmlwrapper', /*fileMiddleware,*/ function(req, res) {
-    res.sendfile("commons/Client/compiler_html_wrapper.html");
+    res.sendFile("commons/Client/compiler_html_wrapper.html", { root: __dirname });
 });
 
 //------------------- save format request --------------------------
 server.get('/saveformat', /*fileMiddleware,*/ function(req, res) {
     
     if (!req.query.windowKey)
+    {
+        res.writeHead(400, { "Content-Type": "text/plain"});
+        res.end("Error: No session");
         return;
+    }
 
     core.logSpecific("Save format request", req.query.windowKey);
 
@@ -131,11 +130,11 @@ server.get('/saveformat', /*fileMiddleware,*/ function(req, res) {
     {
         core.logSpecific("Error: Format was not found within the process", req.query.windowKey);
         res.writeHead(400, { "Content-Type": "text/html"});    
-        res.end("Error: Could not find the format within a process data by its submitted id: " + formatId);
+        res.end("Error: Could not find the format within a process data by its submitted id");
         return;
     }
         
-    res.writeHead(200, { "Content-Type": "text/html",
+    res.writeHead(200, { "Content-Type": "text/plain",
                                  "Content-Disposition": "attachment; filename=compiled" + suffix});
     res.end(result);
 });
@@ -146,13 +145,13 @@ server.post('/saveinstances', /*commandMiddleware,*/ function(req, res, next) {
     if (process != null)
     {
         core.logSpecific("Returning instances file", req.body.windowKey);
-        res.writeHead(200, { "Content-Type": "text/html",
+        res.writeHead(200, { "Content-Type": "text/plain",
                          "Content-Disposition": "attachment; filename=instances.cfr.data"});
         res.end(req.body.data);
     }
     else
     {
-        res.send(404, "Sorry can't find your session. Please re-compile your file to start a new one");        
+        res.status(404).send("Sorry can't find your session. Please re-compile your file to start a new one");        
     }
 });
 
@@ -274,12 +273,16 @@ function runOptimization(process)
 
     process.tool = spawn(toolPath, args, { cwd: process.folder });
 
+    process.tool.stdin.on('error', function (err){
+        core.logSpecific('Could not write to the backend: ' + err.message, key);
+    });
+
     process.tool.on('error', function (err){
-        core.logSpecific('ERROR: Cannot run the chosen backend. Please check whether it is installed and accessible.', req.body.windowKey);
+        core.logSpecific('ERROR: Cannot run the chosen backend. Please check whether it is installed and accessible.', key);
         var process = core.getProcess(key);
         if (process != null)
         {
-            process.result = '{"message": "' + lib.escapeJSON("Error: Cannot run the chosen backend") + '"}';
+            process.result = '{"message": "' + core.escapeJSON("Error: Cannot run the chosen backend") + '"}';
             process.completed = true;
             process.tool = null;
         }
@@ -332,13 +335,23 @@ server.post('/upload', /*commandMiddleware,*/ function(req, res, next)
             loadExampleInEditor = true;
         }
 
+        var options = [req.body.optimizerMaxInt, req.body.optimizerScope, req.body.optimizerCores, req.body.optimizerLimit];
+        if (!options.every(core.isOptionalInteger) || (req.body.fileExt != ".data" && !core.getBackend(req.body.optimizationBackend)))
+        {
+            core.logSpecific("Rejected: invalid optimization options", req.body.windowKey);
+            res.writeHead(400, { "Content-Type": "text/plain"});
+            res.end("Invalid optimization options");
+            return;
+        }
+
         // read the contents of the uploaded file
         fs.readFile(process.file + req.body.fileExt, function (err, data) {
 
             if (err)
             {
-                res.writeHead(500, { "Content-Type": "text/html"});
-                res.end("Error while reading the file: " + err);
+                core.logSpecific("Error while reading the file: " + err, req.body.windowKey);
+                res.writeHead(500, { "Content-Type": "text/plain"});
+                res.end("Error while reading the file");
                 return;
             }
 
@@ -454,8 +467,16 @@ server.post('/poll', /*pollingMiddleware,*/ function(req, res, next)
 //                console.log("COMPLETED COMPILER");
 
                 var jsonObj = new Object();
+                var temporal = lib.isTemporalModel(process);
 
-                if (process.optimize)
+                if (temporal)
+                {
+                    process.optimize = false;
+                    jsonObj.model = process.model;
+                    jsonObj.temporal = true;
+                    jsonObj.message = "Error: " + lib.temporalModelMessage;
+                }
+                else if (process.optimize)
                 {
                     jsonObj.message = "Working";
                 }
@@ -651,8 +672,10 @@ server.get('/initdata', /*commandMiddleware, */function(req, res)
 server.use(function(req, res, next)
 {
     core.logSpecific(req.url, null);
-    res.send(404, "Sorry can't find that!");
+    res.status(404).send("Sorry can't find that!");
 });
+
+lib.addErrorHandler(server);
 
 //================================================================
 // Initialization Code
