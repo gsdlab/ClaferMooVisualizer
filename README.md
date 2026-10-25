@@ -101,6 +101,8 @@ Optional limits and settings in `Server/config.json`:
 
 The environment variables `ALLOWED_MODEL_URLS` (URL prefixes separated by spaces) and `TRUST_PROXY` override `allowedModelURLs` and `trustProxy`, e.g., when running in a container.
 
+A model can import other models with `//# OPTIONS --import=...` (Clafer 0.5.4). Since a submitted model may come from anyone, the tool restricts its imports: local files only from the tool's `Examples` folder (`--import=Examples/<file>.cfr`), and URLs only from public addresses (e.g., `--import=https://example.org/models/design-space.cfr`). A model opened with `?claferFileURL=` imports relative to its URL, so a model next to it on the same server can be imported by its name; a server on a private address (e.g., a wiki on `localhost`) cannot serve imports.
+
 2. Make sure `clafer`, `chocosolver`, `node`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
 
 3. Running the following commands should produce the following results or later version:
