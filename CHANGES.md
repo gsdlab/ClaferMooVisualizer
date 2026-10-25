@@ -2,7 +2,7 @@
 
 Minor release with Clafer 0.5.4.
 
-* Models can import other models with `//# OPTIONS --import=...` ([gsdlab/clafer#100](https://github.com/gsdlab/clafer/issues/100)). Since a submitted model may come from anyone, its imports are restricted: local files only from the tool's `Examples` folder (`--import=Examples/<file>.cfr`), and URLs only from public addresses. A model opened with `?claferFileURL=` imports relative to its URL.
+* Models can import other models with `//# OPTIONS --import=...` ([gsdlab/clafer#100](https://github.com/gsdlab/clafer/issues/100)). Since a submitted model may come from anyone, its imports are restricted: only `.cfr` files, local files only from the tool's `Examples` folder (`--import=Examples/<file>.cfr`), and URLs only from public addresses. A model opened with `?claferFileURL=` imports relative to its URL.
 * Messages give positions as `model.cfr:line:column` and no longer show the server's folders.
 * The welcome window can be closed again: with jQuery 3, its gray backdrop stayed over the page.
 * The live demo and model wiki links point to wiselab.uwaterloo.ca.
