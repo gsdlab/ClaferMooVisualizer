@@ -1,7 +1,7 @@
 ClaferMooVisualizer
 ===================
 
-##### v0.5.3
+##### v0.5.4
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528). The current version can be used outside the product line domain: various design optimization problems, architecture exploration, packaging problems are supported.
@@ -11,10 +11,9 @@ Read more in the paper [Clafer Tools for Product Line Engineering](http://gsd.uw
 
 ### Live demo
 
-* Master branch (stable and released): [ClaferMooVisualizer](http://t3-necsis.cs.uwaterloo.ca:8092/)
-* Develop branch (with newest features, but not guaranteed to be stable): [ClaferMooVisualizer (development)](http://t3-necsis.cs.uwaterloo.ca:8192/)
+* [ClaferMooVisualizer](https://wiselab.uwaterloo.ca:8092/), with the wikis [Clafer Model Wiki](https://wiselab.uwaterloo.ca/modelwiki/), [Railway Wiki](https://wiselab.uwaterloo.ca/railwaywiki/), and [Traffic Lights Wiki](https://wiselab.uwaterloo.ca/trafficlightswiki/), whose buttons open their models in the web tools
 
-If the demo is down or you encounter a bug, please email [Michał Antkiewicz](mailto:mantkiew@gsd.uwaterloo.ca).
+If the demo is down or you encounter a bug, please email [Michał Antkiewicz](mailto:michal.antkiewicz@uwaterloo.ca).
 
 ### Background
 
@@ -49,7 +48,7 @@ Installation and running
 ### Dependencies for running
 
 * [Java Platform (JDK)](https://adoptium.net/) v17+
-* [Clafer](https://github.com/gsdlab/clafer) v0.5.3
+* [Clafer](https://github.com/gsdlab/clafer) v0.5.4
   * can be from the binary distribution
 * [Node.js](https://nodejs.org/), tested with v26
 * Backends' dependencies must be satisfied. See the backend installation steps below.
@@ -102,17 +101,19 @@ Optional limits and settings in `Server/config.json`:
 
 The environment variables `ALLOWED_MODEL_URLS` (URL prefixes separated by spaces) and `TRUST_PROXY` override `allowedModelURLs` and `trustProxy`, e.g., when running in a container.
 
+A model can import other models with `//# OPTIONS --import=...` (Clafer 0.5.4). Since a submitted model may come from anyone, the tool restricts its imports: only `.cfr` files: local files only from the tool's `Examples` folder (`--import=Examples/<file>.cfr`), and URLs only from public addresses and not served as web pages (e.g., `--import=https://example.org/models/design-space.cfr`). A model opened with `?claferFileURL=` imports relative to its URL, so a model next to it on the same server can be imported by its name; a server on a private address (e.g., a wiki on `localhost`) cannot serve imports.
+
 2. Make sure `clafer`, `chocosolver`, `node`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
 
 3. Running the following commands should produce the following results or later version:
 
 `clafer --version`
 
-> `Clafer 0.5.3`
+> `Clafer 0.5.4`
 
 `chocosolver --version`
 
-> `chocosolver v0.5.3.2026-10-15`
+> `chocosolver v0.5.4.2026-10-25`
 
 `java -version`
 
