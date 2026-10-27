@@ -1,0 +1,30 @@
+// A bike with decimal costs and weights. Decimals have a fixed number of fractional
+// digits, the most fractional digits of the literals, here 2 (--decimal-digits in
+// //# OPTIONS overrides it). decimal * decimal and divisions with a decimal round half
+// away from zero. Decimals need the Choco-based backend (Clafer 0.5.5).
+
+abstract Feature
+    cost -> decimal
+    weight -> decimal
+
+abstract Bike
+    Light : Feature ?
+        [ cost = 19.99 ]
+        [ weight = 0.25 ]
+    Rack : Feature ?
+        [ cost = 34.5 ]
+        [ weight = 1.2 ]
+    Bell : Feature ?
+        [ cost = 4.75 ]
+        [ weight = 0.05 ]
+    Frame : Feature
+        [ cost = 250 ]
+        [ weight = 9.8 ]
+    total -> decimal = (sum Feature.cost) * 1.13
+    weight -> decimal = sum Feature.weight
+    [ total <= 340 ]
+
+aBike : Bike
+
+<< max aBike.total >>
+<< min aBike.weight >>
