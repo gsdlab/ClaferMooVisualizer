@@ -6,6 +6,7 @@ Minor release with Clafer 0.5.5.
 * Example `Bike.cfr`: a bike with decimal costs and weights.
 * The Choco-based backend is described as Choco 6 (chocosolver 0.5.5 uses choco-solver 6.0.2).
 * The buttons **URL** and **import** next to the example selector copy the URL of the selected example, to import it into a model elsewhere, and the line `//# OPTIONS --import=Examples/<file>.cfr`, for a model in this tool. Nothing showed the URL of an example. The welcome window, the help and the README explain them.
+* The tool can be served under a path behind a reverse proxy, e.g., `https://wiselab.uwaterloo.ca/clafervisualizer/` instead of the port 8092, since its pages and requests use relative URLs (ClaferToolsUICommonPlatform). The live demo link points there.
 
 ##### ClaferMooVisualizer Version 0.5.4, Oct 25, 2026
 

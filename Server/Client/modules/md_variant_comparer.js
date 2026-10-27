@@ -128,7 +128,7 @@ VariantComparer.method("onSelectionChanged", function(list){
         else
             label += "[No include suggestions]";
 
-        var saveButton = ' <input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
+        var saveButton = ' <input type="button" id="saveSelected" value="Save Selected" disabled="disabled">' + '<form id="SaveForm" action="saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
         label += saveButton;
 
         $("#VariantComparer #completeness").html(label);
@@ -158,7 +158,7 @@ VariantComparer.method("onSelectionChanged", function(list){
 
     var content = '<input type="button" id="saveSelected" value="Save selected" disabled="disabled">';
     content += '<button id="clearSelection">Clear selection</button>';
-    content += '<form id="SaveForm" action="/saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
+    content += '<form id="SaveForm" action="saveinstances" method="post" enctype="multipart/form-data">' + '<input type="hidden" name="data" id="saveData" value=""/>' + '<input type="hidden" name="windowKey" value="' + this.host.key + '"/>' + '</form>';
 
     $("#variant-comparer-control-panel").html(content);
 

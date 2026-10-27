@@ -11,7 +11,7 @@ Read more in the paper [Clafer Tools for Product Line Engineering](http://gsd.uw
 
 ### Live demo
 
-* [ClaferMooVisualizer](https://wiselab.uwaterloo.ca:8092/), with the wikis [Clafer Model Wiki](https://wiselab.uwaterloo.ca/modelwiki/), [Railway Wiki](https://wiselab.uwaterloo.ca/railwaywiki/), and [Traffic Lights Wiki](https://wiselab.uwaterloo.ca/trafficlightswiki/), whose buttons open their models in the web tools
+* [ClaferMooVisualizer](https://wiselab.uwaterloo.ca/clafervisualizer/), with the wikis [Clafer Model Wiki](https://wiselab.uwaterloo.ca/modelwiki/), [Railway Wiki](https://wiselab.uwaterloo.ca/railwaywiki/), and [Traffic Lights Wiki](https://wiselab.uwaterloo.ca/trafficlightswiki/), whose buttons open their models in the web tools
 
 If the demo is down or you encounter a bug, please email [Michał Antkiewicz](mailto:michal.antkiewicz@uwaterloo.ca).
 
@@ -100,6 +100,8 @@ Optional limits and settings in `Server/config.json`:
 * `trustProxy`: Express's `trust proxy` setting when running behind a reverse proxy (e.g., `"loopback"` or `1`), so that the rate limits apply per client
 
 The environment variables `ALLOWED_MODEL_URLS` (URL prefixes separated by spaces) and `TRUST_PROXY` override `allowedModelURLs` and `trustProxy`, e.g., when running in a container.
+
+All URLs of the tool are relative, so a reverse proxy can serve it under a path, e.g., with Apache: `ProxyPass /clafervisualizer/ http://127.0.0.1:8092/` and `RedirectMatch ^/clafervisualizer$ /clafervisualizer/` (the trailing slash is needed, otherwise the page's URLs would resolve against the server's root).
 
 A model can import other models with `//# OPTIONS --import=...` (Clafer 0.5.4). Since a submitted model may come from anyone, the tool restricts its imports: only `.cfr` files: local files only from the tool's `Examples` folder (`--import=Examples/<file>.cfr`), and URLs only from public addresses and not served as web pages (e.g., `--import=https://example.org/models/design-space.cfr`). A model opened with `?claferFileURL=` imports relative to its URL, so a model next to it on the same server can be imported by its name; a server on a private address (e.g., a wiki on `localhost`) cannot serve imports. The buttons **URL** and **import** next to the example selector copy the selected example's URL (`<tool URL>/Examples/<file>.cfr`) and the line `//# OPTIONS --import=Examples/<file>.cfr`.
 
