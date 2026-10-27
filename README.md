@@ -1,7 +1,7 @@
 ClaferMooVisualizer
 ===================
 
-##### v0.5.4
+##### v0.5.5
 
 Visualizes a set of non-dominated optimal variants (Pareto Front) and allows for exploration and trade-off analysis.
 Read more in the paper [Visualization and Exploration of Optimal Variants in Product Line Engineering](http://gsd.uwaterloo.ca/publications/view/528). The current version can be used outside the product line domain: various design optimization problems, architecture exploration, packaging problems are supported.
@@ -48,7 +48,7 @@ Installation and running
 ### Dependencies for running
 
 * [Java Platform (JDK)](https://adoptium.net/) v17+
-* [Clafer](https://github.com/gsdlab/clafer) v0.5.4
+* [Clafer](https://github.com/gsdlab/clafer) v0.5.5
   * can be from the binary distribution
 * [Node.js](https://nodejs.org/), tested with v26
 * Backends' dependencies must be satisfied. See the backend installation steps below.
@@ -109,11 +109,11 @@ A model can import other models with `//# OPTIONS --import=...` (Clafer 0.5.4). 
 
 `clafer --version`
 
-> `Clafer 0.5.4`
+> `Clafer 0.5.5`
 
 `chocosolver --version`
 
-> `chocosolver v0.5.4.2026-10-25`
+> `chocosolver v0.5.5.2026-10-25`
 
 `java -version`
 

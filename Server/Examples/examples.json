@@ -13,7 +13,8 @@
         {"url": "MobilePhone_4.cfr", "label": "Mobile Phone Example (4 objectives)"},    
         {"url": "MobilePhone_5.cfr", "label": "Mobile Phone Example (5 objectives)"},    
 
-        {"url": "Car4D.cfr", "label": "Cruise Control Example (4 objectives)"}
+        {"url": "Car4D.cfr", "label": "Cruise Control Example (4 objectives)"},
+        {"url": "Bike.cfr", "label": "Bike with decimal costs and weights (2 objectives)"}
 
     ]
 }

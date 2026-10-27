@@ -1,5 +1,10 @@
 ##### ClaferMooVisualizer Version 0.5.5, unreleased
 
+Minor release with Clafer 0.5.5.
+
+* Models can use decimals, a new primitive type `decimal` with a fixed number of fractional digits (Clafer 0.5.5), also in the objectives, e.g., `<< max total >>` with `total -> decimal`. The Feature and Quality Matrix shows a reference to a decimal as a number, like a reference to an integer; the editor highlights `decimal`.
+* Example `Bike.cfr`: a bike with decimal costs and weights.
+* The Choco-based backend is described as Choco 6 (chocosolver 0.5.5 uses choco-solver 6.0.2).
 * The buttons **URL** and **import** next to the example selector copy the URL of the selected example, to import it into a model elsewhere, and the line `//# OPTIONS --import=Examples/<file>.cfr`, for a model in this tool. Nothing showed the URL of an example. The welcome window, the help and the README explain them.
 
 ##### ClaferMooVisualizer Version 0.5.4, Oct 25, 2026

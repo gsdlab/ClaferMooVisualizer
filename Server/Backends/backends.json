@@ -3,7 +3,7 @@
         {
             "id": "choco_moo",
             "label": "Choco-based (MOO & magnifier)",
-            "tooltip": "A multi-objective optimizer based on the Choco 4 CSP solver",
+            "tooltip": "A multi-objective optimizer based on the Choco 6 CSP solver",
             "accepted_format": "choco",
             "tool": "chocosolver",
             "tool_args": ["--file=$filepath$", "--moo"],
