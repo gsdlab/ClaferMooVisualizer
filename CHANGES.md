@@ -1,3 +1,7 @@
+##### ClaferMooVisualizer Version 0.5.5, unreleased
+
+* The buttons **URL** and **import** next to the example selector copy the URL of the selected example, to import it into a model elsewhere, and the line `//# OPTIONS --import=Examples/<file>.cfr`, for a model in this tool. Nothing showed the URL of an example. The welcome window, the help and the README explain them.
+
 ##### ClaferMooVisualizer Version 0.5.4, Oct 25, 2026
 
 Minor release with Clafer 0.5.4.
