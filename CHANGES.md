@@ -1,6 +1,9 @@
 ##### ClaferMooVisualizer Version 0.5.6, unreleased
 
+Minor release with Clafer 0.5.6.
+
 * Selecting variants: a click on a bubble or a line of the parallel coordinates could do nothing, so the variant was not added to the spider chart and the variant comparer. Hovering moved the element to the front under the pointer, and the browser then sent no click.
+* The help pages are shown with their styles, images and the title and version of the tool: their paths broke when the tool moved to relative URLs in 0.5.5.
 
 ##### ClaferMooVisualizer Version 0.5.5, Oct 27, 2026
 
