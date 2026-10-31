@@ -368,9 +368,11 @@ CustomParCoords.method("makeActive", function(id)
     this.projection.classed("active", function(p) { return p.id === id; });
     this.projection.filter(function(p) { return p.id === id; }).each(moveToFront);
 
+    // moving the line under the pointer loses the click on it, so it would not be selected
     function moveToFront() {
-      this.parentNode.appendChild(this);
-    }      
+      if (!this.matches(":hover"))
+        this.parentNode.appendChild(this);
+    }
 
 });
 
