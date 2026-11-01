@@ -474,7 +474,11 @@ Graph.method("onFiltered", function(data)
 
 Graph.method("makeActive", function(pid)
 {
-    d3.select("#V" + parsePID(pid)).classed("active", true).moveToFront();    
+    var bubble = d3.select("#V" + parsePID(pid)).classed("active", true);
+
+    // moving the bubble under the pointer loses the click on it, so it would not be selected
+    if (!bubble.empty() && !bubble.node().matches(":hover"))
+        bubble.moveToFront();
     /*
         var instance = parsePID(pid);
         var context = this;
