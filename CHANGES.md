@@ -7,6 +7,7 @@ Minor release with Clafer 0.5.7.
 * multer 2.5.0 and body-parser 1.20.9 (of express) fix denial-of-service advisories of the server.
 * The editor is Ace 1.45.2, an npm dependency like the other client libraries, instead of a copy of Ace 1.1 from 2013 in the commons; the Clafer and console highlighting modes are ported to it.
 * The server runs on Express 5.3 (was 4.22), whose support continues, and express-rate-limit 8.7.3.
+* jQuery 4.0.0 (was 3.7.1). The forms are sent with $.ajax and FormData instead of the unmaintained jQuery Form plugin, and the clafers of the model are suggestions of the field Clafer name(s) of the custom scope (a datalist) instead of the drop-down of the unmaintained Chosen plugin; choosing one fills in its scope.
 
 ##### ClaferMooVisualizer Version 0.5.6, Nov 1, 2026
 
