@@ -5,8 +5,13 @@
   "release_date": "2026-11-01",
   "private": true,
   "dependencies": {
+    "chosen-js": "1.8.7",
+    "d3": "3.5.17",
     "express": "4.22.3",
-    "multer": "2.4.0",
-    "express-rate-limit": "8.7.0"
+    "express-rate-limit": "8.7.0",
+    "jquery": "3.7.1",
+    "jquery-form": "4.3.0",
+    "lodash": "4.18.1",
+    "multer": "2.5.0"
   }
 }

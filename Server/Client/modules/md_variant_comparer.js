@@ -135,7 +135,7 @@ VariantComparer.method("onSelectionChanged", function(list){
 
     // add function to addMissing button
         if($("#addMissing")){
-            $("#addMissing").click(function(){
+            $("#addMissing").on("click", function(){
                 var i;
                 for (i = 0; i<missingProducts.length; i++){
                     context.settings.onSelected(context, getPID(missingProducts[i].replace(/[\u2B22\u25CF\u25A0]/g, "")));
@@ -144,7 +144,7 @@ VariantComparer.method("onSelectionChanged", function(list){
         }
 
     // add function for clear button
-        $("#clearVariantComparer").click(function(){
+        $("#clearVariantComparer").on("click", function(){
             var selected = context.settings.getSelection(context);
             while (selected.length > 0){
                 context.settings.onDeselected(context, selected[selected.length-1]);
@@ -162,9 +162,9 @@ VariantComparer.method("onSelectionChanged", function(list){
 
     $("#variant-comparer-control-panel").html(content);
 
-    $('#saveSelected').click(this.saveSelected.bind(this)).css("cursor", "pointer");
+    $('#saveSelected').on("click", this.saveSelected.bind(this)).css("cursor", "pointer");
 
-    $("#clearSelection").click(function(){
+    $("#clearSelection").on("click", function(){
         var selected = context.settings.getSelection(context);
 
         while (selected.length > 0)
@@ -175,9 +175,9 @@ VariantComparer.method("onSelectionChanged", function(list){
     }).css("cursor", "pointer");
 
     if (context.settings.getSelection(context).length > 0)
-        $("#saveSelected").removeAttr("disabled");
+        $("#saveSelected").prop("disabled", false);
     else
-        $("#saveSelected").attr("disabled", "disabled");
+        $("#saveSelected").prop("disabled", true);
 
     //    commonData.products[0] = label;
     
@@ -222,7 +222,7 @@ VariantComparer.method("onSelectionChanged", function(list){
     for (i=0; i<$(differentProducts).length; i++){
         $(differentProducts[i]).prepend('<image id="rem' + $(differentProducts[i]).find(".svghead :last-child").text() + '" src="commons/Client/images/remove.png" alt="remove">')
         var buttonId = "#rem" + $(differentProducts[i]).find(".svghead :last-child").text()
-        $(buttonId).click(function(){
+        $(buttonId).on("click", function(){
 //            console.log(getPID(String($(this).attr("id").substring(3))));
             context.settings.onDeselected(context, getPID(String($(this).attr("id").substring(3))));
         });
@@ -231,11 +231,9 @@ VariantComparer.method("onSelectionChanged", function(list){
         $(buttonId).css("cursor", "pointer");
         $(differentProducts[i]).append('<span style="visibility: hidden;">--</span>')
         
-        $(buttonId).hover(
-        function () {
+        $(buttonId).on("mouseenter", function () {
             $(this).attr("src", "commons/Client/images/removeMouseOver.png");
-        }, 
-        function () {
+        }).on("mouseleave", function () {
             $(this).attr("src", "commons/Client/images/remove.png");
         });      
     }    
@@ -291,6 +289,6 @@ VariantComparer.method("saveSelected", function(){
         data += parser.getInstanceData(parsePID(selection[i])) + "\n";
     }
     $("#saveData").val(data);
-    $("#SaveForm").submit();
+    $("#SaveForm").trigger("submit");
 });
 

@@ -84,7 +84,7 @@ ParallelCoordinates.method("onRendered", function()
 
     this.chart = new CustomParCoords("#pcChart", chartListeners);
 
-    $('#pcScale input[name="pcScale"]').change(function(){
+    $('#pcScale input[name="pcScale"]').on("change", function(){
         context.redrawChart();
     });
 
