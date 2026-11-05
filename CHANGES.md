@@ -8,6 +8,8 @@ Minor release with Clafer 0.5.7.
 * The editor is Ace 1.45.2, an npm dependency like the other client libraries, instead of a copy of Ace 1.1 from 2013 in the commons; the Clafer and console highlighting modes are ported to it.
 * The server runs on Express 5.3 (was 4.22), whose support continues, and express-rate-limit 8.7.3.
 * jQuery 4.0.0 (was 3.7.1). The forms are sent with $.ajax and FormData instead of the unmaintained jQuery Form plugin, and the clafers of the model are suggestions of the field Clafer name(s) of the custom scope (a datalist) instead of the drop-down of the unmaintained Chosen plugin; choosing one fills in its scope.
+* The editor highlights Clafer like the VS Code extension: the temporal keywords (`always`, `eventually`, `until`, `initially`, `never`, ...), `initial`, `final`, `assert`, `enum`, `if`/`then`/`else`, `parent`, `dref` and the transition arrows. Braces `{ }` were shown as comments and apostrophes in names (`x'`) as strings, and keywords were case-insensitive.
+* Tooltips are the browser's own instead of the tipsy plugin (2010), which is removed.
 
 ##### ClaferMooVisualizer Version 0.5.6, Nov 1, 2026
 

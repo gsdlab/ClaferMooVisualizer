@@ -238,9 +238,6 @@ VariantComparer.method("onSelectionChanged", function(list){
         });      
     }    
 */
-//  adding tooltips
-
-    $("#mdVariantComparer [title]").tipsy({delayIn: 2000, delayOut: 500, fade: true, gravity: 'e', html: true});
 
 });
 
