@@ -5,6 +5,8 @@ Minor release with Clafer 0.5.7.
 * The client libraries jQuery, jQuery Form, d3, lodash and Chosen are npm dependencies in `package.json`, served from `node_modules` (ClaferToolsUICommonPlatform), so that `npm audit` and Dependabot report their vulnerabilities; they were copies in the commons. Chosen is upgraded from 1.0.0 to 1.8.7, and the HTML5 placeholder shim for old browsers is removed.
 * The client code no longer uses jQuery APIs deprecated in jQuery 3 (`.bind`, `.unbind`, `.delegate`, `.hover` and event shorthands such as `.click()`), a step towards jQuery 4.
 * multer 2.5.0 and body-parser 1.20.9 (of express) fix denial-of-service advisories of the server.
+* The editor is Ace 1.45.2, an npm dependency like the other client libraries, instead of a copy of Ace 1.1 from 2013 in the commons; the Clafer and console highlighting modes are ported to it.
+* The server runs on Express 5.3 (was 4.22), whose support continues, and express-rate-limit 8.7.3.
 
 ##### ClaferMooVisualizer Version 0.5.6, Nov 1, 2026
 

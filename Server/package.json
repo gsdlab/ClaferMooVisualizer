@@ -5,10 +5,11 @@
   "release_date": "2026-11-01",
   "private": true,
   "dependencies": {
+    "ace-builds": "1.45.2",
     "chosen-js": "1.8.7",
     "d3": "3.5.17",
-    "express": "4.22.3",
-    "express-rate-limit": "8.7.0",
+    "express": "5.3.0",
+    "express-rate-limit": "8.7.3",
     "jquery": "3.7.1",
     "jquery-form": "4.3.0",
     "lodash": "4.18.1",
