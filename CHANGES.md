@@ -11,6 +11,7 @@ Minor release with Clafer 0.5.7.
 * The editor highlights Clafer like the VS Code extension: the temporal keywords (`always`, `eventually`, `until`, `initially`, `never`, ...), `initial`, `final`, `assert`, `enum`, `if`/`then`/`else`, `parent`, `dref` and the transition arrows. Braces `{ }` were shown as comments and apostrophes in names (`x'`) as strings, and keywords were case-insensitive.
 * Tooltips are the browser's own instead of the tipsy plugin (2010), which is removed.
 * The client code uses the browser's own array functions and optional chaining instead of lodash, which is no longer a dependency.
+* Removing a variant with its button in the Feature and Quality Matrix no longer selects it as well, which made the Spider Chart fail on the removed variant.
 
 ##### ClaferMooVisualizer Version 0.5.6, Nov 1, 2026
 
