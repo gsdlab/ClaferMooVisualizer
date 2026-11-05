@@ -130,7 +130,7 @@ SpiderChart.method("redrawChart", function()
         {
             var obj = new Object();
             obj.axis = this.goals[goal].label;
-            obj.value = _.find(selectedData.matrix, function(el){return el.id === selectedData.instanceIds[i]})[goal];
+            obj.value = selectedData.matrix.find(function(el){return el.id === selectedData.instanceIds[i]})[goal];
             current.push(obj);
         }
         
