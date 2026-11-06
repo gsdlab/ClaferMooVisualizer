@@ -534,9 +534,9 @@ Graph.method("removeInstance", function(id){
 
     context.makeInactive(pid);
 
-    context.data.matrix =  _.without(context.data.matrix, _.find(context.data.matrix, {id: parseInt(id)}));
+    context.data.matrix =  context.data.matrix.filter(function(obj){ return obj.id !== parseInt(id); });
            
-    context.data.instanceIds =  _.without(context.data.instanceIds, id);
+    context.data.instanceIds =  context.data.instanceIds.filter(function(e){ return e !== id; });
     context.data.instanceCount =  context.data.instanceIds.length;
     context.data.instanceMatch =  context.data.instanceIds.length;
 
