@@ -13,6 +13,7 @@ Minor release with Clafer 0.5.7.
 * Tooltips are the browser's own instead of the tipsy plugin (2010), which is removed.
 * The client code uses the browser's own array functions and optional chaining instead of lodash, which is no longer a dependency.
 * Removing a variant with its button in the Feature and Quality Matrix no longer selects it as well, which made the Spider Chart fail on the removed variant.
+* `npm test` runs the tests of the commons, `commons/test`, in a page simulated by jsdom, a development dependency that the deployment (`npm ci --omit=dev`) leaves out: the Feature and Quality Matrix does not select a variant that is removed, which made the Spider Chart fail, and the clafers are shown by their UIDs as they are.
 
 ##### ClaferMooVisualizer Version 0.5.6, Nov 1, 2026
 

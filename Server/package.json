@@ -4,6 +4,9 @@
   "version": "0.5.7",
   "release_date": "2026-11-01",
   "private": true,
+  "scripts": {
+    "test": "node --test commons/test/"
+  },
   "dependencies": {
     "ace-builds": "1.45.2",
     "d3": "3.5.17",
@@ -11,5 +14,8 @@
     "express-rate-limit": "8.7.3",
     "jquery": "4.0.0",
     "multer": "2.5.0"
+  },
+  "devDependencies": {
+    "jsdom": "31.0.0"
   }
 }
