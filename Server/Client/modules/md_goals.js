@@ -74,13 +74,13 @@ Goals.method("onRendered", function()
         $(sid)[i].ondragstart = this.drag.bind(this);
         var goal = $($(sid)[i]).attr("id");
 
-        $('#' + goal + 'min').keyup(function()
+        $('#' + goal + 'min').on("keyup", function()
         {
             var id = $(this).attr("id");
             context.onChange(id.substring(0, id.length - 3));
         });
 
-        $('#' + goal + 'max').keyup(function()
+        $('#' + goal + 'max').on("keyup", function()
         {
             var id = $(this).attr("id");
             context.onChange(id.substring(0, id.length - 3));

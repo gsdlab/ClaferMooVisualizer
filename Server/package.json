@@ -1,12 +1,21 @@
 {
   "name": "ClaferMooVisualizer",
   "description": "A web-based GUI for visualization and exploration of optimal variants",
-  "version": "0.5.6",
-  "release_date": "2026-11-01",
+  "version": "0.5.7",
+  "release_date": "2026-11-08",
   "private": true,
+  "scripts": {
+    "test": "node --test commons/test/"
+  },
   "dependencies": {
-    "express": "4.22.3",
-    "multer": "2.4.0",
-    "express-rate-limit": "8.7.0"
+    "ace-builds": "1.45.2",
+    "d3": "3.5.17",
+    "express": "5.3.0",
+    "express-rate-limit": "8.7.3",
+    "jquery": "4.0.0",
+    "multer": "2.5.0"
+  },
+  "devDependencies": {
+    "jsdom": "31.0.0"
   }
 }

@@ -63,18 +63,6 @@ fieldset{
     left: 0;
 }
 
-#ClaferListCont .chosen-with-drop .chosen-drop {
-    visibility: visible;
-}
-
-#ClaferListCont .chosen-drop {
-    border-bottom: 0;
-    border-top: 1px solid #aaa;
-    z-index: 3000;
-    position: fixed;
-    visibility: hidden;
-}
-
 #clafer_editor .ace_search, #console_editor .ace_search {
     z-index: 1000;
 }
