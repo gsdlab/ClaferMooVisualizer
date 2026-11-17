@@ -2,6 +2,8 @@
 
 Minor release with Clafer 0.5.9.
 
+* A format with `"shows_compilation_errors": "false"` is empty after a failed compilation (ClaferToolsUICommonPlatform).
+
 ##### ClaferMooVisualizer Version 0.5.8, Nov 15, 2026
 
 Minor release with Clafer 0.5.8.
