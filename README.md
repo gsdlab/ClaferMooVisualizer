@@ -80,7 +80,7 @@ git submodule foreach git checkout develop
 
 This will download all the required `Node.js` modules.
 
-4. Install the backends `clafer`, `chocosolver` into some location `<bin>` found on `PATH`. The backends in `Server/Backends/backends.json` run them from `PATH`.
+4. Install the backends `clafer`, `clafersg` into some location `<bin>` found on `PATH`. The backends in `Server/Backends/backends.json` run them from `PATH`.
 
 The fastest way is to unzip a binary distribution into the folder `<bin>`.
 
@@ -105,7 +105,7 @@ All URLs of the tool are relative, so a reverse proxy can serve it under a path,
 
 A model can import other models with `//# OPTIONS --import=...` (Clafer 0.5.4). Since a submitted model may come from anyone, the tool restricts its imports: only `.cfr` files: local files only from the tool's `Examples` folder (`--import=Examples/<file>.cfr`), and URLs only from public addresses and not served as web pages (e.g., `--import=https://example.org/models/design-space.cfr`). A model opened with `?claferFileURL=` imports relative to its URL, so a model next to it on the same server can be imported by its name; a server on a private address (e.g., a wiki on `localhost`) cannot serve imports. The buttons **URL** and **import** next to the example selector copy the selected example's URL (`<tool URL>/Examples/<file>.cfr`) and the line `//# OPTIONS --import=Examples/<file>.cfr`.
 
-2. Make sure `clafer`, `chocosolver`, `node`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
+2. Make sure `clafer`, `clafersg`, `node`, and `java` are in `PATH` environment variables, so they can be executed without any path prefixes.
 
 3. Running the following commands should produce the following results or later version:
 
@@ -113,9 +113,9 @@ A model can import other models with `//# OPTIONS --import=...` (Clafer 0.5.4). 
 
 > `Clafer v0.6.0.2026-11-29`
 
-`chocosolver --version`
+`clafersg --version`
 
-> `chocosolver v0.6.0.2026-11-29`
+> `clafersg v0.6.0.2026-11-29`
 
 `java -version`
 

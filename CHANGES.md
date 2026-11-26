@@ -2,6 +2,7 @@
 
 Minor release with Clafer 0.6.0.
 
+* The Choco backend runs `clafersg`, the new name of `chocosolver`, from `PATH`; Clafer Tools 0.6.0 no longer installs `chocosolver`.
 * A format with `"shows_compilation_errors": "false"` is empty after a failed compilation (ClaferToolsUICommonPlatform).
 
 ##### ClaferMooVisualizer Version 0.5.8, Nov 15, 2026
