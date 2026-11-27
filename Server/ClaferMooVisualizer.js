@@ -208,6 +208,13 @@ function runOptimization(process)
         }
     }
 
+    // the cache is keyed by the whole model, its imports included, which its rich explicit model has
+    for (var j = 0; j < process.compiled_formats.length; j++)
+    {
+        if (process.compiled_formats[j].id == "rich_explicit_clafer" && process.compiled_formats[j].message == "OK")
+            file_contents = process.compiled_formats[j].result;
+    }
+
     if (!found)
     {
         core.logSpecific("Error: Required format result was not found", key);
@@ -252,11 +259,13 @@ function runOptimization(process)
             },
             {
                 "needle": "$filepath$", 
-                "replacement": process.file + format.file_suffix
+                "replacement": path.basename(process.file) + format.file_suffix
             }
         ];
 
     var args = core.replaceTemplateList(backend.tool_args, fileAndPathReplacement);
+    if (format.file_suffix == ".cfr") // the tool reads the model and its imports
+        args = lib.importArgs(process).concat(args);
 
     if (backend.optimization_options)
     {

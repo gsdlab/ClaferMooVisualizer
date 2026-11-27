@@ -2,6 +2,9 @@
 
 Minor release with Clafer 0.6.0.
 
+* The optimizer runs `clafersg --file model.cfr --moo`: clafersg reads the model itself, with its Java frontend, so the server no longer compiles the `.js` output (`-m choco`), and "Choco JavaScript" is no longer an output. clafersg gets the same restrictions of the imports as clafer (ClaferToolsUICommonPlatform).
+* The cache of results is keyed by the rich explicit model (`-m clafer`, compiled but not shown), which includes the imports, instead of the `.js` output.
+* Whether a model is temporal comes from its rich explicit model, whose options have a trace length (`--tl=`) only for a temporal model, instead of the compiler's message that it has no Choco output (ClaferToolsUICommonPlatform).
 * The Choco backend runs `clafersg`, the new name of `chocosolver`, from `PATH`; Clafer Tools 0.6.0 no longer installs `chocosolver`.
 * A format with `"shows_compilation_errors": "false"` is empty after a failed compilation (ClaferToolsUICommonPlatform).
 

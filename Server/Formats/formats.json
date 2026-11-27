@@ -21,22 +21,21 @@
             "display_element": "iframe"
         },
         {
+            "id": "rich_explicit_clafer",
+            "label": "Rich Explicit Clafer",
+            "tooltip": "The explicit model with the rich constructs; not shown, it tells whether the model is temporal",
+            "file_suffix": ".des.cfr",
+            "compiler_mode": "clafer",
+            "compiler_args": [],
+            "shows_compilation_errors" : "false",
+            "display_element": "none"
+        },
+        {
             "id": "alloy",
             "label": "Alloy",
             "tooltip": "Alloy 6 file format (als)",
             "file_suffix": ".als",
             "compiler_mode": "alloy",
-            "compiler_args": [],
-            "shows_compilation_errors" : "false",
-            "display_element": "textarea"
-        },
-
-        {
-            "id": "choco",
-            "label": "Choco JavaScript",
-            "tooltip": "Chocosolver's file format (JavaScript)",
-            "file_suffix": ".js",
-            "compiler_mode": "choco",
             "compiler_args": [],
             "shows_compilation_errors" : "false",
             "display_element": "textarea"
