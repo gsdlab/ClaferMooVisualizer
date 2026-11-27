@@ -4,8 +4,8 @@
             "id": "choco_moo",
             "label": "Choco-based (MOO & magnifier)",
             "tooltip": "A multi-objective optimizer based on the Choco 6 CSP solver",
-            "accepted_format": "choco",
-            "tool": "chocosolver",
+            "accepted_format": "clafer_source",
+            "tool": "clafersg",
             "tool_args": ["--file=$filepath$", "--moo"],
             "tool_version_args": ["--version"],
             "optimization_options": {
