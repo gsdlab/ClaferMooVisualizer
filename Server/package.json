@@ -2,10 +2,10 @@
   "name": "ClaferMooVisualizer",
   "description": "A web-based GUI for visualization and exploration of optimal variants",
   "version": "0.6.0",
-  "release_date": "2026-11-08",
+  "release_date": "2026-11-29",
   "private": true,
   "scripts": {
-    "test": "node --test commons/test/"
+    "test": "node --test \"commons/test/*.test.js\""
   },
   "dependencies": {
     "ace-builds": "1.45.2",
